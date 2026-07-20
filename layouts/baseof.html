@@ -22,12 +22,22 @@
                         <span class="archive-brand-name">{{ default "TOOD.WIN" $brand.name }}</span>
                     {{ end }}
                 </a>
+                {{- $homeURL := .Site.Home.RelPermalink -}}
+                {{- $archivesURL := `archives/` | relLangURL -}}
+                {{- $categoriesURL := `categories/` | relLangURL -}}
+                {{- $tagsURL := `tags/` | relLangURL -}}
+                {{- $aboutURL := `关于/` | relLangURL -}}
+                {{- $isAbout := false -}}
+                {{- with .File -}}
+                    {{- $pageDir := replace .Dir `\` `/` -}}
+                    {{- if eq (lower $pageDir) `page/about/` -}}{{- $isAbout = true -}}{{- end -}}
+                {{- end -}}
                 <nav class="archive-nav" aria-label="主导航">
-                    <a href="{{ `archives/` | relLangURL }}">{{ default "归档" $navigation.archives }}</a>
-                    <a href="{{ `categories/` | relLangURL }}">{{ default "分类" $navigation.categories }}</a>
-                    <a href="{{ `tags/` | relLangURL }}">{{ default "标签" $navigation.tags }}</a>
-                    <a href="{{ `关于/` | relLangURL }}">{{ default "关于" $navigation.about }}</a>
-                    <a href="{{ .Site.Home.RelPermalink }}">{{ default "INDEX" $navigation.index }}</a>
+                    <a class="{{ if eq .RelPermalink $homeURL }}active{{ end }}" href="{{ $homeURL }}">{{ default "INDEX" $navigation.index }}</a>
+                    <a class="{{ if hasPrefix (lower .RelPermalink) (lower $archivesURL) }}active{{ end }}" href="{{ $archivesURL }}">{{ default "归档" $navigation.archives }}</a>
+                    <a class="{{ if hasPrefix (lower .RelPermalink) (lower $categoriesURL) }}active{{ end }}" href="{{ $categoriesURL }}">{{ default "分类" $navigation.categories }}</a>
+                    <a class="{{ if hasPrefix (lower .RelPermalink) (lower $tagsURL) }}active{{ end }}" href="{{ $tagsURL }}">{{ default "标签" $navigation.tags }}</a>
+                    <a class="{{ if or $isAbout (hasPrefix (lower .RelPermalink) (lower $aboutURL)) }}active{{ end }}" href="{{ $aboutURL }}">{{ default "关于" $navigation.about }}</a>
                 </nav>
                 <div class="archive-status"><span>SYS.STATUS</span><b><i></i> ONLINE</b><em aria-hidden="true">▁▂▃▅▇</em></div>
             </header>
