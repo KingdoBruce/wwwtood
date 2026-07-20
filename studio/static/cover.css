@@ -25,3 +25,26 @@
   border: 1px solid var(--line);
   background: #111;
 }
+
+.notice {
+  top: auto;
+  right: auto;
+  bottom: 24px;
+  left: calc(var(--sidebar) + 28px);
+  max-width: min(520px, calc(100vw - var(--sidebar) - 56px));
+  border-left: 3px solid var(--blue);
+  pointer-events: none;
+}
+
+.notice.error {
+  border-left-color: #fff;
+}
+
+@media (max-width: 700px) {
+  .notice {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    max-width: none;
+  }
+}
