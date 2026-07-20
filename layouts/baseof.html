@@ -1,3 +1,7 @@
+{{- $siteConfig := site.Data.site -}}
+{{- $brand := $siteConfig.brand -}}
+{{- $navigation := $siteConfig.navigation -}}
+{{- $footer := $siteConfig.footer -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Locale }}" dir="{{ default `ltr` .Language.Direction }}">
 <head>
@@ -12,15 +16,15 @@
         <div class="archive-shell archive-page-shell">
             <header class="archive-topbar">
                 <a class="archive-brand" href="{{ .Site.Home.RelPermalink }}" aria-label="返回首页">
-                    <span class="archive-focus" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-                    <span>TOOD.WIN</span>
+                    {{ with $brand.logo }}<img class="archive-brand-logo" src="{{ . | relURL }}" alt="">{{ else }}<span class="archive-focus" aria-hidden="true"><i></i><i></i><i></i><i></i></span>{{ end }}
+                    <span>{{ default "TOOD.WIN" $brand.name }}</span>
                 </a>
                 <nav class="archive-nav" aria-label="主导航">
-                    <a href="{{ `archives/` | relLangURL }}">归档</a>
-                    <a href="{{ `categories/` | relLangURL }}">分类</a>
-                    <a href="{{ `tags/` | relLangURL }}">标签</a>
-                    <a href="{{ `关于/` | relLangURL }}">关于</a>
-                    <a href="{{ .Site.Home.RelPermalink }}">INDEX</a>
+                    <a href="{{ `archives/` | relLangURL }}">{{ default "归档" $navigation.archives }}</a>
+                    <a href="{{ `categories/` | relLangURL }}">{{ default "分类" $navigation.categories }}</a>
+                    <a href="{{ `tags/` | relLangURL }}">{{ default "标签" $navigation.tags }}</a>
+                    <a href="{{ `关于/` | relLangURL }}">{{ default "关于" $navigation.about }}</a>
+                    <a href="{{ .Site.Home.RelPermalink }}">{{ default "INDEX" $navigation.index }}</a>
                 </nav>
                 <div class="archive-status"><span>SYS.STATUS</span><b><i></i> ONLINE</b><em aria-hidden="true">▁▂▃▅▇</em></div>
             </header>
@@ -29,12 +33,12 @@
                 <div class="archive-page-index">
                     <span class="archive-cross" aria-hidden="true"></span>
                     <span class="archive-coord archive-coord-top">{{ upper .Kind }}.{{ now.Format "0601" }}.{{ printf "%04d" .WordCount }}</span>
-                    <span class="archive-page-name">TOOD ARCHIVE</span>
+                    <span class="archive-page-name">{{ default "TOOD ARCHIVE" $brand.archive_name }}</span>
                     <strong>/ {{ upper .Kind }}</strong>
                 </div>
                 <main class="archive-page-main">{{- block "main" . }}{{- end }}</main>
             </div>
-            <footer class="archive-footer"><span>© {{ now.Format "2006" }} TOOD.WIN</span><span>BUILT WITH HUGO <i></i></span></footer>
+            <footer class="archive-footer"><span>© {{ default (now.Format "2006") $footer.copyright_since }} {{ default "TOOD.WIN" $brand.name }}</span><span>{{ default "BUILT WITH HUGO" $footer.build_label }} <i></i></span></footer>
         </div>
     {{ end }}
     {{ partial "footer/include.html" . }}

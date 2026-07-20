@@ -1,0 +1,11 @@
+.tood-studio/
+studio/.venv/
+studio/bin/
+studio/build/
+studio/dist/
+studio/*.spec
+studio/__pycache__/
+studio/**/*.pyc
+/TOOD-Studio.exe
+/TOOD-Studio-Windows/
+/TOOD-Studio-Windows.zip
