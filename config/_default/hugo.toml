@@ -1,6 +1,6 @@
-baseURL                = "/"
+baseURL                = "https://www.tood.win/"
 locale                 = "zh"
-title                  = "Hugo Theme Stack"
+title                  = "我的博客"
 theme = "hugo-theme-stack"
 # Theme i18n support
 # See i18n folder for available languages
