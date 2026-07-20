@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import atexit
+import base64
 import json
 import logging
 import os
@@ -15,6 +16,8 @@ import time
 import tomllib
 import uuid
 import webbrowser
+from urllib import error as urlerror
+from urllib import request as urlrequest
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -27,7 +30,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.1.0"
+APP_VERSION = "1.1.1"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 
@@ -115,6 +118,258 @@ def tool_path(name: str) -> str:
 
 def git_args(*args: str) -> list[str]:
     return [tool_path("git"), "-c", f"safe.directory={BLOG_ROOT.as_posix()}", "-C", str(BLOG_ROOT), *args]
+
+
+def git_text(*args: str, timeout: int = 30) -> str:
+    return run_command(git_args(*args), timeout=timeout).stdout.strip()
+
+
+def github_repository() -> str:
+    remote = git_text("remote", "get-url", "origin")
+    if remote.startswith("git@github.com:"):
+        repository = remote.split(":", 1)[1]
+    else:
+        match = re.match(r"https?://github\.com/(.+)$", remote)
+        if not match:
+            raise RuntimeError("当前 origin 不是 GitHub 仓库地址")
+        repository = match.group(1)
+    return repository.removesuffix(".git").strip("/")
+
+
+def github_token() -> str:
+    result = subprocess.run(
+        [tool_path("git"), "credential", "fill"],
+        input="protocol=https\nhost=github.com\n\n",
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=15,
+        env=command_environment(),
+        **process_flags(),
+    )
+    if result.returncode != 0:
+        raise RuntimeError((result.stderr or "无法读取 GitHub 登录凭据").strip())
+    credentials = dict(
+        line.split("=", 1) for line in result.stdout.splitlines() if "=" in line
+    )
+    token = credentials.get("password", "")
+    if not token:
+        raise RuntimeError("未找到 GitHub 登录凭据，请先在 Git Credential Manager 中登录")
+    return token
+
+
+def github_request(
+    repository: str,
+    token: str,
+    method: str,
+    path: str,
+    body: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    data = json.dumps(body, ensure_ascii=False).encode("utf-8") if body is not None else None
+    request_object = urlrequest.Request(
+        f"https://api.github.com/repos/{repository}{path}",
+        data=data,
+        method=method,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+            "User-Agent": "TOOD-Studio",
+            "Content-Type": "application/json",
+        },
+    )
+    try:
+        with urlrequest.urlopen(request_object, timeout=25) as response:
+            return json.loads(response.read().decode("utf-8"))
+    except urlerror.HTTPError as error:
+        detail = error.read().decode("utf-8", errors="replace")
+        try:
+            detail = json.loads(detail).get("message", detail)
+        except json.JSONDecodeError:
+            pass
+        raise RuntimeError(f"GitHub API 返回 {error.code}：{detail}") from error
+    except urlerror.URLError as error:
+        raise RuntimeError(f"无法连接 GitHub API：{error.reason}") from error
+
+
+def git_blob_bytes(sha: str) -> bytes:
+    result = subprocess.run(
+        git_args("cat-file", "blob", sha),
+        cwd=BLOG_ROOT,
+        capture_output=True,
+        timeout=30,
+        env=command_environment(),
+        **process_flags(),
+    )
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr.decode("utf-8", errors="replace").strip())
+    return result.stdout
+
+
+def write_commit_object(raw_commit: str) -> str:
+    result = subprocess.run(
+        git_args("hash-object", "-t", "commit", "-w", "--stdin"),
+        input=raw_commit.encode("utf-8"),
+        cwd=BLOG_ROOT,
+        capture_output=True,
+        timeout=30,
+        env=command_environment(),
+        **process_flags(),
+    )
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr.decode("utf-8", errors="replace").strip())
+    return result.stdout.decode("ascii").strip()
+
+
+def commit_metadata(commit: str) -> dict[str, str]:
+    marker = "%x00"
+    output = run_command(
+        git_args(
+            "show", "-s",
+            f"--format=%an{marker}%ae{marker}%at{marker}%aI{marker}%cn{marker}%ce{marker}%ct{marker}%cI{marker}%B",
+            commit,
+        ),
+        timeout=30,
+    ).stdout
+    values = output.split("\x00", 8)
+    if len(values) != 9:
+        raise RuntimeError("无法读取本地提交信息")
+    keys = (
+        "author_name", "author_email", "author_epoch", "author_iso",
+        "committer_name", "committer_email", "committer_epoch", "committer_iso", "message",
+    )
+    metadata = dict(zip(keys, values))
+    metadata["message"] = metadata["message"].rstrip("\r\n")
+    return metadata
+
+
+def commit_changes(parent: str, commit: str, repository: str, token: str) -> list[dict[str, Any]]:
+    output = git_text("diff-tree", "--no-commit-id", "--name-status", "-r", "-M", parent, commit)
+    entries: list[dict[str, Any]] = []
+    blob_cache: dict[str, str] = {}
+    for line in output.splitlines():
+        parts = line.split("\t")
+        status = parts[0]
+        if status.startswith("R"):
+            entries.append({"path": parts[1], "mode": "100644", "type": "blob", "sha": None})
+            path = parts[2]
+        elif status == "D":
+            entries.append({"path": parts[1], "mode": "100644", "type": "blob", "sha": None})
+            continue
+        else:
+            path = parts[1]
+
+        tree_line = git_text("ls-tree", commit, "--", path)
+        tree_info = tree_line.split("\t", 1)[0].split()
+        if len(tree_info) != 3 or tree_info[1] != "blob":
+            raise RuntimeError(f"暂不支持发布此 Git 对象：{path}")
+        mode, object_type, local_blob = tree_info
+        if local_blob not in blob_cache:
+            blob = github_request(
+                repository,
+                token,
+                "POST",
+                "/git/blobs",
+                {"content": base64.b64encode(git_blob_bytes(local_blob)).decode("ascii"), "encoding": "base64"},
+            )
+            blob_cache[local_blob] = str(blob["sha"])
+        entries.append({"path": path, "mode": mode, "type": object_type, "sha": blob_cache[local_blob]})
+    return entries
+
+
+def push_with_github_api() -> str:
+    repository = github_repository()
+    token = github_token()
+    branch = git_text("symbolic-ref", "--short", "HEAD")
+    local_head = git_text("rev-parse", "HEAD")
+    remote_ref = github_request(repository, token, "GET", f"/git/ref/heads/{branch}")
+    remote_head = str(remote_ref["object"]["sha"])
+    if remote_head == local_head:
+        run_command(git_args("update-ref", f"refs/remotes/origin/{branch}", remote_head), timeout=15)
+        return "GitHub 已是最新状态，无需重复推送"
+
+    known_remote = subprocess.run(
+        git_args("cat-file", "-e", f"{remote_head}^{{commit}}"),
+        cwd=BLOG_ROOT,
+        timeout=15,
+        env=command_environment(),
+        **process_flags(),
+    ).returncode == 0
+    if not known_remote:
+        raise RuntimeError("GitHub 上存在本地尚未同步的提交，请先更新本地仓库")
+    is_ancestor = subprocess.run(
+        git_args("merge-base", "--is-ancestor", remote_head, local_head),
+        cwd=BLOG_ROOT,
+        timeout=15,
+        env=command_environment(),
+        **process_flags(),
+    ).returncode == 0
+    if not is_ancestor:
+        raise RuntimeError("GitHub 与本地提交历史已分叉，请先处理同步冲突")
+
+    commits = git_text("rev-list", "--reverse", f"{remote_head}..{local_head}").splitlines()
+    api_parent = remote_head
+    final_sha = remote_head
+    for commit in commits:
+        local_parent = git_text("rev-parse", f"{commit}^")
+        local_tree = git_text("rev-parse", f"{commit}^{{tree}}")
+        entries = commit_changes(local_parent, commit, repository, token)
+        api_tree = github_request(
+            repository,
+            token,
+            "POST",
+            "/git/trees",
+            {"base_tree": api_parent, "tree": entries},
+        )
+        if api_tree["sha"] != local_tree:
+            raise RuntimeError("GitHub 生成的文件树与本地不一致，已停止发布")
+        metadata = commit_metadata(commit)
+        api_commit = github_request(
+            repository,
+            token,
+            "POST",
+            "/git/commits",
+            {
+                "message": metadata["message"],
+                "tree": local_tree,
+                "parents": [api_parent],
+                "author": {
+                    "name": metadata["author_name"],
+                    "email": metadata["author_email"],
+                    "date": metadata["author_iso"],
+                },
+                "committer": {
+                    "name": metadata["committer_name"],
+                    "email": metadata["committer_email"],
+                    "date": metadata["committer_iso"],
+                },
+            },
+        )
+        author_zone = metadata["author_iso"][-6:].replace(":", "")
+        committer_zone = metadata["committer_iso"][-6:].replace(":", "")
+        raw_commit = (
+            f"tree {local_tree}\nparent {api_parent}\n"
+            f"author {metadata['author_name']} <{metadata['author_email']}> {metadata['author_epoch']} {author_zone}\n"
+            f"committer {metadata['committer_name']} <{metadata['committer_email']}> {metadata['committer_epoch']} {committer_zone}\n\n"
+            f"{metadata['message']}"
+        )
+        written_sha = write_commit_object(raw_commit)
+        if written_sha != api_commit["sha"]:
+            raise RuntimeError("GitHub 提交校验失败，已停止更新本地分支")
+        api_parent = str(api_commit["sha"])
+        final_sha = api_parent
+
+    github_request(
+        repository,
+        token,
+        "PATCH",
+        f"/git/refs/heads/{branch}",
+        {"sha": final_sha, "force": False},
+    )
+    run_command(git_args("update-ref", f"refs/heads/{branch}", final_sha, local_head), timeout=15)
+    run_command(git_args("update-ref", f"refs/remotes/origin/{branch}", final_sha, remote_head), timeout=15)
+    return f"已通过 GitHub API 发布 {len(commits)} 个提交"
 
 
 def load_toml(path: Path) -> dict[str, Any]:
@@ -521,25 +776,23 @@ def api_publish():
         if committed:
             run_command(git_args("commit", "-m", message), timeout=60)
 
-        push: subprocess.CompletedProcess[str] | None = None
-        last_error: RuntimeError | None = None
-        for delay in (0, 2, 5):
-            if delay:
-                time.sleep(delay)
+        try:
+            publish_output = push_with_github_api()
+        except RuntimeError as api_error:
+            logging.warning("GitHub API publish failed, trying git push: %s", api_error)
             try:
-                push = run_command(git_args("push", "origin", "HEAD"), timeout=180)
-                break
-            except RuntimeError as error:
-                last_error = error
-                logging.warning("git push failed, will retry: %s", error)
-        if push is None:
-            raise last_error or RuntimeError("GitHub 推送失败")
+                push = run_command(git_args("push", "origin", "HEAD"), timeout=25)
+                publish_output = (push.stdout + push.stderr).strip() or "Git 推送完成"
+            except (RuntimeError, subprocess.TimeoutExpired) as git_error:
+                raise RuntimeError(
+                    f"发布失败。GitHub API：{api_error}；Git 推送：{git_error}"
+                ) from git_error
 
-    action = "内容已提交并推送" if committed else "GitHub 已确认同步"
+    action = "内容已提交并同步" if committed else "网站已确认同步"
     return jsonify({
         "ok": True,
         "message": f"{action}到 GitHub，Cloudflare 将自动部署",
-        "output": (push.stdout + push.stderr) or build.stdout[-2000:],
+        "output": f"{publish_output}\n\n{build.stdout[-2000:]}",
     })
 
 
