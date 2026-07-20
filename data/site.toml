@@ -23,3 +23,6 @@ established_date = "2026-07-20"
 [footer]
 copyright_since = 2026
 build_label = "BUILT WITH HUGO"
+
+[advertising]
+google_ads_code = ""

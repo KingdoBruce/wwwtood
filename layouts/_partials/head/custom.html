@@ -8,3 +8,8 @@
 
   gtag('config', 'G-TTY0M5CM76');
 </script>
+{{- with site.Data.site.advertising }}
+  {{- with .google_ads_code }}
+    {{ . | safeHTML }}
+  {{- end }}
+{{- end }}

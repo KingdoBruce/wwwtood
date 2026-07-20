@@ -30,7 +30,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.2.1"
+APP_VERSION = "1.3.0"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 
@@ -457,6 +457,7 @@ def settings_payload() -> dict[str, Any]:
     navigation = data.get("navigation", {})
     home = data.get("home", {})
     footer = data.get("footer", {})
+    advertising = data.get("advertising", {})
     return {
         "brand_name": brand.get("name", "TOOD.WIN"),
         "brand_logo": brand.get("logo", ""),
@@ -476,11 +477,13 @@ def settings_payload() -> dict[str, Any]:
         "established_date": home.get("established_date", ""),
         "copyright_since": footer.get("copyright_since", datetime.now().year),
         "footer_build_label": footer.get("build_label", "BUILT WITH HUGO"),
+        "google_ads_code": advertising.get("google_ads_code", ""),
     }
 
 
 def write_settings(values: dict[str, Any]) -> None:
     limited = {key: str(value).strip()[:500] for key, value in values.items() if value is not None}
+    google_ads_code = str(values.get("google_ads_code") or "").strip()[:20000]
     data = {
         "brand": {
             "name": limited.get("brand_name", "TOOD.WIN"),
@@ -507,6 +510,9 @@ def write_settings(values: dict[str, Any]) -> None:
         "footer": {
             "copyright_since": int(values.get("copyright_since") or datetime.now().year),
             "build_label": limited.get("footer_build_label", "BUILT WITH HUGO"),
+        },
+        "advertising": {
+            "google_ads_code": google_ads_code,
         },
     }
     save_toml(BLOG_ROOT / "data" / "site.toml", data)
