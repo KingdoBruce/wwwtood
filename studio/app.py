@@ -30,7 +30,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.3.0"
+APP_VERSION = "1.3.1"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 
@@ -245,7 +245,10 @@ def commit_metadata(commit: str) -> dict[str, str]:
 
 
 def commit_changes(parent: str, commit: str, repository: str, token: str) -> list[dict[str, Any]]:
-    output = git_text("diff-tree", "--no-commit-id", "--name-status", "-r", "-M", parent, commit)
+    output = git_text(
+        "-c", "core.quotepath=false",
+        "diff-tree", "--no-commit-id", "--name-status", "-r", "-M", parent, commit,
+    )
     entries: list[dict[str, Any]] = []
     blob_cache: dict[str, str] = {}
     for line in output.splitlines():
@@ -437,6 +440,7 @@ def post_summary(path: Path) -> dict[str, Any]:
         "draft": bool(metadata.get("draft", True)),
         "description": str(metadata.get("description") or ""),
         "cover": str(metadata.get("cover") or ""),
+        "featured": bool(metadata.get("featured", False)),
         "categories": normalize_list(metadata.get("categories", [])),
         "tags": normalize_list(metadata.get("tags", [])),
         "words": len(re.findall(r"\S+", body)),
@@ -860,6 +864,10 @@ def api_save_post():
         metadata["cover"] = cover[:1000]
     else:
         metadata.pop("cover", None)
+    if bool(payload.get("featured", False)):
+        metadata["featured"] = True
+    else:
+        metadata.pop("featured", None)
     categories = normalize_list(payload.get("categories", []))
     tags = normalize_list(payload.get("tags", []))
     ensure_taxonomy_values("categories", categories)

@@ -85,6 +85,7 @@ class StudioTests(unittest.TestCase):
                         "date": "2026-07-20T12:00",
                         "draft": False,
                         "cover": "/uploads/cover.png",
+                        "featured": True,
                         "body": "正文",
                     },
                     headers={"X-TOOD-Token": studio.SESSION_TOKEN},
@@ -92,6 +93,7 @@ class StudioTests(unittest.TestCase):
                 self.assertEqual(response.status_code, 200)
                 metadata, _ = studio.parse_post(studio.BLOG_ROOT / "content" / "posts" / "cover-test.md")
                 self.assertEqual(metadata["cover"], "/uploads/cover.png")
+                self.assertTrue(metadata["featured"])
                 self.assertFalse(metadata["draft"])
             finally:
                 studio.BLOG_ROOT = original_root
