@@ -15,8 +15,11 @@
       <nav>
         <button class="nav-item active" data-view="dashboard">概览 <span>01</span></button>
         <button class="nav-item" data-view="posts">文章 <span>02</span></button>
-        <button class="nav-item" data-view="settings">网站设置 <span>03</span></button>
-        <button class="nav-item" data-view="publish">预览与发布 <span>04</span></button>
+        <button class="nav-item" data-view="categories">分类 <span>03</span></button>
+        <button class="nav-item" data-view="tags">标签 <span>04</span></button>
+        <button class="nav-item" data-view="about">关于 <span>05</span></button>
+        <button class="nav-item" data-view="settings">网站设置 <span>06</span></button>
+        <button class="nav-item" data-view="publish">预览与发布 <span>07</span></button>
       </nav>
       <div class="sidebar-meta"><span>LOCAL ONLY</span><b><i></i> ONLINE</b><small>{{ blog_root }}</small></div>
     </aside>
@@ -81,11 +84,45 @@
               <div class="file-row"><button type="button" class="button" id="uploadCover">上传封面</button><input type="file" id="coverImage" accept="image/png,image/jpeg,image/webp,image/gif" hidden><span id="coverPath">未设置</span></div>
               <img id="coverPreview" class="cover-preview" alt="封面预览" hidden>
             </div>
-            <label>分类<input id="postCategories" placeholder="技术, 写作"></label>
-            <label>标签<input id="postTags" placeholder="Hugo, Python, 建站"></label>
+            <label>分类<input id="postCategories" list="categoryOptions" placeholder="技术, 写作"></label>
+            <label>标签<input id="postTags" list="tagOptions" placeholder="Hugo, Python, 建站"></label>
+            <datalist id="categoryOptions"></datalist><datalist id="tagOptions"></datalist>
             <div class="editor-info"><span>支持 Markdown</span><span>图片自动保存</span><span>Sitemap 自动更新</span></div>
             <button type="button" class="button danger" id="deletePost" hidden>移入回收站</button>
           </aside>
+        </form>
+      </section>
+
+      <section class="view" id="view-categories">
+        <div class="section-actions"><div><span class="eyebrow">TAXONOMY.03</span><h2>分类管理</h2></div></div>
+        <div class="taxonomy-manager">
+          <article class="panel taxonomy-create"><h3>添加分类</h3><p>分类用于组织文章。重命名或删除时会同步更新所有关联文章。</p><div class="taxonomy-add-row"><input id="newCategory" maxlength="80" placeholder="输入分类名称"><button class="button primary" id="addCategory">添加分类</button></div></article>
+          <article class="panel"><div class="panel-heading"><div><span class="eyebrow">CATEGORY.DB</span><h2>全部分类</h2></div><span class="badge" id="categoryTotal">0</span></div><div class="taxonomy-list" id="categoryList"></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-tags">
+        <div class="section-actions"><div><span class="eyebrow">TAXONOMY.04</span><h2>标签管理</h2></div></div>
+        <div class="taxonomy-manager">
+          <article class="panel taxonomy-create"><h3>添加标签</h3><p>标签用于描述文章主题。重命名或删除时会同步更新所有关联文章。</p><div class="taxonomy-add-row"><input id="newTag" maxlength="80" placeholder="输入标签名称"><button class="button primary" id="addTag">添加标签</button></div></article>
+          <article class="panel"><div class="panel-heading"><div><span class="eyebrow">TAG.DB</span><h2>全部标签</h2></div><span class="badge" id="tagTotal">0</span></div><div class="taxonomy-list" id="tagList"></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-about">
+        <div class="section-actions"><div><span class="eyebrow">PAGE.05</span><h2>关于页面</h2></div><button class="button primary" id="saveAbout">保存关于页面</button></div>
+        <form id="aboutForm" class="about-editor" onsubmit="return false">
+          <article class="panel form-panel">
+            <h3>页面信息</h3>
+            <label>页面标题<input id="aboutPageTitle" maxlength="200" required></label>
+            <label>页面摘要<textarea id="aboutPageDescription" rows="3" maxlength="500" placeholder="用于页面头部和搜索引擎展示"></textarea></label>
+            <p class="form-help">当前编辑默认中文页面；菜单结构和页面日期会自动保留。</p>
+          </article>
+          <article class="panel about-content-panel">
+            <div class="editor-tabs"><button type="button" class="active" data-about-tab="write">Markdown</button><button type="button" data-about-tab="preview">预览</button></div>
+            <textarea id="aboutPageBody" class="markdown-editor" placeholder="使用 Markdown 编辑关于页面…"></textarea>
+            <article id="aboutPreview" class="markdown-preview" hidden></article>
+          </article>
         </form>
       </section>
 

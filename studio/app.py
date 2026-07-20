@@ -30,7 +30,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.1.1"
+APP_VERSION = "1.2.0"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 
@@ -512,6 +512,158 @@ def write_settings(values: dict[str, Any]) -> None:
     save_toml(BLOG_ROOT / "data" / "site.toml", data)
 
 
+def taxonomy_catalog_path() -> Path:
+    return BLOG_ROOT / "data" / "taxonomies.toml"
+
+
+def taxonomy_catalog() -> dict[str, list[str]]:
+    data = load_toml(taxonomy_catalog_path())
+    return {
+        "categories": normalize_list(data.get("categories", [])),
+        "tags": normalize_list(data.get("tags", [])),
+    }
+
+
+def save_taxonomy_catalog(catalog: dict[str, list[str]]) -> None:
+    save_toml(taxonomy_catalog_path(), {
+        "categories": sorted(dict.fromkeys(catalog.get("categories", [])), key=str.casefold),
+        "tags": sorted(dict.fromkeys(catalog.get("tags", [])), key=str.casefold),
+    })
+
+
+def validate_taxonomy(kind: str, name: Any) -> str:
+    if kind not in {"categories", "tags"}:
+        raise ValueError("分类或标签类型无效")
+    value = str(name or "").strip()
+    if not value:
+        raise ValueError("名称不能为空")
+    if len(value) > 80:
+        raise ValueError("名称不能超过 80 个字符")
+    if any(character in value for character in "\r\n,"):
+        raise ValueError("名称不能包含换行或逗号")
+    return value
+
+
+def ensure_taxonomy_values(kind: str, values: list[str]) -> None:
+    if not values:
+        return
+    catalog = taxonomy_catalog()
+    known = {item.casefold() for item in catalog[kind]}
+    changed = False
+    for value in values:
+        if value.casefold() not in known:
+            catalog[kind].append(value)
+            known.add(value.casefold())
+            changed = True
+    if changed:
+        save_taxonomy_catalog(catalog)
+
+
+def taxonomy_payload() -> dict[str, list[dict[str, Any]]]:
+    catalog = taxonomy_catalog()
+    counts: dict[str, dict[str, int]] = {"categories": {}, "tags": {}}
+    labels: dict[str, dict[str, str]] = {"categories": {}, "tags": {}}
+    for path in sorted((BLOG_ROOT / "content" / "posts").glob("*.md")):
+        metadata, _ = parse_post(path)
+        for kind in ("categories", "tags"):
+            for value in normalize_list(metadata.get(kind, [])):
+                key = value.casefold()
+                labels[kind].setdefault(key, value)
+                counts[kind][key] = counts[kind].get(key, 0) + 1
+    result: dict[str, list[dict[str, Any]]] = {}
+    for kind in ("categories", "tags"):
+        for value in catalog[kind]:
+            labels[kind].setdefault(value.casefold(), value)
+        result[kind] = [
+            {"name": label, "count": counts[kind].get(key, 0)}
+            for key, label in sorted(labels[kind].items(), key=lambda item: item[1].casefold())
+        ]
+    return result
+
+
+def replace_taxonomy_value(kind: str, old_name: str, new_name: str | None) -> int:
+    old_key = old_name.casefold()
+    changed_posts = 0
+    for path in sorted((BLOG_ROOT / "content" / "posts").glob("*.md")):
+        metadata, body = parse_post(path)
+        values = normalize_list(metadata.get(kind, []))
+        if not any(value.casefold() == old_key for value in values):
+            continue
+        replacement: list[str] = []
+        for value in values:
+            candidate = new_name if value.casefold() == old_key else value
+            if candidate and candidate.casefold() not in {item.casefold() for item in replacement}:
+                replacement.append(candidate)
+        if replacement:
+            metadata[kind] = replacement
+        else:
+            metadata.pop(kind, None)
+        path.write_text(serialize_post(metadata, body), encoding="utf-8", newline="\n")
+        changed_posts += 1
+
+    catalog = taxonomy_catalog()
+    catalog[kind] = [value for value in catalog[kind] if value.casefold() != old_key]
+    if new_name and new_name.casefold() not in {value.casefold() for value in catalog[kind]}:
+        catalog[kind].append(new_name)
+    save_taxonomy_catalog(catalog)
+    return changed_posts
+
+
+def about_page_path() -> Path:
+    return BLOG_ROOT / "content" / "page" / "about" / "index.zh.md"
+
+
+def parse_about_page() -> dict[str, str]:
+    path = about_page_path()
+    if not path.is_file():
+        raise FileNotFoundError("未找到中文关于页面")
+    text = path.read_text(encoding="utf-8")
+    match = re.match(r"\A---\r?\n(.*?)\r?\n---\r?\n?(.*)\Z", text, re.DOTALL)
+    if not match:
+        raise ValueError("关于页面 Front Matter 格式无效")
+    header, body = match.groups()
+
+    def field(name: str) -> str:
+        item = re.search(rf"(?m)^{re.escape(name)}:\s*(.*?)\s*$", header)
+        if not item:
+            return ""
+        value = item.group(1).strip()
+        if value.startswith(('"', "'")):
+            try:
+                return str(json.loads(value))
+            except json.JSONDecodeError:
+                return value.strip("\"'")
+        return value
+
+    return {"title": field("title"), "description": field("description"), "body": body.rstrip()}
+
+
+def write_about_page(values: dict[str, Any]) -> None:
+    path = about_page_path()
+    text = path.read_text(encoding="utf-8")
+    match = re.match(r"\A---\r?\n(.*?)\r?\n---\r?\n?(.*)\Z", text, re.DOTALL)
+    if not match:
+        raise ValueError("关于页面 Front Matter 格式无效")
+    header = match.group(1)
+    title = str(values.get("title") or "").strip()[:200]
+    if not title:
+        raise ValueError("关于页面标题不能为空")
+    description = str(values.get("description") or "").strip()[:500]
+    body = str(values.get("body") or "")
+
+    def replace_field(source: str, name: str, value: str) -> str:
+        rendered = f"{name}: {json.dumps(value, ensure_ascii=False)}"
+        pattern = rf"(?m)^{re.escape(name)}:\s*.*$"
+        return re.sub(pattern, rendered, source, count=1) if re.search(pattern, source) else f"{rendered}\n{source}"
+
+    header = replace_field(header, "title", title)
+    header = replace_field(header, "description", description)
+    header = replace_field(header, "lastmod", datetime.now().astimezone().date().isoformat())
+    temporary = path.with_suffix(".md.tmp")
+    temporary.write_text(f"---\n{header}\n---\n\n{body.rstrip()}\n", encoding="utf-8", newline="\n")
+    temporary.replace(path)
+
+
 def free_port(start: int = 1413) -> int:
     for port in range(start, start + 50):
         with socket.socket() as sock:
@@ -601,6 +753,57 @@ def api_save_settings():
     return jsonify({"ok": True, "message": "网站设置已保存"})
 
 
+@app.get("/api/taxonomies")
+def api_taxonomies():
+    return jsonify({"ok": True, **taxonomy_payload()})
+
+
+@app.post("/api/taxonomies/<kind>")
+def api_add_taxonomy(kind: str):
+    name = validate_taxonomy(kind, (request.get_json(force=True) or {}).get("name"))
+    payload = taxonomy_payload()[kind]
+    if name.casefold() in {item["name"].casefold() for item in payload}:
+        raise ValueError("该名称已经存在")
+    ensure_taxonomy_values(kind, [name])
+    label = "分类" if kind == "categories" else "标签"
+    return jsonify({"ok": True, "message": f"{label}“{name}”已添加"})
+
+
+@app.put("/api/taxonomies/<kind>/<path:old_name>")
+def api_rename_taxonomy(kind: str, old_name: str):
+    old_name = validate_taxonomy(kind, old_name)
+    new_name = validate_taxonomy(kind, (request.get_json(force=True) or {}).get("name"))
+    if old_name.casefold() == new_name.casefold() and old_name == new_name:
+        return jsonify({"ok": True, "message": "名称没有变化"})
+    existing = taxonomy_payload()[kind]
+    if new_name.casefold() in {
+        item["name"].casefold() for item in existing if item["name"].casefold() != old_name.casefold()
+    }:
+        raise ValueError("新名称已经存在")
+    changed = replace_taxonomy_value(kind, old_name, new_name)
+    label = "分类" if kind == "categories" else "标签"
+    return jsonify({"ok": True, "message": f"{label}已重命名，同步更新 {changed} 篇文章"})
+
+
+@app.delete("/api/taxonomies/<kind>/<path:name>")
+def api_delete_taxonomy(kind: str, name: str):
+    name = validate_taxonomy(kind, name)
+    changed = replace_taxonomy_value(kind, name, None)
+    label = "分类" if kind == "categories" else "标签"
+    return jsonify({"ok": True, "message": f"{label}已删除，并从 {changed} 篇文章中移除"})
+
+
+@app.get("/api/about")
+def api_get_about():
+    return jsonify({"ok": True, "about": parse_about_page()})
+
+
+@app.post("/api/about")
+def api_save_about():
+    write_about_page(request.get_json(force=True) or {})
+    return jsonify({"ok": True, "message": "关于页面已保存"})
+
+
 @app.get("/api/posts")
 def api_posts():
     return jsonify({"ok": True, "posts": all_posts()})
@@ -653,6 +856,8 @@ def api_save_post():
         metadata.pop("cover", None)
     categories = normalize_list(payload.get("categories", []))
     tags = normalize_list(payload.get("tags", []))
+    ensure_taxonomy_values("categories", categories)
+    ensure_taxonomy_values("tags", tags)
     if categories:
         metadata["categories"] = categories
     else:
@@ -766,7 +971,7 @@ def api_publish():
             tool_path("hugo"), "--source", str(BLOG_ROOT), "--destination", destination,
             "--cleanDestinationDir", "--enableGitInfo=false",
         ], timeout=180)
-        managed = ["content", "data/site.toml", "static/uploads"]
+        managed = ["content", "data/site.toml", "data/taxonomies.toml", "static/uploads"]
         existing = [item for item in managed if (BLOG_ROOT / item).exists()]
         run_command(git_args("add", "--", *existing), timeout=30)
         staged = subprocess.run(

@@ -81,6 +81,74 @@ class StudioTests(unittest.TestCase):
             finally:
                 studio.BLOG_ROOT = original_root
 
+    def test_taxonomy_add_rename_and_delete_updates_posts(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                posts = studio.BLOG_ROOT / "content" / "posts"
+                posts.mkdir(parents=True)
+                post = posts / "taxonomy-test.md"
+                post.write_text(
+                    studio.serialize_post(
+                        {"title": "Taxonomy", "categories": ["技术"], "tags": ["Hugo", "博客"]},
+                        "Body",
+                    ),
+                    encoding="utf-8",
+                )
+                headers = {"X-TOOD-Token": studio.SESSION_TOKEN}
+
+                added = self.client.post(
+                    "/api/taxonomies/categories", json={"name": "写作"}, headers=headers
+                )
+                self.assertEqual(added.status_code, 200)
+                renamed = self.client.put(
+                    "/api/taxonomies/categories/%E6%8A%80%E6%9C%AF",
+                    json={"name": "开发"},
+                    headers=headers,
+                )
+                self.assertEqual(renamed.status_code, 200)
+                deleted = self.client.delete(
+                    "/api/taxonomies/tags/Hugo", headers=headers
+                )
+                self.assertEqual(deleted.status_code, 200)
+
+                metadata, _ = studio.parse_post(post)
+                self.assertEqual(metadata["categories"], ["开发"])
+                self.assertEqual(metadata["tags"], ["博客"])
+                payload = self.client.get("/api/taxonomies").get_json()
+                self.assertEqual(
+                    {item["name"] for item in payload["categories"]}, {"写作", "开发"}
+                )
+            finally:
+                studio.BLOG_ROOT = original_root
+
+    def test_about_page_edit_preserves_menu_frontmatter(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                about = studio.BLOG_ROOT / "content" / "page" / "about" / "index.zh.md"
+                about.parent.mkdir(parents=True)
+                about.write_text(
+                    "---\ntitle: 关于\ndescription: 旧摘要\nlastmod: 2026-01-01\nmenu:\n    main:\n        weight: -90\n---\n\n旧正文\n",
+                    encoding="utf-8",
+                )
+                response = self.client.post(
+                    "/api/about",
+                    json={"title": "新的关于", "description": "新摘要", "body": "## 新正文"},
+                    headers={"X-TOOD-Token": studio.SESSION_TOKEN},
+                )
+                self.assertEqual(response.status_code, 200)
+                saved = about.read_text(encoding="utf-8")
+                self.assertIn("weight: -90", saved)
+                self.assertIn("## 新正文", saved)
+                payload = self.client.get("/api/about").get_json()["about"]
+                self.assertEqual(payload["title"], "新的关于")
+                self.assertEqual(payload["description"], "新摘要")
+            finally:
+                studio.BLOG_ROOT = original_root
+
 
 if __name__ == "__main__":
     unittest.main()
