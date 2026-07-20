@@ -45,7 +45,7 @@ class StudioTests(unittest.TestCase):
 
     def test_toml_post_round_trip(self):
         content = studio.serialize_post(
-            {"title": "测试", "date": "2026-07-20T12:00:00+08:00", "draft": True},
+            {"title": "测试", "date": "2026-07-20T12:00:00+08:00", "draft": True, "cover": "/uploads/cover.png"},
             "正文内容",
         )
         with tempfile.TemporaryDirectory() as folder:
@@ -53,7 +53,33 @@ class StudioTests(unittest.TestCase):
             path.write_text(content, encoding="utf-8")
             metadata, body = studio.parse_post(path)
         self.assertEqual(metadata["title"], "测试")
+        self.assertEqual(metadata["cover"], "/uploads/cover.png")
         self.assertEqual(body.strip(), "正文内容")
+
+    def test_save_post_with_cover(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                (studio.BLOG_ROOT / "content" / "posts").mkdir(parents=True)
+                response = self.client.post(
+                    "/api/posts",
+                    json={
+                        "title": "封面测试",
+                        "slug": "cover-test",
+                        "date": "2026-07-20T12:00",
+                        "draft": False,
+                        "cover": "/uploads/cover.png",
+                        "body": "正文",
+                    },
+                    headers={"X-TOOD-Token": studio.SESSION_TOKEN},
+                )
+                self.assertEqual(response.status_code, 200)
+                metadata, _ = studio.parse_post(studio.BLOG_ROOT / "content" / "posts" / "cover-test.md")
+                self.assertEqual(metadata["cover"], "/uploads/cover.png")
+                self.assertFalse(metadata["draft"])
+            finally:
+                studio.BLOG_ROOT = original_root
 
 
 if __name__ == "__main__":

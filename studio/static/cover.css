@@ -1,0 +1,27 @@
+.cover-field {
+  display: grid;
+  gap: 9px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.cover-field > small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.cover-field .button {
+  padding: 8px 11px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.cover-preview {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: #111;
+}

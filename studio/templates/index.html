@@ -6,6 +6,7 @@
   <meta name="tood-token" content="{{ token }}">
   <title>TOOD Studio</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='cover.css') }}">
 </head>
 <body>
   <div class="app-shell">
@@ -74,6 +75,12 @@
           </div>
           <aside class="editor-aside panel">
             <label class="switch-row"><span><b>保存为草稿</b><small>勾选后只在本地预览，不会显示在域名中</small></span><input id="postDraft" type="checkbox"></label>
+            <div class="cover-field">
+              <b>文章封面</b><small>可单独设置；留空时自动使用正文第一张图片</small>
+              <input id="postCover" placeholder="/uploads/cover.jpg 或 https://…">
+              <div class="file-row"><button type="button" class="button" id="uploadCover">上传封面</button><input type="file" id="coverImage" accept="image/png,image/jpeg,image/webp,image/gif" hidden><span id="coverPath">未设置</span></div>
+              <img id="coverPreview" class="cover-preview" alt="封面预览" hidden>
+            </div>
             <label>分类<input id="postCategories" placeholder="技术, 写作"></label>
             <label>标签<input id="postTags" placeholder="Hugo, Python, 建站"></label>
             <div class="editor-info"><span>支持 Markdown</span><span>图片自动保存</span><span>Sitemap 自动更新</span></div>

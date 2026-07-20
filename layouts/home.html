@@ -41,9 +41,23 @@
 
         <div class="archive-columns">
             <div class="archive-primary">
+                {{ $featured := false }}
+                {{ range first 1 $posts }}{{ $featured = . }}{{ end }}
+                {{ $cover := "" }}
+                {{ with $featured }}
+                    {{ with .Params.cover }}{{ $cover = . }}{{ end }}
+                    {{ if not $cover }}
+                        {{ $markdownImages := findRE `!\[[^\]]*\]\((?:<)?[^\s)>]+` .RawContent 1 }}
+                        {{ with $markdownImages }}{{ $cover = replaceRE `^!\[[^\]]*\]\((?:<)?` "" (index . 0) }}{{ end }}
+                    {{ end }}
+                    {{ if not $cover }}
+                        {{ $htmlImages := findRE `(?i)<img[^>]+src=["'][^"']+` .RawContent 1 }}
+                        {{ with $htmlImages }}{{ $cover = replaceRE `(?i)^.*src=["']` "" (index . 0) }}{{ end }}
+                    {{ end }}
+                {{ end }}
                 <section class="feature-record">
-                    <div class="feature-image" role="img" aria-label="特色文章黑白几何封面">
-                        <span class="feature-ring"></span><small>FEATURED<br>STORY</small>
+                    <div class="feature-image{{ if $cover }} has-cover{{ end }}" role="img" aria-label="{{ with $featured }}{{ .Title }}{{ else }}特色文章黑白几何封面{{ end }}">
+                        {{ with $cover }}<img class="feature-cover" src="{{ . | safeURL }}" alt="{{ with $featured }}{{ .Title }}{{ end }}">{{ else }}<span class="feature-ring"></span>{{ end }}<small>FEATURED<br>STORY</small>
                     </div>
                     <div class="feature-copy">
                         <code>FTR.{{ now.Format "0601" }}.001</code>

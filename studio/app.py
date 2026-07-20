@@ -27,7 +27,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.0.1"
+APP_VERSION = "1.1.0"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 
@@ -181,6 +181,7 @@ def post_summary(path: Path) -> dict[str, Any]:
         "date": str(metadata.get("date") or ""),
         "draft": bool(metadata.get("draft", True)),
         "description": str(metadata.get("description") or ""),
+        "cover": str(metadata.get("cover") or ""),
         "categories": normalize_list(metadata.get("categories", [])),
         "tags": normalize_list(metadata.get("tags", [])),
         "words": len(re.findall(r"\S+", body)),
@@ -390,6 +391,11 @@ def api_save_post():
         metadata["description"] = description[:500]
     else:
         metadata.pop("description", None)
+    cover = str(payload.get("cover") or "").strip()
+    if cover:
+        metadata["cover"] = cover[:1000]
+    else:
+        metadata.pop("cover", None)
     categories = normalize_list(payload.get("categories", []))
     tags = normalize_list(payload.get("tags", []))
     if categories:
@@ -407,7 +413,7 @@ def api_save_post():
         old_path = post_path(original_slug)
         if old_path.is_file():
             old_path.unlink()
-    state = "草稿，不会显示在线" if front_matter["draft"] else "公开文章"
+    state = "草稿，不会显示在线" if metadata["draft"] else "公开文章"
     return jsonify({"ok": True, "message": f"文章已保存为{state}", "slug": slug})
 
 
