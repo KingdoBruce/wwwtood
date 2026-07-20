@@ -102,8 +102,9 @@ body.archive-site.archive-subpage {
 .archive-shell { min-height: 100vh; background-image: linear-gradient(90deg, transparent calc(25% - .5px), rgba(16,17,21,.035) 25%, transparent calc(25% + .5px)), linear-gradient(90deg, transparent calc(50% - .5px), rgba(16,17,21,.035) 50%, transparent calc(50% + .5px)), linear-gradient(90deg, transparent calc(75% - .5px), rgba(16,17,21,.035) 75%, transparent calc(75% + .5px)); }
 
 .archive-topbar { height: 76px; border-bottom: 1px solid var(--archive-line); display: grid; grid-template-columns: 250px 1fr 220px; align-items: stretch; padding: 0 28px; }
-.archive-brand { display: flex; align-items: center; gap: 22px; font: 700 14px/1 ui-monospace, monospace; letter-spacing: .08em; }
-.archive-brand-logo { width: 24px; height: 24px; object-fit: contain; flex: 0 0 auto; }
+.archive-brand { display: flex; align-items: center; min-width: 0; font: 700 14px/1 ui-monospace, monospace; letter-spacing: .08em; }
+.archive-brand-logo { display: block; width: auto; height: 34px; max-width: 190px; object-fit: contain; object-position: left center; flex: 0 1 auto; }
+.archive-brand-name { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .archive-focus { width: 20px; height: 20px; position: relative; display: block; }
 .archive-focus i { position: absolute; width: 6px; height: 6px; border-color: var(--archive-ink); border-style: solid; }
 .archive-focus i:nth-child(1) { left: 0; top: 0; border-width: 2px 0 0 2px; }.archive-focus i:nth-child(2) { right: 0; top: 0; border-width: 2px 2px 0 0; }.archive-focus i:nth-child(3) { left: 0; bottom: 0; border-width: 0 0 2px 2px; }.archive-focus i:nth-child(4) { right: 0; bottom: 0; border-width: 0 2px 2px 0; }
@@ -141,6 +142,7 @@ body.archive-site.archive-subpage {
 
 @media (max-width: 1180px) {
     .archive-topbar{grid-template-columns:170px minmax(0,1fr);padding:0 18px}.archive-status{display:none}.archive-nav a{min-width:0;flex:1;padding:0 12px;white-space:nowrap}
+    .archive-brand-logo{height:30px;max-width:145px}
 }
 @media (max-width: 1050px) {
     .archive-frame{padding-left:70px;padding-right:35px;overflow:hidden}.archive-columns{grid-template-columns:1fr;gap:28px}.archive-aside{display:grid;grid-template-columns:1fr 1fr}.archive-about{grid-column:1/-1}.archive-hero{max-width:none}.archive-hero h1{font-size:clamp(58px,9vw,78px);white-space:normal}.archive-hero h1 span{display:block}

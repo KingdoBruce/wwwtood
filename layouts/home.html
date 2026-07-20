@@ -14,8 +14,11 @@
 <div class="archive-shell">
     <header class="archive-topbar">
         <a class="archive-brand" href="{{ .Site.Home.RelPermalink }}" aria-label="返回首页">
-            {{ with $brand.logo }}<img class="archive-brand-logo" src="{{ . | relURL }}" alt="">{{ else }}<span class="archive-focus" aria-hidden="true"><i></i><i></i><i></i><i></i></span>{{ end }}
-            <span>{{ default "TOOD.WIN" $brand.name }}</span>
+            {{ with $brand.logo }}
+                <img class="archive-brand-logo" src="{{ . | relURL }}" alt="{{ default `TOOD.WIN` $brand.name }}">
+            {{ else }}
+                <span class="archive-brand-name">{{ default "TOOD.WIN" $brand.name }}</span>
+            {{ end }}
         </a>
         <nav class="archive-nav" aria-label="主导航">
             <a href="{{ `archives/` | relLangURL }}">{{ default "归档" $navigation.archives }}</a>
