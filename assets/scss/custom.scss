@@ -99,7 +99,7 @@ body.archive-site.archive-subpage {
 .archive-home .main { width: 100%; padding-top: 0; }
 .archive-home a { color: inherit; text-decoration: none; }
 .archive-home .archive-link { color: var(--archive-blue); font-weight: 600; }
-.archive-shell { min-height: 100vh; background-image: linear-gradient(90deg, transparent calc(25% - .5px), rgba(16,17,21,.035) 25%, transparent calc(25% + .5px)), linear-gradient(90deg, transparent calc(50% - .5px), rgba(16,17,21,.035) 50%, transparent calc(50% + .5px)), linear-gradient(90deg, transparent calc(75% - .5px), rgba(16,17,21,.035) 75%, transparent calc(75% + .5px)); }
+.archive-shell { min-height: 100vh; background-image: linear-gradient(90deg, transparent calc(25% - .5px), rgba(16,17,21,.035) 25%, transparent calc(25% + .5px)), linear-gradient(90deg, transparent calc(75% - .5px), rgba(16,17,21,.035) 75%, transparent calc(75% + .5px)); }
 
 .archive-topbar { height: 76px; border-bottom: 1px solid var(--archive-line); display: grid; grid-template-columns: 250px 1fr 220px; align-items: stretch; padding: 0 28px; }
 .archive-brand { display: flex; align-items: center; min-width: 0; font: 700 14px/1 ui-monospace, monospace; letter-spacing: .08em; }
