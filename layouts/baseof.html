@@ -25,10 +25,13 @@
                 <div class="archive-status"><span>SYS.STATUS</span><b><i></i> ONLINE</b><em aria-hidden="true">▁▂▃▅▇</em></div>
             </header>
             <div class="archive-page-frame">
-                <span class="archive-coord archive-coord-top">{{ upper .Kind }}.{{ now.Format "0601" }}.{{ printf "%04d" .WordCount }}</span>
                 <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
-                <span class="archive-cross" aria-hidden="true"></span>
-                <div class="archive-page-index"><span>TOOD ARCHIVE</span><strong>/ {{ upper .Kind }}</strong></div>
+                <div class="archive-page-index">
+                    <span class="archive-cross" aria-hidden="true"></span>
+                    <span class="archive-coord archive-coord-top">{{ upper .Kind }}.{{ now.Format "0601" }}.{{ printf "%04d" .WordCount }}</span>
+                    <span class="archive-page-name">TOOD ARCHIVE</span>
+                    <strong>/ {{ upper .Kind }}</strong>
+                </div>
                 <main class="archive-page-main">{{- block "main" . }}{{- end }}</main>
             </div>
             <footer class="archive-footer"><span>© {{ now.Format "2006" }} TOOD.WIN</span><span>BUILT WITH HUGO <i></i></span></footer>

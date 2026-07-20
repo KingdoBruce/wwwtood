@@ -18,14 +18,15 @@ body.archive-site.archive-subpage {
     font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
 }
 
-.archive-subpage .archive-page-frame { position: relative; max-width: 1240px; margin: 0 auto; padding: 64px 64px 50px; min-height: calc(100vh - 140px); }
-.archive-subpage .archive-page-index { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--archive-line); padding: 0 0 16px; margin: 0 0 28px; color: var(--archive-muted); font: 11px/1 ui-monospace, monospace; letter-spacing: .08em; }
-.archive-subpage .archive-page-index strong { color: var(--archive-blue); font-weight: 500; }
+.archive-subpage .archive-page-frame { position: relative; max-width: 1240px; margin: 0 auto; padding: 42px 64px 50px; min-height: calc(100vh - 140px); }
+.archive-subpage .archive-page-index { position: relative; z-index: 1; min-height: 58px; display: grid; grid-template-columns: auto auto 1fr; gap: 18px; align-items: center; border-top: 1px solid var(--archive-line); border-bottom: 1px solid var(--archive-line); padding: 0 4px; margin: 0 0 28px; color: var(--archive-muted); font: 11px/1 ui-monospace, monospace; letter-spacing: .08em; }
+.archive-subpage .archive-page-index strong { justify-self: end; color: var(--archive-blue); font-weight: 500; }
+.archive-subpage .archive-page-name { color: var(--archive-ink); }
 .archive-subpage .archive-page-main { width: 100%; min-width: 0; }
 .archive-subpage .site-footer { display: none; }
-.archive-subpage .archive-cross { left: 0; top: 22px; }
+.archive-subpage .archive-cross { left: -64px; top: 10px; }
 .archive-subpage .archive-cross::before { height: calc(100vh - 120px); }
-.archive-subpage .archive-coord-top { top: 34px; left: 50px; }
+.archive-subpage .archive-coord-top { position: static; }
 .archive-subpage .archive-coord-left { top: 180px; left: 18px; }
 
 /* Shared page headings */
@@ -76,10 +77,10 @@ body.archive-site.archive-subpage {
 .archive-subpage .search-result { margin-top: 34px; }
 
 @media (max-width: 700px) {
-    .archive-subpage .archive-page-frame { padding: 58px 18px 34px; }
+    .archive-subpage .archive-page-frame { padding: 38px 18px 34px; }
     .archive-subpage .archive-page-index { margin-bottom: 24px; }
-    .archive-subpage .archive-cross { left: -18px; }
-    .archive-subpage .archive-coord-top { left: 28px; }
+    .archive-subpage .archive-page-index { grid-template-columns: auto auto 1fr; gap: 10px; padding: 0; font-size: 9px; }
+    .archive-subpage .archive-cross { left: -36px; }
     .archive-subpage .archive-coord-left { display: none; }
     .archive-subpage .section-card { padding: 24px 20px; }
     .archive-subpage .section-term { font-size: 42px; }
