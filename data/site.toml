@@ -25,4 +25,4 @@ copyright_since = 2026
 build_label = "BUILT WITH HUGO"
 
 [advertising]
-google_ads_code = ""
+google_ads_code = "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673\"\n     crossorigin=\"anonymous\"></script>"
