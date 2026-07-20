@@ -1,0 +1,110 @@
+{{ define "body-class" }}archive-home{{ end }}
+
+{{ define "left-sidebar" }}<!-- Archive homepage intentionally replaces the Stack sidebar. -->{{ end }}
+{{ define "right-sidebar" }}<!-- Archive homepage uses its own index sidebar. -->{{ end }}
+
+{{ define "main" }}
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $posts = $posts.ByDate.Reverse -}}
+<div class="archive-shell">
+    <header class="archive-topbar">
+        <a class="archive-brand" href="{{ .Site.Home.RelPermalink }}" aria-label="返回首页">
+            <span class="archive-focus" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span>TOOD.WIN</span>
+        </a>
+        <nav class="archive-nav" aria-label="主导航">
+            <a href="{{ `archives/` | relLangURL }}">归档</a>
+            <a href="{{ `categories/` | relLangURL }}">分类</a>
+            <a href="{{ `tags/` | relLangURL }}">标签</a>
+            <a href="{{ `关于/` | relLangURL }}">关于</a>
+            <a class="active" href="{{ .Site.Home.RelPermalink }}">INDEX</a>
+        </nav>
+        <div class="archive-status"><span>SYS.STATUS</span><b><i></i> ONLINE</b><em aria-hidden="true">▁▂▃▅▇</em></div>
+    </header>
+
+    <div class="archive-frame">
+        <span class="archive-coord archive-coord-top">IDX.2009.0222</span>
+        <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+        <span class="archive-coord archive-coord-bottom">E 121° 28′ 34.98″</span>
+        <span class="archive-cross" aria-hidden="true"></span>
+
+        <section class="archive-hero">
+            <h1><span>TOOD</span> <span>ARCHIVE</span></h1>
+            <p><i></i>记录思考，沉淀知识，构建可被检索的个人数字花园。</p>
+            <div class="archive-build"><span>BUILD YOUR OWN ARCHIVE.</span><span>VER. {{ now.Format "2006.01" }}</span></div>
+        </section>
+
+        <div class="archive-columns">
+            <div class="archive-primary">
+                <section class="feature-record">
+                    <div class="feature-image" role="img" aria-label="特色文章黑白几何封面">
+                        <span class="feature-ring"></span><small>FEATURED<br>STORY</small>
+                    </div>
+                    <div class="feature-copy">
+                        <code>FTR.{{ now.Format "0601" }}.001</code>
+                        {{ range first 1 $posts }}
+                            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                            <p>{{ .Summary | plainify | truncate 110 }}</p>
+                            <div class="feature-meta"><span>{{ .Date.Format "2006-01-02 15:04:05" }}</span><span>{{ .ReadingTime }} 分钟</span><span>{{ .WordCount }} 字</span></div>
+                            <a class="archive-link" href="{{ .RelPermalink }}">继续阅读 →</a>
+                        {{ else }}
+                            <h2>关于构建长期主义的知识体系</h2>
+                            <p>这里将展示最新发布的特色文章。开始写作后，标题、摘要、日期与阅读时间会自动更新。</p>
+                            <div class="feature-meta"><span>{{ now.Format "2006-01-02 15:04:05" }}</span><span>准备中</span><span>0000 字</span></div>
+                            <span class="archive-link">即将发布 →</span>
+                        {{ end }}
+                    </div>
+                </section>
+
+                <section class="archive-articles">
+                    <div class="archive-section-title"><h2>LATEST ARTICLES</h2><a href="{{ `archives/` | relLangURL }}">VIEW ALL →</a></div>
+                    <div class="archive-table">
+                        {{ range first 5 $posts }}
+                        <a class="archive-row" href="{{ .RelPermalink }}">
+                            <code>A.{{ .Date.Format "0601" }}.{{ printf "%03d" .Weight }}</code><strong>{{ .Title }}</strong><span>/ {{ with index .Params.categories 0 }}{{ . }}{{ else }}未分类{{ end }}</span><time>{{ .Date.Format "2006-01-02" }}</time>
+                        </a>
+                        {{ else }}
+                            {{ range slice "技术债与演进设计" "如何写出清晰的技术文档" "从 0 到 1 搭建一个静态博客" "浏览器渲染机制简述" "信息管理：少即是多" }}
+                            <div class="archive-row is-placeholder"><code>A.0000.000</code><strong>{{ . }}</strong><span>/ 准备中</span><time>----</time></div>
+                            {{ end }}
+                        {{ end }}
+                    </div>
+                </section>
+            </div>
+
+            <aside class="archive-aside">
+                <section class="archive-panel archive-index">
+                    <div class="archive-panel-title"><h2>INDEX</h2><span>▣</span></div>
+                    <dl>
+                        <div><dt>文章总数</dt><dd>{{ len $posts | printf "%03d" }}</dd></div>
+                        <div><dt>分类总数</dt><dd>{{ len .Site.Taxonomies.categories | printf "%03d" }}</dd></div>
+                        <div><dt>标签总数</dt><dd>{{ len .Site.Taxonomies.tags | printf "%03d" }}</dd></div>
+                        <div><dt>建立时间</dt><dd>2026-07-20</dd></div>
+                    </dl>
+                </section>
+
+                <section class="archive-panel archive-latest">
+                    <div class="archive-panel-title"><h2>LATEST</h2><span>[ {{ len (first 5 $posts) }} ]</span></div>
+                    <ul>
+                        {{ range first 5 $posts }}
+                        <li><a href="{{ .RelPermalink }}"><i></i><span>{{ .Title }}</span><time>{{ .Date.Format "2006-01-02" }}</time></a></li>
+                        {{ else }}
+                            {{ range slice "AI 时代的写作：有用、有趣、有我" "整理知识的 3 种有效方法" "设计模式在日常开发中的实践" "打造稳定的数字生活系统" "阅读笔记：人类简史（节选）" }}
+                            <li><span><i></i><span>{{ . }}</span><time>----</time></span></li>
+                            {{ end }}
+                        {{ end }}
+                    </ul>
+                    <a class="archive-link" href="{{ `archives/` | relLangURL }}">查看全部 →</a>
+                </section>
+
+                <section class="archive-panel archive-about">
+                    <div class="pixel-avatar" aria-hidden="true"><span>◆</span></div>
+                    <div><h2>ABOUT</h2><p>一名开发者，偶尔写作，持续学习。相信积累的力量。</p><a class="archive-link" href="{{ `关于/` | relLangURL }}">了解更多 →</a></div>
+                </section>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="archive-footer"><span>© 2026 TOOD.WIN</span><span>BUILT WITH HUGO <i></i></span></footer>
+</div>
+{{ end }}
