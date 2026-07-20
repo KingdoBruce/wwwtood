@@ -27,7 +27,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 
@@ -407,7 +407,8 @@ def api_save_post():
         old_path = post_path(original_slug)
         if old_path.is_file():
             old_path.unlink()
-    return jsonify({"ok": True, "message": "文章已保存", "slug": slug})
+    state = "草稿，不会显示在线" if front_matter["draft"] else "公开文章"
+    return jsonify({"ok": True, "message": f"文章已保存为{state}", "slug": slug})
 
 
 @app.delete("/api/posts/<slug>")
@@ -510,11 +511,30 @@ def api_publish():
         staged = subprocess.run(
             git_args("diff", "--cached", "--quiet"), cwd=BLOG_ROOT, timeout=30, **process_flags()
         ).returncode
-        if staged == 0:
-            return jsonify({"ok": True, "message": "没有需要发布的内容", "output": build.stdout[-2000:]})
-        run_command(git_args("commit", "-m", message), timeout=60)
-        push = run_command(git_args("push", "origin", "HEAD"), timeout=180)
-    return jsonify({"ok": True, "message": "已推送到 GitHub，Cloudflare 将自动部署", "output": push.stdout + push.stderr})
+        committed = staged != 0
+        if committed:
+            run_command(git_args("commit", "-m", message), timeout=60)
+
+        push: subprocess.CompletedProcess[str] | None = None
+        last_error: RuntimeError | None = None
+        for delay in (0, 2, 5):
+            if delay:
+                time.sleep(delay)
+            try:
+                push = run_command(git_args("push", "origin", "HEAD"), timeout=180)
+                break
+            except RuntimeError as error:
+                last_error = error
+                logging.warning("git push failed, will retry: %s", error)
+        if push is None:
+            raise last_error or RuntimeError("GitHub 推送失败")
+
+    action = "内容已提交并推送" if committed else "GitHub 已确认同步"
+    return jsonify({
+        "ok": True,
+        "message": f"{action}到 GitHub，Cloudflare 将自动部署",
+        "output": (push.stdout + push.stderr) or build.stdout[-2000:],
+    })
 
 
 @app.post("/api/shutdown")

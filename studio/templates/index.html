@@ -73,7 +73,7 @@
             <article id="markdownPreview" class="markdown-preview" hidden></article>
           </div>
           <aside class="editor-aside panel">
-            <label class="switch-row"><span><b>草稿</b><small>草稿不会发布到线上</small></span><input id="postDraft" type="checkbox" checked></label>
+            <label class="switch-row"><span><b>保存为草稿</b><small>勾选后只在本地预览，不会显示在域名中</small></span><input id="postDraft" type="checkbox"></label>
             <label>分类<input id="postCategories" placeholder="技术, 写作"></label>
             <label>标签<input id="postTags" placeholder="Hugo, Python, 建站"></label>
             <div class="editor-info"><span>支持 Markdown</span><span>图片自动保存</span><span>Sitemap 自动更新</span></div>
@@ -96,7 +96,7 @@
         <div class="publish-grid">
           <article class="panel publish-card"><span class="step">01</span><h2>实时预览</h2><p>自动启动 Hugo，包含草稿并实时刷新。</p><button class="button primary" id="startPreview">启动并打开预览</button></article>
           <article class="panel publish-card"><span class="step">02</span><h2>构建检查</h2><p>在临时目录执行完整构建，不修改线上文件。</p><button class="button ghost" id="runBuild">检查网站</button></article>
-          <article class="panel publish-card"><span class="step">03</span><h2>发布到 GitHub</h2><p>仅提交文章、网站设置和上传图片，成功后由 Cloudflare 自动部署。</p><label>提交说明<input id="commitMessage" placeholder="留空则自动生成"></label><button class="button primary" id="publishNow">检查并发布</button></article>
+          <article class="panel publish-card"><span class="step">03</span><h2>发布到 GitHub</h2><p>仅提交公开文章、网站设置和上传图片。草稿会同步保存，但不会显示在域名中。</p><label>提交说明<input id="commitMessage" placeholder="留空则自动生成"></label><button class="button primary" id="publishNow">检查并发布</button></article>
         </div>
         <article class="panel console-panel"><div class="panel-heading"><h2>操作结果</h2><button class="text-button" id="clearConsole">清空</button></div><pre id="consoleOutput">等待操作…</pre></article>
         <button class="button danger-outline" id="shutdownApp">退出 TOOD Studio</button>
