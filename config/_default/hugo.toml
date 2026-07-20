@@ -8,6 +8,13 @@ defaultContentLanguage = "zh"
 # Set hasCJKLanguage to true if DefaultContentLanguage is a CJK language
 # This will make .Summary and .WordCount behave correctly
 hasCJKLanguage = true
+enableGitInfo = true
+enableRobotsTXT = true
+
+[sitemap]
+    changeFreq = "weekly"
+    filename   = "sitemap.xml"
+    priority   = 0.5
 
 
 
