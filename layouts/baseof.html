@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale }}" dir="{{ default `ltr` .Language.Direction }}">
+<head>
+    {{- partial "head/head.html" . -}}
+    {{- block "head" . -}}{{ end }}
+</head>
+<body class="archive-site {{ if not .IsHome }}archive-subpage {{ end }}{{ block `body-class` . }}{{ end }}">
+    {{- partial "head/colorScheme" . -}}
+    {{ if .IsHome }}
+        <main class="main full-width">{{- block "main" . }}{{- end }}</main>
+    {{ else }}
+        <div class="archive-shell archive-page-shell">
+            <header class="archive-topbar">
+                <a class="archive-brand" href="{{ .Site.Home.RelPermalink }}" aria-label="返回首页">
+                    <span class="archive-focus" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                    <span>TOOD.WIN</span>
+                </a>
+                <nav class="archive-nav" aria-label="主导航">
+                    <a href="{{ `archives/` | relLangURL }}">归档</a>
+                    <a href="{{ `categories/` | relLangURL }}">分类</a>
+                    <a href="{{ `tags/` | relLangURL }}">标签</a>
+                    <a href="{{ `关于/` | relLangURL }}">关于</a>
+                    <a href="{{ .Site.Home.RelPermalink }}">INDEX</a>
+                </nav>
+                <div class="archive-status"><span>SYS.STATUS</span><b><i></i> ONLINE</b><em aria-hidden="true">▁▂▃▅▇</em></div>
+            </header>
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-top">{{ upper .Kind }}.{{ now.Format "0601" }}.{{ printf "%04d" .WordCount }}</span>
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                <span class="archive-cross" aria-hidden="true"></span>
+                <div class="archive-page-index"><span>TOOD ARCHIVE</span><strong>/ {{ upper .Kind }}</strong></div>
+                <main class="archive-page-main">{{- block "main" . }}{{- end }}</main>
+            </div>
+            <footer class="archive-footer"><span>© {{ now.Format "2006" }} TOOD.WIN</span><span>BUILT WITH HUGO <i></i></span></footer>
+        </div>
+    {{ end }}
+    {{ partial "footer/include.html" . }}
+</body>
+</html>
