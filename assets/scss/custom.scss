@@ -115,9 +115,9 @@ body.archive-site.archive-subpage {
 
 .archive-frame { position: relative; padding: 70px 7vw 24px; }
 .archive-coord { position: absolute; color: #85878c; font: 10px/1 ui-monospace, monospace; letter-spacing: .06em; }
-.archive-coord-top { top: 38px; left: 6.8vw; }.archive-coord-left { left: 28px; top: 178px; writing-mode: vertical-rl; transform: rotate(180deg); }.archive-coord-bottom { left: 28px; bottom: 110px; writing-mode: vertical-rl; transform: rotate(180deg); }
+.archive-coord-top { top: 38px; left: 6.8vw; }.archive-coord-left { left: 18px; top: 178px; writing-mode: vertical-rl; transform: rotate(180deg); }.archive-coord-bottom { left: 18px; bottom: 110px; writing-mode: vertical-rl; transform: rotate(180deg); }
 .archive-cross { position: absolute; left: 14px; top: 22px; width: 36px; height: 36px; background: linear-gradient(90deg, transparent 48%, #a9abb0 48%, #a9abb0 52%, transparent 52%), linear-gradient(transparent 48%, #a9abb0 48%, #a9abb0 52%, transparent 52%); opacity: .55; }
-.archive-cross::before,.archive-cross::after { content:""; position:absolute; background:#a9abb0; }.archive-cross::before { width:1px;height:820px;left:18px;top:0; }.archive-cross::after { height:1px;width:70px;left:-18px;top:18px; }
+.archive-cross::before,.archive-cross::after { content:""; position:absolute; background:#a9abb0; }.archive-cross::before { width:1px;height:calc(100vh - 120px);left:18px;top:0; }.archive-cross::after { height:1px;width:70px;left:-18px;top:18px; }
 
 .archive-hero { max-width: 890px; }
 .archive-hero h1 { margin: 0; font: 900 clamp(60px,7vw,112px)/.9 "Arial Narrow", Impact, sans-serif; letter-spacing: -.035em; white-space: nowrap; }
