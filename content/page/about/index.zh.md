@@ -1,8 +1,8 @@
 ---
-title: 关于
-description: 关于本站及其作者的一切111。
+title: "关于"
+description: "关于本站及其作者的一切。"
 date: 2026-01-26
-lastmod: 2026-01-26
+lastmod: "2026-07-21"
 menu:
     main: 
         weight: -90
@@ -10,36 +10,16 @@ menu:
             icon: user
 ---
 
-## 这是给谁看的？
+大家好，我是 Bruce，一个喜欢折腾新技术、新工具和互联网产品的普通玩家。
 
-这是一个示例**关于**页面。你可以用它来介绍你自己、你的博客或你的项目。
+从搭建网站、制作小程序，到研究域名、VPS、AI 工具、开源软件和各种本地工具，我始终享受从零开始、反复尝试，直到真正跑通的过程。
 
-## 关于作者
+这个网站主要记录我使用过的工具、完成的项目、踩过的坑，以及亲自验证过的解决方法。内容不一定高深，但会尽量真实、实用、容易理解。
 
-你好！我是一个热衷于博客和开源的爱好者。我喜欢探索新技术并向社区分享我的经验。
+希望这些记录能够帮助来到这里的朋友节省一点时间，少走一些弯路，也能发现一些有趣且值得尝试的新东西。
 
-### 我的旅程
+联系方式
 
-我在 10 多年前开始了我的 Web 开发之旅。自那以后，我参与了许多项目，从个人博客到大规模企业应用。
+问题、建议或合作交流，请联系：
 
-### 技能
-
-- **前端**: HTML, CSS, JavaScript, React, Vue
-- **后端**: Node.js, Python, Go
-- **工具**: Git, Docker, Hugo, Neovim
-
-## 联系我
-
-如果你有任何问题或只是想打个招呼，请随时联系我！
-
-- **电子邮件**: [hello@example.com](mailto:hello@example.com)
-- **Twitter**: [@example](https://twitter.com/example)
-- **GitHub**: [example](https://github.com/example)
-
----
-
-> "Logic will get you from A to B. Imagination will take you everywhere."  
-> — *Albert Einstein*
-
----
-*此页面由 AI 生成。*
+admin@tood.win
