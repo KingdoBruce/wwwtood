@@ -2,7 +2,7 @@
 title = "Codex 省额度工具包（新手版）"
 date = "2026-07-21T18:13:00+08:00"
 draft = false
-categories = ["软件"]
+categories = ["AI"]
 tags = ["Codex", "Skills"]
 featured = true
 +++
