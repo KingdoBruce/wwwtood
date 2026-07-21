@@ -13,7 +13,7 @@ about = "关于"
 index = "首页"
 
 [home]
-hero_primary = "TOOD"
+hero_primary = "tood"
 hero_secondary = ".win"
 tagline = "记录值得被发现的人、事、思想与微光。"
 build_label = "Things Others Ought to Discover"
