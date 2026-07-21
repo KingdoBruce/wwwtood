@@ -9,9 +9,13 @@ featured = true
 
 这套文件不会增加 Codex 额度，也不会改变收费标准。它通过限制无关扫描、无关修改、完整测试和重复解释，减少不必要的 Token 与 credits 消耗。
 
+## 工具包下载
+
+[点击下载 Codex 省额度工具包（新手版）](https://iezyw.lanzouv.com/iUlBr3xtimta)
+
+> 下载完成后，请先解压 ZIP 压缩包，再按照下方步骤安装。
 
 ![Codex-](/uploads/2026/07/Codex--5ecf67e2.jpg)
-
 
 ## 最简单的安装方法
 
@@ -23,10 +27,10 @@ featured = true
 
 把解压后的以下内容复制到你的项目最外层目录：
 
-- `.agents` 文件夹
-- `AGENTS.md`
-- `PROJECT_STATUS.md`
-- `prompts` 文件夹
+* `.agents` 文件夹
+* `AGENTS.md`
+* `PROJECT_STATUS.md`
+* `prompts` 文件夹
 
 项目根目录通常是能够看到 `package.json`、`README.md`、`.git` 或源代码文件夹的位置。
 
@@ -83,12 +87,12 @@ Windows 默认可能隐藏以点号开头的文件夹。即使看不到 `.agents
 
 打开 `prompts` 文件夹，根据任务复制对应模板：
 
-- `01-修改小功能.txt`：增加小功能或修改页面
-- `02-修复报错.txt`：解决报错、502、Docker、Nginx、Cloudflare 等问题
-- `03-只分析不修改.txt`：担心 Codex 乱改时先分析
-- `04-继续未完成项目.txt`：继续上一次工作
-- `05-检查本次修改.txt`：提交前检查
-- `06-让Codex填写项目资料.txt`：第一次安装后使用
+* `01-修改小功能.txt`：增加小功能或修改页面
+* `02-修复报错.txt`：解决报错、502、Docker、Nginx、Cloudflare 等问题
+* `03-只分析不修改.txt`：担心 Codex 乱改时先分析
+* `04-继续未完成项目.txt`：继续上一次工作
+* `05-检查本次修改.txt`：提交前检查
+* `06-让Codex填写项目资料.txt`：第一次安装后使用
 
 把方括号中的内容替换成你的实际需求即可。
 
@@ -108,7 +112,7 @@ Windows 默认可能隐藏以点号开头的文件夹。即使看不到 `.agents
 请使用 $diagnose-before-fixing。
 ```
 
-如果界面没有自动补全 `$技能名称`，直接用自然语言写出 Skill 名称也可以；Codex也会根据 Skill 的 description 自动判断是否调用。
+如果界面没有自动补全 `$技能名称`，直接用自然语言写出 Skill 名称也可以；Codex 也会根据 Skill 的 description 自动判断是否调用。
 
 ## 最省额度的使用习惯
 
@@ -129,11 +133,11 @@ Windows 默认可能隐藏以点号开头的文件夹。即使看不到 `.agents
 
 `PROJECT_STATUS.md` 建议填写：
 
-- 项目要做什么
-- 使用什么框架
-- 当前完成到哪里
-- 下一步是什么
-- 哪些文件不能改
+* 项目要做什么
+* 使用什么框架
+* 当前完成到哪里
+* 下一步是什么
+* 哪些文件不能改
 
 如果项目有特殊测试命令，也应写进去。
 
