@@ -28,11 +28,18 @@
         {{ end }}
     </div>
 
-    {{ $showReadingTime := $Page.Params.readingTime | default ($Page.Site.Params.article.readingTime) }}
-    {{ $showDate := not $Page.Date.IsZero }}
+    {{ $hideMeta := false }}
+    {{ with $Page.File }}
+        {{ $pageDir := replace .Dir `\` `/` }}
+        {{ if eq (lower $pageDir) `page/about/` }}
+            {{ $hideMeta = true }}
+        {{ end }}
+    {{ end }}
+    {{ $showReadingTime := and (not $hideMeta) ($Page.Params.readingTime | default ($Page.Site.Params.article.readingTime)) }}
+    {{ $showDate := and (not $hideMeta) (not $Page.Date.IsZero) }}
     {{ $showTime := or $showDate $showReadingTime }}
-    {{ $showTranslations := $Page.IsTranslated }}
-    {{ $showTags := and $Page.Site.Params.Article.List.ShowTags ($Page.GetTerms "tags") $IsList }}
+    {{ $showTranslations := and (not $hideMeta) $Page.IsTranslated }}
+    {{ $showTags := and (not $hideMeta) $Page.Site.Params.Article.List.ShowTags ($Page.GetTerms "tags") $IsList }}
     
     {{ if or $showTime $showTranslations $showTags }}
     <footer class="article-meta">

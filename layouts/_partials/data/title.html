@@ -1,0 +1,46 @@
+{{- $brand := site.Data.site.brand -}}
+{{- $siteTitle := default .Site.Title $brand.browser_title -}}
+{{- $paginator := partial "helper/paginator.html" . -}}
+{{- $title := slice -}}
+
+{{- if and $paginator $paginator.HasPrev -}}
+    {{- $title = $title | append (printf "Page %d" $paginator.PageNumber) -}}
+{{- end -}}
+
+{{- if .IsHome -}}
+    {{- $title = $title | append $siteTitle -}}
+{{- else -}}
+    {{- $pageTitle := default $siteTitle .Title -}}
+    {{- if eq .Kind "taxonomy" -}}
+        {{- if eq .Data.Plural "categories" -}}
+            {{- $pageTitle = "分类" -}}
+        {{- else if eq .Data.Plural "tags" -}}
+            {{- $pageTitle = "标签" -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $title = $title | append $pageTitle -}}
+
+    {{- if and (eq .Kind "page") (eq .Section "posts") -}}
+        {{- $categoryNames := slice -}}
+        {{- range (.GetTerms "categories") -}}
+            {{- $categoryNames = $categoryNames | append .LinkTitle -}}
+        {{- end -}}
+        {{- if $categoryNames -}}
+            {{- $title = $title | append (delimit $categoryNames " / ") -}}
+        {{- else -}}
+            {{- $title = $title | append "未分类" -}}
+        {{- end -}}
+    {{- else if eq .Kind "term" -}}
+        {{- if eq .Data.Plural "categories" -}}
+            {{- $title = $title | append "分类" -}}
+        {{- else if eq .Data.Plural "tags" -}}
+            {{- $title = $title | append "标签" -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{- if and $siteTitle (ne $pageTitle $siteTitle) -}}
+        {{- $title = $title | append $siteTitle -}}
+    {{- end -}}
+{{- end -}}
+
+{{- return delimit $title " - " -}}

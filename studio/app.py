@@ -30,9 +30,9 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.3.1"
+APP_VERSION = "1.3.2"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
-IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
+IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
 
 
 def find_blog_root() -> Path:
@@ -465,6 +465,8 @@ def settings_payload() -> dict[str, Any]:
     return {
         "brand_name": brand.get("name", "TOOD.WIN"),
         "brand_logo": brand.get("logo", ""),
+        "browser_title": brand.get("browser_title", brand.get("name", "TOOD.WIN")),
+        "favicon": brand.get("favicon", ""),
         "archive_name": brand.get("archive_name", "TOOD ARCHIVE"),
         "nav_archives": navigation.get("archives", "归档"),
         "nav_categories": navigation.get("categories", "分类"),
@@ -492,6 +494,8 @@ def write_settings(values: dict[str, Any]) -> None:
         "brand": {
             "name": limited.get("brand_name", "TOOD.WIN"),
             "logo": limited.get("brand_logo", ""),
+            "browser_title": limited.get("browser_title", limited.get("brand_name", "TOOD.WIN")),
+            "favicon": limited.get("favicon", ""),
             "archive_name": limited.get("archive_name", "TOOD ARCHIVE"),
         },
         "navigation": {
@@ -917,7 +921,7 @@ def api_upload():
         raise ValueError("请选择图片")
     suffix = Path(uploaded.filename).suffix.lower()
     if suffix not in IMAGE_EXTENSIONS:
-        raise ValueError("仅支持 PNG、JPG、WEBP 和 GIF 图片")
+        raise ValueError("仅支持 PNG、JPG、WEBP、GIF 和 ICO 图片")
     base = secure_filename(Path(uploaded.filename).stem) or "image"
     folder = BLOG_ROOT / "static" / "uploads" / datetime.now().strftime("%Y/%m")
     folder.mkdir(parents=True, exist_ok=True)
@@ -935,6 +939,15 @@ def api_logo():
     settings["brand_logo"] = result["url"]
     write_settings(settings)
     return jsonify({"ok": True, "url": result["url"], "message": "Logo 已上传并保存"})
+
+
+@app.post("/api/favicon")
+def api_favicon():
+    result = api_upload().get_json()
+    settings = settings_payload()
+    settings["favicon"] = result["url"]
+    write_settings(settings)
+    return jsonify({"ok": True, "url": result["url"], "message": "标签图标已上传并保存"})
 
 
 @app.post("/api/preview")

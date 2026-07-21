@@ -27,6 +27,8 @@ class StudioTests(unittest.TestCase):
         posts = self.client.get("/api/posts").get_json()
         self.assertTrue(settings["ok"])
         self.assertIn("brand_name", settings["settings"])
+        self.assertIn("browser_title", settings["settings"])
+        self.assertIn("favicon", settings["settings"])
         self.assertIn("google_ads_code", settings["settings"])
         self.assertTrue(posts["ok"])
         self.assertIsInstance(posts["posts"], list)
@@ -37,8 +39,14 @@ class StudioTests(unittest.TestCase):
             try:
                 studio.BLOG_ROOT = Path(folder)
                 code = '<script async src="https://example.test/ads.js"></script>'
-                studio.write_settings({"google_ads_code": code})
+                studio.write_settings({
+                    "browser_title": "TOOD.win 拾光集",
+                    "favicon": "/uploads/favicon.ico",
+                    "google_ads_code": code,
+                })
                 saved = studio.settings_payload()
+                self.assertEqual(saved["browser_title"], "TOOD.win 拾光集")
+                self.assertEqual(saved["favicon"], "/uploads/favicon.ico")
                 self.assertEqual(saved["google_ads_code"], code)
                 raw = (studio.BLOG_ROOT / "data" / "site.toml").read_text(encoding="utf-8")
                 self.assertIn("google_ads_code", raw)
