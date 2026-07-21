@@ -2,7 +2,7 @@
 name = "拾光集 TOOD.WIN"
 logo = "/uploads/2026/07/tood-logo-60a3a703.png"
 browser_title = "拾光集 TOOD.WIN"
-favicon = ""
+favicon = "/uploads/2026/07/ico-1-f7348eae.png"
 archive_name = "拾光集 TOOD.WIN"
 
 [navigation]
@@ -13,14 +13,14 @@ about = "关于"
 index = "首页"
 
 [home]
-hero_primary = "TOOD.win"
-hero_secondary = "拾光集"
+hero_primary = "TOOD"
+hero_secondary = ".win"
 tagline = "记录值得被发现的人、事、思想与微光。"
 build_label = "Things Others Ought to Discover"
 about_title = "ABOUT"
 about_text = "网站既是一份个人实践档案，也是一座不断整理中的数字工具箱。1"
 about_link_label = "了解更多 →"
-established_date = "2026-07-20"
+established_date = "2026"
 latest_articles_count = 8
 quarter_random_count = 5
 
