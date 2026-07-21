@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+Sitemap: {{ .Site.BaseURL }}sitemap.xml
+
+# 下面这些是各家公司用于 AI 训练的爬虫，按需屏蔽
+# 屏蔽这些不影响搜索引擎正常收录你的网站
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /

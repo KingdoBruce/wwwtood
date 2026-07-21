@@ -1,6 +1,7 @@
+enableRobotsTXT = true
 baseURL                = "https://www.tood.win/"
 locale                 = "zh"
-title                  = "我的博客"
+title                  = "拾光集"
 theme = "hugo-theme-stack"
 # Theme i18n support
 # See i18n folder for available languages
