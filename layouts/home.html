@@ -24,7 +24,6 @@
         <nav class="archive-nav" aria-label="主导航">
             <a class="active" href="{{ .Site.Home.RelPermalink }}">{{ default "INDEX" $navigation.index }}</a>
             <a href="{{ `archives/` | relLangURL }}">{{ default "归档" $navigation.archives }}</a>
-            <a href="{{ `categories/` | relLangURL }}">{{ default "分类" $navigation.categories }}</a>
             <a href="{{ `tags/` | relLangURL }}">{{ default "标签" $navigation.tags }}</a>
             <a href="{{ `关于/` | relLangURL }}">{{ default "关于" $navigation.about }}</a>
         </nav>

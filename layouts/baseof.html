@@ -24,7 +24,6 @@
                 </a>
                 {{- $homeURL := .Site.Home.RelPermalink -}}
                 {{- $archivesURL := `archives/` | relLangURL -}}
-                {{- $categoriesURL := `categories/` | relLangURL -}}
                 {{- $tagsURL := `tags/` | relLangURL -}}
                 {{- $aboutURL := `关于/` | relLangURL -}}
                 {{- $isAbout := false -}}
@@ -35,7 +34,6 @@
                 <nav class="archive-nav" aria-label="主导航">
                     <a class="{{ if eq .RelPermalink $homeURL }}active{{ end }}" href="{{ $homeURL }}">{{ default "INDEX" $navigation.index }}</a>
                     <a class="{{ if hasPrefix (lower .RelPermalink) (lower $archivesURL) }}active{{ end }}" href="{{ $archivesURL }}">{{ default "归档" $navigation.archives }}</a>
-                    <a class="{{ if hasPrefix (lower .RelPermalink) (lower $categoriesURL) }}active{{ end }}" href="{{ $categoriesURL }}">{{ default "分类" $navigation.categories }}</a>
                     <a class="{{ if hasPrefix (lower .RelPermalink) (lower $tagsURL) }}active{{ end }}" href="{{ $tagsURL }}">{{ default "标签" $navigation.tags }}</a>
                     <a class="{{ if or $isAbout (hasPrefix (lower .RelPermalink) (lower $aboutURL)) }}active{{ end }}" href="{{ $aboutURL }}">{{ default "关于" $navigation.about }}</a>
                 </nav>
