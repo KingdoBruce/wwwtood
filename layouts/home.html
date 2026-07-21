@@ -12,6 +12,14 @@
 {{- $navigation := $siteConfig.navigation -}}
 {{- $home := $siteConfig.home -}}
 {{- $footer := $siteConfig.footer -}}
+{{- $latestArticlesCount := int (default 5 $home.latest_articles_count) -}}
+{{- $quarterRandomCount := int (default 5 $home.quarter_random_count) -}}
+{{- $quarterStart := now.AddDate 0 -3 0 -}}
+{{- $quarterPosts := where $posts "Date" "ge" $quarterStart -}}
+{{- $quarterDisplayCount := $quarterRandomCount -}}
+{{- if lt (len $quarterPosts) $quarterDisplayCount -}}
+    {{- $quarterDisplayCount = len $quarterPosts -}}
+{{- end -}}
 <div class="archive-shell">
     <header class="archive-topbar">
         <a class="archive-brand" href="{{ .Site.Home.RelPermalink }}" aria-label="返回首页">
@@ -76,12 +84,12 @@
                 <section class="archive-articles">
                     <div class="archive-section-title"><h2>LATEST ARTICLES</h2><a href="{{ `archives/` | relLangURL }}">VIEW ALL →</a></div>
                     <div class="archive-table">
-                        {{ range first 5 $posts }}
+                        {{ range first $latestArticlesCount $posts }}
                         <a class="archive-row" href="{{ .RelPermalink }}">
                             <code>A.{{ .Date.Format "0601" }}.{{ printf "%03d" .Weight }}</code><strong>{{ .Title }}</strong><span>/ {{ with index .Params.categories 0 }}{{ . }}{{ else }}未分类{{ end }}</span><time>{{ .Date.Format "2006-01-02" }}</time>
                         </a>
                         {{ else }}
-                            {{ range slice "技术债与演进设计" "如何写出清晰的技术文档" "从 0 到 1 搭建一个静态博客" "浏览器渲染机制简述" "信息管理：少即是多" }}
+                            {{ range first $latestArticlesCount (slice "技术债与演进设计" "如何写出清晰的技术文档" "从 0 到 1 搭建一个静态博客" "浏览器渲染机制简述" "信息管理：少即是多") }}
                             <div class="archive-row is-placeholder"><code>A.0000.000</code><strong>{{ . }}</strong><span>/ 准备中</span><time>----</time></div>
                             {{ end }}
                         {{ end }}
@@ -101,17 +109,29 @@
                 </section>
 
                 <section class="archive-panel archive-latest">
-                    <div class="archive-panel-title"><h2>LATEST</h2><span>[ {{ len (first 5 $posts) }} ]</span></div>
-                    <ul>
-                        {{ range first 5 $posts }}
-                        <li><a href="{{ .RelPermalink }}"><i></i><span>{{ .Title }}</span><time>{{ .Date.Format "2006-01-02" }}</time></a></li>
+                    <div class="archive-panel-title"><h2>QUARTER PICKS</h2><span>[ {{ $quarterDisplayCount }} ]</span></div>
+                    <ul class="archive-quarter-list" data-random-count="{{ $quarterRandomCount }}">
+                        {{ range $index, $post := $quarterPosts }}
+                        <li{{ if ge $index $quarterRandomCount }} hidden{{ end }}><a href="{{ $post.RelPermalink }}"><i></i><span>{{ $post.Title }}</span><time>{{ $post.Date.Format "2006-01-02" }}</time></a></li>
                         {{ else }}
-                            {{ range slice "AI 时代的写作：有用、有趣、有我" "整理知识的 3 种有效方法" "设计模式在日常开发中的实践" "打造稳定的数字生活系统" "阅读笔记：人类简史（节选）" }}
-                            <li><span><i></i><span>{{ . }}</span><time>----</time></span></li>
-                            {{ end }}
+                            <li><span><i></i><span>最近三个月暂无文章</span><time>----</time></span></li>
                         {{ end }}
                     </ul>
                     <a class="archive-link" href="{{ `archives/` | relLangURL }}">查看全部 →</a>
+                    {{ if $quarterPosts }}
+                    <script>
+                    (() => {
+                        const list = document.currentScript.previousElementSibling.previousElementSibling;
+                        const items = Array.from(list.querySelectorAll('li'));
+                        const count = Math.min(Number(list.dataset.randomCount) || 5, items.length);
+                        for (let index = items.length - 1; index > 0; index -= 1) {
+                            const target = Math.floor(Math.random() * (index + 1));
+                            [items[index], items[target]] = [items[target], items[index]];
+                        }
+                        items.forEach((item, index) => { item.hidden = index >= count; });
+                    })();
+                    </script>
+                    {{ end }}
                 </section>
 
                 <section class="archive-panel archive-about">

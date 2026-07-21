@@ -42,11 +42,15 @@ class StudioTests(unittest.TestCase):
                 studio.write_settings({
                     "browser_title": "TOOD.win 拾光集",
                     "favicon": "/uploads/favicon.ico",
+                    "latest_articles_count": 8,
+                    "quarter_random_count": 3,
                     "google_ads_code": code,
                 })
                 saved = studio.settings_payload()
                 self.assertEqual(saved["browser_title"], "TOOD.win 拾光集")
                 self.assertEqual(saved["favicon"], "/uploads/favicon.ico")
+                self.assertEqual(saved["latest_articles_count"], 8)
+                self.assertEqual(saved["quarter_random_count"], 3)
                 self.assertEqual(saved["google_ads_code"], code)
                 raw = (studio.BLOG_ROOT / "data" / "site.toml").read_text(encoding="utf-8")
                 self.assertIn("google_ads_code", raw)

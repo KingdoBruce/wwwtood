@@ -30,7 +30,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.3.2"
+APP_VERSION = "1.3.3"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
 
@@ -397,6 +397,14 @@ def normalize_list(value: Any) -> list[str]:
     return [str(item).strip() for item in values if str(item).strip()]
 
 
+def bounded_int(value: Any, default: int, minimum: int = 1, maximum: int = 20) -> int:
+    try:
+        number = int(value)
+    except (TypeError, ValueError):
+        number = default
+    return max(minimum, min(maximum, number))
+
+
 def slugify(value: str) -> str:
     value = value.strip().lower().replace(" ", "-")
     value = re.sub(r"[^\w\-\u4e00-\u9fff]+", "-", value, flags=re.UNICODE)
@@ -481,6 +489,8 @@ def settings_payload() -> dict[str, Any]:
         "about_text": home.get("about_text", ""),
         "about_link_label": home.get("about_link_label", "了解更多 →"),
         "established_date": home.get("established_date", ""),
+        "latest_articles_count": bounded_int(home.get("latest_articles_count"), 5),
+        "quarter_random_count": bounded_int(home.get("quarter_random_count"), 5),
         "copyright_since": footer.get("copyright_since", datetime.now().year),
         "footer_build_label": footer.get("build_label", "BUILT WITH HUGO"),
         "google_ads_code": advertising.get("google_ads_code", ""),
@@ -514,6 +524,8 @@ def write_settings(values: dict[str, Any]) -> None:
             "about_text": limited.get("about_text", ""),
             "about_link_label": limited.get("about_link_label", "了解更多 →"),
             "established_date": limited.get("established_date", ""),
+            "latest_articles_count": bounded_int(values.get("latest_articles_count"), 5),
+            "quarter_random_count": bounded_int(values.get("quarter_random_count"), 5),
         },
         "footer": {
             "copyright_since": int(values.get("copyright_since") or datetime.now().year),
