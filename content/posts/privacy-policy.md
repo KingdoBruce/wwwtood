@@ -3,6 +3,7 @@ title = "Privacy Policy"
 date = "2026-07-21T16:03:00+08:00"
 draft = false
 tags = ["Privacy Policy"]
+categories = ["政策"]
 +++
 
 > Last updated: July 21, 2026

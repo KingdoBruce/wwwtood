@@ -2,6 +2,7 @@
 title = "Please Allow Ads on Shiguangji"
 date = "2026-07-21T16:39:00+08:00"
 draft = false
+categories = ["政策"]
 +++
 
 > A simple change in your browser settings can make a real difference to the future of this website.
