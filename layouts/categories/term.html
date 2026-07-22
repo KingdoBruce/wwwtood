@@ -1,0 +1,66 @@
+{{ define "body-class" }}category-term-page article-with-sidebar{{ end }}
+{{ define "main" }}
+    {{- $paginator := .Paginator -}}
+    <header class="category-term-header">
+        <div>
+            <code>CATEGORY / {{ upper .Title }}</code>
+            <h1>{{ .Title }}</h1>
+        </div>
+        <span>{{ len .Pages | printf "%03d" }} ARTICLES</span>
+    </header>
+
+    <div class="category-term-layout">
+        <div class="category-term-main">
+            <section class="category-article-list" aria-label="{{ .Title }}分类文章">
+                {{- range $index, $article := $paginator.Pages -}}
+                    {{- $cover := "" -}}
+                    {{- with $article.Params.cover }}{{ $cover = . }}{{ end -}}
+                    {{- if not $cover -}}
+                        {{- $markdownImages := findRE `!\[[^\]]*\]\((?:<)?[^\s)>]+` $article.RawContent 1 -}}
+                        {{- with $markdownImages }}{{ $cover = replaceRE `^!\[[^\]]*\]\((?:<)?` "" (index . 0) }}{{ end -}}
+                    {{- end -}}
+                    {{- if not $cover -}}
+                        {{- $htmlImages := findRE `(?i)<img[^>]+src=["'][^"']+` $article.RawContent 1 -}}
+                        {{- with $htmlImages }}{{ $cover = replaceRE `(?i)^.*src=["']` "" (index . 0) }}{{ end -}}
+                    {{- end -}}
+                    <a class="category-article-card" href="{{ $article.RelPermalink }}">
+                        <div class="category-article-image">
+                            {{- with $cover }}<img src="{{ . | safeURL }}" alt="{{ $article.Title }}" loading="lazy">{{ else }}<span aria-hidden="true"></span>{{ end -}}
+                            <code>{{ add (mul (sub $paginator.PageNumber 1) 15) (add $index 1) | printf "A.%03d" }}</code>
+                        </div>
+                        <div>
+                            <h2>{{ $article.LinkTitle }}</h2>
+                            {{- with $article.Summary -}}<p>{{ . | plainify | htmlUnescape | truncate 120 }}</p>{{- end -}}
+                            <span>
+                                <time datetime="{{ $article.Date.Format `2006-01-02` }}">{{ $article.Date.Format "2006-01-02" }}</time>
+                                <i></i>{{ $article.ReadingTime }} 分钟
+                                <i></i>{{ $article.WordCount }} 字
+                            </span>
+                        </div>
+                        <b>阅读全文 <span>↗</span></b>
+                    </a>
+                {{- else -}}
+                    <p class="category-article-empty">该分类暂时没有文章。</p>
+                {{- end -}}
+            </section>
+
+            {{- if gt $paginator.TotalPages 1 -}}
+                <nav class="category-page-pagination" aria-label="分类文章分页">
+                    {{- with $paginator.Prev -}}
+                        <a href="{{ .URL }}" rel="prev"><span>←</span><b>上一页</b></a>
+                    {{- else -}}
+                        <span class="is-disabled"><span>←</span><b>上一页</b></span>
+                    {{- end -}}
+                    <strong><small>PAGE</small>{{ $paginator.PageNumber | printf "%02d" }} / {{ $paginator.TotalPages | printf "%02d" }}</strong>
+                    {{- with $paginator.Next -}}
+                        <a href="{{ .URL }}" rel="next"><b>下一页</b><span>→</span></a>
+                    {{- else -}}
+                        <span class="is-disabled"><b>下一页</b><span>→</span></span>
+                    {{- end -}}
+                </nav>
+            {{- end -}}
+        </div>
+
+        {{ partial "article/sidebar.html" . }}
+    </div>
+{{ end }}

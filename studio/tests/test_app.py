@@ -3,6 +3,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 BLOG_ROOT = Path(__file__).resolve().parents[2]
@@ -21,6 +22,46 @@ class StudioTests(unittest.TestCase):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"TOOD Studio", response.data)
+        self.assertIn(b'input name="hero_visible"', response.data)
+        self.assertIn(b'input name="hero_title_size"', response.data)
+        self.assertIn(b'id="githubRepository"', response.data)
+
+    def test_find_blog_root_accepts_myblog_child(self):
+        with tempfile.TemporaryDirectory() as folder:
+            parent = Path(folder)
+            blog = parent / "myblog"
+            (blog / "config" / "_default").mkdir(parents=True)
+            (blog / "config" / "_default" / "hugo.toml").write_text("", encoding="utf-8")
+            (blog / "content").mkdir()
+            with patch.dict(os.environ, {"TOOD_BLOG_ROOT": str(parent)}):
+                self.assertEqual(studio.find_blog_root(), blog.resolve())
+
+    def test_github_connection_configures_local_repository(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                headers = {"X-TOOD-Token": studio.SESSION_TOKEN}
+                with patch.object(studio, "github_request", side_effect=[{"full_name": "owner/site"}, {"object": {"sha": "abc"}}]), patch.object(studio, "git_text", side_effect=["origin", "main"]), patch.object(studio, "run_command") as command:
+                    response = self.client.post("/api/github", json={
+                        "repository": "https://github.com/owner/site.git",
+                        "branch": "main",
+                        "user_name": "Bruce",
+                        "user_email": "bruce@example.com",
+                        "token": "github-token",
+                    }, headers=headers)
+                self.assertEqual(response.status_code, 200)
+                connection = response.get_json()["connection"]
+                self.assertTrue(connection["connected"])
+                self.assertNotIn("token", connection)
+                saved = studio.load_github_settings()
+                self.assertEqual(saved["repository"], "owner/site")
+                self.assertEqual(saved["token"], "github-token")
+                commands = [call.args[0] for call in command.call_args_list]
+                self.assertIn(studio.git_args("config", "user.name", "Bruce"), commands)
+                self.assertIn(studio.git_args("config", "user.email", "bruce@example.com"), commands)
+            finally:
+                studio.BLOG_ROOT = original_root
 
     def test_read_apis(self):
         settings = self.client.get("/api/settings").get_json()
@@ -30,6 +71,9 @@ class StudioTests(unittest.TestCase):
         self.assertIn("browser_title", settings["settings"])
         self.assertIn("favicon", settings["settings"])
         self.assertIn("google_ads_code", settings["settings"])
+        self.assertIn("hero_visible", settings["settings"])
+        self.assertIn("hero_title_size", settings["settings"])
+        self.assertIn("hero_tagline_size", settings["settings"])
         self.assertTrue(posts["ok"])
         self.assertIsInstance(posts["posts"], list)
 
@@ -42,6 +86,9 @@ class StudioTests(unittest.TestCase):
                 studio.write_settings({
                     "browser_title": "TOOD.win 拾光集",
                     "favicon": "/uploads/favicon.ico",
+                    "hero_visible": False,
+                    "hero_title_size": 72,
+                    "hero_tagline_size": 19,
                     "latest_articles_count": 8,
                     "quarter_random_count": 3,
                     "google_ads_code": code,
@@ -49,6 +96,9 @@ class StudioTests(unittest.TestCase):
                 saved = studio.settings_payload()
                 self.assertEqual(saved["browser_title"], "TOOD.win 拾光集")
                 self.assertEqual(saved["favicon"], "/uploads/favicon.ico")
+                self.assertFalse(saved["hero_visible"])
+                self.assertEqual(saved["hero_title_size"], 72)
+                self.assertEqual(saved["hero_tagline_size"], 19)
                 self.assertEqual(saved["latest_articles_count"], 8)
                 self.assertEqual(saved["quarter_random_count"], 3)
                 self.assertEqual(saved["google_ads_code"], code)
@@ -79,9 +129,11 @@ class StudioTests(unittest.TestCase):
             path = Path(folder) / "post.md"
             path.write_text(content, encoding="utf-8")
             metadata, body = studio.parse_post(path)
+            summary = studio.post_summary(path)
         self.assertEqual(metadata["title"], "测试")
         self.assertEqual(metadata["cover"], "/uploads/cover.png")
         self.assertEqual(body.strip(), "正文内容")
+        self.assertTrue(summary["showArticleExtras"])
 
     def test_save_post_with_cover(self):
         original_root = studio.BLOG_ROOT
@@ -98,6 +150,7 @@ class StudioTests(unittest.TestCase):
                         "draft": False,
                         "cover": "/uploads/cover.png",
                         "featured": True,
+                        "showArticleExtras": False,
                         "body": "正文",
                     },
                     headers={"X-TOOD-Token": studio.SESSION_TOKEN},
@@ -106,6 +159,7 @@ class StudioTests(unittest.TestCase):
                 metadata, _ = studio.parse_post(studio.BLOG_ROOT / "content" / "posts" / "cover-test.md")
                 self.assertEqual(metadata["cover"], "/uploads/cover.png")
                 self.assertTrue(metadata["featured"])
+                self.assertFalse(metadata["showArticleExtras"])
                 self.assertFalse(metadata["draft"])
             finally:
                 studio.BLOG_ROOT = original_root

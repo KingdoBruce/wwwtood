@@ -30,7 +30,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.3.3"
+APP_VERSION = "1.3.7"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
 
@@ -45,8 +45,9 @@ def find_blog_root() -> Path:
     candidates.extend([Path.cwd(), Path(__file__).resolve().parent.parent])
     for candidate in candidates:
         for current in [candidate, *candidate.parents]:
-            if (current / "config" / "_default" / "hugo.toml").is_file() and (current / "content").is_dir():
-                return current.resolve()
+            for possible_root in (current, current / "myblog"):
+                if (possible_root / "config" / "_default" / "hugo.toml").is_file() and (possible_root / "content").is_dir():
+                    return possible_root.resolve()
     raise RuntimeError("未找到 Hugo 博客目录。请将 TOOD-Studio.exe 放在 myblog 根目录后重新打开。")
 
 
@@ -124,6 +125,126 @@ def git_text(*args: str, timeout: int = 30) -> str:
     return run_command(git_args(*args), timeout=timeout).stdout.strip()
 
 
+def github_settings_path() -> Path:
+    return BLOG_ROOT / ".tood-studio" / "github.json"
+
+
+def load_github_settings() -> dict[str, Any]:
+    path = github_settings_path()
+    if not path.is_file():
+        return {}
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+        return value if isinstance(value, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def normalize_github_repository(value: str) -> tuple[str, str]:
+    repository = value.strip()
+    if repository.startswith("git@github.com:"):
+        repository = repository.split(":", 1)[1]
+    else:
+        repository = re.sub(r"^https?://github\.com/", "", repository, flags=re.IGNORECASE)
+    repository = repository.removesuffix(".git").strip("/")
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository):
+        raise ValueError("GitHub 仓库格式无效，请填写 owner/repository 或完整仓库地址")
+    return repository, f"https://github.com/{repository}.git"
+
+
+def github_connection_payload() -> dict[str, Any]:
+    settings = load_github_settings()
+    repository = str(settings.get("repository") or "")
+    branch = str(settings.get("branch") or "")
+    user_name = str(settings.get("user_name") or "")
+    user_email = str(settings.get("user_email") or "")
+    try:
+        repository = repository or github_repository()
+    except Exception:
+        pass
+    for key, args in {
+        "branch": ("branch", "--show-current"),
+        "user_name": ("config", "user.name"),
+        "user_email": ("config", "user.email"),
+    }.items():
+        if locals()[key]:
+            continue
+        try:
+            value = git_text(*args)
+        except Exception:
+            value = ""
+        if key == "branch":
+            branch = value
+        elif key == "user_name":
+            user_name = value
+        else:
+            user_email = value
+    return {
+        "repository": repository,
+        "branch": branch or "main",
+        "user_name": user_name,
+        "user_email": user_email,
+        "token_configured": bool(settings.get("token")),
+        "connected": bool(repository and user_name and user_email and settings.get("token")),
+    }
+
+
+def configure_github_connection(payload: dict[str, Any]) -> dict[str, Any]:
+    repository, remote_url = normalize_github_repository(str(payload.get("repository") or ""))
+    branch = str(payload.get("branch") or "main").strip()
+    user_name = str(payload.get("user_name") or "").strip()
+    user_email = str(payload.get("user_email") or "").strip()
+    current = load_github_settings()
+    token = str(payload.get("token") or current.get("token") or "").strip()
+    if not re.fullmatch(r"[A-Za-z0-9._/-]+", branch) or ".." in branch or branch.startswith("/") or branch.endswith("/"):
+        raise ValueError("Git 分支名称无效")
+    if not user_name:
+        raise ValueError("请填写 Git 提交用户名")
+    if not re.fullmatch(r"[^\s@]+@[^\s@]+\.[^\s@]+", user_email):
+        raise ValueError("请填写有效的 Git 提交邮箱")
+    if not token:
+        raise ValueError("首次连接需要填写 GitHub Personal Access Token")
+
+    repository_info = github_request(repository, token, "GET", "")
+    github_request(repository, token, "GET", f"/git/ref/heads/{branch}")
+
+    remotes = git_text("remote").splitlines()
+    if "origin" in remotes:
+        run_command(git_args("remote", "set-url", "origin", remote_url), timeout=15)
+    else:
+        run_command(git_args("remote", "add", "origin", remote_url), timeout=15)
+    run_command(git_args("config", "user.name", user_name), timeout=15)
+    run_command(git_args("config", "user.email", user_email), timeout=15)
+    current_branch = git_text("branch", "--show-current")
+    if current_branch and current_branch != branch:
+        run_command(git_args("branch", "-M", branch), timeout=15)
+
+    path = github_settings_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(".tmp")
+    temporary.write_text(json.dumps({
+        "repository": repository,
+        "branch": branch,
+        "user_name": user_name,
+        "user_email": user_email,
+        "token": token,
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    try:
+        os.chmod(temporary, 0o600)
+    except OSError:
+        pass
+    temporary.replace(path)
+    return {
+        "repository": repository,
+        "branch": branch,
+        "user_name": user_name,
+        "user_email": user_email,
+        "token_configured": True,
+        "connected": True,
+        "repository_name": str(repository_info.get("full_name") or repository),
+    }
+
+
 def github_repository() -> str:
     remote = git_text("remote", "get-url", "origin")
     if remote.startswith("git@github.com:"):
@@ -137,6 +258,9 @@ def github_repository() -> str:
 
 
 def github_token() -> str:
+    configured = str(load_github_settings().get("token") or "").strip()
+    if configured:
+        return configured
     result = subprocess.run(
         [tool_path("git"), "credential", "fill"],
         input="protocol=https\nhost=github.com\n\n",
@@ -405,6 +529,19 @@ def bounded_int(value: Any, default: int, minimum: int = 1, maximum: int = 20) -
     return max(minimum, min(maximum, number))
 
 
+def boolean_value(value: Any, default: bool = False) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    normalized = str(value).strip().lower()
+    if normalized in {"1", "true", "yes", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "off", ""}:
+        return False
+    return default
+
+
 def slugify(value: str) -> str:
     value = value.strip().lower().replace(" ", "-")
     value = re.sub(r"[^\w\-\u4e00-\u9fff]+", "-", value, flags=re.UNICODE)
@@ -449,6 +586,7 @@ def post_summary(path: Path) -> dict[str, Any]:
         "description": str(metadata.get("description") or ""),
         "cover": str(metadata.get("cover") or ""),
         "featured": bool(metadata.get("featured", False)),
+        "showArticleExtras": bool(metadata.get("showArticleExtras", True)),
         "categories": normalize_list(metadata.get("categories", [])),
         "tags": normalize_list(metadata.get("tags", [])),
         "words": len(re.findall(r"\S+", body)),
@@ -484,6 +622,9 @@ def settings_payload() -> dict[str, Any]:
         "hero_primary": home.get("hero_primary", "TOOD"),
         "hero_secondary": home.get("hero_secondary", "ARCHIVE"),
         "tagline": home.get("tagline", ""),
+        "hero_visible": boolean_value(home.get("hero_visible"), True),
+        "hero_title_size": bounded_int(home.get("hero_title_size"), 60, 28, 96),
+        "hero_tagline_size": bounded_int(home.get("hero_tagline_size"), 17, 12, 32),
         "build_label": home.get("build_label", "BUILD YOUR OWN ARCHIVE."),
         "about_title": home.get("about_title", "ABOUT"),
         "about_text": home.get("about_text", ""),
@@ -519,6 +660,9 @@ def write_settings(values: dict[str, Any]) -> None:
             "hero_primary": limited.get("hero_primary", "TOOD"),
             "hero_secondary": limited.get("hero_secondary", "ARCHIVE"),
             "tagline": limited.get("tagline", ""),
+            "hero_visible": boolean_value(values.get("hero_visible"), True),
+            "hero_title_size": bounded_int(values.get("hero_title_size"), 60, 28, 96),
+            "hero_tagline_size": bounded_int(values.get("hero_tagline_size"), 17, 12, 32),
             "build_label": limited.get("build_label", "BUILD YOUR OWN ARCHIVE."),
             "about_title": limited.get("about_title", "ABOUT"),
             "about_text": limited.get("about_text", ""),
@@ -884,6 +1028,10 @@ def api_save_post():
         metadata["featured"] = True
     else:
         metadata.pop("featured", None)
+    if bool(payload.get("showArticleExtras", True)):
+        metadata.pop("showArticleExtras", None)
+    else:
+        metadata["showArticleExtras"] = False
     categories = normalize_list(payload.get("categories", []))
     tags = normalize_list(payload.get("tags", []))
     ensure_taxonomy_values("categories", categories)
@@ -999,6 +1147,21 @@ def api_build():
             "--cleanDestinationDir", "--enableGitInfo=false",
         ], timeout=180)
     return jsonify({"ok": True, "message": "Hugo 构建检查通过", "output": result.stdout[-4000:]})
+
+
+@app.get("/api/github")
+def api_github_connection():
+    return jsonify({"ok": True, "connection": github_connection_payload()})
+
+
+@app.post("/api/github")
+def api_save_github_connection():
+    connection = configure_github_connection(request.get_json(silent=True) or {})
+    return jsonify({
+        "ok": True,
+        "message": f"已连接 GitHub 仓库 {connection['repository_name']}",
+        "connection": connection,
+    })
 
 
 @app.post("/api/publish")

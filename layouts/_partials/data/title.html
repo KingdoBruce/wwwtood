@@ -1,6 +1,13 @@
 {{- $brand := site.Data.site.brand -}}
 {{- $siteTitle := default .Site.Title $brand.browser_title -}}
-{{- $paginator := partial "helper/paginator.html" . -}}
+{{- $paginator := slice -}}
+{{- if and (eq .Kind "taxonomy") (eq .Data.Plural "tags") -}}
+    {{- $paginator = .Paginate .Pages.ByTitle 580 -}}
+{{- else if and (eq .Kind "term") (eq .Data.Plural "categories") -}}
+    {{- $paginator = .Paginate .Pages.ByDate.Reverse 15 -}}
+{{- else -}}
+    {{- $paginator = partial "helper/paginator.html" . -}}
+{{- end -}}
 {{- $title := slice -}}
 
 {{- if and $paginator $paginator.HasPrev -}}

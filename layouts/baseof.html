@@ -8,7 +8,7 @@
     {{- partial "head/head.html" . -}}
     {{- block "head" . -}}{{ end }}
 </head>
-<body class="archive-site {{ if not .IsHome }}archive-subpage {{ end }}{{ block `body-class` . }}{{ end }}">
+<body class="archive-site {{ if not .IsHome }}archive-subpage {{ end }}{{ if hugo.IsServer }}is-local-preview {{ end }}{{ block `body-class` . }}{{ end }}">
     {{- partial "head/colorScheme" . -}}
     {{ if .IsHome }}
         <main class="main full-width">{{- block "main" . }}{{- end }}</main>
@@ -37,7 +37,10 @@
                     <a class="{{ if hasPrefix (lower .RelPermalink) (lower $tagsURL) }}active{{ end }}" href="{{ $tagsURL }}">{{ default "标签" $navigation.tags }}</a>
                     <a class="{{ if or $isAbout (hasPrefix (lower .RelPermalink) (lower $aboutURL)) }}active{{ end }}" href="{{ $aboutURL }}">{{ default "关于" $navigation.about }}</a>
                 </nav>
-                <div class="archive-status"><span>SYS.STATUS</span><b><i></i> ONLINE</b><em aria-hidden="true">▁▂▃▅▇</em></div>
+      <div class="archive-status" aria-label="拾光存档：记录微光，存入时间">
+        <em class="archive-status-mark" aria-hidden="true"><i></i></em>
+        <span class="archive-status-copy"><strong>拾光存档</strong><small>记录微光 · 存入时间</small></span>
+      </div>
             </header>
             <div class="archive-page-frame">
                 <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
@@ -49,7 +52,13 @@
                 </div>
                 <main class="archive-page-main">{{- block "main" . }}{{- end }}</main>
             </div>
-            <footer class="archive-footer"><span>© {{ default (now.Format "2006") $footer.copyright_since }} {{ default "TOOD.WIN" $brand.name }}</span><span>{{ default "BUILT WITH HUGO" $footer.build_label }} <i></i></span></footer>
+            <footer class="archive-footer">
+                <span>© {{ default (now.Format "2006") $footer.copyright_since }} {{ default "TOOD.WIN" $brand.name }}</span>
+                <span class="archive-footer-build">
+                    {{ if and (eq .Section "posts") (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}<span class="archive-footer-license">{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span><b>·</b>{{ end }}
+                    <span>{{ default "BUILT WITH HUGO" $footer.build_label }}</span><i></i>
+                </span>
+            </footer>
         </div>
     {{ end }}
     {{ partial "footer/include.html" . }}

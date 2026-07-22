@@ -1,4 +1,3 @@
-enableRobotsTXT = true
 baseURL                = "https://www.tood.win/"
 locale                 = "zh"
 title                  = "拾光集"

@@ -1,0 +1,79 @@
+{{ define "body-class" }}article-page article-with-sidebar{{ end }}
+
+{{ define "main" }}
+<div class="archive-article-layout">
+    <div class="archive-article-main">
+        {{ partial "article/article.html" . }}
+
+        {{ if .Params.links }}{{ partial "article/components/links" . }}{{ end }}
+
+        {{- $showArticleExtras := true -}}
+        {{- if isset .Params "showarticleextras" -}}
+            {{- $showArticleExtras = .Params.showarticleextras -}}
+        {{- end -}}
+        {{- if and (eq .Section "posts") $showArticleExtras -}}
+        {{- $previous := .PrevInSection -}}
+        {{- $next := .NextInSection -}}
+        {{- if or $previous $next -}}
+        <nav class="article-sequence" aria-label="上一篇和下一篇文章">
+            {{- with $previous -}}
+            <a class="article-sequence-link is-previous" href="{{ .RelPermalink }}" rel="prev">
+                <code>PREVIOUS</code>
+                <strong>{{ .LinkTitle }}</strong>
+                <span>←</span>
+            </a>
+            {{- else -}}
+            <span class="article-sequence-link is-disabled"><code>PREVIOUS</code><strong>已经是第一篇</strong></span>
+            {{- end -}}
+            {{- with $next -}}
+            <a class="article-sequence-link is-next" href="{{ .RelPermalink }}" rel="next">
+                <code>NEXT</code>
+                <strong>{{ .LinkTitle }}</strong>
+                <span>→</span>
+            </a>
+            {{- else -}}
+            <span class="article-sequence-link is-next is-disabled"><code>NEXT</code><strong>已经是最后一篇</strong></span>
+            {{- end -}}
+        </nav>
+        {{- end -}}
+
+        {{ partial "article/components/related-content" . }}
+        {{- end -}}
+
+        {{ if not (eq .Params.comments false) }}{{ partial "comments/include" . }}{{ end }}
+    </div>
+
+    {{ partial "article/sidebar.html" . }}
+</div>
+
+<button class="article-back-to-top" type="button" aria-label="返回页面顶部" title="返回顶部" aria-hidden="true" tabindex="-1">
+    <span aria-hidden="true">
+        <svg viewBox="0 0 24 24" role="presentation">
+            <path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path>
+        </svg>
+    </span>
+</button>
+
+{{ partialCached "article/components/photoswipe" . }}
+{{ partial "article/components/mermaid" . }}
+
+<script>
+(() => {
+    const button = document.querySelector('.article-back-to-top');
+    if (!button) return;
+
+    const updateButton = () => {
+        const visible = window.scrollY > 360;
+        button.classList.toggle('is-visible', visible);
+        button.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        button.tabIndex = visible ? 0 : -1;
+    };
+
+    window.addEventListener('scroll', updateButton, { passive: true });
+    button.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    updateButton();
+})();
+</script>
+{{ end }}

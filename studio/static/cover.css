@@ -69,6 +69,53 @@
   border-left-color: #fff;
 }
 
+.github-connect-panel {
+  margin-bottom: 20px;
+}
+
+.github-connect-panel .panel-heading {
+  align-items: flex-end;
+}
+
+.connection-status {
+  color: var(--muted);
+  font: 10px/1.4 ui-monospace, monospace;
+}
+
+.connection-status.connected {
+  color: var(--blue);
+}
+
+.github-connect-panel > .form-help {
+  margin: 18px 0;
+}
+
+.github-connect-fields {
+  display: grid;
+  grid-template-columns: 1.4fr .6fr 1fr 1fr;
+  gap: 14px;
+  align-items: end;
+}
+
+.github-connect-fields label {
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.github-token-field {
+  grid-column: 1 / -2;
+}
+
+.github-connect-fields .button {
+  min-height: 43px;
+}
+
+.github-token-help {
+  margin: 12px 0 0 !important;
+}
+
 @media (max-width: 700px) {
   .notice {
     left: 18px;
@@ -165,10 +212,41 @@
   min-height: 560px;
 }
 
+.settings-switch {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 18px;
+  margin-bottom: 18px !important;
+}
+
+.settings-switch span {
+  display: grid;
+  gap: 5px;
+}
+
+.settings-switch small {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.settings-switch input {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
+
 @media (max-width: 1050px) {
   .taxonomy-manager,
-  .about-editor {
+  .about-editor,
+  .github-connect-fields {
     grid-template-columns: 1fr;
+  }
+
+  .github-token-field {
+    grid-column: auto;
   }
 }
 

@@ -1,0 +1,40 @@
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $related := .Site.RegularPages.Related . -}}
+{{- $recommendations := collections.Union $related $posts.ByDate.Reverse -}}
+{{- $recommendations = where $recommendations "RelPermalink" "ne" .RelPermalink -}}
+{{- $recommendations = first 6 $recommendations -}}
+{{- with $recommendations -}}
+<aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED ARTICLES</h2>
+        <span>{{ len . | printf "%02d" }} RECOMMENDATIONS</span>
+    </div>
+    <div class="archive-related-grid">
+        {{- range $index, $post := . -}}
+        {{- $cover := "" -}}
+        {{- with $post.Params.cover }}{{ $cover = . }}{{ end -}}
+        {{- if not $cover -}}
+            {{- $markdownImages := findRE `!\[[^\]]*\]\((?:<)?[^\s)>]+` $post.RawContent 1 -}}
+            {{- with $markdownImages }}{{ $cover = replaceRE `^!\[[^\]]*\]\((?:<)?` "" (index . 0) }}{{ end -}}
+        {{- end -}}
+        {{- if not $cover -}}
+            {{- $htmlImages := findRE `(?i)<img[^>]+src=["'][^"']+` $post.RawContent 1 -}}
+            {{- with $htmlImages }}{{ $cover = replaceRE `(?i)^.*src=["']` "" (index . 0) }}{{ end -}}
+        {{- end -}}
+        <article class="archive-related-card">
+            <a href="{{ $post.RelPermalink }}">
+                <div class="archive-related-image">
+                    {{- with $cover }}<img src="{{ . | safeURL }}" alt="{{ $post.Title }}" loading="lazy">{{ else }}<span aria-hidden="true"></span>{{ end -}}
+                </div>
+                <div class="archive-related-copy">
+                    <code>REL.{{ printf "%02d" (add $index 1) }}</code>
+                    <h3>{{ $post.Title }}</h3>
+                    <p>{{ $post.Summary | plainify | truncate 72 }}</p>
+                    <time>{{ $post.Date.Format "2006-01-02" }}</time>
+                </div>
+            </a>
+        </article>
+        {{- end -}}
+    </div>
+</aside>
+{{- end -}}

@@ -1,0 +1,21 @@
+{{ define "main" }}
+    {{- $terms := .Pages.ByTitle -}}
+    {{- $paginator := .Paginator -}}
+
+    <header class="archive-tags-header">
+        <h1>{{ default "标签" .Title }}</h1>
+        <span>{{ printf "%03d" (len $terms) }} TAGS</span>
+    </header>
+
+    <section class="archive-tags-cloud article-tag-cloud" aria-label="标签云">
+        {{- range $paginator.Pages -}}
+            <a href="{{ .RelPermalink }}">
+                {{ .LinkTitle }}<sup>{{ len .Pages }}</sup>
+            </a>
+        {{- else -}}
+            <p class="archive-tags-empty">暂无标签</p>
+        {{- end -}}
+    </section>
+
+    {{- partial "pagination.html" . -}}
+{{ end }}

@@ -1,0 +1,100 @@
+{{ define "body-class" }}template-archives{{ end }}
+{{ define "main" }}
+    {{- $taxonomy := .Site.GetPage "/categories" -}}
+    {{- $terms := slice -}}
+    {{- with $taxonomy -}}{{- $terms = .Pages.ByTitle -}}{{- end -}}
+
+    {{- with $terms -}}
+        <section class="archive-category-index" aria-labelledby="archive-category-title">
+            <header class="archive-block-heading">
+                <h1 id="archive-category-title">分类索引</h1>
+                <span>{{ len . | printf "%02d" }} CATEGORIES</span>
+            </header>
+            <div class="archive-category-index-grid">
+                {{- range $index, $term := . -}}
+                    <a class="archive-category-index-card" href="{{ $term.RelPermalink }}">
+                        <code>C.{{ add $index 1 | printf "%02d" }}</code>
+                        <strong>{{ $term.LinkTitle }}</strong>
+                        <span>{{ len $term.Pages }} 篇文章</span>
+                    </a>
+                {{- end -}}
+            </div>
+        </section>
+    {{- end -}}
+
+    {{- $pages := partial "helper/pages.html" .Site.Home -}}
+    {{- $monthGroups := $pages.GroupByDate "2006-01" -}}
+
+    <section class="archive-month-index" aria-labelledby="archive-month-title">
+        <header class="archive-block-heading">
+            <h2 id="archive-month-title">时间归档</h2>
+            <span>{{ len $monthGroups | printf "%02d" }} ACTIVE MONTHS</span>
+        </header>
+
+        {{- range $groupIndex, $group := $monthGroups -}}
+            {{- $monthPages := .Pages -}}
+            {{- $firstPage := index $monthPages 0 -}}
+            <div class="archive-month-card" data-archive-month="{{ $group.Key }}"{{ if ne $groupIndex 0 }} hidden{{ end }}>
+                <header class="archive-month-heading">
+                    <div>
+                        <strong>{{ $firstPage.Date.Format "2006" }}</strong>
+                        <span>{{ $firstPage.Date.Format "01" }}月</span>
+                    </div>
+                    <p>{{ len $monthPages }} 篇文章</p>
+                </header>
+
+                <div class="archive-month-list">
+                    {{- range $index, $article := $monthPages -}}
+                        <a class="archive-month-row" href="{{ $article.RelPermalink }}">
+                            <time datetime="{{ $article.Date.Format `2006-01-02` }}">
+                                <b>{{ $article.Date.Format "02" }}</b>
+                                <span>{{ $article.Date.Format "Mon" }}</span>
+                            </time>
+                            <div class="archive-month-copy">
+                                <code>A.{{ $firstPage.Date.Format "0601" }}.{{ add $index 1 | printf "%03d" }}</code>
+                                <h3>{{ $article.LinkTitle }}</h3>
+                                {{- with $article.Summary -}}<p>{{ . | plainify | htmlUnescape | truncate 100 }}</p>{{- end -}}
+                            </div>
+                            <span class="archive-month-category">
+                                {{- with index $article.Params.categories 0 -}}{{ . }}{{- else -}}未分类{{- end -}}
+                            </span>
+                        </a>
+                    {{- end -}}
+                </div>
+            </div>
+        {{- else -}}
+            <div class="archive-month-empty">暂无可归档文章</div>
+        {{- end -}}
+
+        {{- if gt (len $monthGroups) 1 -}}
+            <nav class="archive-month-pagination" aria-label="归档月份翻页">
+                <button type="button" data-month-prev disabled><span>←</span> 较新月份</button>
+                <strong><span data-month-current>01</span> / {{ len $monthGroups | printf "%02d" }}</strong>
+                <button type="button" data-month-next>较早月份 <span>→</span></button>
+            </nav>
+            <script>
+                (() => {
+                    const root = document.currentScript.closest('.archive-month-index');
+                    const cards = Array.from(root.querySelectorAll('[data-archive-month]'));
+                    const previous = root.querySelector('[data-month-prev]');
+                    const next = root.querySelector('[data-month-next]');
+                    const counter = root.querySelector('[data-month-current]');
+                    let current = Math.max(0, cards.findIndex((card) => `#${card.dataset.archiveMonth}` === window.location.hash));
+
+                    const showMonth = (index, updateUrl = true) => {
+                        current = Math.max(0, Math.min(index, cards.length - 1));
+                        cards.forEach((card, cardIndex) => { card.hidden = cardIndex !== current; });
+                        previous.disabled = current === 0;
+                        next.disabled = current === cards.length - 1;
+                        counter.textContent = String(current + 1).padStart(2, '0');
+                        if (updateUrl) history.replaceState(null, '', `#${cards[current].dataset.archiveMonth}`);
+                    };
+
+                    previous.addEventListener('click', () => showMonth(current - 1));
+                    next.addEventListener('click', () => showMonth(current + 1));
+                    showMonth(current, false);
+                })();
+            </script>
+        {{- end -}}
+    </section>
+{{ end }}

@@ -1,0 +1,56 @@
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $posts = $posts.ByDate.Reverse -}}
+{{- $latest := where $posts "RelPermalink" "ne" .RelPermalink -}}
+{{- $latest = first 5 $latest -}}
+{{- $halfYearStart := now.AddDate 0 -6 0 -}}
+{{- $hotCandidates := where $posts "Date" "ge" $halfYearStart -}}
+{{- $hotCandidates = where $hotCandidates "RelPermalink" "ne" .RelPermalink -}}
+<aside class="archive-article-sidebar" aria-label="文章侧边栏">
+    <section class="article-side-panel">
+        <h2 class="article-side-title">SEARCH <span>01</span></h2>
+        <form class="article-side-search" action="{{ `search/` | relLangURL }}" method="get" role="search">
+            <input type="search" name="keyword" placeholder="输入关键词..." aria-label="搜索文章" required>
+            <button type="submit" aria-label="开始搜索">⌕</button>
+        </form>
+    </section>
+
+    <section class="article-side-panel article-side-toc">
+        <h2 class="article-side-title">CONTENTS <span>02</span></h2>
+        {{ if ge (len .TableOfContents) 100 }}{{ .TableOfContents }}{{ else }}<p class="article-side-empty">本文暂无分节目录</p>{{ end }}
+    </section>
+
+    <section class="article-side-panel">
+        <h2 class="article-side-title">LATEST <span>03</span></h2>
+        <ol class="article-side-list">
+            {{ range $latest }}<li><a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong><time>{{ .Date.Format "01-02" }}</time></a></li>{{ else }}<li><p class="article-side-empty">暂无其他文章</p></li>{{ end }}
+        </ol>
+    </section>
+
+    <section class="article-side-panel">
+        <h2 class="article-side-title">HOT <span>04</span></h2>
+        <ol class="article-side-list article-hot-list" data-random-count="5">
+            {{ range $index, $post := $hotCandidates }}<li{{ if ge $index 5 }} hidden{{ end }}><a href="{{ $post.RelPermalink }}"><strong>{{ $post.Title }}</strong><time>{{ $post.Date.Format "01-02" }}</time></a></li>{{ else }}<li><p class="article-side-empty">近半年暂无其他文章</p></li>{{ end }}
+        </ol>
+        {{ if $hotCandidates }}
+        <script>
+        (() => {
+            const list = document.currentScript.previousElementSibling;
+            const items = Array.from(list.querySelectorAll('li'));
+            const count = Math.min(Number(list.dataset.randomCount) || 5, items.length);
+            for (let index = items.length - 1; index > 0; index -= 1) {
+                const target = Math.floor(Math.random() * (index + 1));
+                [items[index], items[target]] = [items[target], items[index]];
+            }
+            items.forEach((item, index) => { item.hidden = index >= count; list.appendChild(item); });
+        })();
+        </script>
+        {{ end }}
+    </section>
+
+    <section class="article-side-panel">
+        <h2 class="article-side-title">TAG CLOUD <span>05</span></h2>
+        <div class="article-tag-cloud">
+            {{ range $name, $taxonomy := .Site.Taxonomies.tags }}<a href="{{ printf `tags/%s/` ($name | urlize) | relLangURL }}">{{ $name }}<sup>{{ len $taxonomy.Pages }}</sup></a>{{ else }}<p class="article-side-empty">暂无标签</p>{{ end }}
+        </div>
+    </section>
+</aside>
