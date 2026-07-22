@@ -1,0 +1,19 @@
+[categories.AI]
+show_on_home = true
+show_in_archives = true
+
+[categories."政策"]
+show_on_home = false
+show_in_archives = false
+
+[categories."网站"]
+show_on_home = true
+show_in_archives = true
+
+[categories."软件"]
+show_on_home = true
+show_in_archives = true
+
+[categories."随笔"]
+show_on_home = true
+show_in_archives = true

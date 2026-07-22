@@ -32,9 +32,14 @@
     {{- $homeTagDisplayCount = len .Site.Taxonomies.tags -}}
 {{- end -}}
 {{- $categoryGroups := slice -}}
+{{- $categorySettings := .Site.Data.category_settings.categories -}}
 {{- range $name, $taxonomy := .Site.Taxonomies.categories -}}
     {{- $categoryPosts := $taxonomy.Pages.ByDate.Reverse -}}
-    {{- if ge (len $categoryPosts) 5 -}}
+    {{- $showOnHome := true -}}
+    {{- with index $categorySettings $name -}}
+        {{- if isset . "show_on_home" -}}{{- $showOnHome = .show_on_home -}}{{- end -}}
+    {{- end -}}
+    {{- if $showOnHome -}}
         {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "Posts" $categoryPosts "Count" (len $categoryPosts) "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
     {{- end -}}
 {{- end -}}
@@ -160,7 +165,7 @@
 
                 {{ if $categoryGroups }}
                 <section class="archive-category-section">
-                    <div class="archive-section-title"><h2>CATEGORY INDEX</h2><span>{{ len $categoryGroups | printf "%02d" }} GROUPS · 5+ ARTICLES</span></div>
+                    <div class="archive-section-title"><h2>CATEGORY INDEX</h2><span>{{ len $categoryGroups | printf "%02d" }} GROUPS</span></div>
                     <div class="archive-category-grid">
                         {{ range $categoryIndex, $group := $categoryGroups }}
                         <article class="archive-category-card">
@@ -246,23 +251,18 @@
                     {{ end }}
                 </section>
 
-                <section class="archive-panel archive-about">
-                    <div class="pixel-avatar" aria-hidden="true"><span>◆</span></div>
-                    <div><h2>{{ default "ABOUT" $home.about_title }}</h2><p>{{ default "一名开发者，偶尔写作，持续学习。相信积累的力量。" $home.about_text }}</p><a class="archive-link" href="{{ `关于/` | relLangURL }}">{{ default "了解更多 →" $home.about_link_label }}</a></div>
-                </section>
-
                 {{ with .Site.Data.friends }}
                 {{ if .settings.homepage_enabled }}
                 {{ $homeFriends := where .links "show_on_home" true }}
                 <section class="archive-panel archive-friends">
                     <div class="archive-panel-title"><h2>FRIEND LINKS</h2><span>[ {{ len $homeFriends }} ]</span></div>
-                    <ul>
+                    <div class="archive-friend-cloud">
                         {{ range first (default 5 .settings.homepage_limit) $homeFriends }}
-                        <li><a href="{{ .url }}" target="_blank" rel="noopener noreferrer"><span>{{ .name }}</span><b>↗</b></a></li>
+                        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer"><span>{{ .name }}</span><b aria-hidden="true">↗</b></a>
                         {{ else }}
-                        <li class="article-side-empty">暂无友情链接</li>
+                        <p class="article-side-empty">暂无友情链接</p>
                         {{ end }}
-                    </ul>
+                    </div>
                     <a class="archive-link" href="{{ `链接/` | relLangURL }}">查看全部 →</a>
                 </section>
                 {{ end }}

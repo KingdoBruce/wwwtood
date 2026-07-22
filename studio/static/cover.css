@@ -245,6 +245,10 @@
   border-bottom: 1px solid var(--line);
 }
 
+.taxonomy-row.has-visibility {
+  grid-template-columns: minmax(0, 1fr) 90px minmax(260px, auto) auto;
+}
+
 .taxonomy-row:last-child {
   border-bottom: 0;
 }
@@ -270,6 +274,28 @@
 
 .taxonomy-actions .delete-taxonomy {
   color: var(--danger);
+}
+
+.taxonomy-visibility {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.taxonomy-visibility label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.taxonomy-visibility input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--blue);
 }
 
 .about-editor {
@@ -319,6 +345,17 @@
 }
 
 @media (max-width: 1050px) {
+  .taxonomy-row.has-visibility {
+    grid-template-columns: minmax(0, 1fr) 90px auto;
+  }
+
+  .taxonomy-row.has-visibility .taxonomy-visibility {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    padding-bottom: 14px;
+  }
+
   .taxonomy-manager,
   .about-editor,
   .github-connect-fields,

@@ -3,8 +3,17 @@
     {{- $taxonomy := .Site.GetPage "/categories" -}}
     {{- $terms := slice -}}
     {{- with $taxonomy -}}{{- $terms = .Pages.ByTitle -}}{{- end -}}
+    {{- $categorySettings := .Site.Data.category_settings.categories -}}
+    {{- $visibleTerms := slice -}}
+    {{- range $term := $terms -}}
+        {{- $showInArchives := true -}}
+        {{- with index $categorySettings $term.LinkTitle -}}
+            {{- if isset . "show_in_archives" -}}{{- $showInArchives = .show_in_archives -}}{{- end -}}
+        {{- end -}}
+        {{- if $showInArchives -}}{{- $visibleTerms = $visibleTerms | append $term -}}{{- end -}}
+    {{- end -}}
 
-    {{- with $terms -}}
+    {{- with $visibleTerms -}}
         <section class="archive-category-index" aria-labelledby="archive-category-title">
             <header class="archive-block-heading">
                 <h1 id="archive-category-title">分类索引</h1>

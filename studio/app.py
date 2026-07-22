@@ -665,6 +665,45 @@ def taxonomy_catalog_path() -> Path:
     return BLOG_ROOT / "data" / "taxonomies.toml"
 
 
+def category_settings_path() -> Path:
+    return BLOG_ROOT / "data" / "category_settings.toml"
+
+
+def category_settings() -> dict[str, dict[str, bool]]:
+    data = load_toml(category_settings_path()).get("categories", {})
+    if not isinstance(data, dict):
+        return {}
+    return {
+        str(name): {
+            "show_on_home": boolean_value(values.get("show_on_home"), True),
+            "show_in_archives": boolean_value(values.get("show_in_archives"), True),
+        }
+        for name, values in data.items()
+        if isinstance(values, dict)
+    }
+
+
+def save_category_settings(settings: dict[str, dict[str, bool]]) -> None:
+    save_toml(category_settings_path(), {"categories": settings})
+
+
+def category_display(name: str) -> dict[str, bool]:
+    settings = category_settings()
+    matched = next((values for label, values in settings.items() if label.casefold() == name.casefold()), None)
+    return matched or {"show_on_home": True, "show_in_archives": True}
+
+
+def set_category_display(name: str, values: dict[str, Any]) -> None:
+    settings = category_settings()
+    existing = next((label for label in settings if label.casefold() == name.casefold()), name)
+    current = category_display(name)
+    settings[existing] = {
+        "show_on_home": boolean_value(values.get("show_on_home"), current["show_on_home"]),
+        "show_in_archives": boolean_value(values.get("show_in_archives"), current["show_in_archives"]),
+    }
+    save_category_settings(settings)
+
+
 def taxonomy_catalog() -> dict[str, list[str]]:
     data = load_toml(taxonomy_catalog_path())
     return {
@@ -723,10 +762,12 @@ def taxonomy_payload() -> dict[str, list[dict[str, Any]]]:
     for kind in ("categories", "tags"):
         for value in catalog[kind]:
             labels[kind].setdefault(value.casefold(), value)
-        result[kind] = [
-            {"name": label, "count": counts[kind].get(key, 0)}
-            for key, label in sorted(labels[kind].items(), key=lambda item: item[1].casefold())
-        ]
+        result[kind] = []
+        for key, label in sorted(labels[kind].items(), key=lambda item: item[1].casefold()):
+            item = {"name": label, "count": counts[kind].get(key, 0)}
+            if kind == "categories":
+                item.update(category_display(label))
+            result[kind].append(item)
     return result
 
 
@@ -755,6 +796,14 @@ def replace_taxonomy_value(kind: str, old_name: str, new_name: str | None) -> in
     if new_name and new_name.casefold() not in {value.casefold() for value in catalog[kind]}:
         catalog[kind].append(new_name)
     save_taxonomy_catalog(catalog)
+    if kind == "categories":
+        settings = category_settings()
+        matched = next((label for label in settings if label.casefold() == old_key), None)
+        if matched:
+            display = settings.pop(matched)
+            if new_name:
+                settings[new_name] = display
+            save_category_settings(settings)
     return changed_posts
 
 
@@ -969,8 +1018,19 @@ def api_add_taxonomy(kind: str):
     if name.casefold() in {item["name"].casefold() for item in payload}:
         raise ValueError("该名称已经存在")
     ensure_taxonomy_values(kind, [name])
+    if kind == "categories":
+        set_category_display(name, {"show_on_home": True, "show_in_archives": True})
     label = "分类" if kind == "categories" else "标签"
     return jsonify({"ok": True, "message": f"{label}“{name}”已添加"})
+
+
+@app.patch("/api/category-settings/<path:name>")
+def api_category_settings(name: str):
+    name = validate_taxonomy("categories", name)
+    if name.casefold() not in {item["name"].casefold() for item in taxonomy_payload()["categories"]}:
+        raise ValueError("分类不存在")
+    set_category_display(name, request.get_json(force=True) or {})
+    return jsonify({"ok": True, "message": f"分类“{name}”的显示设置已保存", "settings": category_display(name)})
 
 
 @app.put("/api/taxonomies/<kind>/<path:old_name>")
@@ -1293,14 +1353,51 @@ def hide_windows_console() -> None:
         logging.exception("could not hide console")
 
 
+def tray_image_path() -> Path:
+    candidates = [
+        Path(sys.executable).resolve().parent / "ico.png",
+        Path(__file__).resolve().parent / "ico.png",
+        BLOG_ROOT / "TOOD-Studio-Windows" / "ico.png",
+    ]
+    for path in candidates:
+        if path.is_file():
+            return path
+    raise FileNotFoundError("未找到托盘图标 ico.png")
+
+
+def create_tray_icon(url: str):
+    import pystray
+    from PIL import Image
+
+    def open_dashboard(_icon=None, _item=None) -> None:
+        webbrowser.open(url)
+
+    def exit_studio(icon, _item=None) -> None:
+        stop_preview()
+        icon.stop()
+
+    menu = pystray.Menu(
+        pystray.MenuItem("打开后台", open_dashboard, default=True),
+        pystray.MenuItem("退出", exit_studio),
+    )
+    return pystray.Icon("tood-studio", Image.open(tray_image_path()), APP_NAME, menu)
+
+
 def main() -> None:
     hide_windows_console()
     port = find_app_port()
     url = f"http://127.0.0.1:{port}/"
+    logging.info("TOOD Studio %s started at %s for %s", APP_VERSION, url, BLOG_ROOT)
+    server = threading.Thread(
+        target=serve,
+        kwargs={"app": app, "host": "127.0.0.1", "port": port, "threads": 6, "channel_timeout": 300},
+        daemon=True,
+        name="tood-studio-server",
+    )
+    server.start()
     if os.environ.get("TOOD_STUDIO_NO_BROWSER") != "1":
         threading.Timer(0.8, lambda: webbrowser.open(url)).start()
-    logging.info("TOOD Studio %s started at %s for %s", APP_VERSION, url, BLOG_ROOT)
-    serve(app, host="127.0.0.1", port=port, threads=6, channel_timeout=300)
+    create_tray_icon(url).run()
 
 
 if __name__ == "__main__":
