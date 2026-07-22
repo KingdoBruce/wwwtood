@@ -1,0 +1,14 @@
+<section class="article-content">
+    {{- $wrappedTable := printf "<div class=\"table-wrapper\">${1}</div>" -}}
+    {{- $body := .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable -}}
+    {{- $advertising := .Site.Data.site.advertising -}}
+    {{- if and (eq .Section "posts") $advertising.article_content_enabled $advertising.article_content_code -}}
+        {{- $ad := printf `<div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告">%s</div>` ($advertising.article_content_code | safeHTML) -}}
+        {{- if findRE "</p>" $body 1 -}}
+            {{- $body = replaceRE "</p>" (printf "</p>%s" $ad) $body 1 -}}
+        {{- else -}}
+            {{- $body = printf "%s%s" $ad $body -}}
+        {{- end -}}
+    {{- end -}}
+    {{ $body | safeHTML }}
+</section>

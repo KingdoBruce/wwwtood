@@ -19,6 +19,13 @@
         {{ if ge (len .TableOfContents) 100 }}{{ .TableOfContents }}{{ else }}<p class="article-side-empty">本文暂无分节目录</p>{{ end }}
     </section>
 
+    {{- $advertising := .Site.Data.site.advertising -}}
+    {{- if and (eq .Section "posts") $advertising.article_sidebar_enabled $advertising.article_sidebar_code -}}
+    <section class="article-side-panel site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+        {{ $advertising.article_sidebar_code | safeHTML }}
+    </section>
+    {{- end -}}
+
     <section class="article-side-panel">
         <h2 class="article-side-title">LATEST <span>03</span></h2>
         <ol class="article-side-list">

@@ -71,13 +71,17 @@ class StudioTests(unittest.TestCase):
 
     def test_read_apis(self):
         settings = self.client.get("/api/settings").get_json()
+        advertising = self.client.get("/api/advertising").get_json()
         posts = self.client.get("/api/posts").get_json()
         github = self.client.get("/api/github").get_json()
         self.assertTrue(settings["ok"])
         self.assertIn("brand_name", settings["settings"])
         self.assertIn("browser_title", settings["settings"])
         self.assertIn("favicon", settings["settings"])
-        self.assertIn("google_ads_code", settings["settings"])
+        self.assertNotIn("google_ads_code", settings["settings"])
+        self.assertTrue(advertising["ok"])
+        self.assertIn("google_ads_code", advertising["advertising"])
+        self.assertIn("home_sidebar_enabled", advertising["advertising"])
         self.assertIn("hero_visible", settings["settings"])
         self.assertIn("hero_title_size", settings["settings"])
         self.assertIn("hero_tagline_size", settings["settings"])
@@ -86,7 +90,7 @@ class StudioTests(unittest.TestCase):
         self.assertTrue(github["ok"])
         self.assertNotIn("token", github["connection"])
 
-    def test_google_ads_code_round_trip(self):
+    def test_advertising_round_trip_and_settings_preserve_ads(self):
         original_root = studio.BLOG_ROOT
         with tempfile.TemporaryDirectory() as folder:
             try:
@@ -100,9 +104,18 @@ class StudioTests(unittest.TestCase):
                     "hero_tagline_size": 19,
                     "latest_articles_count": 8,
                     "quarter_random_count": 3,
+                })
+                studio.write_advertising({
                     "google_ads_code": code,
+                    "home_sidebar_enabled": True,
+                    "home_sidebar_code": "<ins>home</ins>",
+                    "article_content_enabled": True,
+                    "article_content_code": "<ins>content</ins>",
+                    "article_sidebar_enabled": True,
+                    "article_sidebar_code": "<ins>sidebar</ins>",
                 })
                 saved = studio.settings_payload()
+                advertising = studio.advertising_payload()
                 self.assertEqual(saved["browser_title"], "TOOD.win 拾光集")
                 self.assertEqual(saved["favicon"], "/uploads/favicon.ico")
                 self.assertFalse(saved["hero_visible"])
@@ -110,7 +123,11 @@ class StudioTests(unittest.TestCase):
                 self.assertEqual(saved["hero_tagline_size"], 19)
                 self.assertEqual(saved["latest_articles_count"], 8)
                 self.assertEqual(saved["quarter_random_count"], 3)
-                self.assertEqual(saved["google_ads_code"], code)
+                self.assertEqual(advertising["google_ads_code"], code)
+                self.assertTrue(advertising["home_sidebar_enabled"])
+                self.assertEqual(advertising["article_content_code"], "<ins>content</ins>")
+                studio.write_settings({"browser_title": "保留广告测试"})
+                self.assertEqual(studio.advertising_payload()["article_sidebar_code"], "<ins>sidebar</ins>")
                 raw = (studio.BLOG_ROOT / "data" / "site.toml").read_text(encoding="utf-8")
                 self.assertIn("google_ads_code", raw)
             finally:

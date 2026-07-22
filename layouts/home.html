@@ -194,15 +194,12 @@
                     </form>
                 </section>
 
-                <section class="archive-panel archive-index">
-                    <div class="archive-panel-title"><h2>INDEX</h2><span>▣</span></div>
-                    <dl>
-                        <div><dt>文章总数</dt><dd>{{ len $posts | printf "%03d" }}</dd></div>
-                        <div><dt>分类总数</dt><dd>{{ len .Site.Taxonomies.categories | printf "%03d" }}</dd></div>
-                        <div><dt>标签总数</dt><dd>{{ len .Site.Taxonomies.tags | printf "%03d" }}</dd></div>
-                        <div><dt>建立时间</dt><dd>{{ default "2026-07-20" $home.established_date }}</dd></div>
-                    </dl>
+                {{- $advertising := .Site.Data.site.advertising -}}
+                {{- if and $advertising.home_sidebar_enabled $advertising.home_sidebar_code -}}
+                <section class="archive-panel site-ad-slot site-ad-slot--home" data-ad-slot="home-sidebar" aria-label="广告">
+                    {{ $advertising.home_sidebar_code | safeHTML }}
                 </section>
+                {{- end -}}
 
                 <section class="archive-panel archive-latest">
                     <div class="archive-panel-title"><h2>QUARTER PICKS</h2><span>[ {{ $quarterDisplayCount }} ]</span></div>

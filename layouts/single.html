@@ -77,13 +77,17 @@
 
     const updateButton = () => {
         const visible = window.scrollY > 360;
+        const footer = document.querySelector('.archive-footer');
+        const baseBottom = window.innerWidth <= 700 ? 16 : 26;
+        const footerOffset = footer ? Math.max(0, window.innerHeight - footer.getBoundingClientRect().top) : 0;
+        button.style.setProperty('--back-to-top-bottom', `${Math.max(baseBottom, footerOffset + 12)}px`);
         button.classList.toggle('is-visible', visible);
         button.setAttribute('aria-hidden', visible ? 'false' : 'true');
         button.tabIndex = visible ? 0 : -1;
     };
 
     window.addEventListener('scroll', updateButton, { passive: true });
-    window.addEventListener('resize', placeButton, { passive: true });
+    window.addEventListener('resize', () => { placeButton(); updateButton(); }, { passive: true });
     button.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     });

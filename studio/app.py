@@ -586,7 +586,6 @@ def settings_payload() -> dict[str, Any]:
     navigation = data.get("navigation", {})
     home = data.get("home", {})
     footer = data.get("footer", {})
-    advertising = data.get("advertising", {})
     return {
         "brand_name": brand.get("name", "TOOD.WIN"),
         "brand_logo": brand.get("logo", ""),
@@ -613,13 +612,12 @@ def settings_payload() -> dict[str, Any]:
         "quarter_random_count": bounded_int(home.get("quarter_random_count"), 5),
         "copyright_since": footer.get("copyright_since", datetime.now().year),
         "footer_build_label": footer.get("build_label", "BUILT WITH HUGO"),
-        "google_ads_code": advertising.get("google_ads_code", ""),
     }
 
 
 def write_settings(values: dict[str, Any]) -> None:
     limited = {key: str(value).strip()[:500] for key, value in values.items() if value is not None}
-    google_ads_code = str(values.get("google_ads_code") or "").strip()[:20000]
+    current = load_toml(BLOG_ROOT / "data" / "site.toml")
     data = {
         "brand": {
             "name": limited.get("brand_name", "TOOD.WIN"),
@@ -654,11 +652,37 @@ def write_settings(values: dict[str, Any]) -> None:
             "copyright_since": int(values.get("copyright_since") or datetime.now().year),
             "build_label": limited.get("footer_build_label", "BUILT WITH HUGO"),
         },
-        "advertising": {
-            "google_ads_code": google_ads_code,
-        },
+        "advertising": current.get("advertising", {}),
     }
     save_toml(BLOG_ROOT / "data" / "site.toml", data)
+
+
+def advertising_payload() -> dict[str, Any]:
+    data = load_toml(BLOG_ROOT / "data" / "site.toml").get("advertising", {})
+    return {
+        "google_ads_code": str(data.get("google_ads_code") or ""),
+        "home_sidebar_enabled": boolean_value(data.get("home_sidebar_enabled"), False),
+        "home_sidebar_code": str(data.get("home_sidebar_code") or ""),
+        "article_content_enabled": boolean_value(data.get("article_content_enabled"), False),
+        "article_content_code": str(data.get("article_content_code") or ""),
+        "article_sidebar_enabled": boolean_value(data.get("article_sidebar_enabled"), False),
+        "article_sidebar_code": str(data.get("article_sidebar_code") or ""),
+    }
+
+
+def write_advertising(values: dict[str, Any]) -> None:
+    path = BLOG_ROOT / "data" / "site.toml"
+    data = load_toml(path)
+    data["advertising"] = {
+        "google_ads_code": str(values.get("google_ads_code") or "").strip()[:20000],
+        "home_sidebar_enabled": boolean_value(values.get("home_sidebar_enabled"), False),
+        "home_sidebar_code": str(values.get("home_sidebar_code") or "").strip()[:30000],
+        "article_content_enabled": boolean_value(values.get("article_content_enabled"), False),
+        "article_content_code": str(values.get("article_content_code") or "").strip()[:30000],
+        "article_sidebar_enabled": boolean_value(values.get("article_sidebar_enabled"), False),
+        "article_sidebar_code": str(values.get("article_sidebar_code") or "").strip()[:30000],
+    }
+    save_toml(path, data)
 
 
 def taxonomy_catalog_path() -> Path:
@@ -1004,6 +1028,17 @@ def api_get_settings():
 def api_save_settings():
     write_settings(request.get_json(force=True) or {})
     return jsonify({"ok": True, "message": "网站设置已保存"})
+
+
+@app.get("/api/advertising")
+def api_get_advertising():
+    return jsonify({"ok": True, "advertising": advertising_payload()})
+
+
+@app.post("/api/advertising")
+def api_save_advertising():
+    write_advertising(request.get_json(force=True) or {})
+    return jsonify({"ok": True, "message": "广告设置已保存", "advertising": advertising_payload()})
 
 
 @app.get("/api/taxonomies")

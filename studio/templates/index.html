@@ -19,8 +19,9 @@
         <button class="nav-item" data-view="tags">标签 <span>04</span></button>
         <button class="nav-item" data-view="about">关于 <span>05</span></button>
         <button class="nav-item" data-view="friends">友情链接 <span>06</span></button>
-        <button class="nav-item" data-view="settings">网站设置 <span>07</span></button>
-        <button class="nav-item" data-view="publish">预览与发布 <span>08</span></button>
+        <button class="nav-item" data-view="advertising">广告管理 <span>07</span></button>
+        <button class="nav-item" data-view="settings">网站设置 <span>08</span></button>
+        <button class="nav-item" data-view="publish">预览与发布 <span>09</span></button>
       </nav>
       <div class="sidebar-meta"><span>LOCAL ONLY</span><b><i></i> ONLINE</b><small>{{ blog_root }}</small></div>
     </aside>
@@ -153,6 +154,16 @@
         </div>
       </section>
 
+      <section class="view" id="view-advertising">
+        <div class="section-actions"><div><span class="eyebrow">ADS.CONFIG</span><h2>广告管理</h2></div><button class="button primary" id="saveAdvertising">保存广告设置</button></div>
+        <form id="advertisingForm" class="settings-grid" onsubmit="return false">
+          <article class="panel form-panel"><h3>全站 Google 广告</h3><label>Google AdSense 全站代码<textarea name="google_ads_code" rows="10" placeholder="粘贴 Google AdSense 提供的全站脚本代码"></textarea></label><p class="form-help">代码写入所有页面的 &lt;head&gt;，通常是包含 client 参数的 AdSense 脚本。留空即可停用。</p></article>
+          <article class="panel form-panel"><h3>首页侧栏广告位</h3><label class="settings-switch"><span><b>启用首页侧栏广告</b><small>替换首页右侧原 INDEX 数据卡片</small></span><input name="home_sidebar_enabled" type="checkbox" value="true"></label><label>广告单元代码<textarea name="home_sidebar_code" rows="10" placeholder="粘贴首页侧栏广告单元代码"></textarea></label><p class="form-help">建议使用响应式展示广告，广告容器会自动适应侧栏宽度。</p></article>
+          <article class="panel form-panel"><h3>文章正文广告位</h3><label class="settings-switch"><span><b>启用文章正文广告</b><small>显示在正文开头段落之后，桌面端靠右排列</small></span><input name="article_content_enabled" type="checkbox" value="true"></label><label>广告单元代码<textarea name="article_content_code" rows="10" placeholder="粘贴文章正文广告单元代码"></textarea></label><p class="form-help">桌面端建议使用矩形或响应式广告；窄屏设备会自动改为通栏展示。</p></article>
+          <article class="panel form-panel"><h3>文章侧栏广告位</h3><label class="settings-switch"><span><b>启用文章侧栏广告</b><small>显示在 CONTENTS 与 LATEST 模块之间</small></span><input name="article_sidebar_enabled" type="checkbox" value="true"></label><label>广告单元代码<textarea name="article_sidebar_code" rows="10" placeholder="粘贴文章侧栏广告单元代码"></textarea></label><p class="form-help">建议使用响应式或 300×250 广告，实际高度由 Google AdSense 返回内容决定。</p></article>
+        </form>
+      </section>
+
       <section class="view" id="view-settings">
         <div class="section-actions"><div><span class="eyebrow">THEME.CONFIG</span><h2>网站文字与品牌</h2></div><button class="button primary" id="saveSettings">保存设置</button></div>
         <form id="settingsForm" class="settings-grid" onsubmit="return false">
@@ -160,7 +171,6 @@
           <article class="panel form-panel"><h3>首页</h3><label class="settings-switch"><span><b>显示首页标题区</b><small>关闭后隐藏首页主标题和首页标语</small></span><input name="hero_visible" type="checkbox" value="true"></label><div class="two-columns"><label>主标题<input name="hero_primary"></label><label>副标题<input name="hero_secondary"></label></div><label>首页标语<textarea name="tagline" rows="2"></textarea></label><div class="two-columns"><label>主标题字号（px）<input name="hero_title_size" type="number" min="28" max="96" step="1"></label><label>首页标语字号（px）<input name="hero_tagline_size" type="number" min="12" max="32" step="1"></label></div><label>档案标语<input name="build_label"></label><label>建立日期<input name="established_date" placeholder="YYYY-MM-DD"></label><div class="two-columns"><label>最新文章条数（位置 1）<input name="latest_articles_count" type="number" min="1" max="20" step="1"></label><label>季度随机条数（位置 2）<input name="quarter_random_count" type="number" min="1" max="20" step="1"></label></div><p class="form-help">字号会在平板和手机端自动限制上限。位置 2 从最近三个月发布的公开文章中随机抽取，每次访问首页时重新选择。</p></article>
           <article class="panel form-panel"><h3>导航</h3><div class="two-columns"><label>归档<input name="nav_archives"></label><label>分类<input name="nav_categories"></label><label>标签<input name="nav_tags"></label><label>关于<input name="nav_about"></label><label>首页<input name="nav_index"></label></div></article>
           <article class="panel form-panel"><h3>关于与页脚</h3><label>关于标题<input name="about_title"></label><label>关于简介<textarea name="about_text" rows="3"></textarea></label><label>链接文字<input name="about_link_label"></label><div class="two-columns"><label>版权年份<input name="copyright_since" type="number"></label><label>页脚文字<input name="footer_build_label"></label></div></article>
-          <article class="panel form-panel"><h3>全站 Google 广告</h3><label>Google 广告代码<textarea name="google_ads_code" rows="10" placeholder="粘贴 Google AdSense 提供的完整代码"></textarea></label><p class="form-help">保存后代码会写入全站所有页面的 &lt;head&gt;。留空并保存即可停用。仅粘贴来自 Google AdSense 的可信代码。</p></article>
         </form>
       </section>
 
