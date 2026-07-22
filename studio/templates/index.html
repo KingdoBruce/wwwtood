@@ -151,7 +151,7 @@
             <label class="github-token-field">Personal Access Token<input id="githubToken" type="password" autocomplete="new-password" placeholder="已配置时留空即可保留"></label>
             <button type="button" class="button primary" id="saveGithubConnection">验证并保存连接</button>
           </div>
-          <p class="form-help github-token-help">Token 需要目标仓库的 Contents 读写权限。建议使用 GitHub Fine-grained personal access token，并只授权当前仓库。</p>
+          <div class="github-connect-footer"><button type="button" class="text-button github-help-link" data-go="githubHelp">查看 GitHub 连接使用说明 →</button><button type="button" class="text-button github-clear-link" id="clearGithubConnection">清除本机连接</button></div>
         </article>
         <div class="publish-grid">
           <article class="panel publish-card"><span class="step">01</span><h2>实时预览</h2><p>自动启动 Hugo，包含草稿并实时刷新。</p><button class="button primary" id="startPreview">启动并打开预览</button></article>
@@ -160,6 +160,19 @@
         </div>
         <article class="panel console-panel"><div class="panel-heading"><h2>操作结果</h2><button class="text-button" id="clearConsole">清空</button></div><pre id="consoleOutput">等待操作…</pre></article>
         <button class="button danger-outline" id="shutdownApp">退出 TOOD Studio</button>
+      </section>
+
+      <section class="view" id="view-githubHelp">
+        <div class="section-actions"><div><span class="eyebrow">GUIDE.GITHUB</span><h2>GitHub 连接使用说明</h2></div><button type="button" class="button ghost" data-go="publish">返回预览与发布</button></div>
+        <article class="panel github-guide-intro"><h3>只需在每台电脑首次使用时配置一次</h3><p>连接信息保存在当前博客的 <code>.tood-studio/github.json</code>，不会被 Git 提交。仅分享 <code>TOOD-Studio-Windows</code> 程序文件夹时不会携带这些信息；如果复制整个博客项目，请先在发布页点击“清除本机连接”。</p></article>
+        <div class="github-guide-grid">
+          <article class="panel github-guide-card"><span>01</span><h3>准备 GitHub 仓库</h3><p>先在 GitHub 建立用于部署博客的仓库，并确认 Cloudflare Pages 或 Workers 已连接该仓库。记录仓库地址和部署分支，通常为 <code>main</code>。</p></article>
+          <article class="panel github-guide-card"><span>02</span><h3>创建安全 Token</h3><ol><li>打开 GitHub 的 Fine-grained token 页面。</li><li>Repository access 只选择当前博客仓库。</li><li>Repository permissions 中将 <b>Contents</b> 设置为 <b>Read and write</b>。</li><li>创建后立即复制 Token；GitHub 不会再次完整显示。</li></ol><a class="button ghost guide-external-link" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noreferrer">打开 GitHub Token 创建页面 ↗</a></article>
+          <article class="panel github-guide-card"><span>03</span><h3>填写连接信息</h3><dl><div><dt>GitHub 仓库</dt><dd>填写 <code>用户名/仓库名</code> 或完整仓库地址。</dd></div><div><dt>发布分支</dt><dd>填写 Cloudflare 正在监听的分支，一般是 <code>main</code>。</dd></div><div><dt>提交用户名与邮箱</dt><dd>用于生成 Git 提交记录，可填写 GitHub 账号名称和经过验证的邮箱。</dd></div><div><dt>Token</dt><dd>首次连接必须填写；以后修改其他字段时可以留空保留。</dd></div></dl></article>
+          <article class="panel github-guide-card"><span>04</span><h3>验证并发布</h3><p>返回发布页点击“验证并保存连接”。验证成功后，再点击“检查并发布”。程序会先执行 Hugo 构建、生成提交并同步到 GitHub，Cloudflare 随后自动部署。</p></article>
+          <article class="panel github-guide-card"><span>05</span><h3>换电脑或交给其他人</h3><p>新电脑不会自动获得旧电脑的 Token，需要重新配置。不要通过聊天、邮件或网盘发送 Token；如果怀疑泄露，应立即在 GitHub 中撤销并重新创建。</p></article>
+          <article class="panel github-guide-card"><span>06</span><h3>常见错误</h3><ul><li><b>Repository not found：</b>仓库地址错误，或 Token 未授权该仓库。</li><li><b>403 / Resource not accessible：</b>Contents 没有 Read and write 权限。</li><li><b>分支不存在：</b>发布分支与 GitHub 仓库实际分支不一致。</li><li><b>提交身份未知：</b>重新执行“验证并保存连接”。</li></ul></article>
+        </div>
       </section>
     </main>
   </div>

@@ -25,6 +25,7 @@ class StudioTests(unittest.TestCase):
         self.assertIn(b'input name="hero_visible"', response.data)
         self.assertIn(b'input name="hero_title_size"', response.data)
         self.assertIn(b'id="githubRepository"', response.data)
+        self.assertIn(b'id="view-githubHelp"', response.data)
 
     def test_find_blog_root_accepts_myblog_child(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -60,12 +61,18 @@ class StudioTests(unittest.TestCase):
                 commands = [call.args[0] for call in command.call_args_list]
                 self.assertIn(studio.git_args("config", "user.name", "Bruce"), commands)
                 self.assertIn(studio.git_args("config", "user.email", "bruce@example.com"), commands)
+                cleared = self.client.delete("/api/github", headers=headers)
+                self.assertEqual(cleared.status_code, 200)
+                self.assertFalse(studio.github_settings_path().exists())
+                self.assertFalse(cleared.get_json()["connection"]["connected"])
+                self.assertEqual(cleared.get_json()["connection"]["repository"], "")
             finally:
                 studio.BLOG_ROOT = original_root
 
     def test_read_apis(self):
         settings = self.client.get("/api/settings").get_json()
         posts = self.client.get("/api/posts").get_json()
+        github = self.client.get("/api/github").get_json()
         self.assertTrue(settings["ok"])
         self.assertIn("brand_name", settings["settings"])
         self.assertIn("browser_title", settings["settings"])
@@ -76,6 +83,8 @@ class StudioTests(unittest.TestCase):
         self.assertIn("hero_tagline_size", settings["settings"])
         self.assertTrue(posts["ok"])
         self.assertIsInstance(posts["posts"], list)
+        self.assertTrue(github["ok"])
+        self.assertNotIn("token", github["connection"])
 
     def test_google_ads_code_round_trip(self):
         original_root = studio.BLOG_ROOT

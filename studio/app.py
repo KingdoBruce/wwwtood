@@ -30,7 +30,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.3.7"
+APP_VERSION = "1.3.8"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
 
@@ -155,33 +155,12 @@ def normalize_github_repository(value: str) -> tuple[str, str]:
 def github_connection_payload() -> dict[str, Any]:
     settings = load_github_settings()
     repository = str(settings.get("repository") or "")
-    branch = str(settings.get("branch") or "")
+    branch = str(settings.get("branch") or "main")
     user_name = str(settings.get("user_name") or "")
     user_email = str(settings.get("user_email") or "")
-    try:
-        repository = repository or github_repository()
-    except Exception:
-        pass
-    for key, args in {
-        "branch": ("branch", "--show-current"),
-        "user_name": ("config", "user.name"),
-        "user_email": ("config", "user.email"),
-    }.items():
-        if locals()[key]:
-            continue
-        try:
-            value = git_text(*args)
-        except Exception:
-            value = ""
-        if key == "branch":
-            branch = value
-        elif key == "user_name":
-            user_name = value
-        else:
-            user_email = value
     return {
         "repository": repository,
-        "branch": branch or "main",
+        "branch": branch,
         "user_name": user_name,
         "user_email": user_email,
         "token_configured": bool(settings.get("token")),
@@ -1164,10 +1143,29 @@ def api_save_github_connection():
     })
 
 
+@app.delete("/api/github")
+def api_delete_github_connection():
+    path = github_settings_path()
+    if path.is_file():
+        path.unlink()
+    return jsonify({
+        "ok": True,
+        "message": "本机 GitHub 连接信息已清除",
+        "connection": github_connection_payload(),
+    })
+
+
 @app.post("/api/publish")
 def api_publish():
     payload = request.get_json(silent=True) or {}
     message = str(payload.get("message") or f"content: publish via TOOD Studio {datetime.now():%Y-%m-%d %H:%M}")[:180]
+    try:
+        git_user_name = git_text("config", "user.name")
+        git_user_email = git_text("config", "user.email")
+    except RuntimeError:
+        git_user_name = git_user_email = ""
+    if not git_user_name or not git_user_email:
+        raise RuntimeError("尚未配置 Git 提交身份，请先在本页完成“连接 GitHub”设置")
     with operation_lock, tempfile.TemporaryDirectory(prefix="tood-publish-") as destination:
         build = run_command([
             tool_path("hugo"), "--source", str(BLOG_ROOT), "--destination", destination,
