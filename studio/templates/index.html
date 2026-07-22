@@ -18,8 +18,9 @@
         <button class="nav-item" data-view="categories">分类 <span>03</span></button>
         <button class="nav-item" data-view="tags">标签 <span>04</span></button>
         <button class="nav-item" data-view="about">关于 <span>05</span></button>
-        <button class="nav-item" data-view="settings">网站设置 <span>06</span></button>
-        <button class="nav-item" data-view="publish">预览与发布 <span>07</span></button>
+        <button class="nav-item" data-view="friends">友情链接 <span>06</span></button>
+        <button class="nav-item" data-view="settings">网站设置 <span>07</span></button>
+        <button class="nav-item" data-view="publish">预览与发布 <span>08</span></button>
       </nav>
       <div class="sidebar-meta"><span>LOCAL ONLY</span><b><i></i> ONLINE</b><small>{{ blog_root }}</small></div>
     </aside>
@@ -126,6 +127,30 @@
             <article id="aboutPreview" class="markdown-preview" hidden></article>
           </article>
         </form>
+      </section>
+
+      <section class="view" id="view-friends">
+        <div class="section-actions"><div><span class="eyebrow">LINK.DB</span><h2>友情链接</h2></div><button class="button primary" id="saveFriends">保存友情链接</button></div>
+        <div class="friends-editor-grid">
+          <article class="panel form-panel">
+            <h3>首页展示设置</h3>
+            <label class="settings-switch"><span><b>在首页显示友情链接</b><small>显示在首页侧边栏 ABOUT 模块下方</small></span><input id="friendsHomepageEnabled" type="checkbox"></label>
+            <label>首页最多显示条数<input id="friendsHomepageLimit" type="number" min="1" max="20" step="1" value="5"></label>
+            <h3>添加或编辑链接</h3>
+            <input id="friendEditingIndex" type="hidden" value="-1">
+            <label>网站名称<input id="friendName" maxlength="100" placeholder="例如：GitHub"></label>
+            <label>网站地址<input id="friendUrl" type="url" maxlength="500" placeholder="https://example.com"></label>
+            <label>网站简介<textarea id="friendDescription" rows="3" maxlength="300"></textarea></label>
+            <label>Logo 地址<input id="friendLogo" maxlength="500" placeholder="https://… 或 /uploads/…"></label>
+            <label class="settings-switch"><span><b>在首页展示此链接</b><small>关闭后仍会显示在独立友情链接页面</small></span><input id="friendShowOnHome" type="checkbox" checked></label>
+            <div class="inline-actions"><button type="button" class="button primary" id="applyFriend">添加到列表</button><button type="button" class="button ghost" id="resetFriend">清空</button></div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading"><div><span class="eyebrow">LINKS</span><h2>全部链接</h2></div><span class="badge" id="friendTotal">0</span></div>
+            <p class="form-help">列表顺序同时决定首页和独立页面的展示顺序。修改后请点击右上角“保存友情链接”。</p>
+            <div class="friend-admin-list" id="friendList"></div>
+          </article>
+        </div>
       </section>
 
       <section class="view" id="view-settings">

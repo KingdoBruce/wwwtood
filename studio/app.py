@@ -813,6 +813,61 @@ def write_about_page(values: dict[str, Any]) -> None:
     temporary.replace(path)
 
 
+def friend_links_path() -> Path:
+    return BLOG_ROOT / "data" / "friends.toml"
+
+
+def friends_payload() -> dict[str, Any]:
+    data = load_toml(friend_links_path())
+    settings = data.get("settings", {})
+    links = data.get("links", [])
+    return {
+        "homepage_enabled": boolean_value(settings.get("homepage_enabled"), True),
+        "homepage_limit": bounded_int(settings.get("homepage_limit"), 5, 1, 20),
+        "links": [
+            {
+                "name": str(item.get("name") or ""),
+                "url": str(item.get("url") or ""),
+                "description": str(item.get("description") or ""),
+                "logo": str(item.get("logo") or ""),
+                "show_on_home": boolean_value(item.get("show_on_home"), True),
+            }
+            for item in links
+            if isinstance(item, dict)
+        ],
+    }
+
+
+def save_friend_links(values: dict[str, Any]) -> None:
+    raw_links = values.get("links", [])
+    if not isinstance(raw_links, list):
+        raise ValueError("友情链接列表格式无效")
+    links: list[dict[str, Any]] = []
+    for raw_link in raw_links[:100]:
+        if not isinstance(raw_link, dict):
+            raise ValueError("友情链接条目格式无效")
+        name = str(raw_link.get("name") or "").strip()[:100]
+        url = str(raw_link.get("url") or "").strip()[:500]
+        if not name:
+            raise ValueError("友情链接名称不能为空")
+        if not re.fullmatch(r"https?://[^\s]+", url, re.IGNORECASE):
+            raise ValueError(f"“{name}”的网址必须以 http:// 或 https:// 开头")
+        links.append({
+            "name": name,
+            "url": url,
+            "description": str(raw_link.get("description") or "").strip()[:300],
+            "logo": str(raw_link.get("logo") or "").strip()[:500],
+            "show_on_home": boolean_value(raw_link.get("show_on_home"), True),
+        })
+    save_toml(friend_links_path(), {
+        "settings": {
+            "homepage_enabled": boolean_value(values.get("homepage_enabled"), True),
+            "homepage_limit": bounded_int(values.get("homepage_limit"), 5, 1, 20),
+        },
+        "links": links,
+    })
+
+
 def free_port(start: int = 1413) -> int:
     for port in range(start, start + 50):
         with socket.socket() as sock:
@@ -951,6 +1006,17 @@ def api_get_about():
 def api_save_about():
     write_about_page(request.get_json(force=True) or {})
     return jsonify({"ok": True, "message": "关于页面已保存"})
+
+
+@app.get("/api/friends")
+def api_get_friends():
+    return jsonify({"ok": True, "friends": friends_payload()})
+
+
+@app.post("/api/friends")
+def api_save_friends():
+    save_friend_links(request.get_json(force=True) or {})
+    return jsonify({"ok": True, "message": "友情链接已保存", "friends": friends_payload()})
 
 
 @app.get("/api/posts")

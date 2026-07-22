@@ -250,10 +250,27 @@
                     <div class="pixel-avatar" aria-hidden="true"><span>◆</span></div>
                     <div><h2>{{ default "ABOUT" $home.about_title }}</h2><p>{{ default "一名开发者，偶尔写作，持续学习。相信积累的力量。" $home.about_text }}</p><a class="archive-link" href="{{ `关于/` | relLangURL }}">{{ default "了解更多 →" $home.about_link_label }}</a></div>
                 </section>
+
+                {{ with .Site.Data.friends }}
+                {{ if .settings.homepage_enabled }}
+                {{ $homeFriends := where .links "show_on_home" true }}
+                <section class="archive-panel archive-friends">
+                    <div class="archive-panel-title"><h2>FRIEND LINKS</h2><span>[ {{ len $homeFriends }} ]</span></div>
+                    <ul>
+                        {{ range first (default 5 .settings.homepage_limit) $homeFriends }}
+                        <li><a href="{{ .url }}" target="_blank" rel="noopener noreferrer"><span>{{ .name }}</span><b>↗</b></a></li>
+                        {{ else }}
+                        <li class="article-side-empty">暂无友情链接</li>
+                        {{ end }}
+                    </ul>
+                    <a class="archive-link" href="{{ `链接/` | relLangURL }}">查看全部 →</a>
+                </section>
+                {{ end }}
+                {{ end }}
             </aside>
         </div>
     </div>
 
-    <footer class="archive-footer"><span>© {{ default 2026 $footer.copyright_since }} {{ default "TOOD.WIN" $brand.name }}</span><span>{{ default "BUILT WITH HUGO" $footer.build_label }} <i></i></span></footer>
+    <footer class="archive-footer"><span class="archive-footer-left"><span>© {{ default 2026 $footer.copyright_since }} {{ default "TOOD.WIN" $brand.name }}</span>{{ partial "footer/runtime.html" . }}</span><span>{{ default "BUILT WITH HUGO" $footer.build_label }} <i></i></span></footer>
 </div>
 {{ end }}

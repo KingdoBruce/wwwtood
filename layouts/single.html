@@ -61,6 +61,20 @@
     const button = document.querySelector('.article-back-to-top');
     if (!button) return;
 
+    const placeButton = () => {
+        const main = document.querySelector('.archive-article-main');
+        const sidebar = document.querySelector('.archive-article-sidebar');
+        if (window.innerWidth <= 1180 || !main || !sidebar) {
+            button.style.removeProperty('--back-to-top-x');
+            button.style.setProperty('--back-to-top-right', '16px');
+            return;
+        }
+        const mainRight = main.getBoundingClientRect().right;
+        const sidebarLeft = sidebar.getBoundingClientRect().left;
+        button.style.setProperty('--back-to-top-x', `${(mainRight + sidebarLeft) / 2}px`);
+        button.style.setProperty('--back-to-top-right', 'auto');
+    };
+
     const updateButton = () => {
         const visible = window.scrollY > 360;
         button.classList.toggle('is-visible', visible);
@@ -69,10 +83,12 @@
     };
 
     window.addEventListener('scroll', updateButton, { passive: true });
+    window.addEventListener('resize', placeButton, { passive: true });
     button.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     });
     updateButton();
+    placeButton();
 })();
 </script>
 {{ end }}

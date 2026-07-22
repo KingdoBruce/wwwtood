@@ -1,0 +1,31 @@
+[settings]
+homepage_enabled = true
+homepage_limit = 5
+
+[[links]]
+name = "GitHub"
+url = "https://github.com"
+description = "全球知名的软件开发与代码托管平台。"
+logo = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+show_on_home = true
+
+[[links]]
+name = "TypeScript"
+url = "https://www.typescriptlang.org"
+description = "为 JavaScript 增加类型能力的开发语言。"
+logo = "/链接/ts-logo-128.jpg"
+show_on_home = true
+
+[[links]]
+name = "壹资源网"
+url = "https://www.iezyw.com"
+description = "一个降低试错成本的网站！"
+logo = ""
+show_on_home = true
+
+[[links]]
+name = "Cloudflare"
+url = "https://www.cloudflare.com/"
+description = "赛博活菩萨！"
+logo = "https://www.cloudflare.com/logo.svg"
+show_on_home = true

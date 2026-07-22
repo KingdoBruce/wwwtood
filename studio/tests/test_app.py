@@ -241,6 +241,43 @@ class StudioTests(unittest.TestCase):
             finally:
                 studio.BLOG_ROOT = original_root
 
+    def test_friend_links_round_trip_and_validation(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                headers = {"X-TOOD-Token": studio.SESSION_TOKEN}
+                response = self.client.post(
+                    "/api/friends",
+                    json={
+                        "homepage_enabled": True,
+                        "homepage_limit": 3,
+                        "links": [{
+                            "name": "示例网站",
+                            "url": "https://example.com",
+                            "description": "示例简介",
+                            "logo": "/uploads/example.png",
+                            "show_on_home": False,
+                        }],
+                    },
+                    headers=headers,
+                )
+                self.assertEqual(response.status_code, 200)
+                friends = self.client.get("/api/friends").get_json()["friends"]
+                self.assertTrue(friends["homepage_enabled"])
+                self.assertEqual(friends["homepage_limit"], 3)
+                self.assertEqual(friends["links"][0]["name"], "示例网站")
+                self.assertFalse(friends["links"][0]["show_on_home"])
+
+                invalid = self.client.post(
+                    "/api/friends",
+                    json={"links": [{"name": "错误网址", "url": "javascript:alert(1)"}]},
+                    headers=headers,
+                )
+                self.assertEqual(invalid.status_code, 400)
+            finally:
+                studio.BLOG_ROOT = original_root
+
 
 if __name__ == "__main__":
     unittest.main()

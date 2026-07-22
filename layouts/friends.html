@@ -1,0 +1,56 @@
+{{ define "body-class" }}friend-links-page{{ end }}
+
+{{ define "main" }}
+<section class="friends-page">
+    <header class="friends-page-header">
+        <div><code>LINK.DB</code><h1>{{ .Title }}</h1></div>
+        <span>{{ len .Site.Data.friends.links }} 个站点</span>
+    </header>
+    <section class="friends-agreement" aria-labelledby="friends-agreement-title">
+        <header class="friends-agreement-hero">
+            <span>LINK EXCHANGE · APPLICATION</span>
+            <h2 id="friends-agreement-title">网站链接申请与服务协议</h2>
+            <p>互惠互利 · 共同成长 · 打造优质资源生态圈</p>
+        </header>
+        <div class="friends-agreement-grid">
+            <article class="friends-agreement-service">
+                <code>POLICY / 01</code>
+                <h3>服务条款 <small>Service Agreement</small></h3>
+                <p>本站始终坚持“高质量互惠”的原则，仅收录内容健康、合法合规的优质站点。坚决拒绝任何包含违法违规、有害信息或危害国家利益及公共安全的内容。提交后请您耐心等候，管理员将在 24 小时内完成人工审核并反馈。</p>
+            </article>
+            <article class="friends-site-info">
+                <code>SITE INFO / 02</code>
+                <h3>本站链接信息 <small>Site Info</small></h3>
+                <p>申请前请将以下信息添加至贵站：</p>
+                <pre><code>&lt;a href="https://www.tood.win/" title="记录每一次实践，收藏每一件好用的工具！" target="_blank" rel="noopener"&gt;拾光集 TOOD.WIN&lt;/a&gt;</code></pre>
+            </article>
+        </div>
+        <article class="friends-requirements">
+            <header><code>REQUIREMENTS / 03</code><h3>准入准则 <small>Requirements</small></h3></header>
+            <ol>
+                <li><b>01</b><span>网站建立时间需满 <strong>3 个月</strong>以上，且在搜索引擎有正常收录。</span></li>
+                <li><b>02</b><span>网站内容需保持持续更新，具有真实参考价值及优质用户体验。</span></li>
+                <li><b>03</b><span>申请前请务必确认已添加本站链接，本站暂不收录单向链接申请。</span></li>
+            </ol>
+        </article>
+        <footer class="friends-contact">
+            <div><span>链接申请及商务合作请联系</span><a href="mailto:Admin@tood.win">Admin@tood.win</a></div>
+            <p>我们将在收到邮件后的第一时间为您添加处理</p>
+        </footer>
+    </section>
+    <div class="friends-list-heading"><div><code>NETWORK / 04</code><h2>友情链接</h2></div><span>{{ len .Site.Data.friends.links }} ENTRIES</span></div>
+    <div class="friends-page-grid">
+        {{ range .Site.Data.friends.links }}
+        <a class="friends-page-card" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+            <span class="friends-page-logo">
+                {{ if .logo }}<img src="{{ .logo }}" alt="" loading="lazy">{{ else }}<b>{{ substr .name 0 1 }}</b>{{ end }}
+            </span>
+            <span class="friends-page-copy"><strong>{{ .name }}</strong><small>{{ default .url .description }}</small></span>
+            <i>↗</i>
+        </a>
+        {{ else }}
+        <p class="friends-page-empty">暂时还没有友情链接。</p>
+        {{ end }}
+    </div>
+</section>
+{{ end }}

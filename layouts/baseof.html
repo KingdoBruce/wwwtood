@@ -53,7 +53,7 @@
                 <main class="archive-page-main">{{- block "main" . }}{{- end }}</main>
             </div>
             <footer class="archive-footer">
-                <span>© {{ default (now.Format "2006") $footer.copyright_since }} {{ default "TOOD.WIN" $brand.name }}</span>
+                <span class="archive-footer-left"><span>© {{ default (now.Format "2006") $footer.copyright_since }} {{ default "TOOD.WIN" $brand.name }}</span>{{ partial "footer/runtime.html" . }}</span>
                 <span class="archive-footer-build">
                     {{ if and (eq .Section "posts") (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}<span class="archive-footer-license">{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span><b>·</b>{{ end }}
                     <span>{{ default "BUILT WITH HUGO" $footer.build_label }}</span><i></i>
