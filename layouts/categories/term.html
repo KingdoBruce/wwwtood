@@ -2,11 +2,15 @@
 {{ define "main" }}
     {{- $paginator := .Paginator -}}
     <header class="category-term-header">
-        <div>
-            <code>CATEGORY / {{ upper .Title }}</code>
+        <div class="category-term-heading">
+            <code><span>CATEGORY</span><i>/</i><b>{{ upper .Title }}</b></code>
             <h1>{{ .Title }}</h1>
         </div>
-        <span>{{ len .Pages | printf "%03d" }} ARTICLES</span>
+        <div class="category-term-count" aria-label="该分类共有 {{ len .Pages }} 篇文章">
+            <span>COLLECTION</span>
+            <strong>{{ len .Pages | printf "%03d" }}</strong>
+            <small>ARTICLES</small>
+        </div>
     </header>
 
     <div class="category-term-layout">
