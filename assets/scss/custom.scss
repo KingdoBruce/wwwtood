@@ -422,3 +422,15 @@ body.archive-site.archive-subpage {
 .site-ad-slot--sidebar{min-height:250px;padding:0}
 .site-ad-slot--content{float:right;width:45%;max-width:336px;min-height:280px;margin:24px 0 24px 28px}
 @media(max-width:700px){.site-ad-slot--content{float:none;width:100%;min-height:250px;margin:24px 0}.site-ad-slot--home,.site-ad-slot--sidebar{min-height:250px}}
+
+/* 广告拦截提示：文章页阻断访问，其他页面允许临时关闭。 */
+.adblock-access-blocked{overflow:hidden}
+.adblock-notice{position:fixed;z-index:10000;inset:0;padding:24px;display:grid;place-items:center;background:rgba(16,17,21,.82);backdrop-filter:blur(8px)}
+.adblock-notice[hidden]{display:none}
+.adblock-notice__panel{width:100%;max-width:580px;padding:34px;border:1px solid var(--archive-line);background:var(--archive-bg,#fff);box-shadow:0 24px 80px rgba(0,0,0,.3);color:var(--archive-ink,#111)}
+.adblock-notice__label{color:var(--archive-blue,#c09a4e);font:700 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em}
+.adblock-notice h2{margin:16px 0 14px;font:800 clamp(26px,4vw,38px)/1.15 "Noto Sans SC","Microsoft YaHei",sans-serif}
+.adblock-notice p{margin:0;font-size:15px;line-height:1.75}.adblock-notice .adblock-notice__en{margin-top:8px;color:var(--archive-muted,#666);font-size:13px}
+.adblock-notice__links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}.adblock-notice__links a,.adblock-notice__close{min-height:46px;padding:12px 16px;border:1px solid var(--archive-line);display:grid;place-items:center;background:transparent;color:inherit;font:700 13px/1.3 inherit;text-align:center;cursor:pointer}.adblock-notice__links a:hover,.adblock-notice__links a:focus-visible{border-color:var(--archive-blue,#c09a4e);color:var(--archive-blue,#c09a4e)}
+.adblock-notice__close{width:100%;margin-top:10px;color:var(--archive-muted,#666)}
+@media(max-width:600px){.adblock-notice{padding:14px}.adblock-notice__panel{padding:24px}.adblock-notice__links{grid-template-columns:1fr}}

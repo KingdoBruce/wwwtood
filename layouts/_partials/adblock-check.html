@@ -1,0 +1,82 @@
+{{- $isArticle := and .IsPage (eq .Section "posts") -}}
+<div class="adblock-notice" role="dialog" aria-modal="true" aria-labelledby="adblock-notice-title" hidden data-blocking="{{ if $isArticle }}true{{ else }}false{{ end }}">
+    <div class="adblock-notice__panel">
+        <span class="adblock-notice__label">AD BLOCKER DETECTED</span>
+        <h2 id="adblock-notice-title">请允许本站展示广告</h2>
+        <p>检测到广告拦截功能。请将拾光集加入允许列表，然后刷新本页面。</p>
+        <p class="adblock-notice__en">We detected an ad blocker. Please allow ads on this site, then refresh the page.</p>
+        <div class="adblock-notice__links">
+            <a href="https://www.tood.win/posts/please-allow-ads-on-shiguangji-zh/">中文说明</a>
+            <a href="https://www.tood.win/posts/please-allow-ads-on-shiguangji-en/" lang="en">English guide</a>
+        </div>
+        {{- if not $isArticle }}
+        <button type="button" class="adblock-notice__close">暂时关闭提示</button>
+        {{- end }}
+    </div>
+</div>
+<script>
+(() => {
+    const allowlist = [
+        '/please-allow-ads-on-shiguangji-zh/',
+        '/please-allow-ads-on-shiguangji-en/'
+    ];
+    const path = `${window.location.pathname.replace(/\/+$/, '')}/`.toLowerCase();
+    if (allowlist.some((slug) => path.endsWith(slug))) return;
+
+    const notice = document.querySelector('.adblock-notice');
+    if (!notice) return;
+
+    const bait = document.createElement('div');
+    bait.id = 'ad-banner';
+    bait.className = 'adsbox ad-banner ad-unit advertisement ad-placement pub_300x250 text-ad sponsored-content';
+    bait.setAttribute('aria-hidden', 'true');
+    bait.style.cssText = 'position:absolute!important;left:-10000px!important;top:-10000px!important;width:2px!important;height:2px!important;pointer-events:none!important;';
+    document.body.appendChild(bait);
+
+    let revealed = false;
+    let networkBlocked = false;
+    let localProbeLoaded = false;
+    let localProbeBlocked = false;
+    const revealNotice = () => {
+        if (revealed) return;
+        revealed = true;
+        notice.hidden = false;
+        if (notice.dataset.blocking === 'true') {
+            document.documentElement.classList.add('adblock-access-blocked');
+        }
+        notice.querySelector('.adblock-notice__close')?.addEventListener('click', () => {
+            notice.hidden = true;
+        });
+    };
+
+    const localProbe = document.createElement('script');
+    localProbe.async = true;
+    localProbe.src = `/js/advertisement.js?probe=${Date.now()}`;
+    localProbe.onload = () => {
+        localProbeLoaded = window.__toodAdvertisementProbe === true;
+        localProbe.remove();
+    };
+    localProbe.onerror = () => {
+        localProbeBlocked = true;
+        localProbe.remove();
+    };
+    document.head.appendChild(localProbe);
+
+    fetch(`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?adblock_probe=${Date.now()}`, {
+        mode: 'no-cors',
+        cache: 'no-store'
+    }).catch(() => {
+        networkBlocked = true;
+    });
+
+    window.setTimeout(() => {
+        const style = window.getComputedStyle(bait);
+        const baitBlocked = style.display === 'none' || style.visibility === 'hidden' || bait.offsetHeight === 0 || bait.offsetWidth === 0;
+        const adsRuntimeMissing = typeof window.adsbygoogle === 'undefined';
+        bait.remove();
+        if (baitBlocked || networkBlocked || localProbeBlocked || !localProbeLoaded || adsRuntimeMissing) {
+            revealNotice();
+        }
+    }, 2500);
+})();
+</script>
