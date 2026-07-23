@@ -62,6 +62,7 @@
           <button class="button primary" id="newPost">＋ 新建文章</button>
         </div>
         <div id="postList" class="post-list"></div>
+        <div id="postPagination"></div>
       </section>
 
       <section class="view" id="view-editor">
@@ -109,7 +110,7 @@
         <div class="section-actions"><div><span class="eyebrow">TAXONOMY.04</span><h2>标签管理</h2></div></div>
         <div class="taxonomy-manager">
           <article class="panel taxonomy-create"><h3>添加标签</h3><p>标签用于描述文章主题。重命名或删除时会同步更新所有关联文章。</p><div class="taxonomy-add-row"><input id="newTag" maxlength="80" placeholder="输入标签名称"><button class="button primary" id="addTag">添加标签</button></div></article>
-          <article class="panel"><div class="panel-heading"><div><span class="eyebrow">TAG.DB</span><h2>全部标签</h2></div><span class="badge" id="tagTotal">0</span></div><div class="taxonomy-list" id="tagList"></div></article>
+          <article class="panel"><div class="panel-heading"><div><span class="eyebrow">TAG.DB</span><h2>全部标签</h2></div><span class="badge" id="tagTotal">0</span></div><div class="taxonomy-list" id="tagList"></div><div id="tagPagination"></div></article>
         </div>
       </section>
 
@@ -212,5 +213,6 @@
     </main>
   </div>
   <script src="{{ url_for('static', filename='app.js') }}"></script>
+  <script src="{{ url_for('static', filename='pagination.js') }}"></script>
 </body>
 </html>
