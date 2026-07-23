@@ -75,7 +75,7 @@
             <label>文章标题<input id="postTitle" maxlength="200" required placeholder="输入文章标题"></label>
             <div class="two-columns"><label>URL Slug<input id="postSlug" placeholder="留空则根据标题生成"></label><label>发布日期<input id="postDate" type="datetime-local"></label></div>
             <label>摘要<textarea id="postDescription" rows="2" maxlength="500" placeholder="用于列表和搜索引擎展示"></textarea></label>
-            <div class="editor-tabs"><button class="active" data-editor-tab="write">Markdown</button><button data-editor-tab="preview">预览</button><button type="button" class="upload-inline" id="insertImage">插入图片</button><input type="file" id="articleImage" accept="image/png,image/jpeg,image/webp,image/gif" hidden></div>
+            <div class="editor-tabs"><button class="active" data-editor-tab="write">Markdown</button><button data-editor-tab="preview">预览</button><button type="button" class="upload-inline" id="insertInternalLink">插入内链</button><button type="button" class="upload-inline" id="insertImage">插入图片</button><input type="file" id="articleImage" accept="image/png,image/jpeg,image/webp,image/gif" hidden></div>
             <textarea id="postBody" class="markdown-editor" placeholder="# 从这里开始写作…"></textarea>
             <article id="markdownPreview" class="markdown-preview" hidden></article>
           </div>
@@ -213,6 +213,26 @@
       </section>
     </main>
   </div>
+  <dialog id="internalLinkDialog" class="internal-link-dialog">
+    <form method="dialog">
+      <div class="internal-link-heading"><div><span class="eyebrow">LINK.DB</span><h2>插入内链</h2></div><button class="text-button" value="cancel" aria-label="关闭">关闭</button></div>
+      <div class="internal-link-tabs" role="tablist" aria-label="内链类型">
+        <button type="button" class="active" data-link-mode="article" role="tab">文章内链</button>
+        <button type="button" data-link-mode="tag" role="tab">标签内链</button>
+      </div>
+      <section class="internal-link-panel active" data-link-panel="article">
+        <label>链接文字<input id="internalLinkText" maxlength="200" placeholder="默认使用目标文章标题"></label>
+        <label>搜索文章<input id="internalLinkSearch" type="search" placeholder="按标题、Slug、分类或标签搜索"></label>
+        <label class="internal-link-drafts"><input id="internalLinkIncludeDrafts" type="checkbox"> 同时显示草稿文章</label>
+        <div id="internalLinkResults" class="internal-link-results"></div>
+      </section>
+      <section class="internal-link-panel" data-link-panel="tag" hidden>
+        <p class="internal-link-help">只显示正文中真实存在且尚未添加链接的标签。每次点击链接第一个匹配位置，不会向正文插入新文字。</p>
+        <label>搜索标签<input id="internalTagLinkSearch" type="search" placeholder="按标签名称搜索"></label>
+        <div id="internalTagLinkResults" class="internal-link-results"></div>
+      </section>
+    </form>
+  </dialog>
   <script src="{{ url_for('static', filename='app.js') }}"></script>
   <script src="{{ url_for('static', filename='pagination.js') }}"></script>
 </body>

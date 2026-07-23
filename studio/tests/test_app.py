@@ -190,6 +190,56 @@ class StudioTests(unittest.TestCase):
             finally:
                 studio.BLOG_ROOT = original_root
 
+    def test_post_references_and_slug_rename_update_internal_links(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                posts = studio.BLOG_ROOT / "content" / "posts"
+                posts.mkdir(parents=True)
+                target = posts / "old-slug.md"
+                target.write_text(
+                    studio.serialize_post(
+                        {"title": "目标文章", "date": "2026-07-20T12:00:00+08:00", "draft": False},
+                        "目标正文",
+                    ),
+                    encoding="utf-8",
+                )
+                source = posts / "source.md"
+                source.write_text(
+                    studio.serialize_post(
+                        {"title": "引用文章", "date": "2026-07-20T13:00:00+08:00", "draft": False},
+                        "[站内链接](/posts/old-slug/)",
+                    ),
+                    encoding="utf-8",
+                )
+                references = self.client.get("/api/posts/old-slug/references")
+                self.assertEqual(references.status_code, 200)
+                self.assertEqual(
+                    [item["slug"] for item in references.get_json()["references"]],
+                    ["source"],
+                )
+                renamed = self.client.post(
+                    "/api/posts",
+                    json={
+                        "original_slug": "old-slug",
+                        "title": "目标文章",
+                        "slug": "new-slug",
+                        "date": "2026-07-20T12:00",
+                        "draft": False,
+                        "body": "目标正文",
+                    },
+                    headers={"X-TOOD-Token": studio.SESSION_TOKEN},
+                )
+                self.assertEqual(renamed.status_code, 200)
+                self.assertFalse(target.exists())
+                self.assertTrue((posts / "new-slug.md").exists())
+                _, source_body = studio.parse_post(source)
+                self.assertIn("](/posts/new-slug/)", source_body)
+                self.assertNotIn("/posts/old-slug/", source_body)
+            finally:
+                studio.BLOG_ROOT = original_root
+
     def test_taxonomy_add_rename_and_delete_updates_posts(self):
         original_root = studio.BLOG_ROOT
         with tempfile.TemporaryDirectory() as folder:

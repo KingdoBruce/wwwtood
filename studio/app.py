@@ -580,6 +580,43 @@ def all_posts() -> list[dict[str, Any]]:
     return sorted(posts, key=lambda item: (item["date"], item["modified"]), reverse=True)
 
 
+def internal_post_link_pattern(slug: str) -> re.Pattern[str]:
+    return re.compile(
+        rf"(?P<prefix>(?:https?://[^/\s)\"']+)?/posts/){re.escape(slug)}"
+        r"(?P<suffix>/?(?=[?#\s)\"']|$))",
+        flags=re.IGNORECASE,
+    )
+
+
+def post_references(slug: str) -> list[dict[str, Any]]:
+    pattern = internal_post_link_pattern(slug)
+    references = []
+    for path in (BLOG_ROOT / "content" / "posts").glob("*.md"):
+        if path.stem == slug:
+            continue
+        _, body = parse_post(path)
+        if pattern.search(body):
+            references.append(post_summary(path))
+    return sorted(references, key=lambda item: item["title"].casefold())
+
+
+def update_internal_post_links(old_slug: str, new_slug: str) -> int:
+    pattern = internal_post_link_pattern(old_slug)
+    updated = 0
+    for path in (BLOG_ROOT / "content" / "posts").glob("*.md"):
+        if path.stem == old_slug:
+            continue
+        metadata, body = parse_post(path)
+        new_body, replacements = pattern.subn(
+            lambda match: f"{match.group('prefix')}{new_slug}{match.group('suffix')}",
+            body,
+        )
+        if replacements:
+            path.write_text(serialize_post(metadata, new_body), encoding="utf-8", newline="\n")
+            updated += 1
+    return updated
+
+
 def settings_payload() -> dict[str, Any]:
     data = load_toml(BLOG_ROOT / "data" / "site.toml")
     brand = data.get("brand", {})
@@ -1126,6 +1163,14 @@ def api_posts():
     return jsonify({"ok": True, "posts": all_posts()})
 
 
+@app.get("/api/posts/<slug>/references")
+def api_post_references(slug: str):
+    path = post_path(slug)
+    if not path.is_file():
+        raise FileNotFoundError("文章不存在")
+    return jsonify({"ok": True, "references": post_references(path.stem)})
+
+
 @app.get("/api/posts/<slug>")
 def api_get_post(slug: str):
     path = post_path(slug)
@@ -1194,12 +1239,15 @@ def api_save_post():
     body = str(payload.get("body") or "")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(serialize_post(metadata, body), encoding="utf-8", newline="\n")
+    updated_links = 0
     if original_slug and original_slug != slug:
+        updated_links = update_internal_post_links(original_slug, slug)
         old_path = post_path(original_slug)
         if old_path.is_file():
             old_path.unlink()
     state = "草稿，不会显示在线" if metadata["draft"] else "公开文章"
-    return jsonify({"ok": True, "message": f"文章已保存为{state}", "slug": slug})
+    link_message = f"，并同步更新 {updated_links} 篇文章的内链" if updated_links else ""
+    return jsonify({"ok": True, "message": f"文章已保存为{state}{link_message}", "slug": slug})
 
 
 @app.delete("/api/posts/<slug>")
