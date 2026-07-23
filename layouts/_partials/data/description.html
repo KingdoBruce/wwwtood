@@ -1,0 +1,7 @@
+{{- $description := site.Data.site.seo.description | default .Site.Params.description | default .Site.Params.sidebar.subtitle -}}
+{{- if .Description -}}
+    {{- $description = .Description -}}
+{{- else if and .IsPage .Summary -}}
+    {{- $description = .Summary -}}
+{{- end -}}
+{{- return (replaceRE "\n" " " $description | plainify) -}}

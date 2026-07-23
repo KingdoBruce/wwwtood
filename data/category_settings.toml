@@ -6,10 +6,6 @@ show_in_archives = true
 show_on_home = false
 show_in_archives = false
 
-[categories."网站"]
-show_on_home = true
-show_in_archives = true
-
 [categories."软件"]
 show_on_home = true
 show_in_archives = true

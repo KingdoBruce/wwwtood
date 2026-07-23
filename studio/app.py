@@ -586,6 +586,7 @@ def settings_payload() -> dict[str, Any]:
     navigation = data.get("navigation", {})
     home = data.get("home", {})
     footer = data.get("footer", {})
+    seo = data.get("seo", {})
     return {
         "brand_name": brand.get("name", "TOOD.WIN"),
         "brand_logo": brand.get("logo", ""),
@@ -612,6 +613,8 @@ def settings_payload() -> dict[str, Any]:
         "quarter_random_count": bounded_int(home.get("quarter_random_count"), 5),
         "copyright_since": footer.get("copyright_since", datetime.now().year),
         "footer_build_label": footer.get("build_label", "BUILT WITH HUGO"),
+        "seo_description": seo.get("description", ""),
+        "seo_keywords": seo.get("keywords", ""),
     }
 
 
@@ -651,6 +654,10 @@ def write_settings(values: dict[str, Any]) -> None:
         "footer": {
             "copyright_since": int(values.get("copyright_since") or datetime.now().year),
             "build_label": limited.get("footer_build_label", "BUILT WITH HUGO"),
+        },
+        "seo": {
+            "description": limited.get("seo_description", ""),
+            "keywords": limited.get("seo_keywords", ""),
         },
         "advertising": current.get("advertising", {}),
     }

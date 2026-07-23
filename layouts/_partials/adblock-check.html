@@ -1,5 +1,5 @@
 {{- $isArticle := and .IsPage (eq .Section "posts") -}}
-<div class="adblock-notice" role="dialog" aria-modal="true" aria-labelledby="adblock-notice-title" hidden data-blocking="{{ if $isArticle }}true{{ else }}false{{ end }}">
+<div class="adblock-notice" role="{{ if $isArticle }}dialog{{ else }}status{{ end }}" aria-modal="{{ if $isArticle }}true{{ else }}false{{ end }}" aria-labelledby="adblock-notice-title" hidden data-blocking="{{ if $isArticle }}true{{ else }}false{{ end }}" data-nosnippet>
     <div class="adblock-notice__panel">
         <span class="adblock-notice__label">AD BLOCKER DETECTED</span>
         <h2 id="adblock-notice-title">请允许本站展示广告</h2>
@@ -16,27 +16,33 @@
 </div>
 <script>
 (() => {
+    const articleEntryKey = 'tood-article-ad-check';
     const allowlist = [
         '/please-allow-ads-on-shiguangji-zh/',
         '/please-allow-ads-on-shiguangji-en/'
     ];
     const path = `${window.location.pathname.replace(/\/+$/, '')}/`.toLowerCase();
-    if (allowlist.some((slug) => path.endsWith(slug))) return;
+    const isAllowlisted = allowlist.some((slug) => path.endsWith(slug));
+
+    document.addEventListener('click', (event) => {
+        const link = event.target.closest('a[href]');
+        if (!link) return;
+        try {
+            const target = new URL(link.href, window.location.href);
+            const targetPath = `${target.pathname.replace(/\/+$/, '')}/`.toLowerCase();
+            if (target.origin === window.location.origin && targetPath.includes('/posts/') && !allowlist.some((slug) => targetPath.endsWith(slug))) {
+                sessionStorage.setItem(articleEntryKey, targetPath);
+            }
+        } catch (_) {}
+    }, { capture: true });
+
+    if (isAllowlisted) return;
 
     const notice = document.querySelector('.adblock-notice');
     if (!notice) return;
 
-    const bait = document.createElement('div');
-    bait.id = 'ad-banner';
-    bait.className = 'adsbox ad-banner ad-unit advertisement ad-placement pub_300x250 text-ad sponsored-content';
-    bait.setAttribute('aria-hidden', 'true');
-    bait.style.cssText = 'position:absolute!important;left:-10000px!important;top:-10000px!important;width:2px!important;height:2px!important;pointer-events:none!important;';
-    document.body.appendChild(bait);
-
     let revealed = false;
-    let networkBlocked = false;
-    let localProbeLoaded = false;
-    let localProbeBlocked = false;
+    let detectionStarted = false;
     const revealNotice = () => {
         if (revealed) return;
         revealed = true;
@@ -49,34 +55,70 @@
         });
     };
 
-    const localProbe = document.createElement('script');
-    localProbe.async = true;
-    localProbe.src = `/js/advertisement.js?probe=${Date.now()}`;
-    localProbe.onload = () => {
-        localProbeLoaded = window.__toodAdvertisementProbe === true;
-        localProbe.remove();
-    };
-    localProbe.onerror = () => {
-        localProbeBlocked = true;
-        localProbe.remove();
-    };
-    document.head.appendChild(localProbe);
+    const startDetection = () => {
+        if (detectionStarted) return;
+        detectionStarted = true;
 
-    fetch(`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?adblock_probe=${Date.now()}`, {
-        mode: 'no-cors',
-        cache: 'no-store'
-    }).catch(() => {
-        networkBlocked = true;
-    });
+        const bait = document.createElement('div');
+        bait.id = 'ad-banner';
+        bait.className = 'adsbox ad-banner ad-unit advertisement ad-placement pub_300x250 text-ad sponsored-content';
+        bait.setAttribute('aria-hidden', 'true');
+        bait.style.cssText = 'position:absolute!important;left:-10000px!important;top:-10000px!important;width:2px!important;height:2px!important;pointer-events:none!important;';
+        document.body.appendChild(bait);
 
-    window.setTimeout(() => {
-        const style = window.getComputedStyle(bait);
-        const baitBlocked = style.display === 'none' || style.visibility === 'hidden' || bait.offsetHeight === 0 || bait.offsetWidth === 0;
-        const adsRuntimeMissing = typeof window.adsbygoogle === 'undefined';
-        bait.remove();
-        if (baitBlocked || networkBlocked || localProbeBlocked || !localProbeLoaded || adsRuntimeMissing) {
-            revealNotice();
-        }
-    }, 2500);
+        let networkBlocked = false;
+        let localProbeLoaded = false;
+        let localProbeBlocked = false;
+        const localProbe = document.createElement('script');
+        localProbe.async = true;
+        localProbe.src = `/js/advertisement.js?probe=${Date.now()}`;
+        localProbe.onload = () => {
+            localProbeLoaded = window.__toodAdvertisementProbe === true;
+            localProbe.remove();
+        };
+        localProbe.onerror = () => {
+            localProbeBlocked = true;
+            localProbe.remove();
+        };
+        document.head.appendChild(localProbe);
+
+        fetch(`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?adblock_probe=${Date.now()}`, {
+            mode: 'no-cors',
+            cache: 'no-store'
+        }).catch(() => {
+            networkBlocked = true;
+        });
+
+        window.setTimeout(() => {
+            const style = window.getComputedStyle(bait);
+            const baitBlocked = style.display === 'none' || style.visibility === 'hidden' || bait.offsetHeight === 0 || bait.offsetWidth === 0;
+            const adsRuntimeMissing = typeof window.adsbygoogle === 'undefined';
+            bait.remove();
+            if (baitBlocked || networkBlocked || localProbeBlocked || !localProbeLoaded || adsRuntimeMissing) {
+                revealNotice();
+            }
+        }, notice.dataset.blocking === 'true' ? 1000 : 2500);
+    };
+
+    if (notice.dataset.blocking !== 'true') {
+        startDetection();
+        return;
+    }
+
+    let enteredFromSite = false;
+    try {
+        enteredFromSite = sessionStorage.getItem(articleEntryKey) === path;
+        sessionStorage.removeItem(articleEntryKey);
+    } catch (_) {}
+    if (enteredFromSite || window.scrollY > 120) {
+        startDetection();
+    } else {
+        const onScroll = () => {
+            if (window.scrollY <= 120) return;
+            window.removeEventListener('scroll', onScroll);
+            startDetection();
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+    }
 })();
 </script>

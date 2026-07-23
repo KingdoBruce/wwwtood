@@ -31,6 +31,10 @@ quarter_random_count = 5
 copyright_since = 2026
 build_label = "BUILT WITH HUGO"
 
+[seo]
+description = "拾光集记录值得被发现的人、事、思想与微光，分享工具实测、项目经验、技术实践与问题解决方法。"
+keywords = "拾光集, TOOD.WIN, 工具实测, 技术实践, 项目经验, 问题解决, AI 工具"
+
 [advertising]
 google_ads_code = "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673\"\n     crossorigin=\"anonymous\"></script>"
 home_sidebar_enabled = false
