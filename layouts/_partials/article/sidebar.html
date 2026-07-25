@@ -56,8 +56,22 @@
 
     <section class="article-side-panel">
         <h2 class="article-side-title">TAG CLOUD <span>05</span></h2>
-        <div class="article-tag-cloud">
-            {{ range $name, $taxonomy := .Site.Taxonomies.tags }}<a href="{{ printf `tags/%s/` ($name | urlize) | relLangURL }}">{{ $name }}<sup>{{ len $taxonomy.Pages }}</sup></a>{{ else }}<p class="article-side-empty">暂无标签</p>{{ end }}
+        <div class="article-tag-cloud archive-random-tags" data-random-count="18">
+            {{ range $index, $taxonomy := .Site.Taxonomies.tags }}<a{{ if ge $index 18 }} hidden{{ end }} href="{{ printf `tags/%s/` ($index | urlize) | relLangURL }}">{{ $index }}<sup>{{ len $taxonomy.Pages }}</sup></a>{{ else }}<p class="article-side-empty">暂无标签</p>{{ end }}
         </div>
+        {{ if .Site.Taxonomies.tags }}
+        <script>
+        (() => {
+            const cloud = document.currentScript.previousElementSibling;
+            const tags = Array.from(cloud.querySelectorAll('a'));
+            const count = Math.min(Number(cloud.dataset.randomCount) || 18, tags.length);
+            for (let index = tags.length - 1; index > 0; index -= 1) {
+                const target = Math.floor(Math.random() * (index + 1));
+                [tags[index], tags[target]] = [tags[target], tags[index]];
+            }
+            tags.forEach((tag, index) => { tag.hidden = index >= count; cloud.appendChild(tag); });
+        })();
+        </script>
+        {{ end }}
     </section>
 </aside>
