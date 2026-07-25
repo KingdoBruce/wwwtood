@@ -6,7 +6,7 @@ favicon = "/uploads/2026/07/ico-1-f7348eae.png"
 archive_name = "拾光集 TOOD.WIN"
 
 [navigation]
-archives = "归档"
+archives = "分类"
 categories = "分类"
 tags = "标签"
 about = "关于"

@@ -7,7 +7,7 @@ categories = ["AI"]
 tags = ["ChatGPT", "AI", "Google"]
 +++
 
-在订阅 [ChatGPT](/tags/chatgpt/) Plus、Google Gemini、Grok 等海外 [AI](/tags/ai/) 服务时，很多国内用户都会遇到同一个问题：
+在订阅 [ChatGPT](/tags/chatgpt/) Plus、[Google](/tags/google/) Gemini、Grok 等海外 [AI](/tags/ai/) 服务时，很多国内用户都会遇到同一个问题：
 
 明明手里有 Visa 或 Mastercard 信用卡，但在官网付款时仍然被拒绝；使用虚拟卡又要承担开卡费、充值费、汇率差价和平台稳定性等问题。
 
@@ -46,7 +46,7 @@ tags = ["ChatGPT", "AI", "Google"]
 * 不支持 3D Secure 验证
 * 银行拦截了自动续费交易
 
-而在安卓客户端中，一些 AI 应用支持 Google Play 应用内订阅。
+而在安卓客户端中，一些 [AI](/tags/ai/) 应用支持 Google Play 应用内订阅。
 
 此时，实际支付流程通常是：
 
@@ -383,7 +383,7 @@ Google Play 境外线上订阅付款
 
 在 Google Play 中搜索并下载安装需要订阅的应用，例如：
 
-* ChatGPT
+* [ChatGPT](/tags/chatgpt/)
 * Google Gemini
 * Grok
 
