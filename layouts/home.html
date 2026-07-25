@@ -95,9 +95,11 @@
                             {{ with $htmlImages }}{{ $cover = replaceRE `(?i)^.*src=["']` "" (index . 0) }}{{ end }}
                         {{ end }}
                         <section class="feature-record feature-slide{{ if eq $index 0 }} is-active{{ end }}" data-feature-slide{{ if ne $index 0 }} hidden{{ end }}>
-                            <div class="feature-image{{ if $cover }} has-cover{{ end }}" role="img" aria-label="{{ $featured.Title }}">
-                                {{ with $cover }}<img class="feature-cover" src="{{ . | safeURL }}" alt="{{ $featured.Title }}">{{ else }}<span class="feature-ring"></span>{{ end }}<small>FEATURED<br>STORY</small>
-                            </div>
+                            <a class="feature-image-link" href="{{ $featured.RelPermalink }}" aria-label="{{ $featured.Title }}">
+                                <div class="feature-image{{ if $cover }} has-cover{{ end }}" role="img" aria-label="{{ $featured.Title }}">
+                                    {{ with $cover }}<img class="feature-cover" src="{{ . | safeURL }}" alt="{{ $featured.Title }}">{{ else }}<span class="feature-ring"></span>{{ end }}<small>FEATURED<br>STORY</small>
+                                </div>
+                            </a>
                             <div class="feature-copy">
                                 <code>FTR.{{ $featured.Date.Format "0601" }}.{{ printf "%03d" (add $index 1) }}</code>
                                 <h2><a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a></h2>
@@ -151,13 +153,13 @@
                 <section class="archive-articles">
                     <div class="archive-section-title"><h2>LATEST ARTICLES</h2><a href="{{ `archives/` | relLangURL }}">VIEW ALL →</a></div>
                     <div class="archive-table">
-                        {{ range first $latestArticlesCount $latestPosts }}
-                        <a class="archive-row" href="{{ .RelPermalink }}">
-                            <code>A.{{ .Date.Format "0601" }}.{{ printf "%03d" .Weight }}</code><strong>{{ .Title }}</strong><span>/ {{ with index .Params.categories 0 }}{{ . }}{{ else }}未分类{{ end }}</span><time>{{ .Date.Format "2006-01-02" }}</time>
+                        {{ range $i, $page := first $latestArticlesCount $latestPosts }}
+                        <a class="archive-row" href="{{ $page.RelPermalink }}">
+                            <code>A.{{ $page.Date.Format "0601" }}.{{ printf "%03d" (add $i 1) }}</code><strong>{{ $page.Title }}</strong><time>{{ $page.Date.Format "2006-01-02" }}</time>
                         </a>
                         {{ else }}
                             {{ range first $latestArticlesCount (slice "技术债与演进设计" "如何写出清晰的技术文档" "从 0 到 1 搭建一个静态博客" "浏览器渲染机制简述" "信息管理：少即是多") }}
-                            <div class="archive-row is-placeholder"><code>A.0000.000</code><strong>{{ . }}</strong><span>/ 准备中</span><time>----</time></div>
+                            <div class="archive-row is-placeholder"><code>A.0000.000</code><strong>{{ . }}</strong><time>----</time></div>
                             {{ end }}
                         {{ end }}
                     </div>

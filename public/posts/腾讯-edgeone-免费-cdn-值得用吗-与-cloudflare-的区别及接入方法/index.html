@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="很多站长在给网站配置 CDN 时，第一时间想到的通常都是 Cloudflare。\nCloudflare 的免费套餐确实很好用，不仅可以提供 CDN 加速，还能免费开启 HTTPS，并附带基础的安全防护。对于面向海外用户的网站来说，它依然是一个成熟、稳定且省心的选择。\n">
+<title>腾讯 EdgeOne 免费 CDN 值得用吗？与 Cloudflare 的区别及接入方法 - 建站 - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/%E8%85%BE%E8%AE%AF-edgeone-%E5%85%8D%E8%B4%B9-cdn-%E5%80%BC%E5%BE%97%E7%94%A8%E5%90%97-%E4%B8%8E-cloudflare-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E6%8E%A5%E5%85%A5%E6%96%B9%E6%B3%95/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.4d5ccee27ebbbb162bedc2a3384633c02a68a52778104b94324149bc8abf4342.css"><meta property='og:title' content="腾讯 EdgeOne 免费 CDN 值得用吗？与 Cloudflare 的区别及接入方法 - 建站 - 拾光集 TOOD.WIN">
+<meta property='og:description' content="很多站长在给网站配置 CDN 时，第一时间想到的通常都是 Cloudflare。\nCloudflare 的免费套餐确实很好用，不仅可以提供 CDN 加速，还能免费开启 HTTPS，并附带基础的安全防护。对于面向海外用户的网站来说，它依然是一个成熟、稳定且省心的选择。\n">
+<meta property='og:url' content='https://www.tood.win/posts/%E8%85%BE%E8%AE%AF-edgeone-%E5%85%8D%E8%B4%B9-cdn-%E5%80%BC%E5%BE%97%E7%94%A8%E5%90%97-%E4%B8%8E-cloudflare-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E6%8E%A5%E5%85%A5%E6%96%B9%E6%B3%95/'>
+<meta property='og:site_name' content='Hugo 主题 Stack'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='EdgeOne' /><meta property='article:tag' content='免费CDN' /><meta property='article:tag' content='Cloudflare' /><meta property='article:tag' content='CDN加速' /><meta property='article:published_time' content='2026-07-24T21:59:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-24T21:59:00&#43;08:00'/>
+<meta name="twitter:title" content="腾讯 EdgeOne 免费 CDN 值得用吗？与 Cloudflare 的区别及接入方法 - 建站 - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="很多站长在给网站配置 CDN 时，第一时间想到的通常都是 Cloudflare。\nCloudflare 的免费套餐确实很好用，不仅可以提供 CDN 加速，还能免费开启 HTTPS，并附带基础的安全防护。对于面向海外用户的网站来说，它依然是一个成熟、稳定且省心的选择。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-1-f7348eae.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-1-f7348eae.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="EdgeOne, 免费CDN, Cloudflare, CDN加速">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"腾讯 EdgeOne 免费 CDN 值得用吗？与 Cloudflare 的区别及接入方法\"",
+  "description": "\"很多站长在给网站配置 CDN 时，第一时间想到的通常都是 Cloudflare。\\nCloudflare 的免费套餐确实很好用，不仅可以提供 CDN 加速，还能免费开启 HTTPS，并附带基础的安全防护。对于面向海外用户的网站来说，它依然是一个成熟、稳定且省心的选择。\\n\"",
+  "datePublished": "\"2026-07-24T21:59:00+08:00\"",
+  "dateModified": "\"2026-07-24T21:59:00+08:00\"",
+  "url": "\"https://www.tood.win/posts/%E8%85%BE%E8%AE%AF-edgeone-%E5%85%8D%E8%B4%B9-cdn-%E5%80%BC%E5%BE%97%E7%94%A8%E5%90%97-%E4%B8%8E-cloudflare-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E6%8E%A5%E5%85%A5%E6%96%B9%E6%B3%95/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page article-with-sidebar">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            <header class="archive-topbar">
+                <a class="archive-brand" href="/" aria-label="返回首页">
+                    
+                        <img class="archive-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+                    
+                </a><nav class="archive-nav" aria-label="主导航">
+                    <a class="" href="/">首页</a>
+                    <a class="" href="/archives/">分类</a>
+                    <a class="" href="/tags/">标签</a>
+                    <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+                </nav>
+      <div class="archive-status" aria-label="拾光存档：记录微光，存入时间">
+        <em class="archive-status-mark" aria-hidden="true"><i></i></em>
+        <span class="archive-status-copy"><strong>拾光存档</strong><small>记录微光 · 存入时间</small></span>
+      </div>
+            </header>
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                <div class="archive-page-index">
+                    <span class="archive-cross" aria-hidden="true"></span>
+                    <span class="archive-coord archive-coord-top">PAGE.2607.2773</span>
+                    <span class="archive-page-name">拾光集 TOOD.WIN</span>
+                    <strong>/ PAGE</strong>
+                </div>
+                <main class="archive-page-main">
+<div class="archive-article-layout">
+    <div class="archive-article-main">
+        <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/%E5%BB%BA%E7%AB%99/" style="background-color: hsl(198, 60%, 84%); color: hsl(198, 60%, 15%);">
+                建站
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/%E8%85%BE%E8%AE%AF-edgeone-%E5%85%8D%E8%B4%B9-cdn-%E5%80%BC%E5%BE%97%E7%94%A8%E5%90%97-%E4%B8%8E-cloudflare-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E6%8E%A5%E5%85%A5%E6%96%B9%E6%B3%95/">腾讯 EdgeOne 免费 CDN 值得用吗？与 Cloudflare 的区别及接入方法</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-07-24T21:59:00&#43;08:00'>2026年7月24日星期五</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        阅读时长: 6 分钟
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+
+    <section class="article-content"><p>很多站长在给网站配置 CDN 时，第一时间想到的通常都是 Cloudflare。</p>
+<p>Cloudflare 的免费套餐确实很好用，不仅可以提供 CDN 加速，还能免费开启 HTTPS，并附带基础的安全防护。对于面向海外用户的网站来说，它依然是一个成熟、稳定且省心的选择。</p>
+<p>不过，我在实际使用过程中也发现，如果网站访客主要来自亚洲，尤其是中国大陆及周边地区，Cloudflare 免费节点有时会出现延迟偏高、线路绕行、加载速度波动等问题。</p>
+<p>因此，我开始尝试腾讯云推出的 EdgeOne。</p>
+<p><img alt="d2a28c6a-a573-4925-becf-687206a03e55" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/d2a28c6a-a573-4925-becf-687206a03e55-5cb1346c.png"></p>
+<p>简单来说，EdgeOne 是一套集 <strong>CDN 加速、HTTPS 证书、安全防护、缓存管理和 DNS 接入</strong> 于一体的网站加速服务。它不一定能够完全取代 Cloudflare，但对于面向亚洲用户的网站来说，确实提供了一个值得测试的新选择。</p>
+<hr>
+<h2 id="一edgeone-是什么">一、EdgeOne 是什么？
+</h2><p>EdgeOne 是腾讯云推出的边缘安全加速平台。</p>
+<p>它将内容分发、安全防护和域名接入整合到同一个控制台中，主要功能包括：</p>
+<ul>
+<li>网站静态资源 CDN 加速</li>
+<li>自动配置 HTTPS 证书</li>
+<li>隐藏源站真实 IP</li>
+<li>基础 DDoS 防护</li>
+<li>基础 CC 攻击防护</li>
+<li>IP、地区、Referer、User-Agent 等访问控制</li>
+<li>缓存规则配置</li>
+<li>回源规则配置</li>
+<li>DNS 接入</li>
+<li>CNAME 接入</li>
+<li>IPv6 访问支持</li>
+</ul>
+<p>对于个人博客、工具网站、图片站、企业官网和轻量级 Web 应用来说，EdgeOne 的主要作用可以概括为两点：</p>
+<ol>
+<li>减少用户直接访问源站的次数，降低服务器带宽和访问压力。</li>
+<li>通过边缘节点缓存网站资源，改善不同地区用户的访问速度。</li>
+</ol>
+<p>EdgeOne 官方网站：</p>
+<p><a class="link" href="https://edgeone.ai/zh/"  target="_blank" rel="noopener"
+    >访问 EdgeOne 官网</a></p>
+<hr>
+<h2 id="二edgeone-免费套餐怎么样">二、EdgeOne 免费套餐怎么样？
+</h2><p>EdgeOne 提供免费套餐，但它的领取方式和 Cloudflare 不太一样。</p>
+<p>Cloudflare 注册账号后，通常可以直接为域名开通免费套餐。EdgeOne 的免费套餐则可能通过活动页面、兑换码或限量开放的形式领取。</p>
+<p>部分活动允许一个账号领取多个免费套餐，用于接入多个独立站点。不过，免费套餐数量、领取资格、活动名额和账号配额都可能调整，因此不能把某一次活动规则当成长期固定政策。</p>
+<p>准备使用之前，建议先打开官方兑换页面，确认当前账号可以领取的套餐数量和有效期。</p>
+<p>免费套餐领取页面：</p>
+<p><a class="link" href="https://edgeone.ai/zh/redemption"  target="_blank" rel="noopener"
+    >EdgeOne 免费计划兑换页面</a></p>
+<p>EdgeOne 免费版通常可以提供以下基础能力：</p>
+<ul>
+<li>免费 CDN 加速</li>
+<li>免费 HTTPS 证书</li>
+<li>基础 DDoS 防护</li>
+<li>基础 CC 防护</li>
+<li>基础 Web 安全规则</li>
+<li>IP 和访问来源控制</li>
+<li>IPv6 访问</li>
+<li>缓存规则配置</li>
+<li>回源规则配置</li>
+<li>一定数量的子域名接入能力</li>
+</ul>
+<p>这些功能对于普通个人网站来说已经比较完整。</p>
+<p>不过，免费套餐并不等于所有功能都可以无限使用。站点数量、子域名数量、流量额度、安全规则、高级加速能力和技术支持等级，都可能受到套餐限制。</p>
+<p>因此，在正式接入之前，最好先查看最新的官方说明。</p>
+<p>官方免费版说明：</p>
+<p><a class="link" href="https://edgeone.ai/zh/document/70405"  target="_blank" rel="noopener"
+    >查看 EdgeOne 免费版套餐说明</a></p>
+<p>套餐功能对比：</p>
+<p><a class="link" href="https://www.tencentcloud.com/zh/document/product/1145/55650"  target="_blank" rel="noopener"
+    >查看 EdgeOne 套餐功能对比</a></p>
+<hr>
+<h2 id="三edgeone-与-cloudflare-有什么区别">三、EdgeOne 与 Cloudflare 有什么区别？
+</h2><p>EdgeOne 和 Cloudflare 都可以提供 CDN、HTTPS 和基础安全防护，但两者的定位和优势并不完全相同。</p>
+<p>我认为，选择哪一个平台，最重要的不是看宣传参数，而是看网站的用户主要来自哪里，以及自己真正需要哪些功能。</p>
+<h3 id="1-亚洲地区的访问体验">1. 亚洲地区的访问体验
+</h3><p>Cloudflare 拥有非常成熟的全球节点网络，在欧美和其他海外地区有较好的覆盖能力。</p>
+<p>不过，Cloudflare 免费用户通常不能自由选择节点和线路。在部分中国大陆网络环境中，访问可能会遇到：</p>
+<ul>
+<li>延迟偏高</li>
+<li>节点绕行</li>
+<li>不同运营商速度差异明显</li>
+<li>晚高峰加载波动</li>
+<li>首次连接时间较长</li>
+</ul>
+<p>EdgeOne 背靠腾讯云，在亚洲地区拥有较强的网络资源。</p>
+<p>如果网站用户主要分布在以下地区，EdgeOne 值得实际测试：</p>
+<ul>
+<li>中国大陆周边地区</li>
+<li>中国香港</li>
+<li>中国台湾</li>
+<li>日本</li>
+<li>新加坡</li>
+<li>马来西亚</li>
+<li>泰国</li>
+<li>其他东南亚地区</li>
+</ul>
+<p>部分网络环境下，EdgeOne 的访问线路可能比 Cloudflare 免费版更加稳定。</p>
+<p>不过，这并不代表 EdgeOne 在所有地区都一定更快。</p>
+<p>网站的实际访问速度还会受到很多因素影响，例如：</p>
+<ul>
+<li>源站服务器所在地区</li>
+<li>用户所在地区</li>
+<li>用户使用的网络运营商</li>
+<li>DNS 解析结果</li>
+<li>页面资源大小</li>
+<li>图片是否经过压缩</li>
+<li>静态资源是否成功缓存</li>
+<li>源站响应速度</li>
+<li>是否频繁回源</li>
+<li>网站本身的前端性能</li>
+</ul>
+<p>因此，我不建议只根据一次测速结果作出判断。</p>
+<p>更合理的做法是使用多个网络环境进行测试，例如：</p>
+<ul>
+<li>中国移动</li>
+<li>中国联通</li>
+<li>中国电信</li>
+<li>海外网络</li>
+<li>手机移动网络</li>
+<li>家庭宽带</li>
+</ul>
+<p>最好连续观察几天，再决定是否正式迁移。</p>
+<hr>
+<h3 id="2-免费套餐的获取方式">2. 免费套餐的获取方式
+</h3><p>Cloudflare 的免费套餐相对直接。</p>
+<p>注册账号、添加域名并修改 DNS 后，通常就可以开始使用，不需要额外领取兑换码。</p>
+<p>EdgeOne 的免费套餐则可能采用以下方式开放：</p>
+<ul>
+<li>活动领取</li>
+<li>兑换码兑换</li>
+<li>限量申请</li>
+<li>新用户赠送</li>
+<li>特定地区开放</li>
+<li>特定时间段开放</li>
+</ul>
+<p>这意味着 EdgeOne 的免费套餐规则可能更加灵活，但也更容易发生变化。</p>
+<p>准备使用时，应重点确认：</p>
+<ul>
+<li>当前是否还能领取</li>
+<li>每个账号可以领取几个套餐</li>
+<li>一个套餐支持几个站点</li>
+<li>是否需要实名认证</li>
+<li>是否限制账号地区</li>
+<li>套餐是否长期有效</li>
+<li>是否存在流量或功能限制</li>
+</ul>
+<p>所有信息都应以 EdgeOne 官方页面的最新说明为准。</p>
+<hr>
+<h3 id="3-产品生态和功能成熟度">3. 产品生态和功能成熟度
+</h3><p>Cloudflare 的优势不仅是 CDN，还包括非常完整的开发者生态。</p>
+<p>常见服务包括：</p>
+<ul>
+<li>Cloudflare Workers</li>
+<li>Cloudflare Pages</li>
+<li>Cloudflare R2</li>
+<li>Cloudflare Zero Trust</li>
+<li>Cloudflare Tunnel</li>
+<li>Web Application Firewall</li>
+<li>Bot 管理</li>
+<li>DNS 托管</li>
+<li>邮件路由</li>
+<li>大量第三方工具和开源项目</li>
+</ul>
+<p>如果网站项目需要使用边缘函数、对象存储、内网穿透、无服务器部署或者 Zero Trust，Cloudflare 的生态会更加成熟。</p>
+<p>EdgeOne 的优势则更加集中在：</p>
+<ul>
+<li>亚洲地区的边缘加速</li>
+<li>腾讯云网络资源</li>
+<li>CDN 与安全功能整合</li>
+<li>较直观的中文控制台</li>
+<li>网站加速与防护一体化</li>
+<li>对国内用户更加友好的操作体验</li>
+</ul>
+<p>如果只是想为网站增加 CDN、HTTPS 和基础安全防护，EdgeOne 的功能已经比较完整。</p>
+<p>如果需要更丰富的开发者平台和全球化生态，Cloudflare 目前仍然更有优势。</p>
+<hr>
+<h3 id="4-中国大陆节点和备案问题">4. 中国大陆节点和备案问题
+</h3><p>这里有一个很容易被误解的问题：</p>
+<p><strong>使用 EdgeOne，不代表未备案域名可以直接使用中国大陆境内 CDN 节点。</strong></p>
+<p>如果域名没有完成备案，通常只能使用中国大陆境外节点或平台允许使用的全球节点。</p>
+<p>如果希望正式使用中国大陆境内 CDN 加速，一般仍然需要满足：</p>
+<ul>
+<li>域名完成备案</li>
+<li>接入主体符合平台要求</li>
+<li>源站和业务内容符合相关规定</li>
+<li>按照平台要求完成实名认证或资质审核</li>
+</ul>
+<p>因此，EdgeOne 可以改善亚洲地区的访问体验，但不能绕过备案要求。</p>
+<p>在接入之前，最好先确认自己选择的是中国大陆境内区域，还是全球可用区域，避免对节点覆盖产生错误理解。</p>
+<hr>
+<h2 id="四edgeone-接入网站的基本流程">四、EdgeOne 接入网站的基本流程
+</h2><p>EdgeOne 的接入过程并不复杂，主要可以分为以下几个步骤。</p>
+<h3 id="第一步注册并登录-edgeone">第一步：注册并登录 EdgeOne
+</h3><p>首先打开 EdgeOne 官网，使用邮箱或平台支持的账号完成注册。</p>
+<p><a class="link" href="https://console.edgeone.ai/"  target="_blank" rel="noopener"
+    >进入 EdgeOne 控制台</a></p>
+<p>第一次使用时，需要先确认账号是否已经获得免费套餐。</p>
+<p>如果还没有套餐，可以进入兑换页面查看当前是否有免费计划可以领取。</p>
+<p>领取成功后，就可以在控制台中添加自己的站点。</p>
+<hr>
+<h3 id="第二步添加站点">第二步：添加站点
+</h3><p>进入 EdgeOne 控制台后，选择添加站点，并填写需要接入的主域名。</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">tood.win
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通常建议先填写根域名，而不是直接填写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">www.tood.win
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加根域名以后，可以根据需要继续添加不同的子域名，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">www.tood.win
+</span></span><span class="line"><span class="cl">blog.tood.win
+</span></span><span class="line"><span class="cl">api.tood.win
+</span></span><span class="line"><span class="cl">img.tood.win
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不同子域名可以分别用于：</p>
+<ul>
+<li>主网站</li>
+<li>博客</li>
+<li>API 接口</li>
+<li>图片资源</li>
+<li>文件下载</li>
+<li>后台系统</li>
+</ul>
+<p>首次接入时，我更建议先使用一个不重要的测试子域名，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">test.tood.win
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>先完成 DNS、HTTPS、缓存和回源测试，确认所有功能正常后，再迁移正式域名。</p>
+<p>这样即使配置出现问题，也不会影响主网站的正常访问。</p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/edgeone/">EdgeOne</a>
+        
+            <a href="/tags/%E5%85%8D%E8%B4%B9cdn/">免费CDN</a>
+        
+            <a href="/tags/cloudflare/">Cloudflare</a>
+        
+            <a href="/tags/cdn%E5%8A%A0%E9%80%9F/">CDN加速</a>
+        
+    </section>
+</footer>
+
+    
+</article>
+
+        <nav class="article-sequence" aria-label="上一篇和下一篇文章"><a class="article-sequence-link is-previous" href="/posts/9-%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%AB%99%E5%86%85-seo-%E5%B7%A5%E5%85%B7-%E4%BB%8E%E6%94%B6%E5%BD%95-%E5%85%B3%E9%94%AE%E8%AF%8D%E5%88%B0%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA-%E4%B8%80%E6%AC%A1%E6%9F%A5%E6%B8%85%E9%A1%B5%E9%9D%A2%E9%97%AE%E9%A2%98/" rel="prev">
+                <code>PREVIOUS</code>
+                <strong>9 个常用站内 SEO 工具：从收录、关键词到用户行为，一次查清页面问题</strong>
+                <span>←</span>
+            </a><a class="article-sequence-link is-next" href="/posts/%E5%9B%BD%E5%86%85%E4%BF%A1%E7%94%A8%E5%8D%A1%E8%AE%A2%E9%98%85-chatgpt-gemini-grok-%E5%AE%89%E5%8D%93%E7%AB%AF%E5%AE%8C%E6%95%B4%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/" rel="next">
+                <code>NEXT</code>
+                <strong>国内信用卡订阅 ChatGPT、Gemini、Grok：安卓端完整操作指南</strong>
+                <span>→</span>
+            </a></nav><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED ARTICLES</h2>
+        <span>06 RECOMMENDATIONS</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/9-%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%AB%99%E5%86%85-seo-%E5%B7%A5%E5%85%B7-%E4%BB%8E%E6%94%B6%E5%BD%95-%E5%85%B3%E9%94%AE%E8%AF%8D%E5%88%B0%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA-%E4%B8%80%E6%AC%A1%E6%9F%A5%E6%B8%85%E9%A1%B5%E9%9D%A2%E9%97%AE%E9%A2%98/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/41b1976a-8d8d-4792-a062-8d8b62bfd6bb-037d1aef.png" alt="9 个常用站内 SEO 工具：从收录、关键词到用户行为，一次查清页面问题" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.01</code>
+                    <h3>9 个常用站内 SEO 工具：从收录、关键词到用户行为，一次查清页面问题</h3>
+                    <p>很多网站流量停滞时，第一反应往往是：
+外链不够； 关键词选错了； 文章发得不够多。 这些因素当然重要，但在继续扩内容、做外链之前，更应该先检查页 …</p>
+                    <time>2026-07-24</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ai-%E6%90%9C%E7%B4%A2%E6%AD%A3%E5%9C%A8%E5%88%86%E8%B5%B0%E7%82%B9%E5%87%BB-2026-%E5%B9%B4%E8%BF%98%E6%9C%89%E5%BF%85%E8%A6%81%E7%BB%A7%E7%BB%AD%E5%81%9A-seo-%E5%90%97/">
+                <div class="archive-related-image"><span aria-hidden="true"></span></div>
+                <div class="archive-related-copy">
+                    <code>REL.02</code>
+                    <h3>AI 搜索正在分走点击，2026 年还有必要继续做 SEO 吗？</h3>
+                    <p>AI 搜索正在分走点击，2026 年还有必要继续做 SEO 吗？最近，不少做独立站和海外营销的人都遇到了类似的问题：
+网站文章的排名看起来并不 …</p>
+                    <time>2026-07-23</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/%E7%8B%AC%E7%AB%8B%E7%AB%99%E5%88%AB%E6%80%A5%E7%9D%80%E4%B8%8A%E7%BA%BF-%E4%BB%8E%E5%BB%BA%E7%AB%99%E7%AC%AC%E4%B8%80%E5%A4%A9%E5%BC%80%E5%A7%8B%E5%81%9A%E5%AF%B9%E7%9A%84-google-seo-%E5%9F%BA%E7%A1%80%E5%B8%83%E5%B1%80/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/ChatGPT_Image_2026723_19_30_32-225f28ce.png" alt="独立站别急着上线：从建站第一天开始做对的 Google SEO 基础布局" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.03</code>
+                    <h3>独立站别急着上线：从建站第一天开始做对的 Google SEO 基础布局</h3>
+                    <p>很多独立站的问题，并不是产品不够好，也不是广告预算不够，而是网站从搭建之初就没有考虑搜索引擎和真实用户该如何使用它。
+常见的建站流程通常是：
+买 …</p>
+                    <time>2026-07-23</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/wordpress-next-js/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/640-7bb270ba.jpg" alt="2026 年建站技术怎么选：WordPress 与 Next.js，真正决定答案的不是性能" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.04</code>
+                    <h3>2026 年建站技术怎么选：WordPress 与 Next.js，真正决定答案的不是性能</h3>
+                    <p>不少人在准备做网站时，第一步就陷入了技术选择：
+到底该用 WordPress，还是直接上 Next.js？
+这听起来像一个技术问题，但真正决定答 …</p>
+                    <time>2026-07-23</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/%E8%AE%A9-codex-%E8%B6%8A%E7%94%A8%E8%B6%8A%E8%81%AA%E6%98%8E-%E7%94%A8%E4%B8%80%E5%A5%97%E9%95%BF%E6%9C%9F%E8%A7%84%E5%88%99%E7%A7%AF%E7%B4%AF%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260725-224050-ad6ae167.png" alt="让 Codex 越用越聪明：用一套长期规则积累项目经验" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.05</code>
+                    <h3>让 Codex 越用越聪明：用一套长期规则积累项目经验</h3>
+                    <p>很多人在使用 Codex 时，会遇到一个明显的问题：
+同样的错误反复出现，同样的项目规范需要重复说明，每次开始新任务，都像重新认识一个陌生的助手 …</p>
+                    <time>2026-07-25</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/%E5%9B%BD%E5%86%85%E4%BF%A1%E7%94%A8%E5%8D%A1%E8%AE%A2%E9%98%85-chatgpt-gemini-grok-%E5%AE%89%E5%8D%93%E7%AB%AF%E5%AE%8C%E6%95%B4%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260724-223558-2cb2d2ba.png" alt="国内信用卡订阅 ChatGPT、Gemini、Grok：安卓端完整操作指南" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.06</code>
+                    <h3>国内信用卡订阅 ChatGPT、Gemini、Grok：安卓端完整操作指南</h3>
+                    <p>在订阅 ChatGPT Plus、Google Gemini、Grok 等海外 AI 服务时，很多国内用户都会遇到同一个问题：
+明明手里有 …</p>
+                    <time>2026-07-24</time>
+                </div>
+            </a>
+        </article></div>
+</aside></div>
+
+    <aside class="archive-article-sidebar" aria-label="文章侧边栏">
+    <section class="article-side-panel">
+        <h2 class="article-side-title">SEARCH <span>01</span></h2>
+        <form class="article-side-search" action="/search/" method="get" role="search">
+            <input type="search" name="keyword" placeholder="输入关键词..." aria-label="搜索文章" required>
+            <button type="submit" aria-label="开始搜索">⌕</button>
+        </form>
+    </section>
+
+    <section class="article-side-panel article-side-toc">
+        <h2 class="article-side-title">CONTENTS <span>02</span></h2>
+        <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一edgeone-是什么">一、EdgeOne 是什么？</a></li>
+    <li><a href="#二edgeone-免费套餐怎么样">二、EdgeOne 免费套餐怎么样？</a></li>
+    <li><a href="#三edgeone-与-cloudflare-有什么区别">三、EdgeOne 与 Cloudflare 有什么区别？</a>
+      <ol>
+        <li><a href="#1-亚洲地区的访问体验">1. 亚洲地区的访问体验</a></li>
+        <li><a href="#2-免费套餐的获取方式">2. 免费套餐的获取方式</a></li>
+        <li><a href="#3-产品生态和功能成熟度">3. 产品生态和功能成熟度</a></li>
+        <li><a href="#4-中国大陆节点和备案问题">4. 中国大陆节点和备案问题</a></li>
+      </ol>
+    </li>
+    <li><a href="#四edgeone-接入网站的基本流程">四、EdgeOne 接入网站的基本流程</a>
+      <ol>
+        <li><a href="#第一步注册并登录-edgeone">第一步：注册并登录 EdgeOne</a></li>
+        <li><a href="#第二步添加站点">第二步：添加站点</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        
+        <script>
+        (() => {
+            const toc = document.currentScript.parentElement;
+            const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+            if (!links.length) return;
+            const headings = links.map(link => {
+                const id = link.getAttribute('href').slice(1);
+                return document.getElementById(id);
+            }).filter(Boolean);
+            const isActive = (index) => {
+                const el = headings[index];
+                if (!el) return false;
+                const next = headings[index + 1];
+                const rect = el.getBoundingClientRect();
+                if (next) {
+                    const nextRect = next.getBoundingClientRect();
+                    return rect.top < window.innerHeight / 2 && nextRect.top > 80;
+                }
+                return rect.top < window.innerHeight / 2;
+            };
+            const spy = () => {
+                let active = -1;
+                for (let i = 0; i < headings.length; i++) {
+                    if (isActive(i)) active = i;
+                }
+                links.forEach((link, i) => {
+                    link.classList.toggle('is-active', i === active);
+                });
+                const activeLink = active >= 0 ? links[active] : null;
+                if (activeLink) {
+                    const tocRect = toc.getBoundingClientRect();
+                    const linkRect = activeLink.getBoundingClientRect();
+                    if (linkRect.top < tocRect.top + 50 || linkRect.bottom > tocRect.bottom - 20) {
+                        toc.scrollTop += linkRect.top - tocRect.top - tocRect.height / 2 + linkRect.height / 2;
+                    }
+                }
+            };
+            window.addEventListener('scroll', spy, { passive: true });
+            spy();
+        })();
+        </script>
+        
+    </section><section class="article-side-panel">
+        <h2 class="article-side-title">LATEST <span>03</span></h2>
+        <ol class="article-side-list">
+            <li><a href="/posts/%E8%AE%A9-codex-%E8%B6%8A%E7%94%A8%E8%B6%8A%E8%81%AA%E6%98%8E-%E7%94%A8%E4%B8%80%E5%A5%97%E9%95%BF%E6%9C%9F%E8%A7%84%E5%88%99%E7%A7%AF%E7%B4%AF%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/"><span>让 Codex 越用越聪明：用一套长期规则积累项目经验</span><time>07-25</time></a></li><li><a href="/posts/%E5%9B%BD%E5%86%85%E4%BF%A1%E7%94%A8%E5%8D%A1%E8%AE%A2%E9%98%85-chatgpt-gemini-grok-%E5%AE%89%E5%8D%93%E7%AB%AF%E5%AE%8C%E6%95%B4%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"><span>国内信用卡订阅 ChatGPT、Gemini、Grok：安卓端完整操作指南</span><time>07-24</time></a></li><li><a href="/posts/9-%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%AB%99%E5%86%85-seo-%E5%B7%A5%E5%85%B7-%E4%BB%8E%E6%94%B6%E5%BD%95-%E5%85%B3%E9%94%AE%E8%AF%8D%E5%88%B0%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA-%E4%B8%80%E6%AC%A1%E6%9F%A5%E6%B8%85%E9%A1%B5%E9%9D%A2%E9%97%AE%E9%A2%98/"><span>9 个常用站内 SEO 工具：从收录、关键词到用户行为，一次查清页面问题</span><time>07-24</time></a></li><li><a href="/posts/codex-%E9%92%A9%E5%AD%90%E6%98%AF%E4%BB%80%E4%B9%88-%E7%94%A8%E9%80%94%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"><span>Codex 钩子是什么？用途与使用方法</span><time>07-24</time></a></li><li><a href="/posts/handoff-md-%E6%98%AF%E4%BB%80%E4%B9%88-%E8%AE%A9%E6%96%B0-ai-%E4%BC%9A%E8%AF%9D%E6%97%A0%E7%BC%9D%E6%8E%A5%E6%89%8B%E6%97%A7%E4%BB%BB%E5%8A%A1/"><span>HANDOFF.md 是什么？让新 AI 会话无缝接手旧任务</span><time>07-24</time></a></li>
+        </ol>
+    </section>
+
+    <section class="article-side-panel">
+        <h2 class="article-side-title">HOT <span>04</span></h2>
+        <ol class="article-side-list article-hot-list" data-random-count="5">
+            <li><a href="/posts/%E8%AE%A9-codex-%E8%B6%8A%E7%94%A8%E8%B6%8A%E8%81%AA%E6%98%8E-%E7%94%A8%E4%B8%80%E5%A5%97%E9%95%BF%E6%9C%9F%E8%A7%84%E5%88%99%E7%A7%AF%E7%B4%AF%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/"><span>让 Codex 越用越聪明：用一套长期规则积累项目经验</span><time>07-25</time></a></li><li><a href="/posts/%E5%9B%BD%E5%86%85%E4%BF%A1%E7%94%A8%E5%8D%A1%E8%AE%A2%E9%98%85-chatgpt-gemini-grok-%E5%AE%89%E5%8D%93%E7%AB%AF%E5%AE%8C%E6%95%B4%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"><span>国内信用卡订阅 ChatGPT、Gemini、Grok：安卓端完整操作指南</span><time>07-24</time></a></li><li><a href="/posts/9-%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%AB%99%E5%86%85-seo-%E5%B7%A5%E5%85%B7-%E4%BB%8E%E6%94%B6%E5%BD%95-%E5%85%B3%E9%94%AE%E8%AF%8D%E5%88%B0%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA-%E4%B8%80%E6%AC%A1%E6%9F%A5%E6%B8%85%E9%A1%B5%E9%9D%A2%E9%97%AE%E9%A2%98/"><span>9 个常用站内 SEO 工具：从收录、关键词到用户行为，一次查清页面问题</span><time>07-24</time></a></li><li><a href="/posts/codex-%E9%92%A9%E5%AD%90%E6%98%AF%E4%BB%80%E4%B9%88-%E7%94%A8%E9%80%94%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"><span>Codex 钩子是什么？用途与使用方法</span><time>07-24</time></a></li><li><a href="/posts/handoff-md-%E6%98%AF%E4%BB%80%E4%B9%88-%E8%AE%A9%E6%96%B0-ai-%E4%BC%9A%E8%AF%9D%E6%97%A0%E7%BC%9D%E6%8E%A5%E6%89%8B%E6%97%A7%E4%BB%BB%E5%8A%A1/"><span>HANDOFF.md 是什么？让新 AI 会话无缝接手旧任务</span><time>07-24</time></a></li><li hidden><a href="/posts/chrome-devtools-mcp-%E8%AE%A9-ai-%E7%9B%B4%E6%8E%A5%E6%93%8D%E4%BD%9C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%B0%83%E8%AF%95%E7%BD%91%E7%AB%99/"><span>Chrome DevTools MCP：让 AI 直接操作浏览器调试网站</span><time>07-24</time></a></li><li hidden><a href="/posts/graphify-%E6%8A%8A%E6%95%B4%E4%B8%AA%E9%A1%B9%E7%9B%AE%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0-ai-%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"><span>Graphify：把整个项目变成一张 AI 能看懂的知识图谱</span><time>07-24</time></a></li><li hidden><a href="/posts/jcodemunch-mcp-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E8%AE%A9-codex-claude-code-%E5%B0%91%E8%AF%BB%E5%BA%9F%E4%BB%A3%E7%A0%81-%E9%99%8D%E4%BD%8E-token-%E6%B6%88%E8%80%97/"><span>jCodeMunch MCP 使用教程：让 Codex、Claude Code 少读废代码，降低 Token 消耗</span><time>07-24</time></a></li><li hidden><a href="/posts/ai-%E6%90%9C%E7%B4%A2%E6%AD%A3%E5%9C%A8%E5%88%86%E8%B5%B0%E7%82%B9%E5%87%BB-2026-%E5%B9%B4%E8%BF%98%E6%9C%89%E5%BF%85%E8%A6%81%E7%BB%A7%E7%BB%AD%E5%81%9A-seo-%E5%90%97/"><span>AI 搜索正在分走点击，2026 年还有必要继续做 SEO 吗？</span><time>07-23</time></a></li><li hidden><a href="/posts/%E7%8B%AC%E7%AB%8B%E7%AB%99%E5%88%AB%E6%80%A5%E7%9D%80%E4%B8%8A%E7%BA%BF-%E4%BB%8E%E5%BB%BA%E7%AB%99%E7%AC%AC%E4%B8%80%E5%A4%A9%E5%BC%80%E5%A7%8B%E5%81%9A%E5%AF%B9%E7%9A%84-google-seo-%E5%9F%BA%E7%A1%80%E5%B8%83%E5%B1%80/"><span>独立站别急着上线：从建站第一天开始做对的 Google SEO 基础布局</span><time>07-23</time></a></li><li hidden><a href="/posts/wordpress-next-js/"><span>2026 年建站技术怎么选：WordPress 与 Next.js，真正决定答案的不是性能</span><time>07-23</time></a></li><li hidden><a href="/posts/codex-credit-saving-toolkit-beginner-version/"><span>Codex 省额度工具包（新手版）</span><time>07-21</time></a></li><li hidden><a href="/posts/please-allow-ads-on-shiguangji-en/"><span>Please Allow Ads on Shiguangji</span><time>07-21</time></a></li><li hidden><a href="/posts/please-allow-ads-on-shiguangji-zh/"><span>请允许拾光集展示广告</span><time>07-21</time></a></li><li hidden><a href="/posts/disclaimer-en/"><span>Disclaimer</span><time>07-21</time></a></li><li hidden><a href="/posts/disclaimer-zh/"><span>免责声明</span><time>07-21</time></a></li><li hidden><a href="/posts/privacy-policy/"><span>Privacy Policy</span><time>07-21</time></a></li><li hidden><a href="/posts/privacypolicy/"><span>隐私政策</span><time>07-21</time></a></li>
+        </ol>
+        
+        <script>
+        (() => {
+            const list = document.currentScript.previousElementSibling;
+            const items = Array.from(list.querySelectorAll('li'));
+            const count = Math.min(Number(list.dataset.randomCount) || 5, items.length);
+            for (let index = items.length - 1; index > 0; index -= 1) {
+                const target = Math.floor(Math.random() * (index + 1));
+                [items[index], items[target]] = [items[target], items[index]];
+            }
+            items.forEach((item, index) => { item.hidden = index >= count; list.appendChild(item); });
+        })();
+        </script>
+        
+    </section>
+
+    <section class="article-side-panel">
+        <h2 class="article-side-title">TAG CLOUD <span>05</span></h2>
+        <div class="article-tag-cloud archive-random-tags" data-random-count="18">
+            <a href="/tags/ai/">ai<sup>4</sup></a><a href="/tags/ai-%E4%BA%A4%E6%8E%A5%E6%96%87%E6%A1%A3/">ai 交接文档<sup>1</sup></a><a href="/tags/ai-%E4%BC%9A%E8%AF%9D/">ai 会话<sup>1</sup></a><a href="/tags/ai%E6%8F%92%E4%BB%B6/">ai插件<sup>1</sup></a><a href="/tags/ai%E6%90%9C%E7%B4%A2/">ai搜索<sup>1</sup></a><a href="/tags/cdn%E5%8A%A0%E9%80%9F/">cdn加速<sup>1</sup></a><a href="/tags/chatgpt/">chatgpt<sup>2</sup></a><a href="/tags/chrome-devtools-mcp/">chrome devtools mcp<sup>1</sup></a><a href="/tags/claude-code/">claude code<sup>1</sup></a><a href="/tags/cloudflare/">cloudflare<sup>1</sup></a><a href="/tags/codex/">codex<sup>5</sup></a><a href="/tags/disclaimer/">disclaimer<sup>1</sup></a><a href="/tags/edgeone/">edgeone<sup>1</sup></a><a href="/tags/google/">google<sup>1</sup></a><a href="/tags/google%E6%94%B6%E5%BD%95/">google收录<sup>1</sup></a><a href="/tags/graphify/">graphify<sup>1</sup></a><a href="/tags/handoff/">handoff<sup>1</sup></a><a href="/tags/mcp/">mcp<sup>2</sup></a><a href="/tags/next.js/">next.js<sup>1</sup></a><a href="/tags/privacy-policy/">privacy policy<sup>1</sup></a><a href="/tags/seo/">seo<sup>3</sup></a><a href="/tags/seo-%E5%B7%A5%E5%85%B7/">seo 工具<sup>1</sup></a><a href="/tags/skills/">skills<sup>1</sup></a><a href="/tags/token/">token<sup>1</sup></a><a href="/tags/wordpress/">wordpress<sup>1</sup></a><a href="/tags/%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E/">免责声明<sup>1</sup></a><a href="/tags/%E5%85%8D%E8%B4%B9cdn/">免费cdn<sup>1</sup></a><a href="/tags/%E5%BB%BA%E7%AB%99/">建站<sup>3</sup></a><a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/">搜索引擎优化<sup>1</sup></a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">知识图谱<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/">网站搭建<sup>1</sup></a><a href="/tags/%E9%92%A9%E5%AD%90/">钩子<sup>1</sup></a><a href="/tags/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/">隐私政策<sup>1</sup></a>
+        </div>
+        
+        <script>
+        (() => {
+            const cloud = document.currentScript.previousElementSibling;
+            const tags = Array.from(cloud.querySelectorAll('a'));
+            const count = Math.min(Number(cloud.dataset.randomCount) || 18, tags.length);
+            for (let index = tags.length - 1; index > 0; index -= 1) {
+                const target = Math.floor(Math.random() * (index + 1));
+                [tags[index], tags[target]] = [tags[target], tags[index]];
+            }
+            tags.forEach((tag, index) => { tag.hidden = index >= count; cloud.appendChild(tag); });
+        })();
+        </script>
+        
+    </section>
+</aside>
+
+</div>
+
+<div class="article-float-actions" aria-hidden="true">
+    <button class="article-back-to-top" type="button" aria-label="返回页面顶部" title="返回顶部" tabindex="-1">
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path>
+            </svg>
+        </span>
+    </button>
+    <button class="article-go-to-bottom" type="button" aria-label="跳转到底部" title="跳转到底部" tabindex="-1">
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"></path>
+            </svg>
+        </span>
+    </button>
+</div>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+
+<script>
+(() => {
+    const container = document.querySelector('.article-float-actions');
+    const topBtn = container.querySelector('.article-back-to-top');
+    const bottomBtn = container.querySelector('.article-go-to-bottom');
+    if (!container || !topBtn || !bottomBtn) return;
+
+    const placeButtons = () => {
+        const main = document.querySelector('.archive-article-main');
+        const sidebar = document.querySelector('.archive-article-sidebar');
+        const x = (window.innerWidth <= 1180 || !main || !sidebar)
+            ? null
+            : `${(main.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2}px`;
+        container.style.setProperty('--float-x', x || 'auto');
+        container.style.setProperty('--float-right', x ? 'auto' : '16px');
+    };
+
+    const updateButtons = () => {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight;
+        const viewHeight = window.innerHeight;
+        const nearBottom = scrollY + viewHeight >= docHeight - 60;
+        const farFromTop = scrollY > 360;
+
+        const footer = document.querySelector('.archive-footer');
+        const baseBottom = window.innerWidth <= 700 ? 16 : 26;
+        const footerOffset = footer ? Math.max(0, viewHeight - footer.getBoundingClientRect().top) : 0;
+        const bottom = `${Math.max(baseBottom, footerOffset + 12)}px`;
+        container.style.setProperty('--float-bottom', bottom);
+
+        topBtn.classList.toggle('is-visible', farFromTop);
+        topBtn.setAttribute('aria-hidden', farFromTop ? 'false' : 'true');
+        topBtn.tabIndex = farFromTop ? 0 : -1;
+
+        bottomBtn.classList.toggle('is-visible', !nearBottom);
+        bottomBtn.setAttribute('aria-hidden', nearBottom ? 'true' : 'false');
+        bottomBtn.tabIndex = nearBottom ? -1 : 0;
+    };
+
+    window.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', () => { placeButtons(); updateButtons(); }, { passive: true });
+    topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    bottomBtn.addEventListener('click', () => {
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    updateButtons();
+    placeButtons();
+})();
+</script>
+</main>
+            </div>
+            <footer class="archive-footer">
+                <span class="archive-footer-left"><span>© 2026 拾光集 TOOD.WIN</span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span>
+                <span class="archive-footer-build">
+                    <span class="archive-footer-license">Licensed under <a class="link" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"  target="_blank" rel="noopener"
+    >CC BY-NC-SA 4.0</a></span><b>·</b>
+                    <span>BUILT WITH HUGO</span><i></i>
+                </span>
+            </footer>
+        </div>
+    
+    <div class="adblock-notice" role="dialog" aria-modal="true" aria-labelledby="adblock-notice-title" hidden data-blocking="true" data-nosnippet>
+    <div class="adblock-notice__panel">
+        <span class="adblock-notice__label">AD BLOCKER DETECTED</span>
+        <h2 id="adblock-notice-title">请允许本站展示广告</h2>
+        <p>检测到广告拦截功能。请将拾光集加入允许列表，然后刷新本页面。</p>
+        <p class="adblock-notice__en">We detected an ad blocker. Please allow ads on this site, then refresh the page.</p>
+        <div class="adblock-notice__links">
+            <a href="https://www.tood.win/posts/please-allow-ads-on-shiguangji-zh/">中文说明</a>
+            <a href="https://www.tood.win/posts/please-allow-ads-on-shiguangji-en/" lang="en">English guide</a>
+        </div>
+    </div>
+</div>
+<script>
+(() => {
+    const articleEntryKey = 'tood-article-ad-check';
+    const allowlist = [
+        '/please-allow-ads-on-shiguangji-zh/',
+        '/please-allow-ads-on-shiguangji-en/'
+    ];
+    const path = `${window.location.pathname.replace(/\/+$/, '')}/`.toLowerCase();
+    const isAllowlisted = allowlist.some((slug) => path.endsWith(slug));
+
+    document.addEventListener('click', (event) => {
+        const link = event.target.closest('a[href]');
+        if (!link) return;
+        try {
+            const target = new URL(link.href, window.location.href);
+            const targetPath = `${target.pathname.replace(/\/+$/, '')}/`.toLowerCase();
+            if (target.origin === window.location.origin && targetPath.includes('/posts/') && !allowlist.some((slug) => targetPath.endsWith(slug))) {
+                sessionStorage.setItem(articleEntryKey, targetPath);
+            }
+        } catch (_) {}
+    }, { capture: true });
+
+    if (isAllowlisted) return;
+
+    const notice = document.querySelector('.adblock-notice');
+    if (!notice) return;
+
+    let revealed = false;
+    let detectionStarted = false;
+    const revealNotice = () => {
+        if (revealed) return;
+        revealed = true;
+        notice.hidden = false;
+        if (notice.dataset.blocking === 'true') {
+            document.documentElement.classList.add('adblock-access-blocked');
+        }
+        notice.querySelector('.adblock-notice__close')?.addEventListener('click', () => {
+            notice.hidden = true;
+        });
+    };
+
+    const startDetection = () => {
+        if (detectionStarted) return;
+        detectionStarted = true;
+
+        const bait = document.createElement('div');
+        bait.id = 'ad-banner';
+        bait.className = 'adsbox ad-banner ad-unit advertisement ad-placement pub_300x250 text-ad sponsored-content';
+        bait.setAttribute('aria-hidden', 'true');
+        bait.style.cssText = 'position:absolute!important;left:-10000px!important;top:-10000px!important;width:2px!important;height:2px!important;pointer-events:none!important;';
+        document.body.appendChild(bait);
+
+        let networkBlocked = false;
+        let localProbeLoaded = false;
+        let localProbeBlocked = false;
+        const localProbe = document.createElement('script');
+        localProbe.async = true;
+        localProbe.src = `/js/advertisement.js?probe=${Date.now()}`;
+        localProbe.onload = () => {
+            localProbeLoaded = window.__toodAdvertisementProbe === true;
+            localProbe.remove();
+        };
+        localProbe.onerror = () => {
+            localProbeBlocked = true;
+            localProbe.remove();
+        };
+        document.head.appendChild(localProbe);
+
+        fetch(`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?adblock_probe=${Date.now()}`, {
+            mode: 'no-cors',
+            cache: 'no-store'
+        }).catch(() => {
+            networkBlocked = true;
+        });
+
+        window.setTimeout(() => {
+            const style = window.getComputedStyle(bait);
+            const baitBlocked = style.display === 'none' || style.visibility === 'hidden' || bait.offsetHeight === 0 || bait.offsetWidth === 0;
+            const adsRuntimeMissing = typeof window.adsbygoogle === 'undefined';
+            bait.remove();
+            if (baitBlocked || networkBlocked || localProbeBlocked || !localProbeLoaded || adsRuntimeMissing) {
+                revealNotice();
+            }
+        }, notice.dataset.blocking === 'true' ? 1000 : 2500);
+    };
+
+    if (notice.dataset.blocking !== 'true') {
+        startDetection();
+        return;
+    }
+
+    let enteredFromSite = false;
+    try {
+        enteredFromSite = sessionStorage.getItem(articleEntryKey) === path;
+        sessionStorage.removeItem(articleEntryKey);
+    } catch (_) {}
+    if (enteredFromSite || window.scrollY > 120) {
+        startDetection();
+    } else {
+        const onScroll = () => {
+            if (window.scrollY <= 120) return;
+            window.removeEventListener('scroll', onScroll);
+            startDetection();
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+    }
+})();
+</script>
+
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

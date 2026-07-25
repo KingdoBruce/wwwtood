@@ -30,7 +30,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.3.8"
+APP_VERSION = "1.3.9"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
 
@@ -1344,6 +1344,31 @@ def api_build():
     return jsonify({"ok": True, "message": "Hugo 构建检查通过", "output": result.stdout[-4000:]})
 
 
+@app.post("/api/auto-pull")
+def api_auto_pull():
+    data = request.get_json(silent=True) or {}
+    token = data.get("token") or request.headers.get("X-TOOD-Token", "")
+    if token != SESSION_TOKEN:
+        return jsonify({"ok": False, "error": "无效的访问令牌"}), 403
+    try:
+        auto_pull_from_github()
+        status_data = json.loads(AUTO_PULL_STATUS_FILE.read_text(encoding="utf-8"))
+        return jsonify({"ok": True, "status": status_data["status"], "message": status_data["message"], "time": status_data.get("time", "")})
+    except Exception as error:
+        return jsonify({"ok": False, "error": str(error)}), 500
+
+
+@app.get("/api/auto-pull-status")
+def api_auto_pull_status():
+    try:
+        if AUTO_PULL_STATUS_FILE.is_file():
+            data = json.loads(AUTO_PULL_STATUS_FILE.read_text(encoding="utf-8"))
+            return jsonify({"ok": True, **data})
+    except (OSError, json.JSONDecodeError):
+        pass
+    return jsonify({"ok": True, "status": "unknown", "message": "尚未执行自动同步", "time": None})
+
+
 @app.get("/api/github")
 def api_github_connection():
     return jsonify({"ok": True, "connection": github_connection_payload()})
@@ -1473,8 +1498,46 @@ def create_tray_icon(url: str):
     return pystray.Icon("tood-studio", Image.open(tray_image_path()), APP_NAME, menu)
 
 
+AUTO_PULL_STATUS_FILE = STATE_DIR / "auto-pull.json"
+
+
+def save_auto_pull_status(status: str, message: str) -> None:
+    path = AUTO_PULL_STATUS_FILE
+    try:
+        path.write_text(
+            json.dumps({"status": status, "message": message, "time": datetime.now().isoformat(timespec="seconds")}),
+            encoding="utf-8",
+        )
+    except OSError:
+        pass
+
+
+def auto_pull_from_github() -> None:
+    settings = load_github_settings()
+    if not settings.get("repository") or not settings.get("token"):
+        save_auto_pull_status("skipped", "GitHub 未配置，跳过自动同步")
+        logging.info("GitHub 未配置，跳过自动拉取")
+        return
+    branch = str(settings.get("branch") or "main")
+    try:
+        logging.info("正在从 GitHub 自动拉取最新内容（%s/%s）…", settings["repository"], branch)
+        result = run_command(git_args("pull", "origin", branch), timeout=60)
+        output = (result.stdout or "").strip()
+        if "Already up to date" in output:
+            save_auto_pull_status("uptodate", "本地内容已是最新，无需同步")
+            logging.info("自动拉取：已是最新")
+        else:
+            save_auto_pull_status("success", f"已从 GitHub 拉取最新内容\n{output[:200]}")
+            logging.info("自动拉取成功：%s", output[:200])
+    except (RuntimeError, subprocess.TimeoutExpired) as error:
+        message = str(error).strip()[:200]
+        save_auto_pull_status("failed", f"从 GitHub 拉取失败：{message}")
+        logging.warning("自动拉取失败（可忽略）：%s", error)
+
+
 def main() -> None:
     hide_windows_console()
+    auto_pull_from_github()
     port = find_app_port()
     url = f"http://127.0.0.1:{port}/"
     logging.info("TOOD Studio %s started at %s for %s", APP_VERSION, url, BLOG_ROOT)

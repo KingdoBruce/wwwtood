@@ -17,6 +17,49 @@
     <section class="article-side-panel article-side-toc">
         <h2 class="article-side-title">CONTENTS <span>02</span></h2>
         {{ if ge (len .TableOfContents) 100 }}{{ .TableOfContents }}{{ else }}<p class="article-side-empty">本文暂无分节目录</p>{{ end }}
+        {{ if ge (len .TableOfContents) 100 }}
+        <script>
+        (() => {
+            const toc = document.currentScript.parentElement;
+            const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+            if (!links.length) return;
+            const headings = links.map(link => {
+                const id = link.getAttribute('href').slice(1);
+                return document.getElementById(id);
+            }).filter(Boolean);
+            const isActive = (index) => {
+                const el = headings[index];
+                if (!el) return false;
+                const next = headings[index + 1];
+                const rect = el.getBoundingClientRect();
+                if (next) {
+                    const nextRect = next.getBoundingClientRect();
+                    return rect.top < window.innerHeight / 2 && nextRect.top > 80;
+                }
+                return rect.top < window.innerHeight / 2;
+            };
+            const spy = () => {
+                let active = -1;
+                for (let i = 0; i < headings.length; i++) {
+                    if (isActive(i)) active = i;
+                }
+                links.forEach((link, i) => {
+                    link.classList.toggle('is-active', i === active);
+                });
+                const activeLink = active >= 0 ? links[active] : null;
+                if (activeLink) {
+                    const tocRect = toc.getBoundingClientRect();
+                    const linkRect = activeLink.getBoundingClientRect();
+                    if (linkRect.top < tocRect.top + 50 || linkRect.bottom > tocRect.bottom - 20) {
+                        toc.scrollTop += linkRect.top - tocRect.top - tocRect.height / 2 + linkRect.height / 2;
+                    }
+                }
+            };
+            window.addEventListener('scroll', spy, { passive: true });
+            spy();
+        })();
+        </script>
+        {{ end }}
     </section>
 
     {{- $advertising := .Site.Data.site.advertising -}}
@@ -29,14 +72,14 @@
     <section class="article-side-panel">
         <h2 class="article-side-title">LATEST <span>03</span></h2>
         <ol class="article-side-list">
-            {{ range $latest }}<li><a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong><time>{{ .Date.Format "01-02" }}</time></a></li>{{ else }}<li><p class="article-side-empty">暂无其他文章</p></li>{{ end }}
+            {{ range $latest }}<li><a href="{{ .RelPermalink }}"><span>{{ .Title }}</span><time>{{ .Date.Format "01-02" }}</time></a></li>{{ else }}<li><p class="article-side-empty">暂无其他文章</p></li>{{ end }}
         </ol>
     </section>
 
     <section class="article-side-panel">
         <h2 class="article-side-title">HOT <span>04</span></h2>
         <ol class="article-side-list article-hot-list" data-random-count="5">
-            {{ range $index, $post := $hotCandidates }}<li{{ if ge $index 5 }} hidden{{ end }}><a href="{{ $post.RelPermalink }}"><strong>{{ $post.Title }}</strong><time>{{ $post.Date.Format "01-02" }}</time></a></li>{{ else }}<li><p class="article-side-empty">近半年暂无其他文章</p></li>{{ end }}
+            {{ range $index, $post := $hotCandidates }}<li{{ if ge $index 5 }} hidden{{ end }}><a href="{{ $post.RelPermalink }}"><span>{{ $post.Title }}</span><time>{{ $post.Date.Format "01-02" }}</time></a></li>{{ else }}<li><p class="article-side-empty">近半年暂无其他文章</p></li>{{ end }}
         </ol>
         {{ if $hotCandidates }}
         <script>

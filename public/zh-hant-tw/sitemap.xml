@@ -2,159 +2,177 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/zh-hant-tw/</loc>
-    <lastmod>2026-01-26T00:00:00+00:00</lastmod>
+    <loc>https://www.tood.win/zh-hant-tw/</loc>
+    <lastmod>2026-07-20T10:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/"
+                href="https://www.tood.win/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/"
+                href="https://www.tood.win/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="http://localhost:1313/ja/"
+                href="https://www.tood.win/ja/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-hant-tw"
-                href="http://localhost:1313/zh-hant-tw/"
+                href="https://www.tood.win/zh-hant-tw/"
                 />
   </url><url>
-    <loc>http://localhost:1313/zh-hant-tw/page/</loc>
-    <lastmod>2026-01-26T00:00:00+00:00</lastmod>
+    <loc>https://www.tood.win/zh-hant-tw/page/</loc>
+    <lastmod>2026-07-20T10:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/page/"
+                href="https://www.tood.win/page/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="http://localhost:1313/ja/page/"
+                href="https://www.tood.win/ja/page/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-hant-tw"
-                href="http://localhost:1313/zh-hant-tw/page/"
+                href="https://www.tood.win/zh-hant-tw/page/"
                 />
   </url><url>
-    <loc>http://localhost:1313/zh-hant-tw/%E9%97%9C%E6%96%BC/</loc>
-    <lastmod>2026-01-26T00:00:00+00:00</lastmod>
+    <loc>https://www.tood.win/zh-hant-tw/%E9%97%9C%E6%96%BC/</loc>
+    <lastmod>2026-07-20T10:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/%E5%85%B3%E4%BA%8E/"
+                href="https://www.tood.win/%E5%85%B3%E4%BA%8E/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="http://localhost:1313/ja/%E3%81%93%E3%81%AE%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/"
+                href="https://www.tood.win/ja/%E3%81%93%E3%81%AE%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-hant-tw"
-                href="http://localhost:1313/zh-hant-tw/%E9%97%9C%E6%96%BC/"
+                href="https://www.tood.win/zh-hant-tw/%E9%97%9C%E6%96%BC/"
                 />
   </url><url>
-    <loc>http://localhost:1313/zh-hant-tw/archives/</loc>
-    <lastmod>2019-05-28T00:00:00+00:00</lastmod>
+    <loc>https://www.tood.win/zh-hant-tw/archives/</loc>
+    <lastmod>2026-07-20T10:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/archives/"
+                href="https://www.tood.win/archives/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="http://localhost:1313/ja/archives/"
+                href="https://www.tood.win/ja/archives/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-hant-tw"
-                href="http://localhost:1313/zh-hant-tw/archives/"
+                href="https://www.tood.win/zh-hant-tw/archives/"
                 />
   </url><url>
-    <loc>http://localhost:1313/zh-hant-tw/categories/</loc>
+    <loc>https://www.tood.win/zh-hant-tw/categories/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/categories/"
+                href="https://www.tood.win/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/categories/"
+                href="https://www.tood.win/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="http://localhost:1313/ja/categories/"
+                href="https://www.tood.win/ja/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-hant-tw"
-                href="http://localhost:1313/zh-hant-tw/categories/"
+                href="https://www.tood.win/zh-hant-tw/categories/"
                 />
   </url><url>
-    <loc>http://localhost:1313/zh-hant-tw/tags/</loc>
+    <loc>https://www.tood.win/zh-hant-tw/tags/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/tags/"
+                href="https://www.tood.win/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/tags/"
+                href="https://www.tood.win/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="http://localhost:1313/ja/tags/"
+                href="https://www.tood.win/ja/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-hant-tw"
-                href="http://localhost:1313/zh-hant-tw/tags/"
+                href="https://www.tood.win/zh-hant-tw/tags/"
                 />
   </url><url>
-    <loc>http://localhost:1313/zh-hant-tw/search/</loc>
+    <loc>https://www.tood.win/zh-hant-tw/search/</loc>
+    <lastmod>2026-07-20T10:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/search/"
+                href="https://www.tood.win/search/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="http://localhost:1313/ja/search/"
+                href="https://www.tood.win/ja/search/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-hant-tw"
-                href="http://localhost:1313/zh-hant-tw/search/"
+                href="https://www.tood.win/zh-hant-tw/search/"
                 />
   </url><url>
-    <loc>http://localhost:1313/zh-hant-tw/%E9%8F%88%E6%8E%A5/</loc>
+    <loc>https://www.tood.win/zh-hant-tw/%E9%8F%88%E6%8E%A5/</loc>
+    <lastmod>2026-07-20T10:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/%E9%93%BE%E6%8E%A5/"
+                href="https://www.tood.win/%E9%93%BE%E6%8E%A5/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="http://localhost:1313/ja/%E3%83%AA%E3%83%B3%E3%82%AF/"
+                href="https://www.tood.win/ja/%E3%83%AA%E3%83%B3%E3%82%AF/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-hant-tw"
-                href="http://localhost:1313/zh-hant-tw/%E9%8F%88%E6%8E%A5/"
+                href="https://www.tood.win/zh-hant-tw/%E9%8F%88%E6%8E%A5/"
                 />
   </url>
 </urlset>

@@ -30,15 +30,14 @@
     const pagePosts = posts.slice(start, start + POST_PAGE_SIZE);
     document.getElementById("postList").innerHTML = pagePosts.map((post, index) => `
       <article class="post-row" data-slug="${escapeHtml(post.slug)}">
-        <code>A.${String(start + index + 1).padStart(3, "0")}</code>
+        <code>A.${String(posts.length - (start + index)).padStart(3, "0")}</code>
         <div>
           <strong>${escapeHtml(post.title)}</strong>
-          <button type="button" class="text-button delete-post-row" data-slug="${escapeHtml(post.slug)}" data-title="${escapeHtml(post.title)}">删除</button>
           <p>${escapeHtml(post.description || post.slug)}</p>
         </div>
         <span>${escapeHtml((post.categories || []).join(" / ") || "未分类")}</span>
         <time>${escapeHtml(fmtDate(post.date))}</time>
-        <span class="badge ${post.draft ? "draft" : ""}">${post.draft ? "草稿" : "已发布"}</span>
+        <button type="button" class="text-button delete-post-row" data-slug="${escapeHtml(post.slug)}" data-title="${escapeHtml(post.title)}">删除</button>
       </article>
     `).join("") || '<div class="empty">点击“新建文章”开始写作</div>';
 
