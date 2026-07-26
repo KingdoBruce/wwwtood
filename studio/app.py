@@ -25,14 +25,65 @@ from typing import Any
 import markdown
 import tomlkit
 from flask import Flask, jsonify, render_template, request
+from pypinyin import Style, lazy_pinyin
 from waitress import serve
 from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.3.9"
+APP_VERSION = "1.4.2"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
+SEO_SLUG_MAX_LENGTH = 60
+SEO_SLUG_MAX_TOKENS = 10
+SEO_SLUG_STOP_PHRASES = (
+    "完整操作指南",
+    "完整使用教程",
+    "详细使用教程",
+    "新手入门教程",
+    "完整教程",
+    "详细教程",
+    "使用教程",
+    "操作指南",
+    "是什么",
+    "有什么",
+    "为什么",
+    "怎么样",
+    "怎么办",
+    "如何",
+    "怎么",
+    "是否",
+    "完整",
+    "详细",
+    "最新",
+    "一个",
+    "一种",
+    "以及",
+    "并且",
+    "或者",
+    "关于",
+    "通过",
+    "进行",
+    "实现",
+    "教程",
+    "指南",
+    "方法",
+    "步骤",
+    "技巧",
+    "攻略",
+    "详解",
+    "介绍",
+    "说明",
+    "解析",
+    "中的",
+    "上的",
+    "下的",
+    "里的",
+    "这个",
+    "那个",
+    "这些",
+    "那些",
+)
 
 
 def find_blog_root() -> Path:
@@ -645,6 +696,33 @@ def slugify(value: str) -> str:
     return value[:100]
 
 
+def seo_slugify(title: str) -> str:
+    value = title.strip()
+    for phrase in SEO_SLUG_STOP_PHRASES:
+        value = value.replace(phrase, " ")
+    tokens: list[str] = []
+    for part in re.findall(r"[A-Za-z0-9]+|[\u4e00-\u9fff]+", value):
+        if part.isascii():
+            tokens.append(part.lower())
+        else:
+            tokens.extend(lazy_pinyin(part, style=Style.NORMAL, errors="ignore"))
+        if len(tokens) >= SEO_SLUG_MAX_TOKENS:
+            break
+    normalized_tokens = [
+        re.sub(r"[^a-z0-9]+", "", token.lower())
+        for token in tokens[:SEO_SLUG_MAX_TOKENS]
+    ]
+    normalized_tokens = [token for token in normalized_tokens if token]
+    value = "-".join(normalized_tokens)
+    if len(value) > SEO_SLUG_MAX_LENGTH:
+        value = value[:SEO_SLUG_MAX_LENGTH].rstrip("-")
+        if "-" in value:
+            value = value.rsplit("-", 1)[0]
+    if not value:
+        value = datetime.now().strftime("post-%Y%m%d-%H%M%S")
+    return value
+
+
 def post_path(slug: str) -> Path:
     safe_slug = slugify(slug)
     path = (BLOG_ROOT / "content" / "posts" / f"{safe_slug}.md").resolve()
@@ -652,6 +730,17 @@ def post_path(slug: str) -> Path:
     if path.parent != posts_root:
         raise ValueError("文章路径不安全")
     return path
+
+
+def available_post_slug(slug: str, original_slug: str = "") -> str:
+    base = slugify(slug)
+    candidate = base
+    number = 2
+    while candidate != original_slug and post_path(candidate).exists():
+        suffix = f"-{number}"
+        candidate = f"{base[: SEO_SLUG_MAX_LENGTH - len(suffix)].rstrip('-')}{suffix}"
+        number += 1
+    return candidate
 
 
 def parse_post(path: Path) -> tuple[dict[str, Any], str]:
@@ -766,7 +855,6 @@ def settings_payload() -> dict[str, Any]:
         "established_date": home.get("established_date", ""),
         "latest_articles_count": bounded_int(home.get("latest_articles_count"), 5),
         "quarter_random_count": bounded_int(home.get("quarter_random_count"), 5),
-        "copyright_since": footer.get("copyright_since", datetime.now().year),
         "footer_build_label": footer.get("build_label", "BUILT WITH HUGO"),
         "seo_description": seo.get("description", ""),
         "seo_keywords": seo.get("keywords", ""),
@@ -810,7 +898,7 @@ def write_settings(values: dict[str, Any]) -> None:
             "quarter_random_count": bounded_int(values.get("quarter_random_count"), 5),
         },
         "footer": {
-            "copyright_since": int(values.get("copyright_since") or datetime.now().year),
+            **current.get("footer", {}),
             "build_label": limited.get("footer_build_label", "BUILT WITH HUGO"),
         },
         "seo": {
@@ -1311,9 +1399,10 @@ def api_save_post():
     if not title:
         raise ValueError("文章标题不能为空")
     original_slug = str(payload.get("original_slug") or "").strip()
-    slug = slugify(str(payload.get("slug") or title))
+    requested_slug = str(payload.get("slug") or "").strip()
+    slug = slugify(requested_slug) if requested_slug else available_post_slug(seo_slugify(title), original_slug)
     path = post_path(slug)
-    if path.exists() and original_slug and original_slug != slug:
+    if path.exists() and original_slug != slug:
         raise FileExistsError("新的文章 URL 已存在")
     date_value = str(payload.get("date") or datetime.now().astimezone().isoformat(timespec="seconds"))
     parsed_date = datetime.fromisoformat(date_value)
@@ -1358,6 +1447,12 @@ def api_save_post():
     else:
         metadata.pop("tags", None)
     body = str(payload.get("body") or "")
+    if original_slug and original_slug != slug:
+        aliases = normalize_list(metadata.get("aliases", []))
+        old_url = f"/posts/{original_slug}/"
+        if old_url not in aliases:
+            aliases.append(old_url)
+        metadata["aliases"] = aliases
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(serialize_post(metadata, body), encoding="utf-8", newline="\n")
     updated_links = 0
@@ -1369,6 +1464,16 @@ def api_save_post():
     state = "草稿，不会显示在线" if metadata["draft"] else "公开文章"
     link_message = f"，并同步更新 {updated_links} 篇文章的内链" if updated_links else ""
     return jsonify({"ok": True, "message": f"文章已保存为{state}{link_message}", "slug": slug})
+
+
+@app.post("/api/posts/slug-preview")
+def api_post_slug_preview():
+    payload = request.get_json(force=True) or {}
+    title = str(payload.get("title") or "").strip()
+    original_slug = str(payload.get("original_slug") or "").strip()
+    if not title:
+        return jsonify({"ok": True, "slug": ""})
+    return jsonify({"ok": True, "slug": available_post_slug(seo_slugify(title), original_slug)})
 
 
 @app.delete("/api/posts/<slug>")
@@ -1543,6 +1648,20 @@ def api_save_proxy_settings():
         "message": message,
         "proxy": proxy_settings_payload(),
         "test": test_result,
+    })
+
+
+@app.patch("/api/proxy")
+def api_toggle_proxy_settings():
+    current = proxy_settings_payload()
+    current["enabled"] = boolean_value((request.get_json(silent=True) or {}).get("enabled"))
+    settings = normalize_proxy_settings(current)
+    save_proxy_settings(settings)
+    state = "启用" if settings["enabled"] else "关闭"
+    return jsonify({
+        "ok": True,
+        "message": f"GitHub 代理服务器已{state}",
+        "proxy": proxy_settings_payload(),
     })
 
 

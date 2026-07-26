@@ -27,6 +27,11 @@ class StudioTests(unittest.TestCase):
         self.assertIn(b'id="githubRepository"', response.data)
         self.assertIn(b'id="proxyHost"', response.data)
         self.assertIn(b'id="view-githubHelp"', response.data)
+        self.assertIn(b'id="regenerateSlug"', response.data)
+        self.assertIn(b'id="slugHint"', response.data)
+        self.assertIn(b'id="quickSync"', response.data)
+        self.assertIn(b'id="quickProxyEnabled"', response.data)
+        self.assertNotIn(b'name="copyright_since"', response.data)
 
     def test_find_blog_root_accepts_myblog_child(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -37,6 +42,80 @@ class StudioTests(unittest.TestCase):
             (blog / "content").mkdir()
             with patch.dict(os.environ, {"TOOD_BLOG_ROOT": str(parent)}):
                 self.assertEqual(studio.find_blog_root(), blog.resolve())
+
+    def test_seo_slugify_extracts_short_core_words(self):
+        self.assertEqual(studio.seo_slugify("如何优化网站 SEO"), "you-hua-wang-zhan-seo")
+        self.assertEqual(
+            studio.seo_slugify("2026年 Cloudflare 配置完整教程"),
+            "2026-nian-cloudflare-pei-zhi",
+        )
+        self.assertEqual(
+            studio.seo_slugify("Codex 钩子是什么，有什么用途"),
+            "codex-gou-zi-yong-tu",
+        )
+        slug = studio.seo_slugify("这是一个非常长的中文标题用于验证自动生成结果不会超过限制并且保持完整单词")
+        self.assertLessEqual(len(slug), studio.SEO_SLUG_MAX_LENGTH)
+        self.assertRegex(slug, r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+
+    def test_slug_preview_and_save_avoid_existing_post(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                posts = studio.BLOG_ROOT / "content" / "posts"
+                posts.mkdir(parents=True)
+                existing = posts / "you-hua-wang-zhan-seo.md"
+                existing.write_text("原文章", encoding="utf-8")
+                headers = {"X-TOOD-Token": studio.SESSION_TOKEN}
+
+                preview = self.client.post(
+                    "/api/posts/slug-preview",
+                    json={"title": "如何优化网站 SEO"},
+                    headers=headers,
+                )
+                self.assertEqual(preview.status_code, 200)
+                self.assertEqual(preview.get_json()["slug"], "you-hua-wang-zhan-seo-2")
+
+                existing_preview = self.client.post(
+                    "/api/posts/slug-preview",
+                    json={
+                        "title": "如何优化网站 SEO",
+                        "original_slug": "you-hua-wang-zhan-seo",
+                    },
+                    headers=headers,
+                )
+                self.assertEqual(existing_preview.get_json()["slug"], "you-hua-wang-zhan-seo")
+
+                saved = self.client.post(
+                    "/api/posts",
+                    json={
+                        "title": "如何优化网站 SEO",
+                        "slug": "",
+                        "date": "2026-07-26T12:00",
+                        "draft": True,
+                        "body": "正文",
+                    },
+                    headers=headers,
+                )
+                self.assertEqual(saved.status_code, 200)
+                self.assertEqual(saved.get_json()["slug"], "you-hua-wang-zhan-seo-2")
+                self.assertTrue((posts / "you-hua-wang-zhan-seo-2.md").is_file())
+
+                duplicate = self.client.post(
+                    "/api/posts",
+                    json={
+                        "title": "另一篇文章",
+                        "slug": "you-hua-wang-zhan-seo",
+                        "date": "2026-07-26T12:00",
+                        "draft": True,
+                    },
+                    headers=headers,
+                )
+                self.assertEqual(duplicate.status_code, 400)
+                self.assertIn("URL 已存在", duplicate.get_json()["error"])
+                self.assertEqual(existing.read_text(encoding="utf-8"), "原文章")
+            finally:
+                studio.BLOG_ROOT = original_root
 
     def test_github_connection_configures_local_repository(self):
         original_root = studio.BLOG_ROOT
@@ -126,6 +205,40 @@ class StudioTests(unittest.TestCase):
             finally:
                 studio.BLOG_ROOT = original_root
 
+    def test_quick_proxy_toggle_preserves_connection_settings(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                studio.save_proxy_settings({
+                    "enabled": False,
+                    "protocol": "https",
+                    "host": "127.0.0.1",
+                    "port": 7890,
+                })
+                headers = {"X-TOOD-Token": studio.SESSION_TOKEN}
+                enabled = self.client.patch(
+                    "/api/proxy",
+                    json={"enabled": True},
+                    headers=headers,
+                )
+                self.assertEqual(enabled.status_code, 200)
+                self.assertTrue(enabled.get_json()["proxy"]["enabled"])
+                saved = studio.load_proxy_settings()
+                self.assertEqual(saved["protocol"], "https")
+                self.assertEqual(saved["host"], "127.0.0.1")
+                self.assertEqual(saved["port"], 7890)
+
+                disabled = self.client.patch(
+                    "/api/proxy",
+                    json={"enabled": False},
+                    headers=headers,
+                )
+                self.assertEqual(disabled.status_code, 200)
+                self.assertFalse(studio.load_proxy_settings()["enabled"])
+            finally:
+                studio.BLOG_ROOT = original_root
+
     def test_proxy_test_checks_google_and_github_when_disabled(self):
         google_response = MagicMock()
         google_response.__enter__.return_value.getcode.return_value = 204
@@ -188,6 +301,26 @@ class StudioTests(unittest.TestCase):
                 self.assertEqual(studio.advertising_payload()["article_sidebar_code"], "<ins>sidebar</ins>")
                 raw = (studio.BLOG_ROOT / "data" / "site.toml").read_text(encoding="utf-8")
                 self.assertIn("google_ads_code", raw)
+            finally:
+                studio.BLOG_ROOT = original_root
+
+    def test_settings_hide_and_preserve_legacy_copyright_year(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                site_path = studio.BLOG_ROOT / "data" / "site.toml"
+                studio.save_toml(site_path, {
+                    "footer": {
+                        "copyright_since": 2020,
+                        "build_label": "旧页脚文字",
+                    },
+                })
+                self.assertNotIn("copyright_since", studio.settings_payload())
+                studio.write_settings({"footer_build_label": "新页脚文字"})
+                footer = studio.load_toml(site_path)["footer"]
+                self.assertEqual(footer["copyright_since"], 2020)
+                self.assertEqual(footer["build_label"], "新页脚文字")
             finally:
                 studio.BLOG_ROOT = original_root
 
@@ -292,6 +425,8 @@ class StudioTests(unittest.TestCase):
                 self.assertEqual(renamed.status_code, 200)
                 self.assertFalse(target.exists())
                 self.assertTrue((posts / "new-slug.md").exists())
+                renamed_metadata, _ = studio.parse_post(posts / "new-slug.md")
+                self.assertIn("/posts/old-slug/", renamed_metadata["aliases"])
                 _, source_body = studio.parse_post(source)
                 self.assertIn("](/posts/new-slug/)", source_body)
                 self.assertNotIn("/posts/old-slug/", source_body)

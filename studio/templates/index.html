@@ -30,6 +30,11 @@
       <header class="topbar">
         <div><span class="eyebrow" id="viewCode">SYS.01</span><h1 id="viewTitle">网站概览</h1></div>
         <div class="top-actions">
+          <label class="top-proxy-switch" title="启用或关闭 GitHub 代理服务器">
+            <input id="quickProxyEnabled" type="checkbox" aria-label="启用 GitHub 代理服务器">
+            <span class="top-proxy-track"></span><b>GitHub 代理</b>
+          </label>
+          <button class="button ghost" id="quickSync">重新同步</button>
           <button class="button ghost" id="quickPreview">打开预览</button>
           <button class="button primary" id="quickPublish">一键发布</button>
         </div>
@@ -74,7 +79,13 @@
         <form id="postForm" class="editor-layout" onsubmit="return false">
           <div class="editor-main panel">
             <label>文章标题<input id="postTitle" maxlength="200" required placeholder="输入文章标题"></label>
-            <div class="two-columns"><label>URL Slug<input id="postSlug" placeholder="留空则根据标题生成"></label><label>发布日期<input id="postDate" type="datetime-local"></label></div>
+            <div class="two-columns">
+              <label>URL Slug
+                <div class="slug-input-row"><input id="postSlug" placeholder="输入标题后自动生成"><button class="button ghost" id="regenerateSlug" type="button">重新生成</button></div>
+                <small id="slugHint" class="slug-hint">自动提取核心词并生成简短拼音，可手动修改</small>
+              </label>
+              <label>发布日期<input id="postDate" type="datetime-local"></label>
+            </div>
             <label>摘要<textarea id="postDescription" rows="2" maxlength="500" placeholder="用于列表和搜索引擎展示"></textarea></label>
             <div class="editor-tabs"><button class="active" data-editor-tab="write">Markdown</button><button data-editor-tab="preview">预览</button><button type="button" class="upload-inline" id="insertInternalLink">插入内链</button><button type="button" class="upload-inline" id="insertImage">插入图片</button><input type="file" id="articleImage" accept="image/png,image/jpeg,image/webp,image/gif" hidden></div>
             <textarea id="postBody" class="markdown-editor" placeholder="# 从这里开始写作…"></textarea>
@@ -203,7 +214,7 @@
 
           <article class="panel form-panel settings-card">
             <div class="settings-card-heading"><div><span>05 · FOOTER</span><h3>关于与页脚</h3><p>设置网站简介、链接入口和页脚署名。</p></div></div>
-            <label>关于标题<input name="about_title"></label><label>关于简介<textarea name="about_text" rows="3"></textarea></label><label>链接文字<input name="about_link_label"></label><div class="two-columns"><label>版权年份<input name="copyright_since" type="number"></label><label>页脚文字<input name="footer_build_label"></label></div>
+            <label>关于标题<input name="about_title"></label><label>关于简介<textarea name="about_text" rows="3"></textarea></label><label>链接文字<input name="about_link_label"></label><label>页脚文字<input name="footer_build_label"></label>
           </article>
         </form>
         <form id="proxyForm" class="settings-workbench settings-network-section" onsubmit="return false">

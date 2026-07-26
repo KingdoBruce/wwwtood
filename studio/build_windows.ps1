@@ -19,7 +19,7 @@ $iconSource = Join-Path $portable 'ico.png'
 if (-not (Test-Path -LiteralPath $iconSource)) {
     throw "Icon source not found: $iconSource"
 }
-$iconTemp = Join-Path $studioRoot 'ico.png'
+$iconTemp = Join-Path $studioRoot '.tood-build-icon.png'
 Copy-Item -LiteralPath $iconSource -Destination $iconTemp -Force
 $iconIco = Join-Path $studioRoot 'TOOD-Studio.ico'
 & $python -c "import sys; from PIL import Image; image=Image.open(sys.argv[1]).convert('RGBA').resize((256,256),Image.Resampling.LANCZOS); image.save(sys.argv[2],format='ICO',sizes=[(16,16),(20,20),(24,24),(32,32),(40,40),(48,48),(64,64),(128,128),(256,256)])" $iconTemp $iconIco
@@ -37,6 +37,7 @@ try {
         --add-binary 'bin\hugo.exe;bin' `
         --icon 'TOOD-Studio.ico' `
         --collect-all markdown `
+        --collect-all pypinyin `
         app.py
     if ($LASTEXITCODE -ne 0) {
         throw "PyInstaller build failed with exit code $LASTEXITCODE"

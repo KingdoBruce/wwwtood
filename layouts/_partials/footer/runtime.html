@@ -3,6 +3,10 @@
 (() => {
     const runtime = document.currentScript.previousElementSibling;
     const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
     const updateRuntime = () => {
         const elapsed = Math.max(0, Date.now() - startedAt);
         const totalSeconds = Math.floor(elapsed / 1000);
