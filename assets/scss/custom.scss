@@ -294,6 +294,7 @@ body.archive-site.archive-subpage {
 .archive-status-mark::before { width: 46px; height: 10px; border-top: 1px solid var(--archive-line); border-bottom: 1px solid var(--archive-line); }
 .archive-status-mark::after { width: 10px; height: 46px; border-right: 1px solid var(--archive-line); border-left: 1px solid var(--archive-line); }
 .archive-status-mark i { z-index: 1; width: 8px; height: 8px; transform: rotate(45deg); background: var(--archive-blue); }
+.archive-status-image { width: 38px; height: 38px; flex: 0 0 auto; object-fit: contain; }
 .archive-status-copy { display: grid; gap: 3px; margin-left: 15px; }
 .archive-status-copy strong { font: 600 13px/1.2 sans-serif; letter-spacing: .16em; }
 .archive-status-copy small { color: var(--archive-muted); font: 10px/1.2 sans-serif; letter-spacing: .1em; white-space: nowrap; }

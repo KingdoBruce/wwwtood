@@ -37,9 +37,9 @@
                     <a class="{{ if hasPrefix (lower .RelPermalink) (lower $tagsURL) }}active{{ end }}" href="{{ $tagsURL }}">{{ default "标签" $navigation.tags }}</a>
                     <a class="{{ if or $isAbout (hasPrefix (lower .RelPermalink) (lower $aboutURL)) }}active{{ end }}" href="{{ $aboutURL }}">{{ default "关于" $navigation.about }}</a>
                 </nav>
-      <div class="archive-status" aria-label="拾光存档：记录微光，存入时间">
-        <em class="archive-status-mark" aria-hidden="true"><i></i></em>
-        <span class="archive-status-copy"><strong>拾光存档</strong><small>记录微光 · 存入时间</small></span>
+      <div class="archive-status" aria-label="{{ default `拾光存档` $brand.status_title }}：{{ default `记录微光 · 存入时间` $brand.status_subtitle }}">
+        {{ with $brand.status_icon }}<img class="archive-status-image" src="{{ . | relURL }}" alt="">{{ else }}<em class="archive-status-mark" aria-hidden="true"><i></i></em>{{ end }}
+        <span class="archive-status-copy"><strong>{{ default "拾光存档" $brand.status_title }}</strong><small>{{ default "记录微光 · 存入时间" $brand.status_subtitle }}</small></span>
       </div>
             </header>
             <div class="archive-page-frame">

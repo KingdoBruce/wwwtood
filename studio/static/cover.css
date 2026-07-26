@@ -585,6 +585,210 @@
   flex: 0 0 auto;
 }
 
+.settings-actions {
+  align-items: flex-end;
+}
+
+.settings-actions p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.settings-actions .button {
+  white-space: nowrap;
+}
+
+.settings-workbench {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.settings-card {
+  grid-column: span 6;
+  padding: 0;
+  overflow: hidden;
+}
+
+.settings-card-wide {
+  grid-column: 1 / -1;
+}
+
+.settings-card-home {
+  grid-column: span 8;
+}
+
+.settings-card-home + .settings-card {
+  grid-column: span 4;
+}
+
+.settings-card-heading {
+  min-height: 108px;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(22, 71, 232, 0.045), transparent 62%);
+}
+
+.settings-card-wide .settings-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.settings-card-heading span,
+.settings-field-group h4 {
+  color: var(--blue);
+  font: 700 9px/1 ui-monospace, monospace;
+  letter-spacing: 0.12em;
+}
+
+.settings-card-heading h3 {
+  margin: 8px 0 0;
+  padding: 0;
+  border: 0;
+  font: 750 18px/1.25 "Microsoft YaHei", system-ui, sans-serif;
+}
+
+.settings-card-heading p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.settings-card > label,
+.settings-card > .two-columns,
+.settings-card > .settings-switch,
+.settings-card > .form-help {
+  margin-right: 24px;
+  margin-left: 24px;
+}
+
+.settings-card > label:first-of-type,
+.settings-card > .settings-switch:first-of-type {
+  margin-top: 24px;
+}
+
+.settings-card > .form-help:last-child {
+  margin-bottom: 24px;
+}
+
+.settings-brand-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.settings-field-group {
+  min-width: 0;
+  padding: 25px 24px 6px;
+  border-right: 1px solid var(--line);
+}
+
+.settings-field-group:last-child {
+  border-right: 0;
+}
+
+.settings-field-group h4 {
+  margin: 0 0 22px;
+}
+
+.settings-field-group label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.settings-field-group .form-help {
+  margin-bottom: 18px;
+}
+
+.status-badge-preview {
+  display: flex;
+  min-width: 292px;
+  align-items: center;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  background: #fffefb;
+}
+
+.status-badge-preview > span:last-child {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.status-badge-preview strong {
+  overflow: hidden;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-badge-preview small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-badge-icon {
+  position: relative;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  margin-right: 14px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+}
+
+.status-badge-icon::before,
+.status-badge-icon::after {
+  position: absolute;
+  background: #fffefb;
+  content: "";
+}
+
+.status-badge-icon::before {
+  width: 46px;
+  height: 10px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.status-badge-icon::after {
+  width: 10px;
+  height: 46px;
+  border-right: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.status-badge-icon i {
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+  background: #c09a4e;
+}
+
+.status-badge-icon img {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #fffefb;
+  object-fit: contain;
+}
+
 @media (max-width: 1050px) {
   .taxonomy-row.has-visibility {
     grid-template-columns: minmax(0, 1fr) 90px auto;
@@ -607,6 +811,21 @@
   .github-token-field {
     grid-column: auto;
   }
+
+  .settings-card,
+  .settings-card-home,
+  .settings-card-home + .settings-card {
+    grid-column: 1 / -1;
+  }
+
+  .settings-brand-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .settings-status-fields {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--line);
+  }
 }
 
 @media (max-width: 700px) {
@@ -617,6 +836,36 @@
 }
 
 @media (max-width: 700px) {
+  .settings-actions {
+    align-items: flex-start;
+  }
+
+  .settings-card-wide .settings-card-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .settings-brand-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-field-group,
+  .settings-status-fields {
+    grid-column: auto;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .settings-field-group:last-child {
+    border-bottom: 0;
+  }
+
+  .status-badge-preview {
+    width: 100%;
+    min-width: 0;
+  }
+
   .internal-link-dialog {
     width: calc(100vw - 20px);
     max-height: calc(100dvh - 20px);
