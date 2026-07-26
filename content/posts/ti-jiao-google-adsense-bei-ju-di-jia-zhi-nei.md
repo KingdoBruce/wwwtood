@@ -4,6 +4,7 @@ date = "2026-07-26T18:49:00+08:00"
 draft = false
 categories = ["建站"]
 tags = ["Google AdSense", "Seo", "博客", "Web建站", "广告联盟", "建站教程"]
+featured = true
 +++
 
 提交 [Google](/tags/google/) AdSense 审核，网站没有通过。
