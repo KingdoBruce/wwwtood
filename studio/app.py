@@ -924,6 +924,7 @@ def write_settings(values: dict[str, Any]) -> None:
 def advertising_payload() -> dict[str, Any]:
     data = load_toml(BLOG_ROOT / "data" / "site.toml").get("advertising", {})
     return {
+        "adblock_detection_enabled": boolean_value(data.get("adblock_detection_enabled"), True),
         "google_ads_code": str(data.get("google_ads_code") or ""),
         "home_sidebar_enabled": boolean_value(data.get("home_sidebar_enabled"), False),
         "home_sidebar_code": str(data.get("home_sidebar_code") or ""),
@@ -938,6 +939,7 @@ def write_advertising(values: dict[str, Any]) -> None:
     path = BLOG_ROOT / "data" / "site.toml"
     data = load_toml(path)
     data["advertising"] = {
+        "adblock_detection_enabled": boolean_value(values.get("adblock_detection_enabled"), True),
         "google_ads_code": str(values.get("google_ads_code") or "").strip()[:20000],
         "home_sidebar_enabled": boolean_value(values.get("home_sidebar_enabled"), False),
         "home_sidebar_code": str(values.get("home_sidebar_code") or "").strip()[:30000],

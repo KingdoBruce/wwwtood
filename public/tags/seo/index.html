@@ -2,7 +2,7 @@
 <html lang="zh" dir="ltr">
 <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="拾光集记录值得被发现的人、事、思想与微光，分享工具实测、项目经验、技术实践与问题解决方法。">
-<title>SEO - 标签 - 拾光集 TOOD.WIN</title>
+<title>Seo - 标签 - 拾光集 TOOD.WIN</title>
 
 
 <link rel="canonical" href="https://www.tood.win/tags/seo/">
@@ -12,12 +12,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
 
 
-<link rel="stylesheet" href="/scss/style.min.22ec3091afaaacc27d6058fd34e11870233fb448ec3523e2e0855b4c317da7ad.css"><meta property='og:title' content="SEO - 标签 - 拾光集 TOOD.WIN">
+<link rel="stylesheet" href="/scss/style.min.22ec3091afaaacc27d6058fd34e11870233fb448ec3523e2e0855b4c317da7ad.css"><meta property='og:title' content="Seo - 标签 - 拾光集 TOOD.WIN">
 <meta property='og:description' content="拾光集记录值得被发现的人、事、思想与微光，分享工具实测、项目经验、技术实践与问题解决方法。">
 <meta property='og:url' content='https://www.tood.win/tags/seo/'>
 <meta property='og:site_name' content='拾光集'>
 <meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-07-26T18:49:00&#43;08:00 '/>
-<meta name="twitter:title" content="SEO - 标签 - 拾光集 TOOD.WIN">
+<meta name="twitter:title" content="Seo - 标签 - 拾光集 TOOD.WIN">
 <meta name="twitter:description" content="拾光集记录值得被发现的人、事、思想与微光，分享工具实测、项目经验、技术实践与问题解决方法。"><link rel="alternate" type="application/rss&#43;xml" href="https://www.tood.win/tags/seo/index.xml">
     <link rel="shortcut icon" href="img/avatar.png" />
 
@@ -91,9 +91,9 @@
                 <main class="archive-page-main"><header class="category-term-header">
         <div class="category-term-heading">
             <code><span>TAG</span><i>/</i><b>SEO</b></code>
-            <h1>SEO</h1>
+            <h1>Seo</h1>
         </div>
-        <div class="category-term-count" aria-label="标签 SEO 共有 4 篇文章">
+        <div class="category-term-count" aria-label="标签 Seo 共有 4 篇文章">
             <span>COLLECTION</span>
             <strong>004</strong>
             <small>ARTICLES</small>
@@ -102,7 +102,7 @@
 
     <div class="category-term-layout">
         <div class="category-term-main">
-            <section class="category-article-list" aria-label="SEO标签文章"><a class="category-article-card" href="/posts/ti-jiao-google-adsense-bei-ju-di-jia-zhi-nei/">
+            <section class="category-article-list" aria-label="Seo标签文章"><a class="category-article-card" href="/posts/ti-jiao-google-adsense-bei-ju-di-jia-zhi-nei/">
                         <div class="category-article-image"><img src="/uploads/2026/07/QQ20260726-185409-e3bf1f27.png" alt="提交 Google AdSense 被拒？“低价值内容”该怎么解决" loading="lazy"><code>A.001</code>
                         </div>
                         <div>
@@ -300,7 +300,6 @@
                 </span>
             </footer>
         </div>
-    
     <div class="adblock-notice" role="status" aria-modal="false" aria-labelledby="adblock-notice-title" hidden data-blocking="false" data-nosnippet>
     <div class="adblock-notice__panel">
         <span class="adblock-notice__label">AD BLOCKER DETECTED</span>
@@ -316,25 +315,12 @@
 </div>
 <script>
 (() => {
-    const articleEntryKey = 'tood-article-ad-check';
     const allowlist = [
         '/please-allow-ads-on-shiguangji-zh/',
         '/please-allow-ads-on-shiguangji-en/'
     ];
     const path = `${window.location.pathname.replace(/\/+$/, '')}/`.toLowerCase();
     const isAllowlisted = allowlist.some((slug) => path.endsWith(slug));
-
-    document.addEventListener('click', (event) => {
-        const link = event.target.closest('a[href]');
-        if (!link) return;
-        try {
-            const target = new URL(link.href, window.location.href);
-            const targetPath = `${target.pathname.replace(/\/+$/, '')}/`.toLowerCase();
-            if (target.origin === window.location.origin && targetPath.includes('/posts/') && !allowlist.some((slug) => targetPath.endsWith(slug))) {
-                sessionStorage.setItem(articleEntryKey, targetPath);
-            }
-        } catch (_) {}
-    }, { capture: true });
 
     if (isAllowlisted) return;
 
@@ -358,6 +344,38 @@
     const startDetection = () => {
         if (detectionStarted) return;
         detectionStarted = true;
+        const probeRequest = (url) => new Promise((resolve) => {
+            const controller = new AbortController();
+            const timer = window.setTimeout(() => {
+                controller.abort();
+                resolve(false);
+            }, 3000);
+            fetch(url, {
+                mode: 'no-cors',
+                cache: 'no-store',
+                signal: controller.signal
+            }).then(() => {
+                window.clearTimeout(timer);
+                resolve(true);
+            }).catch(() => {
+                window.clearTimeout(timer);
+                resolve(false);
+            });
+        });
+        const probeScript = (url) => new Promise((resolve) => {
+            const script = document.createElement('script');
+            const finish = (loaded) => {
+                window.clearTimeout(timer);
+                script.remove();
+                resolve(loaded);
+            };
+            const timer = window.setTimeout(() => finish(false), 3000);
+            script.async = true;
+            script.src = url;
+            script.onload = () => finish(true);
+            script.onerror = () => finish(false);
+            document.head.appendChild(script);
+        });
 
         const bait = document.createElement('div');
         bait.id = 'ad-banner';
@@ -380,6 +398,16 @@
         };
         document.head.appendChild(localProbe);
 
+        Promise.all([
+            probeRequest(`https://www.google.com/generate_204?adblock_control=${Date.now()}`),
+            probeRequest(`https://www.gstatic.com/generate_204?adblock_control=${Date.now()}`),
+            probeScript(`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?adblock_probe=${Date.now()}`)
+        ]).then(([googleLoaded, gstaticLoaded, adsLoaded]) => {
+            if ((googleLoaded || gstaticLoaded) && !adsLoaded) {
+                revealNotice();
+            }
+        });
+
         window.setTimeout(() => {
             const style = window.getComputedStyle(bait);
             const baitBlocked = style.display === 'none' || style.visibility === 'hidden' || bait.offsetHeight === 0 || bait.offsetWidth === 0;
@@ -395,25 +423,70 @@
         return;
     }
 
-    let enteredFromSite = false;
-    try {
-        enteredFromSite = sessionStorage.getItem(articleEntryKey) === path;
-        sessionStorage.removeItem(articleEntryKey);
-    } catch (_) {}
-    if (enteredFromSite || window.scrollY > 120) {
+    let touchStartY = null;
+    let scrollBaseline = window.scrollY;
+    let scrollReady = document.readyState === 'complete';
+    const downwardKeys = new Set(['ArrowDown', 'PageDown', 'End', ' ']);
+    const cleanupScrollTriggers = () => {
+        window.removeEventListener('wheel', onWheel);
+        window.removeEventListener('touchstart', onTouchStart);
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('keydown', onKeyDown);
+        window.removeEventListener('scroll', onScroll);
+    };
+    const triggerAfterDownwardScroll = () => {
+        cleanupScrollTriggers();
         startDetection();
+    };
+    const onWheel = (event) => {
+        if (event.deltaY > 0) triggerAfterDownwardScroll();
+    };
+    const onTouchStart = (event) => {
+        touchStartY = event.touches[0]?.clientY ?? null;
+    };
+    const onTouchMove = (event) => {
+        const currentY = event.touches[0]?.clientY;
+        if (touchStartY !== null && currentY !== undefined && touchStartY - currentY >= 16) {
+            triggerAfterDownwardScroll();
+        }
+    };
+    const onKeyDown = (event) => {
+        if (downwardKeys.has(event.key) && !(event.key === ' ' && event.shiftKey)) {
+            triggerAfterDownwardScroll();
+        }
+    };
+    const onScroll = () => {
+        const currentY = window.scrollY;
+        if (!scrollReady) {
+            scrollBaseline = currentY;
+            return;
+        }
+        if (currentY - scrollBaseline >= 24) {
+            triggerAfterDownwardScroll();
+        }
+    };
+    const markScrollReady = () => {
+        window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => {
+                scrollBaseline = window.scrollY;
+                scrollReady = true;
+            });
+        });
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    if (!scrollReady) {
+        window.addEventListener('load', markScrollReady, { once: true });
     } else {
-        const onScroll = () => {
-            if (window.scrollY <= 120) return;
-            window.removeEventListener('scroll', onScroll);
-            startDetection();
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
+        markScrollReady();
     }
 })();
 </script>
-
-    <script>
+<script>
 (() => {
     document.addEventListener('contextmenu', (event) => {
         event.preventDefault();

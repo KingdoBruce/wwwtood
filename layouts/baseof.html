@@ -62,7 +62,10 @@
             </footer>
         </div>
     {{ end }}
+    {{- $advertising := .Site.Data.site.advertising -}}
+    {{- if or (not (isset $advertising "adblock_detection_enabled")) $advertising.adblock_detection_enabled -}}
     {{ partial "adblock-check.html" . }}
+    {{- end -}}
     {{ partial "interaction-guard.html" . }}
     {{ partial "footer/include.html" . }}
 </body>
