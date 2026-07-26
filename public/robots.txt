@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://localhost:1413/sitemap.xml
+Sitemap: https://www.tood.win/sitemap.xml

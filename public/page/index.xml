@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Pages on Hugo 主题 Stack</title>
-        <link>http://localhost:1413/page/</link>
-        <description>Recent content in Pages on Hugo 主题 Stack</description>
+        <title>Pages on 拾光集</title>
+        <link>https://www.tood.win/page/</link>
+        <description>Recent content in Pages on 拾光集</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh</language>
-        <lastBuildDate>Wed, 22 Jul 2026 21:04:19 +0800</lastBuildDate><atom:link href="http://localhost:1413/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 21 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://www.tood.win/page/index.xml" rel="self" type="application/rss+xml" /><item>
             <title>关于</title>
-            <link>http://localhost:1413/%E5%85%B3%E4%BA%8E/</link>
+            <link>https://www.tood.win/%E5%85%B3%E4%BA%8E/</link>
             <pubDate>Mon, 26 Jan 2026 00:00:00 +0000</pubDate>
-            <guid>http://localhost:1413/%E5%85%B3%E4%BA%8E/</guid>
+            <guid>https://www.tood.win/%E5%85%B3%E4%BA%8E/</guid>
             <description>&lt;p&gt;大家好，我是 &lt;strong&gt;Bruce&lt;/strong&gt;，一个喜欢探索新技术、新工具和互联网产品的普通玩家。&lt;/p&gt;&#xA;&lt;p&gt;从搭建网站、制作小程序，到研究域名、VPS、AI 工具、开源软件以及各种本地工具，我始终享受从零开始、反复尝试，直到真正跑通的过程。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;关于这个网站&#34;&gt;关于这个网站&#xD;&#xA;&lt;/h2&gt;&lt;p&gt;这个网站主要记录：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;我使用过的工具&lt;/li&gt;&#xA;&lt;li&gt;我完成的项目&lt;/li&gt;&#xA;&lt;li&gt;实际遇到的问题&lt;/li&gt;&#xA;&lt;li&gt;曾经踩过的坑&lt;/li&gt;&#xA;&lt;li&gt;亲自验证过的解决方法&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;这里的内容不一定高深，也不追求复杂的技术表达。&lt;/p&gt;&#xA;&lt;p&gt;我更希望每一篇内容都能做到：&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;真实、实用、清晰、容易理解。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;为什么做这些记录&#34;&gt;为什么做这些记录&#xD;&#xA;&lt;/h2&gt;&lt;p&gt;很多问题在解决之后，看起来可能只是一个简单的设置，或者几行代码。&lt;/p&gt;&#xA;&lt;p&gt;但在找到正确答案之前，我们往往需要查阅大量资料、尝试不同方法，也可能因为一个不起眼的细节浪费很多时间。&lt;/p&gt;&#xA;&lt;p&gt;因此，我把这些实践过程记录下来，希望能够帮助来到这里的朋友：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;节省一点时间&lt;/li&gt;&#xA;&lt;li&gt;少走一些弯路&lt;/li&gt;&#xA;&lt;li&gt;更快地解决问题&lt;/li&gt;&#xA;&lt;li&gt;发现一些有趣且值得尝试的新东西&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;如果这里的某篇文章恰好解决了你的问题，那么这些记录便有了意义。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;联系方式&#34;&gt;联系方式&#xD;&#xA;&lt;/h2&gt;&lt;p&gt;如果你有任何问题、建议，或希望进行合作交流，欢迎通过邮箱联系：&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;邮箱：&lt;a class=&#34;link&#34; href=&#34;mailto:admin@tood.win&#34; &gt;admin@tood.win&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&#xD;&#xA;    &lt;blockquote&gt;&#xD;&#xA;        &lt;p&gt;&lt;strong&gt;保持好奇，持续折腾。&lt;/strong&gt;&lt;br&gt;&#xA;Explore · Build · Share&lt;/p&gt;&#xA;&#xD;&#xA;    &lt;/blockquote&gt;&#xD;&#xA;</description>
         </item><item>
             <title>归档</title>
-            <link>http://localhost:1413/archives/</link>
+            <link>https://www.tood.win/archives/</link>
             <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
-            <guid>http://localhost:1413/archives/</guid>
+            <guid>https://www.tood.win/archives/</guid>
             <description></description>
         </item><item>
             <title>链接</title>
-            <link>http://localhost:1413/%E9%93%BE%E6%8E%A5/</link>
+            <link>https://www.tood.win/%E9%93%BE%E6%8E%A5/</link>
             <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-            <guid>http://localhost:1413/%E9%93%BE%E6%8E%A5/</guid>
+            <guid>https://www.tood.win/%E9%93%BE%E6%8E%A5/</guid>
             <description></description>
         </item><item>
             <title>搜索</title>
-            <link>http://localhost:1413/search/</link>
+            <link>https://www.tood.win/search/</link>
             <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-            <guid>http://localhost:1413/search/</guid>
+            <guid>https://www.tood.win/search/</guid>
             <description></description>
         </item></channel>
 </rss>

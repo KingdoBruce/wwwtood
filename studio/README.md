@@ -4,7 +4,7 @@ TOOD Studio 是该 Hugo 博客的本地可视化内容管理器。
 
 ## 用户使用
 
-解压 `TOOD-Studio-Windows.zip`，将完整的 `TOOD-Studio-Windows` 文件夹放在博客根目录，然后双击其中的 `TOOD-Studio.exe`。程序会自动打开本地管理页面。
+将完整的 `TOOD-Studio-Windows` 文件夹保留在博客根目录，然后双击其中的 `TOOD-Studio.exe`。程序会自动打开本地管理页面。
 
 请不要只复制 EXE；同目录的 `_internal` 文件夹包含程序运行所需的组件。
 
