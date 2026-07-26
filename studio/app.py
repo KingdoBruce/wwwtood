@@ -85,6 +85,16 @@ def command_environment() -> dict[str, str]:
     environment["GIT_CONFIG_COUNT"] = str(index + 1)
     environment[f"GIT_CONFIG_KEY_{index}"] = "safe.directory"
     environment[f"GIT_CONFIG_VALUE_{index}"] = BLOG_ROOT.as_posix()
+    configured_proxy = proxy_url()
+    if configured_proxy:
+        proxy_index = index + 1
+        environment["GIT_CONFIG_COUNT"] = str(proxy_index + 1)
+        environment[f"GIT_CONFIG_KEY_{proxy_index}"] = "http.proxy"
+        environment[f"GIT_CONFIG_VALUE_{proxy_index}"] = configured_proxy
+        environment["HTTP_PROXY"] = configured_proxy
+        environment["HTTPS_PROXY"] = configured_proxy
+        environment["http_proxy"] = configured_proxy
+        environment["https_proxy"] = configured_proxy
     return environment
 
 
@@ -127,6 +137,104 @@ def git_text(*args: str, timeout: int = 30) -> str:
 
 def github_settings_path() -> Path:
     return BLOG_ROOT / ".tood-studio" / "github.json"
+
+
+def proxy_settings_path() -> Path:
+    return BLOG_ROOT / ".tood-studio" / "proxy.json"
+
+
+def load_proxy_settings() -> dict[str, Any]:
+    path = proxy_settings_path()
+    if not path.is_file():
+        return {}
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+        return value if isinstance(value, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def normalize_proxy_settings(values: dict[str, Any]) -> dict[str, Any]:
+    enabled = values.get("enabled") is True or str(values.get("enabled") or "").strip().lower() in {"1", "true", "yes", "on"}
+    protocol = str(values.get("protocol") or "http").strip().lower()
+    host = str(values.get("host") or "").strip()
+    try:
+        port = int(values.get("port") or 0)
+    except (TypeError, ValueError) as error:
+        raise ValueError("代理端口必须是 1—65535 之间的数字") from error
+    if protocol not in {"http", "https"}:
+        raise ValueError("代理协议仅支持 HTTP 或 HTTPS")
+    if host and (not re.fullmatch(r"(?:[A-Za-z0-9.-]+|\[[0-9A-Fa-f:]+\])", host) or ".." in host):
+        raise ValueError("代理服务器格式无效，请填写主机名或 IP 地址，不要包含协议和路径")
+    if enabled and not host:
+        raise ValueError("启用代理前请填写代理服务器")
+    if enabled and not 1 <= port <= 65535:
+        raise ValueError("代理端口必须是 1—65535 之间的数字")
+    return {"enabled": enabled, "protocol": protocol, "host": host, "port": port}
+
+
+def proxy_url(settings: dict[str, Any] | None = None) -> str:
+    configured = settings if settings is not None else load_proxy_settings()
+    if not configured.get("enabled"):
+        return ""
+    normalized = normalize_proxy_settings(configured)
+    return f"{normalized['protocol']}://{normalized['host']}:{normalized['port']}"
+
+
+def save_proxy_settings(settings: dict[str, Any]) -> None:
+    path = proxy_settings_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(".tmp")
+    temporary.write_text(json.dumps(settings, ensure_ascii=False, indent=2), encoding="utf-8")
+    try:
+        os.chmod(temporary, 0o600)
+    except OSError:
+        pass
+    temporary.replace(path)
+
+
+def proxy_settings_payload() -> dict[str, Any]:
+    settings = load_proxy_settings()
+    return {
+        "enabled": bool(settings.get("enabled")),
+        "protocol": str(settings.get("protocol") or "http"),
+        "host": str(settings.get("host") or ""),
+        "port": int(settings.get("port") or 0),
+    }
+
+
+def test_proxy_connections(settings: dict[str, Any]) -> dict[str, Any]:
+    configured_proxy = proxy_url({**settings, "enabled": True})
+    opener = urlrequest.build_opener(urlrequest.ProxyHandler({"http": configured_proxy, "https": configured_proxy}))
+    targets = (
+        ("google", "Google", "https://www.google.com/generate_204"),
+        ("github", "GitHub", "https://api.github.com/"),
+    )
+    results: dict[str, Any] = {}
+    for key, label, url in targets:
+        request_object = urlrequest.Request(
+            url,
+            headers={"Accept": "application/vnd.github+json", "User-Agent": "TOOD-Studio"},
+        )
+        try:
+            with opener.open(request_object, timeout=15) as response:
+                status = int(response.getcode() or 0)
+                success = 200 <= status < 400
+                message = f"连接成功（HTTP {status}）" if success else f"返回异常状态（HTTP {status}）"
+        except urlerror.HTTPError as error:
+            status = error.code
+            success = False
+            message = f"服务器返回 HTTP {error.code}"
+        except urlerror.URLError as error:
+            status = None
+            success = False
+            message = f"连接失败：{error.reason}"
+        except (OSError, TimeoutError) as error:
+            status = None
+            success = False
+            message = f"连接失败：{error}"
+        results[key] = {"label": label, "success": success, "status": status, "message": message}
+    return {"success": all(item["success"] for item in results.values()), "targets": results}
 
 
 def load_github_settings() -> dict[str, Any]:
@@ -283,7 +391,13 @@ def github_request(
         },
     )
     try:
-        with urlrequest.urlopen(request_object, timeout=25) as response:
+        configured_proxy = proxy_url()
+        if configured_proxy:
+            opener = urlrequest.build_opener(urlrequest.ProxyHandler({"http": configured_proxy, "https": configured_proxy}))
+            response_context = opener.open(request_object, timeout=25)
+        else:
+            response_context = urlrequest.urlopen(request_object, timeout=25)
+        with response_context as response:
             return json.loads(response.read().decode("utf-8"))
     except urlerror.HTTPError as error:
         detail = error.read().decode("utf-8", errors="replace")
@@ -291,7 +405,8 @@ def github_request(
             detail = json.loads(detail).get("message", detail)
         except json.JSONDecodeError:
             pass
-        raise RuntimeError(f"GitHub API 返回 {error.code}：{detail}") from error
+        hint = "。请检查仓库名称是否正确，以及 Token 是否已获准访问该仓库；代理通常不能解决 404" if error.code == 404 else ""
+        raise RuntimeError(f"GitHub API 返回 {error.code}：{detail}{hint}") from error
     except urlerror.URLError as error:
         raise RuntimeError(f"无法连接 GitHub API：{error.reason}") from error
 
@@ -1399,6 +1514,35 @@ def api_delete_github_connection():
         "ok": True,
         "message": "本机 GitHub 连接信息已清除",
         "connection": github_connection_payload(),
+    })
+
+
+@app.get("/api/proxy")
+def api_proxy_settings():
+    return jsonify({"ok": True, "proxy": proxy_settings_payload()})
+
+
+@app.post("/api/proxy")
+def api_save_proxy_settings():
+    settings = normalize_proxy_settings(request.get_json(silent=True) or {})
+    save_proxy_settings(settings)
+    try:
+        test_result = test_proxy_connections(settings)
+    except ValueError as error:
+        test_result = {
+            "success": False,
+            "targets": {},
+            "error": str(error),
+        }
+    if test_result["success"]:
+        message = "代理信息已保存，Google 和 GitHub 连接测试成功"
+    else:
+        message = "代理信息已保存，但连接测试未全部通过"
+    return jsonify({
+        "ok": True,
+        "message": message,
+        "proxy": proxy_settings_payload(),
+        "test": test_result,
     })
 
 

@@ -3,7 +3,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 
 BLOG_ROOT = Path(__file__).resolve().parents[2]
@@ -25,6 +25,7 @@ class StudioTests(unittest.TestCase):
         self.assertIn(b'input name="hero_visible"', response.data)
         self.assertIn(b'input name="hero_title_size"', response.data)
         self.assertIn(b'id="githubRepository"', response.data)
+        self.assertIn(b'id="proxyHost"', response.data)
         self.assertIn(b'id="view-githubHelp"', response.data)
 
     def test_find_blog_root_accepts_myblog_child(self):
@@ -74,6 +75,7 @@ class StudioTests(unittest.TestCase):
         advertising = self.client.get("/api/advertising").get_json()
         posts = self.client.get("/api/posts").get_json()
         github = self.client.get("/api/github").get_json()
+        proxy = self.client.get("/api/proxy").get_json()
         self.assertTrue(settings["ok"])
         self.assertIn("brand_name", settings["settings"])
         self.assertIn("browser_title", settings["settings"])
@@ -89,6 +91,62 @@ class StudioTests(unittest.TestCase):
         self.assertIsInstance(posts["posts"], list)
         self.assertTrue(github["ok"])
         self.assertNotIn("token", github["connection"])
+        self.assertTrue(proxy["ok"])
+        self.assertIn("enabled", proxy["proxy"])
+
+    def test_proxy_settings_apply_to_github_commands(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                headers = {"X-TOOD-Token": studio.SESSION_TOKEN}
+                test_result = {
+                    "success": True,
+                    "targets": {
+                        "google": {"label": "Google", "success": True, "status": 204, "message": "连接成功（HTTP 204）"},
+                        "github": {"label": "GitHub", "success": True, "status": 200, "message": "连接成功（HTTP 200）"},
+                    },
+                }
+                with patch.object(studio, "test_proxy_connections", return_value=test_result) as test_connection:
+                    response = self.client.post("/api/proxy", json={
+                        "enabled": True,
+                        "protocol": "http",
+                        "host": "127.0.0.1",
+                        "port": 7890,
+                    }, headers=headers)
+                self.assertEqual(response.status_code, 200)
+                test_connection.assert_called_once()
+                saved = studio.load_proxy_settings()
+                self.assertTrue(saved["enabled"])
+                self.assertEqual(studio.proxy_url(), "http://127.0.0.1:7890")
+                environment = studio.command_environment()
+                self.assertEqual(environment["HTTPS_PROXY"], "http://127.0.0.1:7890")
+                self.assertIn("http.proxy", environment.values())
+                self.assertIn("http://127.0.0.1:7890", environment.values())
+            finally:
+                studio.BLOG_ROOT = original_root
+
+    def test_proxy_test_checks_google_and_github_when_disabled(self):
+        google_response = MagicMock()
+        google_response.__enter__.return_value.getcode.return_value = 204
+        github_response = MagicMock()
+        github_response.__enter__.return_value.getcode.return_value = 200
+        opener = MagicMock()
+        opener.open.side_effect = [google_response, github_response]
+        with patch.object(studio.urlrequest, "build_opener", return_value=opener):
+            result = studio.test_proxy_connections({
+                "enabled": False,
+                "protocol": "http",
+                "host": "127.0.0.1",
+                "port": 7890,
+            })
+        self.assertTrue(result["success"])
+        self.assertEqual(opener.open.call_count, 2)
+        urls = [call.args[0].full_url for call in opener.open.call_args_list]
+        self.assertEqual(urls, [
+            "https://www.google.com/generate_204",
+            "https://api.github.com/",
+        ])
 
     def test_advertising_round_trip_and_settings_preserve_ads(self):
         original_root = studio.BLOG_ROOT

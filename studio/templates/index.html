@@ -206,6 +206,22 @@
             <label>关于标题<input name="about_title"></label><label>关于简介<textarea name="about_text" rows="3"></textarea></label><label>链接文字<input name="about_link_label"></label><div class="two-columns"><label>版权年份<input name="copyright_since" type="number"></label><label>页脚文字<input name="footer_build_label"></label></div>
           </article>
         </form>
+        <form id="proxyForm" class="settings-workbench settings-network-section" onsubmit="return false">
+          <article class="panel form-panel settings-card settings-card-wide proxy-settings-card">
+            <div class="settings-card-heading"><div><span>06 · NETWORK</span><h3>GitHub 代理服务器</h3><p>仅用于 GitHub API、自动同步和 Git 推送，本机保存，不会写入博客仓库。</p></div><span class="connection-status" id="proxyConnectionStatus">未启用</span></div>
+            <div class="proxy-settings-body">
+              <label class="settings-switch"><span><b>启用代理服务器</b><small>适用于连接超时、连接重置或无法访问 GitHub；不能修复仓库地址或权限导致的 404</small></span><input id="proxyEnabled" type="checkbox"></label>
+              <div class="proxy-settings-fields">
+                <label>代理协议<select id="proxyProtocol"><option value="http">HTTP</option><option value="https">HTTPS</option></select></label>
+                <label>代理服务器<input id="proxyHost" placeholder="例如：127.0.0.1"></label>
+                <label>代理端口<input id="proxyPort" type="number" min="1" max="65535" placeholder="例如：7890"></label>
+                <button type="button" class="button primary" id="saveProxySettings">测试并保存</button>
+              </div>
+              <p class="form-help">请填写代理软件提供的 HTTP/HTTPS 监听地址。常见本机代理地址为 <code>127.0.0.1</code>，端口以代理软件显示为准；本功能暂不保存需要账号密码的代理。</p>
+              <div class="proxy-test-result is-idle" id="proxyTestResult" aria-live="polite"><strong>连接测试</strong><span>尚未测试。点击“测试并保存”后将分别检查 Google 与 GitHub。</span></div>
+            </div>
+          </article>
+        </form>
       </section>
 
       <section class="view" id="view-publish">
