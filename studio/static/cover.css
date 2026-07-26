@@ -215,6 +215,39 @@
   border-left-color: #fff;
 }
 
+.auto-pull-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.auto-pull-banner[hidden] {
+  display: none !important;
+}
+
+.auto-pull-banner.is-timed::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: currentColor;
+  transform-origin: left;
+  animation: auto-pull-timeout 5s linear forwards;
+}
+
+@keyframes auto-pull-timeout {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auto-pull-banner.is-timed::after {
+    animation: none;
+  }
+}
+
 .github-connect-panel {
   margin-bottom: 20px;
 }

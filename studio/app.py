@@ -31,7 +31,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.5.0"
+APP_VERSION = "1.5.1"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
 SEO_SLUG_MAX_LENGTH = 60
@@ -1807,6 +1807,27 @@ def save_auto_pull_status(status: str, message: str) -> None:
         pass
 
 
+def describe_auto_pull_error(error: Exception) -> str:
+    message = str(error).strip()
+    normalized = message.lower()
+    if "schannel" in normalized and ("handshake" in normalized or "ssl/tls connection failed" in normalized):
+        proxy = proxy_settings_payload()
+        if proxy["enabled"]:
+            endpoint = f"{proxy['protocol'].upper()} {proxy['host']}:{proxy['port']}"
+            if proxy["protocol"] == "https":
+                return (
+                    f"GitHub TLS 握手失败。当前代理为 {endpoint}。代理协议表示本地监听方式，不是 GitHub 的 HTTPS；"
+                    "多数本机代理端口应选择 HTTP。请到“网站设置 → GitHub 代理服务器”改为 HTTP，"
+                    "点击“测试并保存”确认 Google 和 GitHub 均连接成功后再同步。"
+                )
+            return (
+                f"GitHub TLS 握手失败。当前代理为 {endpoint}。请确认代理软件正在运行、端口与 HTTP 监听端口一致，"
+                "然后在“网站设置 → GitHub 代理服务器”执行连接测试。"
+            )
+        return "GitHub TLS 握手失败。当前未启用代理，请检查网络、系统时间及安全软件的 HTTPS 检查后重试。"
+    return f"从 GitHub 拉取失败：{message[:200]}"
+
+
 def auto_pull_from_github() -> None:
     settings = load_github_settings()
     if not settings.get("repository") or not settings.get("token"):
@@ -1825,8 +1846,7 @@ def auto_pull_from_github() -> None:
             save_auto_pull_status("success", f"已从 GitHub 拉取最新内容\n{output[:200]}")
             logging.info("自动拉取成功：%s", output[:200])
     except (RuntimeError, subprocess.TimeoutExpired) as error:
-        message = str(error).strip()[:200]
-        save_auto_pull_status("failed", f"从 GitHub 拉取失败：{message}")
+        save_auto_pull_status("failed", describe_auto_pull_error(error))
         logging.warning("自动拉取失败（可忽略）：%s", error)
 
 

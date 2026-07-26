@@ -1,8 +1,5 @@
 {{ define "body-class" }}template-archives{{ end }}
 {{ define "main" }}
-<div class="archive-article-layout">
-    <div class="archive-article-main">
-
     {{- $taxonomy := .Site.GetPage "/categories" -}}
     {{- $terms := slice -}}
     {{- with $taxonomy -}}{{- $terms = .Pages.ByTitle -}}{{- end -}}
@@ -33,6 +30,9 @@
             </div>
         </section>
     {{- end -}}
+
+<div class="archive-article-layout archive-timeline-layout">
+    <div class="archive-article-main">
 
     {{- $pages := partial "helper/pages.html" .Site.Home -}}
     {{- $monthGroups := $pages.GroupByDate "2006-01" -}}

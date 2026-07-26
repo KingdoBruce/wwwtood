@@ -239,6 +239,26 @@ class StudioTests(unittest.TestCase):
             finally:
                 studio.BLOG_ROOT = original_root
 
+    def test_tls_handshake_error_explains_proxy_protocol(self):
+        original_root = studio.BLOG_ROOT
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                studio.BLOG_ROOT = Path(folder)
+                studio.save_proxy_settings({
+                    "enabled": True,
+                    "protocol": "https",
+                    "host": "127.0.0.1",
+                    "port": 10808,
+                })
+                message = studio.describe_auto_pull_error(
+                    RuntimeError("schannel: failed to receive handshake, SSL/TLS connection failed")
+                )
+                self.assertIn("TLS 握手失败", message)
+                self.assertIn("HTTPS 127.0.0.1:10808", message)
+                self.assertIn("应选择 HTTP", message)
+            finally:
+                studio.BLOG_ROOT = original_root
+
     def test_proxy_test_checks_google_and_github_when_disabled(self):
         google_response = MagicMock()
         google_response.__enter__.return_value.getcode.return_value = 204

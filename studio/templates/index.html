@@ -240,7 +240,7 @@
                 <label>代理端口<input id="proxyPort" type="number" min="1" max="65535" placeholder="例如：7890"></label>
                 <button type="button" class="button primary" id="saveProxySettings">测试并保存</button>
               </div>
-              <p class="form-help">请填写代理软件提供的 HTTP/HTTPS 监听地址。常见本机代理地址为 <code>127.0.0.1</code>，端口以代理软件显示为准；本功能暂不保存需要账号密码的代理。</p>
+              <p class="form-help">代理协议指代理软件的本地监听方式，不是 GitHub 网址的 HTTPS。多数 <code>127.0.0.1</code> 本机代理端口应选择 HTTP；端口以代理软件显示的 HTTP 或混合监听端口为准。本功能暂不保存需要账号密码的代理。</p>
               <div class="proxy-test-result is-idle" id="proxyTestResult" aria-live="polite"><strong>连接测试</strong><span>尚未测试。点击“测试并保存”后将分别检查 Google 与 GitHub。</span></div>
             </div>
           </article>

@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Categories on Hugo 主题 Stack</title>
-        <link>https://www.tood.win/categories/</link>
+        <link>http://localhost:1413/categories/</link>
         <description>Recent content in Categories on Hugo 主题 Stack</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh</language>
-        <lastBuildDate>Sun, 26 Jul 2026 15:01:19 +0800</lastBuildDate><atom:link href="https://www.tood.win/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 26 Jul 2026 18:08:00 +0800</lastBuildDate><atom:link href="http://localhost:1413/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>软件</title>
+            <link>http://localhost:1413/categories/%E8%BD%AF%E4%BB%B6/</link>
+            <pubDate>Sun, 26 Jul 2026 18:08:00 +0800</pubDate>
+            <guid>http://localhost:1413/categories/%E8%BD%AF%E4%BB%B6/</guid>
+            <description></description>
+        </item><item>
             <title>随笔</title>
-            <link>https://www.tood.win/categories/%E9%9A%8F%E7%AC%94/</link>
+            <link>http://localhost:1413/categories/%E9%9A%8F%E7%AC%94/</link>
             <pubDate>Sun, 26 Jul 2026 14:59:00 +0800</pubDate>
-            <guid>https://www.tood.win/categories/%E9%9A%8F%E7%AC%94/</guid>
+            <guid>http://localhost:1413/categories/%E9%9A%8F%E7%AC%94/</guid>
             <description></description>
         </item><item>
             <title>AI</title>
-            <link>https://www.tood.win/categories/ai/</link>
+            <link>http://localhost:1413/categories/ai/</link>
             <pubDate>Sat, 25 Jul 2026 22:38:00 +0800</pubDate>
-            <guid>https://www.tood.win/categories/ai/</guid>
+            <guid>http://localhost:1413/categories/ai/</guid>
             <description></description>
         </item><item>
             <title>建站</title>
-            <link>https://www.tood.win/categories/%E5%BB%BA%E7%AB%99/</link>
+            <link>http://localhost:1413/categories/%E5%BB%BA%E7%AB%99/</link>
             <pubDate>Fri, 24 Jul 2026 21:59:00 +0800</pubDate>
-            <guid>https://www.tood.win/categories/%E5%BB%BA%E7%AB%99/</guid>
+            <guid>http://localhost:1413/categories/%E5%BB%BA%E7%AB%99/</guid>
             <description></description>
         </item><item>
             <title>政策</title>
-            <link>https://www.tood.win/categories/%E6%94%BF%E7%AD%96/</link>
+            <link>http://localhost:1413/categories/%E6%94%BF%E7%AD%96/</link>
             <pubDate>Tue, 21 Jul 2026 16:39:00 +0800</pubDate>
-            <guid>https://www.tood.win/categories/%E6%94%BF%E7%AD%96/</guid>
+            <guid>http://localhost:1413/categories/%E6%94%BF%E7%AD%96/</guid>
             <description></description>
         </item></channel>
 </rss>
