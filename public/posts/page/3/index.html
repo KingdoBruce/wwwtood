@@ -16,7 +16,7 @@
 <meta property='og:description' content="拾光集记录值得被发现的人、事、思想与微光，分享工具实测、项目经验、技术实践与问题解决方法。">
 <meta property='og:url' content='https://www.tood.win/posts/'>
 <meta property='og:site_name' content='拾光集'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-07-26T14:59:00&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-07-26T18:49:00&#43;08:00 '/>
 <meta name="twitter:title" content="Posts - 拾光集 TOOD.WIN">
 <meta name="twitter:description" content="拾光集记录值得被发现的人、事、思想与微光，分享工具实测、项目经验、技术实践与问题解决方法。"><link rel="alternate" type="application/rss&#43;xml" href="https://www.tood.win/posts/index.xml">
     <link rel="shortcut icon" href="img/avatar.png" />
@@ -98,7 +98,7 @@
 
         <div class="section-card">
             <div class="section-details">
-                <h3 class="section-count">20 个页面</h3>
+                <h3 class="section-count">21 个页面</h3>
                 <h1 class="section-term">Posts</h1>
                 
             </div>
@@ -107,6 +107,15 @@
     
     
         <section class="article-list--compact">
+            
+                <article>
+    <a href="/posts/codex-%E9%92%A9%E5%AD%90%E6%98%AF%E4%BB%80%E4%B9%88-%E7%94%A8%E9%80%94%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
+        <div class="article-details">
+            <h2 class="article-title">Codex 钩子是什么？用途与使用方法</h2>
+                <footer class="article-meta"><time datetime="2026-07-24T17:55:00&#43;08:00">2026年7月24日星期五</time>
+                </footer></div>
+    </a>
+</article>
             
                 <article>
     <a href="/posts/handoff-md-%E6%98%AF%E4%BB%80%E4%B9%88-%E8%AE%A9%E6%96%B0-ai-%E4%BC%9A%E8%AF%9D%E6%97%A0%E7%BC%9D%E6%8E%A5%E6%89%8B%E6%97%A7%E4%BB%BB%E5%8A%A1/">
@@ -122,15 +131,6 @@
         <div class="article-details">
             <h2 class="article-title">Chrome DevTools MCP：让 AI 直接操作浏览器调试网站</h2>
                 <footer class="article-meta"><time datetime="2026-07-24T17:28:00&#43;08:00">2026年7月24日星期五</time>
-                </footer></div>
-    </a>
-</article>
-            
-                <article>
-    <a href="/posts/graphify-%E6%8A%8A%E6%95%B4%E4%B8%AA%E9%A1%B9%E7%9B%AE%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0-ai-%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
-        <div class="article-details">
-            <h2 class="article-title">Graphify：把整个项目变成一张 AI 能看懂的知识图谱</h2>
-                <footer class="article-meta"><time datetime="2026-07-24T13:45:00&#43;08:00">2026年7月24日星期五</time>
                 </footer></div>
     </a>
 </article>
@@ -318,35 +318,25 @@
         bait.style.cssText = 'position:absolute!important;left:-10000px!important;top:-10000px!important;width:2px!important;height:2px!important;pointer-events:none!important;';
         document.body.appendChild(bait);
 
-        let networkBlocked = false;
-        let localProbeLoaded = false;
         let localProbeBlocked = false;
         const localProbe = document.createElement('script');
         localProbe.async = true;
         localProbe.src = `/js/advertisement.js?probe=${Date.now()}`;
         localProbe.onload = () => {
-            localProbeLoaded = window.__toodAdvertisementProbe === true;
             localProbe.remove();
         };
         localProbe.onerror = () => {
             localProbeBlocked = true;
             localProbe.remove();
+            revealNotice();
         };
         document.head.appendChild(localProbe);
-
-        fetch(`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?adblock_probe=${Date.now()}`, {
-            mode: 'no-cors',
-            cache: 'no-store'
-        }).catch(() => {
-            networkBlocked = true;
-        });
 
         window.setTimeout(() => {
             const style = window.getComputedStyle(bait);
             const baitBlocked = style.display === 'none' || style.visibility === 'hidden' || bait.offsetHeight === 0 || bait.offsetWidth === 0;
-            const adsRuntimeMissing = typeof window.adsbygoogle === 'undefined';
             bait.remove();
-            if (baitBlocked || networkBlocked || localProbeBlocked || !localProbeLoaded || adsRuntimeMissing) {
+            if (baitBlocked || localProbeBlocked) {
                 revealNotice();
             }
         }, notice.dataset.blocking === 'true' ? 1000 : 2500);

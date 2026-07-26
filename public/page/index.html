@@ -16,7 +16,7 @@
 <meta property='og:description' content="拾光集记录值得被发现的人、事、思想与微光，分享工具实测、项目经验、技术实践与问题解决方法。">
 <meta property='og:url' content='https://www.tood.win/page/'>
 <meta property='og:site_name' content='拾光集'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-07-26T14:59:00&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-07-26T18:49:00&#43;08:00 '/>
 <meta name="twitter:title" content="Pages - 拾光集 TOOD.WIN">
 <meta name="twitter:description" content="拾光集记录值得被发现的人、事、思想与微光，分享工具实测、项目经验、技术实践与问题解决方法。"><link rel="alternate" type="application/rss&#43;xml" href="https://www.tood.win/page/index.xml">
     <link rel="shortcut icon" href="img/avatar.png" />
@@ -297,35 +297,25 @@
         bait.style.cssText = 'position:absolute!important;left:-10000px!important;top:-10000px!important;width:2px!important;height:2px!important;pointer-events:none!important;';
         document.body.appendChild(bait);
 
-        let networkBlocked = false;
-        let localProbeLoaded = false;
         let localProbeBlocked = false;
         const localProbe = document.createElement('script');
         localProbe.async = true;
         localProbe.src = `/js/advertisement.js?probe=${Date.now()}`;
         localProbe.onload = () => {
-            localProbeLoaded = window.__toodAdvertisementProbe === true;
             localProbe.remove();
         };
         localProbe.onerror = () => {
             localProbeBlocked = true;
             localProbe.remove();
+            revealNotice();
         };
         document.head.appendChild(localProbe);
-
-        fetch(`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?adblock_probe=${Date.now()}`, {
-            mode: 'no-cors',
-            cache: 'no-store'
-        }).catch(() => {
-            networkBlocked = true;
-        });
 
         window.setTimeout(() => {
             const style = window.getComputedStyle(bait);
             const baitBlocked = style.display === 'none' || style.visibility === 'hidden' || bait.offsetHeight === 0 || bait.offsetWidth === 0;
-            const adsRuntimeMissing = typeof window.adsbygoogle === 'undefined';
             bait.remove();
-            if (baitBlocked || networkBlocked || localProbeBlocked || !localProbeLoaded || adsRuntimeMissing) {
+            if (baitBlocked || localProbeBlocked) {
                 revealNotice();
             }
         }, notice.dataset.blocking === 'true' ? 1000 : 2500);

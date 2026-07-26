@@ -229,35 +229,25 @@ window.addEventListener('load', () => {
         bait.style.cssText = 'position:absolute!important;left:-10000px!important;top:-10000px!important;width:2px!important;height:2px!important;pointer-events:none!important;';
         document.body.appendChild(bait);
 
-        let networkBlocked = false;
-        let localProbeLoaded = false;
         let localProbeBlocked = false;
         const localProbe = document.createElement('script');
         localProbe.async = true;
         localProbe.src = `/js/advertisement.js?probe=${Date.now()}`;
         localProbe.onload = () => {
-            localProbeLoaded = window.__toodAdvertisementProbe === true;
             localProbe.remove();
         };
         localProbe.onerror = () => {
             localProbeBlocked = true;
             localProbe.remove();
+            revealNotice();
         };
         document.head.appendChild(localProbe);
-
-        fetch(`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?adblock_probe=${Date.now()}`, {
-            mode: 'no-cors',
-            cache: 'no-store'
-        }).catch(() => {
-            networkBlocked = true;
-        });
 
         window.setTimeout(() => {
             const style = window.getComputedStyle(bait);
             const baitBlocked = style.display === 'none' || style.visibility === 'hidden' || bait.offsetHeight === 0 || bait.offsetWidth === 0;
-            const adsRuntimeMissing = typeof window.adsbygoogle === 'undefined';
             bait.remove();
-            if (baitBlocked || networkBlocked || localProbeBlocked || !localProbeLoaded || adsRuntimeMissing) {
+            if (baitBlocked || localProbeBlocked) {
                 revealNotice();
             }
         }, notice.dataset.blocking === 'true' ? 1000 : 2500);
