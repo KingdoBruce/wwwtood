@@ -328,6 +328,14 @@ class StudioTests(unittest.TestCase):
         response = self.client.post("/api/markdown", json={"body": "# Test"})
         self.assertEqual(response.status_code, 403)
 
+    def test_editor_contains_download_fields(self):
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+        page = response.get_data(as_text=True)
+        self.assertIn('id="postDownloadEnabled"', page)
+        self.assertIn('id="postDownloadUrl"', page)
+        self.assertIn('id="postDownloadCode"', page)
+
     def test_markdown_preview(self):
         response = self.client.post(
             "/api/markdown",
@@ -368,6 +376,14 @@ class StudioTests(unittest.TestCase):
                         "cover": "/uploads/cover.png",
                         "featured": True,
                         "showArticleExtras": False,
+                        "download": {
+                            "enabled": True,
+                            "url": "https://example.com/download",
+                            "format": "ZIP",
+                            "size": "128 MB",
+                            "source": "本站整理",
+                            "code": "TOOD",
+                        },
                         "body": "正文",
                     },
                     headers={"X-TOOD-Token": studio.SESSION_TOKEN},
@@ -378,6 +394,10 @@ class StudioTests(unittest.TestCase):
                 self.assertTrue(metadata["featured"])
                 self.assertFalse(metadata["showArticleExtras"])
                 self.assertFalse(metadata["draft"])
+                self.assertEqual(metadata["download"]["url"], "https://example.com/download")
+                self.assertEqual(metadata["download"]["format"], "ZIP")
+                self.assertEqual(metadata["download"]["code"], "TOOD")
+                self.assertTrue(studio.post_summary(studio.BLOG_ROOT / "content" / "posts" / "cover-test.md")["download"]["enabled"])
             finally:
                 studio.BLOG_ROOT = original_root
 

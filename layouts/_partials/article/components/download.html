@@ -1,0 +1,53 @@
+{{- with .Params.download -}}
+{{- if and .enabled .url -}}
+{{- $category := "资源" -}}
+{{- with $.Params.categories }}{{ $category = index . 0 }}{{ end -}}
+{{- $format := .format | default "资源文件" -}}
+{{- $size := .size | default "以下载页为准" -}}
+{{- $source := .source | default "本站整理" -}}
+<section class="article-download" aria-labelledby="article-download-title">
+    <header class="article-download-heading">
+        <div>
+            <code>RESOURCE.FILE</code>
+            <h2 id="article-download-title">资源下载</h2>
+        </div>
+        <span>VERIFIED LINK</span>
+    </header>
+    <div class="article-download-body">
+        <div class="article-download-cover">
+            {{- with $.Params.cover -}}
+            <img src="{{ . | safeURL }}" alt="{{ $.Title }}资源封面" loading="lazy">
+            {{- else -}}
+            <div class="article-download-placeholder" aria-hidden="true">
+                <span>TOOD</span>
+                <strong>DOWNLOAD</strong>
+            </div>
+            {{- end -}}
+        </div>
+        <div class="article-download-content">
+            <h3>{{ $.Title }}</h3>
+            <dl class="article-download-meta">
+                <div><dt>资源分类</dt><dd>{{ $category }}</dd></div>
+                <div><dt>文件格式</dt><dd>{{ $format }}</dd></div>
+                <div><dt>发布日期</dt><dd>{{ $.Date.Format "2006-01-02" }}</dd></div>
+                <div><dt>最近更新</dt><dd>{{ $.Lastmod.Format "2006-01-02" }}</dd></div>
+                <div><dt>文件大小</dt><dd>{{ $size }}</dd></div>
+                <div><dt>资源来源</dt><dd>{{ $source }}</dd></div>
+            </dl>
+            <div class="article-download-access"><i aria-hidden="true"></i><span>下载资源</span><strong>免费获取</strong></div>
+            <div class="article-download-actions">
+                <a class="article-download-primary" href="{{ .url }}" target="_blank" rel="noopener noreferrer nofollow">立即下载 <span aria-hidden="true">↗</span></a>
+                {{- with .code -}}
+                <details class="article-download-code">
+                    <summary>查看提取码</summary>
+                    <code onclick="navigator.clipboard.writeText(this.textContent);this.textContent='已复制';setTimeout(()=>this.textContent='{{ . }}',1200)">{{ . }}</code>
+                </details>
+                {{- else -}}
+                <span class="article-download-no-code">无需提取码</span>
+                {{- end -}}
+            </div>
+        </div>
+    </div>
+</section>
+{{- end -}}
+{{- end -}}

@@ -6,6 +6,7 @@
         {{ partial "article/article.html" . }}
 
         {{ if .Params.links }}{{ partial "article/components/links" . }}{{ end }}
+        {{ partial "article/components/download" . }}
 
         {{- $showArticleExtras := true -}}
         {{- if isset .Params "showarticleextras" -}}
@@ -18,26 +19,52 @@
         <nav class="article-sequence" aria-label="上一篇和下一篇文章">
             {{- with $previous -}}
             <a class="article-sequence-link is-previous" href="{{ .RelPermalink }}" rel="prev">
-                <code>PREVIOUS</code>
-                <strong>{{ .LinkTitle }}</strong>
-                <span>←</span>
+                <span class="article-sequence-arrow" aria-hidden="true">←</span>
+                <span class="article-sequence-body">
+                    <code>PREVIOUS</code>
+                    <strong>{{ .LinkTitle }}</strong>
+                </span>
             </a>
             {{- else -}}
-            <span class="article-sequence-link is-disabled"><code>PREVIOUS</code><strong>已经是第一篇</strong></span>
+            <span class="article-sequence-link is-disabled">
+                <span class="article-sequence-arrow" aria-hidden="true">←</span>
+                <span class="article-sequence-body">
+                    <code>PREVIOUS</code>
+                    <strong>已经是第一篇</strong>
+                </span>
+            </span>
             {{- end -}}
             {{- with $next -}}
             <a class="article-sequence-link is-next" href="{{ .RelPermalink }}" rel="next">
-                <code>NEXT</code>
-                <strong>{{ .LinkTitle }}</strong>
-                <span>→</span>
+                <span class="article-sequence-body">
+                    <code>NEXT</code>
+                    <strong>{{ .LinkTitle }}</strong>
+                </span>
+                <span class="article-sequence-arrow" aria-hidden="true">→</span>
             </a>
             {{- else -}}
-            <span class="article-sequence-link is-next is-disabled"><code>NEXT</code><strong>已经是最后一篇</strong></span>
+            <span class="article-sequence-link is-next is-disabled">
+                <span class="article-sequence-body">
+                    <code>NEXT</code>
+                    <strong>已经是最后一篇</strong>
+                </span>
+                <span class="article-sequence-arrow" aria-hidden="true">→</span>
+            </span>
             {{- end -}}
         </nav>
         {{- end -}}
 
         {{ partial "article/components/related-content" . }}
+
+        <aside class="article-disclaimer">
+            <code>DISCLAIMER</code>
+            <div class="article-disclaimer-body">
+                <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+                <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+                <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+                <p>严禁利用本站内容从事任何违法违规活动。</p>
+            </div>
+        </aside>
         {{- end -}}
 
     </div>

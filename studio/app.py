@@ -31,7 +31,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.4.2"
+APP_VERSION = "1.5.0"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
 SEO_SLUG_MAX_LENGTH = 60
@@ -761,6 +761,9 @@ def serialize_post(metadata: dict[str, Any], body: str) -> str:
 
 def post_summary(path: Path) -> dict[str, Any]:
     metadata, body = parse_post(path)
+    download = metadata.get("download")
+    if not isinstance(download, dict):
+        download = {}
     return {
         "slug": path.stem,
         "title": str(metadata.get("title") or path.stem),
@@ -770,6 +773,14 @@ def post_summary(path: Path) -> dict[str, Any]:
         "cover": str(metadata.get("cover") or ""),
         "featured": bool(metadata.get("featured", False)),
         "showArticleExtras": bool(metadata.get("showArticleExtras", True)),
+        "download": {
+            "enabled": bool(download.get("enabled", False)),
+            "url": str(download.get("url") or ""),
+            "format": str(download.get("format") or ""),
+            "size": str(download.get("size") or ""),
+            "source": str(download.get("source") or ""),
+            "code": str(download.get("code") or ""),
+        },
         "categories": normalize_list(metadata.get("categories", [])),
         "tags": normalize_list(metadata.get("tags", [])),
         "words": len(re.findall(r"\S+", body)),
@@ -1434,6 +1445,21 @@ def api_save_post():
         metadata.pop("showArticleExtras", None)
     else:
         metadata["showArticleExtras"] = False
+    download_payload = payload.get("download")
+    if not isinstance(download_payload, dict):
+        download_payload = {}
+    download = {
+        "enabled": bool(download_payload.get("enabled", False)),
+        "url": str(download_payload.get("url") or "").strip()[:2000],
+        "format": str(download_payload.get("format") or "").strip()[:80],
+        "size": str(download_payload.get("size") or "").strip()[:80],
+        "source": str(download_payload.get("source") or "").strip()[:120],
+        "code": str(download_payload.get("code") or "").strip()[:120],
+    }
+    if download["enabled"] or any(download[key] for key in ("url", "format", "size", "source", "code")):
+        metadata["download"] = download
+    else:
+        metadata.pop("download", None)
     categories = normalize_list(payload.get("categories", []))
     tags = normalize_list(payload.get("tags", []))
     ensure_taxonomy_values("categories", categories)

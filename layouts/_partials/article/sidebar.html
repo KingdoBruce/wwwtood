@@ -14,6 +14,7 @@
         </form>
     </section>
 
+    {{- if eq .Section "posts" -}}
     <section class="article-side-panel article-side-toc">
         <h2 class="article-side-title">CONTENTS <span>02</span></h2>
         {{ if ge (len .TableOfContents) 100 }}{{ .TableOfContents }}{{ else }}<p class="article-side-empty">本文暂无分节目录</p>{{ end }}
@@ -61,9 +62,10 @@
         </script>
         {{ end }}
     </section>
+    {{- end -}}
 
     {{- $advertising := .Site.Data.site.advertising -}}
-    {{- if and (eq .Section "posts") $advertising.article_sidebar_enabled $advertising.article_sidebar_code -}}
+    {{- if and $advertising.article_sidebar_enabled $advertising.article_sidebar_code (or (eq .Section "posts") (eq .Section "page") (eq .Section "tags")) -}}
     <section class="article-side-panel site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
         {{ $advertising.article_sidebar_code | safeHTML }}
     </section>
@@ -97,6 +99,7 @@
         {{ end }}
     </section>
 
+    {{- if ne .Kind "taxonomy" -}}
     <section class="article-side-panel">
         <h2 class="article-side-title">TAG CLOUD <span>05</span></h2>
         <div class="article-tag-cloud archive-random-tags" data-random-count="18">
@@ -117,4 +120,5 @@
         </script>
         {{ end }}
     </section>
+    {{- end -}}
 </aside>

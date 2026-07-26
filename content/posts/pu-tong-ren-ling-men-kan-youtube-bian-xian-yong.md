@@ -4,6 +4,7 @@ date = "2026-07-26T14:59:00+08:00"
 draft = false
 categories = ["随笔"]
 tags = ["YouTube", "视频分成", "赚美元", "广告首页", "AI", "自媒体"]
+featured = true
 +++
 
 很多人做自媒体，只关注国内平台，却忽略了 YouTube。

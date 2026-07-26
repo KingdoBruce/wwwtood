@@ -86,6 +86,18 @@
               </label>
               <label>发布日期<input id="postDate" type="datetime-local"></label>
             </div>
+            <section class="download-editor">
+              <label class="download-editor-toggle"><span><b>启用下载模块</b><small>启用并填写下载链接后，才会在文章底部显示</small></span><input id="postDownloadEnabled" type="checkbox"></label>
+              <div id="postDownloadFields" class="download-editor-fields" hidden>
+                <label>下载链接<input id="postDownloadUrl" type="url" maxlength="2000" placeholder="https://…"></label>
+                <div class="download-editor-grid">
+                  <label>文件格式<input id="postDownloadFormat" maxlength="80" placeholder="ZIP / PDF / 安装包"></label>
+                  <label>文件大小<input id="postDownloadSize" maxlength="80" placeholder="例如 128 MB"></label>
+                </div>
+                <label>资源来源<input id="postDownloadSource" maxlength="120" placeholder="留空显示“本站整理”"></label>
+                <label>提取码 / 密码<input id="postDownloadCode" maxlength="120" placeholder="没有可留空"></label>
+              </div>
+            </section>
             <label>摘要<textarea id="postDescription" rows="2" maxlength="500" placeholder="用于列表和搜索引擎展示"></textarea></label>
             <div class="editor-tabs"><button class="active" data-editor-tab="write">Markdown</button><button data-editor-tab="preview">预览</button><button type="button" class="upload-inline" id="insertInternalLink">插入内链</button><button type="button" class="upload-inline" id="insertImage">插入图片</button><input type="file" id="articleImage" accept="image/png,image/jpeg,image/webp,image/gif" hidden></div>
             <textarea id="postBody" class="markdown-editor" placeholder="# 从这里开始写作…"></textarea>

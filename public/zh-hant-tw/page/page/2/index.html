@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
 
 
-<link rel="stylesheet" href="/scss/style.min.453141ba8c60fd46e7b9a0c105676806330622add87e62047771f6540b30f423.css"><meta property='og:title' content="Pages - 拾光集 TOOD.WIN">
+<link rel="stylesheet" href="/scss/style.min.b160badc14e0951d9f1d7daa1d966f891e7fd7ddfd8cdf290e502b08b4405790.css"><meta property='og:title' content="Pages - 拾光集 TOOD.WIN">
 <meta property='og:description' content="拾光集记录值得被发现的人、事、思想与微光，分享工具实测、项目经验、技术实践与问题解决方法。">
 <meta property='og:url' content='https://www.tood.win/zh-hant-tw/page/'>
 <meta property='og:site_name' content='Hugo 主題 Stack'>
@@ -22,8 +22,8 @@
     <link rel="shortcut icon" href="img/avatar.png" />
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
-<link rel="icon" href="/uploads/2026/07/ico-1-f7348eae.png">
-<link rel="shortcut icon" href="/uploads/2026/07/ico-1-f7348eae.png">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -75,8 +75,8 @@
                     <a class="" href="/zh-hant-tw/tags/">标签</a>
                     <a class="" href="/zh-hant-tw/%e5%85%b3%e4%ba%8e/">关于</a>
                 </nav>
-      <div class="archive-status" aria-label="拾光存档：记录微光，存入时间">
-        <em class="archive-status-mark" aria-hidden="true"><i></i></em>
+      <div class="archive-status" aria-label="拾光存档：记录微光 · 存入时间">
+        <img class="archive-status-image" src="/uploads/2026/07/ico-123-850dfa75.png" alt="">
         <span class="archive-status-copy"><strong>拾光存档</strong><small>记录微光 · 存入时间</small></span>
       </div>
             </header>
@@ -183,11 +183,15 @@
 </main>
             </div>
             <footer class="archive-footer">
-                <span class="archive-footer-left"><span>© 2026 拾光集 TOOD.WIN</span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+                <span class="archive-footer-left"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
 <script>
 (() => {
     const runtime = document.currentScript.previousElementSibling;
     const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
     const updateRuntime = () => {
         const elapsed = Math.max(0, Date.now() - startedAt);
         const totalSeconds = Math.floor(elapsed / 1000);

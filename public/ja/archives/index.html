@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
 
 
-<link rel="stylesheet" href="/scss/style.min.453141ba8c60fd46e7b9a0c105676806330622add87e62047771f6540b30f423.css"><meta property='og:title' content="アーカイブ - 拾光集 TOOD.WIN">
+<link rel="stylesheet" href="/scss/style.min.b160badc14e0951d9f1d7daa1d966f891e7fd7ddfd8cdf290e502b08b4405790.css"><meta property='og:title' content="アーカイブ - 拾光集 TOOD.WIN">
 <meta property='og:description' content="拾光集记录值得被发现的人、事、思想与微光，分享工具实测、项目经验、技术实践与问题解决方法。">
 <meta property='og:url' content='https://www.tood.win/ja/archives/'>
 <meta property='og:site_name' content='Hugo Theme Stack'>
@@ -22,8 +22,8 @@
     <link rel="shortcut icon" href="img/avatar.png" />
 
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
-<link rel="icon" href="/uploads/2026/07/ico-1-f7348eae.png">
-<link rel="shortcut icon" href="/uploads/2026/07/ico-1-f7348eae.png">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -90,8 +90,8 @@
                     <a class="" href="/ja/tags/">标签</a>
                     <a class="" href="/ja/%e5%85%b3%e4%ba%8e/">关于</a>
                 </nav>
-      <div class="archive-status" aria-label="拾光存档：记录微光，存入时间">
-        <em class="archive-status-mark" aria-hidden="true"><i></i></em>
+      <div class="archive-status" aria-label="拾光存档：记录微光 · 存入时间">
+        <img class="archive-status-image" src="/uploads/2026/07/ico-123-850dfa75.png" alt="">
         <span class="archive-status-copy"><strong>拾光存档</strong><small>记录微光 · 存入时间</small></span>
       </div>
             </header>
@@ -103,19 +103,126 @@
                     <span class="archive-page-name">拾光集 TOOD.WIN</span>
                     <strong>/ PAGE</strong>
                 </div>
-                <main class="archive-page-main"><section class="archive-month-index" aria-labelledby="archive-month-title">
+                <main class="archive-page-main">
+<div class="archive-article-layout">
+    <div class="archive-article-main"><section class="archive-month-index" aria-labelledby="archive-month-title">
         <header class="archive-block-heading">
             <h2 id="archive-month-title">时间归档</h2>
             <span>00 ACTIVE MONTHS</span>
         </header><div class="archive-month-empty">暂无可归档文章</div></section>
+
+    </div>
+
+    <aside class="archive-article-sidebar" aria-label="文章侧边栏">
+    <section class="article-side-panel">
+        <h2 class="article-side-title">SEARCH <span>01</span></h2>
+        <form class="article-side-search" action="/ja/search/" method="get" role="search">
+            <input type="search" name="keyword" placeholder="输入关键词..." aria-label="搜索文章" required>
+            <button type="submit" aria-label="开始搜索">⌕</button>
+        </form>
+    </section><section class="article-side-panel">
+        <h2 class="article-side-title">LATEST <span>03</span></h2>
+        <ol class="article-side-list">
+            <li><p class="article-side-empty">暂无其他文章</p></li>
+        </ol>
+    </section>
+
+    <section class="article-side-panel">
+        <h2 class="article-side-title">HOT <span>04</span></h2>
+        <ol class="article-side-list article-hot-list" data-random-count="5">
+            <li><p class="article-side-empty">近半年暂无其他文章</p></li>
+        </ol>
+        
+    </section><section class="article-side-panel">
+        <h2 class="article-side-title">TAG CLOUD <span>05</span></h2>
+        <div class="article-tag-cloud archive-random-tags" data-random-count="18">
+            <p class="article-side-empty">暂无标签</p>
+        </div>
+        
+    </section></aside>
+
+</div>
+
+<div class="article-float-actions" aria-hidden="true">
+    <button class="article-back-to-top" type="button" aria-label="返回页面顶部" title="返回顶部" tabindex="-1">
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path>
+            </svg>
+        </span>
+    </button>
+    <button class="article-go-to-bottom" type="button" aria-label="跳转到底部" title="跳转到底部" tabindex="-1">
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"></path>
+            </svg>
+        </span>
+    </button>
+</div>
+
+<script>
+(() => {
+    const container = document.querySelector('.article-float-actions');
+    const topBtn = container.querySelector('.article-back-to-top');
+    const bottomBtn = container.querySelector('.article-go-to-bottom');
+    if (!container || !topBtn || !bottomBtn) return;
+
+    const placeButtons = () => {
+        const main = document.querySelector('.archive-article-main');
+        const sidebar = document.querySelector('.archive-article-sidebar');
+        const x = (window.innerWidth <= 1180 || !main || !sidebar)
+            ? null
+            : `${(main.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2}px`;
+        container.style.setProperty('--float-x', x || 'auto');
+        container.style.setProperty('--float-right', x ? 'auto' : '16px');
+    };
+
+    const updateButtons = () => {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight;
+        const viewHeight = window.innerHeight;
+        const nearBottom = scrollY + viewHeight >= docHeight - 60;
+        const farFromTop = scrollY > 360;
+
+        const footer = document.querySelector('.archive-footer');
+        const baseBottom = window.innerWidth <= 700 ? 16 : 26;
+        const footerOffset = footer ? Math.max(0, viewHeight - footer.getBoundingClientRect().top) : 0;
+        const bottom = `${Math.max(baseBottom, footerOffset + 12)}px`;
+        container.style.setProperty('--float-bottom', bottom);
+
+        topBtn.classList.toggle('is-visible', farFromTop);
+        topBtn.setAttribute('aria-hidden', farFromTop ? 'false' : 'true');
+        topBtn.tabIndex = farFromTop ? 0 : -1;
+
+        bottomBtn.classList.toggle('is-visible', !nearBottom);
+        bottomBtn.setAttribute('aria-hidden', nearBottom ? 'true' : 'false');
+        bottomBtn.tabIndex = nearBottom ? -1 : 0;
+    };
+
+    window.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', () => { placeButtons(); updateButtons(); }, { passive: true });
+    topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    bottomBtn.addEventListener('click', () => {
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    updateButtons();
+    placeButtons();
+})();
+</script>
 </main>
             </div>
             <footer class="archive-footer">
-                <span class="archive-footer-left"><span>© 2026 拾光集 TOOD.WIN</span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+                <span class="archive-footer-left"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
 <script>
 (() => {
     const runtime = document.currentScript.previousElementSibling;
     const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
     const updateRuntime = () => {
         const elapsed = Math.max(0, Date.now() - startedAt);
         const totalSeconds = Math.floor(elapsed / 1000);
