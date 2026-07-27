@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="现在的 AI PPT 工具很多，但不少工具生成的只是图片、网页截图，或者套用固定模板拼出来的页面。\n看起来像 PPT，真正需要修改时却很麻烦：文字不能单独调整、图表无法重新编辑、排版稍微改动就容易错位。\n">
+<title>PPT Master：免费开源的 AI PPT 工具，生成真正可编辑的 PowerPoint - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/ppt-master-mian-fei-kai-yuan-de-ai-ppt-gong/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.22ec3091afaaacc27d6058fd34e11870233fb448ec3523e2e0855b4c317da7ad.css"><meta property='og:title' content="PPT Master：免费开源的 AI PPT 工具，生成真正可编辑的 PowerPoint - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="现在的 AI PPT 工具很多，但不少工具生成的只是图片、网页截图，或者套用固定模板拼出来的页面。\n看起来像 PPT，真正需要修改时却很麻烦：文字不能单独调整、图表无法重新编辑、排版稍微改动就容易错位。\n">
+<meta property='og:url' content='https://www.tood.win/posts/ppt-master-mian-fei-kai-yuan-de-ai-ppt-gong/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='PPT Master' /><meta property='article:tag' content='AI' /><meta property='article:tag' content='MCP' /><meta property='article:tag' content='AI PPT 工具' /><meta property='article:published_time' content='2026-07-27T09:27:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-27T09:27:00&#43;08:00'/>
+<meta name="twitter:title" content="PPT Master：免费开源的 AI PPT 工具，生成真正可编辑的 PowerPoint - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="现在的 AI PPT 工具很多，但不少工具生成的只是图片、网页截图，或者套用固定模板拼出来的页面。\n看起来像 PPT，真正需要修改时却很麻烦：文字不能单独调整、图表无法重新编辑、排版稍微改动就容易错位。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="PPT Master, AI, MCP, AI PPT 工具">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"PPT Master：免费开源的 AI PPT 工具，生成真正可编辑的 PowerPoint\"",
+  "description": "\"现在的 AI PPT 工具很多，但不少工具生成的只是图片、网页截图，或者套用固定模板拼出来的页面。\\n看起来像 PPT，真正需要修改时却很麻烦：文字不能单独调整、图表无法重新编辑、排版稍微改动就容易错位。\\n\"",
+  "datePublished": "\"2026-07-27T09:27:00+08:00\"",
+  "dateModified": "\"2026-07-27T09:27:00+08:00\"",
+  "url": "\"https://www.tood.win/posts/ppt-master-mian-fei-kai-yuan-de-ai-ppt-gong/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page article-with-sidebar">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            <header class="archive-topbar">
+                <a class="archive-brand" href="/" aria-label="返回首页">
+                    
+                        <img class="archive-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+                    
+                </a><nav class="archive-nav" aria-label="主导航">
+                    <a class="" href="/">首页</a>
+                    <a class="" href="/archives/">分类</a>
+                    <a class="" href="/tags/">标签</a>
+                    <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+                </nav>
+      <div class="archive-status" aria-label="拾光存档：记录微光 · 存入时间">
+        <img class="archive-status-image" src="/uploads/2026/07/ico-123-850dfa75.png" alt="">
+        <span class="archive-status-copy"><strong>拾光存档</strong><small>记录微光 · 存入时间</small></span>
+      </div>
+            </header>
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                <div class="archive-page-index">
+                    <span class="archive-cross" aria-hidden="true"></span>
+                    <span class="archive-coord archive-coord-top">PAGE.2607.2833</span>
+                    <span class="archive-page-name">拾光集 TOOD.WIN</span>
+                    <strong>/ PAGE</strong>
+                </div>
+                <main class="archive-page-main">
+<div class="archive-article-layout">
+    <div class="archive-article-main">
+        <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/ai/" style="background-color: hsl(167, 60%, 84%); color: hsl(167, 60%, 15%);">
+                AI
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/ppt-master-mian-fei-kai-yuan-de-ai-ppt-gong/">PPT Master：免费开源的 AI PPT 工具，生成真正可编辑的 PowerPoint</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-07-27T09:27:00&#43;08:00'>2026年7月27日星期一</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        阅读时长: 6 分钟
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+
+    <section class="article-content"><p>现在的 <a class="link" href="/tags/ai/" >AI</a> PPT 工具很多，但不少工具生成的只是图片、网页截图，或者套用固定模板拼出来的页面。</p>
+<p>看起来像 PPT，真正需要修改时却很麻烦：文字不能单独调整、图表无法重新编辑、排版稍微改动就容易错位。</p>
+<p>最近我发现了一个很实用的开源项目——<strong>PPT Master</strong>。</p>
+<p>它最大的特点，是能够根据文档、资料或主题，生成真正的 <code>.pptx</code> 文件。PPT 里的文字、图形、配色和部分图表都可以继续在 PowerPoint、WPS、Keynote 等软件中修改，而不是把整页内容做成一张无法编辑的图片。</p>
+<p><img alt="QQ20260727-092725" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/QQ20260727-092725-cada564a.jpg"></p>
+<p>截至本文整理时，这个项目在 GitHub 上已经获得约 <strong>3.3 万颗 Star</strong>，并且仍在持续更新。</p>
+<h2 id="ppt-master-是什么">PPT Master 是什么？
+</h2><p>PPT Master 是一套运行在 AI 编程工具中的 PPT 生成工作流。</p>
+<p>安装完成后，可以在 <a class="link" href="/tags/claude-code/" >Claude Code</a>、<a class="link" href="/tags/codex/" >Codex</a>、Cursor、VS Code Copilot 等支持读取文件和执行命令的 AI 工具中，直接用自然语言告诉它：</p>
+
+    <blockquote>
+        <p>根据这份产品资料，生成一套 12 页的中文产品介绍 PPT。</p>
+
+    </blockquote>
+<p>AI 会自动分析内容、规划页面结构、设计视觉风格，并导出可以继续编辑的 PowerPoint 文件。</p>
+<p>它不是传统意义上的在线 PPT 网站，也不是打开网页后输入一句话就能生成的 SaaS 服务，而是一套需要部署在本地、配合 AI Agent 使用的开源工具。</p>
+<h2 id="它有什么特别之处">它有什么特别之处？
+</h2><h3 id="1-生成真正可编辑的-pptx">1. 生成真正可编辑的 PPTX
+</h3><p>这是 PPT Master 最有价值的地方。</p>
+<p>项目通过 SVG 和 PowerPoint 原生 DrawingML 结构生成 PPT，最终导出的文字、形状、颜色和图形，可以作为 PowerPoint 对象继续调整。</p>
+<p>生成完成后，你仍然可以：</p>
+<ul>
+<li>修改标题和正文；</li>
+<li>更换字体与颜色；</li>
+<li>移动图标和形状；</li>
+<li>调整版式和间距；</li>
+<li>修改图表文字；</li>
+<li>添加公司 Logo；</li>
+<li>替换图片和品牌元素。</li>
+</ul>
+<p>拿到的不是一套“看起来像 PPT 的图片”，而是一份真正可以修改和交付的演示文稿。</p>
+<h3 id="2-支持多种内容来源">2. 支持多种内容来源
+</h3><p>PPT Master 可以根据主题直接制作内容，也可以读取已有资料重新整理，例如：</p>
+<ul>
+<li>Markdown 文档；</li>
+<li>Word 文档；</li>
+<li>PDF 文件；</li>
+<li>HTML 网页；</li>
+<li>EPUB 文件；</li>
+<li>Jupyter Notebook；</li>
+<li>已有的 PPTX 文件；</li>
+<li>本地图片和项目资料。</li>
+</ul>
+<p>你可以把产品介绍、项目方案、行业报告或会议资料放进项目目录，让 AI 根据原始材料生成 PPT。</p>
+<h3 id="3-支持多种内容结构与视觉风格">3. 支持多种内容结构与视觉风格
+</h3><p>PPT Master 将内容逻辑和视觉风格分开处理。</p>
+<p>内容结构可以选择：</p>
+<ul>
+<li>金字塔汇报；</li>
+<li>故事叙述；</li>
+<li>教程说明；</li>
+<li>产品展示；</li>
+<li>工作简报。</li>
+</ul>
+<p>视觉上则可以选择瑞士极简、编辑杂志、柔和圆角、暗黑科技等不同方向，也可以根据企业品牌要求自定义风格。</p>
+<p>因此，它不仅适合普通工作汇报，也可以用于：</p>
+<ul>
+<li>产品介绍；</li>
+<li>项目方案；</li>
+<li>商业计划书；</li>
+<li>行业分析；</li>
+<li>教学课件；</li>
+<li>公司培训；</li>
+<li>商业路演；</li>
+<li>咨询报告；</li>
+<li>年度总结。</li>
+</ul>
+<h3 id="4-支持动画旁白和视频导出">4. 支持动画、旁白和视频导出
+</h3><p>项目支持页面转场和元素动画，还可以根据演讲者备注生成语音旁白，并将音频嵌入 PPT。</p>
+<p>之后可以通过 PowerPoint 将整套演示文稿导出为带旁白和转场的视频。</p>
+<h3 id="5-不只可以制作-ppt">5. 不只可以制作 PPT
+</h3><p>除了常见的 16:9 和 4:3 演示文稿，PPT Master 还支持生成多种内容尺寸：</p>
+<ul>
+<li>小红书 3:4 图文；</li>
+<li>微信朋友圈 1:1 图片；</li>
+<li>Instagram 方形内容；</li>
+<li>短视频竖屏封面；</li>
+<li>微信公众号头图；</li>
+<li>A4 海报和宣传页。</li>
+</ul>
+<p>这些内容最终仍可以导出为带有可编辑元素的 PPTX 文件。</p>
+<h2 id="ppt-master-使用方法">PPT Master 使用方法
+</h2><p>下面以 Windows 系统为例介绍。</p>
+<h3 id="第一步安装-python">第一步：安装 Python
+</h3><p>PPT Master 需要 Python 3.10 或更高版本。</p>
+<p>安装 Python 时，一定要勾选：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Add python.exe to PATH
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装完成后，打开 PowerShell，输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python --version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>能够看到 Python 版本号，就说明安装成功。</p>
+<h3 id="第二步下载项目">第二步：下载项目
+</h3><p>熟悉 Git 的用户，可以在 PowerShell 中执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/hugohe3/ppt-master.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ppt-master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不熟悉 Git，也可以直接打开 GitHub 项目页面，点击：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Code → Download ZIP
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下载完成后解压到本地文件夹。</p>
+<h3 id="第三步安装依赖">第三步：安装依赖
+</h3><p>进入项目目录后执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install -r requirements.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果系统提示找不到 <code>pip</code>，可以改用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python -m pip install -r requirements.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装完成后，可以执行下面的命令检查环境：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python -c <span class="s2">&#34;import pptx; import fitz; print(&#39;All core dependencies OK&#39;)&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果显示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">All core dependencies OK
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>说明核心环境已经配置完成。</p>
+<h3 id="第四步使用-ai-工具打开项目">第四步：使用 AI 工具打开项目
+</h3><p>接下来使用支持 Agent 功能的 AI 工具打开 <code>ppt-master</code> 文件夹，例如：</p>
+<ul>
+<li>Codex；</li>
+<li>Claude Code；</li>
+<li>Cursor；</li>
+<li>VS Code Copilot；</li>
+<li>其他能够读取文件并执行终端命令的 AI Agent。</li>
+</ul>
+<p>打开后，可以先输入一条简单的测试指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请创建一份 3 页的测试 PPT。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">主题：人工智能如何提高工作效率。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">页面结构：
+</span></span><span class="line"><span class="cl">1. 封面
+</span></span><span class="line"><span class="cl">2. 主要应用场景
+</span></span><span class="line"><span class="cl">3. 总结
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">使用简洁、现代的商务风格，生成中文内容，并导出为可编辑的 PPTX 文件。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行完成后，生成的 PPT 文件通常会保存在：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">exports
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>目录中。</p>
+<h2 id="推荐提示词">推荐提示词
+</h2><p>正式制作 PPT 时，可以直接使用下面的提示词：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请使用 PPT Master，根据我提供的资料制作一套完整的中文演示文稿。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">具体要求：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1. PPT 主题：填写你的主题
+</span></span><span class="line"><span class="cl">2. 使用场景：工作汇报 / 产品介绍 / 商业路演
+</span></span><span class="line"><span class="cl">3. 目标受众：填写听众身份
+</span></span><span class="line"><span class="cl">4. 页面数量：10—12 页
+</span></span><span class="line"><span class="cl">5. 页面比例：16:9
+</span></span><span class="line"><span class="cl">6. 视觉风格：现代、简洁、专业
+</span></span><span class="line"><span class="cl">7. 内容要求：
+</span></span><span class="line"><span class="cl">   - 先整理资料并生成清晰的大纲；
+</span></span><span class="line"><span class="cl">   - 每页只表达一个核心观点；
+</span></span><span class="line"><span class="cl">   - 避免大段文字；
+</span></span><span class="line"><span class="cl">   - 重要数据尽量使用图表或信息图；
+</span></span><span class="line"><span class="cl">   - 保持整套 PPT 的字体、配色和间距统一；
+</span></span><span class="line"><span class="cl">   - 为每一页添加简洁的演讲者备注。
+</span></span><span class="line"><span class="cl">8. 输出要求：
+</span></span><span class="line"><span class="cl">   - 导出真正可编辑的 PPTX 文件；
+</span></span><span class="line"><span class="cl">   - 文字、形状和图表保持可修改；
+</span></span><span class="line"><span class="cl">   - 检查是否存在文字溢出、元素重叠和页面错位；
+</span></span><span class="line"><span class="cl">   - 完成后告知 PPTX 文件的保存位置。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果已经准备好了 Word、PDF 或 Markdown 文件，可以补充：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请优先读取项目目录中的资料，不要虚构资料中没有出现的数据。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="如何修改生成结果">如何修改生成结果？
+</h2><p>PPT 生成后，不需要整套重新制作。</p>
+<p>假如某一页出现问题，可以直接告诉 AI：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">第 3 页标题和图表发生重叠，请重新调整这一页的版式，其他页面不要修改。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以继续提出更具体的要求：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">将第 5 页改为左右分栏布局。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">第 7 页文字太多，请压缩内容并增加一张信息图。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">将整套 PPT 修改为深色科技风，但不要改变原来的内容结构。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>PPT Master 支持针对单独页面进行重新生成和修复，不一定每次都要从头开始。</p>
+<h2 id="使用时需要注意什么">使用时需要注意什么？
+</h2><h3 id="ppt-master-本身免费但-ai-模型不一定免费">PPT Master 本身免费，但 AI 模型不一定免费
+</h3><p>PPT Master 使用 MIT 开源协议，项目本身可以免费使用。</p>
+<p>但是，它需要配合 Claude Code、Codex、Cursor 或其他 AI 模型工作，因此可能产生模型订阅费或 API 调用费用。</p>
+<h3 id="它不是完全零门槛的一键工具">它不是完全零门槛的一键工具
+</h3><p>第一次使用时，需要完成：</p>
+<ul>
+<li>安装 Python；</li>
+<li>下载项目；</li>
+<li>安装依赖；</li>
+<li>配置 AI 编程工具；</li>
+<li>必要时配置模型或图片 API。</li>
+</ul>
+<p>对于完全没有接触过本地部署的用户来说，前期需要一点学习成本。</p>
+<h3 id="最终效果仍然取决于资料和提示词">最终效果仍然取决于资料和提示词
+</h3><p>AI 能够提高制作效率，但无法代替内容判断。</p>
+<p>如果提供的资料过于简单，或者没有明确告诉 AI 使用场景、受众和页面重点，生成结果也容易显得空泛。</p>
+<p>建议提前准备：</p>
+<ul>
+<li>完整的原始资料；</li>
+<li>明确的汇报对象；</li>
+<li>大概的页面数量；</li>
+<li>企业配色和 Logo；</li>
+<li>参考 PPT 或视觉案例；</li>
+<li>希望重点表达的数据。</li>
+</ul>
+<h2 id="总结">总结
+</h2><p>PPT Master 最值得关注的地方，并不是“AI 可以自动做 PPT”，而是它解决了 AI PPT 工具普遍存在的一个问题：</p>
+<p><strong>生成之后还能不能继续编辑。</strong></p>
+<p>它输出的是原生可编辑的 PowerPoint 文件，而不是简单的图片或网页截图。对于经常需要制作工作汇报、产品介绍、项目方案、行业报告和商业路演的人来说，这种可编辑性非常重要。</p>
+<p>虽然前期需要安装环境，并配合 Codex、Claude Code、Cursor 等 AI 工具使用，但完成配置后，就可以把它变成一套长期使用的本地 AI PPT 工作流。</p>
+<p>如果你平时经常制作 PPT，这个项目值得收藏和尝试。</p>
+<h2 id="项目地址">项目地址
+</h2><p>GitHub：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">https://github.com/hugohe3/ppt-master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>项目主页：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">https://hugohe3.github.io/ppt-master/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>中文说明：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">https://github.com/hugohe3/ppt-master/blob/main/README_CN.md
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Windows 安装指南：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">https://github.com/hugohe3/ppt-master/blob/main/docs/windows-installation.md
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/ppt-master/">PPT Master</a>
+        
+            <a href="/tags/ai/">AI</a>
+        
+            <a href="/tags/mcp/">MCP</a>
+        
+            <a href="/tags/ai-ppt-%E5%B7%A5%E5%85%B7/">AI PPT 工具</a>
+        
+    </section>
+</footer>
+
+    
+</article>
+
+        
+        <nav class="article-sequence" aria-label="上一篇和下一篇文章"><a class="article-sequence-link is-previous" href="/posts/16-zhong-chang-jian-de-ui-she-ji-feng-ge/" rel="prev">
+                <span class="article-sequence-arrow" aria-hidden="true">←</span>
+                <span class="article-sequence-body">
+                    <code>PREVIOUS</code>
+                    <strong>16 种常见的 UI 设计风格提示词</strong>
+                </span>
+            </a><a class="article-sequence-link is-next" href="/posts/mian-fei-ling-qu-4-ge-kai-fa-zhe-yu/" rel="next">
+                <span class="article-sequence-body">
+                    <code>NEXT</code>
+                    <strong>免费领取 4 个开发者域名：Stackryze Domains 使用介绍</strong>
+                </span>
+                <span class="article-sequence-arrow" aria-hidden="true">→</span>
+            </a></nav><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED ARTICLES</h2>
+        <span>06 RECOMMENDATIONS</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/jcodemunch-mcp-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E8%AE%A9-codex-claude-code-%E5%B0%91%E8%AF%BB%E5%BA%9F%E4%BB%A3%E7%A0%81-%E9%99%8D%E4%BD%8E-token-%E6%B6%88%E8%80%97/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/55f79257-eef3-4961-a753-c71896496d7d-7c41d5a3.png" alt="jCodeMunch MCP 使用教程：让 Codex、Claude Code 少读废代码，降低 Token 消耗" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.01</code>
+                    <h3>jCodeMunch MCP 使用教程：让 Codex、Claude Code 少读废代码，降低 Token 消耗</h3>
+                    <p>使用 Codex、Claude Code 或 Cursor 编写项目时，你可能遇到过这样的情况：
+明明只需要修改一个函数，AI 却读取了整个文件 …</p>
+                    <time>2026-07-24</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/headroom-zui-gao-jian-shao-92-token-yong-ai-bian/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/ChatGPT_Image_2026727_20_20_12-d72362d1.jpg" alt="Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.02</code>
+                    <h3>Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上</h3>
+                    <p>使用 Claude Code、Codex、Cursor 等 AI 编程工具时，真正消耗 Token 的往往不只是你输入的提示词。
+代码搜索结果、 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/codex-xiao-lv-bei-zeng-5-ge-zhi-de-guan/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/codex-5-tools-carousel-4x3-33eb37b3.jpg" alt="Codex 效率倍增：5 个值得关注的开源工具" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.03</code>
+                    <h3>Codex 效率倍增：5 个值得关注的开源工具</h3>
+                    <p>同样使用 Codex，为什么有些人写代码更快、更稳，还能让 AI 自动查文档、理解大型项目，甚至操作浏览器和电脑？
+原因并不只是模型更强，而是他 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/anysearch-skill-wei-ai-agent-jian-shao-wu-xiao-sou/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260727-165725-9bec5bb5.jpg" alt="AnySearch Skill：为 AI Agent 减少无效搜索与 Token 浪费" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.04</code>
+                    <h3>AnySearch Skill：为 AI Agent 减少无效搜索与 Token 浪费</h3>
+                    <p>在使用 Codex、Claude Code、OpenClaw 等 AI Agent 时，联网搜索看起来只是一个简单功能，但实际执行起来非常消耗上 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/%E8%AE%A9-codex-%E8%B6%8A%E7%94%A8%E8%B6%8A%E8%81%AA%E6%98%8E-%E7%94%A8%E4%B8%80%E5%A5%97%E9%95%BF%E6%9C%9F%E8%A7%84%E5%88%99%E7%A7%AF%E7%B4%AF%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260725-224050-ad6ae167.png" alt="让 Codex 越用越聪明：用一套长期规则积累项目经验" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.05</code>
+                    <h3>让 Codex 越用越聪明：用一套长期规则积累项目经验</h3>
+                    <p>很多人在使用 Codex 时，会遇到一个明显的问题：
+同样的错误反复出现，同样的项目规范需要重复说明，每次开始新任务，都像重新认识一个陌生的助手 …</p>
+                    <time>2026-07-25</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/%E5%9B%BD%E5%86%85%E4%BF%A1%E7%94%A8%E5%8D%A1%E8%AE%A2%E9%98%85-chatgpt-gemini-grok-%E5%AE%89%E5%8D%93%E7%AB%AF%E5%AE%8C%E6%95%B4%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260724-223558-2cb2d2ba.png" alt="国内信用卡订阅 ChatGPT、Gemini、Grok：安卓端完整操作指南" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.06</code>
+                    <h3>国内信用卡订阅 ChatGPT、Gemini、Grok：安卓端完整操作指南</h3>
+                    <p>在订阅 ChatGPT Plus、Google Gemini、Grok 等海外 AI 服务时，很多国内用户都会遇到同一个问题：
+明明手里有 …</p>
+                    <time>2026-07-24</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+        <aside class="article-disclaimer">
+            <code>DISCLAIMER</code>
+            <div class="article-disclaimer-body">
+                <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+                <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+                <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+                <p>严禁利用本站内容从事任何违法违规活动。</p>
+            </div>
+        </aside></div>
+
+    <aside class="archive-article-sidebar" aria-label="文章侧边栏">
+    <section class="article-side-panel">
+        <h2 class="article-side-title">SEARCH <span>01</span></h2>
+        <form class="article-side-search" action="/search/" method="get" role="search">
+            <input type="search" name="keyword" placeholder="输入关键词..." aria-label="搜索文章" required>
+            <button type="submit" aria-label="开始搜索">⌕</button>
+        </form>
+    </section><section class="article-side-panel article-side-toc">
+        <h2 class="article-side-title">CONTENTS <span>02</span></h2>
+        <nav id="TableOfContents">
+  <ol>
+    <li><a href="#ppt-master-是什么">PPT Master 是什么？</a></li>
+    <li><a href="#它有什么特别之处">它有什么特别之处？</a>
+      <ol>
+        <li><a href="#1-生成真正可编辑的-pptx">1. 生成真正可编辑的 PPTX</a></li>
+        <li><a href="#2-支持多种内容来源">2. 支持多种内容来源</a></li>
+        <li><a href="#3-支持多种内容结构与视觉风格">3. 支持多种内容结构与视觉风格</a></li>
+        <li><a href="#4-支持动画旁白和视频导出">4. 支持动画、旁白和视频导出</a></li>
+        <li><a href="#5-不只可以制作-ppt">5. 不只可以制作 PPT</a></li>
+      </ol>
+    </li>
+    <li><a href="#ppt-master-使用方法">PPT Master 使用方法</a>
+      <ol>
+        <li><a href="#第一步安装-python">第一步：安装 Python</a></li>
+        <li><a href="#第二步下载项目">第二步：下载项目</a></li>
+        <li><a href="#第三步安装依赖">第三步：安装依赖</a></li>
+        <li><a href="#第四步使用-ai-工具打开项目">第四步：使用 AI 工具打开项目</a></li>
+      </ol>
+    </li>
+    <li><a href="#推荐提示词">推荐提示词</a></li>
+    <li><a href="#如何修改生成结果">如何修改生成结果？</a></li>
+    <li><a href="#使用时需要注意什么">使用时需要注意什么？</a>
+      <ol>
+        <li><a href="#ppt-master-本身免费但-ai-模型不一定免费">PPT Master 本身免费，但 AI 模型不一定免费</a></li>
+        <li><a href="#它不是完全零门槛的一键工具">它不是完全零门槛的一键工具</a></li>
+        <li><a href="#最终效果仍然取决于资料和提示词">最终效果仍然取决于资料和提示词</a></li>
+      </ol>
+    </li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#项目地址">项目地址</a></li>
+  </ol>
+</nav>
+        
+        <script>
+        (() => {
+            const toc = document.currentScript.parentElement;
+            const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+            if (!links.length) return;
+            const headings = links.map(link => {
+                const id = link.getAttribute('href').slice(1);
+                return document.getElementById(id);
+            }).filter(Boolean);
+            const isActive = (index) => {
+                const el = headings[index];
+                if (!el) return false;
+                const next = headings[index + 1];
+                const rect = el.getBoundingClientRect();
+                if (next) {
+                    const nextRect = next.getBoundingClientRect();
+                    return rect.top < window.innerHeight / 2 && nextRect.top > 80;
+                }
+                return rect.top < window.innerHeight / 2;
+            };
+            const spy = () => {
+                let active = -1;
+                for (let i = 0; i < headings.length; i++) {
+                    if (isActive(i)) active = i;
+                }
+                links.forEach((link, i) => {
+                    link.classList.toggle('is-active', i === active);
+                });
+                const activeLink = active >= 0 ? links[active] : null;
+                if (activeLink) {
+                    const tocRect = toc.getBoundingClientRect();
+                    const linkRect = activeLink.getBoundingClientRect();
+                    if (linkRect.top < tocRect.top + 50 || linkRect.bottom > tocRect.bottom - 20) {
+                        toc.scrollTop += linkRect.top - tocRect.top - tocRect.height / 2 + linkRect.height / 2;
+                    }
+                }
+            };
+            window.addEventListener('scroll', spy, { passive: true });
+            spy();
+        })();
+        </script>
+        
+    </section><section class="article-side-panel">
+        <h2 class="article-side-title">LATEST <span>03</span></h2>
+        <ol class="article-side-list">
+            <li><a href="/posts/headroom-zui-gao-jian-shao-92-token-yong-ai-bian/"><span>Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上</span><time>07-27</time></a></li><li><a href="/posts/book-to-skill-ba-yi-ben-shu-bian-cheng-ai/"><span>Book to Skill：把一本书变成 AI 可以反复调用的知识工具</span><time>07-27</time></a></li><li><a href="/posts/codex-xiao-lv-bei-zeng-5-ge-zhi-de-guan/"><span>Codex 效率倍增：5 个值得关注的开源工具</span><time>07-27</time></a></li><li><a href="/posts/find-skills-install-guide/"><span>Find Skills 使用教程：帮你搜索、筛选和安装合适的 AI Agent Skills</span><time>07-27</time></a></li><li><a href="/posts/website-speed-image-cdn-optimization/"><span>为什么别人网站秒开，你的网站却要等半天？先别急着升级服务器.</span><time>07-27</time></a></li>
+        </ol>
+    </section>
+
+    <section class="article-side-panel">
+        <h2 class="article-side-title">HOT <span>04</span></h2>
+        <ol class="article-side-list article-hot-list" data-random-count="5">
+            <li><a href="/posts/headroom-zui-gao-jian-shao-92-token-yong-ai-bian/"><span>Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上</span><time>07-27</time></a></li><li><a href="/posts/book-to-skill-ba-yi-ben-shu-bian-cheng-ai/"><span>Book to Skill：把一本书变成 AI 可以反复调用的知识工具</span><time>07-27</time></a></li><li><a href="/posts/codex-xiao-lv-bei-zeng-5-ge-zhi-de-guan/"><span>Codex 效率倍增：5 个值得关注的开源工具</span><time>07-27</time></a></li><li><a href="/posts/find-skills-install-guide/"><span>Find Skills 使用教程：帮你搜索、筛选和安装合适的 AI Agent Skills</span><time>07-27</time></a></li><li><a href="/posts/website-speed-image-cdn-optimization/"><span>为什么别人网站秒开，你的网站却要等半天？先别急着升级服务器.</span><time>07-27</time></a></li><li hidden><a href="/posts/wang-zhan-nei-rong-bei-ai-yin-yong-guan-jian/"><span>网站内容如何被 AI 引用？关键不是写得多，而是写得清楚、具体、可信</span><time>07-27</time></a></li><li hidden><a href="/posts/anysearch-skill-wei-ai-agent-jian-shao-wu-xiao-sou/"><span>AnySearch Skill：为 AI Agent 减少无效搜索与 Token 浪费</span><time>07-27</time></a></li><li hidden><a href="/posts/yong-cloudflare-da-jian-shu-yu-zi-ji-de-lin/"><span>用 Cloudflare 搭建一个属于自己的临时邮箱：Cloud Mail 项目介绍</span><time>07-27</time></a></li><li hidden><a href="/posts/mian-fei-ling-qu-4-ge-kai-fa-zhe-yu/"><span>免费领取 4 个开发者域名：Stackryze Domains 使用介绍</span><time>07-27</time></a></li><li hidden><a href="/posts/16-zhong-chang-jian-de-ui-she-ji-feng-ge/"><span>16 种常见的 UI 设计风格提示词</span><time>07-26</time></a></li><li hidden><a href="/posts/ti-jiao-google-adsense-bei-ju-di-jia-zhi-nei/"><span>提交 Google AdSense 被拒？“低价值内容”该怎么解决</span><time>07-26</time></a></li><li hidden><a href="/posts/pu-tong-ren-ling-men-kan-youtube-bian-xian-yong/"><span>普通人零门槛 YouTube 变现攻略：用 AI 做英文 Vlog，开启海外副业</span><time>07-26</time></a></li><li hidden><a href="/posts/%E8%AE%A9-codex-%E8%B6%8A%E7%94%A8%E8%B6%8A%E8%81%AA%E6%98%8E-%E7%94%A8%E4%B8%80%E5%A5%97%E9%95%BF%E6%9C%9F%E8%A7%84%E5%88%99%E7%A7%AF%E7%B4%AF%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/"><span>让 Codex 越用越聪明：用一套长期规则积累项目经验</span><time>07-25</time></a></li><li hidden><a href="/posts/%E5%9B%BD%E5%86%85%E4%BF%A1%E7%94%A8%E5%8D%A1%E8%AE%A2%E9%98%85-chatgpt-gemini-grok-%E5%AE%89%E5%8D%93%E7%AB%AF%E5%AE%8C%E6%95%B4%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"><span>国内信用卡订阅 ChatGPT、Gemini、Grok：安卓端完整操作指南</span><time>07-24</time></a></li><li hidden><a href="/posts/%E8%85%BE%E8%AE%AF-edgeone-%E5%85%8D%E8%B4%B9-cdn-%E5%80%BC%E5%BE%97%E7%94%A8%E5%90%97-%E4%B8%8E-cloudflare-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E6%8E%A5%E5%85%A5%E6%96%B9%E6%B3%95/"><span>腾讯 EdgeOne 免费 CDN 值得用吗？与 Cloudflare 的区别及接入方法</span><time>07-24</time></a></li><li hidden><a href="/posts/9-%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%AB%99%E5%86%85-seo-%E5%B7%A5%E5%85%B7-%E4%BB%8E%E6%94%B6%E5%BD%95-%E5%85%B3%E9%94%AE%E8%AF%8D%E5%88%B0%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA-%E4%B8%80%E6%AC%A1%E6%9F%A5%E6%B8%85%E9%A1%B5%E9%9D%A2%E9%97%AE%E9%A2%98/"><span>9 个常用站内 SEO 工具：从收录、关键词到用户行为，一次查清页面问题</span><time>07-24</time></a></li><li hidden><a href="/posts/codex-%E9%92%A9%E5%AD%90%E6%98%AF%E4%BB%80%E4%B9%88-%E7%94%A8%E9%80%94%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"><span>Codex 钩子是什么？用途与使用方法</span><time>07-24</time></a></li><li hidden><a href="/posts/handoff-md-%E6%98%AF%E4%BB%80%E4%B9%88-%E8%AE%A9%E6%96%B0-ai-%E4%BC%9A%E8%AF%9D%E6%97%A0%E7%BC%9D%E6%8E%A5%E6%89%8B%E6%97%A7%E4%BB%BB%E5%8A%A1/"><span>HANDOFF.md 是什么？让新 AI 会话无缝接手旧任务</span><time>07-24</time></a></li><li hidden><a href="/posts/chrome-devtools-mcp-%E8%AE%A9-ai-%E7%9B%B4%E6%8E%A5%E6%93%8D%E4%BD%9C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%B0%83%E8%AF%95%E7%BD%91%E7%AB%99/"><span>Chrome DevTools MCP：让 AI 直接操作浏览器调试网站</span><time>07-24</time></a></li><li hidden><a href="/posts/graphify-%E6%8A%8A%E6%95%B4%E4%B8%AA%E9%A1%B9%E7%9B%AE%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0-ai-%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"><span>Graphify：把整个项目变成一张 AI 能看懂的知识图谱</span><time>07-24</time></a></li><li hidden><a href="/posts/jcodemunch-mcp-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E8%AE%A9-codex-claude-code-%E5%B0%91%E8%AF%BB%E5%BA%9F%E4%BB%A3%E7%A0%81-%E9%99%8D%E4%BD%8E-token-%E6%B6%88%E8%80%97/"><span>jCodeMunch MCP 使用教程：让 Codex、Claude Code 少读废代码，降低 Token 消耗</span><time>07-24</time></a></li><li hidden><a href="/posts/ai-%E6%90%9C%E7%B4%A2%E6%AD%A3%E5%9C%A8%E5%88%86%E8%B5%B0%E7%82%B9%E5%87%BB-2026-%E5%B9%B4%E8%BF%98%E6%9C%89%E5%BF%85%E8%A6%81%E7%BB%A7%E7%BB%AD%E5%81%9A-seo-%E5%90%97/"><span>AI 搜索正在分走点击，2026 年还有必要继续做 SEO 吗？</span><time>07-23</time></a></li><li hidden><a href="/posts/%E7%8B%AC%E7%AB%8B%E7%AB%99%E5%88%AB%E6%80%A5%E7%9D%80%E4%B8%8A%E7%BA%BF-%E4%BB%8E%E5%BB%BA%E7%AB%99%E7%AC%AC%E4%B8%80%E5%A4%A9%E5%BC%80%E5%A7%8B%E5%81%9A%E5%AF%B9%E7%9A%84-google-seo-%E5%9F%BA%E7%A1%80%E5%B8%83%E5%B1%80/"><span>独立站别急着上线：从建站第一天开始做对的 Google SEO 基础布局</span><time>07-23</time></a></li><li hidden><a href="/posts/wordpress-next-js/"><span>2026 年建站技术怎么选：WordPress 与 Next.js，真正决定答案的不是性能</span><time>07-23</time></a></li><li hidden><a href="/posts/codex-credit-saving-toolkit-beginner-version/"><span>Codex 省额度工具包（新手版）</span><time>07-21</time></a></li><li hidden><a href="/posts/please-allow-ads-on-shiguangji-en/"><span>Please Allow Ads on Shiguangji</span><time>07-21</time></a></li><li hidden><a href="/posts/please-allow-ads-on-shiguangji-zh/"><span>请允许拾光集展示广告</span><time>07-21</time></a></li><li hidden><a href="/posts/disclaimer-en/"><span>Disclaimer</span><time>07-21</time></a></li><li hidden><a href="/posts/disclaimer-zh/"><span>免责声明</span><time>07-21</time></a></li><li hidden><a href="/posts/privacy-policy/"><span>Privacy Policy</span><time>07-21</time></a></li><li hidden><a href="/posts/privacypolicy/"><span>隐私政策</span><time>07-21</time></a></li>
+        </ol>
+        
+        <script>
+        (() => {
+            const list = document.currentScript.previousElementSibling;
+            const items = Array.from(list.querySelectorAll('li'));
+            const count = Math.min(Number(list.dataset.randomCount) || 5, items.length);
+            for (let index = items.length - 1; index > 0; index -= 1) {
+                const target = Math.floor(Math.random() * (index + 1));
+                [items[index], items[target]] = [items[target], items[index]];
+            }
+            items.forEach((item, index) => { item.hidden = index >= count; list.appendChild(item); });
+        })();
+        </script>
+        
+    </section><section class="article-side-panel">
+        <h2 class="article-side-title">TAG CLOUD <span>05</span></h2>
+        <div class="article-tag-cloud archive-random-tags" data-random-count="18">
+            <a href="/tags/aeo/">aeo<sup>1</sup></a><a href="/tags/agent-skills/">agent skills<sup>3</sup></a><a href="/tags/agent-tars/">agent tars<sup>1</sup></a><a href="/tags/ai/">ai<sup>8</sup></a><a href="/tags/ai-agent/">ai agent<sup>4</sup></a><a href="/tags/ai-ppt-%E5%B7%A5%E5%85%B7/">ai ppt 工具<sup>1</sup></a><a href="/tags/ai-%E4%BA%A4%E6%8E%A5%E6%96%87%E6%A1%A3/">ai 交接文档<sup>1</sup></a><a href="/tags/ai-%E4%BC%9A%E8%AF%9D/">ai 会话<sup>1</sup></a><a href="/tags/ai-%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/">ai 工具教程<sup>1</sup></a><a href="/tags/ai-%E7%9F%A5%E8%AF%86%E5%BA%93/">ai 知识库<sup>1</sup></a><a href="/tags/ai-%E8%AF%BB%E4%B9%A6%E5%B7%A5%E5%85%B7/">ai 读书工具<sup>1</sup></a><a href="/tags/ai%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">ai开发工具<sup>1</sup></a><a href="/tags/ai%E5%BC%95%E7%94%A8/">ai引用<sup>1</sup></a><a href="/tags/ai%E6%8F%92%E4%BB%B6/">ai插件<sup>1</sup></a><a href="/tags/ai%E6%90%9C%E7%B4%A2/">ai搜索<sup>2</sup></a><a href="/tags/ai%E7%BC%96%E7%A8%8B/">ai编程<sup>1</sup></a><a href="/tags/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/">ai编程工具<sup>1</sup></a><a href="/tags/anysearch/">anysearch<sup>1</sup></a><a href="/tags/b2b-seo/">b2b seo<sup>1</sup></a><a href="/tags/book-to-skill/">book to skill<sup>1</sup></a><a href="/tags/cdn-%E5%8A%A0%E9%80%9F/">cdn 加速<sup>1</sup></a><a href="/tags/cdn-%E5%9B%9E%E6%BA%90/">cdn 回源<sup>1</sup></a><a href="/tags/cdn%E5%8A%A0%E9%80%9F/">cdn加速<sup>1</sup></a><a href="/tags/chatgpt/">chatgpt<sup>2</sup></a><a href="/tags/chrome-devtools-mcp/">chrome devtools mcp<sup>1</sup></a><a href="/tags/claude-code/">claude code<sup>5</sup></a><a href="/tags/cloud-mail/">cloud mail<sup>1</sup></a><a href="/tags/cloudflare/">cloudflare<sup>1</sup></a><a href="/tags/cloudflare-cdn/">cloudflare cdn<sup>1</sup></a><a href="/tags/codex/">codex<sup>8</sup></a><a href="/tags/codex-skills/">codex skills<sup>1</sup></a><a href="/tags/computer-use/">computer use<sup>1</sup></a><a href="/tags/core-web-vitals/">core web vitals<sup>1</sup></a><a href="/tags/cursor/">cursor<sup>3</sup></a><a href="/tags/disclaimer/">disclaimer<sup>1</sup></a><a href="/tags/dns%E7%AE%A1%E7%90%86/">dns管理<sup>1</sup></a><a href="/tags/edgeone/">edgeone<sup>1</sup></a><a href="/tags/email/">email<sup>1</sup></a><a href="/tags/find-skills/">find-skills<sup>1</sup></a><a href="/tags/firecrawl/">firecrawl<sup>1</sup></a><a href="/tags/geo/">geo<sup>1</sup></a><a href="/tags/github-copilot-cli/">github copilot cli<sup>1</sup></a><a href="/tags/github-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">github 开源项目<sup>1</sup></a><a href="/tags/github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">github开源项目<sup>1</sup></a><a href="/tags/google/">google<sup>1</sup></a><a href="/tags/google-adsense/">google adsense<sup>1</sup></a><a href="/tags/google-seo/">google seo<sup>1</sup></a><a href="/tags/google%E6%94%B6%E5%BD%95/">google收录<sup>1</sup></a><a href="/tags/graphify/">graphify<sup>2</sup></a><a href="/tags/handoff/">handoff<sup>1</sup></a><a href="/tags/headroom/">headroom<sup>1</sup></a><a href="/tags/lcp-%E4%BC%98%E5%8C%96/">lcp 优化<sup>1</sup></a><a href="/tags/llm%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/">llm成本优化<sup>1</sup></a><a href="/tags/mcp/">mcp<sup>5</sup></a><a href="/tags/next.js/">next.js<sup>1</sup></a><a href="/tags/pdf-%E8%BD%AC-skill/">pdf 转 skill<sup>1</sup></a><a href="/tags/ponytail/">ponytail<sup>1</sup></a><a href="/tags/ppt-master/">ppt master<sup>1</sup></a><a href="/tags/privacy-policy/">privacy policy<sup>1</sup></a><a href="/tags/seo/">seo<sup>4</sup></a><a href="/tags/seo-%E5%B7%A5%E5%85%B7/">seo 工具<sup>1</sup></a><a href="/tags/skill/">skill<sup>1</sup></a><a href="/tags/skill-%E5%AE%89%E8%A3%85/">skill 安装<sup>1</sup></a><a href="/tags/skills/">skills<sup>1</sup></a><a href="/tags/skills-cli/">skills cli<sup>1</sup></a><a href="/tags/skills.sh/">skills.sh<sup>1</sup></a><a href="/tags/stackryze-domains/">stackryze domains<sup>1</sup></a><a href="/tags/superpowers/">superpowers<sup>1</sup></a><a href="/tags/token/">token<sup>2</sup></a><a href="/tags/token%E4%BC%98%E5%8C%96/">token优化<sup>1</sup></a><a href="/tags/token%E5%8E%8B%E7%BC%A9/">token压缩<sup>1</sup></a><a href="/tags/ui-tars/">ui-tars<sup>1</sup></a><a href="/tags/ui%E8%AE%BE%E8%AE%A1/">ui设计<sup>1</sup></a><a href="/tags/webp/">webp<sup>1</sup></a><a href="/tags/web%E5%BB%BA%E7%AB%99/">web建站<sup>1</sup></a><a href="/tags/wordpress/">wordpress<sup>1</sup></a><a href="/tags/youtube/">youtube<sup>1</sup></a><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9/">上下文压缩<sup>1</sup></a><a href="/tags/%E4%BB%A3%E7%A0%81%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">代码知识图谱<sup>1</sup></a><a href="/tags/%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E/">免责声明<sup>1</sup></a><a href="/tags/%E5%85%8D%E8%B4%B9cdn/">免费cdn<sup>1</sup></a><a href="/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/">免费域名<sup>1</sup></a><a href="/tags/%E5%85%8D%E8%B4%B9%E9%82%AE%E7%AE%B1/">免费邮箱<sup>1</sup></a><a href="/tags/%E5%86%85%E5%AE%B9%E4%BC%98%E5%8C%96/">内容优化<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">前端性能优化<sup>1</sup></a><a href="/tags/%E5%8D%9A%E5%AE%A2/">博客<sup>1</sup></a><a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建<sup>1</sup></a><a href="/tags/%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9/">图片压缩<sup>1</sup></a><a href="/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/">域名解析<sup>1</sup></a><a href="/tags/%E5%A4%96%E8%B4%B8%E7%8B%AC%E7%AB%8B%E7%AB%99/">外贸独立站<sup>1</sup></a><a href="/tags/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/">广告联盟<sup>1</sup></a><a href="/tags/%E5%B9%BF%E5%91%8A%E9%A6%96%E9%A1%B5/">广告首页<sup>1</sup></a><a href="/tags/%E5%BB%BA%E7%AB%99/">建站<sup>4</sup></a><a href="/tags/%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B/">建站教程<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%BA%90-ai-%E5%B7%A5%E5%85%B7/">开源 ai 工具<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/">开源工具<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目<sup>1</sup></a><a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/">搜索引擎优化<sup>1</sup></a><a href="/tags/%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%8F%90%E5%8F%96/">文档知识提取<sup>1</sup></a><a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96/">服务器优化<sup>1</sup></a><a href="/tags/%E7%94%B5%E5%AD%90%E4%B9%A6%E8%BD%AC-skill/">电子书转 skill<sup>1</sup></a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">知识图谱<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD/">网站性能<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/">网站搭建<sup>2</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E8%AE%BE%E8%AE%A1/">网站设计<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/">网站速度优化<sup>1</sup></a><a href="/tags/%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6/">网页加载速度<sup>1</sup></a><a href="/tags/%E8%87%AA%E5%AA%92%E4%BD%93/">自媒体<sup>1</sup></a><a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E6%88%90/">视频分成<sup>1</sup></a><a href="/tags/%E8%B5%9A%E7%BE%8E%E5%85%83/">赚美元<sup>1</sup></a><a href="/tags/%E8%B7%A8agent%E8%AE%B0%E5%BF%86/">跨agent记忆<sup>1</sup></a><a href="/tags/%E9%92%A9%E5%AD%90/">钩子<sup>1</sup></a><a href="/tags/%E9%99%8D%E4%BD%8Eapi%E6%88%90%E6%9C%AC/">降低api成本<sup>1</sup></a><a href="/tags/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/">隐私政策<sup>1</sup></a>
+        </div>
+        
+        <script>
+        (() => {
+            const cloud = document.currentScript.previousElementSibling;
+            const tags = Array.from(cloud.querySelectorAll('a'));
+            const count = Math.min(Number(cloud.dataset.randomCount) || 18, tags.length);
+            for (let index = tags.length - 1; index > 0; index -= 1) {
+                const target = Math.floor(Math.random() * (index + 1));
+                [tags[index], tags[target]] = [tags[target], tags[index]];
+            }
+            tags.forEach((tag, index) => { tag.hidden = index >= count; cloud.appendChild(tag); });
+        })();
+        </script>
+        
+    </section></aside>
+
+</div>
+
+<div class="article-float-actions" aria-hidden="true">
+    <button class="article-back-to-top" type="button" aria-label="返回页面顶部" title="返回顶部" tabindex="-1">
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path>
+            </svg>
+        </span>
+    </button>
+    <button class="article-go-to-bottom" type="button" aria-label="跳转到底部" title="跳转到底部" tabindex="-1">
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"></path>
+            </svg>
+        </span>
+    </button>
+</div>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+
+<script>
+(() => {
+    const container = document.querySelector('.article-float-actions');
+    const topBtn = container.querySelector('.article-back-to-top');
+    const bottomBtn = container.querySelector('.article-go-to-bottom');
+    if (!container || !topBtn || !bottomBtn) return;
+
+    const placeButtons = () => {
+        const main = document.querySelector('.archive-article-main');
+        const sidebar = document.querySelector('.archive-article-sidebar');
+        const x = (window.innerWidth <= 1180 || !main || !sidebar)
+            ? null
+            : `${(main.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2}px`;
+        container.style.setProperty('--float-x', x || 'auto');
+        container.style.setProperty('--float-right', x ? 'auto' : '16px');
+    };
+
+    const updateButtons = () => {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight;
+        const viewHeight = window.innerHeight;
+        const nearBottom = scrollY + viewHeight >= docHeight - 60;
+        const farFromTop = scrollY > 360;
+
+        const footer = document.querySelector('.archive-footer');
+        const baseBottom = window.innerWidth <= 700 ? 16 : 26;
+        const footerOffset = footer ? Math.max(0, viewHeight - footer.getBoundingClientRect().top) : 0;
+        const bottom = `${Math.max(baseBottom, footerOffset + 12)}px`;
+        container.style.setProperty('--float-bottom', bottom);
+
+        topBtn.classList.toggle('is-visible', farFromTop);
+        topBtn.setAttribute('aria-hidden', farFromTop ? 'false' : 'true');
+        topBtn.tabIndex = farFromTop ? 0 : -1;
+
+        bottomBtn.classList.toggle('is-visible', !nearBottom);
+        bottomBtn.setAttribute('aria-hidden', nearBottom ? 'true' : 'false');
+        bottomBtn.tabIndex = nearBottom ? -1 : 0;
+    };
+
+    window.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', () => { placeButtons(); updateButtons(); }, { passive: true });
+    topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    bottomBtn.addEventListener('click', () => {
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    updateButtons();
+    placeButtons();
+})();
+</script>
+</main>
+            </div>
+            <footer class="archive-footer">
+                <span class="archive-footer-left"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span>
+                <span class="archive-footer-policies"><a href="/posts/privacypolicy/">隐私政策</a><b>·</b><a href="/posts/disclaimer-zh/">免责声明</a></span>
+                <span class="archive-footer-build">
+                    <span class="archive-footer-license">Licensed under <a class="link" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"  target="_blank" rel="noopener"
+    >CC BY-NC-SA 4.0</a></span><b>·</b>
+                    <span>BUILT WITH HUGO</span><i></i>
+                </span>
+            </footer>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

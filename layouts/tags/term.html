@@ -1,5 +1,5 @@
 {{ define "main" }}
-    {{- $paginator := .Paginator -}}
+    {{- $paginator := .Paginate .Pages.ByDate.Reverse 15 -}}
     <header class="category-term-header">
         <div class="category-term-heading">
             <code><span>TAG</span><i>/</i><b>{{ upper .Title }}</b></code>

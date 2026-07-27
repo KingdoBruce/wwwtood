@@ -2,8 +2,488 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://www.tood.win/categories/ai/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai-agent/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
     <loc>https://www.tood.win/categories/</loc>
-    <lastmod>2026-07-26T18:49:00+08:00</lastmod>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/claude-code/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/codex/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/cursor/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/headroom/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/headroom-zui-gao-jian-shao-92-token-yong-ai-bian/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/llm%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/mcp/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/token%E5%8E%8B%E7%BC%A9/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/token%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E9%99%8D%E4%BD%8Eapi%E6%88%90%E6%9C%AC/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E8%B7%A8agent%E8%AE%B0%E5%BF%86/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/</loc>
+    <lastmod>2026-07-27T20:09:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/agent-skills/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai-%E8%AF%BB%E4%B9%A6%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai-%E7%9F%A5%E8%AF%86%E5%BA%93/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/book-to-skill/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/book-to-skill-ba-yi-ben-shu-bian-cheng-ai/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/codex-skills/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/github-copilot-cli/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/pdf-%E8%BD%AC-skill/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E7%94%B5%E5%AD%90%E4%B9%A6%E8%BD%AC-skill/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%BC%80%E6%BA%90-ai-%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%8F%90%E5%8F%96/</loc>
+    <lastmod>2026-07-27T19:55:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/agent-tars/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/codex-xiao-lv-bei-zeng-5-ge-zhi-de-guan/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/computer-use/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/firecrawl/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/graphify/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ponytail/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/superpowers/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ui-tars/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E4%BB%A3%E7%A0%81%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-07-27T19:40:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai-%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2026-07-27T19:10:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/find-skills/</loc>
+    <lastmod>2026-07-27T19:10:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/find-skills-install-guide/</loc>
+    <lastmod>2026-07-27T19:10:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/github-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2026-07-27T19:10:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/skill-%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2026-07-27T19:10:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/skills-cli/</loc>
+    <lastmod>2026-07-27T19:10:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/skills.sh/</loc>
+    <lastmod>2026-07-27T19:10:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/cdn-%E5%9B%9E%E6%BA%90/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/cdn-%E5%8A%A0%E9%80%9F/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/cloudflare-cdn/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/core-web-vitals/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/lcp-%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/webp/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/categories/%E5%BB%BA%E7%AB%99/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/website-speed-image-cdn-optimization/</loc>
+    <lastmod>2026-07-27T17:51:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/aeo/</loc>
+    <lastmod>2026-07-27T17:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai%E6%90%9C%E7%B4%A2/</loc>
+    <lastmod>2026-07-27T17:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai%E5%BC%95%E7%94%A8/</loc>
+    <lastmod>2026-07-27T17:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/b2b-seo/</loc>
+    <lastmod>2026-07-27T17:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/geo/</loc>
+    <lastmod>2026-07-27T17:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/google-seo/</loc>
+    <lastmod>2026-07-27T17:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%86%85%E5%AE%B9%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-07-27T17:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%A4%96%E8%B4%B8%E7%8B%AC%E7%AB%8B%E7%AB%99/</loc>
+    <lastmod>2026-07-27T17:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/wang-zhan-nei-rong-bei-ai-yin-yong-guan-jian/</loc>
+    <lastmod>2026-07-27T17:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai/</loc>
+    <lastmod>2026-07-27T16:47:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/anysearch/</loc>
+    <lastmod>2026-07-27T16:47:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/anysearch-skill-wei-ai-agent-jian-shao-wu-xiao-sou/</loc>
+    <lastmod>2026-07-27T16:47:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/skill/</loc>
+    <lastmod>2026-07-27T16:47:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/token/</loc>
+    <lastmod>2026-07-27T16:47:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/cloud-mail/</loc>
+    <lastmod>2026-07-27T12:27:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/email/</loc>
+    <lastmod>2026-07-27T12:27:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2026-07-27T12:27:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%85%8D%E8%B4%B9%E9%82%AE%E7%AE%B1/</loc>
+    <lastmod>2026-07-27T12:27:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/yong-cloudflare-da-jian-shu-yu-zi-ji-de-lin/</loc>
+    <lastmod>2026-07-27T12:27:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/dns%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2026-07-27T12:16:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/stackryze-domains/</loc>
+    <lastmod>2026-07-27T12:16:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2026-07-27T12:16:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/mian-fei-ling-qu-4-ge-kai-fa-zhe-yu/</loc>
+    <lastmod>2026-07-27T12:16:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/</loc>
+    <lastmod>2026-07-27T12:16:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2026-07-27T12:16:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2026-07-27T12:16:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ai-ppt-%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-07-27T09:27:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ppt-master/</loc>
+    <lastmod>2026-07-27T09:27:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/ppt-master-mian-fei-kai-yuan-de-ai-ppt-gong/</loc>
+    <lastmod>2026-07-27T09:27:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/posts/16-zhong-chang-jian-de-ui-she-ji-feng-ge/</loc>
+    <lastmod>2026-07-26T22:54:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/ui%E8%AE%BE%E8%AE%A1/</loc>
+    <lastmod>2026-07-26T22:54:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E5%BB%BA%E7%AB%99/</loc>
+    <lastmod>2026-07-26T22:54:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E8%AE%BE%E8%AE%A1/</loc>
+    <lastmod>2026-07-26T22:54:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
@@ -12,17 +492,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://www.tood.win/posts/</loc>
-    <lastmod>2026-07-26T18:49:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://www.tood.win/tags/seo/</loc>
-    <lastmod>2026-07-26T18:49:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://www.tood.win/tags/</loc>
     <lastmod>2026-07-26T18:49:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -42,28 +512,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://www.tood.win/categories/%E5%BB%BA%E7%AB%99/</loc>
-    <lastmod>2026-07-26T18:49:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://www.tood.win/tags/%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2026-07-26T18:49:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://www.tood.win/</loc>
     <lastmod>2026-07-26T18:49:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://www.tood.win/posts/ti-jiao-google-adsense-bei-ju-di-jia-zhi-nei/</loc>
     <lastmod>2026-07-26T18:49:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://www.tood.win/tags/ai/</loc>
-    <lastmod>2026-07-26T14:59:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
@@ -99,16 +554,6 @@
   </url><url>
     <loc>https://www.tood.win/tags/%E8%87%AA%E5%AA%92%E4%BD%93/</loc>
     <lastmod>2026-07-26T14:59:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://www.tood.win/categories/ai/</loc>
-    <lastmod>2026-07-25T22:38:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://www.tood.win/tags/codex/</loc>
-    <lastmod>2026-07-25T22:38:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
@@ -167,11 +612,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://www.tood.win/tags/%E5%BB%BA%E7%AB%99/</loc>
-    <lastmod>2026-07-24T18:05:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://www.tood.win/posts/codex-%E9%92%A9%E5%AD%90%E6%98%AF%E4%BB%80%E4%B9%88-%E7%94%A8%E9%80%94%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
     <lastmod>2026-07-24T17:55:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -217,16 +657,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://www.tood.win/tags/mcp/</loc>
-    <lastmod>2026-07-24T17:28:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://www.tood.win/tags/graphify/</loc>
-    <lastmod>2026-07-24T13:45:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://www.tood.win/posts/graphify-%E6%8A%8A%E6%95%B4%E4%B8%AA%E9%A1%B9%E7%9B%AE%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0-ai-%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</loc>
     <lastmod>2026-07-24T13:45:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -237,27 +667,12 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://www.tood.win/tags/claude-code/</loc>
-    <lastmod>2026-07-24T10:23:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://www.tood.win/posts/jcodemunch-mcp-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E8%AE%A9-codex-claude-code-%E5%B0%91%E8%AF%BB%E5%BA%9F%E4%BB%A3%E7%A0%81-%E9%99%8D%E4%BD%8E-token-%E6%B6%88%E8%80%97/</loc>
     <lastmod>2026-07-24T10:23:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://www.tood.win/tags/token/</loc>
-    <lastmod>2026-07-24T10:23:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://www.tood.win/posts/ai-%E6%90%9C%E7%B4%A2%E6%AD%A3%E5%9C%A8%E5%88%86%E8%B5%B0%E7%82%B9%E5%87%BB-2026-%E5%B9%B4%E8%BF%98%E6%9C%89%E5%BF%85%E8%A6%81%E7%BB%A7%E7%BB%AD%E5%81%9A-seo-%E5%90%97/</loc>
-    <lastmod>2026-07-23T20:22:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://www.tood.win/tags/ai%E6%90%9C%E7%B4%A2/</loc>
     <lastmod>2026-07-23T20:22:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -288,11 +703,6 @@
     <priority>0.5</priority>
   </url><url>
     <loc>https://www.tood.win/tags/wordpress/</loc>
-    <lastmod>2026-07-23T18:34:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2026-07-23T18:34:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

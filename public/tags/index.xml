@@ -5,14 +5,494 @@
         <description>Recent content in Tags on 拾光集</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh</language>
-        <lastBuildDate>Sun, 26 Jul 2026 18:49:00 +0800</lastBuildDate><atom:link href="https://www.tood.win/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 27 Jul 2026 20:09:00 +0800</lastBuildDate><atom:link href="https://www.tood.win/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>AI Agent</title>
+            <link>https://www.tood.win/tags/ai-agent/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai-agent/</guid>
+            <description></description>
+        </item><item>
+            <title>AI编程工具</title>
+            <link>https://www.tood.win/tags/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/</guid>
+            <description></description>
+        </item><item>
+            <title>Claude Code</title>
+            <link>https://www.tood.win/tags/claude-code/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/claude-code/</guid>
+            <description></description>
+        </item><item>
+            <title>Codex</title>
+            <link>https://www.tood.win/tags/codex/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/codex/</guid>
+            <description></description>
+        </item><item>
+            <title>Cursor</title>
+            <link>https://www.tood.win/tags/cursor/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/cursor/</guid>
+            <description></description>
+        </item><item>
+            <title>GitHub开源项目</title>
+            <link>https://www.tood.win/tags/github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
+            <description></description>
+        </item><item>
+            <title>Headroom</title>
+            <link>https://www.tood.win/tags/headroom/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/headroom/</guid>
+            <description></description>
+        </item><item>
+            <title>LLM成本优化</title>
+            <link>https://www.tood.win/tags/llm%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/llm%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/</guid>
+            <description></description>
+        </item><item>
+            <title>MCP</title>
+            <link>https://www.tood.win/tags/mcp/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/mcp/</guid>
+            <description></description>
+        </item><item>
+            <title>Token压缩</title>
+            <link>https://www.tood.win/tags/token%E5%8E%8B%E7%BC%A9/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/token%E5%8E%8B%E7%BC%A9/</guid>
+            <description></description>
+        </item><item>
+            <title>Token优化</title>
+            <link>https://www.tood.win/tags/token%E4%BC%98%E5%8C%96/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/token%E4%BC%98%E5%8C%96/</guid>
+            <description></description>
+        </item><item>
+            <title>降低API成本</title>
+            <link>https://www.tood.win/tags/%E9%99%8D%E4%BD%8Eapi%E6%88%90%E6%9C%AC/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E9%99%8D%E4%BD%8Eapi%E6%88%90%E6%9C%AC/</guid>
+            <description></description>
+        </item><item>
+            <title>跨Agent记忆</title>
+            <link>https://www.tood.win/tags/%E8%B7%A8agent%E8%AE%B0%E5%BF%86/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E8%B7%A8agent%E8%AE%B0%E5%BF%86/</guid>
+            <description></description>
+        </item><item>
+            <title>上下文压缩</title>
+            <link>https://www.tood.win/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9/</link>
+            <pubDate>Mon, 27 Jul 2026 20:09:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9/</guid>
+            <description></description>
+        </item><item>
+            <title>Agent Skills</title>
+            <link>https://www.tood.win/tags/agent-skills/</link>
+            <pubDate>Mon, 27 Jul 2026 19:55:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/agent-skills/</guid>
+            <description></description>
+        </item><item>
+            <title>AI 读书工具</title>
+            <link>https://www.tood.win/tags/ai-%E8%AF%BB%E4%B9%A6%E5%B7%A5%E5%85%B7/</link>
+            <pubDate>Mon, 27 Jul 2026 19:55:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai-%E8%AF%BB%E4%B9%A6%E5%B7%A5%E5%85%B7/</guid>
+            <description></description>
+        </item><item>
+            <title>AI 知识库</title>
+            <link>https://www.tood.win/tags/ai-%E7%9F%A5%E8%AF%86%E5%BA%93/</link>
+            <pubDate>Mon, 27 Jul 2026 19:55:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai-%E7%9F%A5%E8%AF%86%E5%BA%93/</guid>
+            <description></description>
+        </item><item>
+            <title>Book to Skill</title>
+            <link>https://www.tood.win/tags/book-to-skill/</link>
+            <pubDate>Mon, 27 Jul 2026 19:55:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/book-to-skill/</guid>
+            <description></description>
+        </item><item>
+            <title>Codex Skills</title>
+            <link>https://www.tood.win/tags/codex-skills/</link>
+            <pubDate>Mon, 27 Jul 2026 19:55:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/codex-skills/</guid>
+            <description></description>
+        </item><item>
+            <title>GitHub Copilot CLI</title>
+            <link>https://www.tood.win/tags/github-copilot-cli/</link>
+            <pubDate>Mon, 27 Jul 2026 19:55:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/github-copilot-cli/</guid>
+            <description></description>
+        </item><item>
+            <title>PDF 转 Skill</title>
+            <link>https://www.tood.win/tags/pdf-%E8%BD%AC-skill/</link>
+            <pubDate>Mon, 27 Jul 2026 19:55:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/pdf-%E8%BD%AC-skill/</guid>
+            <description></description>
+        </item><item>
+            <title>电子书转 Skill</title>
+            <link>https://www.tood.win/tags/%E7%94%B5%E5%AD%90%E4%B9%A6%E8%BD%AC-skill/</link>
+            <pubDate>Mon, 27 Jul 2026 19:55:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E7%94%B5%E5%AD%90%E4%B9%A6%E8%BD%AC-skill/</guid>
+            <description></description>
+        </item><item>
+            <title>开源 AI 工具</title>
+            <link>https://www.tood.win/tags/%E5%BC%80%E6%BA%90-ai-%E5%B7%A5%E5%85%B7/</link>
+            <pubDate>Mon, 27 Jul 2026 19:55:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%BC%80%E6%BA%90-ai-%E5%B7%A5%E5%85%B7/</guid>
+            <description></description>
+        </item><item>
+            <title>文档知识提取</title>
+            <link>https://www.tood.win/tags/%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%8F%90%E5%8F%96/</link>
+            <pubDate>Mon, 27 Jul 2026 19:55:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%8F%90%E5%8F%96/</guid>
+            <description></description>
+        </item><item>
+            <title>Agent TARS</title>
+            <link>https://www.tood.win/tags/agent-tars/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/agent-tars/</guid>
+            <description></description>
+        </item><item>
+            <title>AI编程</title>
+            <link>https://www.tood.win/tags/ai%E7%BC%96%E7%A8%8B/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai%E7%BC%96%E7%A8%8B/</guid>
+            <description></description>
+        </item><item>
+            <title>AI开发工具</title>
+            <link>https://www.tood.win/tags/ai%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</guid>
+            <description></description>
+        </item><item>
+            <title>Computer Use</title>
+            <link>https://www.tood.win/tags/computer-use/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/computer-use/</guid>
+            <description></description>
+        </item><item>
+            <title>Firecrawl</title>
+            <link>https://www.tood.win/tags/firecrawl/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/firecrawl/</guid>
+            <description></description>
+        </item><item>
+            <title>Graphify</title>
+            <link>https://www.tood.win/tags/graphify/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/graphify/</guid>
+            <description></description>
+        </item><item>
+            <title>Ponytail</title>
+            <link>https://www.tood.win/tags/ponytail/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ponytail/</guid>
+            <description></description>
+        </item><item>
+            <title>Superpowers</title>
+            <link>https://www.tood.win/tags/superpowers/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/superpowers/</guid>
+            <description></description>
+        </item><item>
+            <title>UI-TARS</title>
+            <link>https://www.tood.win/tags/ui-tars/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ui-tars/</guid>
+            <description></description>
+        </item><item>
+            <title>代码知识图谱</title>
+            <link>https://www.tood.win/tags/%E4%BB%A3%E7%A0%81%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E4%BB%A3%E7%A0%81%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</guid>
+            <description></description>
+        </item><item>
+            <title>开源工具</title>
+            <link>https://www.tood.win/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/</link>
+            <pubDate>Mon, 27 Jul 2026 19:40:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/</guid>
+            <description></description>
+        </item><item>
+            <title>AI 工具教程</title>
+            <link>https://www.tood.win/tags/ai-%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/</link>
+            <pubDate>Mon, 27 Jul 2026 19:10:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai-%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/</guid>
+            <description></description>
+        </item><item>
+            <title>Find Skills</title>
+            <link>https://www.tood.win/tags/find-skills/</link>
+            <pubDate>Mon, 27 Jul 2026 19:10:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/find-skills/</guid>
+            <description></description>
+        </item><item>
+            <title>GitHub 开源项目</title>
+            <link>https://www.tood.win/tags/github-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
+            <pubDate>Mon, 27 Jul 2026 19:10:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/github-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
+            <description></description>
+        </item><item>
+            <title>Skill 安装</title>
+            <link>https://www.tood.win/tags/skill-%E5%AE%89%E8%A3%85/</link>
+            <pubDate>Mon, 27 Jul 2026 19:10:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/skill-%E5%AE%89%E8%A3%85/</guid>
+            <description></description>
+        </item><item>
+            <title>Skills CLI</title>
+            <link>https://www.tood.win/tags/skills-cli/</link>
+            <pubDate>Mon, 27 Jul 2026 19:10:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/skills-cli/</guid>
+            <description></description>
+        </item><item>
+            <title>Skills.sh</title>
+            <link>https://www.tood.win/tags/skills.sh/</link>
+            <pubDate>Mon, 27 Jul 2026 19:10:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/skills.sh/</guid>
+            <description></description>
+        </item><item>
+            <title>CDN 回源</title>
+            <link>https://www.tood.win/tags/cdn-%E5%9B%9E%E6%BA%90/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/cdn-%E5%9B%9E%E6%BA%90/</guid>
+            <description></description>
+        </item><item>
+            <title>CDN 加速</title>
+            <link>https://www.tood.win/tags/cdn-%E5%8A%A0%E9%80%9F/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/cdn-%E5%8A%A0%E9%80%9F/</guid>
+            <description></description>
+        </item><item>
+            <title>Cloudflare CDN</title>
+            <link>https://www.tood.win/tags/cloudflare-cdn/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/cloudflare-cdn/</guid>
+            <description></description>
+        </item><item>
+            <title>Core Web Vitals</title>
+            <link>https://www.tood.win/tags/core-web-vitals/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/core-web-vitals/</guid>
+            <description></description>
+        </item><item>
+            <title>LCP 优化</title>
+            <link>https://www.tood.win/tags/lcp-%E4%BC%98%E5%8C%96/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/lcp-%E4%BC%98%E5%8C%96/</guid>
+            <description></description>
+        </item><item>
+            <title>WebP</title>
+            <link>https://www.tood.win/tags/webp/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/webp/</guid>
+            <description></description>
+        </item><item>
+            <title>服务器优化</title>
+            <link>https://www.tood.win/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96/</guid>
+            <description></description>
+        </item><item>
+            <title>前端性能优化</title>
+            <link>https://www.tood.win/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
+            <description></description>
+        </item><item>
+            <title>图片压缩</title>
+            <link>https://www.tood.win/tags/%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9/</guid>
+            <description></description>
+        </item><item>
+            <title>网页加载速度</title>
+            <link>https://www.tood.win/tags/%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6/</guid>
+            <description></description>
+        </item><item>
+            <title>网站速度优化</title>
+            <link>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/</guid>
+            <description></description>
+        </item><item>
+            <title>网站性能</title>
+            <link>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD/</link>
+            <pubDate>Mon, 27 Jul 2026 17:51:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD/</guid>
+            <description></description>
+        </item><item>
+            <title>AEO</title>
+            <link>https://www.tood.win/tags/aeo/</link>
+            <pubDate>Mon, 27 Jul 2026 17:00:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/aeo/</guid>
+            <description></description>
+        </item><item>
+            <title>AI搜索</title>
+            <link>https://www.tood.win/tags/ai%E6%90%9C%E7%B4%A2/</link>
+            <pubDate>Mon, 27 Jul 2026 17:00:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai%E6%90%9C%E7%B4%A2/</guid>
+            <description></description>
+        </item><item>
+            <title>AI引用</title>
+            <link>https://www.tood.win/tags/ai%E5%BC%95%E7%94%A8/</link>
+            <pubDate>Mon, 27 Jul 2026 17:00:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai%E5%BC%95%E7%94%A8/</guid>
+            <description></description>
+        </item><item>
+            <title>B2B SEO</title>
+            <link>https://www.tood.win/tags/b2b-seo/</link>
+            <pubDate>Mon, 27 Jul 2026 17:00:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/b2b-seo/</guid>
+            <description></description>
+        </item><item>
+            <title>GEO</title>
+            <link>https://www.tood.win/tags/geo/</link>
+            <pubDate>Mon, 27 Jul 2026 17:00:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/geo/</guid>
+            <description></description>
+        </item><item>
+            <title>Google SEO</title>
+            <link>https://www.tood.win/tags/google-seo/</link>
+            <pubDate>Mon, 27 Jul 2026 17:00:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/google-seo/</guid>
+            <description></description>
+        </item><item>
+            <title>内容优化</title>
+            <link>https://www.tood.win/tags/%E5%86%85%E5%AE%B9%E4%BC%98%E5%8C%96/</link>
+            <pubDate>Mon, 27 Jul 2026 17:00:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%86%85%E5%AE%B9%E4%BC%98%E5%8C%96/</guid>
+            <description></description>
+        </item><item>
+            <title>外贸独立站</title>
+            <link>https://www.tood.win/tags/%E5%A4%96%E8%B4%B8%E7%8B%AC%E7%AB%8B%E7%AB%99/</link>
+            <pubDate>Mon, 27 Jul 2026 17:00:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%A4%96%E8%B4%B8%E7%8B%AC%E7%AB%8B%E7%AB%99/</guid>
+            <description></description>
+        </item><item>
+            <title>AI</title>
+            <link>https://www.tood.win/tags/ai/</link>
+            <pubDate>Mon, 27 Jul 2026 16:47:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai/</guid>
+            <description></description>
+        </item><item>
+            <title>AnySearch</title>
+            <link>https://www.tood.win/tags/anysearch/</link>
+            <pubDate>Mon, 27 Jul 2026 16:47:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/anysearch/</guid>
+            <description></description>
+        </item><item>
+            <title>Skill</title>
+            <link>https://www.tood.win/tags/skill/</link>
+            <pubDate>Mon, 27 Jul 2026 16:47:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/skill/</guid>
+            <description></description>
+        </item><item>
+            <title>Token</title>
+            <link>https://www.tood.win/tags/token/</link>
+            <pubDate>Mon, 27 Jul 2026 16:47:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/token/</guid>
+            <description></description>
+        </item><item>
+            <title>Cloud Mail</title>
+            <link>https://www.tood.win/tags/cloud-mail/</link>
+            <pubDate>Mon, 27 Jul 2026 12:27:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/cloud-mail/</guid>
+            <description></description>
+        </item><item>
+            <title>Email</title>
+            <link>https://www.tood.win/tags/email/</link>
+            <pubDate>Mon, 27 Jul 2026 12:27:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/email/</guid>
+            <description></description>
+        </item><item>
+            <title>开源项目</title>
+            <link>https://www.tood.win/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
+            <pubDate>Mon, 27 Jul 2026 12:27:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
+            <description></description>
+        </item><item>
+            <title>免费邮箱</title>
+            <link>https://www.tood.win/tags/%E5%85%8D%E8%B4%B9%E9%82%AE%E7%AE%B1/</link>
+            <pubDate>Mon, 27 Jul 2026 12:27:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%85%8D%E8%B4%B9%E9%82%AE%E7%AE%B1/</guid>
+            <description></description>
+        </item><item>
+            <title>DNS管理</title>
+            <link>https://www.tood.win/tags/dns%E7%AE%A1%E7%90%86/</link>
+            <pubDate>Mon, 27 Jul 2026 12:16:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/dns%E7%AE%A1%E7%90%86/</guid>
+            <description></description>
+        </item><item>
+            <title>Stackryze Domains</title>
+            <link>https://www.tood.win/tags/stackryze-domains/</link>
+            <pubDate>Mon, 27 Jul 2026 12:16:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/stackryze-domains/</guid>
+            <description></description>
+        </item><item>
+            <title>博客搭建</title>
+            <link>https://www.tood.win/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</link>
+            <pubDate>Mon, 27 Jul 2026 12:16:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</guid>
+            <description></description>
+        </item><item>
+            <title>免费域名</title>
+            <link>https://www.tood.win/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/</link>
+            <pubDate>Mon, 27 Jul 2026 12:16:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/</guid>
+            <description></description>
+        </item><item>
+            <title>网站搭建</title>
+            <link>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</link>
+            <pubDate>Mon, 27 Jul 2026 12:16:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</guid>
+            <description></description>
+        </item><item>
+            <title>域名解析</title>
+            <link>https://www.tood.win/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/</link>
+            <pubDate>Mon, 27 Jul 2026 12:16:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/</guid>
+            <description></description>
+        </item><item>
+            <title>AI PPT 工具</title>
+            <link>https://www.tood.win/tags/ai-ppt-%E5%B7%A5%E5%85%B7/</link>
+            <pubDate>Mon, 27 Jul 2026 09:27:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ai-ppt-%E5%B7%A5%E5%85%B7/</guid>
+            <description></description>
+        </item><item>
+            <title>PPT Master</title>
+            <link>https://www.tood.win/tags/ppt-master/</link>
+            <pubDate>Mon, 27 Jul 2026 09:27:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ppt-master/</guid>
+            <description></description>
+        </item><item>
+            <title>UI设计</title>
+            <link>https://www.tood.win/tags/ui%E8%AE%BE%E8%AE%A1/</link>
+            <pubDate>Sun, 26 Jul 2026 22:54:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/ui%E8%AE%BE%E8%AE%A1/</guid>
+            <description></description>
+        </item><item>
+            <title>建站</title>
+            <link>https://www.tood.win/tags/%E5%BB%BA%E7%AB%99/</link>
+            <pubDate>Sun, 26 Jul 2026 22:54:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E5%BB%BA%E7%AB%99/</guid>
+            <description></description>
+        </item><item>
+            <title>网站设计</title>
+            <link>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E8%AE%BE%E8%AE%A1/</link>
+            <pubDate>Sun, 26 Jul 2026 22:54:00 +0800</pubDate>
+            <guid>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E8%AE%BE%E8%AE%A1/</guid>
+            <description></description>
+        </item><item>
             <title>Google AdSense</title>
             <link>https://www.tood.win/tags/google-adsense/</link>
             <pubDate>Sun, 26 Jul 2026 18:49:00 +0800</pubDate>
             <guid>https://www.tood.win/tags/google-adsense/</guid>
             <description></description>
         </item><item>
-            <title>Seo</title>
+            <title>SEO</title>
             <link>https://www.tood.win/tags/seo/</link>
             <pubDate>Sun, 26 Jul 2026 18:49:00 +0800</pubDate>
             <guid>https://www.tood.win/tags/seo/</guid>
@@ -40,12 +520,6 @@
             <link>https://www.tood.win/tags/%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B/</link>
             <pubDate>Sun, 26 Jul 2026 18:49:00 +0800</pubDate>
             <guid>https://www.tood.win/tags/%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B/</guid>
-            <description></description>
-        </item><item>
-            <title>AI</title>
-            <link>https://www.tood.win/tags/ai/</link>
-            <pubDate>Sun, 26 Jul 2026 14:59:00 +0800</pubDate>
-            <guid>https://www.tood.win/tags/ai/</guid>
             <description></description>
         </item><item>
             <title>YouTube</title>
@@ -76,12 +550,6 @@
             <link>https://www.tood.win/tags/%E8%87%AA%E5%AA%92%E4%BD%93/</link>
             <pubDate>Sun, 26 Jul 2026 14:59:00 +0800</pubDate>
             <guid>https://www.tood.win/tags/%E8%87%AA%E5%AA%92%E4%BD%93/</guid>
-            <description></description>
-        </item><item>
-            <title>Codex</title>
-            <link>https://www.tood.win/tags/codex/</link>
-            <pubDate>Sat, 25 Jul 2026 22:38:00 +0800</pubDate>
-            <guid>https://www.tood.win/tags/codex/</guid>
             <description></description>
         </item><item>
             <title>ChatGPT</title>
@@ -126,12 +594,6 @@
             <guid>https://www.tood.win/tags/seo-%E5%B7%A5%E5%85%B7/</guid>
             <description></description>
         </item><item>
-            <title>建站</title>
-            <link>https://www.tood.win/tags/%E5%BB%BA%E7%AB%99/</link>
-            <pubDate>Fri, 24 Jul 2026 18:05:00 +0800</pubDate>
-            <guid>https://www.tood.win/tags/%E5%BB%BA%E7%AB%99/</guid>
-            <description></description>
-        </item><item>
             <title>钩子</title>
             <link>https://www.tood.win/tags/%E9%92%A9%E5%AD%90/</link>
             <pubDate>Fri, 24 Jul 2026 17:55:00 +0800</pubDate>
@@ -168,40 +630,10 @@
             <guid>https://www.tood.win/tags/chrome-devtools-mcp/</guid>
             <description></description>
         </item><item>
-            <title>MCP</title>
-            <link>https://www.tood.win/tags/mcp/</link>
-            <pubDate>Fri, 24 Jul 2026 17:28:00 +0800</pubDate>
-            <guid>https://www.tood.win/tags/mcp/</guid>
-            <description></description>
-        </item><item>
-            <title>Graphify</title>
-            <link>https://www.tood.win/tags/graphify/</link>
-            <pubDate>Fri, 24 Jul 2026 13:45:00 +0800</pubDate>
-            <guid>https://www.tood.win/tags/graphify/</guid>
-            <description></description>
-        </item><item>
             <title>知识图谱</title>
             <link>https://www.tood.win/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</link>
             <pubDate>Fri, 24 Jul 2026 13:45:00 +0800</pubDate>
             <guid>https://www.tood.win/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</guid>
-            <description></description>
-        </item><item>
-            <title>Claude Code</title>
-            <link>https://www.tood.win/tags/claude-code/</link>
-            <pubDate>Fri, 24 Jul 2026 10:23:00 +0800</pubDate>
-            <guid>https://www.tood.win/tags/claude-code/</guid>
-            <description></description>
-        </item><item>
-            <title>Token</title>
-            <link>https://www.tood.win/tags/token/</link>
-            <pubDate>Fri, 24 Jul 2026 10:23:00 +0800</pubDate>
-            <guid>https://www.tood.win/tags/token/</guid>
-            <description></description>
-        </item><item>
-            <title>AI搜索</title>
-            <link>https://www.tood.win/tags/ai%E6%90%9C%E7%B4%A2/</link>
-            <pubDate>Thu, 23 Jul 2026 20:22:00 +0800</pubDate>
-            <guid>https://www.tood.win/tags/ai%E6%90%9C%E7%B4%A2/</guid>
             <description></description>
         </item><item>
             <title>GOOGLE收录</title>
@@ -226,12 +658,6 @@
             <link>https://www.tood.win/tags/wordpress/</link>
             <pubDate>Thu, 23 Jul 2026 18:34:00 +0800</pubDate>
             <guid>https://www.tood.win/tags/wordpress/</guid>
-            <description></description>
-        </item><item>
-            <title>网站搭建</title>
-            <link>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</link>
-            <pubDate>Thu, 23 Jul 2026 18:34:00 +0800</pubDate>
-            <guid>https://www.tood.win/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</guid>
             <description></description>
         </item><item>
             <title>Skills</title>

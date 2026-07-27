@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前段时间，有人找到我，说公司的官网打开特别慢，客户经常等不到页面加载完成就直接关掉了。\n他的第一反应是：\n是不是服务器配置太低，需要升级 CPU、内存和带宽？\n">
+<title>为什么别人网站秒开，你的网站却要等半天？先别急着升级服务器. - 建站 - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/website-speed-image-cdn-optimization/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.22ec3091afaaacc27d6058fd34e11870233fb448ec3523e2e0855b4c317da7ad.css"><meta property='og:title' content="为什么别人网站秒开，你的网站却要等半天？先别急着升级服务器. - 建站 - 拾光集 TOOD.WIN">
+<meta property='og:description' content="前段时间，有人找到我，说公司的官网打开特别慢，客户经常等不到页面加载完成就直接关掉了。\n他的第一反应是：\n是不是服务器配置太低，需要升级 CPU、内存和带宽？\n">
+<meta property='og:url' content='https://www.tood.win/posts/website-speed-image-cdn-optimization/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='网站速度优化' /><meta property='article:tag' content='CDN 加速' /><meta property='article:tag' content='图片压缩' /><meta property='article:tag' content='WebP' /><meta property='article:tag' content='网站性能' /><meta property='article:tag' content='Cloudflare CDN' /><meta property='article:tag' content='网页加载速度' /><meta property='article:tag' content='LCP 优化' /><meta property='article:tag' content='服务器优化' /><meta property='article:tag' content='前端性能优化' /><meta property='article:tag' content='CDN 回源' /><meta property='article:tag' content='Core Web Vitals' /><meta property='article:published_time' content='2026-07-27T17:51:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-27T17:51:00&#43;08:00'/>
+<meta name="twitter:title" content="为什么别人网站秒开，你的网站却要等半天？先别急着升级服务器. - 建站 - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="前段时间，有人找到我，说公司的官网打开特别慢，客户经常等不到页面加载完成就直接关掉了。\n他的第一反应是：\n是不是服务器配置太低，需要升级 CPU、内存和带宽？\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="网站速度优化, CDN 加速, 图片压缩, WebP, 网站性能, Cloudflare CDN, 网页加载速度, LCP 优化, 服务器优化, 前端性能优化, CDN 回源, Core Web Vitals">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"为什么别人网站秒开，你的网站却要等半天？先别急着升级服务器.\"",
+  "description": "\"前段时间，有人找到我，说公司的官网打开特别慢，客户经常等不到页面加载完成就直接关掉了。\\n他的第一反应是：\\n是不是服务器配置太低，需要升级 CPU、内存和带宽？\\n\"",
+  "datePublished": "\"2026-07-27T17:51:00+08:00\"",
+  "dateModified": "\"2026-07-27T17:51:00+08:00\"",
+  "url": "\"https://www.tood.win/posts/website-speed-image-cdn-optimization/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page article-with-sidebar">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            <header class="archive-topbar">
+                <a class="archive-brand" href="/" aria-label="返回首页">
+                    
+                        <img class="archive-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+                    
+                </a><nav class="archive-nav" aria-label="主导航">
+                    <a class="" href="/">首页</a>
+                    <a class="" href="/archives/">分类</a>
+                    <a class="" href="/tags/">标签</a>
+                    <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+                </nav>
+      <div class="archive-status" aria-label="拾光存档：记录微光 · 存入时间">
+        <img class="archive-status-image" src="/uploads/2026/07/ico-123-850dfa75.png" alt="">
+        <span class="archive-status-copy"><strong>拾光存档</strong><small>记录微光 · 存入时间</small></span>
+      </div>
+            </header>
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                <div class="archive-page-index">
+                    <span class="archive-cross" aria-hidden="true"></span>
+                    <span class="archive-coord archive-coord-top">PAGE.2607.4233</span>
+                    <span class="archive-page-name">拾光集 TOOD.WIN</span>
+                    <strong>/ PAGE</strong>
+                </div>
+                <main class="archive-page-main">
+<div class="archive-article-layout">
+    <div class="archive-article-main">
+        <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/%E5%BB%BA%E7%AB%99/" style="background-color: hsl(198, 60%, 84%); color: hsl(198, 60%, 15%);">
+                建站
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/website-speed-image-cdn-optimization/">为什么别人网站秒开，你的网站却要等半天？先别急着升级服务器.</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    <footer class="article-meta">
+        
+            <div class="inline-meta">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time class="article-time--published" datetime='2026-07-27T17:51:00&#43;08:00'>2026年7月27日星期一</time>
+                
+
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                    <time class="article-time--reading">
+                        阅读时长: 9 分钟
+                    </time>
+                
+            </div>
+        
+
+        
+
+        
+    </footer>
+    
+</div>
+
+</header>
+
+    
+
+    <section class="article-content"><p>前段时间，有人找到我，说公司的官网打开特别慢，客户经常等不到页面加载完成就直接关掉了。</p>
+<p>他的第一反应是：</p>
+
+    <blockquote>
+        <p>是不是服务器配置太低，需要升级 CPU、内存和带宽？</p>
+
+    </blockquote>
+<p>我打开网站首页后，很快就发现了一个更直接的问题：首屏轮播图有一张接近 12MB。</p>
+<p>这意味着用户进入网站后，浏览器需要先下载一张体积接近普通短视频的图片，才能完整显示首页。服务器配置即使不差，页面也很难真正做到“秒开”。</p>
+<p>很多网站速度慢，并不是单纯因为服务器性能不足，而是图片过大、页面资源过多、缓存没有设置好，或者服务器距离用户太远。</p>
+<p><img alt="ChatGPT_Image_2026727_17_54_24" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/ChatGPT_Image_2026727_17_54_24-750986fe.jpg"></p>
+<h2 id="一张-12mb-的首页图会带来什么问题">一张 12MB 的首页图，会带来什么问题？
+</h2><p>企业官网首页通常不只有一张图片，还会同时加载：</p>
+<ul>
+<li>HTML 页面；</li>
+<li>CSS 样式文件；</li>
+<li>JavaScript 脚本；</li>
+<li>Logo、图标和字体；</li>
+<li>统计代码；</li>
+<li>在线客服；</li>
+<li>广告或第三方组件。</li>
+</ul>
+<p>如果单张 Banner 就有 12MB，其他资源再叠加上去，首页首次打开时可能需要下载十几兆甚至几十兆的数据。</p>
+<p>在办公室宽带环境下，站长自己可能觉得还能接受。但客户使用手机网络、跨地区线路或海外网络访问时，加载时间就会明显增加。</p>
+<p>更重要的是，首页大图经常是页面中最大的可见元素，也就是常见的 LCP 候选内容。图片体积过大，通常会直接拖慢主要内容显示速度。Google 的网页性能文档也将图片优化列为改善加载体验的重要方向。</p>
+<h2 id="网页图片并不需要使用设计原图">网页图片并不需要使用设计原图
+</h2><p>网站上常见的错误包括：</p>
+<ol>
+<li>设计师导出多大，后台就上传多大；</li>
+<li>相机拍摄的原始照片直接放到网页；</li>
+<li>手机端和电脑端共用同一张超大图片；</li>
+<li>产品照片仍使用体积很大的 PNG；</li>
+<li>图片已经压缩，但像素尺寸远超实际展示尺寸。</li>
+</ol>
+<p>例如，网页中只显示 1200 像素宽的图片，却上传了一张 6000 像素宽的摄影原图。浏览器最终虽然会把图片缩小显示，但用户仍然需要先下载完整原图。</p>
+<p>正确做法不是只在 CSS 中缩小图片，而是在上传前就生成适合网页使用的尺寸。</p>
+<h3 id="常见图片格式怎么选">常见图片格式怎么选？
+</h3><p><strong>JPEG</strong></p>
+<p>适合照片、产品图、人物图和渐变较多的画面。兼容性好，压缩后体积通常明显小于 PNG。</p>
+<p><strong>PNG</strong></p>
+<p>适合透明背景 Logo、图标、截图和需要保留清晰边缘的简单图形。一般不适合保存大幅摄影照片。</p>
+<p><strong>WebP</strong></p>
+<p>适合大多数网站图片，可同时支持有损压缩、无损压缩和透明背景，通常比传统 JPEG、PNG 更节省空间。</p>
+<p><strong>AVIF</strong></p>
+<p>压缩效率通常更高，适合希望进一步减少图片体积的网站，但需要保留格式兼容和图片处理流程。</p>
+<p>WebP 和 AVIF 通常可以在维持可接受画质的同时减少文件体积。更稳妥的做法是通过 <code>&lt;picture&gt;</code> 元素提供现代格式，并保留 JPEG 或 PNG 作为兼容回退。</p>
+<h2 id="图片应该压缩到多大">图片应该压缩到多大？
+</h2><p>没有一个数字适合所有网站，但可以先建立一个实用的性能预算。</p>
+<p>对于普通企业官网，可以参考下面的起始目标：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>资源类型</th>
+          <th style="text-align: right">建议起始目标</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>首页普通内容图</td>
+          <td style="text-align: right">尽量控制在 100—300KB</td>
+      </tr>
+      <tr>
+          <td>首屏横幅图</td>
+          <td style="text-align: right">尽量控制在 300—500KB</td>
+      </tr>
+      <tr>
+          <td>产品缩略图</td>
+          <td style="text-align: right">通常控制在 50—150KB</td>
+      </tr>
+      <tr>
+          <td>Logo 和简单图标</td>
+          <td style="text-align: right">尽量控制在几十 KB</td>
+      </tr>
+      <tr>
+          <td>首页首次加载总资源</td>
+          <td style="text-align: right">越精简越好，避免无意义膨胀</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>这些数字不是强制标准。</p>
+<p>一张细节丰富的建筑照片，可能需要更高体积才能保持画质；一张背景简单的营销横幅，可能压到 150KB 仍然足够清晰。</p>
+<p>判断标准应该是：</p>
+<ul>
+<li>实际展示尺寸是否合适；</li>
+<li>手机端是否加载了更小版本；</li>
+<li>肉眼是否能看出明显损失；</li>
+<li>页面性能测试是否仍提示图片过大；</li>
+<li>首屏图片是否拖慢 LCP。</li>
+</ul>
+<p>Google 的性能指南建议为图片、JavaScript 和页面总资源建立性能预算，避免网站在不断添加内容后逐渐变慢。</p>
+<h2 id="cdn-能不能解决大图片问题">CDN 能不能解决大图片问题？
+</h2><p>能改善，但不能代替图片优化。</p>
+<p>CDN 的完整名称是内容分发网络。它会把适合缓存的图片、CSS、JavaScript、字体等资源存放在多个地区的节点中。</p>
+<p>当用户访问网站时，资源可以从距离用户更近的节点返回，从而减少网络传输距离、降低源站压力。CDN 本质上是一个分布在不同地区的缓存和分发网络。</p>
+<p>可以把它理解成快递仓库：</p>
+<ul>
+<li>没有 CDN：商品需要从广州仓库发往北京；</li>
+<li>使用 CDN：北京附近已经提前存有商品；</li>
+<li>图片压缩：把原本几十公斤的货物减轻到几公斤。</li>
+</ul>
+<p>CDN 解决的是“从哪里发货”，图片压缩解决的是“货物有多重”。</p>
+<p>如果图片仍然有 12MB，即使从附近节点下载，用户仍然要接收完整的 12MB 数据。CDN 可以缩短路程，却不会自动让原文件变小。</p>
+<p>因此正确顺序应该是：</p>
+
+    <blockquote>
+        <p>先调整图片尺寸和格式，再压缩图片，最后使用 CDN 分发。</p>
+
+    </blockquote>
+<h2 id="什么是回源">什么是回源？
+</h2><p>CDN 节点不一定一开始就保存了网站资源。</p>
+<p>当用户第一次请求某个文件时，CDN 节点如果没有缓存，通常需要向源服务器获取文件，再将文件保存到节点中，这个过程称为“回源”。</p>
+<p>常见状态包括：</p>
+<ul>
+<li><strong>HIT</strong>：资源已在 CDN 节点缓存，直接返回；</li>
+<li><strong>MISS</strong>：节点没有缓存，需要向源站获取；</li>
+<li><strong>EXPIRED</strong>：缓存已经过期，需要重新验证或获取；</li>
+<li><strong>BYPASS</strong>：根据规则跳过缓存；</li>
+<li><strong>DYNAMIC</strong>：资源被判断为动态内容，没有使用普通静态缓存。</li>
+</ul>
+<p>不同 CDN 的状态名称可能略有区别，但判断逻辑相近。</p>
+<p>以 Cloudflare 为例，图片、CSS 和 JavaScript 等静态资源通常可以默认缓存，而 HTML 页面默认不会直接缓存。具体是否命中，还会受到文件扩展名、查询参数、Cookie、缓存响应头和 Cache Rules 等因素影响。</p>
+<h2 id="什么是-cdn-预热">什么是 CDN 预热？
+</h2><p>预热是指在正式流量到来前，提前让 CDN 节点获取指定资源。</p>
+<p>它适合以下场景：</p>
+<ul>
+<li>网站刚上线；</li>
+<li>大型活动即将开始；</li>
+<li>一批重要图片或视频刚刚更新；</li>
+<li>新版本静态文件需要提前进入缓存；</li>
+<li>短时间内会有大量用户访问同一资源。</li>
+</ul>
+<p>普通个人博客或访问量不高的企业网站，不需要频繁执行预热。日常更新依靠正常缓存即可。</p>
+<h2 id="网站慢怎样判断问题到底在哪里">网站慢，怎样判断问题到底在哪里？
+</h2><p>不要一看到网站慢就直接购买更贵的服务器。可以按照下面的顺序排查。</p>
+<h3 id="第一步检查页面资源大小">第一步：检查页面资源大小
+</h3><p>打开 Chrome 浏览器，按 <code>F12</code> 进入开发者工具：</p>
+<ol>
+<li>打开 <code>Network</code>；</li>
+<li>刷新页面；</li>
+<li>按 <code>Size</code> 排序；</li>
+<li>查看最大的图片、脚本和字体；</li>
+<li>检查页面总传输大小和请求数量。</li>
+</ol>
+<p>重点关注：</p>
+<ul>
+<li>是否有超过 1MB 的首页图片；</li>
+<li>是否加载了没有显示的图片；</li>
+<li>是否存在重复脚本；</li>
+<li>是否加载了多个字体文件；</li>
+<li>是否有第三方请求长时间没有响应。</li>
+</ul>
+<h3 id="第二步检查图片实际尺寸">第二步：检查图片实际尺寸
+</h3><p>确认图片在页面上的显示宽度。</p>
+<p>如果首页 Banner 最大只显示 1920 像素宽，就没有必要上传一张 6000 像素宽的原图。</p>
+<p>同时应使用响应式图片，让浏览器根据设备宽度选择不同文件。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">img</span>
+</span></span><span class="line"><span class="cl">  <span class="na">src</span><span class="o">=</span><span class="s">&#34;banner-1280.webp&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">srcset</span><span class="o">=</span><span class="s">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    banner-640.webp 640w,
+</span></span></span><span class="line"><span class="cl"><span class="s">    banner-1280.webp 1280w,
+</span></span></span><span class="line"><span class="cl"><span class="s">    banner-1920.webp 1920w
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">sizes</span><span class="o">=</span><span class="s">&#34;100vw&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">width</span><span class="o">=</span><span class="s">&#34;1920&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">height</span><span class="o">=</span><span class="s">&#34;800&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="na">alt</span><span class="o">=</span><span class="s">&#34;企业官网首页横幅&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样手机用户不必下载桌面端使用的超大图片。</p>
+<h3 id="第三步测试服务器响应时间">第三步：测试服务器响应时间
+</h3><p>如果图片和静态资源已经较小，但 HTML 文档仍然很慢，需要检查：</p>
+<ul>
+<li>服务器 TTFB 是否过高；</li>
+<li>PHP、Node.js 或其他程序是否执行过慢；</li>
+<li>数据库查询是否过多；</li>
+<li>WordPress 插件是否拖慢页面；</li>
+<li>第三方 API 是否超时；</li>
+<li>服务器 CPU、内存和磁盘是否长期满载。</li>
+</ul>
+<p>CDN 主要改善缓存资源的传输。如果首页慢在数据库或后端程序，单纯增加 CDN 不一定能解决问题。</p>
+<h3 id="第四步比较不同地区的访问结果">第四步：比较不同地区的访问结果
+</h3><p>如果本地访问快，外地或海外用户明显更慢，问题可能与物理距离、运营商线路或跨境网络有关。</p>
+<p>此时 CDN 的价值会更加明显，因为它可以让静态资源从更靠近用户的节点返回。</p>
+<p>但不要把某个城市之间的延迟写成固定值。真实结果会受到线路、运营商、网络拥堵、路由质量和测试时间影响，应以实际监测数据为准。</p>
+<h2 id="哪些网站更适合使用-cdn">哪些网站更适合使用 CDN？
+</h2><h3 id="全国性企业官网">全国性企业官网
+</h3><p>客户分布在多个省市，不同地区的网络质量难以统一。CDN 可以减少静态资源跨地区传输。</p>
+<h3 id="图片较多的网站">图片较多的网站
+</h3><p>例如产品展示、案例展示、摄影、装修、服装、机械设备和设计作品网站。图片越多，静态资源分发的收益通常越明显。</p>
+<h3 id="电商网站和活动页面">电商网站和活动页面
+</h3><p>访问高峰期间，大量用户同时加载同一批图片、脚本和样式文件。CDN 可以减少源站带宽和并发压力。</p>
+<h3 id="小程序和-app-静态资源">小程序和 App 静态资源
+</h3><p>启动图片、更新包、字体、脚本和公共资源适合通过 CDN 分发。</p>
+<h3 id="面向海外用户的网站">面向海外用户的网站
+</h3><p>如果源站与客户距离较远，使用覆盖目标市场的 CDN 或直接选择更靠近客户的服务器区域，通常比单纯升级 CPU 更有效。</p>
+<h2 id="哪些网站可以暂时不用-cdn">哪些网站可以暂时不用 CDN？
+</h2><p>以下情况可以先完成基础优化，再决定是否使用：</p>
+<ul>
+<li>用户主要集中在同一办公室或同一城市；</li>
+<li>网站访问量很低；</li>
+<li>页面几乎没有图片和大型静态资源；</li>
+<li>网站本身已经部署在靠近用户的边缘平台；</li>
+<li>当前问题明显来自程序、数据库或第三方接口。</li>
+</ul>
+<p>不过，即使不使用独立 CDN，也应该正确设置浏览器缓存、压缩传输和静态资源版本管理。</p>
+<h2 id="使用-cdn-最容易踩的五个坑">使用 CDN 最容易踩的五个坑
+</h2><h3 id="1-图片不压缩直接开-cdn">1. 图片不压缩，直接开 CDN
+</h3><p>CDN 只能缩短文件传输路径，不能从根本上消除超大文件带来的下载成本。</p>
+<h3 id="2-把-cdn-当成万能加速器">2. 把 CDN 当成万能加速器
+</h3><p>数据库慢、代码效率低、插件冲突和第三方接口超时，都不是普通静态缓存能够彻底解决的问题。</p>
+<h3 id="3-开通后完全使用默认配置">3. 开通后完全使用默认配置
+</h3><p>至少应该检查：</p>
+<ul>
+<li>域名是否已经正确接入；</li>
+<li>DNS 或 CNAME 是否生效；</li>
+<li>图片、CSS、JavaScript 是否被缓存；</li>
+<li>缓存时间是否合理；</li>
+<li>源站缓存响应头是否正确；</li>
+<li>HTTPS 是否完整配置；</li>
+<li>更新文件后是否能及时刷新。</li>
+</ul>
+<h3 id="4-更新-css-后页面样式错乱">4. 更新 CSS 后页面样式错乱
+</h3><p>通常是 CDN 或浏览器仍在使用旧文件。</p>
+<p>推荐使用文件指纹或版本号，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;/assets/style.a82c17.css&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;/assets/style.css?v=20260727&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于带哈希值、内容变化后文件名也会变化的静态资源，可以设置更长的缓存时间。MDN 也推荐将长期不变的静态资源与缓存破坏机制结合使用。</p>
+<h3 id="5-https-配置不完整">5. HTTPS 配置不完整
+</h3><p>如果网站已经使用 HTTPS，CDN、源站和静态资源也应保持 HTTPS。</p>
+<p>否则可能出现：</p>
+<ul>
+<li>混合内容警告；</li>
+<li>图片或脚本加载失败；</li>
+<li>浏览器安全锁消失；</li>
+<li>重定向循环；</li>
+<li>回源证书错误。</li>
+</ul>
+<h2 id="一个更实用的网站速度优化顺序">一个更实用的网站速度优化顺序
+</h2><p>当网站打开很慢时，可以按照下面的优先级处理：</p>
+<h3 id="1-先处理图片">1. 先处理图片
+</h3><ul>
+<li>删除没有使用的图片；</li>
+<li>调整到实际展示尺寸；</li>
+<li>照片避免使用原始 PNG；</li>
+<li>转换为 WebP 或 AVIF；</li>
+<li>为手机端提供较小尺寸；</li>
+<li>压缩后再上传。</li>
+</ul>
+<h3 id="2-再检查页面资源">2. 再检查页面资源
+</h3><ul>
+<li>删除无用 CSS 和 JavaScript；</li>
+<li>减少第三方统计和客服组件；</li>
+<li>合理延迟非关键脚本；</li>
+<li>减少字体文件和字重；</li>
+<li>为非首屏图片设置懒加载。</li>
+</ul>
+<h3 id="3-检查服务器与程序">3. 检查服务器与程序
+</h3><ul>
+<li>查看 TTFB；</li>
+<li>检查慢查询；</li>
+<li>排查插件；</li>
+<li>查看 CPU、内存、磁盘和带宽；</li>
+<li>检查第三方接口。</li>
+</ul>
+<h3 id="4-判断是否需要-cdn">4. 判断是否需要 CDN
+</h3><p>当用户分布较远、静态资源较多或访问并发较高时，再接入合适的 CDN。</p>
+<h3 id="5-配置缓存和-https">5. 配置缓存和 HTTPS
+</h3><p>确认静态资源是否真正命中缓存，而不是只完成了域名接入。</p>
+<h3 id="6-优化后重新测试">6. 优化后重新测试
+</h3><p>不要只看自己电脑上的打开速度。应分别测试：</p>
+<ul>
+<li>无痕窗口首次加载；</li>
+<li>手机 4G 或 5G 网络；</li>
+<li>不同城市或国家；</li>
+<li>CDN 缓存命中前后；</li>
+<li>首页和内容页；</li>
+<li>登录状态与未登录状态。</li>
+</ul>
+<h2 id="总结">总结
+</h2><p>网站速度慢，不应该第一时间就归咎于服务器配置。</p>
+<p>一张未经处理的 12MB 首页图片，可能比升级服务器更值得优先解决。正确的优化思路应该是：</p>
+
+    <blockquote>
+        <p>先减小资源体积，再减少无效请求；先判断慢在哪里，再决定是否升级服务器或接入 CDN。</p>
+
+    </blockquote>
+<p>图片优化解决的是文件太大，CDN 解决的是传输距离和源站压力，服务器优化解决的是后端响应速度。</p>
+<p>这三件事各自解决不同的问题。</p>
+<p>真正有效的网站加速，不是购买一个服务后期待页面自动变快，而是先通过数据找到瓶颈，再按顺序处理。</p>
+
+</section>
+
+
+    <footer class="article-meta article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%BD%91%E7%AB%99%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/">网站速度优化</a>
+        
+            <a href="/tags/cdn-%E5%8A%A0%E9%80%9F/">CDN 加速</a>
+        
+            <a href="/tags/%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9/">图片压缩</a>
+        
+            <a href="/tags/webp/">WebP</a>
+        
+            <a href="/tags/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD/">网站性能</a>
+        
+            <a href="/tags/cloudflare-cdn/">Cloudflare CDN</a>
+        
+            <a href="/tags/%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6/">网页加载速度</a>
+        
+            <a href="/tags/lcp-%E4%BC%98%E5%8C%96/">LCP 优化</a>
+        
+            <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96/">服务器优化</a>
+        
+            <a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">前端性能优化</a>
+        
+            <a href="/tags/cdn-%E5%9B%9E%E6%BA%90/">CDN 回源</a>
+        
+            <a href="/tags/core-web-vitals/">Core Web Vitals</a>
+        
+    </section>
+</footer>
+
+    
+</article>
+
+        
+        <nav class="article-sequence" aria-label="上一篇和下一篇文章"><a class="article-sequence-link is-previous" href="/posts/wang-zhan-nei-rong-bei-ai-yin-yong-guan-jian/" rel="prev">
+                <span class="article-sequence-arrow" aria-hidden="true">←</span>
+                <span class="article-sequence-body">
+                    <code>PREVIOUS</code>
+                    <strong>网站内容如何被 AI 引用？关键不是写得多，而是写得清楚、具体、可信</strong>
+                </span>
+            </a><a class="article-sequence-link is-next" href="/posts/find-skills-install-guide/" rel="next">
+                <span class="article-sequence-body">
+                    <code>NEXT</code>
+                    <strong>Find Skills 使用教程：帮你搜索、筛选和安装合适的 AI Agent Skills</strong>
+                </span>
+                <span class="article-sequence-arrow" aria-hidden="true">→</span>
+            </a></nav><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED ARTICLES</h2>
+        <span>06 RECOMMENDATIONS</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/wang-zhan-nei-rong-bei-ai-yin-yong-guan-jian/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260727-172946-488d0000.jpg" alt="网站内容如何被 AI 引用？关键不是写得多，而是写得清楚、具体、可信" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.01</code>
+                    <h3>网站内容如何被 AI 引用？关键不是写得多，而是写得清楚、具体、可信</h3>
+                    <p>随着 Google AI Overviews、AI Mode、Microsoft Copilot 等 AI 搜索产品逐渐进入用户的日常搜索流程， …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/yong-cloudflare-da-jian-shu-yu-zi-ji-de-lin/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260727-122753-1939fbbb.jpg" alt="用 Cloudflare 搭建一个属于自己的临时邮箱：Cloud Mail 项目介绍" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.02</code>
+                    <h3>用 Cloudflare 搭建一个属于自己的临时邮箱：Cloud Mail 项目介绍</h3>
+                    <p>平时注册网站、测试工具或体验在线服务时，经常需要填写邮箱地址。
+如果每次都使用自己的常用邮箱，时间久了很容易收到大量广告邮件、推广信息，甚至还可 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/mian-fei-ling-qu-4-ge-kai-fa-zhe-yu/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260727-121729-b2a7d08c.jpg" alt="免费领取 4 个开发者域名：Stackryze Domains 使用介绍" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.03</code>
+                    <h3>免费领取 4 个开发者域名：Stackryze Domains 使用介绍</h3>
+                    <p>对于经常折腾网站、部署开源项目或者学习前端开发的人来说，域名虽然不是一笔很大的开支，但如果同时维护多个测试项目，成本也会慢慢增加。
+最近发现了一 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/16-zhong-chang-jian-de-ui-she-ji-feng-ge/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260726-225440-41127a82.png" alt="16 种常见的 UI 设计风格提示词" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.04</code>
+                    <h3>16 种常见的 UI 设计风格提示词</h3>
+                    <p>可直接运行的单文件 HTML 的 16 种常见的 UI 设计风格设计提示词。
+一、项目目标制作一个“UI 设计风格展示库”网站，通过 16 个 …</p>
+                    <time>2026-07-26</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ti-jiao-google-adsense-bei-ju-di-jia-zhi-nei/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260726-185409-e3bf1f27.png" alt="提交 Google AdSense 被拒？“低价值内容”该怎么解决" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.05</code>
+                    <h3>提交 Google AdSense 被拒？“低价值内容”该怎么解决</h3>
+                    <p>提交 Google AdSense 审核，网站没有通过。
+从提交到收到结果，9 天后。谷歌邮件里没有明确说明具体问题，只是在后台提示：低价值内容 …</p>
+                    <time>2026-07-26</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/%E8%85%BE%E8%AE%AF-edgeone-%E5%85%8D%E8%B4%B9-cdn-%E5%80%BC%E5%BE%97%E7%94%A8%E5%90%97-%E4%B8%8E-cloudflare-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E6%8E%A5%E5%85%A5%E6%96%B9%E6%B3%95/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/d2a28c6a-a573-4925-becf-687206a03e55-5cb1346c.png" alt="腾讯 EdgeOne 免费 CDN 值得用吗？与 Cloudflare 的区别及接入方法" loading="lazy"></div>
+                <div class="archive-related-copy">
+                    <code>REL.06</code>
+                    <h3>腾讯 EdgeOne 免费 CDN 值得用吗？与 Cloudflare 的区别及接入方法</h3>
+                    <p>很多站长在给网站配置 CDN 时，第一时间想到的通常都是 Cloudflare。
+Cloudflare 的免费套餐确实很好用，不仅可以提供 …</p>
+                    <time>2026-07-24</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+        <aside class="article-disclaimer">
+            <code>DISCLAIMER</code>
+            <div class="article-disclaimer-body">
+                <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+                <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+                <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+                <p>严禁利用本站内容从事任何违法违规活动。</p>
+            </div>
+        </aside></div>
+
+    <aside class="archive-article-sidebar" aria-label="文章侧边栏">
+    <section class="article-side-panel">
+        <h2 class="article-side-title">SEARCH <span>01</span></h2>
+        <form class="article-side-search" action="/search/" method="get" role="search">
+            <input type="search" name="keyword" placeholder="输入关键词..." aria-label="搜索文章" required>
+            <button type="submit" aria-label="开始搜索">⌕</button>
+        </form>
+    </section><section class="article-side-panel article-side-toc">
+        <h2 class="article-side-title">CONTENTS <span>02</span></h2>
+        <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一张-12mb-的首页图会带来什么问题">一张 12MB 的首页图，会带来什么问题？</a></li>
+    <li><a href="#网页图片并不需要使用设计原图">网页图片并不需要使用设计原图</a>
+      <ol>
+        <li><a href="#常见图片格式怎么选">常见图片格式怎么选？</a></li>
+      </ol>
+    </li>
+    <li><a href="#图片应该压缩到多大">图片应该压缩到多大？</a></li>
+    <li><a href="#cdn-能不能解决大图片问题">CDN 能不能解决大图片问题？</a></li>
+    <li><a href="#什么是回源">什么是回源？</a></li>
+    <li><a href="#什么是-cdn-预热">什么是 CDN 预热？</a></li>
+    <li><a href="#网站慢怎样判断问题到底在哪里">网站慢，怎样判断问题到底在哪里？</a>
+      <ol>
+        <li><a href="#第一步检查页面资源大小">第一步：检查页面资源大小</a></li>
+        <li><a href="#第二步检查图片实际尺寸">第二步：检查图片实际尺寸</a></li>
+        <li><a href="#第三步测试服务器响应时间">第三步：测试服务器响应时间</a></li>
+        <li><a href="#第四步比较不同地区的访问结果">第四步：比较不同地区的访问结果</a></li>
+      </ol>
+    </li>
+    <li><a href="#哪些网站更适合使用-cdn">哪些网站更适合使用 CDN？</a>
+      <ol>
+        <li><a href="#全国性企业官网">全国性企业官网</a></li>
+        <li><a href="#图片较多的网站">图片较多的网站</a></li>
+        <li><a href="#电商网站和活动页面">电商网站和活动页面</a></li>
+        <li><a href="#小程序和-app-静态资源">小程序和 App 静态资源</a></li>
+        <li><a href="#面向海外用户的网站">面向海外用户的网站</a></li>
+      </ol>
+    </li>
+    <li><a href="#哪些网站可以暂时不用-cdn">哪些网站可以暂时不用 CDN？</a></li>
+    <li><a href="#使用-cdn-最容易踩的五个坑">使用 CDN 最容易踩的五个坑</a>
+      <ol>
+        <li><a href="#1-图片不压缩直接开-cdn">1. 图片不压缩，直接开 CDN</a></li>
+        <li><a href="#2-把-cdn-当成万能加速器">2. 把 CDN 当成万能加速器</a></li>
+        <li><a href="#3-开通后完全使用默认配置">3. 开通后完全使用默认配置</a></li>
+        <li><a href="#4-更新-css-后页面样式错乱">4. 更新 CSS 后页面样式错乱</a></li>
+        <li><a href="#5-https-配置不完整">5. HTTPS 配置不完整</a></li>
+      </ol>
+    </li>
+    <li><a href="#一个更实用的网站速度优化顺序">一个更实用的网站速度优化顺序</a>
+      <ol>
+        <li><a href="#1-先处理图片">1. 先处理图片</a></li>
+        <li><a href="#2-再检查页面资源">2. 再检查页面资源</a></li>
+        <li><a href="#3-检查服务器与程序">3. 检查服务器与程序</a></li>
+        <li><a href="#4-判断是否需要-cdn">4. 判断是否需要 CDN</a></li>
+        <li><a href="#5-配置缓存和-https">5. 配置缓存和 HTTPS</a></li>
+        <li><a href="#6-优化后重新测试">6. 优化后重新测试</a></li>
+      </ol>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</nav>
+        
+        <script>
+        (() => {
+            const toc = document.currentScript.parentElement;
+            const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+            if (!links.length) return;
+            const headings = links.map(link => {
+                const id = link.getAttribute('href').slice(1);
+                return document.getElementById(id);
+            }).filter(Boolean);
+            const isActive = (index) => {
+                const el = headings[index];
+                if (!el) return false;
+                const next = headings[index + 1];
+                const rect = el.getBoundingClientRect();
+                if (next) {
+                    const nextRect = next.getBoundingClientRect();
+                    return rect.top < window.innerHeight / 2 && nextRect.top > 80;
+                }
+                return rect.top < window.innerHeight / 2;
+            };
+            const spy = () => {
+                let active = -1;
+                for (let i = 0; i < headings.length; i++) {
+                    if (isActive(i)) active = i;
+                }
+                links.forEach((link, i) => {
+                    link.classList.toggle('is-active', i === active);
+                });
+                const activeLink = active >= 0 ? links[active] : null;
+                if (activeLink) {
+                    const tocRect = toc.getBoundingClientRect();
+                    const linkRect = activeLink.getBoundingClientRect();
+                    if (linkRect.top < tocRect.top + 50 || linkRect.bottom > tocRect.bottom - 20) {
+                        toc.scrollTop += linkRect.top - tocRect.top - tocRect.height / 2 + linkRect.height / 2;
+                    }
+                }
+            };
+            window.addEventListener('scroll', spy, { passive: true });
+            spy();
+        })();
+        </script>
+        
+    </section><section class="article-side-panel">
+        <h2 class="article-side-title">LATEST <span>03</span></h2>
+        <ol class="article-side-list">
+            <li><a href="/posts/headroom-zui-gao-jian-shao-92-token-yong-ai-bian/"><span>Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上</span><time>07-27</time></a></li><li><a href="/posts/book-to-skill-ba-yi-ben-shu-bian-cheng-ai/"><span>Book to Skill：把一本书变成 AI 可以反复调用的知识工具</span><time>07-27</time></a></li><li><a href="/posts/codex-xiao-lv-bei-zeng-5-ge-zhi-de-guan/"><span>Codex 效率倍增：5 个值得关注的开源工具</span><time>07-27</time></a></li><li><a href="/posts/find-skills-install-guide/"><span>Find Skills 使用教程：帮你搜索、筛选和安装合适的 AI Agent Skills</span><time>07-27</time></a></li><li><a href="/posts/wang-zhan-nei-rong-bei-ai-yin-yong-guan-jian/"><span>网站内容如何被 AI 引用？关键不是写得多，而是写得清楚、具体、可信</span><time>07-27</time></a></li>
+        </ol>
+    </section>
+
+    <section class="article-side-panel">
+        <h2 class="article-side-title">HOT <span>04</span></h2>
+        <ol class="article-side-list article-hot-list" data-random-count="5">
+            <li><a href="/posts/headroom-zui-gao-jian-shao-92-token-yong-ai-bian/"><span>Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上</span><time>07-27</time></a></li><li><a href="/posts/book-to-skill-ba-yi-ben-shu-bian-cheng-ai/"><span>Book to Skill：把一本书变成 AI 可以反复调用的知识工具</span><time>07-27</time></a></li><li><a href="/posts/codex-xiao-lv-bei-zeng-5-ge-zhi-de-guan/"><span>Codex 效率倍增：5 个值得关注的开源工具</span><time>07-27</time></a></li><li><a href="/posts/find-skills-install-guide/"><span>Find Skills 使用教程：帮你搜索、筛选和安装合适的 AI Agent Skills</span><time>07-27</time></a></li><li><a href="/posts/wang-zhan-nei-rong-bei-ai-yin-yong-guan-jian/"><span>网站内容如何被 AI 引用？关键不是写得多，而是写得清楚、具体、可信</span><time>07-27</time></a></li><li hidden><a href="/posts/anysearch-skill-wei-ai-agent-jian-shao-wu-xiao-sou/"><span>AnySearch Skill：为 AI Agent 减少无效搜索与 Token 浪费</span><time>07-27</time></a></li><li hidden><a href="/posts/yong-cloudflare-da-jian-shu-yu-zi-ji-de-lin/"><span>用 Cloudflare 搭建一个属于自己的临时邮箱：Cloud Mail 项目介绍</span><time>07-27</time></a></li><li hidden><a href="/posts/mian-fei-ling-qu-4-ge-kai-fa-zhe-yu/"><span>免费领取 4 个开发者域名：Stackryze Domains 使用介绍</span><time>07-27</time></a></li><li hidden><a href="/posts/ppt-master-mian-fei-kai-yuan-de-ai-ppt-gong/"><span>PPT Master：免费开源的 AI PPT 工具，生成真正可编辑的 PowerPoint</span><time>07-27</time></a></li><li hidden><a href="/posts/16-zhong-chang-jian-de-ui-she-ji-feng-ge/"><span>16 种常见的 UI 设计风格提示词</span><time>07-26</time></a></li><li hidden><a href="/posts/ti-jiao-google-adsense-bei-ju-di-jia-zhi-nei/"><span>提交 Google AdSense 被拒？“低价值内容”该怎么解决</span><time>07-26</time></a></li><li hidden><a href="/posts/pu-tong-ren-ling-men-kan-youtube-bian-xian-yong/"><span>普通人零门槛 YouTube 变现攻略：用 AI 做英文 Vlog，开启海外副业</span><time>07-26</time></a></li><li hidden><a href="/posts/%E8%AE%A9-codex-%E8%B6%8A%E7%94%A8%E8%B6%8A%E8%81%AA%E6%98%8E-%E7%94%A8%E4%B8%80%E5%A5%97%E9%95%BF%E6%9C%9F%E8%A7%84%E5%88%99%E7%A7%AF%E7%B4%AF%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/"><span>让 Codex 越用越聪明：用一套长期规则积累项目经验</span><time>07-25</time></a></li><li hidden><a href="/posts/%E5%9B%BD%E5%86%85%E4%BF%A1%E7%94%A8%E5%8D%A1%E8%AE%A2%E9%98%85-chatgpt-gemini-grok-%E5%AE%89%E5%8D%93%E7%AB%AF%E5%AE%8C%E6%95%B4%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"><span>国内信用卡订阅 ChatGPT、Gemini、Grok：安卓端完整操作指南</span><time>07-24</time></a></li><li hidden><a href="/posts/%E8%85%BE%E8%AE%AF-edgeone-%E5%85%8D%E8%B4%B9-cdn-%E5%80%BC%E5%BE%97%E7%94%A8%E5%90%97-%E4%B8%8E-cloudflare-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E6%8E%A5%E5%85%A5%E6%96%B9%E6%B3%95/"><span>腾讯 EdgeOne 免费 CDN 值得用吗？与 Cloudflare 的区别及接入方法</span><time>07-24</time></a></li><li hidden><a href="/posts/9-%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%AB%99%E5%86%85-seo-%E5%B7%A5%E5%85%B7-%E4%BB%8E%E6%94%B6%E5%BD%95-%E5%85%B3%E9%94%AE%E8%AF%8D%E5%88%B0%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA-%E4%B8%80%E6%AC%A1%E6%9F%A5%E6%B8%85%E9%A1%B5%E9%9D%A2%E9%97%AE%E9%A2%98/"><span>9 个常用站内 SEO 工具：从收录、关键词到用户行为，一次查清页面问题</span><time>07-24</time></a></li><li hidden><a href="/posts/codex-%E9%92%A9%E5%AD%90%E6%98%AF%E4%BB%80%E4%B9%88-%E7%94%A8%E9%80%94%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"><span>Codex 钩子是什么？用途与使用方法</span><time>07-24</time></a></li><li hidden><a href="/posts/handoff-md-%E6%98%AF%E4%BB%80%E4%B9%88-%E8%AE%A9%E6%96%B0-ai-%E4%BC%9A%E8%AF%9D%E6%97%A0%E7%BC%9D%E6%8E%A5%E6%89%8B%E6%97%A7%E4%BB%BB%E5%8A%A1/"><span>HANDOFF.md 是什么？让新 AI 会话无缝接手旧任务</span><time>07-24</time></a></li><li hidden><a href="/posts/chrome-devtools-mcp-%E8%AE%A9-ai-%E7%9B%B4%E6%8E%A5%E6%93%8D%E4%BD%9C%E6%B5%8F%E8%A7%88%E5%99%A8%E8%B0%83%E8%AF%95%E7%BD%91%E7%AB%99/"><span>Chrome DevTools MCP：让 AI 直接操作浏览器调试网站</span><time>07-24</time></a></li><li hidden><a href="/posts/graphify-%E6%8A%8A%E6%95%B4%E4%B8%AA%E9%A1%B9%E7%9B%AE%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0-ai-%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"><span>Graphify：把整个项目变成一张 AI 能看懂的知识图谱</span><time>07-24</time></a></li><li hidden><a href="/posts/jcodemunch-mcp-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E8%AE%A9-codex-claude-code-%E5%B0%91%E8%AF%BB%E5%BA%9F%E4%BB%A3%E7%A0%81-%E9%99%8D%E4%BD%8E-token-%E6%B6%88%E8%80%97/"><span>jCodeMunch MCP 使用教程：让 Codex、Claude Code 少读废代码，降低 Token 消耗</span><time>07-24</time></a></li><li hidden><a href="/posts/ai-%E6%90%9C%E7%B4%A2%E6%AD%A3%E5%9C%A8%E5%88%86%E8%B5%B0%E7%82%B9%E5%87%BB-2026-%E5%B9%B4%E8%BF%98%E6%9C%89%E5%BF%85%E8%A6%81%E7%BB%A7%E7%BB%AD%E5%81%9A-seo-%E5%90%97/"><span>AI 搜索正在分走点击，2026 年还有必要继续做 SEO 吗？</span><time>07-23</time></a></li><li hidden><a href="/posts/%E7%8B%AC%E7%AB%8B%E7%AB%99%E5%88%AB%E6%80%A5%E7%9D%80%E4%B8%8A%E7%BA%BF-%E4%BB%8E%E5%BB%BA%E7%AB%99%E7%AC%AC%E4%B8%80%E5%A4%A9%E5%BC%80%E5%A7%8B%E5%81%9A%E5%AF%B9%E7%9A%84-google-seo-%E5%9F%BA%E7%A1%80%E5%B8%83%E5%B1%80/"><span>独立站别急着上线：从建站第一天开始做对的 Google SEO 基础布局</span><time>07-23</time></a></li><li hidden><a href="/posts/wordpress-next-js/"><span>2026 年建站技术怎么选：WordPress 与 Next.js，真正决定答案的不是性能</span><time>07-23</time></a></li><li hidden><a href="/posts/codex-credit-saving-toolkit-beginner-version/"><span>Codex 省额度工具包（新手版）</span><time>07-21</time></a></li><li hidden><a href="/posts/please-allow-ads-on-shiguangji-en/"><span>Please Allow Ads on Shiguangji</span><time>07-21</time></a></li><li hidden><a href="/posts/please-allow-ads-on-shiguangji-zh/"><span>请允许拾光集展示广告</span><time>07-21</time></a></li><li hidden><a href="/posts/disclaimer-en/"><span>Disclaimer</span><time>07-21</time></a></li><li hidden><a href="/posts/disclaimer-zh/"><span>免责声明</span><time>07-21</time></a></li><li hidden><a href="/posts/privacy-policy/"><span>Privacy Policy</span><time>07-21</time></a></li><li hidden><a href="/posts/privacypolicy/"><span>隐私政策</span><time>07-21</time></a></li>
+        </ol>
+        
+        <script>
+        (() => {
+            const list = document.currentScript.previousElementSibling;
+            const items = Array.from(list.querySelectorAll('li'));
+            const count = Math.min(Number(list.dataset.randomCount) || 5, items.length);
+            for (let index = items.length - 1; index > 0; index -= 1) {
+                const target = Math.floor(Math.random() * (index + 1));
+                [items[index], items[target]] = [items[target], items[index]];
+            }
+            items.forEach((item, index) => { item.hidden = index >= count; list.appendChild(item); });
+        })();
+        </script>
+        
+    </section><section class="article-side-panel">
+        <h2 class="article-side-title">TAG CLOUD <span>05</span></h2>
+        <div class="article-tag-cloud archive-random-tags" data-random-count="18">
+            <a href="/tags/aeo/">aeo<sup>1</sup></a><a href="/tags/agent-skills/">agent skills<sup>3</sup></a><a href="/tags/agent-tars/">agent tars<sup>1</sup></a><a href="/tags/ai/">ai<sup>8</sup></a><a href="/tags/ai-agent/">ai agent<sup>4</sup></a><a href="/tags/ai-ppt-%E5%B7%A5%E5%85%B7/">ai ppt 工具<sup>1</sup></a><a href="/tags/ai-%E4%BA%A4%E6%8E%A5%E6%96%87%E6%A1%A3/">ai 交接文档<sup>1</sup></a><a href="/tags/ai-%E4%BC%9A%E8%AF%9D/">ai 会话<sup>1</sup></a><a href="/tags/ai-%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/">ai 工具教程<sup>1</sup></a><a href="/tags/ai-%E7%9F%A5%E8%AF%86%E5%BA%93/">ai 知识库<sup>1</sup></a><a href="/tags/ai-%E8%AF%BB%E4%B9%A6%E5%B7%A5%E5%85%B7/">ai 读书工具<sup>1</sup></a><a href="/tags/ai%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">ai开发工具<sup>1</sup></a><a href="/tags/ai%E5%BC%95%E7%94%A8/">ai引用<sup>1</sup></a><a href="/tags/ai%E6%8F%92%E4%BB%B6/">ai插件<sup>1</sup></a><a href="/tags/ai%E6%90%9C%E7%B4%A2/">ai搜索<sup>2</sup></a><a href="/tags/ai%E7%BC%96%E7%A8%8B/">ai编程<sup>1</sup></a><a href="/tags/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/">ai编程工具<sup>1</sup></a><a href="/tags/anysearch/">anysearch<sup>1</sup></a><a href="/tags/b2b-seo/">b2b seo<sup>1</sup></a><a href="/tags/book-to-skill/">book to skill<sup>1</sup></a><a href="/tags/cdn-%E5%8A%A0%E9%80%9F/">cdn 加速<sup>1</sup></a><a href="/tags/cdn-%E5%9B%9E%E6%BA%90/">cdn 回源<sup>1</sup></a><a href="/tags/cdn%E5%8A%A0%E9%80%9F/">cdn加速<sup>1</sup></a><a href="/tags/chatgpt/">chatgpt<sup>2</sup></a><a href="/tags/chrome-devtools-mcp/">chrome devtools mcp<sup>1</sup></a><a href="/tags/claude-code/">claude code<sup>5</sup></a><a href="/tags/cloud-mail/">cloud mail<sup>1</sup></a><a href="/tags/cloudflare/">cloudflare<sup>1</sup></a><a href="/tags/cloudflare-cdn/">cloudflare cdn<sup>1</sup></a><a href="/tags/codex/">codex<sup>8</sup></a><a href="/tags/codex-skills/">codex skills<sup>1</sup></a><a href="/tags/computer-use/">computer use<sup>1</sup></a><a href="/tags/core-web-vitals/">core web vitals<sup>1</sup></a><a href="/tags/cursor/">cursor<sup>3</sup></a><a href="/tags/disclaimer/">disclaimer<sup>1</sup></a><a href="/tags/dns%E7%AE%A1%E7%90%86/">dns管理<sup>1</sup></a><a href="/tags/edgeone/">edgeone<sup>1</sup></a><a href="/tags/email/">email<sup>1</sup></a><a href="/tags/find-skills/">find-skills<sup>1</sup></a><a href="/tags/firecrawl/">firecrawl<sup>1</sup></a><a href="/tags/geo/">geo<sup>1</sup></a><a href="/tags/github-copilot-cli/">github copilot cli<sup>1</sup></a><a href="/tags/github-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">github 开源项目<sup>1</sup></a><a href="/tags/github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">github开源项目<sup>1</sup></a><a href="/tags/google/">google<sup>1</sup></a><a href="/tags/google-adsense/">google adsense<sup>1</sup></a><a href="/tags/google-seo/">google seo<sup>1</sup></a><a href="/tags/google%E6%94%B6%E5%BD%95/">google收录<sup>1</sup></a><a href="/tags/graphify/">graphify<sup>2</sup></a><a href="/tags/handoff/">handoff<sup>1</sup></a><a href="/tags/headroom/">headroom<sup>1</sup></a><a href="/tags/lcp-%E4%BC%98%E5%8C%96/">lcp 优化<sup>1</sup></a><a href="/tags/llm%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/">llm成本优化<sup>1</sup></a><a href="/tags/mcp/">mcp<sup>5</sup></a><a href="/tags/next.js/">next.js<sup>1</sup></a><a href="/tags/pdf-%E8%BD%AC-skill/">pdf 转 skill<sup>1</sup></a><a href="/tags/ponytail/">ponytail<sup>1</sup></a><a href="/tags/ppt-master/">ppt master<sup>1</sup></a><a href="/tags/privacy-policy/">privacy policy<sup>1</sup></a><a href="/tags/seo/">seo<sup>4</sup></a><a href="/tags/seo-%E5%B7%A5%E5%85%B7/">seo 工具<sup>1</sup></a><a href="/tags/skill/">skill<sup>1</sup></a><a href="/tags/skill-%E5%AE%89%E8%A3%85/">skill 安装<sup>1</sup></a><a href="/tags/skills/">skills<sup>1</sup></a><a href="/tags/skills-cli/">skills cli<sup>1</sup></a><a href="/tags/skills.sh/">skills.sh<sup>1</sup></a><a href="/tags/stackryze-domains/">stackryze domains<sup>1</sup></a><a href="/tags/superpowers/">superpowers<sup>1</sup></a><a href="/tags/token/">token<sup>2</sup></a><a href="/tags/token%E4%BC%98%E5%8C%96/">token优化<sup>1</sup></a><a href="/tags/token%E5%8E%8B%E7%BC%A9/">token压缩<sup>1</sup></a><a href="/tags/ui-tars/">ui-tars<sup>1</sup></a><a href="/tags/ui%E8%AE%BE%E8%AE%A1/">ui设计<sup>1</sup></a><a href="/tags/webp/">webp<sup>1</sup></a><a href="/tags/web%E5%BB%BA%E7%AB%99/">web建站<sup>1</sup></a><a href="/tags/wordpress/">wordpress<sup>1</sup></a><a href="/tags/youtube/">youtube<sup>1</sup></a><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9/">上下文压缩<sup>1</sup></a><a href="/tags/%E4%BB%A3%E7%A0%81%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">代码知识图谱<sup>1</sup></a><a href="/tags/%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E/">免责声明<sup>1</sup></a><a href="/tags/%E5%85%8D%E8%B4%B9cdn/">免费cdn<sup>1</sup></a><a href="/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/">免费域名<sup>1</sup></a><a href="/tags/%E5%85%8D%E8%B4%B9%E9%82%AE%E7%AE%B1/">免费邮箱<sup>1</sup></a><a href="/tags/%E5%86%85%E5%AE%B9%E4%BC%98%E5%8C%96/">内容优化<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">前端性能优化<sup>1</sup></a><a href="/tags/%E5%8D%9A%E5%AE%A2/">博客<sup>1</sup></a><a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建<sup>1</sup></a><a href="/tags/%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9/">图片压缩<sup>1</sup></a><a href="/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/">域名解析<sup>1</sup></a><a href="/tags/%E5%A4%96%E8%B4%B8%E7%8B%AC%E7%AB%8B%E7%AB%99/">外贸独立站<sup>1</sup></a><a href="/tags/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/">广告联盟<sup>1</sup></a><a href="/tags/%E5%B9%BF%E5%91%8A%E9%A6%96%E9%A1%B5/">广告首页<sup>1</sup></a><a href="/tags/%E5%BB%BA%E7%AB%99/">建站<sup>4</sup></a><a href="/tags/%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B/">建站教程<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%BA%90-ai-%E5%B7%A5%E5%85%B7/">开源 ai 工具<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/">开源工具<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目<sup>1</sup></a><a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/">搜索引擎优化<sup>1</sup></a><a href="/tags/%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%8F%90%E5%8F%96/">文档知识提取<sup>1</sup></a><a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96/">服务器优化<sup>1</sup></a><a href="/tags/%E7%94%B5%E5%AD%90%E4%B9%A6%E8%BD%AC-skill/">电子书转 skill<sup>1</sup></a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">知识图谱<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD/">网站性能<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/">网站搭建<sup>2</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E8%AE%BE%E8%AE%A1/">网站设计<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96/">网站速度优化<sup>1</sup></a><a href="/tags/%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E9%80%9F%E5%BA%A6/">网页加载速度<sup>1</sup></a><a href="/tags/%E8%87%AA%E5%AA%92%E4%BD%93/">自媒体<sup>1</sup></a><a href="/tags/%E8%A7%86%E9%A2%91%E5%88%86%E6%88%90/">视频分成<sup>1</sup></a><a href="/tags/%E8%B5%9A%E7%BE%8E%E5%85%83/">赚美元<sup>1</sup></a><a href="/tags/%E8%B7%A8agent%E8%AE%B0%E5%BF%86/">跨agent记忆<sup>1</sup></a><a href="/tags/%E9%92%A9%E5%AD%90/">钩子<sup>1</sup></a><a href="/tags/%E9%99%8D%E4%BD%8Eapi%E6%88%90%E6%9C%AC/">降低api成本<sup>1</sup></a><a href="/tags/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96/">隐私政策<sup>1</sup></a>
+        </div>
+        
+        <script>
+        (() => {
+            const cloud = document.currentScript.previousElementSibling;
+            const tags = Array.from(cloud.querySelectorAll('a'));
+            const count = Math.min(Number(cloud.dataset.randomCount) || 18, tags.length);
+            for (let index = tags.length - 1; index > 0; index -= 1) {
+                const target = Math.floor(Math.random() * (index + 1));
+                [tags[index], tags[target]] = [tags[target], tags[index]];
+            }
+            tags.forEach((tag, index) => { tag.hidden = index >= count; cloud.appendChild(tag); });
+        })();
+        </script>
+        
+    </section></aside>
+
+</div>
+
+<div class="article-float-actions" aria-hidden="true">
+    <button class="article-back-to-top" type="button" aria-label="返回页面顶部" title="返回顶部" tabindex="-1">
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path>
+            </svg>
+        </span>
+    </button>
+    <button class="article-go-to-bottom" type="button" aria-label="跳转到底部" title="跳转到底部" tabindex="-1">
+        <span aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation">
+                <path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"></path>
+            </svg>
+        </span>
+    </button>
+</div>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+
+<script>
+(() => {
+    const container = document.querySelector('.article-float-actions');
+    const topBtn = container.querySelector('.article-back-to-top');
+    const bottomBtn = container.querySelector('.article-go-to-bottom');
+    if (!container || !topBtn || !bottomBtn) return;
+
+    const placeButtons = () => {
+        const main = document.querySelector('.archive-article-main');
+        const sidebar = document.querySelector('.archive-article-sidebar');
+        const x = (window.innerWidth <= 1180 || !main || !sidebar)
+            ? null
+            : `${(main.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2}px`;
+        container.style.setProperty('--float-x', x || 'auto');
+        container.style.setProperty('--float-right', x ? 'auto' : '16px');
+    };
+
+    const updateButtons = () => {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight;
+        const viewHeight = window.innerHeight;
+        const nearBottom = scrollY + viewHeight >= docHeight - 60;
+        const farFromTop = scrollY > 360;
+
+        const footer = document.querySelector('.archive-footer');
+        const baseBottom = window.innerWidth <= 700 ? 16 : 26;
+        const footerOffset = footer ? Math.max(0, viewHeight - footer.getBoundingClientRect().top) : 0;
+        const bottom = `${Math.max(baseBottom, footerOffset + 12)}px`;
+        container.style.setProperty('--float-bottom', bottom);
+
+        topBtn.classList.toggle('is-visible', farFromTop);
+        topBtn.setAttribute('aria-hidden', farFromTop ? 'false' : 'true');
+        topBtn.tabIndex = farFromTop ? 0 : -1;
+
+        bottomBtn.classList.toggle('is-visible', !nearBottom);
+        bottomBtn.setAttribute('aria-hidden', nearBottom ? 'true' : 'false');
+        bottomBtn.tabIndex = nearBottom ? -1 : 0;
+    };
+
+    window.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', () => { placeButtons(); updateButtons(); }, { passive: true });
+    topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    bottomBtn.addEventListener('click', () => {
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    updateButtons();
+    placeButtons();
+})();
+</script>
+</main>
+            </div>
+            <footer class="archive-footer">
+                <span class="archive-footer-left"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span>
+                <span class="archive-footer-policies"><a href="/posts/privacypolicy/">隐私政策</a><b>·</b><a href="/posts/disclaimer-zh/">免责声明</a></span>
+                <span class="archive-footer-build">
+                    <span class="archive-footer-license">Licensed under <a class="link" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"  target="_blank" rel="noopener"
+    >CC BY-NC-SA 4.0</a></span><b>·</b>
+                    <span>BUILT WITH HUGO</span><i></i>
+                </span>
+            </footer>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>
