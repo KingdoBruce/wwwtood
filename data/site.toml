@@ -40,7 +40,7 @@ keywords = "拾光集, TOOD.WIN, 工具实测, 技术实践, 项目经验, 问�
 
 [advertising]
 adblock_detection_enabled = false
-google_ads_code = "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673\"\n     crossorigin=\"anonymous\"></script>"
+google_ads_code = ""
 home_sidebar_enabled = false
 home_sidebar_code = ""
 article_content_enabled = false
