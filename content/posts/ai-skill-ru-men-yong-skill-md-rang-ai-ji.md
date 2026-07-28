@@ -1,5 +1,5 @@
 +++
-title = "AI Skill 入门教程：用一个 SKILL.md，让 AI 记住你的工作方法"
+title = "AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法"
 date = "2026-07-28T15:54:00+08:00"
 draft = false
 featured = true
