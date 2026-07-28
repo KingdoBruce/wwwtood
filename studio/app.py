@@ -31,15 +31,17 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.5.2"
+APP_VERSION = "1.5.4"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
 PUBLISH_MANAGED_PATHS = (
     "content",
+    "config/_default/hugo.toml",
     "data/site.toml",
     "data/taxonomies.toml",
     "data/category_settings.toml",
     "data/friends.toml",
+    "layouts/sitemap.xml",
     "static/uploads",
 )
 SEO_SLUG_MAX_LENGTH = 60

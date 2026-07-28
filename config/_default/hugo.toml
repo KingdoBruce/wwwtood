@@ -12,9 +12,7 @@ enableGitInfo = true
 enableRobotsTXT = true
 
 [sitemap]
-    changeFreq = "weekly"
     filename   = "sitemap.xml"
-    priority   = 0.5
 
 
 
