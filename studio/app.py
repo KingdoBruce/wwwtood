@@ -31,9 +31,17 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.5.1"
+APP_VERSION = "1.5.2"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
+PUBLISH_MANAGED_PATHS = (
+    "content",
+    "data/site.toml",
+    "data/taxonomies.toml",
+    "data/category_settings.toml",
+    "data/friends.toml",
+    "static/uploads",
+)
 SEO_SLUG_MAX_LENGTH = 60
 SEO_SLUG_MAX_TOKENS = 10
 SEO_SLUG_STOP_PHRASES = (
@@ -1709,8 +1717,7 @@ def api_publish():
             tool_path("hugo"), "--source", str(BLOG_ROOT), "--destination", destination,
             "--cleanDestinationDir", "--enableGitInfo=false",
         ], timeout=180)
-        managed = ["content", "data/site.toml", "data/taxonomies.toml", "static/uploads"]
-        existing = [item for item in managed if (BLOG_ROOT / item).exists()]
+        existing = [item for item in PUBLISH_MANAGED_PATHS if (BLOG_ROOT / item).exists()]
         run_command(git_args("add", "--", *existing), timeout=30)
         staged = subprocess.run(
             git_args("diff", "--cached", "--quiet"), cwd=BLOG_ROOT, timeout=30, **process_flags()

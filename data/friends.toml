@@ -10,13 +10,6 @@ logo = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.pn
 show_on_home = true
 
 [[links]]
-name = "TypeScript"
-url = "https://www.typescriptlang.org"
-description = "为 JavaScript 增加类型能力的开发语言。"
-logo = "/链接/ts-logo-128.jpg"
-show_on_home = true
-
-[[links]]
 name = "壹资源网"
 url = "https://www.iezyw.com"
 description = "一个降低试错成本的网站！"
@@ -28,4 +21,11 @@ name = "Cloudflare"
 url = "https://www.cloudflare.com/"
 description = "赛博活菩萨！"
 logo = "https://www.cloudflare.com/logo.svg"
+show_on_home = true
+
+[[links]]
+name = "图片压缩"
+url = "https://img.tood.win"
+description = "所有图片处理均在浏览器本地完成，不会上传到服务器，保护您的隐私安全。"
+logo = "https://www.tood.win/uploads/2026/07/ico-123-850dfa75.png"
 show_on_home = true
