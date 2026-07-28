@@ -1,5 +1,5 @@
 +++
-title = "5个自定义 Skill，让 Codex 从代码生成器升级为全能 AI 开发助手"
+title = "5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手"
 date = "2026-07-28T11:34:00+08:00"
 draft = false
 description = "介绍 obsidian-skills、UI Skill、Humanizer-zh、grill-me 和编码原则 Skill，构建覆盖知识管理、方案审查、UI 设计、内容优化与代码验证的 Codex 工作流。"

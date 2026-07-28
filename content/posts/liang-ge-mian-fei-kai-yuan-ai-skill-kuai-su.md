@@ -1,5 +1,5 @@
 +++
-title = "两个免费开源 AI Skill：快速制作电影感项目演示视频"
+title = "两个免费开源 AI Skills：快速制作电影感项目演示视频"
 date = "2026-07-28T15:04:00+08:00"
 draft = false
 categories = ["AI"]
