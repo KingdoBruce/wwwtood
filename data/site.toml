@@ -40,10 +40,10 @@ keywords = "拾光集, TOOD.WIN, 工具实测, 技术实践, 项目经验, 问�
 
 [advertising]
 adblock_detection_enabled = false
-google_ads_code = ""
-home_sidebar_enabled = false
-home_sidebar_code = ""
-article_content_enabled = false
-article_content_code = ""
-article_sidebar_enabled = false
-article_sidebar_code = ""
+google_ads_code = "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673\"\n     crossorigin=\"anonymous\"></script>"
+home_sidebar_enabled = true
+home_sidebar_code = "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673\"\n     crossorigin=\"anonymous\"></script>\n<!-- iezyw自适应 -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-8251016534296673\"\n     data-ad-slot=\"8508409086\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>"
+article_content_enabled = true
+article_content_code = "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673\"\n     crossorigin=\"anonymous\"></script>\n<!-- iezyw自适应 -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-8251016534296673\"\n     data-ad-slot=\"8508409086\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>"
+article_sidebar_enabled = true
+article_sidebar_code = "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673\"\n     crossorigin=\"anonymous\"></script>\n<!-- iezyw自适应 -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-8251016534296673\"\n     data-ad-slot=\"8508409086\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>"
