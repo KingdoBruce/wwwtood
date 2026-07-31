@@ -4,6 +4,72 @@
   let postPage = 1;
   let tagPage = 1;
 
+  function normalizedSearchText(value) {
+    return String(value || "")
+      .normalize("NFKC")
+      .toLocaleLowerCase()
+      .replace(/[\s\-_:：，。、“”"'‘’【】\[\]（）()《》<>]+/g, "");
+  }
+
+  function fuzzyTitleMatch(title, query) {
+    const target = normalizedSearchText(title);
+    const needle = normalizedSearchText(query);
+    if (!needle || target.includes(needle)) return true;
+    let queryIndex = 0;
+    for (const character of target) {
+      if (character === needle[queryIndex]) queryIndex += 1;
+      if (queryIndex === needle.length) return true;
+    }
+    return false;
+  }
+
+  async function loadChangeDetails() {
+    const result = await api("/api/status");
+    const list = document.getElementById("changeList");
+    const items = result.change_items || [];
+    list.innerHTML = items.map(item => `
+      <div class="change-row">
+        <div>
+          <strong>${escapeHtml(item.title)}</strong>
+          <small>${escapeHtml(item.path)}</small>
+        </div>
+        <span class="badge${item.draft ? " draft" : ""}">${escapeHtml(item.kind === "post" ? (item.draft ? "草稿文章" : "文章文件") : "程序文件")} · ${escapeHtml(item.state)}</span>
+        ${item.kind === "post" ? `<div class="change-actions">
+          <button type="button" class="text-button edit-change-post" data-slug="${escapeHtml(item.slug)}">编辑</button>
+          <button type="button" class="text-button delete-change-post" data-slug="${escapeHtml(item.slug)}" data-title="${escapeHtml(item.title)}">移入回收站</button>
+        </div>` : ""}
+      </div>
+    `).join("") || '<div class="empty">当前没有未发布的网站内容改动</div>';
+
+    list.querySelectorAll(".edit-change-post").forEach(button => {
+      button.onclick = () => editPost(button.dataset.slug);
+    });
+    list.querySelectorAll(".delete-change-post").forEach(button => {
+      button.onclick = async () => {
+        await deletePostBySlug(button.dataset.slug, button.dataset.title);
+        await loadDashboard();
+      };
+    });
+  }
+
+  async function toggleChangeDetails(forceOpen) {
+    const panel = document.getElementById("changeDetails");
+    const button = document.getElementById("changeMetric");
+    const open = forceOpen ?? panel.hidden;
+    panel.hidden = !open;
+    button.setAttribute("aria-expanded", String(open));
+    if (open) {
+      try {
+        await loadChangeDetails();
+      } catch (error) {
+        notice(error.message, true);
+      }
+    }
+  }
+
+  document.getElementById("changeMetric").onclick = () => toggleChangeDetails();
+  document.getElementById("closeChangeDetails").onclick = () => toggleChangeDetails(false);
+
   function paginationMarkup(page, totalPages, totalItems, label) {
     if (totalPages <= 1) return "";
     return `<nav class="studio-pagination" aria-label="${label}">
@@ -24,13 +90,19 @@
   }
 
   function renderPostPage() {
-    const totalPages = Math.max(1, Math.ceil(posts.length / POST_PAGE_SIZE));
+    const searchInput = document.getElementById("postSearch");
+    const searchMeta = document.getElementById("postSearchMeta");
+    const query = searchInput.value.trim();
+    const visiblePosts = query
+      ? posts.filter(post => !post.draft && fuzzyTitleMatch(post.title, query))
+      : posts;
+    const totalPages = Math.max(1, Math.ceil(visiblePosts.length / POST_PAGE_SIZE));
     postPage = Math.min(Math.max(1, postPage), totalPages);
     const start = (postPage - 1) * POST_PAGE_SIZE;
-    const pagePosts = posts.slice(start, start + POST_PAGE_SIZE);
+    const pagePosts = visiblePosts.slice(start, start + POST_PAGE_SIZE);
     document.getElementById("postList").innerHTML = pagePosts.map((post, index) => `
       <article class="post-row" data-slug="${escapeHtml(post.slug)}">
-        <code>A.${String(posts.length - (start + index)).padStart(3, "0")}</code>
+        <code>A.${String(posts.length - posts.indexOf(post)).padStart(3, "0")}</code>
         <div>
           <strong>${escapeHtml(post.title)}</strong>
           <p>${escapeHtml(post.description || post.slug)}</p>
@@ -39,10 +111,13 @@
         <time>${escapeHtml(fmtDate(post.date))}</time>
         <button type="button" class="text-button delete-post-row" data-slug="${escapeHtml(post.slug)}" data-title="${escapeHtml(post.title)}">删除</button>
       </article>
-    `).join("") || '<div class="empty">点击“新建文章”开始写作</div>';
+    `).join("") || (query
+      ? '<div class="empty">没有找到匹配的已发布文章</div>'
+      : '<div class="empty">点击“新建文章”开始写作</div>');
 
     const pagination = document.getElementById("postPagination");
-    pagination.innerHTML = paginationMarkup(postPage, totalPages, posts.length, "文章管理分页");
+    pagination.innerHTML = paginationMarkup(postPage, totalPages, visiblePosts.length, query ? "文章搜索结果分页" : "文章管理分页");
+    searchMeta.textContent = query ? `找到 ${visiblePosts.length} 篇` : "输入标题关键词";
     bindPagination(pagination, page => {
       postPage = page;
       renderPostPage();
@@ -60,6 +135,11 @@
       };
     });
   }
+
+  document.getElementById("postSearch").oninput = () => {
+    postPage = 1;
+    renderPostPage();
+  };
 
   loadPosts = async function () {
     try {

@@ -34,7 +34,7 @@
             <input id="quickProxyEnabled" type="checkbox" aria-label="启用 GitHub 代理服务器">
             <span class="top-proxy-track"></span><b>GitHub 代理</b>
           </label>
-          <button class="button ghost" id="quickSync">重新同步</button>
+          <button class="button ghost" id="quickSync" title="仅拉取其他电脑已经发布到 GitHub 的内容">重新同步</button>
           <button class="button ghost" id="quickPreview">打开预览</button>
           <button class="button primary" id="quickPublish">一键发布</button>
         </div>
@@ -47,9 +47,14 @@
         <div class="metric-grid">
           <article class="metric"><span>ARTICLES</span><strong id="metricPosts">—</strong><small>文章总数</small></article>
           <article class="metric"><span>DRAFTS</span><strong id="metricDrafts">—</strong><small>待发布草稿</small></article>
-          <article class="metric"><span>CHANGES</span><strong id="metricChanges">—</strong><small>本地未发布文件</small></article>
+          <button type="button" class="metric metric-action" id="changeMetric" aria-expanded="false" aria-controls="changeDetails"><span>CHANGES</span><strong id="metricChanges">—</strong><small>网站内容改动 · 点击查看</small></button>
           <article class="metric"><span>BRANCH</span><strong class="small-metric" id="metricBranch">—</strong><small>Git 当前分支</small></article>
         </div>
+        <article class="panel change-details" id="changeDetails" hidden>
+          <div class="panel-heading"><div><span class="eyebrow">CHANGES.DETAIL</span><h2>网站内容改动</h2></div><button type="button" class="text-button" id="closeChangeDetails">收起</button></div>
+          <p class="change-details-help">这里只显示可由 TOOD Studio 管理和发布的网站内容；文章文件可以直接编辑或移入回收站，后台程序源文件不会再混入统计。</p>
+          <div id="changeList" class="change-list"></div>
+        </article>
         <div class="split-grid">
           <article class="panel">
             <div class="panel-heading"><div><span class="eyebrow">RECENT</span><h2>最近文章</h2></div><button class="text-button" data-go="posts">管理全部 →</button></div>
@@ -63,8 +68,13 @@
       </section>
 
       <section class="view" id="view-posts">
-        <div class="section-actions">
+        <div class="section-actions post-section-actions">
           <div><span class="eyebrow">CONTENT.DB</span><h2>文章管理</h2></div>
+          <label class="post-search" for="postSearch">
+            <span aria-hidden="true">⌕</span>
+            <input id="postSearch" type="search" autocomplete="off" placeholder="搜索已发布文章标题…">
+            <small id="postSearchMeta">输入标题关键词</small>
+          </label>
           <button class="button primary" id="newPost">＋ 新建文章</button>
         </div>
         <div id="postList" class="post-list"></div>
@@ -263,9 +273,9 @@
           <div class="github-connect-footer"><button type="button" class="text-button github-help-link" data-go="githubHelp">查看 GitHub 连接使用说明 →</button><button type="button" class="text-button github-clear-link" id="clearGithubConnection">清除本机连接</button></div>
         </article>
         <div class="publish-grid">
-          <article class="panel publish-card"><span class="step">01</span><h2>实时预览</h2><p>自动启动 Hugo，包含草稿并实时刷新。</p><button class="button primary" id="startPreview">启动并打开预览</button></article>
+          <article class="panel publish-card"><span class="step">01</span><h2>实时预览</h2><p>自动启动 Hugo，与线上规则一致，不显示草稿并实时刷新。</p><button class="button primary" id="startPreview">启动并打开预览</button></article>
           <article class="panel publish-card"><span class="step">02</span><h2>构建检查</h2><p>在临时目录执行完整构建，不修改线上文件。</p><button class="button ghost" id="runBuild">检查网站</button></article>
-          <article class="panel publish-card"><span class="step">03</span><h2>发布到 GitHub</h2><p>仅提交公开文章、网站设置和上传图片。草稿会同步保存，但不会显示在域名中。</p><label>提交说明<input id="commitMessage" placeholder="留空则自动生成"></label><button class="button primary" id="publishNow">检查并发布</button></article>
+          <article class="panel publish-card"><span class="step">03</span><h2>发布到 GitHub</h2><p>先自动拉取其他电脑的更新，再提交文章及各管理菜单设置。草稿会同步保存，但不会显示在域名中。</p><label>提交说明<input id="commitMessage" placeholder="留空则自动生成"></label><button class="button primary" id="publishNow">检查并发布</button></article>
         </div>
         <article class="panel console-panel"><div class="panel-heading"><h2>操作结果</h2><button class="text-button" id="clearConsole">清空</button></div><pre id="consoleOutput">等待操作…</pre></article>
         <button class="button danger-outline" id="shutdownApp">退出 TOOD Studio</button>

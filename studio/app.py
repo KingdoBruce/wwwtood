@@ -31,7 +31,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.5.4"
+APP_VERSION = "1.5.9"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
 PUBLISH_MANAGED_PATHS = (
@@ -137,18 +137,20 @@ def process_flags() -> dict[str, Any]:
     return {}
 
 
-def command_environment() -> dict[str, str]:
+def command_environment(proxy_override: str | None = None) -> dict[str, str]:
     environment = os.environ.copy()
     try:
         index = int(environment.get("GIT_CONFIG_COUNT", "0"))
     except ValueError:
         index = 0
-    environment["GIT_CONFIG_COUNT"] = str(index + 1)
+    environment["GIT_CONFIG_COUNT"] = str(index + 2)
     environment[f"GIT_CONFIG_KEY_{index}"] = "safe.directory"
     environment[f"GIT_CONFIG_VALUE_{index}"] = BLOG_ROOT.as_posix()
-    configured_proxy = proxy_url()
+    environment[f"GIT_CONFIG_KEY_{index + 1}"] = "http.sslBackend"
+    environment[f"GIT_CONFIG_VALUE_{index + 1}"] = "openssl"
+    configured_proxy = proxy_url() if proxy_override is None else proxy_override
     if configured_proxy:
-        proxy_index = index + 1
+        proxy_index = index + 2
         environment["GIT_CONFIG_COUNT"] = str(proxy_index + 1)
         environment[f"GIT_CONFIG_KEY_{proxy_index}"] = "http.proxy"
         environment[f"GIT_CONFIG_VALUE_{proxy_index}"] = configured_proxy
@@ -159,7 +161,12 @@ def command_environment() -> dict[str, str]:
     return environment
 
 
-def run_command(args: list[str], timeout: int = 120, cwd: Path = BLOG_ROOT) -> subprocess.CompletedProcess[str]:
+def run_command(
+    args: list[str],
+    timeout: int = 120,
+    cwd: Path = BLOG_ROOT,
+    environment: dict[str, str] | None = None,
+) -> subprocess.CompletedProcess[str]:
     logging.info("run: %s", " ".join(args))
     result = subprocess.run(
         args,
@@ -169,7 +176,7 @@ def run_command(args: list[str], timeout: int = 120, cwd: Path = BLOG_ROOT) -> s
         encoding="utf-8",
         errors="replace",
         timeout=timeout,
-        env=command_environment(),
+        env=environment or command_environment(),
         **process_flags(),
     )
     if result.returncode != 0:
@@ -194,6 +201,62 @@ def git_args(*args: str) -> list[str]:
 
 def git_text(*args: str, timeout: int = 30) -> str:
     return run_command(git_args(*args), timeout=timeout).stdout.strip()
+
+
+def git_network_environment(settings: dict[str, Any], configured_proxy: str | None = None) -> dict[str, str]:
+    environment = command_environment(configured_proxy)
+    index = int(environment.get("GIT_CONFIG_COUNT", "0"))
+    credentials = base64.b64encode(f"x-access-token:{settings.get('token', '')}".encode("utf-8")).decode("ascii")
+    environment["GIT_CONFIG_COUNT"] = str(index + 1)
+    environment[f"GIT_CONFIG_KEY_{index}"] = "http.extraHeader"
+    environment[f"GIT_CONFIG_VALUE_{index}"] = f"Authorization: Basic {credentials}"
+    return environment
+
+
+def local_proxy_fallback() -> tuple[str, dict[str, Any]] | None:
+    settings = load_proxy_settings()
+    host = str(settings.get("host") or "").strip()
+    try:
+        port = int(settings.get("port") or 0)
+    except (TypeError, ValueError):
+        return None
+    if not host or not 1 <= port <= 65535:
+        return None
+    fallback = {"enabled": True, "protocol": "http", "host": host, "port": port}
+    return proxy_url(fallback), fallback
+
+
+def run_git_network_command(
+    args: list[str],
+    settings: dict[str, Any],
+    timeout: int,
+) -> subprocess.CompletedProcess[str]:
+    try:
+        return run_command(args, timeout=timeout, environment=git_network_environment(settings))
+    except (RuntimeError, subprocess.TimeoutExpired) as direct_error:
+        normalized = str(direct_error).lower()
+        network_error = any(fragment in normalized for fragment in (
+            "connection was reset", "failed to connect", "could not connect",
+            "timed out", "schannel", "could not resolve host",
+        ))
+        fallback = local_proxy_fallback()
+        if not network_error or not fallback or fallback[0] == proxy_url():
+            raise
+        logging.warning("GitHub 直连失败，正在自动尝试本机 HTTP 代理 %s", fallback[0])
+        try:
+            result = run_command(
+                args,
+                timeout=timeout,
+                environment=git_network_environment(settings, fallback[0]),
+            )
+        except RuntimeError as fallback_error:
+            if "403" in str(fallback_error) or "permission" in str(fallback_error).lower():
+                save_proxy_settings(fallback[1])
+                logging.info("本机 HTTP 代理已连通，已自动启用；GitHub 拒绝了当前 Token 权限")
+            raise
+        save_proxy_settings(fallback[1])
+        logging.info("本机 HTTP 代理连接成功，已自动启用")
+        return result
 
 
 def github_settings_path() -> Path:
@@ -355,6 +418,20 @@ def configure_github_connection(payload: dict[str, Any]) -> dict[str, Any]:
 
     repository_info = github_request(repository, token, "GET", "")
     github_request(repository, token, "GET", f"/git/ref/heads/{branch}")
+    try:
+        github_request(
+            repository,
+            token,
+            "POST",
+            "/git/blobs",
+            {"content": base64.b64encode(b"").decode("ascii"), "encoding": "base64"},
+        )
+    except RuntimeError as error:
+        if "403" in str(error):
+            raise ValueError(
+                "当前 Token 只能读取仓库，不能发布内容。请将该仓库的 Contents 权限设为 Read and write 后重新保存。"
+            ) from error
+        raise
 
     remotes = git_text("remote").splitlines()
     if "origin" in remotes:
@@ -468,8 +545,31 @@ def github_request(
             pass
         hint = "。请检查仓库名称是否正确，以及 Token 是否已获准访问该仓库；代理通常不能解决 404" if error.code == 404 else ""
         raise RuntimeError(f"GitHub API 返回 {error.code}：{detail}{hint}") from error
-    except urlerror.URLError as error:
-        raise RuntimeError(f"无法连接 GitHub API：{error.reason}") from error
+    except (urlerror.URLError, OSError) as error:
+        fallback = local_proxy_fallback()
+        if fallback and fallback[0] != configured_proxy:
+            try:
+                opener = urlrequest.build_opener(
+                    urlrequest.ProxyHandler({"http": fallback[0], "https": fallback[0]})
+                )
+                with opener.open(request_object, timeout=25) as response:
+                    result = json.loads(response.read().decode("utf-8"))
+                save_proxy_settings(fallback[1])
+                logging.info("GitHub API 通过本机 HTTP 代理连接成功，已自动启用")
+                return result
+            except urlerror.HTTPError as fallback_error:
+                save_proxy_settings(fallback[1])
+                detail = fallback_error.read().decode("utf-8", errors="replace")
+                try:
+                    detail = json.loads(detail).get("message", detail)
+                except json.JSONDecodeError:
+                    pass
+                raise RuntimeError(f"GitHub API 返回 {fallback_error.code}：{detail}") from fallback_error
+            except (urlerror.URLError, OSError) as fallback_error:
+                reason = getattr(fallback_error, "reason", fallback_error)
+                raise RuntimeError(f"无法连接 GitHub API：{reason}") from fallback_error
+        reason = getattr(error, "reason", error)
+        raise RuntimeError(f"无法连接 GitHub API：{reason}") from error
 
 
 def git_blob_bytes(sha: str) -> bytes:
@@ -652,6 +752,31 @@ def push_with_github_api() -> str:
     run_command(git_args("update-ref", f"refs/heads/{branch}", final_sha, local_head), timeout=15)
     run_command(git_args("update-ref", f"refs/remotes/origin/{branch}", final_sha, remote_head), timeout=15)
     return f"已通过 GitHub API 发布 {len(commits)} 个提交"
+
+
+def push_to_github(settings: dict[str, Any]) -> str:
+    try:
+        return push_with_github_api()
+    except RuntimeError as api_error:
+        logging.warning("GitHub API publish failed, trying authenticated git push: %s", api_error)
+        try:
+            push = run_git_network_command(
+                git_args("push", "origin", "HEAD"),
+                settings,
+                timeout=45,
+            )
+            return (push.stdout + push.stderr).strip() or "Git 推送完成"
+        except (RuntimeError, subprocess.TimeoutExpired) as git_error:
+            combined = f"{api_error}；{git_error}"
+            if "403" in combined or "permission" in combined.lower():
+                raise RuntimeError(
+                    "GitHub Token 没有仓库内容写入权限。请重新创建或修改 Token，"
+                    "将当前仓库的 Contents 权限设为 Read and write，再到“预览与发布”重新验证保存；"
+                    "本机提交已安全保留。"
+                ) from git_error
+            raise RuntimeError(
+                f"GitHub API 推送失败：{api_error}；Git 推送失败：{git_error}"
+            ) from git_error
 
 
 def load_toml(path: Path) -> dict[str, Any]:
@@ -1272,10 +1397,35 @@ def index():
 def api_status():
     branch = run_command(git_args("branch", "--show-current"), timeout=15).stdout.strip()
     ignored_prefixes = ("public/", "resources/", ".hugo_build.lock")
-    changes = [
-        line for line in run_command(git_args("status", "--porcelain"), timeout=15).stdout.splitlines()
-        if not line[3:].replace("\\", "/").startswith(ignored_prefixes)
-    ]
+    changes = []
+    status_output = run_command(
+        git_args("-c", "core.quotepath=false", "status", "--porcelain", "--untracked-files=all"),
+        timeout=15,
+    ).stdout
+    for line in status_output.splitlines():
+        path_text = line[3:].replace("\\", "/")
+        if " -> " in path_text:
+            path_text = path_text.rsplit(" -> ", 1)[1]
+        managed = any(
+            path_text == managed_path or path_text.startswith(f"{managed_path}/")
+            for managed_path in PUBLISH_MANAGED_PATHS
+        )
+        if path_text.startswith(ignored_prefixes) or not managed:
+            continue
+        code = line[:2]
+        state = "新增" if code == "??" else "已删除" if "D" in code else "已修改"
+        item = {"path": path_text, "state": state, "kind": "file", "title": path_text}
+        if path_text.startswith("content/posts/") and path_text.endswith(".md"):
+            path = BLOG_ROOT / path_text
+            if path.is_file():
+                summary = post_summary(path)
+                item.update({
+                    "kind": "post",
+                    "title": summary["title"],
+                    "slug": summary["slug"],
+                    "draft": summary["draft"],
+                })
+        changes.append(item)
     versions: dict[str, str] = {}
     for name in ("hugo", "git"):
         try:
@@ -1290,6 +1440,7 @@ def api_status():
         "root": str(BLOG_ROOT),
         "branch": branch,
         "changes": len(changes),
+        "change_items": changes,
         "preview_url": preview_url,
         "tools": versions,
     })
@@ -1578,7 +1729,7 @@ def api_preview():
         port = free_port()
         command = [
             tool_path("hugo"), "server", "--source", str(BLOG_ROOT), "--bind", "127.0.0.1",
-            "--port", str(port), "--disableFastRender", "--buildDrafts", "--renderToMemory",
+            "--port", str(port), "--disableFastRender", "--renderToMemory",
             "--enableGitInfo=false",
         ]
         log_handle = (STATE_DIR / "hugo-preview.log").open("w", encoding="utf-8")
@@ -1714,6 +1865,16 @@ def api_publish():
         git_user_name = git_user_email = ""
     if not git_user_name or not git_user_email:
         raise RuntimeError("尚未配置 Git 提交身份，请先在本页完成“连接 GitHub”设置")
+    sync_status = auto_pull_from_github()
+    if sync_status == "skipped":
+        raise RuntimeError("尚未连接 GitHub，请先在“预览与发布”页面完成连接设置")
+    if sync_status == "failed":
+        try:
+            sync_message = str(json.loads(AUTO_PULL_STATUS_FILE.read_text(encoding="utf-8")).get("message") or "")
+        except (OSError, json.JSONDecodeError):
+            sync_message = ""
+        detail = sync_message or "自动同步未完成"
+        raise RuntimeError(f"发布已安全停止：{detail} 本地内容和提交没有丢失。")
     with operation_lock, tempfile.TemporaryDirectory(prefix="tood-publish-") as destination:
         build = run_command([
             tool_path("hugo"), "--source", str(BLOG_ROOT), "--destination", destination,
@@ -1728,17 +1889,7 @@ def api_publish():
         if committed:
             run_command(git_args("commit", "-m", message), timeout=60)
 
-        try:
-            publish_output = push_with_github_api()
-        except RuntimeError as api_error:
-            logging.warning("GitHub API publish failed, trying git push: %s", api_error)
-            try:
-                push = run_command(git_args("push", "origin", "HEAD"), timeout=25)
-                publish_output = (push.stdout + push.stderr).strip() or "Git 推送完成"
-            except (RuntimeError, subprocess.TimeoutExpired) as git_error:
-                raise RuntimeError(
-                    f"发布失败。GitHub API：{api_error}；Git 推送：{git_error}"
-                ) from git_error
+        publish_output = push_to_github(load_github_settings())
 
     action = "内容已提交并同步" if committed else "网站已确认同步"
     return jsonify({
@@ -1839,26 +1990,114 @@ def describe_auto_pull_error(error: Exception) -> str:
     return f"从 GitHub 拉取失败：{message[:200]}"
 
 
-def auto_pull_from_github() -> None:
+def git_rebase_in_progress() -> bool:
+    for name in ("rebase-merge", "rebase-apply"):
+        path = Path(git_text("rev-parse", "--git-path", name))
+        if not path.is_absolute():
+            path = BLOG_ROOT / path
+        if path.exists():
+            return True
+    return False
+
+
+def auto_pull_from_github() -> str:
     settings = load_github_settings()
     if not settings.get("repository") or not settings.get("token"):
         save_auto_pull_status("skipped", "GitHub 未配置，跳过自动同步")
         logging.info("GitHub 未配置，跳过自动拉取")
-        return
+        return "skipped"
     branch = str(settings.get("branch") or "main")
+    started_rebase = False
     try:
-        logging.info("正在从 GitHub 自动拉取最新内容（%s/%s）…", settings["repository"], branch)
-        result = run_command(git_args("pull", "origin", branch), timeout=60)
-        output = (result.stdout or "").strip()
-        if "Already up to date" in output:
-            save_auto_pull_status("uptodate", "本地内容已是最新，无需同步")
-            logging.info("自动拉取：已是最新")
-        else:
-            save_auto_pull_status("success", f"已从 GitHub 拉取最新内容\n{output[:200]}")
-            logging.info("自动拉取成功：%s", output[:200])
+        with operation_lock:
+            if git_rebase_in_progress():
+                save_auto_pull_status("failed", "检测到上次未完成的 Git 同步，请先处理后再重新同步")
+                logging.warning("自动拉取跳过：检测到未完成的 rebase")
+                return "failed"
+            conflicts = git_text("diff", "--name-only", "--diff-filter=U")
+            if conflicts:
+                save_auto_pull_status("failed", "工作区存在尚未解决的 Git 冲突，请处理后点击“重新同步”")
+                logging.warning("自动拉取跳过：工作区存在冲突：%s", conflicts)
+                return "failed"
+
+            has_local_changes = bool(git_text("status", "--porcelain", "--untracked-files=no"))
+            local_head = git_text("rev-parse", "HEAD")
+            remote_ref = github_request(
+                settings["repository"],
+                settings["token"],
+                "GET",
+                f"/git/ref/heads/{branch}",
+            )
+            remote_head = str(remote_ref["object"]["sha"])
+            if remote_head == local_head:
+                message = "GitHub 没有其他电脑发布的新内容，本机已是最新"
+                if has_local_changes:
+                    message += "；本机未发布的网站内容可通过“一键发布”上传"
+                save_auto_pull_status("uptodate", message)
+                run_command(git_args("update-ref", f"refs/remotes/origin/{branch}", remote_head), timeout=15)
+                logging.info("远程同步：GitHub 没有新内容")
+                return "uptodate"
+
+            logging.info("正在与 GitHub 双向同步（%s/%s）…", settings["repository"], branch)
+            remote_known = subprocess.run(
+                git_args("cat-file", "-e", f"{remote_head}^{{commit}}"),
+                cwd=BLOG_ROOT,
+                timeout=15,
+                env=command_environment(),
+                **process_flags(),
+            ).returncode == 0
+            remote_is_ancestor = remote_known and subprocess.run(
+                git_args("merge-base", "--is-ancestor", remote_head, local_head),
+                cwd=BLOG_ROOT,
+                timeout=15,
+                env=command_environment(),
+                **process_flags(),
+            ).returncode == 0
+            if remote_is_ancestor:
+                save_auto_pull_status(
+                    "uptodate",
+                    "GitHub 没有其他电脑发布的新内容；本机已有待发布提交，可直接点击“一键发布”",
+                )
+                logging.info("远程同步：本机提交领先 GitHub，无需拉取")
+                return "uptodate"
+
+            started_rebase = True
+            pull_result = run_git_network_command(
+                git_args("pull", "--rebase", "--autostash", "origin", branch),
+                settings,
+                timeout=90,
+            )
+            pull_output = "\n".join(
+                part.strip() for part in (pull_result.stdout, pull_result.stderr) if part and part.strip()
+            )
+            conflicts = git_text("diff", "--name-only", "--diff-filter=U")
+            if conflicts:
+                save_auto_pull_status(
+                    "failed",
+                    "远程内容已拉取，但恢复本地修改时发生冲突；本地修改已由 Git 安全保留，请先解决冲突",
+                )
+                logging.warning("自动同步后恢复本地修改发生冲突：%s", conflicts)
+                return "failed"
+
+            message = "已同步其他电脑发布到 GitHub 的最新内容"
+            if has_local_changes:
+                message += "；本地未提交修改已自动保护并恢复"
+            save_auto_pull_status("success", message)
+            logging.info("远程内容拉取成功：%s", pull_output[:200])
+            return "success"
     except (RuntimeError, subprocess.TimeoutExpired) as error:
-        save_auto_pull_status("failed", describe_auto_pull_error(error))
-        logging.warning("自动拉取失败（可忽略）：%s", error)
+        if started_rebase:
+            try:
+                if git_rebase_in_progress():
+                    run_command(git_args("rebase", "--abort"), timeout=30)
+                    logging.info("自动同步失败，已中止变基并恢复同步前状态")
+            except (RuntimeError, subprocess.TimeoutExpired):
+                logging.exception("自动同步失败后无法自动中止变基")
+        error_message = str(error)
+        status_message = error_message if "GitHub Token 没有仓库内容写入权限" in error_message else describe_auto_pull_error(error)
+        save_auto_pull_status("failed", status_message)
+        logging.warning("自动同步失败（可忽略）：%s", error)
+        return "failed"
 
 
 def main() -> None:
