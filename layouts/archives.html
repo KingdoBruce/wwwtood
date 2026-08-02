@@ -21,7 +21,7 @@
     {{- end -}}
     {{- $pages := partial "helper/pages.html" .Site.Home -}}
     {{- $totalArticles := len $pages -}}
-    {{- $monthGroups := $pages.GroupByDate "2006-01" | collections.Reverse -}}
+    {{- $monthGroups := $pages.GroupByDate "2006-01" -}}
 
 <header class="page-hero">
     <div class="hero-main">
@@ -100,9 +100,14 @@
                 </div>
 
                 <nav class="month-pagination mono" aria-label="按月分页">
-                    {{- range $groupIndex, $group := . -}}
-                    <button class="month-btn{{ if eq $groupIndex 0 }} active{{ end }}" type="button" data-index="{{ $groupIndex }}"><strong>{{ replace $group.Key "-" "." }}</strong><small>{{ len $group.Pages }} ARTICLES</small></button>
-                    {{- end -}}
+                    <button type="button" class="month-page-nav month-page-prev" aria-label="上一页月份">←</button>
+                    <div class="month-pagination-track">
+                        {{- range $groupIndex, $group := . -}}
+                        <button class="month-btn{{ if eq $groupIndex 0 }} active{{ end }}" type="button" data-index="{{ $groupIndex }}"><strong>{{ replace $group.Key "-" "." }}</strong><small>{{ len $group.Pages }} ARTICLES</small></button>
+                        {{- end -}}
+                    </div>
+                    <button type="button" class="month-page-nav month-page-next" aria-label="下一页月份">→</button>
+                    <span class="month-pagination-status"></span>
                 </nav>
                 {{- else -}}
                 <div class="archive-month-empty">暂无可归档文章</div>
@@ -138,6 +143,29 @@
     if (!monthPages.length || !monthTitle || !monthCount) return;
     let currentMonth = 0;
 
+    const paginationTrack = document.querySelector('.month-pagination-track');
+    const prevNavBtn = document.querySelector('.month-page-prev');
+    const nextNavBtn = document.querySelector('.month-page-next');
+    const pageStatus = document.querySelector('.month-pagination-status');
+    const buttonsPerPage = 8;
+    const totalPages = Math.max(1, Math.ceil(monthButtons.length / buttonsPerPage));
+    let currentPage = 0;
+
+    const renderPage = () => {
+        const start = currentPage * buttonsPerPage;
+        monthButtons.forEach((button, i) => {
+            const inPage = i >= start && i < start + buttonsPerPage;
+            button.style.display = inPage ? '' : 'none';
+        });
+        if (prevNavBtn) prevNavBtn.disabled = currentPage <= 0;
+        if (nextNavBtn) nextNavBtn.disabled = currentPage >= totalPages - 1;
+        if (pageStatus) {
+            pageStatus.textContent = totalPages > 1 ? currentPage + 1 + ' / ' + totalPages : '';
+        }
+        if (prevNavBtn) prevNavBtn.style.visibility = totalPages > 1 ? 'visible' : 'hidden';
+        if (nextNavBtn) nextNavBtn.style.visibility = totalPages > 1 ? 'visible' : 'hidden';
+    };
+
     const showMonth = (index) => {
         if (index < 0) index = monthPages.length - 1;
         if (index >= monthPages.length) index = 0;
@@ -145,6 +173,12 @@
 
         monthPages.forEach((page, i) => page.classList.toggle('active', i === index));
         monthButtons.forEach((button, i) => button.classList.toggle('active', i === index));
+
+        const targetPage = Math.floor(index / buttonsPerPage);
+        if (targetPage !== currentPage) {
+            currentPage = targetPage;
+            renderPage();
+        }
 
         const page = monthPages[index];
         const count = page.querySelectorAll('.month-article').length;
@@ -155,8 +189,21 @@
     monthButtons.forEach((button) => {
         button.addEventListener('click', () => showMonth(Number(button.dataset.index)));
     });
+    if (prevNavBtn) prevNavBtn.addEventListener('click', () => {
+        if (currentPage > 0) {
+            currentPage--;
+            renderPage();
+        }
+    });
+    if (nextNavBtn) nextNavBtn.addEventListener('click', () => {
+        if (currentPage < totalPages - 1) {
+            currentPage++;
+            renderPage();
+        }
+    });
     document.getElementById('prevMonth').addEventListener('click', () => showMonth(currentMonth - 1));
     document.getElementById('nextMonth').addEventListener('click', () => showMonth(currentMonth + 1));
+    renderPage();
     showMonth(0);
 })();
 </script>

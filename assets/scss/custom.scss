@@ -1207,11 +1207,17 @@ body.template-archives .month-copy h3{margin:8px 0 9px;font-size:21px;line-heigh
 body.template-archives .month-copy p{margin:0;color:var(--signal-muted);font-size:14px;line-height:1.65;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 body.template-archives .month-meta{padding:13px 10px;border-left:1px solid var(--signal-line);display:flex;flex-direction:column;justify-content:space-between;text-align:right;font-size:11px}
 body.template-archives .month-meta b{font-size:12px}
-body.template-archives .month-pagination{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-body.template-archives .month-btn{min-height:45px;padding:7px 14px;border:2px solid var(--signal-line);background:var(--signal-white);cursor:pointer;font-family:"Courier New",monospace;font-weight:900}
+body.template-archives .month-pagination{display:flex;align-items:center;gap:8px;margin-top:18px}
+body.template-archives .month-pagination-track{display:flex;gap:8px;overflow:hidden;min-width:0}
+body.template-archives .month-pagination-track .month-btn{flex:none}
+body.template-archives .month-btn{min-height:45px;padding:7px 14px;border:2px solid var(--signal-line);background:var(--signal-white);cursor:pointer;font-family:"Courier New",monospace;font-weight:900;white-space:nowrap}
 body.template-archives .month-btn strong,body.template-archives .month-btn small{display:block}
 body.template-archives .month-btn small{margin-top:2px;color:var(--signal-muted);font-size:9px}
 body.template-archives .month-btn:hover,body.template-archives .month-btn.active{background:var(--signal-lime)}
+body.template-archives .month-page-nav{flex:none;min-width:44px;min-height:45px;border:2px solid var(--signal-line);background:var(--signal-white);cursor:pointer;font-family:"Courier New",monospace;font-weight:900;font-size:16px;transition:background .16s ease}
+body.template-archives .month-page-nav:hover:not(:disabled){background:var(--signal-lime)}
+body.template-archives .month-page-nav:disabled{opacity:.35;cursor:default}
+body.template-archives .month-pagination-status{flex:none;margin-left:6px;font:700 11px/1 "Courier New",monospace;letter-spacing:.06em;color:var(--signal-muted)}
 @media(max-width:980px){
   body.template-archives .menu{display:none}
   body.template-archives .page-hero{grid-template-columns:minmax(0,1fr) 200px;gap:20px}
