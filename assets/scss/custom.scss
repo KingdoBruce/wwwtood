@@ -708,7 +708,7 @@ body.signal-home-page .week-card{background:var(--signal-lime);border:2px solid 
 body.signal-home-page .week-card strong{font-size:54px;line-height:.9}
 body.signal-home-page .week-card .big{font-size:36px;font-weight:900}
 body.signal-home-page .week-card p{font-size:13px;line-height:1.6;margin:14px 0 0}
-body.signal-home-page .section{padding:36px 0}
+body.signal-home-page .section{padding:22px 0 36px}
 body.signal-home-page .section-label{display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--signal-line);padding:12px 0 16px;font-weight:700}
 body.signal-home-page .section-label a{color:inherit}
 body.signal-home-page .section-label a:hover{color:#d9004f}
@@ -982,19 +982,22 @@ body.signal-article-page .archive-related-card:nth-child(4n+2){--related-accent:
 body.signal-article-page .archive-related-card:nth-child(4n+3){--related-accent:#5da3ff}
 body.signal-article-page .archive-related-card:nth-child(4n+4){--related-accent:var(--signal-pink)}
 body.signal-article-page .archive-related-card:last-child{border-right:0}
-body.signal-article-page .archive-related-card>a{min-height:345px;display:flex;flex-direction:column;background:var(--signal-white)}
+body.signal-article-page .archive-related-card>a{min-height:345px;display:flex;flex-direction:column;background:transparent}
 body.signal-article-page .archive-related-image{position:relative;width:100%;aspect-ratio:4/3;border-bottom:2px solid var(--signal-line);background:var(--signal-black);overflow:hidden;isolation:isolate}
 body.signal-article-page .archive-related-image::after{content:"";position:absolute;inset:32% 0 0;z-index:1;background:linear-gradient(transparent,rgba(5,9,7,.94))}
 body.signal-article-page .archive-related-image img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
 body.signal-article-page .archive-related-image code{position:absolute;left:12px;top:12px;z-index:3;max-width:calc(100% - 24px);padding:6px 8px;border:1px solid var(--signal-line);background:var(--related-accent);color:var(--signal-ink);font:700 9px/1.2 "Courier New",monospace;letter-spacing:.07em}
 body.signal-article-page .archive-related-image h3{position:absolute;left:16px;right:16px;bottom:15px;z-index:2;margin:0;color:#fff;font-size:19px;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,.35)}
-body.signal-article-page .archive-related-copy{flex:1;padding:16px;border-top:5px solid var(--related-accent);display:flex;flex-direction:column;background:var(--signal-white)}
+body.signal-article-page .archive-related-copy{flex:1;padding:16px;border-top:5px solid var(--related-accent);display:flex;flex-direction:column;background:transparent}
 body.signal-article-page .archive-related-copy p{margin:0 0 16px;display:-webkit-box;overflow:hidden;color:var(--signal-ink);font-size:12px;line-height:1.55;-webkit-box-orient:vertical;-webkit-line-clamp:3}
 body.signal-article-page .archive-related-copy time{margin-top:auto;color:var(--signal-ink);font:700 9px/1 "Courier New",monospace;letter-spacing:.08em;opacity:.6}
 body.signal-article-page .archive-related-card:hover .archive-related-image img{transform:scale(1.05)}
 body.signal-article-page .archive-related-card:hover h3{text-decoration:underline;text-decoration-color:var(--related-accent);text-underline-offset:4px}
-body.signal-article-page .article-disclaimer{margin-top:28px;border:2px solid var(--signal-line);background:var(--signal-white);border-radius:0}
-body.signal-article-page .article-disclaimer code{color:#d9004f;font-weight:800}
+body.signal-article-page .article-disclaimer{margin-top:28px;border:2px dashed var(--signal-line);background:transparent;border-radius:0}
+body.signal-article-page .article-disclaimer code{color:#d9004f;font-weight:800;letter-spacing:.12em}
+body.signal-article-page .article-disclaimer .article-disclaimer-body p{font-size:12.5px;line-height:1.75}
+body.signal-article-page .article-disclaimer .article-disclaimer-body a{font-weight:800;text-decoration:underline;text-underline-offset:3px}
+body.signal-article-page .article-disclaimer .article-disclaimer-body a:hover{color:#d9004f}
 
 /* 侧栏 */
 body.signal-article-page .side-meta{position:sticky;top:20px;display:flex;flex-direction:column;gap:14px}
@@ -1388,17 +1391,17 @@ body.signal-tag-page .archive-page-main{max-width:none}
 body.signal-tag-page .archive-page-index,body.signal-tag-page .archive-coord-left,body.signal-tag-page .archive-coord-top,body.signal-tag-page .archive-cross{display:none}
 body.signal-tag-page .nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--signal-line);gap:20px;position:sticky;top:0;z-index:900;background:var(--signal-paper);width:1240px;max-width:calc(100% - 28px);margin:0 auto}
 body.signal-tag-page .brand{font-weight:900;font-size:22px;letter-spacing:-.04em;display:inline-flex;align-items:baseline;gap:10px;min-width:0}
-body.signal-tag-page .brand-logo-wrap{display:flex;align-items:center;gap:10px;min-width:0}
-body.signal-tag-page .brand small{display:block;font:10px "Courier New",monospace;letter-spacing:.12em;white-space:nowrap}
+body.signal-tag-page .brand-logo-wrap{display:inline-flex;align-items:flex-end;gap:10px;min-width:0}
+body.signal-tag-page .brand small{display:block;position:static;padding-bottom:2px;font:10px "Courier New",monospace;letter-spacing:.12em;white-space:nowrap}
 body.signal-tag-page .signal-brand-logo{height:34px;max-width:200px;width:auto;object-fit:contain;object-position:left center}
 body.signal-tag-page .menu{display:flex;gap:24px;font-size:14px;font-weight:700}
 body.signal-tag-page .menu a:hover,body.signal-tag-page .menu a.active{color:#d9004f}
 body.signal-tag-page .actions .icon{padding:0;font-family:inherit;cursor:pointer;border-radius:50%;color:var(--signal-ink);background:var(--signal-white);width:42px;height:42px;border:2px solid var(--signal-line);display:grid;place-items:center;font-size:20px;box-shadow:0 2px 0 rgba(16,19,18,.12)}
 body.signal-tag-page .actions .icon:hover{background:var(--signal-lime)}
 body.signal-tag-page .tag-detail-shell{width:1240px;max-width:calc(100% - 28px);margin:0 auto;padding-bottom:42px}
-body.signal-tag-page .tag-breadcrumb{min-height:50px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--signal-line);color:var(--signal-muted);font-size:11px}
+body.signal-tag-page .tag-breadcrumb{display:flex;align-items:center;gap:10px;padding:16px 0;color:var(--signal-muted);font-size:11px}
 body.signal-tag-page .tag-breadcrumb a:hover{color:#d9004f}
-body.signal-tag-page .tag-detail-hero{display:grid;grid-template-columns:155px minmax(0,1fr) 230px;min-height:290px;margin:30px 0 18px;border:2px solid var(--signal-line);background:rgba(248,250,246,.92)}
+body.signal-tag-page .tag-detail-hero{display:grid;grid-template-columns:155px minmax(0,1fr) 230px;min-height:290px;margin:8px 0 18px;border:2px solid var(--signal-line);background:rgba(248,250,246,.92)}
 body.signal-tag-page .tag-hero-code{padding:20px;border-right:2px solid var(--signal-line);background:var(--signal-black);color:#fff;display:flex;flex-direction:column;justify-content:space-between}
 body.signal-tag-page .tag-hero-code strong{font:900 54px/1 "Courier New",monospace;color:var(--signal-pink);word-break:break-all;overflow-wrap:anywhere}
 body.signal-tag-page .tag-hero-content{padding:30px 34px;display:flex;flex-direction:column;justify-content:center;min-width:0}
@@ -1854,3 +1857,10 @@ body.signal-friends-page .copy-btn:hover{background:var(--signal-lime);color:var
   body.signal-friends-page .intro-copy{padding:26px 20px}
   body.signal-friends-page .apply-box{padding:24px 20px}
 }
+
+/* ===== 导航滚动状态：未滚动透明，滚动后才显示底色 ===== */
+body.nav-scrolled .nav{background:var(--signal-paper)}
+body:not(.nav-scrolled) .nav{background:transparent}
+body:not(.nav-scrolled) .nav .menu a.active{position:relative}
+body:not(.nav-scrolled) .nav .brand small{color:var(--signal-ink)}
+body .nav{transition:background .18s ease,border-color .18s ease}

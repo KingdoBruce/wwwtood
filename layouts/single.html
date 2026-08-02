@@ -23,7 +23,7 @@
 {{- if not $cover -}}{{- with .Params.cover }}{{ $cover = . }}{{ end -}}{{- end -}}
 {{- $words := .WordCount -}}
 <div class="signal-article">
-    <div class="breadcrumb mono"><a href="{{ .Site.Home.RelPermalink }}">HOME</a><span>/</span>{{ with .Params.categories }}<a href="{{ `categories/` | relLangURL }}{{ index . 0 | urlize }}/">{{ upper (index . 0) }}</a><span>/</span>{{ end }}<span>{{ .Title }}</span></div>
+    <div class="breadcrumb mono"><a href="{{ .Site.Home.RelPermalink }}">HOME</a><span>/</span>{{ with .Params.categories }}<a href="{{ `categories/` | relLangURL }}{{ index . 0 | urlize }}/">{{ upper (index . 0) }}</a><span>/</span>{{ end }}<a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
 
     <header class="article-hero">
         <div class="hero-main">
