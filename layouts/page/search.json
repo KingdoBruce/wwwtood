@@ -1,0 +1,19 @@
+{{- $pages := partial "helper/pages.html" .Site.Home -}}
+{{- $result := slice -}}
+
+{{- range $pages -}}
+    {{- $data := dict "title" .Title "date" .Date "permalink" .RelPermalink "content" (.Plain) "readingTime" .ReadingTime "wordcount" .WordCount -}}
+    {{- with .Params.categories -}}{{- $data = merge $data (dict "categories" .) -}}{{- end -}}
+    {{- with .Params.tags -}}{{- $data = merge $data (dict "tags" .) -}}{{- end -}}
+    {{- with .Params.kicker -}}{{- $data = merge $data (dict "kicker" .) -}}{{- end -}}
+    {{- with .Description -}}{{- $data = merge $data (dict "summary" .) -}}{{- else -}}{{- $data = merge $data (dict "summary" (.Summary | plainify)) -}}{{- end -}}
+
+    {{- $image := partial "helper/image" (dict "Image" .Params.image "Resources" .Resources "Context" .) -}}
+    {{- if $image -}}
+        {{- $data = merge $data (dict "image" $image.Permalink) -}}
+    {{- end -}}
+
+    {{- $result = $result | append $data -}}
+{{- end -}}
+
+{{ jsonify $result }}

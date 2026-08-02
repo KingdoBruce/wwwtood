@@ -1,0 +1,115 @@
+{{ define "body-class" }}archive-home signal-home-page signal-404-page{{ end }}
+
+{{ define "main" }}
+{{- $siteConfig := site.Data.site -}}
+{{- $brand := $siteConfig.brand -}}
+{{- $navigation := $siteConfig.navigation -}}
+{{- $home := $siteConfig.home -}}
+{{- $footer := $siteConfig.footer -}}
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $popular := $posts.ByDate.Reverse | first 3 -}}
+{{- $categoryGroups := slice -}}
+{{- $categorySettings := site.Data.category_settings.categories -}}
+{{- range $name, $taxonomy := site.Taxonomies.categories -}}
+    {{- $showOnHome := true -}}
+    {{- with index $categorySettings $name -}}
+        {{- if isset . "show_on_home" -}}{{- $showOnHome = .show_on_home -}}{{- end -}}
+    {{- end -}}
+    {{- if $showOnHome -}}
+        {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
+    {{- end -}}
+{{- end -}}
+<div class="signal-home">
+    <div class="wrap">
+        {{ partial "site-nav.html" . }}
+
+        <div class="breadcrumb mono"><a href="{{ .Site.Home.RelPermalink }}">HOME</a><span>/</span><span>404 NOT FOUND</span></div>
+
+        <section class="error-shell">
+        <div class="error-main">
+            <div>
+                <div class="error-topline kicker"><span>SYSTEM MESSAGE / LOST SIGNAL</span><span>ERROR.CODE / 404</span></div>
+                <div class="error-code">404</div>
+                <h1>这条内容信号<br>没有被找到</h1>
+                <p>你访问的页面可能已经移动、被删除，或者网址输入有误。可以返回首页，重新搜索内容，或从右侧热门入口继续浏览。</p>
+            </div>
+            <div class="error-actions">
+                <a class="primary-btn" href="{{ .Site.Home.RelPermalink }}"><span>返回首页</span><span>→</span></a>
+                <a class="secondary-btn" href="javascript:history.back()"><span>返回上一页</span><span>↩</span></a>
+            </div>
+        </div>
+        <aside class="error-side">
+            <section class="side-section">
+                <div class="kicker">SEARCH ARCHIVE</div><h2>搜索拾光集</h2>
+                <form class="error-search-form" action="{{ `search/` | relLangURL }}" method="get"><input type="search" name="q" placeholder="输入文章、工具或标签……"><button type="submit">⌕</button></form>
+            </section>
+            <section class="side-section">
+                <div class="kicker">QUICK ROUTES</div><h2>继续浏览</h2>
+                <nav class="quick-links">
+                    {{- range $i, $c := $categoryGroups -}}
+                        {{- if lt $i 4 -}}
+                    <a href="{{ $c.URL }}"><span>{{ $c.Name }}</span><b>↗</b></a>
+                        {{- end -}}
+                    {{- end -}}
+                    <a href="{{ `tags/` | relLangURL }}"><span>全部标签</span><b>↗</b></a>
+                    <a href="{{ `archives/` | relLangURL }}"><span>文章归档</span><b>↗</b></a>
+                </nav>
+            </section>
+            <section class="side-section">
+                <div class="kicker">POPULAR SIGNALS</div><h2>也许你在找</h2>
+                <div class="signal-list">
+                    {{- range $i, $p := $popular -}}
+                    <a class="signal-link" href="{{ $p.RelPermalink }}"><span class="signal-no">{{ printf "%02d" (add $i 1) }}</span><span class="signal-copy"><span>{{ with $p.Params.categories }}{{ index . 0 | upper }}{{ end }} / {{ $p.Date.Format "2006" }}</span><strong>{{ $p.Title }}</strong></span></a>
+                    {{- end -}}
+                </div>
+            </section>
+        </aside>
+        </section>
+
+        <section class="status-strip">
+            <div class="status-cell"><span class="kicker">ERROR TYPE</span><strong>NOT FOUND</strong><span class="mono">PAGE / 404</span></div>
+            <div class="status-cell"><span class="kicker">SITE STATUS</span><strong>ONLINE</strong><span class="mono">TOOD.WIN / ACTIVE</span></div>
+            <div class="status-cell"><span class="kicker">NEXT STEP</span><strong>SEARCH</strong><span class="mono">FIND ANOTHER SIGNAL</span></div>
+            <div class="status-cell"><span class="kicker">ARCHIVE</span><strong>{{ len $posts }}+</strong><span class="mono">ARTICLES AVAILABLE</span></div>
+        </section>
+
+        {{ partial "site-footer.html" . }}
+    </div>
+
+    <div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+</div>
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+{{ end }}

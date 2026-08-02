@@ -2,17 +2,20 @@
 {{- $related := .Site.RegularPages.Related . -}}
 {{- $recommendations := collections.Union $related $posts.ByDate.Reverse -}}
 {{- $recommendations = where $recommendations "RelPermalink" "ne" .RelPermalink -}}
-{{- $recommendations = first 6 $recommendations -}}
+{{- $recommendations = first 4 $recommendations -}}
 {{- with $recommendations -}}
 <aside class="archive-related" aria-labelledby="archive-related-title">
     <div class="archive-related-header">
-        <h2 id="archive-related-title">RELATED ARTICLES</h2>
-        <span>{{ len . | printf "%02d" }} RECOMMENDATIONS</span>
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>{{ len . | printf "%02d" }} ARTICLES</span>
     </div>
     <div class="archive-related-grid">
         {{- range $index, $post := . -}}
         {{- $cover := "" -}}
-        {{- with $post.Params.cover }}{{ $cover = . }}{{ end -}}
+        {{- with $post.Params.image }}{{ $cover = . }}{{ end -}}
+        {{- if not $cover }}{{ with $post.Params.cover }}{{ $cover = . }}{{ end }}{{ end -}}
+        {{- $category := "SIGNAL" -}}
+        {{- with $post.Params.categories }}{{ $category = upper (index . 0) }}{{ end -}}
         {{- if not $cover -}}
             {{- $markdownImages := findRE `!\[[^\]]*\]\((?:<)?[^\s)>]+` $post.RawContent 1 -}}
             {{- with $markdownImages }}{{ $cover = replaceRE `^!\[[^\]]*\]\((?:<)?` "" (index . 0) }}{{ end -}}
@@ -25,10 +28,10 @@
             <a href="{{ $post.RelPermalink }}">
                 <div class="archive-related-image">
                     {{- with $cover }}<img src="{{ . | safeURL }}" alt="{{ $post.Title }}" loading="lazy">{{ else }}<span aria-hidden="true"></span>{{ end -}}
+                    <code>{{ printf "%02d" (add $index 1) }} / {{ $category }}</code>
+                    <h3>{{ $post.Title }}</h3>
                 </div>
                 <div class="archive-related-copy">
-                    <code>REL.{{ printf "%02d" (add $index 1) }}</code>
-                    <h3>{{ $post.Title }}</h3>
                     <p>{{ $post.Summary | plainify | truncate 72 }}</p>
                     <time>{{ $post.Date.Format "2006-01-02" }}</time>
                 </div>

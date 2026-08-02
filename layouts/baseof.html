@@ -2,6 +2,17 @@
 {{- $brand := $siteConfig.brand -}}
 {{- $navigation := $siteConfig.navigation -}}
 {{- $footer := $siteConfig.footer -}}
+{{- $categoryGroups := slice -}}
+{{- $categorySettings := site.Data.category_settings.categories -}}
+{{- range $name, $taxonomy := site.Taxonomies.categories -}}
+    {{- $showOnHome := true -}}
+    {{- with index $categorySettings $name -}}
+        {{- if isset . "show_on_home" -}}{{- $showOnHome = .show_on_home -}}{{- end -}}
+    {{- end -}}
+    {{- if $showOnHome -}}
+        {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
+    {{- end -}}
+{{- end -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Locale }}" dir="{{ default `ltr` .Language.Direction }}">
 <head>
@@ -10,56 +21,29 @@
 </head>
 <body class="archive-site {{ if not .IsHome }}archive-subpage {{ end }}{{ if hugo.IsServer }}is-local-preview {{ end }}{{ block `body-class` . }}{{ end }}">
     {{- partial "head/colorScheme" . -}}
-    {{ if .IsHome }}
+    {{ if or .IsHome (eq .Kind "404") (eq .Layout "search") (eq .Layout "friends") }}
         <main class="main full-width">{{- block "main" . }}{{- end }}</main>
     {{ else }}
         <div class="archive-shell archive-page-shell">
-            <header class="archive-topbar">
-                <a class="archive-brand" href="{{ .Site.Home.RelPermalink }}" aria-label="返回首页">
-                    {{ with $brand.logo }}
-                        <img class="archive-brand-logo" src="{{ . | relURL }}" alt="{{ default `TOOD.WIN` $brand.name }}">
-                    {{ else }}
-                        <span class="archive-brand-name">{{ default "TOOD.WIN" $brand.name }}</span>
-                    {{ end }}
-                </a>
-                {{- $homeURL := .Site.Home.RelPermalink -}}
-                {{- $archivesURL := `archives/` | relLangURL -}}
-                {{- $tagsURL := `tags/` | relLangURL -}}
-                {{- $aboutURL := `关于/` | relLangURL -}}
-                {{- $isAbout := false -}}
-                {{- with .File -}}
-                    {{- $pageDir := replace .Dir `\` `/` -}}
-                    {{- if eq (lower $pageDir) `page/about/` -}}{{- $isAbout = true -}}{{- end -}}
-                {{- end -}}
-                <nav class="archive-nav" aria-label="主导航">
-                    <a class="{{ if eq .RelPermalink $homeURL }}active{{ end }}" href="{{ $homeURL }}">{{ default "INDEX" $navigation.index }}</a>
-                    <a class="{{ if hasPrefix (lower .RelPermalink) (lower $archivesURL) }}active{{ end }}" href="{{ $archivesURL }}">{{ default "归档" $navigation.archives }}</a>
-                    <a class="{{ if hasPrefix (lower .RelPermalink) (lower $tagsURL) }}active{{ end }}" href="{{ $tagsURL }}">{{ default "标签" $navigation.tags }}</a>
-                    <a class="{{ if or $isAbout (hasPrefix (lower .RelPermalink) (lower $aboutURL)) }}active{{ end }}" href="{{ $aboutURL }}">{{ default "关于" $navigation.about }}</a>
-                </nav>
-      <div class="archive-status" aria-label="{{ default `拾光存档` $brand.status_title }}：{{ default `记录微光 · 存入时间` $brand.status_subtitle }}">
-        {{ with $brand.status_icon }}<img class="archive-status-image" src="{{ . | relURL }}" alt="">{{ else }}<em class="archive-status-mark" aria-hidden="true"><i></i></em>{{ end }}
-        <span class="archive-status-copy"><strong>{{ default "拾光存档" $brand.status_title }}</strong><small>{{ default "记录微光 · 存入时间" $brand.status_subtitle }}</small></span>
-      </div>
-            </header>
+            {{ block "topbar" . }}
+            {{ partial "site-nav.html" . }}
+            {{ end }}
             <div class="archive-page-frame">
                 <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                {{ block "page-index" . }}
+                {{- if not (or (and (eq .Kind "taxonomy") (eq .Data.Plural "tags")) (and (eq .Kind "page") (eq .Section "posts")) (and (eq .Kind "page") (eq (lower .RelPermalink) (lower (`archives/` | relLangURL))))) -}}
+                {{- $brand := site.Data.site.brand -}}
                 <div class="archive-page-index">
                     <span class="archive-cross" aria-hidden="true"></span>
                     <span class="archive-coord archive-coord-top">{{ upper .Kind }}.{{ now.Format "0601" }}.{{ printf "%04d" .WordCount }}</span>
                     <span class="archive-page-name">{{ default "TOOD ARCHIVE" $brand.archive_name }}</span>
                     <strong>/ {{ upper .Kind }}</strong>
                 </div>
+                {{- end -}}
+                {{ end }}
                 <main class="archive-page-main">{{- block "main" . }}{{- end }}</main>
             </div>
-            <footer class="archive-footer">
-                <span class="archive-footer-left"><span>© <span data-current-year>{{ now.Year }}</span> {{ default "TOOD.WIN" $brand.name }}</span>{{ partial "footer/runtime.html" . }}</span>
-                <span class="archive-footer-policies"><a href="/posts/privacypolicy/">隐私政策</a><b>·</b><a href="/posts/disclaimer-zh/">免责声明</a></span>
-                <span class="archive-footer-build">
-                    {{ if and (eq .Section "posts") (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}<span class="archive-footer-license">{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span><b>·</b>{{ end }}
-                    <span>{{ default "BUILT WITH HUGO" $footer.build_label }}</span><i></i>
-                </span>
-            </footer>
+            {{ partial "site-footer.html" . }}
         </div>
     {{ end }}
     {{- $advertising := .Site.Data.site.advertising -}}

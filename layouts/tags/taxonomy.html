@@ -1,91 +1,252 @@
-﻿{{ define "main" }}
-<div class="archive-article-layout">
-    <div class="archive-article-main">
-        {{- $tags := .Site.Taxonomies.tags -}}
-        <header class="archive-tags-header">
-            <h1>{{ default "标签" .Title }}</h1>
-            <span>{{ printf "%03d" (len $tags) }} TAGS</span>
-        </header>
-        <section class="archive-tags-cloud article-tag-cloud" aria-label="标签云">
-            {{- range $tag, $pages := $tags -}}
-                <a href="{{ printf "tags/%s/" ($tag | urlize) | relLangURL }}">
-                    {{ $tag }}<sup>{{ len $pages }}</sup>
-                </a>
-            {{- else -}}
-                <p class="archive-tags-empty">暂无标签</p>
-            {{- end -}}
-        </section>
+﻿{{ define "body-class" }}tags-page signal-article-page signal-tags-page{{ end }}
+
+{{ define "topbar" }}
+{{ partial "site-nav.html" . }}
+{{ end }}
+
+{{ define "page-index" }}{{ end }}
+
+{{ define "main" }}
+{{- $tags := .Site.Taxonomies.tags -}}
+{{- $tagCount := len $tags -}}
+{{- $referenceCount := 0 -}}
+{{- range $tag, $pages := $tags -}}
+    {{- $referenceCount = add $referenceCount (len $pages) -}}
+{{- end -}}
+{{- $categoryCount := len .Site.Taxonomies.categories -}}
+{{- $top := $tags.ByCount -}}
+{{- $f1 := index $top 0 -}}
+{{- $f2 := index $top 1 -}}
+{{- $f3 := index $top 2 -}}
+{{- $paginator := .Paginate .Pages 15 -}}
+{{- $latestPosts := (where .Site.RegularPages "Section" "posts").ByDate.Reverse | first 4 -}}
+<div class="signal-tags">
+    <div class="breadcrumb mono"><a href="{{ .Site.Home.RelPermalink }}">HOME</a><span>/</span><span>TAG INDEX</span></div>
+
+    <section class="tags-hero">
+        <div class="hero-copy">
+            <div class="hero-top kicker">
+                <span>DISCOVER / CONNECT / EXPLORE</span>
+                <span>INDEX DATA / T.{{ printf "%03d" $tagCount }}</span>
+            </div>
+            <h1>从标签进入<br><span>内容世界</span></h1>
+            <p class="hero-desc">标签不是简单的关键词，而是内容之间的连接点。通过 AI、建站、软件、GitHub、SEO 与效率工具等主题，快速找到你真正感兴趣的文章。</p>
+        </div>
+        <aside class="hero-panel">
+            <div>
+                <div class="kicker">TAG ARCHIVE</div>
+                <div class="hero-number">#{{ printf "%02d" $tagCount }}</div>
+                <p class="mono">ACTIVE TOPICS<br>UPDATED WEEKLY</p>
+            </div>
+            <div class="hero-panel-grid">
+                <div><strong>{{ $referenceCount }}</strong><span class="kicker">ARTICLES</span></div>
+                <div><strong>{{ printf "%02d" $categoryCount }}</strong><span class="kicker">CATEGORIES</span></div>
+            </div>
+        </aside>
+    </section>
+
+    <section class="tag-tools">
+        <label class="search-wrap">
+            <span class="search-mark">⌕</span>
+            <input id="tagSearch" type="search" placeholder="搜索标签，例如：AI、GitHub、SEO、Windows…" autocomplete="off">
+        </label>
+        <div class="sort-buttons">
+            <button class="active" data-sort="default">默认</button>
+            <button data-sort="name">名称</button>
+            <button data-sort="count">数量</button>
+        </div>
+    </section>
+
+    <section class="featured">
+        {{- with $f1 }}
+        <a class="featured-main" href="{{ .Page.RelPermalink }}">
+            <div>
+                <div class="kicker">FEATURED TAG / 01</div>
+                <h2>{{ .Page.Title }}</h2>
+                <p>该标签下收录的文章与相关主题，点击进入浏览全部内容。</p>
+            </div>
+            <div class="featured-link">浏览 {{ .Count }} 篇文章 <span>→</span></div>
+        </a>
+        {{- end }}
+        <div class="featured-side">
+            {{- with $f2 }}
+            <a class="mini-feature" href="{{ .Page.RelPermalink }}">
+                <div class="kicker">FEATURED / 02</div>
+                <div>
+                    <span class="mono">{{ .Count }} ARTICLES</span>
+                    <h3>{{ .Page.Title }}</h3>
+                </div>
+            </a>
+            {{- end }}
+            {{- with $f3 }}
+            <a class="mini-feature" href="{{ .Page.RelPermalink }}">
+                <div class="kicker">FEATURED / 03</div>
+                <div>
+                    <span class="mono">{{ .Count }} ARTICLES</span>
+                    <h3>{{ .Page.Title }}</h3>
+                </div>
+            </a>
+            {{- end }}
+        </div>
+    </section>
+
+    <div class="section-head">
+        <div>
+            <div class="kicker">ALL TOPICS</div>
+            <h2>全部标签</h2>
+        </div>
+        <p class="mono"><span id="visibleCount">{{ len $paginator.Pages }}</span> TAGS VISIBLE</p>
     </div>
 
-    {{ partial "article/sidebar.html" . }}
+    <div id="tagIndex" class="tag-index">
+        {{- range $i, $entry := $paginator.Pages }}
+        <a class="tag-card" href="{{ $entry.RelPermalink }}" data-name="{{ $entry.Title }}" data-count="{{ len $entry.Pages }}">
+            <div class="tag-no"><span class="kicker">TAG / {{ printf "%03d" (add $i 1) }}</span><span class="tag-count">{{ printf "%02d" (len $entry.Pages) }}</span></div>
+            <div><h3># {{ $entry.Title }}</h3><p>该标签下收录的文章与相关主题。</p></div>
+            <span class="tag-arrow">↗</span>
+        </a>
+        {{- else }}
+        <p class="archive-tags-empty">暂无标签</p>
+        {{- end }}
+    </div>
+
+    <div id="emptyState" class="empty">
+        <div class="kicker">NO MATCHED TAGS</div>
+        <h2>没有找到相关标签</h2>
+        <p>换一个更短的关键词试试，例如“AI”“建站”“软件”或“域名”。</p>
+    </div>
+
+    {{- if gt $paginator.TotalPages 1 }}
+    <nav class="tag-page-nav" aria-label="标签分页">
+        {{- with $paginator.Prev }}<a href="{{ .URL }}" rel="prev" class="tag-page-btn">← 上一页</a>{{- else }}<span class="tag-page-btn is-disabled">← 上一页</span>{{- end }}
+        <span class="tag-page-info">PAGE {{ printf "%02d" $paginator.PageNumber }} / {{ printf "%02d" $paginator.TotalPages }}</span>
+        {{- with $paginator.Next }}<a href="{{ .URL }}" rel="next" class="tag-page-btn">下一页 →</a>{{- else }}<span class="tag-page-btn is-disabled">下一页 →</span>{{- end }}
+    </nav>
+    {{- end }}
+
+    <section class="cloud-panel">
+        <div class="cloud-title">
+            <div class="kicker">TAG CLOUD</div>
+            <strong>#</strong>
+            <h2>主题信号云</h2>
+            <p>字号越大，代表该主题下收录的文章越多。</p>
+        </div>
+        <div class="tag-cloud">
+            {{- range $i, $t := $top }}
+            {{- if lt $i 20 }}
+            <a class="cloud-tag" data-size="{{ if lt $i 5 }}lg{{ else if lt $i 13 }}md{{ else }}sm{{ end }}" href="{{ $t.Page.RelPermalink }}">{{ $t.Page.Title }}</a>
+            {{- end }}
+            {{- end }}
+        </div>
+    </section>
+
+    <div class="section-head">
+        <div>
+            <div class="kicker">RECENTLY UPDATED</div>
+            <h2>热门标签下的新文章</h2>
+        </div>
+        <p class="mono">LATEST SIGNALS / {{ len $latestPosts }}</p>
+    </div>
+
+    <section>
+        {{- range $i, $p := $latestPosts }}
+        <a class="article-strip" href="{{ $p.RelPermalink }}">
+            <div class="article-category">
+                <span class="kicker">{{ with $p.Params.categories }}{{ upper (index . 0) }}{{ else }}ARTICLE{{ end }}</span>
+                <strong>#{{ printf "%02d" (add $i 1) }}</strong>
+            </div>
+            <div class="article-title">
+                <div class="kicker">{{ $p.Date.Format "2006.01.02" }}</div>
+                <h3>{{ $p.Title }}</h3>
+                {{ with $p.Params.tags }}<p>#{{ delimit . "　#" }}</p>{{ end }}
+            </div>
+            <div class="article-meta">{{ $p.Date.Format "2006.01.02" }}<br>{{ $p.ReadingTime }} MIN</div>
+        </a>
+        {{- end }}
+    </section>
 </div>
 
-<div class="article-float-actions" aria-hidden="true">
-    <button class="article-back-to-top" type="button" aria-label="返回页面顶部" title="返回顶部" tabindex="-1">
-        <span aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="presentation">
-                <path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path>
-            </svg>
-        </span>
-    </button>
-    <button class="article-go-to-bottom" type="button" aria-label="跳转到底部" title="跳转到底部" tabindex="-1">
-        <span aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="presentation">
-                <path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"></path>
-            </svg>
-        </span>
-    </button>
+<div class="search-modal" hidden>
+    <div class="search-modal-backdrop" data-close></div>
+    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+        <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
+            <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+            <button type="submit" aria-label="开始搜索">⌕</button>
+        </form>
+        <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+    </div>
+</div>
+<div class="scroll-arrows scroll-arrows--right">
+    <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+    <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
 </div>
 
 <script>
 (() => {
-    const container = document.querySelector('.article-float-actions');
-    const topBtn = container.querySelector('.article-back-to-top');
-    const bottomBtn = container.querySelector('.article-go-to-bottom');
-    if (!container || !topBtn || !bottomBtn) return;
+    const input = document.getElementById('tagSearch');
+    const grid = document.getElementById('tagIndex');
+    if (!input || !grid) return;
+    const cards = [...grid.querySelectorAll('.tag-card')];
+    const visibleCount = document.getElementById('visibleCount');
+    const emptyState = document.getElementById('emptyState');
+    const sortButtons = [...document.querySelectorAll('[data-sort]')];
+    const originalOrder = cards.map(card => card);
 
-    const placeButtons = () => {
-        const main = document.querySelector('.archive-article-main');
-        const sidebar = document.querySelector('.archive-article-sidebar');
-        const x = (window.innerWidth <= 1180 || !main || !sidebar)
-            ? null
-            : `${(main.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2}px`;
-        container.style.setProperty('--float-x', x || 'auto');
-        container.style.setProperty('--float-right', x ? 'auto' : '16px');
+    const filterTags = () => {
+        const keyword = input.value.trim().toLowerCase();
+        let count = 0;
+        cards.forEach(card => {
+            const matched = card.dataset.name.toLowerCase().includes(keyword);
+            card.style.display = matched ? '' : 'none';
+            if (matched) count++;
+        });
+        if (visibleCount) visibleCount.textContent = count;
+        if (emptyState) emptyState.style.display = count ? 'none' : 'block';
     };
 
-    const updateButtons = () => {
-        const scrollY = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight;
-        const viewHeight = window.innerHeight;
-        const nearBottom = scrollY + viewHeight >= docHeight - 60;
-        const farFromTop = scrollY > 360;
-
-        const footer = document.querySelector('.archive-footer');
-        const baseBottom = window.innerWidth <= 700 ? 16 : 26;
-        const footerOffset = footer ? Math.max(0, viewHeight - footer.getBoundingClientRect().top) : 0;
-        const bottom = `${Math.max(baseBottom, footerOffset + 12)}px`;
-        container.style.setProperty('--float-bottom', bottom);
-
-        topBtn.classList.toggle('is-visible', farFromTop);
-        topBtn.setAttribute('aria-hidden', farFromTop ? 'false' : 'true');
-        topBtn.tabIndex = farFromTop ? 0 : -1;
-
-        bottomBtn.classList.toggle('is-visible', !nearBottom);
-        bottomBtn.setAttribute('aria-hidden', nearBottom ? 'true' : 'false');
-        bottomBtn.tabIndex = nearBottom ? -1 : 0;
+    const sortTags = mode => {
+        const sorted = [...cards].sort((a, b) => {
+            if (mode === 'name') return a.dataset.name.localeCompare(b.dataset.name, 'zh-CN');
+            if (mode === 'count') return Number(b.dataset.count) - Number(a.dataset.count);
+            return originalOrder.indexOf(a) - originalOrder.indexOf(b);
+        });
+        sorted.forEach(card => grid.appendChild(card));
     };
 
-    window.addEventListener('scroll', updateButtons, { passive: true });
-    window.addEventListener('resize', () => { placeButtons(); updateButtons(); }, { passive: true });
-    topBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    input.addEventListener('input', filterTags);
+    sortButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            sortButtons.forEach(item => item.classList.remove('active'));
+            btn.classList.add('active');
+            sortTags(btn.dataset.sort);
+        });
     });
-    bottomBtn.addEventListener('click', () => {
-        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+})();
+</script>
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => { modal.hidden = false; document.body.classList.add('search-modal-open'); window.setTimeout(() => input && input.focus(), 30); };
+    const close = () => { modal.hidden = true; document.body.classList.remove('search-modal-open'); };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => { if (e.target.closest('[data-close]')) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) close(); });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    if (!arrows) return;
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
     });
-    updateButtons();
-    placeButtons();
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
 })();
 </script>
 {{ end }}

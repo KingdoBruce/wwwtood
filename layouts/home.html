@@ -1,14 +1,11 @@
-{{ define "body-class" }}archive-home{{ end }}
+{{ define "body-class" }}archive-home signal-home-page{{ end }}
 
-{{ define "left-sidebar" }}<!-- Archive homepage intentionally replaces the Stack sidebar. -->{{ end }}
-{{ define "right-sidebar" }}<!-- Archive homepage uses its own index sidebar. -->{{ end }}
+{{ define "left-sidebar" }}<!-- Signal homepage intentionally replaces the Stack sidebar. -->{{ end }}
+{{ define "right-sidebar" }}<!-- Signal homepage uses its own full-width layout. -->{{ end }}
 
 {{ define "main" }}
 {{- $posts := where .Site.RegularPages "Section" "posts" -}}
 {{- $posts = $posts.ByDate.Reverse -}}
-{{- $featuredPosts := where $posts "Params.featured" true -}}
-{{- $carouselPosts := first 6 $featuredPosts -}}
-{{- $latestPosts := collections.Complement $carouselPosts $posts -}}
 {{- $siteConfig := .Site.Data.site -}}
 {{- $brand := $siteConfig.brand -}}
 {{- $navigation := $siteConfig.navigation -}}
@@ -16,21 +13,21 @@
 {{- $footer := $siteConfig.footer -}}
 {{- $heroVisible := true -}}
 {{- if isset $home "hero_visible" -}}{{- $heroVisible = $home.hero_visible -}}{{- end -}}
-{{- $heroTitleSize := int (default 60 $home.hero_title_size) -}}
+{{- $heroTitleSize := int (default 104 $home.hero_title_size) -}}
 {{- $heroTaglineSize := int (default 17 $home.hero_tagline_size) -}}
-{{- $latestArticlesCount := int (default 5 $home.latest_articles_count) -}}
-{{- $quarterRandomCount := int (default 5 $home.quarter_random_count) -}}
-{{- $quarterStart := now.AddDate 0 -3 0 -}}
-{{- $quarterPosts := where $posts "Date" "ge" $quarterStart -}}
-{{- $quarterDisplayCount := $quarterRandomCount -}}
-{{- if lt (len $quarterPosts) $quarterDisplayCount -}}
-    {{- $quarterDisplayCount = len $quarterPosts -}}
+{{- $latestArticlesCount := int (default 8 $home.latest_articles_count) -}}
+
+{{- $topPosts := where $posts "Params.featured" true -}}
+{{- if lt (len $topPosts) 4 -}}
+    {{- $need := sub 4 (len $topPosts) -}}
+    {{- $topPosts = collections.Union $topPosts (first $need $posts) -}}
 {{- end -}}
-{{- $homeTagCount := 18 -}}
-{{- $homeTagDisplayCount := $homeTagCount -}}
-{{- if lt (len .Site.Taxonomies.tags) $homeTagDisplayCount -}}
-    {{- $homeTagDisplayCount = len .Site.Taxonomies.tags -}}
-{{- end -}}
+{{- $topPosts = first 4 $topPosts -}}
+{{- $signalPool := collections.Complement $topPosts $posts -}}
+{{- $signalPosts := first 8 $signalPool -}}
+{{- $latestPool := collections.Complement $signalPosts $signalPool -}}
+{{- $latestPosts := first $latestArticlesCount $latestPool -}}
+
 {{- $categoryGroups := slice -}}
 {{- $categorySettings := .Site.Data.category_settings.categories -}}
 {{- range $name, $taxonomy := .Site.Taxonomies.categories -}}
@@ -43,233 +40,317 @@
         {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "Posts" $categoryPosts "Count" (len $categoryPosts) "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
     {{- end -}}
 {{- end -}}
-<div class="archive-shell">
-    <header class="archive-topbar">
-        <a class="archive-brand" href="{{ .Site.Home.RelPermalink }}" aria-label="返回首页">
-            {{ with $brand.logo }}
-                <img class="archive-brand-logo" src="{{ . | relURL }}" alt="{{ default `TOOD.WIN` $brand.name }}">
-            {{ else }}
-                <span class="archive-brand-name">{{ default "TOOD.WIN" $brand.name }}</span>
-            {{ end }}
-        </a>
-        <nav class="archive-nav" aria-label="主导航">
-            <a class="active" href="{{ .Site.Home.RelPermalink }}">{{ default "INDEX" $navigation.index }}</a>
-            <a href="{{ `archives/` | relLangURL }}">{{ default "归档" $navigation.archives }}</a>
-            <a href="{{ `tags/` | relLangURL }}">{{ default "标签" $navigation.tags }}</a>
-            <a href="{{ `关于/` | relLangURL }}">{{ default "关于" $navigation.about }}</a>
-        </nav>
-      <div class="archive-status" aria-label="{{ default `拾光存档` $brand.status_title }}：{{ default `记录微光 · 存入时间` $brand.status_subtitle }}">
-        {{ with $brand.status_icon }}<img class="archive-status-image" src="{{ . | relURL }}" alt="">{{ else }}<em class="archive-status-mark" aria-hidden="true"><i></i></em>{{ end }}
-        <span class="archive-status-copy"><strong>{{ default "拾光存档" $brand.status_title }}</strong><small>{{ default "记录微光 · 存入时间" $brand.status_subtitle }}</small></span>
-      </div>
-    </header>
 
-    <div class="archive-frame">
-        <span class="archive-coord archive-coord-top">IDX.2009.0222</span>
-        <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
-        <span class="archive-coord archive-coord-bottom">E 121° 28′ 34.98″</span>
-        <span class="archive-cross" aria-hidden="true"></span>
+{{- $allTags := slice -}}
+{{- range $name, $taxonomy := .Site.Taxonomies.tags -}}
+    {{- $allTags = $allTags | append (dict "Name" $name "Count" (len $taxonomy.Pages) "Latest" (index $taxonomy.Pages.ByDate.Reverse 0) "URL" (printf "tags/%s/" ($name | urlize) | relLangURL)) -}}
+{{- end -}}
+{{- $toolTags := sort $allTags "Count" "desc" -}}
+{{- $toolTags = first 20 $toolTags -}}
 
-        <section class="archive-hero{{ if not $heroVisible }} is-content-hidden{{ end }}" style="{{ printf `--archive-hero-title-size:%dpx;--archive-hero-tagline-size:%dpx` $heroTitleSize $heroTaglineSize | safeCSS }}">
-            {{ if $heroVisible }}
-            <h1><span>{{ default "TOOD" $home.hero_primary }}</span> <span>{{ default "ARCHIVE" $home.hero_secondary }}</span></h1>
-            <p><i></i>{{ default "记录思考，沉淀知识，构建可被检索的个人数字花园。" $home.tagline }}</p>
-            {{ end }}
-            <div class="archive-build"><span>{{ default "BUILD YOUR OWN ARCHIVE." $home.build_label }}</span><span>VER. {{ now.Format "2006.01" }}</span></div>
-        </section>
+{{- $wdMap := dict "Sunday" 0 "Monday" 1 "Tuesday" 2 "Wednesday" 3 "Thursday" 4 "Friday" 5 "Saturday" 6 -}}
+{{- $wd := index $wdMap (printf "%v" (now.Weekday)) -}}
+{{- $monday := now.AddDate 0 0 (sub 1 $wd) -}}
+{{- $sunday := $monday.AddDate 0 0 6 -}}
+{{- $doy := int (now.Format "002") -}}
+{{- $week := add (div (add $doy 6) 7) 0 -}}
+{{- $advertising := $siteConfig.advertising -}}
+<div class="signal-home"{{ with $home }} style="--signal-title-size:{{ default 60 .hero_title_size }}px;--signal-tagline-size:{{ default 17 .hero_tagline_size }}px"{{ end }}>
+    <div class="wrap">
+        {{ partial "site-nav.html" . }}
 
-        <div class="archive-columns">
-            <div class="archive-primary">
-                {{ if $carouselPosts }}
-                <div class="feature-carousel" data-feature-carousel>
-                    <div class="feature-carousel-track">
-                        {{ range $index, $featured := $carouselPosts }}
-                        {{ $cover := "" }}
-                        {{ with $featured.Params.cover }}{{ $cover = . }}{{ end }}
-                        {{ if not $cover }}
-                            {{ $markdownImages := findRE `!\[[^\]]*\]\((?:<)?[^\s)>]+` $featured.RawContent 1 }}
-                            {{ with $markdownImages }}{{ $cover = replaceRE `^!\[[^\]]*\]\((?:<)?` "" (index . 0) }}{{ end }}
-                        {{ end }}
-                        {{ if not $cover }}
-                            {{ $htmlImages := findRE `(?i)<img[^>]+src=["'][^"']+` $featured.RawContent 1 }}
-                            {{ with $htmlImages }}{{ $cover = replaceRE `(?i)^.*src=["']` "" (index . 0) }}{{ end }}
-                        {{ end }}
-                        <section class="feature-record feature-slide{{ if eq $index 0 }} is-active{{ end }}" data-feature-slide{{ if ne $index 0 }} hidden{{ end }}>
-                            <a class="feature-image-link" href="{{ $featured.RelPermalink }}" aria-label="{{ $featured.Title }}">
-                                <div class="feature-image{{ if $cover }} has-cover{{ end }}" role="img" aria-label="{{ $featured.Title }}">
-                                    {{ with $cover }}<img class="feature-cover" src="{{ . | safeURL }}" alt="{{ $featured.Title }}">{{ else }}<span class="feature-ring"></span>{{ end }}<small>FEATURED<br>STORY</small>
-                                </div>
-                            </a>
-                            <div class="feature-copy">
-                                <code>FTR.{{ $featured.Date.Format "0601" }}.{{ printf "%03d" (add $index 1) }}</code>
-                                <h2><a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a></h2>
-                                <p>{{ $featured.Summary | plainify | truncate 110 }}</p>
-                                <div class="feature-meta"><span>{{ $featured.Date.Format "2006-01-02" }}</span><span>{{ $featured.ReadingTime }} 分钟</span><span>{{ $featured.WordCount }} 字</span></div>
-                                <a class="archive-link" href="{{ $featured.RelPermalink }}">继续阅读 →</a>
-                            </div>
-                        </section>
-                        {{ end }}
-                    </div>
-                    {{ if gt (len $carouselPosts) 1 }}
-                    <div class="feature-carousel-controls" aria-label="特色文章轮播控制">
-                        <div class="feature-carousel-dots">
-                            {{ range $index, $_ := $carouselPosts }}<button type="button" data-carousel-dot="{{ $index }}"{{ if eq $index 0 }} class="is-active" aria-current="true"{{ end }} aria-label="查看第 {{ add $index 1 }} 篇特色文章"></button>{{ end }}
-                        </div>
-                    </div>
-                    <script>
-                    (() => {
-                        const carousel = document.currentScript.closest('[data-feature-carousel]');
-                        const slides = Array.from(carousel.querySelectorAll('[data-feature-slide]'));
-                        const dots = Array.from(carousel.querySelectorAll('[data-carousel-dot]'));
-                        let current = 0;
-                        let timer;
-                        const show = (index) => {
-                            current = (index + slides.length) % slides.length;
-                            slides.forEach((slide, slideIndex) => {
-                                const active = slideIndex === current;
-                                slide.hidden = !active;
-                                slide.classList.toggle('is-active', active);
-                            });
-                            dots.forEach((dot, dotIndex) => {
-                                const active = dotIndex === current;
-                                dot.classList.toggle('is-active', active);
-                                if (active) dot.setAttribute('aria-current', 'true');
-                                else dot.removeAttribute('aria-current');
-                            });
-                        };
-                        const stop = () => window.clearInterval(timer);
-                        const start = () => {
-                            stop();
-                            timer = window.setInterval(() => show(current + 1), 5000);
-                        };
-                        dots.forEach((dot) => dot.addEventListener('click', () => { show(Number(dot.dataset.carouselDot)); start(); }));
-                        start();
-                    })();
-                    </script>
-                    {{ end }}
+        {{ if $heroVisible }}
+        <header class="hero">
+            <div class="hero-copy">
+                <div class="small mono">TOOD.WIN / WEEKLY DIGITAL OPPORTUNITY INDEX</div>
+                <h1><span>{{ default "TOOD" $home.hero_primary }}</span><span><span class="slash">／</span>{{ default "ARCHIVE" $home.hero_secondary }}</span></h1>
+                <div class="hero-sub">
+                    <b class="tiny mono">TREND<br>SHIFT</b>
+                    <div>{{ default "记录值得被发现的人、事、思想与微光。" $home.tagline }}</div>
                 </div>
-                {{ end }}
+            </div>
+            <aside class="week-card">
+                <div>
+                    <div class="tiny mono">WEEK / {{ now.Year }}</div>
+                    <strong class="mono">W{{ printf "%02d" $week }}</strong>
+                    <p class="mono">{{ $monday.Format "JAN. 02" }}<br>— {{ $sunday.Format "JAN. 02" }}</p>
+                </div>
+                <div>
+                    <div class="big">{{ len $posts }}</div>
+                    <div class="small">已收录内容</div>
+                </div>
+            </aside>
+        </header>
+        {{ end }}
 
-                <section class="archive-articles">
-                    <div class="archive-section-title"><h2>LATEST ARTICLES</h2><a href="{{ `archives/` | relLangURL }}">VIEW ALL →</a></div>
-                    <div class="archive-table">
-                        {{ range $i, $page := first $latestArticlesCount $latestPosts }}
-                        <a class="archive-row" href="{{ $page.RelPermalink }}">
-                            <code>A.{{ $page.Date.Format "0601" }}.{{ printf "%03d" (add $i 1) }}</code><strong>{{ $page.Title }}</strong><time>{{ $page.Date.Format "2006-01-02" }}</time>
-                        </a>
-                        {{ else }}
-                            {{ range first $latestArticlesCount (slice "技术债与演进设计" "如何写出清晰的技术文档" "从 0 到 1 搭建一个静态博客" "浏览器渲染机制简述" "信息管理：少即是多") }}
-                            <div class="archive-row is-placeholder"><code>A.0000.000</code><strong>{{ . }}</strong><time>----</time></div>
-                            {{ end }}
+        <section id="ranking" class="section">
+            <div class="section-label mono"><span>TOP 03 / FEATURED SIGNALS</span><span>TOOD.WIN / WEEKLY PICKS</span></div>
+            <div class="top-grid">
+                <div class="rank-stack">
+                    {{ with index $topPosts 0 }}
+                    <article class="rank-one">
+                        <div class="rank-one-index">
+                            <div class="num">01</div>
+                            <div class="rank-one-meta">
+                                {{ with .Params.categories }}<div class="small mono">{{ delimit . " / " | upper }}</div>{{ end }}
+                                <div class="score mono">{{ .ReadingTime }} MIN</div>
+                            </div>
+                        </div>
+                        <div class="rank-one-copy">
+                            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                            <div>{{ .Summary | plainify | truncate 60 }}</div>
+                        </div>
+                    </article>
+                    {{ end }}
+                    <div class="rank-split">
+                        {{ with index $topPosts 1 }}
+                        <article class="rank-card"><div class="num">02</div><div>{{ with .Params.categories }}<div class="small mono">{{ delimit . " / " | upper }}</div>{{ end }}<h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><div class="rank-summary">{{ .Summary | plainify | truncate 40 }}</div></div></article>
+                        {{ end }}
+                        {{ with index $topPosts 2 }}
+                        <article class="rank-card"><div class="num">03</div><div>{{ with .Params.categories }}<div class="small mono">{{ delimit . " / " | upper }}</div>{{ end }}<h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><div class="rank-summary">{{ .Summary | plainify | truncate 40 }}</div></div></article>
                         {{ end }}
                     </div>
-                </section>
-
-                {{ if $categoryGroups }}
-                <section class="archive-category-section">
-                    <div class="archive-section-title"><h2>CATEGORY INDEX</h2><span>{{ len $categoryGroups | printf "%02d" }} GROUPS</span></div>
-                    <div class="archive-category-grid">
-                        {{ range $categoryIndex, $group := $categoryGroups }}
-                        <article class="archive-category-card">
-                            <header>
-                                <div><code>C.{{ printf "%02d" (add $categoryIndex 1) }}</code><h3><a href="{{ $group.URL }}">{{ $group.Name }}</a></h3></div>
-                                <a href="{{ $group.URL }}" aria-label="查看 {{ $group.Name }} 分类全部文章">{{ $group.Count | printf "%03d" }} POSTS</a>
-                            </header>
-                            <ol>
-                                {{ range $postIndex, $post := first 5 $group.Posts }}
-                                <li><a href="{{ $post.RelPermalink }}"><span>{{ printf "%02d" (add $postIndex 1) }}</span><strong>{{ $post.Title }}</strong><time>{{ $post.Date.Format "2006-01-02" }}</time></a></li>
-                                {{ end }}
-                            </ol>
-                        </article>
-                        {{ end }}
+                </div>
+                {{ with index $topPosts 3 }}
+                {{- $editorCover := "" -}}
+                {{- with .Params.cover }}{{ $editorCover = . }}{{ end -}}
+                {{- if not $editorCover -}}
+                    {{- $markdownImages := findRE `!\[[^\]]*\]\((?:<)?[^\s)>]+` .RawContent 1 -}}
+                    {{- with $markdownImages }}{{ $editorCover = replaceRE `^!\[[^\]]*\]\((?:<)?` "" (index . 0) }}{{ end -}}
+                {{- end -}}
+                {{- if not $editorCover -}}
+                    {{- $htmlImages := findRE `(?i)<img[^>]+src=["'][^"']+` .RawContent 1 -}}
+                    {{- with $htmlImages }}{{ $editorCover = replaceRE `(?i)^.*src=["']` "" (index . 0) }}{{ end -}}
+                {{- end -}}
+                <aside class="feature-panel">
+                    <div class="feature-topbar mono"><span>EDITOR'S SIGNAL</span><span>{{ now.Format "0601" }}.{{ printf "%03d" .WordCount }}</span></div>
+                    <a class="feature-image-link" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
+                        <div class="feature-cover{{ if $editorCover }} has-cover{{ end }}" role="img" aria-label="{{ .Title }}">
+                            {{ with $editorCover }}<img class="feature-cover-img" src="{{ . | safeURL }}" alt="{{ $.Title }}" loading="lazy">{{ else }}<span class="feature-cover-mark"></span><small>EDITOR'S<br>PICK</small>{{ end }}
+                        </div>
+                    </a>
+                    <div class="feature-main">
+                        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                        <p>{{ .Summary | plainify | truncate 120 }}</p>
                     </div>
-                </section>
+                    <div class="feature-meta mono"><span>{{ with .Params.categories }}{{ delimit . " / " | upper }}{{ end }}</span><span>{{ .WordCount }} WORDS</span></div>
+                </aside>
                 {{ end }}
             </div>
+        </section>
 
-            <aside class="archive-aside">
-                <section class="archive-panel archive-search">
-                    <div class="archive-panel-title"><h2>SEARCH</h2><span>⌕</span></div>
-                    <form class="article-side-search" action="{{ `search/` | relLangURL }}" method="get" role="search">
-                        <input type="search" name="keyword" placeholder="输入关键词..." aria-label="搜索文章" required>
-                        <button type="submit" aria-label="开始搜索">⌕</button>
-                    </form>
-                </section>
+        {{ if and $advertising.home_sidebar_enabled $advertising.home_sidebar_code }}
+        <section class="section ad-section">
+            <div class="section-label mono"><span>SPONSORED SIGNAL</span><span>ADVERTISEMENT</span></div>
+            <div class="ad-banner site-ad-slot site-ad-slot--home" data-ad-slot="home-sidebar" aria-label="广告">
+                {{ $advertising.home_sidebar_code | safeHTML }}
+            </div>
+        </section>
+        <script>
+        (() => {
+            const section = document.querySelector('.ad-section .site-ad-slot--home')?.closest('.ad-section');
+            if (!section) return;
+            const ins = section.querySelector('ins.adsbygoogle');
+            const hideSection = () => { section.style.display = 'none'; };
+            if (!ins) { hideSection(); return; }
+            let tries = 0;
+            const timer = window.setInterval(() => {
+                tries++;
+                const rect = ins.getBoundingClientRect();
+                if (rect.height > 0 && (ins.querySelector('iframe') || ins.textContent.trim().length > 0)) {
+                    window.clearInterval(timer);
+                    return;
+                }
+                if (tries >= 8) {
+                    window.clearInterval(timer);
+                    hideSection();
+                }
+            }, 500);
+        })();
+        </script>
+        {{ end }}
 
-                {{- $advertising := .Site.Data.site.advertising -}}
-                {{- if and $advertising.home_sidebar_enabled $advertising.home_sidebar_code -}}
-                <section class="archive-panel site-ad-slot site-ad-slot--home" data-ad-slot="home-sidebar" aria-label="广告">
-                    {{ $advertising.home_sidebar_code | safeHTML }}
-                </section>
-                {{- end -}}
-
-                <section class="archive-panel archive-latest">
-                    <div class="archive-panel-title"><h2>QUARTER PICKS</h2><span>[ {{ $quarterDisplayCount }} ]</span></div>
-                    <ul class="archive-quarter-list" data-random-count="{{ $quarterRandomCount }}">
-                        {{ range $index, $post := $quarterPosts }}
-                        <li{{ if ge $index $quarterRandomCount }} hidden{{ end }}><a href="{{ $post.RelPermalink }}"><i></i><span>{{ $post.Title }}</span><time>{{ $post.Date.Format "2006-01-02" }}</time></a></li>
-                        {{ else }}
-                            <li><span><i></i><span>最近三个月暂无文章</span><time>----</time></span></li>
-                        {{ end }}
-                    </ul>
-                    <a class="archive-link" href="{{ `archives/` | relLangURL }}">查看全部 →</a>
-                    {{ if $quarterPosts }}
-                    <script>
-                    (() => {
-                        const list = document.currentScript.previousElementSibling.previousElementSibling;
-                        const items = Array.from(list.querySelectorAll('li'));
-                        const count = Math.min(Number(list.dataset.randomCount) || 5, items.length);
-                        for (let index = items.length - 1; index > 0; index -= 1) {
-                            const target = Math.floor(Math.random() * (index + 1));
-                            [items[index], items[target]] = [items[target], items[index]];
-                        }
-                        items.forEach((item, index) => { item.hidden = index >= count; });
-                    })();
-                    </script>
+        {{ if $signalPosts }}
+        <section id="signals" class="section">
+            <div class="section-label mono"><span>04–11 / SIGNAL DIRECTORY</span><span>{{ len $signalPosts }} ARTICLES / RECENT</span></div>
+            <div class="signal-grid">
+                {{ $half := div (len $signalPosts) 2 }}
+                {{ if gt (mod (len $signalPosts) 2) 0 }}{{ $half = add $half 1 }}{{ end }}
+                {{ $firstCol := first $half $signalPosts }}
+                {{ $secondCol := after $half $signalPosts }}
+                <div class="signal-col">
+                    {{ range $index, $post := $firstCol }}
+                    <article class="signal-row">
+                        <span class="badge{{ if mod $index 2 }} pink{{ else }} orange{{ end }}">{{ printf "%02d" (add $index 4) }}</span>
+                        <div><h3><a href="{{ $post.RelPermalink }}">{{ $post.Title }}</a></h3></div>
+                        <div class="signal-side"><span class="score">{{ $post.ReadingTime }} MIN</span>{{ with $post.Params.categories }}<span class="tiny mono">{{ delimit . " / " | upper }}</span>{{ end }}</div>
+                    </article>
                     {{ end }}
-                </section>
-
-                <section class="archive-panel archive-tags">
-                    <div class="archive-panel-title"><h2>TAG CLOUD</h2><span>[ {{ $homeTagDisplayCount }} ]</span></div>
-                    <div class="article-tag-cloud archive-random-tags" data-random-count="{{ $homeTagCount }}">
-                        {{ range $index, $taxonomy := .Site.Taxonomies.tags }}<a{{ if ge $index $homeTagCount }} hidden{{ end }} href="{{ printf `tags/%s/` ($index | urlize) | relLangURL }}">{{ $index }}<sup>{{ len $taxonomy.Pages }}</sup></a>{{ else }}<p class="article-side-empty">暂无标签</p>{{ end }}
-                    </div>
-                    {{ if .Site.Taxonomies.tags }}
-                    <script>
-                    (() => {
-                        const cloud = document.currentScript.previousElementSibling;
-                        const tags = Array.from(cloud.querySelectorAll('a'));
-                        const count = Math.min(Number(cloud.dataset.randomCount) || 18, tags.length);
-                        for (let index = tags.length - 1; index > 0; index -= 1) {
-                            const target = Math.floor(Math.random() * (index + 1));
-                            [tags[index], tags[target]] = [tags[target], tags[index]];
-                        }
-                        tags.forEach((tag, index) => { tag.hidden = index >= count; cloud.appendChild(tag); });
-                    })();
-                    </script>
+                </div>
+                <div class="signal-col">
+                    {{ range $index, $post := $secondCol }}
+                    <article class="signal-row">
+                        <span class="badge{{ if mod $index 2 }} blue{{ else }} lime{{ end }}">{{ printf "%02d" (add $index (add $half 4)) }}</span>
+                        <div><h3><a href="{{ $post.RelPermalink }}">{{ $post.Title }}</a></h3></div>
+                        <div class="signal-side"><span class="score">{{ $post.ReadingTime }} MIN</span>{{ with $post.Params.categories }}<span class="tiny mono">{{ delimit . " / " | upper }}</span>{{ end }}</div>
+                    </article>
                     {{ end }}
-                </section>
+                </div>
+            </div>
+        </section>
+        {{ end }}
 
-                {{ with .Site.Data.friends }}
-                {{ if .settings.homepage_enabled }}
-                {{ $homeFriends := where .links "show_on_home" true }}
-                <section class="archive-panel archive-friends">
-                    <div class="archive-panel-title"><h2>FRIEND LINKS</h2><span>[ {{ len $homeFriends }} ]</span></div>
-                    <div class="archive-friend-cloud">
-                        {{ range first (default 5 .settings.homepage_limit) $homeFriends }}
-                        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer"><span>{{ .name }}</span><b aria-hidden="true">↗</b></a>
-                        {{ else }}
-                        <p class="article-side-empty">暂无友情链接</p>
-                        {{ end }}
-                    </div>
-                    <a class="archive-link" href="{{ `链接/` | relLangURL }}">查看全部 →</a>
-                </section>
+        {{ if $categoryGroups }}
+        <section id="categories" class="section">
+            <div class="section-label mono"><span>CATEGORY INDEX</span><span>{{ len $categoryGroups | printf "%02d" }} GROUPS / <a href="{{ `archives/` | relLangURL }}">MORE →</a></span></div>
+            <div class="categories">
+                {{ range $index, $group := $categoryGroups }}
+                <a class="category" href="{{ $group.URL }}">
+                    <div class="small mono">C.{{ printf "%02d" (add $index 1) }}</div>
+                    <div class="count">{{ $group.Count | printf "%02d" }}</div>
+                    <h3>{{ $group.Name }}</h3>
+                    {{ with index $group.Posts 0 }}<p>{{ .Title }}</p>{{ end }}
+                </a>
                 {{ end }}
+            </div>
+        </section>
+        {{ end }}
+
+        {{ if $toolTags }}
+        <section id="tools" class="section">
+            <div class="section-label mono"><span>TOOD TOOLBOX</span><span>TAG.{{ len $toolTags | printf "%02d" }} / <a href="{{ `tags/` | relLangURL }}">MORE →</a></span></div>
+            <div class="tools">
+                <div class="tools-track">
+                {{ range $g := seq 0 4 }}
+                <div class="tools-group">
+                {{ range $i, $tag := first 4 (after (mul $g 4) $toolTags) }}
+                <article class="tool{{ if and (eq $g 0) (eq $i 0) }} primary{{ end }}">
+                    <div class="small mono">TAG.{{ printf "%02d" (add (mul $g 4) $i 1) }}</div>
+                    <h3><a href="{{ $tag.URL }}">{{ $tag.Name }}</a></h3>
+                    {{ with $tag.Latest }}<p>{{ .Title }}</p>{{ end }}
+                    <a class="tool-link" href="{{ $tag.URL }}">{{ $tag.Count }} 篇 →</a>
+                </article>
                 {{ end }}
-            </aside>
-        </div>
+                </div>
+                {{ end }}
+                </div>
+            </div>
+        </section>
+        {{ end }}
+
+        {{ if $latestPosts }}
+        <section id="latest" class="section">
+            <div class="section-label mono"><span>LATEST ARTICLES</span><a href="{{ `archives/` | relLangURL }}">VIEW ALL →</a></div>
+            <div class="latest">
+                {{ range $index, $post := $latestPosts }}
+                <a class="latest-row" href="{{ $post.RelPermalink }}">
+                    <span class="mono small">A.{{ $post.Date.Format "0601" }}.{{ printf "%03d" (add $index 1) }}</span>
+                    <h3>{{ $post.Title }}</h3>
+                    <span class="score mono">{{ $post.Date.Format "2006.01.02" }}</span>
+                </a>
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
+
+        <section id="about" class="section">
+            <div class="section-label mono"><span>WHY TOOD.WIN</span><span>EDITORIAL NOTE</span></div>
+            <div class="editorial">
+                <article><div class="small mono">WHY NOW</div><h2>{{ default "记录值得被发现的人、事、思想与微光。" $home.tagline }}</h2><p>{{ default "记录每一次实践，收藏每一件好用的工具。" $home.about_text }}</p></article>
+                <article><div class="small mono">MISSION</div><h2>{{ default "Things Others Ought to Discover." $home.build_label }}</h2><p><a href="{{ `关于/` | relLangURL }}">{{ default "了解更多 →" $home.about_link_label }}</a></p></article>
+            </div>
+        </section>
+
+        {{ with .Site.Data.friends }}
+        {{ if .settings.homepage_enabled }}
+        {{ $homeFriends := where .links "show_on_home" true }}
+        {{ if $homeFriends }}
+        <section id="friends" class="section">
+            <div class="section-label mono"><span>FRIEND LINKS</span><span>{{ len $homeFriends | printf "%02d" }} LINKS</span></div>
+            <div class="links">
+                {{ range first (default 4 .settings.homepage_limit) $homeFriends }}
+                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }} ↗</a>
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+
+        <section class="section">
+            <div class="search-panel">
+                <div><div class="small mono">SITE SEARCH</div><h2>搜索拾光集</h2><p>查找 AI、建站、软件与数字效率中的重点内容。</p></div>
+                <form class="form" action="{{ `search/` | relLangURL }}" method="get" role="search">
+                    <input type="search" name="keyword" placeholder="输入关键词..." aria-label="搜索文章" required>
+                    <button type="submit">SEARCH</button>
+                </form>
+            </div>
+        </section>
+
+        {{ partial "site-footer.html" . }}
     </div>
 
-    <footer class="archive-footer"><span class="archive-footer-left"><span>© <span data-current-year>{{ now.Year }}</span> {{ default "TOOD.WIN" $brand.name }}</span>{{ partial "footer/runtime.html" . }}</span><span class="archive-footer-policies"><a href="/posts/privacypolicy/">隐私政策</a><b>·</b><a href="/posts/disclaimer-zh/">免责声明</a></span><span>{{ default "BUILT WITH HUGO" $footer.build_label }} <i></i></span></footer>
+    <div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
 </div>
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const track = document.querySelector('.tools .tools-track');
+    if (!track) return;
+    const groups = Array.from(track.children);
+    if (groups.length < 2) return;
+    let current = 0;
+    window.setInterval(() => {
+        current = (current + 1) % groups.length;
+        track.style.transform = 'translateX(' + (-current * 100) + '%)';
+    }, 8000);
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+})();
+</script>
 {{ end }}

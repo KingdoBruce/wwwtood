@@ -1,146 +1,275 @@
-{{ define "body-class" }}article-page article-with-sidebar{{ end }}
+{{ define "body-class" }}article-page signal-article-page{{ end }}
+
+{{ define "topbar" }}
+{{ partial "site-nav.html" . }}
+{{ end }}
+
+{{ define "page-index" }}{{ end }}
 
 {{ define "main" }}
-<div class="archive-article-layout">
-    <div class="archive-article-main">
-        {{ partial "article/article.html" . }}
+{{- $siteConfig := site.Data.site -}}
+{{- $brand := $siteConfig.brand -}}
+{{- $advertising := $siteConfig.advertising -}}
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $postsSorted := $posts.ByDate -}}
+{{- $seq := 0 -}}
+{{- range $i, $p := $postsSorted -}}
+    {{- if eq $p.RelPermalink $.RelPermalink -}}{{- $seq = add $i 1 -}}{{- end -}}
+{{- end -}}
+{{- $seqMeta := printf "A.%s.%03d" (.Date.Format "0601") $seq -}}
+{{- $sectionCount := len (findRE `<h2` .Content) -}}
+{{- $cover := "" -}}
+{{- with .Params.image }}{{ $cover = . }}{{ end -}}
+{{- if not $cover -}}{{- with .Params.cover }}{{ $cover = . }}{{ end -}}{{- end -}}
+{{- $words := .WordCount -}}
+<div class="signal-article">
+    <div class="breadcrumb mono"><a href="{{ .Site.Home.RelPermalink }}">HOME</a><span>/</span>{{ with .Params.categories }}<a href="{{ `categories/` | relLangURL }}{{ index . 0 | urlize }}/">{{ upper (index . 0) }}</a><span>/</span>{{ end }}<span>{{ .Title }}</span></div>
 
-        {{ if .Params.links }}{{ partial "article/components/links" . }}{{ end }}
-        {{ partial "article/components/download" . }}
-
-        {{- $showArticleExtras := true -}}
-        {{- if isset .Params "showarticleextras" -}}
-            {{- $showArticleExtras = .Params.showarticleextras -}}
-        {{- end -}}
-        {{- if and (eq .Section "posts") $showArticleExtras -}}
-        {{- $previous := .PrevInSection -}}
-        {{- $next := .NextInSection -}}
-        {{- if or $previous $next -}}
-        <nav class="article-sequence" aria-label="上一篇和下一篇文章">
-            {{- with $previous -}}
-            <a class="article-sequence-link is-previous" href="{{ .RelPermalink }}" rel="prev">
-                <span class="article-sequence-arrow" aria-hidden="true">←</span>
-                <span class="article-sequence-body">
-                    <code>PREVIOUS</code>
-                    <strong>{{ .LinkTitle }}</strong>
-                </span>
-            </a>
-            {{- else -}}
-            <span class="article-sequence-link is-disabled">
-                <span class="article-sequence-arrow" aria-hidden="true">←</span>
-                <span class="article-sequence-body">
-                    <code>PREVIOUS</code>
-                    <strong>已经是第一篇</strong>
-                </span>
-            </span>
-            {{- end -}}
-            {{- with $next -}}
-            <a class="article-sequence-link is-next" href="{{ .RelPermalink }}" rel="next">
-                <span class="article-sequence-body">
-                    <code>NEXT</code>
-                    <strong>{{ .LinkTitle }}</strong>
-                </span>
-                <span class="article-sequence-arrow" aria-hidden="true">→</span>
-            </a>
-            {{- else -}}
-            <span class="article-sequence-link is-next is-disabled">
-                <span class="article-sequence-body">
-                    <code>NEXT</code>
-                    <strong>已经是最后一篇</strong>
-                </span>
-                <span class="article-sequence-arrow" aria-hidden="true">→</span>
-            </span>
-            {{- end -}}
-        </nav>
-        {{- end -}}
-
-        {{ partial "article/components/related-content" . }}
-
-        <aside class="article-disclaimer">
-            <code>DISCLAIMER</code>
-            <div class="article-disclaimer-body">
-                <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
-                <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
-                <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
-                <p>严禁利用本站内容从事任何违法违规活动。</p>
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / {{ with .Params.categories }}{{ delimit . " / " | upper }}{{ end }}</span>
+                <span>LIVE DATA / {{ $seqMeta }}</span>
+            </div>
+            <h1>{{ .Title }}</h1>
+            {{ with .Description }}<p class="article-deck">{{ . }}</p>{{ else }}{{ with .Summary }}<p class="article-deck">{{ . | plainify }}</p>{{ end }}{{ end }}
+            <div class="author-line mono">
+                <span>BY {{ upper (default "TOOD.WIN" $brand.name) }}</span>
+                <span>{{ .Date.Format "2006.01.02" }}</span>
+                <span>{{ .ReadingTime }} MIN READ</span>
+                <span>{{ $words }} WORDS</span>
+                {{ with .Params.categories }}<span>{{ upper (delimit . " / ") }}</span>{{ end }}
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A{{ $seq }}</strong>
+                <p class="mono">{{ .Date.Format "JAN. 02" }}<br>— {{ .Date.Format "2006" }}</p>
+            </div>
+            <div>
+                <div class="stat">{{ printf "%02d" $sectionCount }}</div>
+                <div class="kicker">章节内容</div>
             </div>
         </aside>
-        {{- end -}}
+    </header>
 
+    <div class="article-layout">
+        <main class="article-body">
+            {{ partial "article/components/content" . }}
+
+            {{ if .Params.links }}{{ partial "article/components/links" . }}{{ end }}
+            {{ partial "article/components/download" . }}
+
+            <div class="article-end">
+                {{ partial "article/components/tags" . }}
+
+                {{- $showArticleExtras := true -}}
+                {{- if isset .Params "showarticleextras" -}}
+                    {{- $showArticleExtras = .Params.showarticleextras -}}
+                {{- end -}}
+                {{- if and (eq .Section "posts") $showArticleExtras -}}
+                {{- $previous := .PrevInSection -}}
+                {{- $next := .NextInSection -}}
+                {{- if or $previous $next -}}
+                <nav class="prev-next" aria-label="上一篇和下一篇文章">
+                    {{- with $previous -}}
+                    <a href="{{ .RelPermalink }}" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>{{ .LinkTitle }}</strong>
+                    </a>
+                    {{- else -}}
+                    <span class="prev-disabled">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>已经是第一篇</strong>
+                    </span>
+                    {{- end -}}
+                    {{- with $next -}}
+                    <a href="{{ .RelPermalink }}" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>{{ .LinkTitle }}</strong>
+                    </a>
+                    {{- else -}}
+                    <span class="prev-disabled">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>已经是最后一篇</strong>
+                    </span>
+                    {{- end -}}
+                </nav>
+                {{- end -}}
+                {{- end -}}
+            </div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">{{ if ge (len .TableOfContents) 100 }}{{ partial "article/components/toc" . | safeHTML }}{{ else }}<p class="toc-empty">本文暂无分节目录</p>{{ end }}</div>
+            </div>
+            {{- if and $advertising.article_sidebar_enabled $advertising.article_sidebar_code -}}
+            <div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    {{ $advertising.article_sidebar_code | safeHTML }}
+                </div>
+            </div>
+            {{- end -}}
+            {{- $posts := where .Site.RegularPages "Section" "posts" -}}
+            {{- $latest := $posts.ByDate.Reverse | first 6 -}}
+            {{- $now := now -}}
+            {{- $thirtyDaysAgo := $now.AddDate 0 0 -30 -}}
+            {{- $popular := where $posts ".Date" ">=" $thirtyDaysAgo | first 6 -}}
+            <div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles">
+                    {{- range $latest -}}
+                    <a class="side-article-row" href="{{ .RelPermalink }}">
+                        <span class="side-article-title">{{ .Title }}</span>
+                        <span class="side-article-date mono">{{ .Date.Format "01.02" }}</span>
+                    </a>
+                    {{- end -}}
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles">
+                    {{- range $popular -}}
+                    <a class="side-article-row" href="{{ .RelPermalink }}">
+                        <span class="side-article-title">{{ .Title }}</span>
+                        <span class="side-article-date mono">{{ .Date.Format "01.02" }}</span>
+                    </a>
+                    {{- end -}}
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a{{ with .Params.categories }} href="{{ `categories/` | relLangURL }}{{ index . 0 | urlize }}/"{{ end }}><span>分类</span><b>{{ with .Params.categories }}{{ index . 0 }}{{ else }}-{{ end }}</b></a>
+                    <a><span>字数</span><b>{{ $words }}</b></a>
+                    <a><span>阅读</span><b>{{ .ReadingTime }} MIN</b></a>
+                    <a><span>更新</span><b>{{ .Date.Format "01.02" }}</b></a>
+                </div>
+            </div>
+        </aside>
     </div>
 
-    {{ partial "article/sidebar.html" . }}
-</div>
+    {{- if and (eq .Section "posts") $showArticleExtras -}}
+    {{ partial "article/components/related-content" . }}
 
-<div class="article-float-actions" aria-hidden="true">
-    <button class="article-back-to-top" type="button" aria-label="返回页面顶部" title="返回顶部" tabindex="-1">
-        <span aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="presentation">
-                <path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path>
-            </svg>
-        </span>
-    </button>
-    <button class="article-go-to-bottom" type="button" aria-label="跳转到底部" title="跳转到底部" tabindex="-1">
-        <span aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="presentation">
-                <path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"></path>
-            </svg>
-        </span>
-    </button>
-</div>
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside>
+    {{- end -}}
 
-{{ partialCached "article/components/photoswipe" . }}
-{{ partial "article/components/mermaid" . }}
+    <div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
 
 <script>
 (() => {
-    const container = document.querySelector('.article-float-actions');
-    const topBtn = container.querySelector('.article-back-to-top');
-    const bottomBtn = container.querySelector('.article-go-to-bottom');
-    if (!container || !topBtn || !bottomBtn) return;
-
-    const placeButtons = () => {
-        const main = document.querySelector('.archive-article-main');
-        const sidebar = document.querySelector('.archive-article-sidebar');
-        const x = (window.innerWidth <= 1180 || !main || !sidebar)
-            ? null
-            : `${(main.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2}px`;
-        container.style.setProperty('--float-x', x || 'auto');
-        container.style.setProperty('--float-right', x ? 'auto' : '16px');
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
     };
-
-    const updateButtons = () => {
-        const scrollY = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight;
-        const viewHeight = window.innerHeight;
-        const nearBottom = scrollY + viewHeight >= docHeight - 60;
-        const farFromTop = scrollY > 360;
-
-        const footer = document.querySelector('.archive-footer');
-        const baseBottom = window.innerWidth <= 700 ? 16 : 26;
-        const footerOffset = footer ? Math.max(0, viewHeight - footer.getBoundingClientRect().top) : 0;
-        const bottom = `${Math.max(baseBottom, footerOffset + 12)}px`;
-        container.style.setProperty('--float-bottom', bottom);
-
-        topBtn.classList.toggle('is-visible', farFromTop);
-        topBtn.setAttribute('aria-hidden', farFromTop ? 'false' : 'true');
-        topBtn.tabIndex = farFromTop ? 0 : -1;
-
-        bottomBtn.classList.toggle('is-visible', !nearBottom);
-        bottomBtn.setAttribute('aria-hidden', nearBottom ? 'true' : 'false');
-        bottomBtn.tabIndex = nearBottom ? -1 : 0;
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
     };
-
-    window.addEventListener('scroll', updateButtons, { passive: true });
-    window.addEventListener('resize', () => { placeButtons(); updateButtons(); }, { passive: true });
-    topBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
     });
-    bottomBtn.addEventListener('click', () => {
-        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
     });
-    updateButtons();
-    placeButtons();
 })();
 </script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+{{ partialCached "article/components/photoswipe" . }}
+{{ partial "article/components/mermaid" . }}
 {{ end }}

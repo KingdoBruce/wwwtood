@@ -1,4 +1,11 @@
 {{ define "body-class" }}template-archives{{ end }}
+
+{{ define "topbar" }}
+{{ partial "site-nav.html" . }}
+{{ end }}
+
+{{ define "page-index" }}{{ end }}
+
 {{ define "main" }}
     {{- $taxonomy := .Site.GetPage "/categories" -}}
     {{- $terms := slice -}}
@@ -10,177 +17,183 @@
         {{- with index $categorySettings $term.LinkTitle -}}
             {{- if isset . "show_in_archives" -}}{{- $showInArchives = .show_in_archives -}}{{- end -}}
         {{- end -}}
-        {{- if $showInArchives -}}{{- $visibleTerms = $visibleTerms | append $term -}}{{- end -}}
+        {{- if and $showInArchives (gt (len $term.Pages) 0) -}}{{- $visibleTerms = $visibleTerms | append $term -}}{{- end -}}
     {{- end -}}
-
-    {{- with $visibleTerms -}}
-        <section class="archive-category-index" aria-labelledby="archive-category-title">
-            <header class="archive-block-heading">
-                <h1 id="archive-category-title">分类索引</h1>
-                <span>{{ len . | printf "%02d" }} CATEGORIES</span>
-            </header>
-            <div class="archive-category-index-grid">
-                {{- range $index, $term := . -}}
-                    <a class="archive-category-index-card" href="{{ $term.RelPermalink }}">
-                        <code>C.{{ add $index 1 | printf "%02d" }}</code>
-                        <strong>{{ $term.LinkTitle }}</strong>
-                        <span>{{ len $term.Pages }} 篇文章</span>
-                    </a>
-                {{- end -}}
-            </div>
-        </section>
-    {{- end -}}
-
-<div class="archive-article-layout archive-timeline-layout">
-    <div class="archive-article-main">
-
     {{- $pages := partial "helper/pages.html" .Site.Home -}}
-    {{- $monthGroups := $pages.GroupByDate "2006-01" -}}
+    {{- $totalArticles := len $pages -}}
+    {{- $monthGroups := $pages.GroupByDate "2006-01" | collections.Reverse -}}
 
-    <section class="archive-month-index" aria-labelledby="archive-month-title">
-        <header class="archive-block-heading">
-            <h2 id="archive-month-title">时间归档</h2>
-            <span>{{ len $monthGroups | printf "%02d" }} ACTIVE MONTHS</span>
-        </header>
+<header class="page-hero">
+    <div class="hero-main">
+        <div class="hero-meta kicker"><span>CONTENT DIRECTORY / CATEGORIES</span><span>UPDATED / {{ now.Format "2006.01" }}</span></div>
+        <h1>内容分类</h1>
+        <p class="page-deck">按主题进入拾光集的不同内容区。这里不是传统的栏目列表，而是一张持续更新的数字实践地图。</p>
+        <div class="hero-stats mono"><span>{{ len $visibleTerms | printf "%02d" }} CATEGORIES</span><span>{{ $totalArticles | printf "%02d" }} ARTICLES</span><span>AI / WEB / SOFTWARE / NOTES</span></div>
+    </div>
+    <aside class="signal-box">
+        <div>
+            <div class="kicker">ARCHIVE INDEX</div>
+            <strong>C{{ len $visibleTerms | printf "%02d" }}</strong>
+            <p class="mono">SIGNAL GROUPS<br>— TOOD.WIN</p>
+        </div>
+        <div>
+            <div class="stat">{{ $totalArticles }}</div>
+            <div class="kicker">已收录文章</div>
+        </div>
+    </aside>
+</header>
 
-        {{- range $groupIndex, $group := $monthGroups -}}
-            {{- $monthPages := .Pages -}}
-            {{- $firstPage := index $monthPages 0 -}}
-            <div class="archive-month-card" data-archive-month="{{ $group.Key }}"{{ if ne $groupIndex 0 }} hidden{{ end }}>
-                <header class="archive-month-heading">
-                    <div>
-                        <strong>{{ $firstPage.Date.Format "2006" }}</strong>
-                        <span>{{ $firstPage.Date.Format "01" }}月</span>
+<div class="archive-stack">
+    <main class="archive-top">
+        {{- with $visibleTerms -}}
+        <div class="section-head kicker"><span>ALL SIGNAL GROUPS</span><span>{{ len . | printf "%02d" }} ITEMS</span></div>
+        <nav class="category-tags-row" aria-label="内容分类">
+            {{- range $index, $term := . -}}
+            <a class="category-tag" href="{{ $term.RelPermalink }}">
+                <span class="category-tag-no mono">GROUP / {{ printf "%02d" (add $index 1) }}</span>
+                <strong class="category-tag-name">{{ $term.LinkTitle }}</strong>
+                <span class="category-tag-foot"><b>{{ len $term.Pages | printf "%02d" }}</b><span class="category-tag-go">进入分类 ↗</span></span>
+            </a>
+            {{- end -}}
+        </nav>
+        {{- end -}}
+    </main>
+
+    <div class="monthly-layout">
+        <main class="archive-main">
+            <section class="month-archive" aria-labelledby="archive-month-title">
+                <div class="section-head kicker"><span>MONTHLY ARTICLES</span><span>ALL POSTS OF THE MONTH</span></div>
+
+                {{- with $monthGroups -}}
+                <div class="month-toolbar" id="current-archive">
+                    <div class="month-heading">
+                        <div>
+                            <div class="kicker">CURRENT ARCHIVE</div>
+                            <strong id="monthTitle">{{ range first 1 . }}{{ with index .Pages 0 }}{{ .Date.Format "2006 年 1 月" }}{{ end }}{{ end }}</strong>
+                        </div>
+                        <span class="mono" id="monthCount"></span>
                     </div>
-                    <p>{{ len $monthPages }} 篇文章</p>
-                </header>
+                    <div class="month-arrows">
+                        <button type="button" id="prevMonth" aria-label="上一个月">←</button>
+                        <button type="button" id="nextMonth" aria-label="下一个月">→</button>
+                    </div>
+                </div>
 
-                <div class="archive-month-list">
-                    {{- range $index, $article := $monthPages -}}
-                        <a class="archive-month-row" href="{{ $article.RelPermalink }}">
-                            <time datetime="{{ $article.Date.Format `2006-01-02` }}">
-                                <b>{{ $article.Date.Format "02" }}</b>
-                                <span>{{ $article.Date.Format "Mon" }}</span>
-                            </time>
-                            <div class="archive-month-copy">
-                                <code>A.{{ $firstPage.Date.Format "0601" }}.{{ add $index 1 | printf "%03d" }}</code>
-                                <h3>{{ $article.LinkTitle }}</h3>
-                                {{- with $article.Summary -}}<p>{{ . | plainify | htmlUnescape | truncate 100 }}</p>{{- end -}}
-                            </div>
-                            <span class="archive-month-category">
-                                {{- with index $article.Params.categories 0 -}}{{ . }}{{- else -}}未分类{{- end -}}
-                            </span>
-                        </a>
+                <div id="monthPages">
+                    {{- range $groupIndex, $group := . -}}
+                    <section class="month-page{{ if eq $groupIndex 0 }} active{{ end }}" data-label="{{ with index $group.Pages 0 }}{{ .Date.Format "2006 年 1 月" }}{{ end }}">
+                        <div class="article-month-list">
+                            {{- range $article := $group.Pages -}}
+                            <a class="month-article" href="{{ $article.RelPermalink }}">
+                                <div class="month-date"><span class="kicker">{{ upper ($article.Date.Format "Jan") }}</span><strong>{{ $article.Date.Format "02" }}</strong></div>
+                                <div class="month-copy">
+                                    <div class="kicker">{{ with index $article.Params.categories 0 }}{{ upper . }}{{ end }}</div>
+                                    <h3>{{ $article.LinkTitle }}</h3>
+                                    {{- with $article.Summary -}}<p>{{ . | plainify | htmlUnescape | truncate 80 }}</p>{{- end -}}
+                                </div>
+                                <div class="month-meta mono"><span>{{ $article.Date.Format "2006.01.02" }}</span><b>{{ $article.ReadingTime }} MIN READ</b><span>{{ with index $article.Params.tags 0 }}#{{ . }}{{ end }}</span></div>
+                            </a>
+                            {{- end -}}
+                        </div>
+                    </section>
                     {{- end -}}
                 </div>
-            </div>
-        {{- else -}}
-            <div class="archive-month-empty">暂无可归档文章</div>
-        {{- end -}}
 
-        {{- if gt (len $monthGroups) 1 -}}
-            <nav class="archive-month-pagination" aria-label="归档月份翻页">
-                <button type="button" data-month-prev disabled><span>←</span> 较新月份</button>
-                <strong><span data-month-current>01</span> / {{ len $monthGroups | printf "%02d" }}</strong>
-                <button type="button" data-month-next>较早月份 <span>→</span></button>
-            </nav>
-            <script>
-                (() => {
-                    const root = document.currentScript.closest('.archive-month-index');
-                    const cards = Array.from(root.querySelectorAll('[data-archive-month]'));
-                    const previous = root.querySelector('[data-month-prev]');
-                    const next = root.querySelector('[data-month-next]');
-                    const counter = root.querySelector('[data-month-current]');
-                    let current = Math.max(0, cards.findIndex((card) => `#${card.dataset.archiveMonth}` === window.location.hash));
-
-                    const showMonth = (index, updateUrl = true) => {
-                        current = Math.max(0, Math.min(index, cards.length - 1));
-                        cards.forEach((card, cardIndex) => { card.hidden = cardIndex !== current; });
-                        previous.disabled = current === 0;
-                        next.disabled = current === cards.length - 1;
-                        counter.textContent = String(current + 1).padStart(2, '0');
-                        if (updateUrl) history.replaceState(null, '', `#${cards[current].dataset.archiveMonth}`);
-                    };
-
-                    previous.addEventListener('click', () => showMonth(current - 1));
-                    next.addEventListener('click', () => showMonth(current + 1));
-                    showMonth(current, false);
-                })();
-            </script>
-        {{- end -}}
-    </section>
+                <nav class="month-pagination mono" aria-label="按月分页">
+                    {{- range $groupIndex, $group := . -}}
+                    <button class="month-btn{{ if eq $groupIndex 0 }} active{{ end }}" type="button" data-index="{{ $groupIndex }}"><strong>{{ replace $group.Key "-" "." }}</strong><small>{{ len $group.Pages }} ARTICLES</small></button>
+                    {{- end -}}
+                </nav>
+                {{- else -}}
+                <div class="archive-month-empty">暂无可归档文章</div>
+                {{- end -}}
+            </section>
+        </main>
 
     </div>
-
-    {{ partial "article/sidebar.html" . }}
 </div>
 
-<div class="article-float-actions" aria-hidden="true">
-    <button class="article-back-to-top" type="button" aria-label="返回页面顶部" title="返回顶部" tabindex="-1">
-        <span aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="presentation">
-                <path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path>
-            </svg>
-        </span>
-    </button>
-    <button class="article-go-to-bottom" type="button" aria-label="跳转到底部" title="跳转到底部" tabindex="-1">
-        <span aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="presentation">
-                <path d="M12 5v14M6.5 13.5 12 19l5.5-5.5"></path>
-            </svg>
-        </span>
-    </button>
+<div class="scroll-arrows scroll-arrows--right">
+    <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+    <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
 </div>
 
 <script>
 (() => {
-    const container = document.querySelector('.article-float-actions');
-    const topBtn = container.querySelector('.article-back-to-top');
-    const bottomBtn = container.querySelector('.article-go-to-bottom');
-    if (!container || !topBtn || !bottomBtn) return;
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+})();
+</script>
 
-    const placeButtons = () => {
-        const main = document.querySelector('.archive-article-main');
-        const sidebar = document.querySelector('.archive-article-sidebar');
-        const x = (window.innerWidth <= 1180 || !main || !sidebar)
-            ? null
-            : `${(main.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2}px`;
-        container.style.setProperty('--float-x', x || 'auto');
-        container.style.setProperty('--float-right', x ? 'auto' : '16px');
+<script>
+(() => {
+    const monthPages = [...document.querySelectorAll('.month-page')];
+    const monthButtons = [...document.querySelectorAll('.month-btn')];
+    const monthTitle = document.getElementById('monthTitle');
+    const monthCount = document.getElementById('monthCount');
+    if (!monthPages.length || !monthTitle || !monthCount) return;
+    let currentMonth = 0;
+
+    const showMonth = (index) => {
+        if (index < 0) index = monthPages.length - 1;
+        if (index >= monthPages.length) index = 0;
+        currentMonth = index;
+
+        monthPages.forEach((page, i) => page.classList.toggle('active', i === index));
+        monthButtons.forEach((button, i) => button.classList.toggle('active', i === index));
+
+        const page = monthPages[index];
+        const count = page.querySelectorAll('.month-article').length;
+        monthTitle.textContent = page.dataset.label;
+        monthCount.textContent = String(count).padStart(2, '0') + ' ARTICLES / COMPLETE MONTH';
     };
 
-    const updateButtons = () => {
-        const scrollY = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight;
-        const viewHeight = window.innerHeight;
-        const nearBottom = scrollY + viewHeight >= docHeight - 60;
-        const farFromTop = scrollY > 360;
+    monthButtons.forEach((button) => {
+        button.addEventListener('click', () => showMonth(Number(button.dataset.index)));
+    });
+    document.getElementById('prevMonth').addEventListener('click', () => showMonth(currentMonth - 1));
+    document.getElementById('nextMonth').addEventListener('click', () => showMonth(currentMonth + 1));
+    showMonth(0);
+})();
+</script>
 
-        const footer = document.querySelector('.archive-footer');
-        const baseBottom = window.innerWidth <= 700 ? 16 : 26;
-        const footerOffset = footer ? Math.max(0, viewHeight - footer.getBoundingClientRect().top) : 0;
-        const bottom = `${Math.max(baseBottom, footerOffset + 12)}px`;
-        container.style.setProperty('--float-bottom', bottom);
-
-        topBtn.classList.toggle('is-visible', farFromTop);
-        topBtn.setAttribute('aria-hidden', farFromTop ? 'false' : 'true');
-        topBtn.tabIndex = farFromTop ? 0 : -1;
-
-        bottomBtn.classList.toggle('is-visible', !nearBottom);
-        bottomBtn.setAttribute('aria-hidden', nearBottom ? 'true' : 'false');
-        bottomBtn.tabIndex = nearBottom ? -1 : 0;
+<div class="search-modal" hidden>
+    <div class="search-modal-backdrop" data-close></div>
+    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+        <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
+            <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+            <button type="submit" aria-label="开始搜索">⌕</button>
+        </form>
+        <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+    </div>
+</div>
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
     };
-
-    window.addEventListener('scroll', updateButtons, { passive: true });
-    window.addEventListener('resize', () => { placeButtons(); updateButtons(); }, { passive: true });
-    topBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
     });
-    bottomBtn.addEventListener('click', () => {
-        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
     });
-    updateButtons();
-    placeButtons();
 })();
 </script>
 {{ end }}

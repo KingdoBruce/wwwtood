@@ -1,0 +1,29 @@
+{{- $siteConfig := site.Data.site -}}
+{{- $brand := $siteConfig.brand -}}
+{{- $navigation := $siteConfig.navigation -}}
+{{- $homeURL := .Site.Home.RelPermalink -}}
+{{- $archivesURL := `archives/` | relLangURL -}}
+{{- $latestURL := printf "%s#current-archive" $archivesURL -}}
+{{- $tagsURL := `tags/` | relLangURL -}}
+{{- $aboutURL := `关于/` | relLangURL -}}
+{{- $isHome := .IsHome -}}
+{{- $isArchives := or (hasPrefix (lower .RelPermalink) (lower $archivesURL)) (hasPrefix (lower .RelPermalink) (lower "categories/")) -}}
+{{- $isTags := hasPrefix (lower .RelPermalink) (lower $tagsURL) -}}
+{{- $isAbout := false -}}
+{{- with .File -}}{{- if eq (lower (replace .Dir `\` `/`)) `page/about/` -}}{{- $isAbout = true -}}{{- end -}}{{- end -}}
+<nav class="nav">
+    <a class="brand" href="{{ $homeURL }}">
+        <span class="brand-logo-wrap">
+            {{ with $brand.logo }}<img class="signal-brand-logo" src="{{ . | relURL }}" alt="{{ default `TOOD.WIN` $brand.name }}">{{ else }}{{ default "TOOD.WIN" $brand.name }}{{ end }}
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="{{ if $isHome }}active{{ end }}" href="{{ $homeURL }}">首页</a>
+        <a href="{{ if (or $isArchives (hasPrefix (lower .RelPermalink) (lower $archivesURL))) }}{{ $archivesURL }}#current-archive{{ else }}{{ $latestURL }}{{ end }}">最新</a>
+        <a class="{{ if $isArchives }}active{{ end }}" href="{{ $archivesURL }}">分类</a>
+        <a class="{{ if $isTags }}active{{ end }}" href="{{ $tagsURL }}">标签</a>
+        <a class="{{ if $isAbout }}active{{ end }}" href="{{ $aboutURL }}">{{ default "关于" $navigation.about }}</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>

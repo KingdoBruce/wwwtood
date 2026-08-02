@@ -2,7 +2,7 @@
 {{- $siteTitle := default .Site.Title $brand.browser_title -}}
 {{- $paginator := slice -}}
 {{- if and (eq .Kind "taxonomy") (eq .Data.Plural "tags") -}}
-    {{- $paginator = .Paginate .Pages.ByTitle 580 -}}
+    {{- $paginator = .Paginate .Pages.ByTitle 15 -}}
 {{- else if and (eq .Kind "term") (eq .Data.Plural "categories") -}}
     {{- $paginator = .Paginate .Pages.ByDate.Reverse 15 -}}
 {{- else if and (eq .Kind "term") (eq .Data.Plural "tags") -}}

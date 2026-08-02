@@ -1,0 +1,6 @@
+{{- $toc := .TableOfContents -}}
+{{- $toc = replace $toc "<nav id=\"TableOfContents\">" "" -}}
+{{- $toc = replace $toc "</nav>" "" -}}
+{{- $toc = replaceRE `(?s)<li>[^<]*<a[^>]*>[^<]*</a>\s*<ol>.*?</ol>\s*</li>` "<li></li>" $toc -}}
+{{- $toc = replaceRE `<li>\s*</li>` "" $toc -}}
+{{- return $toc -}}

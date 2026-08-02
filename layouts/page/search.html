@@ -1,27 +1,383 @@
-{{ define "body-class" }}template-search{{ end }}
-{{ define "head" }}
-    {{- with .OutputFormats.Get "json" -}}<link rel="preload" href="{{ .RelPermalink }}" as="fetch" crossorigin="anonymous">{{- end }}
-{{ end }}
+{{ define "body-class" }}archive-home signal-home-page signal-search-page{{ end }}
+
 {{ define "main" }}
-<form action="{{ .RelPermalink }}" class="search-form"{{ with .OutputFormats.Get "json" -}} data-json="{{ .RelPermalink }}"{{- end }}>
-    <p><label>{{ T "search.title" }}</label><input name="keyword" placeholder="{{ T `search.placeholder` }}" /></p>
-    <button title="{{ T `search.title` }}">{{ partial "helper/icon" "search" }}</button>
-</form>
-<div class="search-result hidden"><h3 class="search-result--title section-title"></h3><div class="search-result--list article-list--compact"></div></div>
-<script>window.searchResultTitleTemplate = "{{ T `search.resultTitle` }}"</script>
-{{- $opts := dict "minify" hugo.IsProduction "JSXFactory" "createElement" -}}
-{{- $searchScript := resources.Get "ts/search.tsx" | js.Build $opts -}}
-<script type="text/javascript" src="{{ $searchScript.RelPermalink }}" defer></script>
+{{- $siteConfig := site.Data.site -}}
+{{- $brand := $siteConfig.brand -}}
+{{- $navigation := $siteConfig.navigation -}}
+{{- $home := $siteConfig.home -}}
+{{- $footer := $siteConfig.footer -}}
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $allTags := slice -}}
+{{- range $name, $taxonomy := .Site.Taxonomies.tags -}}
+    {{- $allTags = $allTags | append (dict "Name" $name "Count" (len $taxonomy.Pages)) -}}
+{{- end -}}
+{{- $topTags := sort $allTags "Count" "desc" | first 8 -}}
+{{- $categoryGroups := slice -}}
+{{- range $name, $taxonomy := site.Taxonomies.categories -}}
+    {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
+{{- end -}}
+<div class="signal-home">
+    <div class="wrap">
+        {{ partial "site-nav.html" . }}
+
+        <div class="breadcrumb mono"><a href="{{ .Site.Home.RelPermalink }}">HOME</a><span>/</span><span>SEARCH</span></div>
+
+        <div class="search-shell">
+            <section class="search-hero">
+                <div class="hero-main">
+                    <div class="hero-meta kicker"><span>GLOBAL SEARCH / CONTENT INDEX</span><span>SEARCH.MODE / ACTIVE</span></div>
+                    <h1>搜索<span>拾光集</span></h1>
+                    <p class="hero-desc">搜索文章标题、摘要、分类和标签。输入关键词后可以即时筛选，也可以按内容分类缩小搜索范围。</p>
+                </div>
+                <aside class="hero-card">
+                    <div>
+                        <div class="kicker">SEARCH INDEX</div>
+                        <strong>S01</strong>
+                        <p class="mono">FULL TEXT READY<br>— TOOD.WIN</p>
+                    </div>
+                    <div>
+                        <div class="count">{{ len $posts }}</div>
+                        <div class="kicker">可搜索文章</div>
+                    </div>
+                </aside>
+            </section>
+
+            <section class="search-panel">
+                <form class="search-form" id="searchForm" action="{{ .RelPermalink }}" method="get" role="search"{{ with .OutputFormats.Get "json" }} data-json="{{ .RelPermalink }}"{{ end }}>
+                    <span class="search-mark">⌕</span>
+                    <input id="searchInput" type="search" name="keyword" placeholder="搜索文章、工具、分类或标签……" autocomplete="off">
+                    <button type="submit">搜索</button>
+                </form>
+                <div class="search-total">
+                    <div>
+                        <strong id="resultCount">00</strong>
+                        <span class="kicker">RESULTS FOUND</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="filter-bar">
+                <div class="filter-group" id="categoryFilters">
+                    <button class="filter-btn active" data-category="全部">全部内容</button>
+                    {{- range $name, $taxonomy := .Site.Taxonomies.categories -}}
+                    <button class="filter-btn" data-category="{{ $name }}">{{ $name }}</button>
+                    {{- end -}}
+                </div>
+                <select class="sort-select" id="sortSelect" aria-label="结果排序">
+                    <option value="newest">按最新发布</option>
+                    <option value="oldest">按最早发布</option>
+                    <option value="title">按标题排序</option>
+                </select>
+            </div>
+
+            <div class="content-layout">
+                <main class="main-column">
+                    <div class="section-head">
+                        <h2 id="resultTitle">热门内容</h2>
+                        <span class="kicker">15 RESULTS PER PAGE</span>
+                    </div>
+                    <section class="result-list" id="resultList"></section>
+                    <section class="empty-state" id="emptyState">
+                        <strong>0</strong>
+                        <h2>没有找到匹配内容</h2>
+                        <p>尝试缩短关键词，或搜索 AI、GitHub、SEO、Vercel、Everything。</p>
+                    </section>
+                    <nav class="pagination mono" id="pagination" aria-label="搜索结果分页"></nav>
+                </main>
+
+                <aside class="sidebar">
+                    <section class="side-card">
+                        <div class="side-head kicker" style="background:var(--signal-pink);color:var(--signal-ink)">POPULAR SEARCHES</div>
+                        <nav class="quick-searches">
+                            <a href="#" data-query="AI"><span>AI 与大模型</span><b>AI</b></a>
+                            <a href="#" data-query="Everything"><span>Everything</span><b>EV</b></a>
+                            <a href="#" data-query="SEO"><span>SEO</span><b>SEO</b></a>
+                            <a href="#" data-query="Token"><span>Token</span><b>TK</b></a>
+                            <a href="#" data-query="GitHub"><span>GitHub</span><b>GH</b></a>
+                        </nav>
+                    </section>
+                    {{- $advertising := $siteConfig.advertising -}}
+                    {{- if and $advertising.article_sidebar_enabled $advertising.article_sidebar_code -}}
+                    <section class="side-card side-card--ad">
+                        <div class="side-head kicker" style="background:var(--signal-black);color:#fff">ADVERTISEMENT</div>
+                        <div class="side-body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                            {{ $advertising.article_sidebar_code | safeHTML }}
+                        </div>
+                    </section>
+                    {{- end -}}
+                    <section class="side-card">
+                        <div class="side-head kicker" style="background:var(--signal-cyan);color:var(--signal-ink)">SEARCH BY TAG</div>
+                        <div class="side-body tag-cloud">
+                            {{- range $topTags -}}
+                            <button data-query="{{ .Name }}">{{ .Name }}</button>
+                            {{- end -}}
+                        </div>
+                    </section>
+                    <section class="side-card">
+                        <div class="side-head kicker" style="background:var(--signal-orange);color:var(--signal-ink)">SEARCH TIPS</div>
+                        <div class="side-body">
+                            <ul class="help-list">
+                                <li>输入工具名称可精准搜索。</li>
+                                <li>输入分类名称可查看相关内容。</li>
+                                <li>搜索支持文章标题、摘要和标签。</li>
+                                <li>结果超过 15 条会自动分页。</li>
+                            </ul>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+
+        {{ partial "site-footer.html" . }}
+    </div>
+
+    <div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="{{ .RelPermalink }}" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+</div>
+
 <script>
-window.addEventListener('load', () => {
-    window.setTimeout(() => {
-        const input = document.querySelector('.search-form input[name="keyword"]');
-        const keyword = new URLSearchParams(window.location.search).get('keyword');
-        if (input && keyword) {
-            input.value = keyword;
-            input.dispatchEvent(new Event('input', { bubbles: true }));
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (modal && opener) {
+        const input = modal.querySelector('input[name="keyword"]');
+        const open = () => {
+            modal.hidden = false;
+            document.body.classList.add('search-modal-open');
+            window.setTimeout(() => input && input.focus(), 30);
+        };
+        const close = () => {
+            modal.hidden = true;
+            document.body.classList.remove('search-modal-open');
+        };
+        opener.addEventListener('click', open);
+        modal.addEventListener('click', (e) => {
+            if (e.target.closest('[data-close]')) close();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.hidden) close();
+        });
+    }
+})();
+</script>
+<script>
+(() => {
+    const form = document.getElementById('searchForm');
+    if (!form) return;
+    const jsonURL = form.dataset.json;
+    const input = document.getElementById('searchInput');
+    const list = document.getElementById('resultList');
+    const pagination = document.getElementById('pagination');
+    const resultCount = document.getElementById('resultCount');
+    const emptyState = document.getElementById('emptyState');
+    const resultTitle = document.getElementById('resultTitle');
+    const sortSelect = document.getElementById('sortSelect');
+    const categoryFilters = document.getElementById('categoryFilters');
+
+    const perPage = 15;
+    let allData = [];
+    let filtered = [];
+    let currentPage = 1;
+    let currentCategory = '全部';
+    let currentQuery = '';
+
+    function escapeRegExp(value) {
+        return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function highlight(text, query) {
+        if (!query) return text;
+        const safe = escapeRegExp(query);
+        return String(text).replace(new RegExp(`(${safe})`, 'gi'), '<mark>$1</mark>');
+    }
+
+    function showHotPicks() {
+        const threeMonthsAgo = new Date();
+        threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+        const hot = allData
+            .filter((item) => new Date(item.date) >= threeMonthsAgo)
+            .sort((a, b) => (b.wordcount || 0) - (a.wordcount || 0))
+            .slice(0, 6);
+        resultTitle.textContent = '热门内容';
+        list.innerHTML = hot.map((item, index) => {
+            const cat = categoryOf(item);
+            const date = (item.date || '').slice(0, 10);
+            const tags = (item.tags || []).slice(0, 3).map((tag) => `<span>#${tag}</span>`).join('');
+            const desc = (item.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 90);
+            return `
+            <a class="result-card" href="${item.permalink}">
+                <div class="result-cover">
+                    <div class="cover-art">
+                        <span class="cover-badge">${cat}</span>
+                        <strong>${(item.kicker || cat).toUpperCase()}</strong>
+                        <span class="kicker">HOT / ${String(index + 1).padStart(2, '0')}</span>
+                    </div>
+                </div>
+                <div class="result-body">
+                    <div class="kicker">${cat} / ${date}</div>
+                    <h3>${item.title}</h3>
+                    <p>${desc}${desc.length >= 90 ? '…' : ''}</p>
+                    <div class="result-tags">${tags}</div>
+                </div>
+                <div class="result-meta mono">
+                    <span>${date}</span>
+                    <strong>${item.readingTime || '5'} MIN</strong>
+                    <span>HOT ${String(index + 1).padStart(2, '0')}</span>
+                </div>
+            </a>`;
+        }).join('');
+        resultCount.textContent = String(hot.length).padStart(2, '0');
+        list.style.display = 'block';
+        emptyState.style.display = 'none';
+        pagination.style.display = 'none';
+    }
+
+    function applyFilters() {
+        currentQuery = (input.value || '').trim().toLowerCase();
+        if (!currentQuery) {
+            filtered = [];
+            currentPage = 1;
+            showHotPicks();
+            return;
         }
-    }, 30);
-});
+        resultTitle.textContent = '搜索结果';
+        filtered = allData.filter((item) => {
+            const haystack = [item.title, item.content, item.categories ? item.categories.join(' ') : '', item.tags ? item.tags.join(' ') : ''].join(' ').toLowerCase();
+            const matchesQuery = !currentQuery || haystack.includes(currentQuery);
+            const matchesCategory = currentCategory === '全部' || (item.categories && item.categories.includes(currentCategory));
+            return matchesQuery && matchesCategory;
+        });
+
+        const mode = sortSelect.value;
+        filtered.sort((a, b) => {
+            if (mode === 'oldest') return new Date(a.date) - new Date(b.date);
+            if (mode === 'title') return a.title.localeCompare(b.title, 'zh-CN');
+            return new Date(b.date) - new Date(a.date);
+        });
+
+        currentPage = 1;
+        render();
+    }
+
+    function categoryOf(item) {
+        return (item.categories && item.categories[0]) || 'AI';
+    }
+
+    function render() {
+        const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+        if (currentPage > totalPages) currentPage = totalPages;
+
+        const start = (currentPage - 1) * perPage;
+        const pageItems = filtered.slice(start, start + perPage);
+
+        list.innerHTML = pageItems.map((item, index) => {
+            const cat = categoryOf(item);
+            const date = (item.date || '').slice(0, 10);
+            const tags = (item.tags || []).map((tag) => `<span>#${highlight(tag, currentQuery)}</span>`).join('');
+            const desc = (item.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 90);
+            return `
+            <a class="result-card" href="${item.permalink}">
+                <div class="result-cover">
+                    <div class="cover-art">
+                        <span class="cover-badge">${highlight(cat, currentQuery)}</span>
+                        <strong>${(item.kicker || cat).toUpperCase()}</strong>
+                        <span class="kicker">RESULT / ${String(start + index + 1).padStart(2, '0')}</span>
+                    </div>
+                </div>
+                <div class="result-body">
+                    <div class="kicker">${cat} / ${date}</div>
+                    <h3>${highlight(item.title, currentQuery)}</h3>
+                    <p>${desc}${desc.length >= 90 ? '…' : ''}</p>
+                    <div class="result-tags">${tags}</div>
+                </div>
+                <div class="result-meta mono">
+                    <span>${date}</span>
+                    <strong>${item.readingTime || '5'} MIN</strong>
+                    <span>ARTICLE ${String(start + index + 1).padStart(2, '0')}</span>
+                </div>
+            </a>`;
+        }).join('');
+
+        resultCount.textContent = String(filtered.length).padStart(2, '0');
+        list.style.display = filtered.length ? 'block' : 'none';
+        emptyState.style.display = filtered.length ? 'none' : 'block';
+        pagination.style.display = filtered.length ? 'flex' : 'none';
+        renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+        let html = `<button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} data-action="prev">←</button>`;
+        for (let i = 1; i <= totalPages; i++) {
+            html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${String(i).padStart(2, '0')}</button>`;
+        }
+        html += `<button class="page-btn" ${currentPage === totalPages ? 'disabled' : ''} data-action="next">→</button>`;
+        pagination.innerHTML = html;
+    }
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        applyFilters();
+    });
+
+    input.addEventListener('input', applyFilters);
+    sortSelect.addEventListener('change', applyFilters);
+
+    categoryFilters.addEventListener('click', (event) => {
+        const button = event.target.closest('.filter-btn');
+        if (!button) return;
+        document.querySelectorAll('.filter-btn').forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        currentCategory = button.dataset.category;
+        applyFilters();
+    });
+
+    pagination.addEventListener('click', (event) => {
+        const button = event.target.closest('button');
+        if (!button || button.disabled) return;
+        if (button.dataset.page) currentPage = Number(button.dataset.page);
+        if (button.dataset.action === 'prev') currentPage--;
+        if (button.dataset.action === 'next') currentPage++;
+        render();
+        document.querySelector('.section-head').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    document.querySelectorAll('[data-query]').forEach((element) => {
+        element.addEventListener('click', (event) => {
+            event.preventDefault();
+            input.value = element.dataset.query;
+            currentCategory = '全部';
+            document.querySelectorAll('.filter-btn').forEach((item) => {
+                item.classList.toggle('active', item.dataset.category === '全部');
+            });
+            applyFilters();
+            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+
+    const keyword = new URLSearchParams(window.location.search).get('keyword');
+    if (keyword && input) {
+        input.value = keyword;
+    }
+
+    fetch(jsonURL)
+        .then((res) => res.json())
+        .then((data) => {
+            allData = data;
+            if (keyword && input && input.value.trim()) {
+                applyFilters();
+            } else {
+                showHotPicks();
+            }
+        });
+})();
 </script>
 {{ end }}
