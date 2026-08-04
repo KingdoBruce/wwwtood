@@ -11,7 +11,7 @@ tags = ["OpenMontage", "AI视频生产工具", "开源AI视频工具", "AI自动
 
 OpenMontage 是一个开源的 **Agentic AI 视频生产系统**。它不是单纯的文生视频模型，而是将选题研究、脚本创作、素材生成、配音、字幕、音乐、剪辑和最终渲染组织成完整的视频生产流水线。
 
-用户可以直接在 Claude Code、Cursor、GitHub Copilot、Windsurf 或 Codex 等 AI 编程助手中描述视频需求，OpenMontage 会根据任务选择合适的制作流程，并调用本地工具或云端 AI 服务完成视频制作。
+用户可以直接在 [Claude](/tags/claude/) Code、[Cursor](/tags/cursor/)、[GitHub Copilot](/tags/github-copilot/)、[Windsurf](/tags/windsurf/) 或 [Codex](/tags/codex/) 等 AI 编程助手中描述视频需求，OpenMontage 会根据任务选择合适的制作流程，并调用本地工具或云端 AI 服务完成视频制作。
 
 ![OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成](/uploads/2026/08/cc0d4cca-b9ff-4510-8389-086246ee5ce7-5380f58f.jpg)
 
@@ -30,7 +30,7 @@ OpenMontage 是一个开源的 **Agentic AI 视频生产系统**。它不是单�
 3. 拆分场景与镜头；
 4. 搜索或生成图片、视频素材；
 5. 生成旁白、字幕和背景音乐；
-6. 使用 Remotion 或 FFmpeg 完成剪辑与渲染；
+6. 使用 [Remotion](/tags/remotion/) 或 [FFmpeg](/tags/ffmpeg/) 完成剪辑与渲染；
 7. 检查画面、音量、字幕和视频文件是否正常。
 
 它也支持使用 Archive.org、NASA、Wikimedia Commons 等公开素材源搜索真实视频片段，而不只是把静态图片做成缩放动画。
@@ -43,7 +43,7 @@ OpenMontage 是一个开源的 **Agentic AI 视频生产系统**。它不是单�
 | ------------------- | ---: |
 | 视频生产流水线             | 12 条 |
 | 视频制作工具              | 100+ |
-| Agent Skill 与制作知识文件 | 700+ |
+| Agent [Skill](/tags/skill/) 与制作知识文件 | 700+ |
 
 现有流水线覆盖多种视频类型，包括：
 
@@ -63,7 +63,7 @@ OpenMontage 是一个开源的 **Agentic AI 视频生产系统**。它不是单�
 资料研究 → 视频方案 → 脚本 → 分镜 → 素材 → 剪辑 → 合成
 ```
 
-OpenMontage 的核心并不是某一个 AI 模型，而是让 AI Agent 阅读 YAML 流水线配置、Markdown 导演指令和工具说明，再调用对应的 Python 工具执行任务。
+OpenMontage 的核心并不是某一个 AI 模型，而是让 [AI Agent](/tags/ai-agent/) 阅读 YAML 流水线配置、Markdown 导演指令和工具说明，再调用对应的 Python 工具执行任务。
 
 ## 是否可以完全免费使用？
 
@@ -85,8 +85,8 @@ OpenMontage 的核心并不是某一个 AI 模型，而是让 AI Agent 阅读 YA
 
 * Python 3.10 或更高版本
 * FFmpeg
-* Node.js 18 或更高版本
-* Claude Code、Cursor、Copilot、Windsurf 或 Codex 等可读取文件并执行命令的 AI 助手
+* [Node.js](/tags/node-js/) 18 或更高版本
+* [Claude Code](/tags/claude-code/)、Cursor、Copilot、Windsurf 或 Codex 等可读取文件并执行命令的 AI 助手
 
 基础安装命令：
 
