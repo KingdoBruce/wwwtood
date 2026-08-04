@@ -22,6 +22,22 @@
     {{- $pages := partial "helper/pages.html" .Site.Home -}}
     {{- $totalArticles := len $pages -}}
     {{- $monthGroups := $pages.GroupByDate "2006-01" -}}
+    {{- $monthsJSON := slice -}}
+    {{- range $group := $monthGroups -}}
+        {{- $monthLabel := "" -}}
+        {{- with index $group.Pages 0 }}{{ $monthLabel = .Date.Format "2006 年 1 月" }}{{ end }}
+        {{- $articles := slice -}}
+        {{- range $article := $group.Pages -}}
+            {{- $cat := "" -}}
+            {{- with index $article.Params.categories 0 }}{{ $cat = upper . }}{{ end }}
+            {{- $tag := "" -}}
+            {{- with index $article.Params.tags 0 }}{{ $tag = . }}{{ end }}
+            {{- $summary := "" -}}
+            {{- with $article.Summary }}{{ $summary = string (. | plainify | htmlUnescape | truncate 80) }}{{ end }}
+            {{- $articles = $articles | append (dict "title" (string $article.LinkTitle) "url" (string $article.RelPermalink) "month" (string (upper ($article.Date.Format "Jan"))) "day" (string ($article.Date.Format "02")) "cat" (string $cat) "summary" $summary "dateFull" (string ($article.Date.Format "2006.01.02")) "read" (int $article.ReadingTime) "tag" (string $tag)) -}}
+        {{- end -}}
+        {{- $monthsJSON = $monthsJSON | append (dict "label" $monthLabel "articles" $articles) -}}
+    {{- end -}}
 
 <header class="page-hero">
     <div class="hero-main">
@@ -82,31 +98,19 @@
                 <div id="monthPages">
                     {{- range $groupIndex, $group := . -}}
                     <section class="month-page{{ if eq $groupIndex 0 }} active{{ end }}" data-label="{{ with index $group.Pages 0 }}{{ .Date.Format "2006 年 1 月" }}{{ end }}">
-                        <div class="article-month-list">
-                            {{- range $article := $group.Pages -}}
-                            <a class="month-article" href="{{ $article.RelPermalink }}">
-                                <div class="month-date"><span class="kicker">{{ upper ($article.Date.Format "Jan") }}</span><strong>{{ $article.Date.Format "02" }}</strong></div>
-                                <div class="month-copy">
-                                    <div class="kicker">{{ with index $article.Params.categories 0 }}{{ upper . }}{{ end }}</div>
-                                    <h3>{{ $article.LinkTitle }}</h3>
-                                    {{- with $article.Summary -}}<p>{{ . | plainify | htmlUnescape | truncate 80 }}</p>{{- end -}}
-                                </div>
-                                <div class="month-meta mono"><span>{{ $article.Date.Format "2006.01.02" }}</span><b>{{ $article.ReadingTime }} MIN READ</b><span>{{ with index $article.Params.tags 0 }}#{{ . }}{{ end }}</span></div>
-                            </a>
-                            {{- end -}}
-                        </div>
+                        <div class="article-month-list" data-month="{{ $groupIndex }}"></div>
                     </section>
                     {{- end -}}
                 </div>
 
                 <nav class="month-pagination mono" aria-label="按月分页">
-                    <button type="button" class="month-page-nav month-page-prev" aria-label="上一页月份">←</button>
+                    <button type="button" class="month-page-nav month-page-prev" aria-label="上一页月份"></button>
                     <div class="month-pagination-track">
                         {{- range $groupIndex, $group := . -}}
                         <button class="month-btn{{ if eq $groupIndex 0 }} active{{ end }}" type="button" data-index="{{ $groupIndex }}"><strong>{{ replace $group.Key "-" "." }}</strong><small>{{ len $group.Pages }} ARTICLES</small></button>
                         {{- end -}}
                     </div>
-                    <button type="button" class="month-page-nav month-page-next" aria-label="下一页月份">→</button>
+                    <button type="button" class="month-page-nav month-page-next" aria-label="下一页月份"></button>
                     <span class="month-pagination-status"></span>
                 </nav>
                 {{- else -}}
@@ -117,6 +121,8 @@
 
     </div>
 </div>
+
+<script type="application/json" id="archives-data">{{ $monthsJSON | jsonify | safeJS }}</script>
 
 <div class="scroll-arrows scroll-arrows--right">
     <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
@@ -136,12 +142,19 @@
 
 <script>
 (() => {
+    const dataEl = document.getElementById('archives-data');
+    if (!dataEl) return;
+    let DATA;
+    try { DATA = JSON.parse(dataEl.textContent); } catch (e) { return; }
+    if (!Array.isArray(DATA)) return;
+
     const monthPages = [...document.querySelectorAll('.month-page')];
     const monthButtons = [...document.querySelectorAll('.month-btn')];
     const monthTitle = document.getElementById('monthTitle');
     const monthCount = document.getElementById('monthCount');
     if (!monthPages.length || !monthTitle || !monthCount) return;
     let currentMonth = 0;
+    const PAGE_SIZE = 10;
 
     const paginationTrack = document.querySelector('.month-pagination-track');
     const prevNavBtn = document.querySelector('.month-page-prev');
@@ -162,8 +175,34 @@
         if (pageStatus) {
             pageStatus.textContent = totalPages > 1 ? currentPage + 1 + ' / ' + totalPages : '';
         }
-        if (prevNavBtn) prevNavBtn.style.visibility = totalPages > 1 ? 'visible' : 'hidden';
-        if (nextNavBtn) nextNavBtn.style.visibility = totalPages > 1 ? 'visible' : 'hidden';
+        if (prevNavBtn) prevNavBtn.style.visibility = 'visible';
+        if (nextNavBtn) nextNavBtn.style.visibility = 'visible';
+    };
+
+    const articleHTML = (a) => {
+        const tagHtml = a.tag ? '<span>#' + a.tag + '</span>' : '';
+        const summaryHtml = a.summary ? '<p>' + a.summary + '</p>' : '';
+        return '<a class="month-article" href="' + a.url + '">'
+            + '<div class="month-date"><span class="kicker">' + a.month + '</span><strong>' + a.day + '</strong></div>'
+            + '<div class="month-copy"><div class="kicker">' + a.cat + '</div><h3>' + a.title + '</h3>' + summaryHtml + '</div>'
+            + '<div class="month-meta mono"><span>' + a.dateFull + '</span><b>' + a.read + ' MIN READ</b>' + tagHtml + '</div>'
+            + '</a>';
+    };
+
+    const renderArticleBatch = (monthIndex) => {
+        const group = DATA[monthIndex];
+        const list = monthPages[monthIndex].querySelector('.article-month-list');
+        if (!group || !list) return;
+        const existing = list.querySelectorAll('.month-article').length;
+        const batch = group.articles.slice(existing, existing + PAGE_SIZE);
+        if (!batch.length) return;
+        list.insertAdjacentHTML('beforeend', batch.map(articleHTML).join(''));
+    };
+
+    const resetArticleList = (monthIndex) => {
+        const list = monthPages[monthIndex].querySelector('.article-month-list');
+        if (list) list.innerHTML = '';
+        renderArticleBatch(monthIndex);
     };
 
     const showMonth = (index) => {
@@ -181,9 +220,14 @@
         }
 
         const page = monthPages[index];
-        const count = page.querySelectorAll('.month-article').length;
+        const group = DATA[index];
+        resetArticleList(index);
         monthTitle.textContent = page.dataset.label;
-        monthCount.textContent = String(count).padStart(2, '0') + ' ARTICLES / COMPLETE MONTH';
+        monthCount.textContent = String(group ? group.articles.length : 0).padStart(2, '0') + ' ARTICLES / COMPLETE MONTH';
+    };
+
+    const loadMoreForCurrent = () => {
+        renderArticleBatch(currentMonth);
     };
 
     monthButtons.forEach((button) => {
@@ -203,6 +247,23 @@
     });
     document.getElementById('prevMonth').addEventListener('click', () => showMonth(currentMonth - 1));
     document.getElementById('nextMonth').addEventListener('click', () => showMonth(currentMonth + 1));
+
+    let scrollTicking = false;
+    const handleScroll = () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(() => {
+            scrollTicking = false;
+            const list = monthPages[currentMonth].querySelector('.article-month-list');
+            if (!list) return;
+            const rect = list.getBoundingClientRect();
+            if (rect.bottom <= window.innerHeight + 300) {
+                loadMoreForCurrent();
+            }
+        });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     renderPage();
     showMonth(0);
 })();

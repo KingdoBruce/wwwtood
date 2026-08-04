@@ -34,6 +34,7 @@ APP_NAME = "TOOD Studio"
 APP_VERSION = "1.5.9"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
+VIDEO_EXTENSIONS = {".mp4", ".webm", ".mov", ".m4v", ".ogv", ".ogg", ".avi"}
 PUBLISH_MANAGED_PATHS = (
     "content",
     "config/_default/hugo.toml",
@@ -899,6 +900,9 @@ def post_summary(path: Path) -> dict[str, Any]:
     download = metadata.get("download")
     if not isinstance(download, dict):
         download = {}
+    video = metadata.get("video")
+    if not isinstance(video, dict):
+        video = {}
     return {
         "slug": path.stem,
         "title": str(metadata.get("title") or path.stem),
@@ -915,6 +919,11 @@ def post_summary(path: Path) -> dict[str, Any]:
             "size": str(download.get("size") or ""),
             "source": str(download.get("source") or ""),
             "code": str(download.get("code") or ""),
+        },
+        "video": {
+            "enabled": bool(video.get("enabled", False)),
+            "type": str(video.get("type") or "youtube"),
+            "url": str(video.get("url") or ""),
         },
         "categories": normalize_list(metadata.get("categories", [])),
         "tags": normalize_list(metadata.get("tags", [])),
@@ -1623,6 +1632,18 @@ def api_save_post():
         metadata["download"] = download
     else:
         metadata.pop("download", None)
+    video_payload = payload.get("video")
+    if not isinstance(video_payload, dict):
+        video_payload = {}
+    video = {
+        "enabled": bool(video_payload.get("enabled", False)),
+        "type": str(video_payload.get("type") or "youtube")[:30],
+        "url": str(video_payload.get("url") or "").strip()[:2000],
+    }
+    if video["enabled"] and video["url"]:
+        metadata["video"] = video
+    else:
+        metadata.pop("video", None)
     categories = normalize_list(payload.get("categories", []))
     tags = normalize_list(payload.get("tags", []))
     ensure_taxonomy_values("categories", categories)
@@ -1700,6 +1721,24 @@ def api_upload():
     uploaded.save(target)
     url = "/" + target.relative_to(BLOG_ROOT / "static").as_posix()
     return jsonify({"ok": True, "url": url, "markdown": f"![{base}]({url})"})
+
+
+@app.post("/api/video-upload")
+def api_video_upload():
+    uploaded = request.files.get("file")
+    if not uploaded or not uploaded.filename:
+        raise ValueError("请选择视频")
+    suffix = Path(uploaded.filename).suffix.lower()
+    if suffix not in VIDEO_EXTENSIONS:
+        raise ValueError("仅支持 MP4、WEBM、MOV、M4V、OGV、OGG 和 AVI 视频")
+    base = secure_filename(Path(uploaded.filename).stem) or "video"
+    folder = BLOG_ROOT / "static" / "uploads" / datetime.now().strftime("%Y/%m")
+    folder.mkdir(parents=True, exist_ok=True)
+    filename = f"{base}-{uuid.uuid4().hex[:8]}{suffix}"
+    target = folder / filename
+    uploaded.save(target)
+    url = "/" + target.relative_to(BLOG_ROOT / "static").as_posix()
+    return jsonify({"ok": True, "url": url, "video": url})
 
 
 @app.post("/api/logo")

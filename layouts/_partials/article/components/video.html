@@ -1,0 +1,44 @@
+{{- with .Params.video -}}
+{{- if and .enabled .url -}}
+{{- $videoType := .type | default "youtube" -}}
+{{- $videoUrl := .url -}}
+<section class="article-video">
+    <div class="video-frame">
+        {{- if eq $videoType "local" -}}
+        <video controls preload="metadata" playsinline>
+            <source src="{{ $videoUrl | safeURL }}" type="video/mp4">
+            您的浏览器不支持 HTML5 视频播放，请点击链接直接访问：<a href="{{ $videoUrl | safeURL }}">{{ $videoUrl }}</a>
+        </video>
+        {{- else if eq $videoType "bilibili" -}}
+        {{- $bvid := index (findRE `(?:video/|av)[A-Za-z0-9]+` $videoUrl) 0 -}}
+        {{- $bvid = replaceRE `^av` "av" $bvid -}}
+        {{- $embed := $videoUrl -}}
+        {{- $pageId := "" -}}
+        {{- with findRE `\?p=\d+` $videoUrl }}{{ $pageId = index . 0 }}{{ end -}}
+        {{- if eq (printf "%s" (index (findRE `BV[0-9A-Za-z]+` $videoUrl) 0)) "" -}}
+        <a class="video-link" href="{{ $videoUrl | safeURL }}" target="_blank" rel="noopener noreferrer">在哔哩哔哩观看视频 ↗</a>
+        {{- else -}}
+        <iframe class="video-iframe" src="https://player.bilibili.com/player.html?bvid={{ index (findRE `BV[0-9A-Za-z]+` $videoUrl) 0 }}{{ $pageId }}&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" loading="lazy" title="哔哩哔哩视频"></iframe>
+        {{- end -}}
+        {{- else if eq $videoType "vimeo" -}}
+        {{- $vimeoId := index (findRE `vimeo\.com(?:/video)?/(\d+)` $videoUrl) 0 | replaceRE `vimeo\.com(?:/video)?/` "" -}}
+        {{- if eq $vimeoId "" -}}
+        <a class="video-link" href="{{ $videoUrl | safeURL }}" target="_blank" rel="noopener noreferrer">在 Vimeo 观看视频 ↗</a>
+        {{- else -}}
+        <iframe class="video-iframe" src="https://player.vimeo.com/video/{{ $vimeoId }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Vimeo 视频"></iframe>
+        {{- end -}}
+        {{- else if eq $videoType "other" -}}
+        <a class="video-link" href="{{ $videoUrl | safeURL }}" target="_blank" rel="noopener noreferrer">观看视频 ↗</a>
+        {{- else -}}
+        {{- $youtubeId := "" -}}
+        {{- with findRE `(?:youtube\.com/(?:watch\?(?:.*&)?v=|embed/|shorts/)|youtu\.be/)([A-Za-z0-9_-]{11})` $videoUrl }}{{ $youtubeId = index (findRE `[A-Za-z0-9_-]{11}$` (index . 0)) 0 }}{{ end -}}
+        {{- if eq $youtubeId "" -}}
+        <a class="video-link" href="{{ $videoUrl | safeURL }}" target="_blank" rel="noopener noreferrer">在 YouTube 观看视频 ↗</a>
+        {{- else -}}
+        <iframe class="video-iframe" src="https://www.youtube-nocookie.com/embed/{{ $youtubeId }}" title="YouTube 视频" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+        {{- end -}}
+        {{- end -}}
+    </div>
+</section>
+{{- end -}}
+{{- end -}}

@@ -96,6 +96,7 @@
               </label>
               <label>发布日期<input id="postDate" type="datetime-local"></label>
             </div>
+            <div class="editor-modules">
             <section class="download-editor">
               <label class="download-editor-toggle"><span><b>启用下载模块</b><small>启用并填写下载链接后，才会在文章底部显示</small></span><input id="postDownloadEnabled" type="checkbox"></label>
               <div id="postDownloadFields" class="download-editor-fields" hidden>
@@ -108,6 +109,25 @@
                 <label>提取码 / 密码<input id="postDownloadCode" maxlength="120" placeholder="没有可留空"></label>
               </div>
             </section>
+            <section class="video-editor">
+              <label class="download-editor-toggle"><span><b>启用视频模块</b><small>启用并填写视频后，才会在文章顶部显示视频播放器</small></span><input id="postVideoEnabled" type="checkbox"></label>
+              <div id="postVideoFields" class="download-editor-fields" hidden>
+                <div class="video-type-row">
+                  <label class="video-type-option"><input type="radio" name="postVideoType" value="youtube" checked><span><b>YouTube</b><small>填写 YouTube 视频链接，自动内嵌播放</small></span></label>
+                  <label class="video-type-option"><input type="radio" name="postVideoType" value="bilibili"><span><b>哔哩哔哩</b><small>填写 B 站视频链接，自动内嵌播放</small></span></label>
+                  <label class="video-type-option"><input type="radio" name="postVideoType" value="vimeo"><span><b>Vimeo</b><small>填写 Vimeo 视频链接，自动内嵌播放</small></span></label>
+                  <label class="video-type-option"><input type="radio" name="postVideoType" value="local"><span><b>本地上传</b><small>直接上传视频文件到本站</small></span></label>
+                  <label class="video-type-option"><input type="radio" name="postVideoType" value="other"><span><b>其他平台</b><small>其他平台视频链接</small></span></label>
+                </div>
+                <label id="postVideoUrlLabel">视频链接<input id="postVideoUrl" type="url" maxlength="2000" placeholder="https://www.youtube.com/watch?v=…"></label>
+                <div id="postVideoLocalRow" class="file-row" hidden>
+                  <button type="button" class="button" id="uploadVideo">上传视频</button>
+                  <input type="file" id="videoFile" accept="video/mp4,video/webm,video/mov,video/m4v,video/ogg,video/ogv,video/avi" hidden>
+                  <span id="videoPath" class="video-path">未设置</span>
+                </div>
+              </div>
+            </section>
+            </div>
             <label>摘要<textarea id="postDescription" rows="2" maxlength="500" placeholder="用于列表和搜索引擎展示"></textarea></label>
             <div class="editor-tabs"><button class="active" data-editor-tab="write">Markdown</button><button data-editor-tab="preview">预览</button><button type="button" class="upload-inline" id="insertInternalLink">插入内链</button><button type="button" class="upload-inline" id="insertImage">插入图片</button><input type="file" id="articleImage" accept="image/png,image/jpeg,image/webp,image/gif" hidden></div>
             <textarea id="postBody" class="markdown-editor" placeholder="# 从这里开始写作…"></textarea>
