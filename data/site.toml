@@ -39,7 +39,7 @@ description = "拾光集记录值得被发现的人、事、思想与微光，�
 keywords = "拾光集, TOOD.WIN, 工具实测, 技术实践, 项目经验, 问题解决, AI 工具"
 
 [advertising]
-adblock_detection_enabled = true
+adblock_detection_enabled = false
 google_ads_code = "<script async src=\"https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1\"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>\n\n<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673\"\n     crossorigin=\"anonymous\"></script>"
 home_sidebar_enabled = false
 home_sidebar_code = "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673\"\n     crossorigin=\"anonymous\"></script>\n<!-- iezyw自适应 -->\n<ins class=\"adsbygoogle\"\n     style=\"display:block\"\n     data-ad-client=\"ca-pub-8251016534296673\"\n     data-ad-slot=\"8508409086\"\n     data-ad-format=\"auto\"\n     data-full-width-responsive=\"true\"></ins>\n<script>\n     (adsbygoogle = window.adsbygoogle || []).push({});\n</script>"
