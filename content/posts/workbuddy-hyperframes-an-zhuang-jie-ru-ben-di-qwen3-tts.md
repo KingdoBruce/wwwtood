@@ -4,7 +4,7 @@ date = "2026-07-28T11:55:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["WorkBuddy", "HyperFrames", "Qwen3-TTS", "HTML转视频", "AI视频生成", "本地语音模型", "声音克隆", "自动配音", "FFmpeg", "Node.js", "AI Agent", "开源视频工具"]
+tags = ["WorkBuddy", "Qwen3-TTS", "AI视频生成", "本地语音模型", "声音克隆", "FFmpeg", "AI Agent", "开源视频工具"]
 +++
 
 想用 [AI](/tags/ai/) 自动生成动画视频，但不熟悉 Node.js、FFmpeg、命令行和环境配置？

@@ -4,7 +4,7 @@ date = "2026-08-04T19:53:00+08:00"
 draft = false
 description = "本文介绍如何在 Codex 中接入 DeepSeek V4 Flash，并通过 GLM-4.6V Vision MCP 增加图片、截图和界面分析能力。文章梳理了配置备份、自定义模型、视觉 MCP、自动识图 Skill 和功能验证流程，同时说明配置覆盖、接口兼容和 API Key 安全等注意事项。"
 categories = ["AI"]
-tags = ["Codex接入DeepSeek", "DeepSeek V4 Flash", "Codex自定义模型", "Codex MCP配置", "GLM-4.6V", "Vision MCP Server", "Codex图片识别", "Codex Skill教程", "AI编程工具", "多模态AI工作流"]
+tags = ["Codex接入DeepSeek", "GLM-4.6V", "Vision MCP Server", "Codex Skill教程", "AI编程工具", "多模态AI工作流"]
 +++
 
 [DeepSeek](/tags/deepseek/) V4 Flash 本身主要面向文本、编程和 Agent 任务。如果希望在 [Codex](/tags/codex/) 中使用 DeepSeek，同时让它能够分析截图、界面、报错图片或设计稿，可以采用下面这套组合方案：

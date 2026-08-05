@@ -4,7 +4,7 @@ date = "2026-07-28T19:42:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["Codex", "Codex长期记忆", "Codex永久记忆", "Obsidian", "Obsidian第二大脑", "AI智能体", "AI Agent", "AGENTS.md", "Codex CLI", "本地知识库", "AI工作流", "AI记忆系统"]
+tags = ["Codex", "Codex长期记忆", "AI智能体", "AI Agent", "Codex CLI", "本地知识库", "AI工作流", "AI记忆系统"]
 +++
 
 [Codex](/tags/codex/) 每次开始新任务时，最麻烦的问题之一，就是需要重新解释项目背景、工作习惯和之前做过的决定。

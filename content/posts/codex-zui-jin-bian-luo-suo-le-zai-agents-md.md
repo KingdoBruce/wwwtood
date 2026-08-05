@@ -4,7 +4,7 @@ date = "2026-07-27T22:04:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["Codex", "Codex降质", "AGENTS.md", "Codex提示词", "Codex Token优化", "AI编程助手", "OpenAI Codex", "Codex使用技巧", "AI编程效率", "提示词优化"]
+tags = ["Codex", "AI编程助手", "OpenAI Codex", "AI编程效率", "提示词优化"]
 +++
 
 最近使用 [Codex](/tags/codex/) 时，你可能会遇到这样的情况：

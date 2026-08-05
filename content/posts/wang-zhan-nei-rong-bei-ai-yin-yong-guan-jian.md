@@ -4,7 +4,7 @@ date = "2026-07-27T17:00:00+08:00"
 draft = false
 featured = true
 categories = ["建站"]
-tags = ["AI搜索", "AI引用", "Google SEO", "AEO", "GEO", "内容优化", "外贸独立站", "B2B SEO"]
+tags = ["AI搜索", "AI引用", "Google SEO", "AEO", "GEO", "外贸独立站", "B2B SEO"]
 +++
 
 随着 [Google](/tags/google/) [AI](/tags/ai/) Overviews、AI Mode、Microsoft Copilot 等 AI 搜索产品逐渐进入用户的日常搜索流程，网站内容的曝光方式也在发生变化。

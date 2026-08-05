@@ -4,7 +4,7 @@ date = "2026-07-28T20:22:00+08:00"
 draft = false
 featured = true
 categories = ["软件"]
-tags = ["CodexBar", "AI编程工具", "macOS菜单栏", "Codex额度监控", "Claude使用限制", "Cursor", "Gemini", "GitHub Copilot", "OpenRouter", "GitHub开源项目"]
+tags = ["AI编程工具", "Cursor", "Gemini", "OpenRouter"]
 +++
 
 同时使用 [Codex](/tags/codex/)、[Claude](/tags/claude/)、[Cursor](/tags/cursor/)、Gemini 和 [GitHub Copilot](/tags/github-copilot/) 时，最麻烦的事情之一，就是不知道每个平台还剩多少额度，以及下一次什么时候重置。

@@ -4,7 +4,7 @@ date = "2026-08-05T13:27:00+08:00"
 draft = false
 description = "直接上传长篇 PDF 可能夹带页眉、页脚和复杂排版信息，增加 AI 的解析难度。本文介绍微软开源工具 MarkItDown 的安装与使用方法，演示如何先将 PDF 转成 Markdown，再进行内容清理、章节拆分、AI 总结和知识库导入，同时说明扫描件、复杂表格和多栏论文的转换限制。"
 categories = ["AI"]
-tags = ["AI读取PDF", "PDF转Markdown", "MarkItDown教程", "Microsoft MarkItDown", "AI节省Token", "PDF文档解析", "Markdown文档转换", "AI知识库", "长文档处理", "PDF转MD"]
+tags = ["AI读取PDF", "AI节省Token", "Markdown文档转换", "AI知识库"]
 +++
 
 直接把几十页甚至上百页的 PDF 上传给 [AI](/tags/ai/)，虽然方便，但不一定是最高效的处理方式。

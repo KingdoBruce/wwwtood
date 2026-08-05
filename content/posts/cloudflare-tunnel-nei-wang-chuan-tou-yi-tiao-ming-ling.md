@@ -4,7 +4,7 @@ date = "2026-08-03T14:44:00+08:00"
 draft = false
 description = "本文介绍如何使用 Cloudflare Tunnel 将本地服务安全地连接到公网。临时演示可以通过一条 cloudflared tunnel --url 命令生成 HTTPS 公网地址；需要固定域名和长期运行时，则可创建命名隧道、配置 DNS 和系统服务。文章同时说明 Quick Tunnel 的并发、SSE 和稳定性限制，并提供多服务配置、常见故障排查与安全建议。"
 categories = ["随笔"]
-tags = ["Cloudflare Tunnel", "cloudflared", "内网穿透", "Cloudflare 内网穿透", "Quick Tunnel", "TryCloudflare", "命名隧道", "公网访问 localhost", "本地服务公网访问", "Webhook 调试", "NAS 远程访问", "固定域名内网穿透", "HTTPS 内网穿透", "无公网 IP", "开发工具"]
+tags = ["本地服务公网访问", "Webhook 调试", "无公网 IP", "开发工具"]
 +++
 
 本地项目已经运行成功，却无法发给同事或客户查看？调试微信、支付宝或 Stripe Webhook 时，需要填写公网 HTTPS 回调地址，但你手里只有 `localhost`？

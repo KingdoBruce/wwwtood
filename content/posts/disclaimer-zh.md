@@ -2,7 +2,6 @@
 title = "免责声明"
 date = "2026-07-21T16:14:00+08:00"
 draft = false
-tags = ["免责声明"]
 categories = ["政策"]
 +++
 

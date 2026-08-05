@@ -4,7 +4,7 @@ date = "2026-07-31T12:38:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["Ponytail", "AI编程", "Token优化", "Claude Code", "Codex", "编程效率"]
+tags = ["Ponytail", "AI编程", "Codex"]
 +++
 
 最近“马尾辫” **[Ponytail](/tags/ponytail/)** 在 GitHub 火得有点离谱，短时间内拿下超过 **9.2 万 Stars**。

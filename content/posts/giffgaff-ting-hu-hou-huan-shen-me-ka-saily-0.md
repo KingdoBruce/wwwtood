@@ -4,7 +4,7 @@ date = "2026-08-03T11:40:00+08:00"
 draft = false
 featured = true
 categories = ["随笔"]
-tags = ["Saily", "Saily 美国号码", "Saily 0.99美元", "Saily 推广码", "BRUCEE8833", "美国手机号", "美国号码保号", "美国 eSIM", "eSIM 手机号", "+1 手机号码", "海外保号卡", "低价保号套餐", "giffgaff 替代方案", "giffgaff 停户", "美国短信验证码", "美国虚拟号码", "Saily Phone Number", "eSIM 教程", "海外手机号", "双重验证"]
+tags = ["Saily", "美国 eSIM", "eSIM 手机号", "海外保号卡", "giffgaff 替代方案", "海外手机号", "双重验证"]
 +++
 
 近期，部分长期在英国以外使用 giffgaff 的用户收到了停户邮件。

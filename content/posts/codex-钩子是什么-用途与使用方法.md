@@ -3,7 +3,7 @@ title = "Codex 钩子是什么？用途与使用方法"
 date = "2026-07-24T17:55:00+08:00"
 draft = false
 featured = true
-tags = ["ChatGPT", "Codex", "钩子"]
+tags = ["ChatGPT", "Codex"]
 +++
 
 在 ChatGPT 的 [Codex](/tags/codex/) 设置中，你可能会看到一个名为“钩子”的页面。

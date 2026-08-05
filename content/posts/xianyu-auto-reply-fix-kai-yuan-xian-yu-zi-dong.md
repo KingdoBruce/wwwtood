@@ -3,7 +3,7 @@ title = "xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理�
 date = "2026-07-29T16:09:00+08:00"
 draft = false
 categories = ["建站"]
-tags = ["闲鱼自动回复", "闲鱼自动发货", "闲鱼管理系统", "AI客服", "Docker部署", "Playwright"]
+tags = ["AI客服"]
 featured = true
 +++
 

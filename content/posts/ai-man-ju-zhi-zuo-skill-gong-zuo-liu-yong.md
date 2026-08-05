@@ -3,7 +3,7 @@ title = "AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创�
 date = "2026-07-29T11:47:00+08:00"
 draft = false
 categories = ["AI"]
-tags = ["AI漫剧", "AI短剧制作", "Claude Code Skills", "Codex Skills", "影视分镜", "角色一致性"]
+tags = ["AI漫剧", "AI短剧制作", "Claude Code Skills", "影视分镜", "角色一致性"]
 +++
 
 制作 [AI](/tags/ai/) 漫剧，真正困难的通常不是生成一张图片，而是如何让**剧情节奏、人物形象和镜头衔接保持一致**。

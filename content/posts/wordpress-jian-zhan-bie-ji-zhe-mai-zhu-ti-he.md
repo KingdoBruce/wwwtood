@@ -3,7 +3,7 @@ title = "WordPress 建站别急着买主题和装插件：正确流程与避坑�
 date = "2026-07-29T13:49:00+08:00"
 draft = false
 categories = ["建站"]
-tags = ["WordPress建站", "WordPress主题", "WordPress插件", "网站性能优化", "企业官网建设", "独立站运营"]
+tags = ["网站性能优化", "独立站运营"]
 featured = true
 +++
 

@@ -4,7 +4,7 @@ date = "2026-07-29T13:20:00+08:00"
 draft = false
 featured = true
 categories = ["建站"]
-tags = ["第一次建站", "域名注册", "网站托管", "域名邮箱", "网站统计", "Google Search Console"]
+tags = ["域名注册", "网站托管", "域名邮箱", "网站统计", "Google Search Console"]
 +++
 
 第一次建站，真正让人困惑的通常不是“页面怎么做”，而是网站做好之后的一系列问题：

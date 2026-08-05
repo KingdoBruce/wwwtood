@@ -3,7 +3,7 @@ title = "Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费�
 date = "2026-07-27T20:09:00+08:00"
 draft = false
 categories = ["AI"]
-tags = ["Headroom", "Token压缩", "Token优化", "AI编程工具", "Claude Code", "Codex", "Cursor", "AI Agent", "上下文压缩", "降低API成本", "GitHub开源项目", "MCP", "跨Agent记忆", "LLM成本优化"]
+tags = ["Headroom", "AI编程工具", "Codex", "Cursor", "AI Agent", "MCP", "跨Agent记忆"]
 +++
 
 使用 [Claude Code](/tags/claude-code/)、[Codex](/tags/codex/)、Cursor 等 [AI](/tags/ai/) 编程工具时，真正消耗 [Token](/tags/token/) 的往往不只是你输入的提示词。

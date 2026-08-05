@@ -6,7 +6,7 @@ description = "ITom Dev 是 Tomasz Szmajda 开源的沉浸式 3D WebGL 开发者
 cover = "/uploads/2026/08/93e00659-200d-4b46-8155-bdbb1a458471-cc83081f.jpg"
 featured = true
 categories = ["建站"]
-tags = ["ITom Dev", "3D作品集", "WebGL作品集", "React Three Fiber", "Three.js", "GSAP", "React", "Vite", "WebGL", "GLSL", "开源作品集", "个人简历网站", "前端作品集", "GitHub开源项目", "3D个人网站"]
+tags = ["Vite", "WebGL", "GLSL", "开源作品集"]
 +++
 
 ITom Dev 是一个开源的沉浸式 3D 开发者作品集。它没有采用常见的卡片式简历页面，而是把个人介绍、项目案例和联系方式放进了一条可以交互探索的手绘走廊中。

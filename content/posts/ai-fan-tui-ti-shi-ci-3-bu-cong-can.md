@@ -4,7 +4,7 @@ date = "2026-07-28T17:21:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["AI反推提示词", "图片反推提示词", "Image to Prompt", "AI生图提示词", "提示词工程", "Midjourney提示词", "Stable Diffusion提示词", "Flux提示词", "参考图生成提示词", "AI绘画教程"]
+tags = ["AI反推提示词", "图片反推提示词", "AI生图提示词", "提示词工程", "AI绘画教程"]
 +++
 
 看到一张喜欢的图片，却不知道应该怎样写提示词？

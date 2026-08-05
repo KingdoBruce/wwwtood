@@ -3,7 +3,7 @@ title = "Cheat on Content：用 AI 预测视频表现，让内容创作从直觉
 date = "2026-07-28T16:14:00+08:00"
 draft = false
 categories = ["AI"]
-tags = ["Cheat on Content", "AI视频预测", "视频播放量预测", "短视频数据分析", "自媒体运营", "内容创作工具", "AI内容分析", "Claude Code Skills", "Codex Skills", "开源AI工具", "视频选题分析", "内容复盘"]
+tags = ["AI视频预测", "AI内容分析", "Claude Code Skills", "开源AI工具"]
 +++
 
 做短视频时，最难判断的往往不是“能不能写出来”，而是：

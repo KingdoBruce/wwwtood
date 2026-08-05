@@ -3,7 +3,7 @@ title = "giffgaff 长期海外用户收到停户邮件：号码抢救与携号�
 date = "2026-08-03T11:26:00+08:00"
 draft = false
 categories = ["随笔"]
-tags = ["giffgaff", "giffgaff 停户", "giffgaff 清退", "giffgaff PAC", "英国手机卡", "英国保号卡", "英国号码保号", "携号转网", "PAC Code", "STAC", "CTExcel", "CTExcel 回国年套餐", "VOXI", "英国 eSIM", "海外接收验证码", "英国号码转网", "Ofcom", "长期海外漫游"]
+tags = ["英国手机卡", "英国保号卡", "携号转网", "PAC Code", "VOXI", "英国 eSIM", "海外接收验证码"]
 cover = "/uploads/2026/08/3_11_28_30-6e53c656.jpg"
 featured = true
 +++

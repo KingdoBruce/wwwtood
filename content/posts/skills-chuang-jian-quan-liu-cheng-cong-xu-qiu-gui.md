@@ -4,7 +4,7 @@ date = "2026-07-28T11:08:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["Skills创建教程", "Skill Creator", "SKILL.md", "Agent Skills", "Codex Skills", "Claude Skills", "AI工作流", "AI自动化", "自定义Skill", "提示词工程", "Codex教程", "零基础AI教程"]
+tags = ["Skill Creator", "Agent Skills", "AI工作流", "AI自动化", "自定义Skill", "提示词工程"]
 +++
 
 很多人第一次接触 [Skills](/tags/skills/) 时，会认为它只是一个写了提示词的 Markdown 文件。

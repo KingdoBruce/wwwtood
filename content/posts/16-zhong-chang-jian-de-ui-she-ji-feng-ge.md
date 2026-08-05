@@ -4,7 +4,7 @@ date = "2026-07-26T22:54:00+08:00"
 draft = false
 featured = true
 categories = ["建站"]
-tags = ["UI设计", "AI", "建站", "网站设计"]
+tags = ["UI设计", "AI", "建站"]
 +++
 
 可直接运行的单文件 HTML 的 16 种常见的 UI 设计风格设计提示词。

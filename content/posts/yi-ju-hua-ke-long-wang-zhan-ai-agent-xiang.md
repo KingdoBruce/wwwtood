@@ -4,7 +4,7 @@ date = "2026-07-29T10:37:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["AI Agent", "网站克隆", "Next.js", "像素级复刻", "Claude Code", "前端开发"]
+tags = ["AI Agent", "网站克隆", "像素级复刻", "前端开发"]
 +++
 
 想快速复刻一个网站的页面设计，又不想从零手写 React 组件和 CSS？

@@ -4,7 +4,7 @@ date = "2026-08-04T22:05:00+08:00"
 draft = false
 description = "OpenMontage 是一个开源的 Agentic AI 视频生产系统，可通过 Codex、Claude Code、Cursor 等 AI 助手完成资料研究、脚本、分镜、素材生成、配音、字幕、剪辑和渲染。本文介绍 OpenMontage 的主要功能、安装要求、免费与付费使用方式、适用人群及使用注意事项。"
 categories = ["AI"]
-tags = ["OpenMontage", "AI视频生产工具", "开源AI视频工具", "AI自动剪辑", "Agentic Video", "AI视频工作流", "Codex视频制作", "Claude Code视频制作", "自动生成字幕", "Remotion视频生成"]
+tags = ["OpenMontage", "AI视频生产工具", "开源AI视频工具", "AI自动剪辑", "Agentic Video", "AI视频工作流", "Codex视频制作", "Claude Code视频制作"]
 +++
 
 # OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成

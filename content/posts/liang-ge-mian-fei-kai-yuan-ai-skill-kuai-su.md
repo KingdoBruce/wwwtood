@@ -3,7 +3,7 @@ title = "两个免费开源 AI Skills：快速制作电影感项目演示视频"
 date = "2026-07-28T15:04:00+08:00"
 draft = false
 categories = ["AI"]
-tags = ["AI Skill", "video-shotcraft", "Archify", "Claude Code", "Codex", "Remotion", "AI视频制作", "项目演示视频", "电影感动画", "系统架构图", "开源AI工具", "GitHub开源项目"]
+tags = ["Archify", "Codex", "AI视频制作", "电影感动画", "开源AI工具"]
 +++
 
 制作一个像样的项目演示视频，通常需要完成脚本、录屏、动画、架构图、音效和剪辑等多个步骤。

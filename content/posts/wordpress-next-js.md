@@ -4,7 +4,7 @@ date = "2026-07-23T18:34:00+08:00"
 draft = false
 featured = true
 categories = ["建站"]
-tags = ["WordPress", "Next.js", "网站搭建"]
+tags = ["WordPress", "网站搭建"]
 +++
 
 不少人在准备做网站时，第一步就陷入了技术选择：

@@ -4,7 +4,7 @@ date = "2026-07-30T22:16:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["GPT Image 2", "AI绘图提示词", "GitHub开源项目", "Prompt Engineering", "AI商业设计", "图像生成"]
+tags = ["GPT Image 2", "AI绘图提示词", "AI商业设计"]
 +++
 
 不会写 [AI](/tags/ai/) 绘图提示词，可以先从现成案例开始修改。

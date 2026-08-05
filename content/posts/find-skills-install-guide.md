@@ -5,7 +5,7 @@ draft = false
 description = "Skills 太多不知道安装哪个？本文介绍 Vercel Labs 的 Find Skills，包括安装命令、skills.sh 搜索流程、Skill 筛选方法、使用案例和安全注意事项，适合 Claude Code、Codex、Cursor 等 AI Agent 用户。"
 featured = true
 categories = ["AI"]
-tags = ["Find Skills", "find-skills", "skills.sh", "Agent Skills", "AI Agent", "Claude Code", "Codex", "Cursor", "Skills CLI", "AI 工具教程", "Skill 安装", "GitHub 开源项目"]
+tags = ["Agent Skills", "AI Agent", "Codex", "Cursor", "AI 工具教程"]
 +++
 
 # [Skills](/tags/skills/) 太多不知道装哪个？先用 Find Skills 帮你筛选

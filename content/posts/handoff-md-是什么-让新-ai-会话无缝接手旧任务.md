@@ -3,7 +3,7 @@ title = "HANDOFF.md 是什么？让新 AI 会话无缝接手旧任务"
 date = "2026-07-24T17:39:00+08:00"
 draft = false
 categories = ["AI"]
-tags = ["AI 会话", "HANDOFF", "AI 交接文档", "Codex"]
+tags = ["HANDOFF", "Codex"]
 featured = true
 +++
 

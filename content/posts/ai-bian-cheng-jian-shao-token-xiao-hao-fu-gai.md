@@ -4,7 +4,7 @@ date = "2026-07-30T23:03:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["AI编程", "Token优化", "Coding Agent", "Claude Code", "Codex", "开源工具"]
+tags = ["AI编程", "Codex", "开源工具"]
 +++
 
 使用 [Claude](/tags/claude/) Code、[Codex](/tags/codex/)、[Cursor](/tags/cursor/) 等 [AI](/tags/ai/) 编程 Agent 时，[Token](/tags/token/) 消耗并不只取决于模型价格。

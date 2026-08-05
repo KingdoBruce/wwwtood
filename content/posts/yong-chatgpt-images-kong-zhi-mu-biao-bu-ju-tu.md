@@ -4,7 +4,7 @@ date = "2026-07-28T20:06:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["ChatGPT Images", "AI图片生成", "图片提示词", "参考图生成", "AI视觉设计", "布局控制", "图案控制", "配色控制", "图生图", "网站封面图"]
+tags = ["ChatGPT Images", "AI图片生成", "图片提示词", "AI视觉设计", "布局控制", "图案控制", "图生图"]
 +++
 
 很多人使用 [ChatGPT](/tags/chatgpt/) Images 时，会把大量精力放在描述“画面要多精美”，却没有明确说明元素放在哪里、图案如何保留、颜色如何分配。

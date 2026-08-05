@@ -19,9 +19,11 @@
         {{- end -}}
         {{- if and $showInArchives (gt (len $term.Pages) 0) -}}{{- $visibleTerms = $visibleTerms | append $term -}}{{- end -}}
     {{- end -}}
-    {{- $pages := partial "helper/pages.html" .Site.Home -}}
-    {{- $totalArticles := len $pages -}}
-    {{- $monthGroups := $pages.GroupByDate "2006-01" -}}
+    {{- $posts := where .Site.RegularPages "Section" "posts" -}}
+    {{- $totalArticles := len $posts -}}
+    {{- $monthlyPosts := where $posts "Date" ">=" (time (printf "%s-01T00:00:00+08:00" (now.Format "2006-01"))) -}}
+    {{- $monthGroups := $posts.GroupByDate "2006-01" -}}
+    {{- $currentMonthName := now.Format "1 月" -}}
     {{- $monthsJSON := slice -}}
     {{- range $group := $monthGroups -}}
         {{- $monthLabel := "" -}}
@@ -48,9 +50,9 @@
     </div>
     <aside class="signal-box">
         <div>
-            <div class="kicker">ARCHIVE INDEX</div>
-            <strong>C{{ len $visibleTerms | printf "%02d" }}</strong>
-            <p class="mono">SIGNAL GROUPS<br>— TOOD.WIN</p>
+            <div class="kicker">本月新增</div>
+            <strong>{{ len $monthlyPosts }}</strong>
+            <p class="mono">{{ $currentMonthName }} / {{ now.Year }}</p>
         </div>
         <div>
             <div class="stat">{{ $totalArticles }}</div>

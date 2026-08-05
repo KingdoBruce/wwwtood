@@ -5,7 +5,7 @@ draft = false
 cover = "/uploads/2026/07/28_14_30_10_2-958887ea.jpg"
 featured = true
 categories = ["AI"]
-tags = ["Generative Media Skills", "AI图片生成", "AI视频生成", "AI音频生成", "多模态AI", "Claude Code Skills", "Cursor Skills", "Gemini CLI", "MCP Server", "AI内容创作"]
+tags = ["AI图片生成", "AI视频生成", "AI音频生成", "多模态AI", "Claude Code Skills", "Cursor Skills", "AI内容创作"]
 +++
 
 做 [AI](/tags/ai/) 内容创作时，图片、视频和音频通常需要分别打开不同的平台，不仅操作流程分散，提示词、素材和生成结果也不方便统一管理。

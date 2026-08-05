@@ -9,11 +9,8 @@
 {{ define "main" }}
 {{- $tags := .Site.Taxonomies.tags -}}
 {{- $tagCount := len $tags -}}
-{{- $referenceCount := 0 -}}
-{{- range $tag, $pages := $tags -}}
-    {{- $referenceCount = add $referenceCount (len $pages) -}}
-{{- end -}}
 {{- $categoryCount := len .Site.Taxonomies.categories -}}
+{{- $postCount := len (where .Site.RegularPages "Section" "posts") -}}
 {{- $top := $tags.ByCount -}}
 {{- $f1 := index $top 0 -}}
 {{- $f2 := index $top 1 -}}
@@ -34,13 +31,13 @@
         </div>
         <aside class="hero-panel">
             <div>
-                <div class="kicker">TAG ARCHIVE</div>
-                <div class="hero-number">#{{ printf "%02d" $tagCount }}</div>
-                <p class="mono">ACTIVE TOPICS<br>UPDATED WEEKLY</p>
+                <div class="kicker">文章统计</div>
+                <div class="hero-number">{{ $postCount }}</div>
+                <p class="mono">ARTICLES<br>BY HUGO STATS</p>
             </div>
             <div class="hero-panel-grid">
-                <div><strong>{{ $referenceCount }}</strong><span class="kicker">ARTICLES</span></div>
-                <div><strong>{{ printf "%02d" $categoryCount }}</strong><span class="kicker">CATEGORIES</span></div>
+                <div><strong>{{ $tagCount }}</strong><span class="kicker">标签</span></div>
+                <div><strong>{{ $categoryCount }}</strong><span class="kicker">分类</span></div>
             </div>
         </aside>
     </section>

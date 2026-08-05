@@ -4,7 +4,7 @@ date = "2026-07-28T12:14:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["video-use", "AI视频剪辑", "自动视频剪辑", "Claude Code", "开源视频工具", "自动生成字幕", "自动删除停顿", "FFmpeg", "AI剪辑工具", "短视频制作"]
+tags = ["video-use", "AI视频剪辑", "开源视频工具", "FFmpeg", "AI剪辑工具", "短视频制作"]
 +++
 
 传统视频剪辑最耗时间的，往往不是拍摄，而是后期处理。

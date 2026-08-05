@@ -4,7 +4,7 @@ date = "2026-07-24T21:59:00+08:00"
 draft = false
 featured = true
 categories = ["建站"]
-tags = ["EdgeOne", "免费CDN", "Cloudflare", "CDN加速"]
+tags = ["免费CDN", "Cloudflare", "CDN加速"]
 +++
 
 很多站长在给网站配置 CDN 时，第一时间想到的通常都是 Cloudflare。

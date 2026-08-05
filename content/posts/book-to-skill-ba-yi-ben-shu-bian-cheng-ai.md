@@ -4,7 +4,7 @@ date = "2026-07-27T19:55:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["Book to Skill", "Agent Skills", "Claude Code", "GitHub Copilot CLI", "AI 读书工具", "电子书转 Skill", "PDF 转 Skill", "AI 知识库", "AI Agent", "文档知识提取", "Codex Skills", "开源 AI 工具"]
+tags = ["Agent Skills", "AI 读书工具", "电子书转 Skill", "AI Agent", "文档知识提取", "开源 AI 工具"]
 +++
 
 很多人用 [AI](/tags/ai/) 阅读一本书时，通常只会做两件事：

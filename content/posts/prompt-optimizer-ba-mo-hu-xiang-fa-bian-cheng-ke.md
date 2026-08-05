@@ -3,7 +3,7 @@ title = "Prompt Optimizer：把模糊想法变成可测试、可复用的 AI 提
 date = "2026-07-27T22:24:00+08:00"
 draft = false
 categories = ["AI"]
-tags = ["Prompt Optimizer", "AI提示词优化", "提示词工程", "Prompt Engineering", "AI工具", "系统提示词", "用户提示词", "文生图提示词", "图生图", "ChatGPT提示词", "Claude提示词", "Gemini提示词", "DeepSeek提示词", "开源项目", "GitHub开源工具"]
+tags = ["AI提示词优化", "提示词工程", "AI工具", "用户提示词", "文生图提示词", "图生图", "ChatGPT提示词", "Claude提示词", "开源项目"]
 featured = true
 +++
 

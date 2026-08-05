@@ -4,7 +4,7 @@ date = "2026-07-27T19:40:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["Codex", "AI编程", "开源工具", "AI开发工具", "Agent Skills", "Superpowers", "Firecrawl", "Ponytail", "Graphify", "Agent TARS", "UI-TARS", "MCP", "AI Agent", "代码知识图谱", "Computer Use", "Cursor", "Claude Code"]
+tags = ["Codex", "AI编程", "开源工具", "AI开发工具", "Agent Skills", "Firecrawl", "Ponytail", "Graphify", "MCP", "AI Agent", "代码知识图谱", "Cursor"]
 +++
 
 同样使用 [Codex](/tags/codex/)，为什么有些人写代码更快、更稳，还能让 [AI](/tags/ai/) 自动查文档、理解大型项目，甚至操作浏览器和电脑？

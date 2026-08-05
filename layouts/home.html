@@ -6,6 +6,7 @@
 {{ define "main" }}
 {{- $posts := where .Site.RegularPages "Section" "posts" -}}
 {{- $posts = $posts.ByDate.Reverse -}}
+{{- $monthlyPosts := where $posts "Date" ">=" (time (printf "%s-01T00:00:00+08:00" (now.Format "2006-01"))) -}}
 {{- $siteConfig := .Site.Data.site -}}
 {{- $brand := $siteConfig.brand -}}
 {{- $navigation := $siteConfig.navigation -}}
@@ -70,14 +71,18 @@
                 </div>
             </div>
             <aside class="week-card">
-                <div>
-                    <div class="tiny mono">WEEK / {{ now.Year }}</div>
-                    <strong class="mono">W{{ printf "%02d" $week }}</strong>
-                    <p class="mono">{{ $monday.Format "JAN. 02" }}<br>— {{ $sunday.Format "JAN. 02" }}</p>
+                <div class="week-head">
+                    <span class="tiny mono">本周 / {{ now.Year }}</span>
+                    <span class="week-tag mono">WEEK</span>
                 </div>
-                <div>
-                    <div class="big">{{ len $posts }}</div>
-                    <div class="small">已收录内容</div>
+                <div class="week-main">
+                    <strong class="week-num mono">{{ $week }}</strong>
+                    <span class="week-unit mono">周</span>
+                </div>
+                <p class="week-range mono">{{ printf "%d" $monday.Month }}月{{ $monday.Day }}日 — {{ printf "%d" $sunday.Month }}月{{ $sunday.Day }}日</p>
+                <div class="week-foot">
+                    <div><strong class="big">{{ len $monthlyPosts }}</strong><span class="small">本月新增</span></div>
+                    <div><strong class="big">{{ len $posts }}</strong><span class="small">已收录</span></div>
                 </div>
             </aside>
         </header>
@@ -240,7 +245,7 @@
 
         {{ if $latestPosts }}
         <section id="latest" class="section">
-            <div class="section-label mono"><span>LATEST ARTICLES</span><a href="{{ `archives/` | relLangURL }}">VIEW ALL →</a></div>
+            <div class="section-label mono"><span>最新文章</span><a href="{{ `archives/` | relLangURL }}">VIEW ALL →</a></div>
             <div class="latest">
                 {{ range $index, $post := $latestPosts }}
                 <a class="latest-row" href="{{ $post.RelPermalink }}">

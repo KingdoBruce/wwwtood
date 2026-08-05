@@ -5,7 +5,7 @@ draft = false
 cover = "/uploads/2026/07/55f79257-eef3-4961-a753-c71896496d7d-7c41d5a3.png"
 featured = true
 categories = ["AI"]
-tags = ["Codex", "Claude Code", "Token", "AI", "MCP"]
+tags = ["Codex", "Token", "AI", "MCP"]
 +++
 
 使用 Codex、Claude Code 或 Cursor 编写项目时，你可能遇到过这样的情况：

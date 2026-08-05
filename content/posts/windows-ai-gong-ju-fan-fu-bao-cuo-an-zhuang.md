@@ -4,7 +4,7 @@ date = "2026-08-02T22:02:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["PowerShell 7", "Windows PowerShell", "AI Token", "Token 优化", "AI 编程", "AI Agent", "Windows 11", "WinGet", "VS Code", "Cursor", "Codex", "Claude Code", "终端配置", "PowerShell 教程", "pwsh"]
+tags = ["PowerShell 7", "Windows PowerShell", "AI Token", "AI Agent", "Windows 11", "WinGet", "VS Code", "Cursor", "Codex"]
 +++
 
 在 Windows 上使用 [Codex](/tags/codex/)、[Claude](/tags/claude/) Code、[Cursor](/tags/cursor/) 或其他 [AI](/tags/ai/) 编程工具时，你可能遇到过这种情况：

@@ -1,12 +1,7 @@
 {{- printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" | safeHTML -}}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {{- range .Site.Pages }}
-  {{- $htmlOutput := .OutputFormats.Get "HTML" -}}
-  {{- $isSearchPage := eq .Layout "search" -}}
-  {{- $isUtilitySection := and (eq .Kind "section") (eq .Section "page") -}}
-  {{- $isCollection := in (slice "section" "taxonomy" "term") .Kind -}}
-  {{- $hasPages := or (not $isCollection) (gt (len .Pages) 0) -}}
-  {{- if and $htmlOutput (not .Sitemap.Disable) (not $isSearchPage) (not $isUtilitySection) $hasPages }}
+  {{- if and (eq .Kind "page") (eq .Section "posts") }}
   <url>
     <loc>{{ .Permalink }}</loc>
     {{- if not .Lastmod.IsZero }}

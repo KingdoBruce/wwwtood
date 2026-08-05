@@ -3,7 +3,7 @@ title = "普通人零门槛 YouTube 变现攻略：用 AI 做英文 Vlog，开�
 date = "2026-07-26T14:59:00+08:00"
 draft = false
 categories = ["随笔"]
-tags = ["YouTube", "视频分成", "赚美元", "广告首页", "AI", "自媒体"]
+tags = ["YouTube", "广告首页", "AI"]
 featured = true
 +++
 

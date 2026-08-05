@@ -121,7 +121,7 @@
             {{- $thirtyDaysAgo := $now.AddDate 0 0 -30 -}}
             {{- $popular := where $posts ".Date" ">=" $thirtyDaysAgo | first 6 -}}
             <div class="side-card">
-                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="head kicker">最新文章</div>
                 <div class="body side-articles">
                     {{- range $latest -}}
                     <a class="side-article-row" href="{{ .RelPermalink }}">
@@ -132,7 +132,7 @@
                 </div>
             </div>
             <div class="side-card">
-                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="head kicker" style="background:var(--signal-pink)">编辑推荐</div>
                 <div class="body side-articles">
                     {{- range $popular -}}
                     <a class="side-article-row" href="{{ .RelPermalink }}">

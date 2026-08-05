@@ -5,7 +5,7 @@ draft = false
 cover = "/uploads/2026/07/12_2-026d34e7.jpg"
 featured = true
 categories = ["AI"]
-tags = ["UI/UX Pro Max", "AI生成UI", "AI前端开发", "AI编程工具", "UI设计知识库", "UX设计规范", "Codex", "Claude Code", "Cursor", "Tailwind CSS", "Next.js", "设计系统", "开源项目"]
+tags = ["AI生成UI", "AI前端开发", "AI编程工具", "UI设计知识库", "Codex", "Cursor", "开源项目"]
 +++
 
 使用 [AI](/tags/ai/) 编程工具生成网页时，很多人都会遇到同一个问题：

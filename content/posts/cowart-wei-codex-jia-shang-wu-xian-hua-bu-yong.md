@@ -5,7 +5,7 @@ draft = false
 description = "Cowart 是一款基于 tldraw 的开源 Codex 无限画布插件，支持在画布中生成图片、添加箭头和文字标注，并让 Codex 根据标注生成新的修改版本。本文介绍 Cowart 的核心功能、安装方法、图片生成与标注改图流程，以及使用时需要注意的限制。项目还支持 AI HTML 和 AI Slides，适合海报、电商图片、网页原型和视觉方案的连续迭代。"
 featured = true
 categories = ["AI"]
-tags = ["Cowart", "Codex 无限画布", "Codex 插件", "AI 图片修改", "AI 图片标注", "tldraw", "Codex MCP", "开源 AI 工具", "AI 海报生成", "AI 视觉创作"]
+tags = ["Codex 无限画布", "Codex 插件", "AI 图片修改", "AI 图片标注", "tldraw", "开源 AI 工具", "AI 视觉创作"]
 +++
 
 Cowart 是一款面向 [Codex](/tags/codex/) 的开源无限画布插件。它基于 tldraw 构建，可以在 Codex 中打开可视化画布，用于整理创意、放置参考图、生成图片、添加箭头和文字标注，以及根据标注继续迭代图片。

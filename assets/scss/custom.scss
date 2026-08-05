@@ -95,7 +95,7 @@ body.signal-tags-page .tags-hero h1{margin:28px 0 18px;max-width:850px;font-size
 body.signal-tags-page .tags-hero h1 span{display:inline-block;padding:0 .08em;background:var(--signal-lime);border:2px solid var(--signal-line);transform:rotate(-1deg)}
 body.signal-tags-page .hero-desc{margin:0;max-width:760px;color:#343a36;font-size:18px;line-height:1.75}
 body.signal-tags-page .hero-panel{min-height:320px;border:2px solid var(--signal-line);background:var(--signal-pink);padding:18px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
-body.signal-tags-page .hero-panel:before{content:"#";position:absolute;right:-15px;bottom:-65px;font:900 230px/.8 "Courier New",monospace;color:rgba(12,15,13,.18)}
+body.signal-tags-page .hero-panel:before{content:"∑";position:absolute;right:-15px;bottom:-65px;font:900 230px/.8 "Courier New",monospace;color:rgba(12,15,13,.18)}
 body.signal-tags-page .hero-number{font:900 78px/.9 "Courier New",monospace;letter-spacing:-.08em}
 body.signal-tags-page .hero-panel p.mono{margin:14px 0 0;font:12px/1.6 "Courier New",monospace}
 body.signal-tags-page .hero-panel-grid{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--signal-line);background:var(--signal-white);position:relative}
@@ -704,10 +704,16 @@ body.signal-home-page .hero-copy h1 .slash{color:#d9004f;margin-right:.45em;font
 body.signal-home-page .hero-sub{display:grid;grid-template-columns:100px 1fr;gap:16px;max-width:690px;border-top:2px solid var(--signal-line);padding-top:14px}
 body.signal-home-page .hero-sub b{color:#d9004f}
 body.signal-home-page .hero-sub div{font-size:15px;line-height:1.7}
-body.signal-home-page .week-card{background:var(--signal-lime);border:2px solid var(--signal-line);padding:18px;display:flex;flex-direction:column;justify-content:space-between}
-body.signal-home-page .week-card strong{font-size:54px;line-height:.9}
-body.signal-home-page .week-card .big{font-size:36px;font-weight:900}
-body.signal-home-page .week-card p{font-size:13px;line-height:1.6;margin:14px 0 0}
+body.signal-home-page .week-card{background:var(--signal-lime);border:2px solid var(--signal-line);display:flex;flex-direction:column}
+body.signal-home-page .week-card .week-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:2px solid var(--signal-line);background:var(--signal-white)}
+body.signal-home-page .week-card .week-tag{font-weight:900;color:#d9004f}
+body.signal-home-page .week-card .week-main{display:flex;align-items:baseline;gap:6px;padding:18px 14px 4px}
+body.signal-home-page .week-card .week-num{font-size:52px;line-height:1;font-weight:900}
+body.signal-home-page .week-card .week-unit{font-size:14px;font-weight:900}
+body.signal-home-page .week-card .week-range{margin:6px 14px 16px;font-size:12px;color:rgba(16,19,18,.72);letter-spacing:.04em}
+body.signal-home-page .week-card .week-foot{display:flex;justify-content:space-between;align-items:stretch;gap:10px;padding:12px 14px;border-top:2px solid var(--signal-line);background:var(--signal-white);margin-top:auto}
+body.signal-home-page .week-card .week-foot>div{display:flex;flex-direction:column;gap:2px}
+body.signal-home-page .week-card .week-foot .big{font-size:30px;font-weight:900;line-height:1}
 body.signal-home-page .section{padding:22px 0 36px}
 body.signal-home-page .section-label{display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--signal-line);padding:12px 0 16px;font-weight:700}
 body.signal-home-page .section-label a{color:inherit}
@@ -831,7 +837,9 @@ body.signal-home-page .footer h4{margin:0 0 10px}
 body.signal-home-page .footer a{display:block;font-size:13px;margin:8px 0;color:var(--signal-muted)}
 body.signal-home-page .footer a:hover{color:var(--signal-ink)}
 body.signal-home-page .end{border-top:1px solid var(--signal-line);padding:16px 0 26px;display:flex;justify-content:space-between;gap:20px;font-size:12px;flex-wrap:wrap}
-body.signal-home-page .archive-runtime{color:var(--signal-muted);font:10px/1.5 ui-monospace,monospace;letter-spacing:.04em;white-space:nowrap}
+body.signal-home-page .end-links{display:flex;gap:16px}
+body.signal-home-page .end-links a{color:var(--signal-muted);transition:color .16s ease}
+body.signal-home-page .end-links a:hover{color:#d9004f}
 @media(max-width:900px){
   body.signal-home-page .menu{display:none}
   body.signal-home-page .hero,body.signal-home-page .top-grid,body.signal-home-page .editorial{grid-template-columns:1fr}
@@ -1167,10 +1175,10 @@ body.template-archives .page-hero{width:1240px;max-width:calc(100% - 28px);margi
 body.template-archives .hero-main{padding-top:8px;min-width:0}
 body.template-archives .hero-meta{display:flex;justify-content:space-between;padding-top:0;padding-bottom:6px;border-bottom:2px solid var(--signal-line)}
 body.template-archives .hero-main h1{max-width:900px;margin:24px 0 18px;font-size:clamp(42px,7vw,80px);line-height:.92;letter-spacing:-.07em;font-weight:900}
-body.template-archives .page-deck{font-size:18px;line-height:1.7;max-width:760px;color:#343a36}
+body.template-archives .page-deck{font-size:18px;line-height:1.7;max-width:760px;color:#343a36;white-space:nowrap;overflow:visible}
 body.template-archives .hero-stats{display:flex;flex-wrap:wrap;gap:18px;margin-top:24px;padding-top:15px;border-top:2px solid var(--signal-line);font-size:13px}
-body.template-archives .signal-box{border:2px solid var(--signal-line);padding:18px;min-height:290px;display:flex;flex-direction:column;justify-content:space-between;background:var(--signal-lime)}
-body.template-archives .signal-box strong{font:900 58px/1 "Courier New",monospace}
+body.template-archives .signal-box{border:2px solid var(--signal-line);padding:14px 16px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;background:var(--signal-lime)}
+body.template-archives .signal-box strong{font:900 46px/1 "Courier New",monospace}
 body.template-archives .signal-box p.mono{margin:14px 0 0;font:12px/1.6 "Courier New",monospace}
 body.template-archives .signal-box .stat{font-size:32px;font-weight:950}
 body.template-archives .section-head{display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--signal-line);padding:10px 0 15px}

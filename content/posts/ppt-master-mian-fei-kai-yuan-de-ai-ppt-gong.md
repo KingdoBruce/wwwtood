@@ -4,7 +4,7 @@ date = "2026-07-27T09:27:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["PPT Master", "AI", "MCP", "AI PPT 工具"]
+tags = ["AI", "MCP", "AI PPT 工具"]
 +++
 
 现在的 [AI](/tags/ai/) PPT 工具很多，但不少工具生成的只是图片、网页截图，或者套用固定模板拼出来的页面。

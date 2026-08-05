@@ -4,7 +4,7 @@ date = "2026-07-28T14:35:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["AI Video Workflow", "AI视频工作流", "AI视频制作", "AI视频生成", "视频自动化", "AI分镜", "AI脚本生成", "智能剪辑", "短视频制作", "ViMax"]
+tags = ["AI Video Workflow", "AI视频工作流", "AI视频制作", "AI视频生成", "AI分镜", "AI脚本生成", "智能剪辑", "短视频制作", "ViMax"]
 +++
 
 制作一条视频，真正耗时的往往不是某一个步骤，而是在选题、写脚本、设计分镜、生成素材和剪辑软件之间反复切换。

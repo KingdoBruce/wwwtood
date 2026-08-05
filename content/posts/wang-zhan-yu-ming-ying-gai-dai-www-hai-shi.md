@@ -4,7 +4,7 @@ date = "2026-07-31T14:34:00+08:00"
 draft = false
 featured = true
 categories = ["随笔"]
-tags = ["网站域名", "www域名", "非www域名", "Vercel域名设置", "Google Search Console", "Sitemap", "Canonical URL", "Google SEO", "301重定向", "域名规范化"]
+tags = ["Vercel域名设置", "Google Search Console", "Sitemap", "Canonical URL", "Google SEO", "域名规范化"]
 +++
 
 网站上线时，经常需要在下面两种域名格式中选择一种：

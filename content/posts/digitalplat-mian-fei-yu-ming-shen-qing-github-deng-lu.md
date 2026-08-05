@@ -3,7 +3,7 @@ title = "DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解�
 date = "2026-07-31T11:11:00+08:00"
 draft = false
 categories = ["建站"]
-tags = ["DigitalPlat FreeDomain", "免费域名申请", "Cloudflare 域名解析", "GitHub 免费域名", "dpdns.org", "us.kg"]
+tags = ["DigitalPlat FreeDomain", "us.kg"]
 featured = true
 +++
 

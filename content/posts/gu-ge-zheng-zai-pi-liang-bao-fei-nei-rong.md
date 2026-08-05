@@ -4,7 +4,7 @@ date = "2026-07-29T09:47:00+08:00"
 draft = false
 featured = true
 categories = ["随笔"]
-tags = ["Google SEO", "AI 内容", "谷歌算法", "内容质量", "网站流量", "高质量内容"]
+tags = ["Google SEO", "网站流量"]
 +++
 
 最近，网上流传着一张让不少站长焦虑的截图。

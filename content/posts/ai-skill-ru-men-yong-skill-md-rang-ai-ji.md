@@ -4,7 +4,7 @@ date = "2026-07-28T15:54:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["AI Skill", "Agent Skills", "SKILL.md", "AI入门教程", "Codex Skills", "Claude Code Skills", "AI工作流", "提示词工程", "AI自动化", "周报助手"]
+tags = ["Agent Skills", "AI入门教程", "Claude Code Skills", "AI工作流", "提示词工程", "AI自动化"]
 cover = "/uploads/2026/07/QQ20260728-155400_1-b3640702.jpg"
 +++
 

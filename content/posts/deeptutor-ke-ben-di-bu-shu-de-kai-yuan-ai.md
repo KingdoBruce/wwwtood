@@ -4,7 +4,7 @@ date = "2026-07-28T15:16:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["DeepTutor", "本地AI助手", "开源AI项目", "AI学习助手", "个性化学习", "RAG知识库", "AI智能体", "本地大模型", "知识管理", "AI工作区", "自托管AI", "人工智能学习工具"]
+tags = ["DeepTutor", "本地AI助手", "开源AI项目", "AI学习助手", "RAG知识库", "AI智能体", "本地大模型", "知识管理", "AI工作区", "自托管AI"]
 +++
 
 同时使用 [ChatGPT](/tags/chatgpt/)、[Claude](/tags/claude/)、知识库、笔记软件和多个 [AI Agent](/tags/ai-agent/) 时，真正影响效率的往往不是模型能力，而是分散的窗口、重复导入的资料，以及无法连续保存的上下文。

@@ -4,7 +4,7 @@ date = "2026-07-28T12:07:00+08:00"
 draft = false
 featured = true
 categories = ["AI"]
-tags = ["HyperFrames", "AI视频生成", "HTML转视频", "网页动画", "MP4视频渲染", "AI编程助手", "Claude Code", "Codex", "短视频制作", "开源视频工具", "HeyGen"]
+tags = ["AI视频生成", "AI编程助手", "Codex", "短视频制作", "开源视频工具"]
 +++
 
 做产品演示、工具介绍或数据动画时，传统视频软件往往需要手动调整时间轴、关键帧和字幕，制作过程比较繁琐。
