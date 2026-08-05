@@ -1769,11 +1769,11 @@ body.signal-search-page .help-list{margin:0;padding-left:18px;color:var(--signal
 }
 
 /* ===== 友链页 ===== */
-body.signal-friends-page{--signal-paper:#eef1ec;--signal-ink:#101312;--signal-muted:#5e6661;--signal-grid:rgba(16,19,18,.15);--signal-lime:#c9ff32;--signal-pink:#ff3d8e;--signal-cyan:#49d8c4;--signal-orange:#ffb52f;--signal-black:#0b0f0d;--signal-line:#1b211e;--signal-white:#f8faf6;--signal-blue:#5da3ff}
+body.archive-site.archive-subpage.signal-friends-page{--signal-paper:#eef1ec;--signal-ink:#101312;--signal-muted:#5e6661;--signal-grid:rgba(16,19,18,.15);--signal-lime:#c9ff32;--signal-pink:#ff3d8e;--signal-cyan:#49d8c4;--signal-orange:#ffb52f;--signal-black:#0b0f0d;--signal-line:#1b211e;--signal-white:#f8faf6;--signal-blue:#5da3ff;background-color:var(--signal-paper);background-image:linear-gradient(var(--signal-grid) 1px,transparent 1px),linear-gradient(90deg,var(--signal-grid) 1px,transparent 1px);background-size:28px 28px;color:var(--signal-ink);font-family:Inter,system-ui,-apple-system,"Segoe UI","Noto Sans SC","Microsoft YaHei",sans-serif}
 body.signal-friends-page .kicker{font:700 11px/1.25 "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase}
 body.signal-friends-page .breadcrumb{display:flex;gap:10px;align-items:center;padding:15px 0;border-bottom:1px solid var(--signal-line);color:var(--signal-muted);font-size:12px;flex-wrap:wrap}
 body.signal-friends-page .breadcrumb a:hover{color:var(--signal-ink)}
-body.signal-friends-page .friends-shell{width:1240px;max-width:calc(100% - 28px);margin:auto;padding-bottom:54px}
+body.signal-friends-page .friends-shell{width:100%;max-width:none;margin:auto;padding-bottom:54px}
 body.signal-friends-page .friends-hero{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:24px;padding:32px 0 28px;align-items:stretch}
 body.signal-friends-page .hero-main{padding-top:8px;min-height:0}
 body.signal-friends-page .hero-meta{display:flex;justify-content:space-between;gap:16px;padding-top:10px;border-top:2px solid var(--signal-line)}
