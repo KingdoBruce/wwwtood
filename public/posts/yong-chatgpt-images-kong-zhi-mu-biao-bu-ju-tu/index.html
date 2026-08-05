@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="很多人使用 ChatGPT Images 时，会把大量精力放在描述“画面要多精美”，却没有明确说明元素放在哪里、图案如何保留、颜色如何分配。\n想让生成结果更接近目标图，关键不是不断堆叠风格词，而是把提示词拆成三个可控制部分：\n">
+<title>如何用 ChatGPT Images 控制目标布局、图案和配色 - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/yong-chatgpt-images-kong-zhi-mu-biao-bu-ju-tu/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="如何用 ChatGPT Images 控制目标布局、图案和配色 - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="很多人使用 ChatGPT Images 时，会把大量精力放在描述“画面要多精美”，却没有明确说明元素放在哪里、图案如何保留、颜色如何分配。\n想让生成结果更接近目标图，关键不是不断堆叠风格词，而是把提示词拆成三个可控制部分：\n">
+<meta property='og:url' content='https://www.tood.win/posts/yong-chatgpt-images-kong-zhi-mu-biao-bu-ju-tu/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='ChatGPT Images' /><meta property='article:tag' content='AI图片生成' /><meta property='article:tag' content='图片提示词' /><meta property='article:tag' content='参考图生成' /><meta property='article:tag' content='AI视觉设计' /><meta property='article:tag' content='布局控制' /><meta property='article:tag' content='图案控制' /><meta property='article:tag' content='配色控制' /><meta property='article:tag' content='图生图' /><meta property='article:tag' content='网站封面图' /><meta property='article:published_time' content='2026-07-28T20:06:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-28T20:08:36&#43;08:00'/>
+<meta name="twitter:title" content="如何用 ChatGPT Images 控制目标布局、图案和配色 - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="很多人使用 ChatGPT Images 时，会把大量精力放在描述“画面要多精美”，却没有明确说明元素放在哪里、图案如何保留、颜色如何分配。\n想让生成结果更接近目标图，关键不是不断堆叠风格词，而是把提示词拆成三个可控制部分：\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="ChatGPT Images, AI图片生成, 图片提示词, 参考图生成, AI视觉设计, 布局控制, 图案控制, 配色控制, 图生图, 网站封面图">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"如何用 ChatGPT Images 控制目标布局、图案和配色\"",
+  "description": "\"很多人使用 ChatGPT Images 时，会把大量精力放在描述“画面要多精美”，却没有明确说明元素放在哪里、图案如何保留、颜色如何分配。\\n想让生成结果更接近目标图，关键不是不断堆叠风格词，而是把提示词拆成三个可控制部分：\\n\"",
+  "datePublished": "\"2026-07-28T20:06:00+08:00\"",
+  "dateModified": "\"2026-07-28T20:08:36+08:00\"",
+  "url": "\"https://www.tood.win/posts/yong-chatgpt-images-kong-zhi-mu-biao-bu-ju-tu/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai/">AI</a><span>/</span><a href="/posts/yong-chatgpt-images-kong-zhi-mu-biao-bu-ju-tu/">如何用 ChatGPT Images 控制目标布局、图案和配色</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI</span>
+                <span>LIVE DATA / A.2607.052</span>
+            </div>
+            <h1>如何用 ChatGPT Images 控制目标布局、图案和配色</h1>
+            <p class="article-deck">很多人使用 ChatGPT Images 时，会把大量精力放在描述“画面要多精美”，却没有明确说明元素放在哪里、图案如何保留、颜色如何分配。
+想让生成结果更接近目标图，关键不是不断堆叠风格词，而是把提示词拆成三个可控制部分：
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.28</span>
+                <span>5 MIN READ</span>
+                <span>2443 WORDS</span>
+                <span>AI</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A52</strong>
+                <p class="mono">JAN. 28<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">10</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>很多人使用 <a class="link" href="/tags/chatgpt/" >ChatGPT</a> Images 时，会把大量精力放在描述“画面要多精美”，却没有明确说明元素放在哪里、图案如何保留、颜色如何分配。</p>
+<p>想让生成结果更接近目标图，关键不是不断堆叠风格词，而是把提示词拆成三个可控制部分：</p>
+<ol>
+<li><strong>布局约束</strong></li>
+<li><strong>图案约束</strong></li>
+<li><strong>配色约束</strong></li>
+</ol>
+<p>ChatGPT Images 支持根据文字生成图片，也可以结合上传的参考图片继续编辑和调整。参考图越清晰、每张图片的用途说明越明确，最终结果通常越稳定。</p>
+<p><img alt="如何用 ChatGPT Images 控制目标布局、图案和配色" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/4048e3a9-2788-47c0-8cd0-25d762cc266a-f0073c74.jpg"></p>
+<h2 id="一先准备三类参考素材">一、先准备三类参考素材
+</h2><p>不要只上传一张图片，然后让 <a class="link" href="/tags/ai/" >AI</a> 同时猜测布局、图案和颜色。</p>
+<p>更稳定的方法是分别准备：</p>
+<ul>
+<li><strong>布局参考图</strong>：用于确定元素位置、留白和视觉重心。</li>
+<li><strong>图案参考图</strong>：用于保留纹理、花型、材质或产品细节。</li>
+<li><strong>配色参考图</strong>：用于确定主色、辅助色和点缀色。</li>
+</ul>
+<p>上传后，需要明确告诉 ChatGPT 每张图片的作用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">参考图 1：只参考整体布局和元素位置。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">参考图 2：只参考图案、纹理和材质细节，不要改变图案比例。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">参考图 3：只提取配色，不参考其中的物体和构图。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这种写法可以避免模型把不同参考图中的元素混合在一起。</p>
+<h2 id="二使用结构化提示词">二、使用结构化提示词
+</h2><p>一个容易控制的 ChatGPT Images 提示词，可以按照下面的顺序编写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">图片用途
+</span></span><span class="line"><span class="cl">画面比例
+</span></span><span class="line"><span class="cl">布局结构
+</span></span><span class="line"><span class="cl">主体内容
+</span></span><span class="line"><span class="cl">图案要求
+</span></span><span class="line"><span class="cl">配色要求
+</span></span><span class="line"><span class="cl">材质与光线
+</span></span><span class="line"><span class="cl">文字内容
+</span></span><span class="line"><span class="cl">禁止出现的内容
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不要把所有要求写成一段没有层级的长句。</p>
+<h2 id="三如何准确控制布局">三、如何准确控制布局
+</h2><p>“画面高级、构图大气、视觉丰富”这类描述过于抽象，无法告诉 AI 元素应该放在哪里。</p>
+<p>可以改成更具体的位置关系：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">生成一张 4:3 横版网站封面图。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">画面采用左右分栏布局：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">左侧约占画面 55%，放置主要视觉主体；
+</span></span><span class="line"><span class="cl">右侧约占画面 45%，放置配色卡、图案参考和界面元素。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">标题位于左上区域，距离边缘保留充足安全留白。
+</span></span><span class="line"><span class="cl">主体位于左侧中下方，不要遮挡标题。
+</span></span><span class="line"><span class="cl">右侧信息按垂直方向整齐排列。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要进一步控制时，可以加入网格、占比和对齐方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">使用三栏网格布局。
+</span></span><span class="line"><span class="cl">主要主体占两栏，辅助元素占一栏。
+</span></span><span class="line"><span class="cl">所有元素沿同一条水平基线对齐。
+</span></span><span class="line"><span class="cl">画面四周保留约 8% 的安全边距。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="四如何保留目标图案">四、如何保留目标图案
+</h2><p>只写“使用参考图中的图案”通常不够。</p>
+<p>需要说明哪些部分必须保持一致：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">严格保留参考图中的图案结构、方向和密度。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">不要重新设计花型。
+</span></span><span class="line"><span class="cl">不要放大或缩小图案比例。
+</span></span><span class="line"><span class="cl">不要改变图案之间的间距。
+</span></span><span class="line"><span class="cl">不要增加参考图中不存在的装饰。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用于面料、包装或产品设计时，可以进一步补充：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">图案需要自然贴合物体表面，并随褶皱和透视产生合理变形。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">图案不能悬浮在物体表面。
+</span></span><span class="line"><span class="cl">不能出现断裂、错位、重复边界或镜像拼接。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="五如何准确控制配色">五、如何准确控制配色
+</h2><p>“使用蓝色”“采用高级配色”仍然不够具体。</p>
+<p>建议把颜色分成三个层级：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">主色：深蓝色，占画面约 70%。
+</span></span><span class="line"><span class="cl">辅助色：浅灰色，占画面约 20%。
+</span></span><span class="line"><span class="cl">点缀色：暖橙色，占画面约 10%。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以直接提供十六进制颜色：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">主背景色：#101827
+</span></span><span class="line"><span class="cl">辅助界面色：#D9E2EC
+</span></span><span class="line"><span class="cl">重点强调色：#FF9F43
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">不要出现紫色渐变、荧光绿色和高饱和粉色。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>明确颜色比例，可以减少 AI 自动加入无关颜色的问题。</p>
+<h2 id="六不要一次要求-ai-完成所有细节">六、不要一次要求 AI 完成所有细节
+</h2><p>复杂图片建议分三轮生成。</p>
+<h3 id="第一轮只确认布局">第一轮：只确认布局
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">先生成低细节构图草案。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">这一轮只确认元素位置、大小关系、留白和视觉层级，不需要增加复杂纹理。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第二轮锁定图案和配色">第二轮：锁定图案和配色
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">保持当前布局不变。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">将主体图案替换为参考图 2 中的图案，并严格使用指定配色。
+</span></span><span class="line"><span class="cl">不要移动任何主要元素。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第三轮处理材质文字和细节">第三轮：处理材质、文字和细节
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">保持现有布局、图案和颜色不变。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">增强材质细节、光影层次和边缘清晰度。
+</span></span><span class="line"><span class="cl">修正标题文字，不要修改其他区域。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这种分阶段修改的方法，比每次重新生成整张图片更容易保持一致。ChatGPT Images 也支持在现有图片基础上继续编辑，并尽量保留未修改区域。</p>
+<h2 id="七可直接复制的通用提示词">七、可直接复制的通用提示词
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请结合我上传的参考图片，生成一张可用于网站首页的视觉素材。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">网站首页封面图，用于介绍 ChatGPT Images 的布局、图案和配色控制方法。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">4:3 横版构图，适合网站首页展示。
+</span></span><span class="line"><span class="cl">画面四周保留安全留白，不要裁切标题和主体。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">参考图 1：只参考布局和元素位置。
+</span></span><span class="line"><span class="cl">参考图 2：只参考图案、纹理和材质。
+</span></span><span class="line"><span class="cl">参考图 3：只参考配色。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">不要把三张参考图中的物体随意混合。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">采用左右分栏构图。
+</span></span><span class="line"><span class="cl">左侧约占 55%，放置主要视觉主体和标题。
+</span></span><span class="line"><span class="cl">右侧约占 45%，展示布局网格、图案样本和配色卡。
+</span></span><span class="line"><span class="cl">视觉重心位于画面中部偏左。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">严格保留参考图中的图案结构、方向、比例和密度。
+</span></span><span class="line"><span class="cl">不要重新设计图案。
+</span></span><span class="line"><span class="cl">不要增加新的纹样。
+</span></span><span class="line"><span class="cl">避免图案断裂、错位、镜像和不自然重复。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">主色使用深蓝灰色，占画面约 70%。
+</span></span><span class="line"><span class="cl">辅助色使用浅灰白色，占画面约 20%。
+</span></span><span class="line"><span class="cl">点缀色使用橙色，占画面约 10%。
+</span></span><span class="line"><span class="cl">不要出现紫色渐变和无关的高饱和颜色。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">现代数字创意工作台风格。
+</span></span><span class="line"><span class="cl">界面清晰，结构专业，细节精致。
+</span></span><span class="line"><span class="cl">使用柔和体积光、磨砂玻璃和轻微金属质感。
+</span></span><span class="line"><span class="cl">不要过度炫光，不要堆叠无意义的科技元素。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">主标题：ChatGPT Images 视觉控制指南
+</span></span><span class="line"><span class="cl">副标题：布局 · 图案 · 配色
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">确保文字完整、清晰、没有错别字。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">不要出现人物。
+</span></span><span class="line"><span class="cl">不要出现品牌 Logo。
+</span></span><span class="line"><span class="cl">不要增加无关英文。
+</span></span><span class="line"><span class="cl">不要改变画面比例。
+</span></span><span class="line"><span class="cl">不要让辅助元素遮挡标题。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="八常见问题">八、常见问题
+</h2><h3 id="生成结果与参考图差距很大">生成结果与参考图差距很大
+</h3><p>通常是因为没有说明每张参考图的用途。应分别标注哪些图片控制布局、图案和颜色。</p>
+<h3 id="图案被-ai-重新设计">图案被 AI 重新设计
+</h3><p>在提示词中加入“严格保留图案结构、方向、比例和密度”，并明确禁止新增纹样。</p>
+<h3 id="颜色总是发生偏移">颜色总是发生偏移
+</h3><p>提供具体色值和颜色占比，同时列出禁止出现的颜色。</p>
+<h3 id="修改文字后整张图片都变了">修改文字后整张图片都变了
+</h3><p>要求 AI 只修改指定区域，并强调：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">除标题文字外，保持其他区域完全不变。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="画面比例不正确">画面比例不正确
+</h3><p>不要只写“横版图片”，应明确写出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">4:3 横版构图，最终尺寸为 1200 × 900 像素。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="总结">总结
+</h2><p>使用 ChatGPT Images 生成可控视觉素材时，可以记住一个简单公式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">参考图分工
+</span></span><span class="line"><span class="cl">+ 布局位置
+</span></span><span class="line"><span class="cl">+ 图案约束
+</span></span><span class="line"><span class="cl">+ 颜色比例
+</span></span><span class="line"><span class="cl">+ 分阶段修改
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>提示词越具体，AI 需要猜测的内容越少。</p>
+<p>真正有效的提示词不是堆叠“高级、震撼、电影感”等形容词，而是明确告诉模型：什么必须保留、什么可以调整，以及每个元素应该出现在哪里。</p>
+<h2 id="官方资料与-github-项目">官方资料与 GitHub 项目
+</h2><ul>
+<li>
+<p>OpenAI Cookbook 图片生成提示词指南：
+<a class="link" href="https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb"  target="_blank" rel="noopener"
+    >https://github.com/openai/openai-cookbook/blob/main/examples/multimodal/image-gen-models-prompting-guide.ipynb</a></p>
+</li>
+<li>
+<p>OpenAI 图片生成示例项目：
+<a class="link" href="https://github.com/openai/openai-imagegen-demo"  target="_blank" rel="noopener"
+    >https://github.com/openai/openai-imagegen-demo</a></p>
+</li>
+<li>
+<p>OpenAI Cookbook：
+<a class="link" href="https://github.com/openai/openai-cookbook"  target="_blank" rel="noopener"
+    >https://github.com/openai/openai-cookbook</a></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/chatgpt-images/">ChatGPT Images</a>
+        
+            <a href="/tags/ai%E5%9B%BE%E7%89%87%E7%94%9F%E6%88%90/">AI图片生成</a>
+        
+            <a href="/tags/%E5%9B%BE%E7%89%87%E6%8F%90%E7%A4%BA%E8%AF%8D/">图片提示词</a>
+        
+            <a href="/tags/%E5%8F%82%E8%80%83%E5%9B%BE%E7%94%9F%E6%88%90/">参考图生成</a>
+        
+            <a href="/tags/ai%E8%A7%86%E8%A7%89%E8%AE%BE%E8%AE%A1/">AI视觉设计</a>
+        
+            <a href="/tags/%E5%B8%83%E5%B1%80%E6%8E%A7%E5%88%B6/">布局控制</a>
+        
+            <a href="/tags/%E5%9B%BE%E6%A1%88%E6%8E%A7%E5%88%B6/">图案控制</a>
+        
+            <a href="/tags/%E9%85%8D%E8%89%B2%E6%8E%A7%E5%88%B6/">配色控制</a>
+        
+            <a href="/tags/%E5%9B%BE%E7%94%9F%E5%9B%BE/">图生图</a>
+        
+            <a href="/tags/%E7%BD%91%E7%AB%99%E5%B0%81%E9%9D%A2%E5%9B%BE/">网站封面图</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/codex-obsidian-chang-qi-ji-yi-pei-zhi-rang-ai/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>Codex &#43; Obsidian 长期记忆配置：让 AI 跨项目记住工作进度和关键决策</strong>
+                    </a><a href="/posts/codexbar-zai-macos-cai-dan-lan-tong-yi-cha-kan/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>CodexBar：在 macOS 菜单栏统一查看 AI 编程工具额度</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#一先准备三类参考素材">一、先准备三类参考素材</a></li>
+    <li><a href="#二使用结构化提示词">二、使用结构化提示词</a></li>
+    <li><a href="#三如何准确控制布局">三、如何准确控制布局</a></li>
+    <li><a href="#四如何保留目标图案">四、如何保留目标图案</a></li>
+    <li><a href="#五如何准确控制配色">五、如何准确控制配色</a></li>
+    
+    <li><a href="#七可直接复制的通用提示词">七、可直接复制的通用提示词</a></li>
+    
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#官方资料与-github-项目">官方资料与 GitHub 项目</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/ai/"><span>分类</span><b>AI</b></a>
+                    <a><span>字数</span><b>2443</b></a>
+                    <a><span>阅读</span><b>5 MIN</b></a>
+                    <a><span>更新</span><b>07.28</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/generative-media-skills-rang-ai-bian-cheng-zhu-shou-sheng/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/28_14_30_10_2-958887ea.jpg" alt="Generative Media Skills：让 AI 编程助手生成图片、视频和音频" loading="lazy"><code>01 / AI</code>
+                    <h3>Generative Media Skills：让 AI 编程助手生成图片、视频和音频</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>做 AI 内容创作时，图片、视频和音频通常需要分别打开不同的平台，不仅操作流程分散，提示词、素材和生成结果也不方便统一管理。 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/prompt-optimizer-ba-mo-hu-xiang-fa-bian-cheng-ke/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260727-222919-eae371b9.jpg" alt="Prompt Optimizer：把模糊想法变成可测试、可复用的 AI 提示词" loading="lazy"><code>02 / AI</code>
+                    <h3>Prompt Optimizer：把模糊想法变成可测试、可复用的 AI 提示词</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>写 AI 提示词时没有思路，很多人的第一反应是继续堆背景、加角色、补格式。
+结果往往是提示词越来越长，AI 的回答却不一定更准确。
+最近我发现了 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/acac708a-8226-4374-a7b8-dddf4fafc240-0b7e708d.jpg" alt="Video-use：用一句话让 AI 自动剪辑视频的开源技能" loading="lazy"><code>03 / AI</code>
+                    <h3>Video-use：用一句话让 AI 自动剪辑视频的开源技能</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>把原始素材放进文件夹，再告诉 AI“把这些素材剪成一条教程视频”，Video-use 就能协助完成素材分析、片段筛选、调色、字幕、动画叠加和视频 …</p>
+                    <time>2026-08-04</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/cc0d4cca-b9ff-4510-8389-086246ee5ce7-5380f58f.jpg" alt="OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成" loading="lazy"><code>04 / AI</code>
+                    <h3>OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成OpenMontage 是一个开源的 Agentic AI 视 …</p>
+                    <time>2026-08-04</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

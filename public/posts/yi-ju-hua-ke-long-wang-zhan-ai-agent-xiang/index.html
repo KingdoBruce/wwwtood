@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="想快速复刻一个网站的页面设计，又不想从零手写 React 组件和 CSS？\nAI Website Cloner Template 提供了一套基于 AI Agent 的网站逆向工程流程：输入目标网址并运行 /clone-website，AI 会分析页面、提取设计规范、下载素材，并生成结构清晰的 Next.js 项目。\n">
+<title>一句话克隆网站：AI Agent 像素级复刻工具 - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/yi-ju-hua-ke-long-wang-zhan-ai-agent-xiang/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="一句话克隆网站：AI Agent 像素级复刻工具 - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="想快速复刻一个网站的页面设计，又不想从零手写 React 组件和 CSS？\nAI Website Cloner Template 提供了一套基于 AI Agent 的网站逆向工程流程：输入目标网址并运行 /clone-website，AI 会分析页面、提取设计规范、下载素材，并生成结构清晰的 Next.js 项目。\n">
+<meta property='og:url' content='https://www.tood.win/posts/yi-ju-hua-ke-long-wang-zhan-ai-agent-xiang/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='AI Agent' /><meta property='article:tag' content='网站克隆' /><meta property='article:tag' content='Next.js' /><meta property='article:tag' content='像素级复刻' /><meta property='article:tag' content='Claude Code' /><meta property='article:tag' content='前端开发' /><meta property='article:published_time' content='2026-07-29T10:37:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-29T11:34:00&#43;08:00'/>
+<meta name="twitter:title" content="一句话克隆网站：AI Agent 像素级复刻工具 - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="想快速复刻一个网站的页面设计，又不想从零手写 React 组件和 CSS？\nAI Website Cloner Template 提供了一套基于 AI Agent 的网站逆向工程流程：输入目标网址并运行 /clone-website，AI 会分析页面、提取设计规范、下载素材，并生成结构清晰的 Next.js 项目。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="AI Agent, 网站克隆, Next.js, 像素级复刻, Claude Code, 前端开发">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"一句话克隆网站：AI Agent 像素级复刻工具\"",
+  "description": "\"想快速复刻一个网站的页面设计，又不想从零手写 React 组件和 CSS？\\nAI Website Cloner Template 提供了一套基于 AI Agent 的网站逆向工程流程：输入目标网址并运行 /clone-website，AI 会分析页面、提取设计规范、下载素材，并生成结构清晰的 Next.js 项目。\\n\"",
+  "datePublished": "\"2026-07-29T10:37:00+08:00\"",
+  "dateModified": "\"2026-07-29T11:34:00+08:00\"",
+  "url": "\"https://www.tood.win/posts/yi-ju-hua-ke-long-wang-zhan-ai-agent-xiang/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai/">AI</a><span>/</span><a href="/posts/yi-ju-hua-ke-long-wang-zhan-ai-agent-xiang/">一句话克隆网站：AI Agent 像素级复刻工具</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI</span>
+                <span>LIVE DATA / A.2607.055</span>
+            </div>
+            <h1>一句话克隆网站：AI Agent 像素级复刻工具</h1>
+            <p class="article-deck">想快速复刻一个网站的页面设计，又不想从零手写 React 组件和 CSS？
+AI Website Cloner Template 提供了一套基于 AI Agent 的网站逆向工程流程：输入目标网址并运行 /clone-website，AI 会分析页面、提取设计规范、下载素材，并生成结构清晰的 Next.js 项目。
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.29</span>
+                <span>4 MIN READ</span>
+                <span>1961 WORDS</span>
+                <span>AI</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A55</strong>
+                <p class="mono">JAN. 29<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">08</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>想快速复刻一个网站的页面设计，又不想从零手写 React 组件和 CSS？</p>
+<p><strong><a class="link" href="/tags/ai/" >AI</a> Website Cloner Template</strong> 提供了一套基于 <a class="link" href="/tags/ai-agent/" >AI Agent</a> 的网站逆向工程流程：输入目标网址并运行 <code>/clone-website</code>，AI 会分析页面、提取设计规范、下载素材，并生成结构清晰的 <a class="link" href="/tags/next-js/" >Next.js</a> 项目。</p>
+<p>它并不是简单的“截图转 HTML”，而是把网站拆解为可维护的 React 组件、<a class="link" href="/tags/tailwind-css/" >Tailwind CSS</a> 样式、TypeScript 类型和本地素材文件，适合网站迁移、旧站重建、源码找回和前端学习。</p>
+<p><img alt="一句话克隆网站：AI Agent 像素级复刻工具" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/729_10_39_48-48407b7e.jpg"></p>
+<h2 id="这个工具能做什么">这个工具能做什么？
+</h2><p>它主要解决的是“从现有网站视觉效果到可编辑前端代码”的问题。</p>
+<ul>
+<li>自动截取桌面端和移动端页面</li>
+<li>提取颜色、字体、间距、圆角、阴影等设计 <a class="link" href="/tags/token/" >Token</a></li>
+<li>分析滚动、悬停、点击、弹窗和轮播等交互</li>
+<li>下载图片、视频、字体、SVG 和网站图标</li>
+<li>按页面区块生成 React 组件规格</li>
+<li>并行生成 Next.js 组件</li>
+<li>对比原站与复刻页面，进行视觉 QA</li>
+<li>输出可继续修改和部署的前端项目</li>
+</ul>
+<h2 id="核心工作流程">核心工作流程
+</h2><h3 id="1-页面侦察">1. 页面侦察
+</h3><p>AI Agent 通过浏览器自动化工具打开目标网站，滚动并检查完整页面，同时记录桌面端、移动端和不同交互状态。</p>
+<h3 id="2-提取设计规范">2. 提取设计规范
+</h3><p>工具会读取页面的实际样式，包括：</p>
+<ul>
+<li>字体名称、字号和字重</li>
+<li>颜色和渐变</li>
+<li>内外边距</li>
+<li>圆角、边框和阴影</li>
+<li>响应式断点</li>
+<li>动画时间和缓动方式</li>
+</ul>
+<p>这些数据会被整理为 Tailwind CSS 和全局样式中的设计 <a class="link" href="/tags/token/" >Token</a>，减少凭感觉猜测样式的问题。</p>
+<h3 id="3-下载真实素材">3. 下载真实素材
+</h3><p>页面中的图片、视频、字体、SVG、favicon 和 Open Graph 图片会被保存到本地项目中。</p>
+<p>这意味着生成结果使用的是目标页面的真实素材，而不是由 AI 临时生成的占位内容。</p>
+<h3 id="4-生成组件规格">4. 生成组件规格
+</h3><p>AI 会按照导航栏、首屏、功能区、案例区、价格区和页脚等页面区块，生成详细的组件规格文档。</p>
+<p>规格中会记录：</p>
+<ul>
+<li>组件结构</li>
+<li>文本内容</li>
+<li>精确样式值</li>
+<li>素材路径</li>
+<li>交互状态</li>
+<li>响应式表现</li>
+</ul>
+<h3 id="5-并行生成代码">5. 并行生成代码
+</h3><p>不同区块可以交给多个 AI Agent 并行处理，最终合并为完整页面。</p>
+<p>生成项目主要使用：</p>
+<ul>
+<li>Next.js</li>
+<li>React</li>
+<li>TypeScript</li>
+<li>Tailwind CSS</li>
+<li>shadcn/ui</li>
+</ul>
+<h3 id="6-视觉-qa">6. 视觉 QA
+</h3><p>页面生成后，AI 会再次运行网站并截图，与原页面进行视觉对比，检查布局、字体、颜色、间距和素材是否存在明显偏差。</p>
+<h2 id="生成后的项目结构">生成后的项目结构
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">src/
+</span></span><span class="line"><span class="cl">├─ app/                 # Next.js 路由与页面
+</span></span><span class="line"><span class="cl">├─ components/          # 页面 React 组件
+</span></span><span class="line"><span class="cl">│  ├─ ui/               # shadcn/ui 基础组件
+</span></span><span class="line"><span class="cl">│  └─ icons.tsx         # 提取的 SVG 图标
+</span></span><span class="line"><span class="cl">├─ hooks/               # 自定义 React Hooks
+</span></span><span class="line"><span class="cl">├─ lib/                 # 公共工具
+</span></span><span class="line"><span class="cl">└─ types/               # TypeScript 类型
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public/
+</span></span><span class="line"><span class="cl">├─ images/              # 下载的图片
+</span></span><span class="line"><span class="cl">├─ videos/              # 下载的视频
+</span></span><span class="line"><span class="cl">└─ seo/                 # favicon、OG 图片等
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docs/
+</span></span><span class="line"><span class="cl">├─ research/            # 页面分析与组件规格
+</span></span><span class="line"><span class="cl">└─ design-references/   # 原网站截图
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="如何使用">如何使用？
+</h2><h3 id="准备条件">准备条件
+</h3><p>使用前需要准备：</p>
+<ul>
+<li>Node.js 24 或更高版本</li>
+<li>一个支持该项目的 AI 编程工具</li>
+<li>可用的浏览器自动化能力，例如 Chrome <a class="link" href="/tags/mcp/" >MCP</a>、Playwright MCP 或 Puppeteer MCP</li>
+</ul>
+<p>项目推荐使用 <a class="link" href="/tags/claude/" >Claude</a> Code，同时也支持 <a class="link" href="/tags/codex-cli/" >Codex CLI</a>、Cursor、<a class="link" href="/tags/gemini/" >Gemini</a> CLI、<a class="link" href="/tags/github-copilot/" >GitHub Copilot</a>、<a class="link" href="/tags/windsurf/" >Windsurf</a>、Cline、Roo Code 等工具。</p>
+<h3 id="第一步创建自己的项目">第一步：创建自己的项目
+</h3><p>打开 GitHub 项目页面，点击 <strong>Use this template</strong>，再选择 <strong>Create a new repository</strong>。</p>
+<p>不要直接把官方模板仓库当成自己的网站项目提交修改。</p>
+<h3 id="第二步克隆自己的仓库">第二步：克隆自己的仓库
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/你的用户名/你的仓库名.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> 你的仓库名
+</span></span><span class="line"><span class="cl">npm install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第三步启动-ai-agent">第三步：启动 AI Agent
+</h3><p>以 <a class="link" href="/tags/claude-code/" >Claude Code</a> 为例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">claude --chrome
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第四步运行网站克隆命令">第四步：运行网站克隆命令
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">/clone-website https://example.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以一次提供多个网址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">/clone-website https://example.com https://example.com/pricing
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第五步运行项目">第五步：运行项目
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm run dev
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>完成后访问本地开发地址，检查页面并继续修改内容、品牌信息和业务逻辑。</p>
+<h2 id="它适合哪些场景">它适合哪些场景？
+</h2><h3 id="适合">适合
+</h3><ul>
+<li>将自己的网站迁移到 Next.js</li>
+<li>旧网站只有线上页面，但源码已经丢失</li>
+<li>将 <a class="link" href="/tags/wordpress/" >WordPress</a>、Webflow 或 Squarespace 页面重建为现代前端项目</li>
+<li>学习优秀网站的布局、动效和响应式设计</li>
+<li>快速搭建内部原型或页面改版基础</li>
+<li>在获得授权后重建客户网站</li>
+</ul>
+<h3 id="不适合">不适合
+</h3><ul>
+<li>自动还原原网站的后端数据库</li>
+<li>复制登录、支付、会员和实时业务系统</li>
+<li>自动修复原网站不合理的业务逻辑</li>
+<li>把别人的品牌、文案和设计冒充为自己的作品</li>
+<li>制作钓鱼网站或仿冒登录页面</li>
+<li>绕过目标网站的服务条款、版权或访问限制</li>
+</ul>
+<h2 id="使用前必须知道的限制">使用前必须知道的限制
+</h2><p>“像素级复刻”是一项目标，而不是任何网站都能百分之百实现的保证。</p>
+<p>以下内容通常仍需要人工调整：</p>
+<ul>
+<li>复杂的 WebGL、Canvas 或 3D 动画</li>
+<li>登录后才能访问的页面</li>
+<li>依赖后端接口的动态数据</li>
+<li>个性化推荐和实时内容</li>
+<li>支付、账号、权限和数据库逻辑</li>
+<li>受跨域、反爬虫或访问权限保护的素材</li>
+<li>原网站未公开的源代码与内部实现</li>
+</ul>
+<p>生成完成后，开发者仍然需要进行代码 Review、性能优化、无障碍检查、<a class="link" href="/tags/seo/" >SEO</a> 配置和业务改造。</p>
+<h2 id="一句话总结">一句话总结
+</h2><p><strong>AI Website Cloner Template 更像一个“网站视觉逆向工程助手”，而不是自动重构完整业务系统的万能工具。</strong></p>
+<p>它可以显著缩短页面搭建时间，并把目标网站的视觉结构转换为可继续开发的 Next.js 代码；但后端功能、版权合规、性能优化和真实业务逻辑，仍然需要开发者自己完成。</p>
+<h2 id="github-项目">GitHub 项目
+</h2><ul>
+<li>项目名称：AI Website Cloner Template</li>
+<li>GitHub：<a class="link" href="https://github.com/JCodesMore/ai-website-cloner-template"  target="_blank" rel="noopener"
+    >JCodesMore/ai-website-cloner-template</a></li>
+<li>开源协议：MIT</li>
+</ul>
+
+    <blockquote>
+        <p>请只复刻自己拥有、已经获得授权，或明确允许研究和重建的网站。不要将该工具用于仿冒、钓鱼、侵权或其他违法用途。</p>
+
+    </blockquote>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/ai-agent/">AI Agent</a>
+        
+            <a href="/tags/%E7%BD%91%E7%AB%99%E5%85%8B%E9%9A%86/">网站克隆</a>
+        
+            <a href="/tags/next.js/">Next.js</a>
+        
+            <a href="/tags/%E5%83%8F%E7%B4%A0%E7%BA%A7%E5%A4%8D%E5%88%BB/">像素级复刻</a>
+        
+            <a href="/tags/claude-code/">Claude Code</a>
+        
+            <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/gu-ge-zheng-zai-pi-liang-bao-fei-nei-rong/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>谷歌正在“批量报废”内容站？真正被淘汰的不是 AI</strong>
+                    </a><a href="/posts/ai-man-ju-zhi-zuo-skill-gong-zuo-liu-yong/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#这个工具能做什么">这个工具能做什么？</a></li>
+    
+    <li><a href="#生成后的项目结构">生成后的项目结构</a></li>
+    
+    
+    <li><a href="#使用前必须知道的限制">使用前必须知道的限制</a></li>
+    <li><a href="#一句话总结">一句话总结</a></li>
+    <li><a href="#github-项目">GitHub 项目</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/ai/"><span>分类</span><b>AI</b></a>
+                    <a><span>字数</span><b>1961</b></a>
+                    <a><span>阅读</span><b>4 MIN</b></a>
+                    <a><span>更新</span><b>07.29</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/windows-ai-gong-ju-fan-fu-bao-cuo-an-zhuang/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/23_08_32301_1-85cb7eaa.jpg" alt="Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费" loading="lazy"><code>01 / AI</code>
+                    <h3>Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>在 Windows 上使用 Codex、Claude Code、Cursor 或其他 AI 编程工具时，你可能遇到过这种情况：
+1 2 3 4 …</p>
+                    <time>2026-08-02</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ui-ux-pro-max-rang-ai-sheng-cheng-de-jie/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/12_2-026d34e7.jpg" alt="UI/UX Pro Max：让 AI 生成的界面摆脱模板感" loading="lazy"><code>02 / AI</code>
+                    <h3>UI/UX Pro Max：让 AI 生成的界面摆脱模板感</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>使用 AI 编程工具生成网页时，很多人都会遇到同一个问题：
+代码可以运行，但界面一眼就能看出是 AI 做的。
+页面通常拥有相似的渐变背景、圆角卡 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/headroom-zui-gao-jian-shao-92-token-yong-ai-bian/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/ChatGPT_Image_2026727_20_20_12-d72362d1.jpg" alt="Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上" loading="lazy"><code>03 / AI</code>
+                    <h3>Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>使用 Claude Code、Codex、Cursor 等 AI 编程工具时，真正消耗 Token 的往往不只是你输入的提示词。
+代码搜索结果、 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/book-to-skill-ba-yi-ben-shu-bian-cheng-ai/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/codex-5-tools-carousel-4x3-980be985.jpg" alt="Book to Skill：把一本书变成 AI 可以反复调用的知识工具" loading="lazy"><code>04 / AI</code>
+                    <h3>Book to Skill：把一本书变成 AI 可以反复调用的知识工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>很多人用 AI 阅读一本书时，通常只会做两件事：
+总结全书内容 提炼重点和金句 这种方式可以帮助我们快速了解一本书，却很难真正把书里的方法应用到 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

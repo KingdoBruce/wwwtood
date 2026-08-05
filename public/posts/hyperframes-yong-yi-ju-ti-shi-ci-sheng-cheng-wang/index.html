@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="做产品演示、工具介绍或数据动画时，传统视频软件往往需要手动调整时间轴、关键帧和字幕，制作过程比较繁琐。\nHyperFrames 提供了另一种思路：使用 HTML、CSS 和 JavaScript 编写视频画面，再将网页动画逐帧渲染成 MP4 文件。\n">
+<title>HyperFrames：用一句提示词生成网页动画，并渲染为 MP4 视频 - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/hyperframes-yong-yi-ju-ti-shi-ci-sheng-cheng-wang/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="HyperFrames：用一句提示词生成网页动画，并渲染为 MP4 视频 - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="做产品演示、工具介绍或数据动画时，传统视频软件往往需要手动调整时间轴、关键帧和字幕，制作过程比较繁琐。\nHyperFrames 提供了另一种思路：使用 HTML、CSS 和 JavaScript 编写视频画面，再将网页动画逐帧渲染成 MP4 文件。\n">
+<meta property='og:url' content='https://www.tood.win/posts/hyperframes-yong-yi-ju-ti-shi-ci-sheng-cheng-wang/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='HyperFrames' /><meta property='article:tag' content='AI视频生成' /><meta property='article:tag' content='HTML转视频' /><meta property='article:tag' content='网页动画' /><meta property='article:tag' content='MP4视频渲染' /><meta property='article:tag' content='AI编程助手' /><meta property='article:tag' content='Claude Code' /><meta property='article:tag' content='Codex' /><meta property='article:tag' content='短视频制作' /><meta property='article:tag' content='开源视频工具' /><meta property='article:tag' content='HeyGen' /><meta property='article:published_time' content='2026-07-28T12:07:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-28T12:15:48&#43;08:00'/>
+<meta name="twitter:title" content="HyperFrames：用一句提示词生成网页动画，并渲染为 MP4 视频 - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="做产品演示、工具介绍或数据动画时，传统视频软件往往需要手动调整时间轴、关键帧和字幕，制作过程比较繁琐。\nHyperFrames 提供了另一种思路：使用 HTML、CSS 和 JavaScript 编写视频画面，再将网页动画逐帧渲染成 MP4 文件。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="HyperFrames, AI视频生成, HTML转视频, 网页动画, MP4视频渲染, AI编程助手, Claude Code, Codex, 短视频制作, 开源视频工具, HeyGen">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"HyperFrames：用一句提示词生成网页动画，并渲染为 MP4 视频\"",
+  "description": "\"做产品演示、工具介绍或数据动画时，传统视频软件往往需要手动调整时间轴、关键帧和字幕，制作过程比较繁琐。\\nHyperFrames 提供了另一种思路：使用 HTML、CSS 和 JavaScript 编写视频画面，再将网页动画逐帧渲染成 MP4 文件。\\n\"",
+  "datePublished": "\"2026-07-28T12:07:00+08:00\"",
+  "dateModified": "\"2026-07-28T12:15:48+08:00\"",
+  "url": "\"https://www.tood.win/posts/hyperframes-yong-yi-ju-ti-shi-ci-sheng-cheng-wang/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai/">AI</a><span>/</span><a href="/posts/hyperframes-yong-yi-ju-ti-shi-ci-sheng-cheng-wang/">HyperFrames：用一句提示词生成网页动画，并渲染为 MP4 视频</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI</span>
+                <span>LIVE DATA / A.2607.040</span>
+            </div>
+            <h1>HyperFrames：用一句提示词生成网页动画，并渲染为 MP4 视频</h1>
+            <p class="article-deck">做产品演示、工具介绍或数据动画时，传统视频软件往往需要手动调整时间轴、关键帧和字幕，制作过程比较繁琐。
+HyperFrames 提供了另一种思路：使用 HTML、CSS 和 JavaScript 编写视频画面，再将网页动画逐帧渲染成 MP4 文件。
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.28</span>
+                <span>3 MIN READ</span>
+                <span>1345 WORDS</span>
+                <span>AI</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A40</strong>
+                <p class="mono">JAN. 28<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">07</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>做产品演示、工具介绍或数据动画时，传统视频软件往往需要手动调整时间轴、关键帧和字幕，制作过程比较繁琐。</p>
+<p><strong>HyperFrames</strong> 提供了另一种思路：使用 HTML、CSS 和 JavaScript 编写视频画面，再将网页动画逐帧渲染成 MP4 文件。</p>
+<p>它尤其适合配合 <a class="link" href="/tags/claude/" >Claude</a> Code、<a class="link" href="/tags/codex/" >Codex</a> 等 <a class="link" href="/tags/ai/" >AI</a> 编程助手使用。你只需要描述视频主题、画面风格和动画效果，AI 就可以帮助生成对应的网页动画代码，然后通过 HyperFrames 完成预览和视频导出。</p>
+<p><img alt="2026728_12_09_15" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/2026728_12_09_15-bcf2b426.jpg"></p>
+<h2 id="hyperframes-是什么">HyperFrames 是什么？
+</h2><p>HyperFrames 是 HeyGen 开源的 HTML 视频渲染框架。</p>
+<p>它可以把 HTML 页面、CSS 样式、图片、视频素材和可控制的网页动画，转换为帧数稳定、结果可复现的 MP4 视频。</p>
+<p>简单理解就是：</p>
+
+    <blockquote>
+        <p>用写网页的方式制作视频，再把网页动画渲染成 MP4。</p>
+
+    </blockquote>
+<p>HyperFrames 本身并不是 Sora、Veo 这类直接生成真实画面的文生视频模型。所谓“一句话生成视频”，通常是让 AI 编程助手根据提示词生成 HTML、CSS 和 JavaScript，再调用 HyperFrames 完成渲染。</p>
+<h2 id="hyperframes-可以做什么">HyperFrames 可以做什么？
+</h2><h3 id="1-制作产品宣传视频">1. 制作产品宣传视频
+</h3><p>可以用网页布局展示产品界面、功能卖点、价格方案和操作流程，适合制作 SaaS 产品介绍视频。</p>
+<h3 id="2-生成动态数据视频">2. 生成动态数据视频
+</h3><p>网页中的图表、数字、进度条和排行榜都可以加入动画，用于制作数据报告、业务汇报和社交媒体内容。</p>
+<h3 id="3-制作文字与字幕动画">3. 制作文字与字幕动画
+</h3><p>通过 CSS 或 GSAP 控制文字进入、缩放、渐变和切换效果，适合知识类短视频、教程和信息卡片。</p>
+<h3 id="4-输出标准-mp4-文件">4. 输出标准 MP4 文件
+</h3><p>动画完成后，可以通过命令行直接渲染为 MP4，方便上传到抖音、视频号、<a class="link" href="/tags/youtube/" >YouTube</a> 或其他视频平台。</p>
+<h2 id="为什么适合-ai-编程助手">为什么适合 AI 编程助手？
+</h2><p>传统视频编辑依赖时间轴操作，而 HyperFrames 的视频内容本质上是代码。</p>
+<p>这意味着 AI 可以直接修改：</p>
+<ul>
+<li>视频尺寸和时长</li>
+<li>文字内容与页面布局</li>
+<li>CSS 动画和转场效果</li>
+<li>图片、视频和音频素材</li>
+<li>字幕、图表和品牌样式</li>
+</ul>
+<p>例如，你可以直接告诉 AI：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">使用 HyperFrames 创建一段 10 秒的产品介绍视频。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">要求：
+</span></span><span class="line"><span class="cl">1. 画面比例为 16:9
+</span></span><span class="line"><span class="cl">2. 深色科技风格
+</span></span><span class="line"><span class="cl">3. 开头显示产品名称
+</span></span><span class="line"><span class="cl">4. 中间依次展示三个核心功能
+</span></span><span class="line"><span class="cl">5. 结尾显示网站地址
+</span></span><span class="line"><span class="cl">6. 添加平滑的文字进入和页面切换动画
+</span></span><span class="line"><span class="cl">7. 最后渲染为 MP4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>AI 会根据要求生成视频页面，再通过 HyperFrames 进行预览和导出。</p>
+<h2 id="基本使用流程">基本使用流程
+</h2><h3 id="第一步安装-hyperframes-skill">第一步：安装 HyperFrames Skill
+</h3><p>官方提供了适用于 AI 编程助手的 Skill，可以通过下面的命令安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npx skills add heygen-com/hyperframes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第二步让-ai-生成视频页面">第二步：让 AI 生成视频页面
+</h3><p>在 <a class="link" href="/tags/claude-code/" >Claude Code</a>、Codex 或其他支持 Skill 的 AI 工具中，描述视频主题、时长、比例和动画要求。</p>
+<h3 id="第三步浏览器预览">第三步：浏览器预览
+</h3><p>HyperFrames 使用普通 HTML 作为视频内容，因此可以先在浏览器中查看动画效果，再继续修改。</p>
+<h3 id="第四步渲染-mp4">第四步：渲染 MP4
+</h3><p>准备好 HTML 文件后，可以运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npx hyperframes render index.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>HyperFrames 会逐帧录制网页动画，并输出 MP4 视频文件。</p>
+<h2 id="适合哪些用户">适合哪些用户？
+</h2><p>HyperFrames 比较适合：</p>
+<ul>
+<li>想用 AI 批量制作短视频的人</li>
+<li>熟悉 HTML、CSS 或 JavaScript 的开发者</li>
+<li>需要制作产品演示视频的独立开发者</li>
+<li>想自动生成数据动画和信息视频的内容创作者</li>
+<li>不想反复拖动传统视频时间轴的用户</li>
+</ul>
+<p>不过，它更擅长制作网页动画、产品演示、字幕和动态图表，并不适合直接生成复杂的真人电影画面。</p>
+<h2 id="总结">总结
+</h2><p>HyperFrames 把网页开发和视频制作连接在了一起。</p>
+<p>你可以先用一句提示词让 AI 生成 HTML 动画，再使用 HyperFrames 将动画稳定地渲染为 MP4。对于产品介绍、数据展示、教程动画和批量短视频制作来说，这种工作方式比传统手动剪辑更容易自动化和重复使用。</p>
+<h2 id="项目地址">项目地址
+</h2><ul>
+<li>GitHub：https://github.com/heygen-com/hyperframes</li>
+<li>官方网站：https://hyperframes.heygen.com/</li>
+</ul>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/hyperframes/">HyperFrames</a>
+        
+            <a href="/tags/ai%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/">AI视频生成</a>
+        
+            <a href="/tags/html%E8%BD%AC%E8%A7%86%E9%A2%91/">HTML转视频</a>
+        
+            <a href="/tags/%E7%BD%91%E9%A1%B5%E5%8A%A8%E7%94%BB/">网页动画</a>
+        
+            <a href="/tags/mp4%E8%A7%86%E9%A2%91%E6%B8%B2%E6%9F%93/">MP4视频渲染</a>
+        
+            <a href="/tags/ai%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/">AI编程助手</a>
+        
+            <a href="/tags/claude-code/">Claude Code</a>
+        
+            <a href="/tags/codex/">Codex</a>
+        
+            <a href="/tags/%E7%9F%AD%E8%A7%86%E9%A2%91%E5%88%B6%E4%BD%9C/">短视频制作</a>
+        
+            <a href="/tags/%E5%BC%80%E6%BA%90%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7/">开源视频工具</a>
+        
+            <a href="/tags/heygen/">HeyGen</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/workbuddy-hyperframes-an-zhuang-jie-ru-ben-di-qwen3-tts/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>WorkBuddy &#43; HyperFrames 安装教程：接入本地 Qwen3-TTS，实现自己的声音自动配音</strong>
+                    </a><a href="/posts/video-use-ba-yuan-shi-su-cai-jiao-gei-ai/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>video-use：把原始素材交给 AI，自动完成剪辑、字幕与调色</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#hyperframes-是什么">HyperFrames 是什么？</a></li>
+    
+    <li><a href="#为什么适合-ai-编程助手">为什么适合 AI 编程助手？</a></li>
+    
+    <li><a href="#适合哪些用户">适合哪些用户？</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#项目地址">项目地址</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/ai/"><span>分类</span><b>AI</b></a>
+                    <a><span>字数</span><b>1345</b></a>
+                    <a><span>阅读</span><b>3 MIN</b></a>
+                    <a><span>更新</span><b>07.28</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/workbuddy-hyperframes-an-zhuang-jie-ru-ben-di-qwen3-tts/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/26728_11_56_43-2c227fc4.jpg" alt="WorkBuddy &#43; HyperFrames 安装教程：接入本地 Qwen3-TTS，实现自己的声音自动配音" loading="lazy"><code>01 / AI</code>
+                    <h3>WorkBuddy &#43; HyperFrames 安装教程：接入本地 Qwen3-TTS，实现自己的声音自动配音</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>想用 AI 自动生成动画视频，但不熟悉 Node.js、FFmpeg、命令行和环境配置？
+一种更省事的方案是：使用 WorkBuddy 协助安装 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/video-use-ba-yuan-shi-su-cai-jiao-gei-ai/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/26728_12_13_20-82056871.jpg" alt="video-use：把原始素材交给 AI，自动完成剪辑、字幕与调色" loading="lazy"><code>02 / AI</code>
+                    <h3>video-use：把原始素材交给 AI，自动完成剪辑、字幕与调色</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>传统视频剪辑最耗时间的，往往不是拍摄，而是后期处理。
+删除停顿、处理口头禅、生成字幕、调整画面颜色、添加转场和动效，这些操作并不复杂，但需要反复 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/windows-ai-gong-ju-fan-fu-bao-cuo-an-zhuang/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/23_08_32301_1-85cb7eaa.jpg" alt="Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费" loading="lazy"><code>03 / AI</code>
+                    <h3>Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>在 Windows 上使用 Codex、Claude Code、Cursor 或其他 AI 编程工具时，你可能遇到过这种情况：
+1 2 3 4 …</p>
+                    <time>2026-08-02</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/how-to-nu-sheng-token-dai-ma-shuang-dao-fei/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/08-9ea9be30.jpg" alt="How to 怒省 Token，代码爽到飞起！马尾辫 Ponytail 实测" loading="lazy"><code>04 / AI</code>
+                    <h3>How to 怒省 Token，代码爽到飞起！马尾辫 Ponytail 实测</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>最近“马尾辫” Ponytail 在 GitHub 火得有点离谱，短时间内拿下超过 9.2 万 Stars。
+它不是新的 AI 编程模型，而是一 …</p>
+                    <time>2026-07-31</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

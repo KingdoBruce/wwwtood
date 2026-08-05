@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="同时使用 Codex、Claude、Cursor、Gemini 和 GitHub Copilot 时，最麻烦的事情之一，就是不知道每个平台还剩多少额度，以及下一次什么时候重置。\n">
+<title>CodexBar：在 macOS 菜单栏统一查看 AI 编程工具额度 - 软件 - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/codexbar-zai-macos-cai-dan-lan-tong-yi-cha-kan/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="CodexBar：在 macOS 菜单栏统一查看 AI 编程工具额度 - 软件 - 拾光集 TOOD.WIN">
+<meta property='og:description' content="同时使用 Codex、Claude、Cursor、Gemini 和 GitHub Copilot 时，最麻烦的事情之一，就是不知道每个平台还剩多少额度，以及下一次什么时候重置。\n">
+<meta property='og:url' content='https://www.tood.win/posts/codexbar-zai-macos-cai-dan-lan-tong-yi-cha-kan/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='CodexBar' /><meta property='article:tag' content='AI编程工具' /><meta property='article:tag' content='macOS菜单栏' /><meta property='article:tag' content='Codex额度监控' /><meta property='article:tag' content='Claude使用限制' /><meta property='article:tag' content='Cursor' /><meta property='article:tag' content='Gemini' /><meta property='article:tag' content='GitHub Copilot' /><meta property='article:tag' content='OpenRouter' /><meta property='article:tag' content='GitHub开源项目' /><meta property='article:published_time' content='2026-07-28T20:22:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-28T21:18:39&#43;08:00'/>
+<meta name="twitter:title" content="CodexBar：在 macOS 菜单栏统一查看 AI 编程工具额度 - 软件 - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="同时使用 Codex、Claude、Cursor、Gemini 和 GitHub Copilot 时，最麻烦的事情之一，就是不知道每个平台还剩多少额度，以及下一次什么时候重置。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="CodexBar, AI编程工具, macOS菜单栏, Codex额度监控, Claude使用限制, Cursor, Gemini, GitHub Copilot, OpenRouter, GitHub开源项目">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"CodexBar：在 macOS 菜单栏统一查看 AI 编程工具额度\"",
+  "description": "\"同时使用 Codex、Claude、Cursor、Gemini 和 GitHub Copilot 时，最麻烦的事情之一，就是不知道每个平台还剩多少额度，以及下一次什么时候重置。\\n\"",
+  "datePublished": "\"2026-07-28T20:22:00+08:00\"",
+  "dateModified": "\"2026-07-28T21:18:39+08:00\"",
+  "url": "\"https://www.tood.win/posts/codexbar-zai-macos-cai-dan-lan-tong-yi-cha-kan/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><span>/</span><a href="/posts/codexbar-zai-macos-cai-dan-lan-tong-yi-cha-kan/">CodexBar：在 macOS 菜单栏统一查看 AI 编程工具额度</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / 软件</span>
+                <span>LIVE DATA / A.2607.053</span>
+            </div>
+            <h1>CodexBar：在 macOS 菜单栏统一查看 AI 编程工具额度</h1>
+            <p class="article-deck">同时使用 Codex、Claude、Cursor、Gemini 和 GitHub Copilot 时，最麻烦的事情之一，就是不知道每个平台还剩多少额度，以及下一次什么时候重置。
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.28</span>
+                <span>3 MIN READ</span>
+                <span>1442 WORDS</span>
+                <span>软件</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A53</strong>
+                <p class="mono">JAN. 28<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">09</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>同时使用 <a class="link" href="/tags/codex/" >Codex</a>、<a class="link" href="/tags/claude/" >Claude</a>、<a class="link" href="/tags/cursor/" >Cursor</a>、Gemini 和 <a class="link" href="/tags/github-copilot/" >GitHub Copilot</a> 时，最麻烦的事情之一，就是不知道每个平台还剩多少额度，以及下一次什么时候重置。</p>
+<p><strong>CodexBar</strong> 是一款免费开源的 macOS 菜单栏应用，可以把多个 <a class="link" href="/tags/ai/" >AI</a> 编程工具的使用额度、重置倒计时、余额和服务状态集中显示在桌面顶部。</p>
+<p>不用反复打开不同网站，抬眼看一下菜单栏，就能了解当前 AI 工具的使用情况。</p>
+<p><img alt="CodexBar：在 macOS 菜单栏统一查看 AI 编程工具额度" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/af426cc6-39ea-412e-ba01-110e5c877a14-ce6ecd10.jpg"></p>
+<h2 id="codexbar-能做什么">CodexBar 能做什么？
+</h2><p>CodexBar 主要解决三个问题：</p>
+<ul>
+<li>查看不同 AI 服务的当前使用额度</li>
+<li>显示会话、每周或每月额度的重置时间</li>
+<li>提醒用户某个服务是否出现故障或额度不足</li>
+</ul>
+<p>部分服务还可以显示：</p>
+<ul>
+<li>剩余积分或账户余额</li>
+<li>API 调用费用</li>
+<li><a class="link" href="/tags/token/" >Token</a> 使用量</li>
+<li>最近一段时间的使用趋势</li>
+<li>服务故障和运行状态</li>
+</ul>
+<p>具体能够显示哪些数据，取决于对应服务是否提供相关接口。</p>
+<h2 id="支持哪些-ai-工具">支持哪些 AI 工具？
+</h2><p>CodexBar 官方目前列出了 63 个服务提供商，常见的包括：</p>
+<ul>
+<li><a class="link" href="/tags/openai-codex/" >OpenAI Codex</a></li>
+<li>OpenAI API</li>
+<li>Claude</li>
+<li>Cursor</li>
+<li>Gemini</li>
+<li>GitHub Copilot</li>
+<li><a class="link" href="/tags/grok/" >Grok</a></li>
+<li>GroqCloud</li>
+<li>OpenRouter</li>
+<li>LiteLLM</li>
+<li><a class="link" href="/tags/deepseek/" >DeepSeek</a></li>
+<li>ElevenLabs</li>
+<li>Deepgram</li>
+<li>MiniMax</li>
+<li>Kiro</li>
+<li>Zed</li>
+<li>Vertex AI</li>
+<li>AWS Bedrock</li>
+</ul>
+<p>不同服务的连接方式并不完全相同，可能需要使用 OAuth、API Key、浏览器登录状态、本地 CLI 或应用配置文件。</p>
+<h2 id="两种菜单栏显示方式">两种菜单栏显示方式
+</h2><p>CodexBar 提供两种主要显示模式。</p>
+<h3 id="独立图标模式">独立图标模式
+</h3><p>每个 AI 服务在菜单栏中显示一个独立状态项。</p>
+<p>这种方式适合只使用两三个 AI 工具的用户，可以直接看到每个平台的剩余额度。</p>
+<h3 id="合并图标模式">合并图标模式
+</h3><p>将多个服务合并到一个菜单栏图标中，再通过提供商切换器查看不同平台。</p>
+<p>当启用的 AI 工具较多时，这种模式可以减少菜单栏占用空间。</p>
+<p>CodexBar 本身没有 Dock 图标，主要通过菜单栏运行，界面比较简洁。</p>
+<h2 id="动态条形图标有什么用">动态条形图标有什么用？
+</h2><p>CodexBar 会使用动态条形图标表示当前额度。</p>
+<p>用户不需要每次点击菜单，就能通过图标大致判断：</p>
+<ul>
+<li>当前额度是否充足</li>
+<li>使用量是否接近上限</li>
+<li>是否需要等待下一次重置</li>
+<li>服务是否出现异常</li>
+</ul>
+<p>对于长时间使用 AI 编程助手的开发者，这种显示方式比频繁检查网页控制台更方便。</p>
+<h2 id="如何安装-codexbar">如何安装 CodexBar？
+</h2><p>CodexBar 桌面应用要求：</p>
+<ul>
+<li>macOS 14 Sonoma 或更高版本</li>
+</ul>
+<p>使用 Homebrew 安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install --cask codexbar
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以前往 GitHub Releases 页面下载安装包。</p>
+<p>安装完成后，打开：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Settings → Providers
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启用自己正在使用的 AI 服务，并根据提示完成登录或授权。</p>
+<h2 id="使用时需要注意什么">使用时需要注意什么？
+</h2><p>CodexBar 会复用已有的 OAuth 登录、浏览器 Cookie、API Key、本地 CLI 登录状态或配置文件，不会要求用户把所有平台密码直接保存到应用中。</p>
+<p>不过，部分功能可能需要：</p>
+<ul>
+<li>访问浏览器 Cookie</li>
+<li>读取钥匙串信息</li>
+<li>读取本地项目或日志文件</li>
+<li>配置 API Key</li>
+<li>开启文件访问权限</li>
+</ul>
+<p>因此，在启用某个提供商之前，建议先查看该服务对应的数据来源和权限说明。</p>
+<p>此外，不同 AI 平台开放的数据并不一致，所以并不是所有提供商都能同时显示额度、费用、Token 和重置时间。</p>
+<h2 id="codexbar-适合哪些人">CodexBar 适合哪些人？
+</h2><p>CodexBar 比较适合以下用户：</p>
+<ul>
+<li>同时使用多个 AI 编程助手</li>
+<li>经常遇到 Codex 或 Claude 额度限制</li>
+<li>需要管理多个 API 账户</li>
+<li>希望提前安排高消耗编程任务</li>
+<li>不想频繁打开不同平台的控制台</li>
+<li>想在菜单栏快速查看 AI 服务状态</li>
+</ul>
+<p>如果你只偶尔使用一个 AI 工具，CodexBar 的作用可能不明显。</p>
+<p>但对于每天同时使用 Codex、Claude、Cursor、Gemini 等工具的人来说，它可以减少检查额度和切换网页的时间。</p>
+<h2 id="总结">总结
+</h2><p>CodexBar 并不会增加 AI 工具的额度，它真正解决的是“额度不可见”的问题。</p>
+<p>它把分散在不同平台中的使用限制、重置倒计时、账户余额和服务状态集中到 macOS 菜单栏，让用户能够更合理地安排 AI 编程任务。</p>
+<p>项目免费开源，采用 MIT 许可证，支持 Homebrew 安装，也提供适用于 macOS 和 Linux 的命令行工具。</p>
+<h2 id="项目地址">项目地址
+</h2><ul>
+<li>GitHub：https://github.com/steipete/CodexBar</li>
+<li>官方网站：https://codexbar.app/</li>
+<li>Releases：https://github.com/steipete/CodexBar/releases</li>
+</ul>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/codexbar/">CodexBar</a>
+        
+            <a href="/tags/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/">AI编程工具</a>
+        
+            <a href="/tags/macos%E8%8F%9C%E5%8D%95%E6%A0%8F/">MacOS菜单栏</a>
+        
+            <a href="/tags/codex%E9%A2%9D%E5%BA%A6%E7%9B%91%E6%8E%A7/">Codex额度监控</a>
+        
+            <a href="/tags/claude%E4%BD%BF%E7%94%A8%E9%99%90%E5%88%B6/">Claude使用限制</a>
+        
+            <a href="/tags/cursor/">Cursor</a>
+        
+            <a href="/tags/gemini/">Gemini</a>
+        
+            <a href="/tags/github-copilot/">GitHub Copilot</a>
+        
+            <a href="/tags/openrouter/">OpenRouter</a>
+        
+            <a href="/tags/github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">GitHub开源项目</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/yong-chatgpt-images-kong-zhi-mu-biao-bu-ju-tu/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>如何用 ChatGPT Images 控制目标布局、图案和配色</strong>
+                    </a><a href="/posts/gu-ge-zheng-zai-pi-liang-bao-fei-nei-rong/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>谷歌正在“批量报废”内容站？真正被淘汰的不是 AI</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#codexbar-能做什么">CodexBar 能做什么？</a></li>
+    <li><a href="#支持哪些-ai-工具">支持哪些 AI 工具？</a></li>
+    
+    <li><a href="#动态条形图标有什么用">动态条形图标有什么用？</a></li>
+    <li><a href="#如何安装-codexbar">如何安装 CodexBar？</a></li>
+    <li><a href="#使用时需要注意什么">使用时需要注意什么？</a></li>
+    <li><a href="#codexbar-适合哪些人">CodexBar 适合哪些人？</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#项目地址">项目地址</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/%E8%BD%AF%E4%BB%B6/"><span>分类</span><b>软件</b></a>
+                    <a><span>字数</span><b>1442</b></a>
+                    <a><span>阅读</span><b>3 MIN</b></a>
+                    <a><span>更新</span><b>07.28</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/headroom-zui-gao-jian-shao-92-token-yong-ai-bian/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/ChatGPT_Image_2026727_20_20_12-d72362d1.jpg" alt="Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上" loading="lazy"><code>01 / AI</code>
+                    <h3>Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>使用 Claude Code、Codex、Cursor 等 AI 编程工具时，真正消耗 Token 的往往不只是你输入的提示词。
+代码搜索结果、 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/everything-windows-kuai-su-sou-suo-wen-jian-de-shi/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/31_13_53_56-5c219d61.jpg" alt="Everything 使用教程：Windows 快速搜索文件的实用技巧" loading="lazy"><code>02 / 软件</code>
+                    <h3>Everything 使用教程：Windows 快速搜索文件的实用技巧</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>在 Windows 电脑中查找文件时，系统自带搜索有时需要等待较长时间，尤其是在硬盘文件较多、目录层级复杂的情况下。
+如果你主要通过文件名、文件 …</p>
+                    <time>2026-07-31</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/zai-xian-tu-pian-ya-suo-gong-ju-mian-fei/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/27_23-62a6619f.jpg" alt="在线图片压缩工具：免费批量压缩 JPG、PNG 和 WebP" loading="lazy"><code>03 / 软件</code>
+                    <h3>在线图片压缩工具：免费批量压缩 JPG、PNG 和 WebP</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>需要减小图片体积，又不想把私人照片或工作素材上传到第三方服务器，可以试试这款免费的在线图片压缩工具。
+它支持 JPG、PNG 和 WebP 格式 …</p>
+                    <time>2026-07-31</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ui-ux-pro-max-rang-ai-sheng-cheng-de-jie/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/12_2-026d34e7.jpg" alt="UI/UX Pro Max：让 AI 生成的界面摆脱模板感" loading="lazy"><code>04 / AI</code>
+                    <h3>UI/UX Pro Max：让 AI 生成的界面摆脱模板感</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>使用 AI 编程工具生成网页时，很多人都会遇到同一个问题：
+代码可以运行，但界面一眼就能看出是 AI 做的。
+页面通常拥有相似的渐变背景、圆角卡 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

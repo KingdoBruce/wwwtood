@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="xianyu-auto-reply-fix 是一个开源的闲鱼管理系统，基于 FastAPI、SQLite 和 Playwright 开发，提供多账号管理、关键词回复、AI 自动回复、自动发货、商品管理和运行日志等功能。\n">
+<title>xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程 - 建站 - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/xianyu-auto-reply-fix-kai-yuan-xian-yu-zi-dong/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程 - 建站 - 拾光集 TOOD.WIN">
+<meta property='og:description' content="xianyu-auto-reply-fix 是一个开源的闲鱼管理系统，基于 FastAPI、SQLite 和 Playwright 开发，提供多账号管理、关键词回复、AI 自动回复、自动发货、商品管理和运行日志等功能。\n">
+<meta property='og:url' content='https://www.tood.win/posts/xianyu-auto-reply-fix-kai-yuan-xian-yu-zi-dong/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='闲鱼自动回复' /><meta property='article:tag' content='闲鱼自动发货' /><meta property='article:tag' content='闲鱼管理系统' /><meta property='article:tag' content='AI客服' /><meta property='article:tag' content='Docker部署' /><meta property='article:tag' content='Playwright' /><meta property='article:published_time' content='2026-07-29T16:09:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-30T10:50:58&#43;08:00'/>
+<meta name="twitter:title" content="xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程 - 建站 - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="xianyu-auto-reply-fix 是一个开源的闲鱼管理系统，基于 FastAPI、SQLite 和 Playwright 开发，提供多账号管理、关键词回复、AI 自动回复、自动发货、商品管理和运行日志等功能。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="闲鱼自动回复, 闲鱼自动发货, 闲鱼管理系统, AI客服, Docker部署, Playwright">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程\"",
+  "description": "\"xianyu-auto-reply-fix 是一个开源的闲鱼管理系统，基于 FastAPI、SQLite 和 Playwright 开发，提供多账号管理、关键词回复、AI 自动回复、自动发货、商品管理和运行日志等功能。\\n\"",
+  "datePublished": "\"2026-07-29T16:09:00+08:00\"",
+  "dateModified": "\"2026-07-30T10:50:58+08:00\"",
+  "url": "\"https://www.tood.win/posts/xianyu-auto-reply-fix-kai-yuan-xian-yu-zi-dong/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><span>/</span><a href="/posts/xianyu-auto-reply-fix-kai-yuan-xian-yu-zi-dong/">xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / 建站</span>
+                <span>LIVE DATA / A.2607.060</span>
+            </div>
+            <h1>xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程</h1>
+            <p class="article-deck">xianyu-auto-reply-fix 是一个开源的闲鱼管理系统，基于 FastAPI、SQLite 和 Playwright 开发，提供多账号管理、关键词回复、AI 自动回复、自动发货、商品管理和运行日志等功能。
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.29</span>
+                <span>5 MIN READ</span>
+                <span>2403 WORDS</span>
+                <span>建站</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A60</strong>
+                <p class="mono">JAN. 29<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">11</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p><code>xianyu-auto-reply-fix</code> 是一个开源的闲鱼管理系统，基于 <strong>FastAPI、SQLite 和 Playwright</strong> 开发，提供多账号管理、关键词回复、<a class="link" href="/tags/ai/" >AI</a> 自动回复、自动发货、商品管理和运行日志等功能。</p>
+<p>它更适合需要集中管理多个闲鱼账号、减少重复客服操作，或者希望研究浏览器自动化与 AI 客服系统的开发者。</p>
+
+    <blockquote>
+        <p>**注意：**该项目并非闲鱼官方产品，采用 AGPL-3.0 开源协议。请仅用于学习、研究和合规业务，不要用于刷量、骚扰、绕过平台限制或其他违规场景。</p>
+
+    </blockquote>
+<p><img alt="xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/d6ddc941-6453-473b-8d51-501d0c08d4a3-873437be.jpg"></p>
+<h2 id="主要功能">主要功能
+</h2><h3 id="多用户与多账号管理">多用户与多账号管理
+</h3><p>系统支持用户注册、邮箱验证、图形验证码、权限控制和数据隔离。</p>
+<p>每个用户可以添加多个闲鱼账号，并分别查看账号状态、启停监听任务及维护 Cookie，适合多人或多店铺协同管理。</p>
+<h3 id="关键词与-ai-自动回复">关键词与 AI 自动回复
+</h3><p>系统提供多种回复方式：</p>
+<ul>
+<li>通用关键词回复</li>
+<li>指定商品关键词回复</li>
+<li>默认回复</li>
+<li>图片关键词回复</li>
+<li>AI 上下文回复</li>
+</ul>
+<p>回复优先级为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">指定商品回复
+</span></span><span class="line"><span class="cl">&gt; 商品专用关键词
+</span></span><span class="line"><span class="cl">&gt; 通用关键词
+</span></span><span class="line"><span class="cl">&gt; 默认回复
+</span></span><span class="line"><span class="cl">&gt; AI 回复
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于价格、库存、发货时间等固定问题，可以优先使用关键词回复；只有未匹配到规则时，再交给 AI 处理，可以减少模型调用费用和错误回复。</p>
+<h3 id="自动发货">自动发货
+</h3><p>自动发货支持以下内容形式：</p>
+<ul>
+<li>固定文本</li>
+<li>卡密或批量数据</li>
+<li>API 返回内容</li>
+<li>图片文件</li>
+</ul>
+<p>系统提供防重复处理机制，适合虚拟资料、兑换码、课程链接等数字商品。</p>
+<p>正式启用前，建议先使用测试商品验证触发条件，避免重复发货或错误匹配。</p>
+<h3 id="商品与订单管理">商品与订单管理
+</h3><p>系统可以自动收集商品信息，并提供：</p>
+<ul>
+<li>商品详情查看</li>
+<li>商品规格配置</li>
+<li>商品数据去重</li>
+<li>订单状态管理</li>
+<li>消息通知</li>
+<li>在线客服</li>
+<li>商品定时擦亮</li>
+</ul>
+<p>这些功能可以把分散在多个账号中的商品、订单和咨询记录集中到一个 Web 后台中。</p>
+<h3 id="日志与运行监控">日志与运行监控
+</h3><p>管理后台可以查看实时日志，并支持：</p>
+<ul>
+<li><code>DEBUG</code>、<code>INFO</code>、<code>WARNING</code>、<code>ERROR</code> 日志级别</li>
+<li>按日期生成日志文件</li>
+<li>日志文件自动轮转</li>
+<li>系统状态统计</li>
+<li>安全统计</li>
+<li><code>/health</code> 健康检查接口</li>
+</ul>
+<p>遇到消息没有回复、Cookie 失效或容器启动失败时，可以先查看后台日志和账号连接状态。</p>
+<h2 id="部署前准备">部署前准备
+</h2><p>Docker 部署建议准备：</p>
+<ul>
+<li>Docker 20.10 或更高版本</li>
+<li>Docker Compose 2.0 或更高版本</li>
+<li>至少 2GB 内存</li>
+<li>至少 10GB 可用存储空间</li>
+</ul>
+<p>源码运行还需要：</p>
+<ul>
+<li>Python 3.11+</li>
+<li><a class="link" href="/tags/node-js/" >Node.js</a> 16+</li>
+<li>Playwright Chromium</li>
+<li>Windows、Linux 或 macOS</li>
+</ul>
+<p>对于不熟悉 Python 环境配置的用户，优先使用 Docker Compose。</p>
+<h2 id="使用-docker-compose-部署">使用 Docker Compose 部署
+</h2><p>执行以下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/GuDong2003/xianyu-auto-reply-fix.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> xianyu-auto-reply-fix
+</span></span><span class="line"><span class="cl">docker compose up -d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动后访问：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>地址</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Web 管理后台</td>
+          <td><code>http://localhost:9000</code></td>
+      </tr>
+      <tr>
+          <td>API 文档</td>
+          <td><code>http://localhost:9000/docs</code></td>
+      </tr>
+      <tr>
+          <td>健康检查</td>
+          <td><code>http://localhost:9000/health</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>查看容器状态：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose ps
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看实时日志：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose logs -f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>停止服务：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose down
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>国内网络环境也可以使用仓库提供的配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose -f docker-compose-cn.yml up -d --build
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>国内配置默认访问地址为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">http://localhost:8000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="本地源码运行">本地源码运行
+</h2><p>克隆项目并进入目录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/GuDong2003/xianyu-auto-reply-fix.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> xianyu-auto-reply-fix
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建 Python 虚拟环境：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python -m venv venv
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Linux 或 macOS 激活环境：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">source</span> venv/bin/activate
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Windows 激活环境：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">activate</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装依赖：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install --upgrade pip
+</span></span><span class="line"><span class="cl">pip install -r requirements.txt
+</span></span><span class="line"><span class="cl">playwright install chromium
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Linux 如果缺少浏览器系统依赖，可继续执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">playwright install-deps chromium
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动服务：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python Start.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>本地运行默认访问：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">http://localhost:8090
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="首次登录后的安全设置">首次登录后的安全设置
+</h2><p>项目首次初始化且没有自定义管理员密码时，默认账号可能为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">用户名：admin
+</span></span><span class="line"><span class="cl">密码：admin123
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>首次登录后应立即修改密码。</p>
+<p>同时建议完成以下设置：</p>
+<ol>
+<li>不要直接把管理端口暴露到公网。</li>
+<li>公网访问时配置 HTTPS、反向代理和访问限制。</li>
+<li>为 <code>SECRET_ENCRYPTION_KEY</code> 设置随机且足够长的值。</li>
+<li>不要把 Cookie、API Key、<a class="link" href="/tags/token/" >Token</a> 或数据库上传到 GitHub。</li>
+<li>定期备份 <code>data/</code> 和必要的运行配置。</li>
+</ol>
+<p>项目运行过程中可能产生以下目录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">data/
+</span></span><span class="line"><span class="cl">logs/
+</span></span><span class="line"><span class="cl">browser_data/
+</span></span><span class="line"><span class="cl">update_backup/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中可能包含数据库、日志、浏览器登录状态和 Cookie 相关信息，不应公开分享。</p>
+<h2 id="配置-ai-自动回复">配置 AI 自动回复
+</h2><p>AI 回复主要使用以下四个字段：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>model_name</code></td>
+          <td>模型名称</td>
+      </tr>
+      <tr>
+          <td><code>api_key</code></td>
+          <td>模型服务密钥</td>
+      </tr>
+      <tr>
+          <td><code>base_url</code></td>
+          <td>API 接口地址</td>
+      </tr>
+      <tr>
+          <td><code>api_type</code></td>
+          <td>接口类型</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>项目支持的接口类型包括：</p>
+<ul>
+<li>OpenAI-compatible</li>
+<li>OpenAI Responses</li>
+<li>DashScope</li>
+<li><a class="link" href="/tags/gemini/" >Gemini</a></li>
+<li>Anthropic</li>
+<li>Azure OpenAI</li>
+</ul>
+<p>对于兼容 OpenAI Chat Completions 格式的第三方模型服务，通常只需要填写自定义 <code>base_url</code>、模型名称和 API Key。</p>
+<p>建议先用测试账号验证：</p>
+<ul>
+<li>AI 是否能够正常返回内容</li>
+<li>回复语气是否符合商品场景</li>
+<li>是否会泄露系统提示词或敏感信息</li>
+<li>API 超时后是否会使用默认回复</li>
+<li>模型调用费用是否在可接受范围内</li>
+</ul>
+<h2 id="基本使用流程">基本使用流程
+</h2><p>部署完成后，可以按照以下顺序配置：</p>
+<ol>
+<li>登录 Web 管理后台。</li>
+<li>修改默认管理员密码。</li>
+<li>添加闲鱼账号和 Cookie。</li>
+<li>配置关键词及默认回复。</li>
+<li>按需配置 AI 模型。</li>
+<li>添加自动发货规则。</li>
+<li>启动账号监听。</li>
+<li>通过日志观察消息连接和回复情况。</li>
+</ol>
+<p>建议先启用关键词回复，再逐步增加 AI 回复和自动发货，不要在未测试的情况下直接管理正式账号。</p>
+<h2 id="常见问题">常见问题
+</h2><h3 id="docker-容器启动失败">Docker 容器启动失败
+</h3><p>先查看日志：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose logs -f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>仍然无法启动时，可以重新构建：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker compose down
+</span></span><span class="line"><span class="cl">docker compose build --no-cache
+</span></span><span class="line"><span class="cl">docker compose up -d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="playwright-提示缺少-chromium">Playwright 提示缺少 Chromium
+</h3><p>进入虚拟环境后执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">playwright install chromium
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="websocket-无法连接">WebSocket 无法连接
+</h3><p>重点检查：</p>
+<ul>
+<li>闲鱼 Cookie 是否过期</li>
+<li>服务器网络是否正常</li>
+<li>防火墙是否拦截连接</li>
+<li>账号是否触发登录验证</li>
+<li>后台账号监听任务是否已经启用</li>
+</ul>
+<h3 id="端口被占用">端口被占用
+</h3><p>Docker 部署可以修改 <code>docker-compose.yml</code> 中的端口映射。</p>
+<p>源码运行可以修改 <code>API_PORT</code> 环境变量，或者调整 <code>global_config.yml</code> 中的端口配置。</p>
+<h2 id="技术架构">技术架构
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>模块</th>
+          <th>使用技术</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>后端</td>
+          <td>FastAPI、Uvicorn、Python 异步编程</td>
+      </tr>
+      <tr>
+          <td>数据库</td>
+          <td>SQLite 3</td>
+      </tr>
+      <tr>
+          <td>前端</td>
+          <td>Bootstrap 5、Vanilla JavaScript、Chart.js</td>
+      </tr>
+      <tr>
+          <td>通信</td>
+          <td>REST API、WebSocket、SSE</td>
+      </tr>
+      <tr>
+          <td>浏览器自动化</td>
+          <td>Playwright、DrissionPage</td>
+      </tr>
+      <tr>
+          <td>日志</td>
+          <td>Loguru</td>
+      </tr>
+      <tr>
+          <td>部署</td>
+          <td>Docker、Docker Compose、可选 Nginx</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>SQLite 部署简单，适合个人或小规模使用；如果需要大量账号、高并发访问或多人长期协作，应先进行压力测试，并评估数据库和任务调度是否需要进一步改造。</p>
+<h2 id="使用注意事项">使用注意事项
+</h2><p>这个项目需要维护账号 Cookie 和浏览器状态，因此无法保证长期无人值守运行。</p>
+<p>闲鱼登录策略、接口和页面结构发生变化后，自动回复或账号监听功能也可能失效。使用过程中应定期检查日志，并关注项目 Issues 和版本更新。</p>
+<p>自动回复内容也应避免：</p>
+<ul>
+<li>重复发送相同消息</li>
+<li>向用户发送广告或无关内容</li>
+<li>承诺不存在的库存或服务</li>
+<li>自动处理高风险交易纠纷</li>
+<li>绕过闲鱼平台规则</li>
+</ul>
+<h2 id="项目地址">项目地址
+</h2><ul>
+<li>GitHub：<a class="link" href="https://github.com/GuDong2003/xianyu-auto-reply-fix"  target="_blank" rel="noopener"
+    >GuDong2003/xianyu-auto-reply-fix</a></li>
+<li>部署文档：<a class="link" href="https://github.com/GuDong2003/xianyu-auto-reply-fix/blob/main/docs/deployment.md"  target="_blank" rel="noopener"
+    >deployment.md</a></li>
+<li>配置说明：<a class="link" href="https://github.com/GuDong2003/xianyu-auto-reply-fix/blob/main/docs/configuration.md"  target="_blank" rel="noopener"
+    >configuration.md</a></li>
+<li>使用指南：<a class="link" href="https://github.com/GuDong2003/xianyu-auto-reply-fix/blob/main/docs/usage.md"  target="_blank" rel="noopener"
+    >usage.md</a></li>
+<li>常见问题：<a class="link" href="https://github.com/GuDong2003/xianyu-auto-reply-fix/blob/main/docs/faq.md"  target="_blank" rel="noopener"
+    >faq.md</a></li>
+</ul>
+
+    <blockquote>
+        <p>项目功能、默认端口和配置方式可能随版本更新而变化，部署前请以 GitHub 仓库中的最新文档为准。</p>
+
+    </blockquote>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/%E9%97%B2%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/">闲鱼自动回复</a>
+        
+            <a href="/tags/%E9%97%B2%E9%B1%BC%E8%87%AA%E5%8A%A8%E5%8F%91%E8%B4%A7/">闲鱼自动发货</a>
+        
+            <a href="/tags/%E9%97%B2%E9%B1%BC%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">闲鱼管理系统</a>
+        
+            <a href="/tags/ai%E5%AE%A2%E6%9C%8D/">AI客服</a>
+        
+            <a href="/tags/docker%E9%83%A8%E7%BD%B2/">Docker部署</a>
+        
+            <a href="/tags/playwright/">Playwright</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/wordpress-jian-zhan-bie-ji-zhe-mai-zhu-ti-he/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>WordPress 建站别急着买主题和装插件：正确流程与避坑清单</strong>
+                    </a><a href="/posts/awesome-gpt-image-2-prompts-github-kai-yuan-ai-hui/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>Awesome GPT Image 2 Prompts：GitHub 开源 AI 绘图提示词库</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    
+    <li><a href="#部署前准备">部署前准备</a></li>
+    <li><a href="#使用-docker-compose-部署">使用 Docker Compose 部署</a></li>
+    <li><a href="#本地源码运行">本地源码运行</a></li>
+    <li><a href="#首次登录后的安全设置">首次登录后的安全设置</a></li>
+    <li><a href="#配置-ai-自动回复">配置 AI 自动回复</a></li>
+    <li><a href="#基本使用流程">基本使用流程</a></li>
+    
+    <li><a href="#技术架构">技术架构</a></li>
+    <li><a href="#使用注意事项">使用注意事项</a></li>
+    <li><a href="#项目地址">项目地址</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/%E5%BB%BA%E7%AB%99/"><span>分类</span><b>建站</b></a>
+                    <a><span>字数</span><b>2403</b></a>
+                    <a><span>阅读</span><b>5 MIN</b></a>
+                    <a><span>更新</span><b>07.29</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/itom-dev-ke-zai-liu-lan-qi-zhong-hang-zou/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/93e00659-200d-4b46-8155-bdbb1a458471-cc83081f.jpg" alt="ITom Dev：可在浏览器中行走的开源 3D WebGL 作品集" loading="lazy"><code>01 / 建站</code>
+                    <h3>ITom Dev：可在浏览器中行走的开源 3D WebGL 作品集</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>ITom Dev 是一个开源的沉浸式 3D 开发者作品集。它没有采用常见的卡片式简历页面，而是把个人介绍、项目案例和联系方式放进了一条可以交互探 …</p>
+                    <time>2026-08-03</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/digitalplat-mian-fei-yu-ming-shen-qing-github-deng-lu/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/14_36-dadff2e7.jpg" alt="DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南" loading="lazy"><code>02 / 建站</code>
+                    <h3>DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>DigitalPlat FreeDomain 提供 dpdns.org、us.kg、qzz.io、xx.kg、qd.je 等公共命名空间下的免费 …</p>
+                    <time>2026-07-31</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/wordpress-jian-zhan-bie-ji-zhe-mai-zhu-ti-he/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/C729_13_52_17-eecc8ff7.jpg" alt="WordPress 建站别急着买主题和装插件：正确流程与避坑清单" loading="lazy"><code>03 / 建站</code>
+                    <h3>WordPress 建站别急着买主题和装插件：正确流程与避坑清单</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>很多人第一次使用 WordPress 建站，通常会先做两件事：
+购买一个看起来功能丰富的 WordPress 主题； 安装页面编辑器、轮播图、表 …</p>
+                    <time>2026-07-29</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/di-yi-ci-jian-zhan-xu-yao-na-xie-gong/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/12_13_06-c03efb6c.jpg" alt="第一次建站需要哪些工具？域名、托管、企业邮箱与网站统计清单" loading="lazy"><code>04 / 建站</code>
+                    <h3>第一次建站需要哪些工具？域名、托管、企业邮箱与网站统计清单</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>第一次建站，真正让人困惑的通常不是“页面怎么做”，而是网站做好之后的一系列问题：
+域名在哪里买？ 网站文件放在哪里？ 免费托管够不够用？ 怎么创 …</p>
+                    <time>2026-07-29</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

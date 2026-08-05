@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文介绍如何在 Codex 中接入 DeepSeek V4 Flash，并通过 GLM-4.6V Vision MCP 增加图片、截图和界面分析能力。文章梳理了配置备份、自定义模型、视觉 MCP、自动识图 Skill 和功能验证流程，同时说明配置覆盖、接口兼容和 API Key 安全等注意事项。">
+<title>Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力 - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力 - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="本文介绍如何在 Codex 中接入 DeepSeek V4 Flash，并通过 GLM-4.6V Vision MCP 增加图片、截图和界面分析能力。文章梳理了配置备份、自定义模型、视觉 MCP、自动识图 Skill 和功能验证流程，同时说明配置覆盖、接口兼容和 API Key 安全等注意事项。">
+<meta property='og:url' content='https://www.tood.win/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Codex接入DeepSeek' /><meta property='article:tag' content='DeepSeek V4 Flash' /><meta property='article:tag' content='Codex自定义模型' /><meta property='article:tag' content='Codex MCP配置' /><meta property='article:tag' content='GLM-4.6V' /><meta property='article:tag' content='Vision MCP Server' /><meta property='article:tag' content='Codex图片识别' /><meta property='article:tag' content='Codex Skill教程' /><meta property='article:tag' content='AI编程工具' /><meta property='article:tag' content='多模态AI工作流' /><meta property='article:published_time' content='2026-08-04T19:53:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-04T20:02:06&#43;08:00'/>
+<meta name="twitter:title" content="Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力 - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="本文介绍如何在 Codex 中接入 DeepSeek V4 Flash，并通过 GLM-4.6V Vision MCP 增加图片、截图和界面分析能力。文章梳理了配置备份、自定义模型、视觉 MCP、自动识图 Skill 和功能验证流程，同时说明配置覆盖、接口兼容和 API Key 安全等注意事项。">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="Codex接入DeepSeek, DeepSeek V4 Flash, Codex自定义模型, Codex MCP配置, GLM-4.6V, Vision MCP Server, Codex图片识别, Codex Skill教程, AI编程工具, 多模态AI工作流">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力\"",
+  "description": "\"本文介绍如何在 Codex 中接入 DeepSeek V4 Flash，并通过 GLM-4.6V Vision MCP 增加图片、截图和界面分析能力。文章梳理了配置备份、自定义模型、视觉 MCP、自动识图 Skill 和功能验证流程，同时说明配置覆盖、接口兼容和 API Key 安全等注意事项。\"",
+  "datePublished": "\"2026-08-04T19:53:00+08:00\"",
+  "dateModified": "\"2026-08-04T20:02:06+08:00\"",
+  "url": "\"https://www.tood.win/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai/">AI</a><span>/</span><a href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI</span>
+                <span>LIVE DATA / A.2608.076</span>
+            </div>
+            <h1>Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</h1>
+            <p class="article-deck">本文介绍如何在 Codex 中接入 DeepSeek V4 Flash，并通过 GLM-4.6V Vision MCP 增加图片、截图和界面分析能力。文章梳理了配置备份、自定义模型、视觉 MCP、自动识图 Skill 和功能验证流程，同时说明配置覆盖、接口兼容和 API Key 安全等注意事项。</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.08.04</span>
+                <span>5 MIN READ</span>
+                <span>2456 WORDS</span>
+                <span>AI</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A76</strong>
+                <p class="mono">JAN. 04<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">09</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p><a class="link" href="/tags/deepseek/" >DeepSeek</a> V4 Flash 本身主要面向文本、编程和 Agent 任务。如果希望在 <a class="link" href="/tags/codex/" >Codex</a> 中使用 DeepSeek，同时让它能够分析截图、界面、报错图片或设计稿，可以采用下面这套组合方案：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Codex
+</span></span><span class="line"><span class="cl">  ├─ DeepSeek V4 Flash：负责推理、编程和工具调度
+</span></span><span class="line"><span class="cl">  ├─ Vision MCP：负责读取和分析图片
+</span></span><span class="line"><span class="cl">  └─ Skill：判断何时自动调用视觉工具
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这并不是给 DeepSeek 模型本身增加视觉参数，而是让它在需要查看图片时，调用一个独立的视觉模型完成识图，再根据识图结果继续处理任务。</p>
+<p><img alt="Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/23_08_01_2-c9214eb7.jpg"></p>
+<h2 id="deepseek-v4-flash-是什么">DeepSeek V4 Flash 是什么
+</h2><p>DeepSeek 在 2026 年 4 月发布了 DeepSeek V4 Preview，其中包括：</p>
+<ul>
+<li>DeepSeek V4 Pro：面向复杂推理和高难度 Agent 任务</li>
+<li>DeepSeek V4 Flash：速度更快、调用成本更低</li>
+<li>最高支持约 100 万 <a class="link" href="/tags/token/" >Token</a> 上下文</li>
+</ul>
+<p>2026 年 7 月 31 日，官方进一步更新了 <code>DeepSeek-V4-Flash-0731</code>。通过 DeepSeek API 使用 <code>deepseek-v4-flash</code> 模型名时，会自动指向当前更新版本。</p>
+<p>V4 Flash 的主要优势不是在所有测试中超过旗舰模型，而是兼顾了价格、速度、长上下文和工具调用能力，更适合日常编程、代码修改以及 Agent 工作流。</p>
+
+    <blockquote>
+        <p>模型评分会受到测试集、推理参数和评测平台影响，不建议只根据单一排行榜判断模型强弱。</p>
+
+    </blockquote>
+<h2 id="第一步备份-codex-配置">第一步：备份 Codex 配置
+</h2><p>在修改配置之前，先备份 Codex 的全局配置目录。</p>
+<h3 id="windows-powershell"><a class="link" href="/tags/windows-powershell/" >Windows PowerShell</a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Copy-Item</span> <span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">\.codex&#34;</span> <span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">\.codex-backup&#34;</span> <span class="n">-Recurse</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="macos-或-linux">macOS 或 Linux
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp -R ~/.codex ~/.codex-backup
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重点需要保留的内容通常包括：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">~/.codex/config.toml
+</span></span><span class="line"><span class="cl">~/.codex/skills/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不同版本的 Codex 可能还会使用项目目录中的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">项目目录/.codex/config.toml
+</span></span><span class="line"><span class="cl">项目目录/.codex/skills/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不要把包含 API Key 的配置文件提交到公开 GitHub 仓库。</p>
+<h2 id="第二步让-codex-使用-deepseek">第二步：让 Codex 使用 DeepSeek
+</h2><p><a class="link" href="/tags/codex-cli/" >Codex CLI</a> 支持通过 <code>config.toml</code> 配置模型和模型提供商，但第三方服务需要提供 Codex 所需的兼容接口。</p>
+<p>DeepSeek API 支持 OpenAI 风格的接口，不过 Codex 对第三方模型的兼容性还取决于：</p>
+<ul>
+<li>Codex 当前版本</li>
+<li>DeepSeek API 接口类型</li>
+<li>Responses API 与流式输出兼容情况</li>
+<li>Tool Call 参数是否能够正确转换</li>
+</ul>
+<p>因此，实际接入时可能需要直接配置 DeepSeek，也可能需要借助兼容代理层。</p>
+<p>配置结构可参考：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">model</span> <span class="p">=</span> <span class="s2">&#34;deepseek-v4-flash&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">model_provider</span> <span class="p">=</span> <span class="s2">&#34;deepseek&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">model_providers</span><span class="p">.</span><span class="nx">deepseek</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;DeepSeek&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">base_url</span> <span class="p">=</span> <span class="s2">&#34;https://api.deepseek.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">env_key</span> <span class="p">=</span> <span class="s2">&#34;DEEPSEEK_API_KEY&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>API Key 建议通过环境变量保存。</p>
+<h3 id="windows-powershell-1">Windows PowerShell
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">[</span><span class="no">Environment</span><span class="p">]::</span><span class="n">SetEnvironmentVariable</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;DEEPSEEK_API_KEY&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;你的 DeepSeek API Key&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;User&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>设置完成后重新打开终端。</p>
+<h3 id="macos-或-linux-1">macOS 或 Linux
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">DEEPSEEK_API_KEY</span><span class="o">=</span><span class="s2">&#34;你的 DeepSeek API Key&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后启动 Codex：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">codex
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果出现接口格式、Responses API 或 Tool Call 不兼容的问题，说明当前 DeepSeek 接口不能直接满足 Codex 的全部请求，需要增加一个兼容转换层，而不是反复修改 API Key。</p>
+<h2 id="第三步配置视觉理解-mcp">第三步：配置视觉理解 <a class="link" href="/tags/mcp/" >MCP</a>
+</h2><p>DeepSeek V4 Flash 主要负责文本推理。图片分析可以交给 GLM-4.6V 或 GLM-4.6V-Flash。</p>
+<p>Z.<a class="link" href="/tags/ai/" >AI</a> 官方提供了 Vision <a class="link" href="/tags/mcp-server/" >MCP Server</a>，可为支持 MCP 的 AI 客户端增加：</p>
+<ul>
+<li>图片内容分析</li>
+<li>截图报错识别</li>
+<li>网页界面理解</li>
+<li>表格和图表分析</li>
+<li>视频内容理解</li>
+<li>视觉定位与界面操作辅助</li>
+</ul>
+<p>其中，GLM-4.6V-Flash 当前提供免费调用选项，但免费额度、速率限制和开放政策可能调整，正式使用前应查看最新价格页面。</p>
+<p>MCP 配置通常写入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">~/.codex/config.toml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结构示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">mcp_servers</span><span class="p">.</span><span class="nx">vision</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">command</span> <span class="p">=</span> <span class="s2">&#34;你的 Vision MCP 启动命令&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">args</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;对应的启动参数&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">enabled</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">mcp_servers</span><span class="p">.</span><span class="nx">vision</span><span class="p">.</span><span class="nx">env</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ZAI_API_KEY</span> <span class="p">=</span> <span class="s2">&#34;建议改用环境变量，不要直接填写在公开文件中&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实际的 <code>command</code>、<code>args</code> 和环境变量名称，应以所使用的 Vision MCP 项目说明为准。</p>
+<p>配置完成后，重启 Codex，并检查 MCP 是否已经加载：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">/mcp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以直接测试：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请分析这张图片，告诉我图片中的报错原因，并给出修改步骤。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果 DeepSeek 能够返回视觉 MCP 的识别结果，说明工具链已经接通。</p>
+<h2 id="第四步封装自动识图-skill">第四步：封装自动识图 <a class="link" href="/tags/skill/" >Skill</a>
+</h2><p>只配置 MCP 后，模型不一定会在每次遇到图片时主动调用它。</p>
+<p>可以再创建一个 Skill，明确告诉 Codex：</p>
+<ul>
+<li>哪些任务需要调用视觉 MCP</li>
+<li>应该先读取图片还是先询问用户</li>
+<li>得到识图结果后如何继续处理</li>
+<li>哪些情况下不应该调用视觉工具</li>
+</ul>
+<p>Skill 可以放在：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">~/.codex/skills/image-understanding/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如创建：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">~/.codex/skills/image-understanding/SKILL.md
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参考内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="gh"># Image Understanding
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">当用户要求分析图片、截图、界面、设计稿、图表或图片中的错误信息时：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">1.</span> 优先调用 Vision MCP 获取图片内容。
+</span></span><span class="line"><span class="cl"><span class="k">2.</span> 不要根据文件名猜测图片内容。
+</span></span><span class="line"><span class="cl"><span class="k">3.</span> 提取图片中的文字、界面状态、关键元素和异常信息。
+</span></span><span class="line"><span class="cl"><span class="k">4.</span> 将视觉结果与当前代码或任务上下文结合。
+</span></span><span class="line"><span class="cl"><span class="k">5.</span> 给出可以执行的修改方案。
+</span></span><span class="line"><span class="cl"><span class="k">6.</span> 图片无法读取时，明确说明失败原因，不要虚构识别结果。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样，当用户输入类似下面的任务时，DeepSeek 就更容易自动调用视觉工具：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">查看这张报错截图，找到项目无法启动的原因。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">分析这个网页截图，并根据现有项目修改页面布局。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">读取图片中的配置内容，判断 MCP 是否启用成功。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="第五步验证是否真正生效">第五步：验证是否真正生效
+</h2><p>建议分别测试三个层级。</p>
+<h3 id="1-测试-deepseek">1. 测试 DeepSeek
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请告诉我当前使用的模型提供商和模型名称。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>确认请求是否确实发送到了 DeepSeek，而不是仍在使用 Codex 默认模型。</p>
+<h3 id="2-测试-vision-mcp">2. 测试 Vision MCP
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">调用视觉工具分析这张图片，并列出图片中的主要文字。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>确认 MCP 能被单独调用。</p>
+<h3 id="3-测试自动识图-skill">3. 测试自动识图 Skill
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">这张图片为什么运行失败？
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不要主动写“请调用 MCP”，观察 Skill 是否会自动判断并使用视觉工具。</p>
+<p>只有以上三个测试都成功，才能说明“DeepSeek + Codex + Vision MCP + Skill”的完整链路已经生效。</p>
+<h2 id="配置容易丢失的原因">配置容易丢失的原因
+</h2><p>需要注意，Codex 的全局配置、项目配置和不同客户端可能使用不同的配置层级。</p>
+<p>以下操作可能导致自定义配置失效：</p>
+<ul>
+<li>替换整个 <code>config.toml</code></li>
+<li>恢复旧版 Codex 配置</li>
+<li>在桌面端和 CLI 之间切换配置</li>
+<li>删除或重建 <code>~/.codex</code> 目录</li>
+<li>使用脚本覆盖原有配置文件</li>
+<li>把 MCP 配置写在了错误的用户目录</li>
+<li>在项目配置和全局配置中重复定义同名 MCP</li>
+</ul>
+<p>曾有用户报告 Codex Desktop 在特定环境中重写全局配置，并移除手动添加的 MCP 项目。因此，修改前备份是必要的，但这不代表所有版本都会自动清除配置。</p>
+<p>更加稳妥的做法是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">1. 先备份 ~/.codex
+</span></span><span class="line"><span class="cl">2. 先配置并验证 MCP
+</span></span><span class="line"><span class="cl">3. 再创建自动识图 Skill
+</span></span><span class="line"><span class="cl">4. 最后添加 DeepSeek 模型配置
+</span></span><span class="line"><span class="cl">5. 每完成一步都单独测试
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不要一次覆盖整个配置文件。应把 DeepSeek 配置合并到现有配置中，保留原来的 MCP、Skill 和其他设置。</p>
+<h2 id="这套方案适合哪些任务">这套方案适合哪些任务
+</h2><p>配置完成后，可以用于：</p>
+<ul>
+<li>让 DeepSeek 根据报错截图修复代码</li>
+<li>分析网页界面并修改前端样式</li>
+<li>读取软件配置截图</li>
+<li>从图表中提取数据</li>
+<li>检查页面排版和视觉问题</li>
+<li>分析图片中的终端输出</li>
+<li>根据设计稿生成或调整代码</li>
+</ul>
+<p>它的核心价值不是让 DeepSeek 直接变成多模态模型，而是利用 MCP 将文本模型、视觉模型和 Codex 的文件操作能力组合起来。</p>
+<h2 id="相关项目与官方资料">相关项目与官方资料
+</h2><ul>
+<li>
+<p><a class="link" href="/tags/openai-codex/" >OpenAI Codex</a>：
+<a class="link" href="https://github.com/openai/codex"  target="_blank" rel="noopener"
+    >https://github.com/openai/codex</a></p>
+</li>
+<li>
+<p>DeepSeek 官方 GitHub：
+<a class="link" href="https://github.com/deepseek-ai"  target="_blank" rel="noopener"
+    >https://github.com/deepseek-ai</a></p>
+</li>
+<li>
+<p>DeepSeek V4 Flash 模型页面：
+<a class="link" href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"  target="_blank" rel="noopener"
+    >https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731</a></p>
+</li>
+<li>
+<p>Z.AI Vision MCP Server 文档：
+<a class="link" href="https://docs.z.ai/devpack/mcp/vision-mcp-server"  target="_blank" rel="noopener"
+    >https://docs.z.ai/devpack/mcp/vision-mcp-server</a></p>
+</li>
+</ul>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/codex%E6%8E%A5%E5%85%A5deepseek/">Codex接入DeepSeek</a>
+        
+            <a href="/tags/deepseek-v4-flash/">DeepSeek V4 Flash</a>
+        
+            <a href="/tags/codex%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B/">Codex自定义模型</a>
+        
+            <a href="/tags/codex-mcp%E9%85%8D%E7%BD%AE/">Codex MCP配置</a>
+        
+            <a href="/tags/glm-4.6v/">GLM-4.6V</a>
+        
+            <a href="/tags/vision-mcp-server/">Vision MCP Server</a>
+        
+            <a href="/tags/codex%E5%9B%BE%E7%89%87%E8%AF%86%E5%88%AB/">Codex图片识别</a>
+        
+            <a href="/tags/codex-skill%E6%95%99%E7%A8%8B/">Codex Skill教程</a>
+        
+            <a href="/tags/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/">AI编程工具</a>
+        
+            <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81ai%E5%B7%A5%E4%BD%9C%E6%B5%81/">多模态AI工作流</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</strong>
+                    </a><a href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#deepseek-v4-flash-是什么">DeepSeek V4 Flash 是什么</a></li>
+    
+    
+    <li><a href="#第三步配置视觉理解-mcp">第三步：配置视觉理解 MCP</a></li>
+    <li><a href="#第四步封装自动识图-skill">第四步：封装自动识图 Skill</a></li>
+    
+    <li><a href="#配置容易丢失的原因">配置容易丢失的原因</a></li>
+    <li><a href="#这套方案适合哪些任务">这套方案适合哪些任务</a></li>
+    <li><a href="#相关项目与官方资料">相关项目与官方资料</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/ai/"><span>分类</span><b>AI</b></a>
+                    <a><span>字数</span><b>2456</b></a>
+                    <a><span>阅读</span><b>5 MIN</b></a>
+                    <a><span>更新</span><b>08.04</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/5-ge-zi-ding-yi-skill-rang-codex-cong-dai/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/2026728_11_32_01-2bd2a234.jpg" alt="5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手" loading="lazy"><code>01 / AI</code>
+                    <h3>5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>很多人使用 Codex 时，只让它完成“写代码”这一件事。
+遇到需求就生成代码，出现报错再继续修改。这样的使用方式虽然方便，但 Codex 很难 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ui-ux-pro-max-rang-ai-sheng-cheng-de-jie/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/12_2-026d34e7.jpg" alt="UI/UX Pro Max：让 AI 生成的界面摆脱模板感" loading="lazy"><code>02 / AI</code>
+                    <h3>UI/UX Pro Max：让 AI 生成的界面摆脱模板感</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>使用 AI 编程工具生成网页时，很多人都会遇到同一个问题：
+代码可以运行，但界面一眼就能看出是 AI 做的。
+页面通常拥有相似的渐变背景、圆角卡 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/headroom-zui-gao-jian-shao-92-token-yong-ai-bian/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/ChatGPT_Image_2026727_20_20_12-d72362d1.jpg" alt="Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上" loading="lazy"><code>03 / AI</code>
+                    <h3>Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>使用 Claude Code、Codex、Cursor 等 AI 编程工具时，真正消耗 Token 的往往不只是你输入的提示词。
+代码搜索结果、 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/acac708a-8226-4374-a7b8-dddf4fafc240-0b7e708d.jpg" alt="Video-use：用一句话让 AI 自动剪辑视频的开源技能" loading="lazy"><code>04 / AI</code>
+                    <h3>Video-use：用一句话让 AI 自动剪辑视频的开源技能</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>把原始素材放进文件夹，再告诉 AI“把这些素材剪成一条教程视频”，Video-use 就能协助完成素材分析、片段筛选、调色、字幕、动画叠加和视频 …</p>
+                    <time>2026-08-04</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="写 AI 提示词时没有思路，很多人的第一反应是继续堆背景、加角色、补格式。\n结果往往是提示词越来越长，AI 的回答却不一定更准确。\n最近我发现了一个比较实用的开源项目：Prompt Optimizer。它不是单纯把一句话扩写成一大段，而是提供了一套完整的提示词优化流程，包括：\n">
+<title>Prompt Optimizer：把模糊想法变成可测试、可复用的 AI 提示词 - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/prompt-optimizer-ba-mo-hu-xiang-fa-bian-cheng-ke/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="Prompt Optimizer：把模糊想法变成可测试、可复用的 AI 提示词 - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="写 AI 提示词时没有思路，很多人的第一反应是继续堆背景、加角色、补格式。\n结果往往是提示词越来越长，AI 的回答却不一定更准确。\n最近我发现了一个比较实用的开源项目：Prompt Optimizer。它不是单纯把一句话扩写成一大段，而是提供了一套完整的提示词优化流程，包括：\n">
+<meta property='og:url' content='https://www.tood.win/posts/prompt-optimizer-ba-mo-hu-xiang-fa-bian-cheng-ke/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Prompt Optimizer' /><meta property='article:tag' content='AI提示词优化' /><meta property='article:tag' content='提示词工程' /><meta property='article:tag' content='Prompt Engineering' /><meta property='article:tag' content='AI工具' /><meta property='article:tag' content='系统提示词' /><meta property='article:tag' content='用户提示词' /><meta property='article:tag' content='文生图提示词' /><meta property='article:tag' content='图生图' /><meta property='article:tag' content='ChatGPT提示词' /><meta property='article:tag' content='Claude提示词' /><meta property='article:tag' content='Gemini提示词' /><meta property='article:tag' content='DeepSeek提示词' /><meta property='article:tag' content='开源项目' /><meta property='article:tag' content='GitHub开源工具' /><meta property='article:published_time' content='2026-07-27T22:24:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-27T22:30:08&#43;08:00'/>
+<meta name="twitter:title" content="Prompt Optimizer：把模糊想法变成可测试、可复用的 AI 提示词 - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="写 AI 提示词时没有思路，很多人的第一反应是继续堆背景、加角色、补格式。\n结果往往是提示词越来越长，AI 的回答却不一定更准确。\n最近我发现了一个比较实用的开源项目：Prompt Optimizer。它不是单纯把一句话扩写成一大段，而是提供了一套完整的提示词优化流程，包括：\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="Prompt Optimizer, AI提示词优化, 提示词工程, Prompt Engineering, AI工具, 系统提示词, 用户提示词, 文生图提示词, 图生图, ChatGPT提示词, Claude提示词, Gemini提示词, DeepSeek提示词, 开源项目, GitHub开源工具">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"Prompt Optimizer：把模糊想法变成可测试、可复用的 AI 提示词\"",
+  "description": "\"写 AI 提示词时没有思路，很多人的第一反应是继续堆背景、加角色、补格式。\\n结果往往是提示词越来越长，AI 的回答却不一定更准确。\\n最近我发现了一个比较实用的开源项目：Prompt Optimizer。它不是单纯把一句话扩写成一大段，而是提供了一套完整的提示词优化流程，包括：\\n\"",
+  "datePublished": "\"2026-07-27T22:24:00+08:00\"",
+  "dateModified": "\"2026-07-27T22:30:08+08:00\"",
+  "url": "\"https://www.tood.win/posts/prompt-optimizer-ba-mo-hu-xiang-fa-bian-cheng-ke/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai/">AI</a><span>/</span><a href="/posts/prompt-optimizer-ba-mo-hu-xiang-fa-bian-cheng-ke/">Prompt Optimizer：把模糊想法变成可测试、可复用的 AI 提示词</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI</span>
+                <span>LIVE DATA / A.2607.035</span>
+            </div>
+            <h1>Prompt Optimizer：把模糊想法变成可测试、可复用的 AI 提示词</h1>
+            <p class="article-deck">写 AI 提示词时没有思路，很多人的第一反应是继续堆背景、加角色、补格式。
+结果往往是提示词越来越长，AI 的回答却不一定更准确。
+最近我发现了一个比较实用的开源项目：Prompt Optimizer。它不是单纯把一句话扩写成一大段，而是提供了一套完整的提示词优化流程，包括：
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.27</span>
+                <span>6 MIN READ</span>
+                <span>2518 WORDS</span>
+                <span>AI</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A35</strong>
+                <p class="mono">JAN. 27<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">11</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>写 <a class="link" href="/tags/ai/" >AI</a> 提示词时没有思路，很多人的第一反应是继续堆背景、加角色、补格式。</p>
+<p>结果往往是提示词越来越长，AI 的回答却不一定更准确。</p>
+<p>最近我发现了一个比较实用的开源项目：<strong><a class="link" href="/tags/prompt-optimizer/" >Prompt Optimizer</a></strong>。它不是单纯把一句话扩写成一大段，而是提供了一套完整的提示词优化流程，包括：</p>
+<ul>
+<li>优化原始提示词</li>
+<li>测试实际输出</li>
+<li>对比优化前后的结果</li>
+<li>根据反馈继续迭代</li>
+<li>收藏并复用稳定版本</li>
+</ul>
+<p>项目在 GitHub 上已经获得超过 3 万个 Star，适合经常使用 <a class="link" href="/tags/chatgpt/" >ChatGPT</a>、Claude、<a class="link" href="/tags/gemini/" >Gemini</a>、<a class="link" href="/tags/deepseek/" >DeepSeek</a>、<a class="link" href="/tags/grok/" >Grok</a> 等 AI 模型的人。</p>
+<p><img alt="QQ20260727-222919" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/QQ20260727-222919-eae371b9.jpg"></p>
+<h2 id="prompt-optimizer-是什么">Prompt Optimizer 是什么？
+</h2><p>Prompt Optimizer 是一款开源的 AI 提示词优化工具。</p>
+<p>你只需要输入一个比较粗糙的需求，例如：</p>
+
+    <blockquote>
+        <p>帮我写一篇介绍网站速度优化的文章。</p>
+
+    </blockquote>
+<p>它会尝试补充任务目标、读者对象、内容结构、输出格式和限制条件，将原本模糊的想法整理成更容易被 AI 理解和执行的提示词。</p>
+<p>它真正有价值的地方，不是把提示词写得更长，而是让提示词变得：</p>
+<ul>
+<li>目标更明确</li>
+<li>条件更完整</li>
+<li>输出更可控</li>
+<li>测试结果更容易比较</li>
+<li>后续更方便重复使用</li>
+</ul>
+<h2 id="它和普通提示词扩写工具有什么区别">它和普通提示词扩写工具有什么区别？
+</h2><p>普通的提示词生成器通常只完成一次改写。</p>
+<p>Prompt Optimizer 更接近一个提示词工作台：你可以优化、测试、比较，再根据结果继续调整。</p>
+<h3 id="1-支持两种提示词优化模式">1. 支持两种提示词优化模式
+</h3><p>它可以分别处理：</p>
+<ul>
+<li><strong><a class="link" href="/tags/%e7%b3%bb%e7%bb%9f%e6%8f%90%e7%a4%ba%e8%af%8d/" >系统提示词</a></strong>：定义 AI 的身份、长期规则、行为边界和输出标准。</li>
+<li><strong><a class="link" href="/tags/%e7%94%a8%e6%88%b7%e6%8f%90%e7%a4%ba%e8%af%8d/" >用户提示词</a></strong>：处理某一次具体任务，例如写文章、分析数据、生成代码或制作图片。</li>
+</ul>
+<p>这两种提示词的作用不同，分开优化比简单混在一起更容易控制最终结果。</p>
+<h3 id="2-可以对比优化前后的回答">2. 可以对比优化前后的回答
+</h3><p>提示词看起来更专业，不代表实际效果一定更好。</p>
+<p>Prompt Optimizer 支持分析、单结果评估和多结果对比。你可以使用同一个问题分别测试原始提示词和优化后的提示词，再观察以下变化：</p>
+<ul>
+<li>回答是否更准确</li>
+<li>结构是否更清晰</li>
+<li>是否减少无关内容</li>
+<li>是否遵守输出格式</li>
+<li>是否真正解决了任务</li>
+</ul>
+<p>这种方式比凭感觉判断提示词质量更可靠。</p>
+<h3 id="3-支持多轮迭代">3. 支持多轮迭代
+</h3><p>第一次优化不满意，可以继续提出修改方向，例如：</p>
+<ul>
+<li>内容太长，需要精简</li>
+<li>语言太像 AI</li>
+<li>缺少具体示例</li>
+<li>输出格式不稳定</li>
+<li>需要增加限制条件</li>
+<li>需要适配某个特定模型</li>
+</ul>
+<p>通过多轮修改，可以逐步得到更符合实际工作需求的提示词。</p>
+<h2 id="不只是文字提示词">不只是文字提示词
+</h2><p>Prompt Optimizer 也支持图片生成相关工作流，包括：</p>
+<ul>
+<li>文生图</li>
+<li><a class="link" href="/tags/%e5%9b%be%e7%94%9f%e5%9b%be/" >图生图</a></li>
+<li>多图生成</li>
+<li>参考图风格迁移</li>
+<li>图片提示词优化</li>
+<li>图片生成结果预览</li>
+</ul>
+<p>例如你只输入：</p>
+
+    <blockquote>
+        <p>一座漂浮在夜空中的图书馆。</p>
+
+    </blockquote>
+<p>优化后可以进一步明确：</p>
+<ul>
+<li>主体位置</li>
+<li>镜头视角</li>
+<li>空间层次</li>
+<li>光线方向</li>
+<li>色彩氛围</li>
+<li>画面风格</li>
+<li>主体与背景关系</li>
+<li>不希望出现的元素</li>
+</ul>
+<p>这样做不能保证每一次都生成完美图片，但可以减少模型自由发挥带来的随机性，让画面更接近预期。</p>
+<h2 id="支持哪些-ai-模型">支持哪些 AI 模型？
+</h2><p>根据项目文档，Prompt Optimizer 已支持或兼容多种主流模型和服务，包括：</p>
+<ul>
+<li>OpenAI</li>
+<li>Gemini</li>
+<li>DeepSeek</li>
+<li>Grok</li>
+<li>智谱 AI</li>
+<li>MiniMax</li>
+<li>SiliconFlow</li>
+<li>Ollama 等本地模型</li>
+</ul>
+<p>不同模型对提示词的理解方式并不完全相同，因此实际使用时，最好固定模型进行测试，不要只优化一次就直接在所有模型中通用。</p>
+<h2 id="四种使用方式">四种使用方式
+</h2><p>Prompt Optimizer 提供了多种使用方式。</p>
+<h3 id="在线版">在线版
+</h3><p>适合第一次体验，不需要安装程序。</p>
+<p>项目采用纯前端架构，数据主要保存在浏览器本地，并直接与配置的 AI 服务商交互。</p>
+<p>使用在线版时仍需注意：不要把公司机密、客户资料、账号密码或未公开代码直接发送给第三方 AI 模型。</p>
+<h3 id="桌面版">桌面版
+</h3><p>桌面版适合长期使用，也更方便连接本地模型或存在跨域限制的 API。</p>
+<p>项目提供 Windows、macOS 和 Linux 对应的安装包或压缩包，具体版本以 GitHub Releases 页面为准。</p>
+<h3 id="chrome-插件">Chrome 插件
+</h3><p>Chrome 插件适合在浏览器中直接调用提示词优化功能，减少在多个页面之间复制和切换。</p>
+<h3 id="docker-部署">Docker 部署
+</h3><p>熟悉 Docker 的用户可以将 Prompt Optimizer 部署到自己的服务器或 NAS 中，方便自己使用或在团队内部共享。</p>
+<p>私有部署并不等于绝对安全。API Key、访问密码、服务器权限和日志记录仍需要正确配置。</p>
+<h2 id="提示词也可以成为可复用资产">提示词也可以成为可复用资产
+</h2><p>很多人写完提示词后就随手丢在聊天记录里，下次遇到相同任务又要重新写一遍。</p>
+<p>Prompt Optimizer 支持收藏、版本历史、示例保存和来源绑定，可以将经过验证的提示词整理成自己的提示词库。</p>
+<p>例如可以分别保存：</p>
+<ul>
+<li><a class="link" href="/tags/seo/" >SEO</a> 文章写作提示词</li>
+<li>商务邮件翻译提示词</li>
+<li>GitHub 项目分析提示词</li>
+<li>商品测评提示词</li>
+<li>代码审查提示词</li>
+<li>网站封面图提示词</li>
+<li>客服回复提示词</li>
+</ul>
+<p>当提示词经过多次测试并证明稳定后，它就不再是一段临时文字，而是一套可以重复执行的工作流程。</p>
+<h2 id="一个简单的使用方法">一个简单的使用方法
+</h2><p>第一次使用时，可以按照下面的步骤操作：</p>
+<ol>
+<li>输入原始需求，不需要一开始就写得很完整。</li>
+<li>选择系统提示词或用户提示词优化模式。</li>
+<li>检查优化结果是否准确表达了你的真实目的。</li>
+<li>使用同一个模型测试原始版和优化版。</li>
+<li>对比准确性、完整性、格式和冗余程度。</li>
+<li>根据测试结果继续优化。</li>
+<li>将稳定版本收藏并命名。</li>
+<li>保存一个实际输入与输出示例，方便以后复现。</li>
+</ol>
+<h2 id="哪些人适合使用">哪些人适合使用？
+</h2><p>Prompt Optimizer 比较适合以下用户：</p>
+<ul>
+<li>不熟悉提示词工程的新手</li>
+<li>经常使用多个 AI 模型的人</li>
+<li>需要稳定生成文章、邮件或代码的人</li>
+<li>需要制作 AI 图片提示词的人</li>
+<li>希望沉淀团队提示词模板的人</li>
+<li>想对比不同提示词实际效果的人</li>
+<li>希望把提示词作为工作资产管理的人</li>
+</ul>
+<h2 id="使用时需要注意什么">使用时需要注意什么？
+</h2><p>Prompt Optimizer 可以提高提示词的清晰度，但它不能替代事实核查和人工判断。</p>
+<p>使用时建议注意以下几点：</p>
+<ol>
+<li>
+<p><strong>提示词更长不代表更好。</strong>
+多余背景和重复规则可能增加 <a class="link" href="/tags/token/" >Token</a> 消耗，也可能让模型忽略真正重要的要求。</p>
+</li>
+<li>
+<p><strong>优化后必须测试。</strong>
+不要只看文字是否专业，应检查实际输出是否改善。</p>
+</li>
+<li>
+<p><strong>不同模型需要分别验证。</strong>
+在一个模型上表现良好的提示词，不一定适合所有模型。</p>
+</li>
+<li>
+<p><strong>不要提交敏感信息。</strong>
+客户资料、商业机密、密码、私有代码和个人隐私应先脱敏。</p>
+</li>
+<li>
+<p><strong>保留版本和示例。</strong>
+只有保存模型、参数、输入和输出示例，后续结果才更容易复现。</p>
+</li>
+</ol>
+<h2 id="总结">总结
+</h2><p>Prompt Optimizer 的核心价值，不是自动帮你写出一段看起来复杂的提示词，而是将提示词从一次性的聊天输入，变成一套可以优化、测试、比较和复用的工作资产。</p>
+<p>对于偶尔使用 AI 的用户，它可以降低提示词写作门槛。</p>
+<p>对于高频使用 AI 的个人或团队，它更适合用来建立稳定的提示词库和测试流程。</p>
+<p>真正值得保留的提示词，不是文字最长的那一个，而是经过实际任务验证后，能够稳定得到理想结果的那一个。</p>
+<h2 id="项目地址">项目地址
+</h2><ul>
+<li>GitHub：https://github.com/linshenkx/prompt-optimizer</li>
+<li>在线版：https://prompt.always200.com</li>
+<li>项目文档：https://docs.always200.com</li>
+</ul>
+
+    <blockquote>
+        <p>提示：GitHub Star、支持的模型和功能版本会持续变化，请以项目仓库和最新 Release 说明为准。</p>
+
+    </blockquote>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/prompt-optimizer/">Prompt Optimizer</a>
+        
+            <a href="/tags/ai%E6%8F%90%E7%A4%BA%E8%AF%8D%E4%BC%98%E5%8C%96/">AI提示词优化</a>
+        
+            <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/">提示词工程</a>
+        
+            <a href="/tags/prompt-engineering/">Prompt Engineering</a>
+        
+            <a href="/tags/ai%E5%B7%A5%E5%85%B7/">AI工具</a>
+        
+            <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%8F%90%E7%A4%BA%E8%AF%8D/">系统提示词</a>
+        
+            <a href="/tags/%E7%94%A8%E6%88%B7%E6%8F%90%E7%A4%BA%E8%AF%8D/">用户提示词</a>
+        
+            <a href="/tags/%E6%96%87%E7%94%9F%E5%9B%BE%E6%8F%90%E7%A4%BA%E8%AF%8D/">文生图提示词</a>
+        
+            <a href="/tags/%E5%9B%BE%E7%94%9F%E5%9B%BE/">图生图</a>
+        
+            <a href="/tags/chatgpt%E6%8F%90%E7%A4%BA%E8%AF%8D/">ChatGPT提示词</a>
+        
+            <a href="/tags/claude%E6%8F%90%E7%A4%BA%E8%AF%8D/">Claude提示词</a>
+        
+            <a href="/tags/gemini%E6%8F%90%E7%A4%BA%E8%AF%8D/">Gemini提示词</a>
+        
+            <a href="/tags/deepseek%E6%8F%90%E7%A4%BA%E8%AF%8D/">DeepSeek提示词</a>
+        
+            <a href="/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a>
+        
+            <a href="/tags/github%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/">GitHub开源工具</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/codex-zui-jin-bian-luo-suo-le-zai-agents-md/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>Codex 最近变“啰嗦”了？在 AGENTS.md 加上这句提示词试试</strong>
+                    </a><a href="/posts/skills-chuang-jian-quan-liu-cheng-cong-xu-qiu-gui/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>Skills 创建全流程：从需求规划到测试落地，零基础也能完成</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#prompt-optimizer-是什么">Prompt Optimizer 是什么？</a></li>
+    
+    <li><a href="#不只是文字提示词">不只是文字提示词</a></li>
+    <li><a href="#支持哪些-ai-模型">支持哪些 AI 模型？</a></li>
+    
+    <li><a href="#提示词也可以成为可复用资产">提示词也可以成为可复用资产</a></li>
+    <li><a href="#一个简单的使用方法">一个简单的使用方法</a></li>
+    <li><a href="#哪些人适合使用">哪些人适合使用？</a></li>
+    <li><a href="#使用时需要注意什么">使用时需要注意什么？</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#项目地址">项目地址</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/ai/"><span>分类</span><b>AI</b></a>
+                    <a><span>字数</span><b>2518</b></a>
+                    <a><span>阅读</span><b>6 MIN</b></a>
+                    <a><span>更新</span><b>07.27</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/awesome-gpt-image-2-prompts-github-kai-yuan-ai-hui/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/0_22_18_34-69f2fb8d.jpg" alt="Awesome GPT Image 2 Prompts：GitHub 开源 AI 绘图提示词库" loading="lazy"><code>01 / AI</code>
+                    <h3>Awesome GPT Image 2 Prompts：GitHub 开源 AI 绘图提示词库</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>不会写 AI 绘图提示词，可以先从现成案例开始修改。
+GitHub 上的开源项目 Awesome GPT Image 2 Prompts，整理了 …</p>
+                    <time>2026-07-30</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/yong-chatgpt-images-kong-zhi-mu-biao-bu-ju-tu/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/4048e3a9-2788-47c0-8cd0-25d762cc266a-f0073c74.jpg" alt="如何用 ChatGPT Images 控制目标布局、图案和配色" loading="lazy"><code>02 / AI</code>
+                    <h3>如何用 ChatGPT Images 控制目标布局、图案和配色</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>很多人使用 ChatGPT Images 时，会把大量精力放在描述“画面要多精美”，却没有明确说明元素放在哪里、图案如何保留、颜色如何分配。
+想 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ai-fan-tui-ti-shi-ci-3-bu-cong-can/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/ChatGPT_Image_2026728_17_21_16-edfd98e5.jpg" alt="AI 反推提示词教程：3 步从参考图片生成可复用的生图提示词" loading="lazy"><code>03 / AI</code>
+                    <h3>AI 反推提示词教程：3 步从参考图片生成可复用的生图提示词</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>看到一张喜欢的图片，却不知道应该怎样写提示词？
+可以使用“AI 反推提示词”工作流，让支持图片识别的 AI 先分析画面，再将分析结果整理成适合 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ai-skill-ru-men-yong-skill-md-rang-ai-ji/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260728-155400_1-b3640702.jpg" alt="AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法" loading="lazy"><code>04 / AI</code>
+                    <h3>AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>每次让 AI 写周报、整理会议纪要或分析数据，都要重新解释格式、语气和步骤？
+这类问题可以通过 AI Skills 解决。
+Skills 可以理 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="想用 AI 自动生成动画视频，但不熟悉 Node.js、FFmpeg、命令行和环境配置？\n一种更省事的方案是：使用 WorkBuddy 协助安装和排查问题，用 HyperFrames 把 HTML 动画渲染成 MP4，再通过桥接脚本接入本地 Qwen3-TTS，实现字幕、画面和个人声音配音的一体化制作。\n">
+<title>WorkBuddy &#43; HyperFrames 安装教程：接入本地 Qwen3-TTS，实现自己的声音自动配音 - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/workbuddy-hyperframes-an-zhuang-jie-ru-ben-di-qwen3-tts/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="WorkBuddy + HyperFrames 安装教程：接入本地 Qwen3-TTS，实现自己的声音自动配音 - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="想用 AI 自动生成动画视频，但不熟悉 Node.js、FFmpeg、命令行和环境配置？\n一种更省事的方案是：使用 WorkBuddy 协助安装和排查问题，用 HyperFrames 把 HTML 动画渲染成 MP4，再通过桥接脚本接入本地 Qwen3-TTS，实现字幕、画面和个人声音配音的一体化制作。\n">
+<meta property='og:url' content='https://www.tood.win/posts/workbuddy-hyperframes-an-zhuang-jie-ru-ben-di-qwen3-tts/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='WorkBuddy' /><meta property='article:tag' content='HyperFrames' /><meta property='article:tag' content='Qwen3-TTS' /><meta property='article:tag' content='HTML转视频' /><meta property='article:tag' content='AI视频生成' /><meta property='article:tag' content='本地语音模型' /><meta property='article:tag' content='声音克隆' /><meta property='article:tag' content='自动配音' /><meta property='article:tag' content='FFmpeg' /><meta property='article:tag' content='Node.js' /><meta property='article:tag' content='AI Agent' /><meta property='article:tag' content='开源视频工具' /><meta property='article:published_time' content='2026-07-28T11:55:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-28T11:57:23&#43;08:00'/>
+<meta name="twitter:title" content="WorkBuddy + HyperFrames 安装教程：接入本地 Qwen3-TTS，实现自己的声音自动配音 - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="想用 AI 自动生成动画视频，但不熟悉 Node.js、FFmpeg、命令行和环境配置？\n一种更省事的方案是：使用 WorkBuddy 协助安装和排查问题，用 HyperFrames 把 HTML 动画渲染成 MP4，再通过桥接脚本接入本地 Qwen3-TTS，实现字幕、画面和个人声音配音的一体化制作。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="WorkBuddy, HyperFrames, Qwen3-TTS, HTML转视频, AI视频生成, 本地语音模型, 声音克隆, 自动配音, FFmpeg, Node.js, AI Agent, 开源视频工具">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"WorkBuddy + HyperFrames 安装教程：接入本地 Qwen3-TTS，实现自己的声音自动配音\"",
+  "description": "\"想用 AI 自动生成动画视频，但不熟悉 Node.js、FFmpeg、命令行和环境配置？\\n一种更省事的方案是：使用 WorkBuddy 协助安装和排查问题，用 HyperFrames 把 HTML 动画渲染成 MP4，再通过桥接脚本接入本地 Qwen3-TTS，实现字幕、画面和个人声音配音的一体化制作。\\n\"",
+  "datePublished": "\"2026-07-28T11:55:00+08:00\"",
+  "dateModified": "\"2026-07-28T11:57:23+08:00\"",
+  "url": "\"https://www.tood.win/posts/workbuddy-hyperframes-an-zhuang-jie-ru-ben-di-qwen3-tts/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai/">AI</a><span>/</span><a href="/posts/workbuddy-hyperframes-an-zhuang-jie-ru-ben-di-qwen3-tts/">WorkBuddy &#43; HyperFrames 安装教程：接入本地 Qwen3-TTS，实现自己的声音自动配音</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI</span>
+                <span>LIVE DATA / A.2607.039</span>
+            </div>
+            <h1>WorkBuddy &#43; HyperFrames 安装教程：接入本地 Qwen3-TTS，实现自己的声音自动配音</h1>
+            <p class="article-deck">想用 AI 自动生成动画视频，但不熟悉 Node.js、FFmpeg、命令行和环境配置？
+一种更省事的方案是：使用 WorkBuddy 协助安装和排查问题，用 HyperFrames 把 HTML 动画渲染成 MP4，再通过桥接脚本接入本地 Qwen3-TTS，实现字幕、画面和个人声音配音的一体化制作。
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.28</span>
+                <span>8 MIN READ</span>
+                <span>3575 WORDS</span>
+                <span>AI</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A39</strong>
+                <p class="mono">JAN. 28<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">16</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>想用 <a class="link" href="/tags/ai/" >AI</a> 自动生成动画视频，但不熟悉 Node.js、FFmpeg、命令行和环境配置？</p>
+<p>一种更省事的方案是：使用 <strong>WorkBuddy</strong> 协助安装和排查问题，用 <strong>HyperFrames</strong> 把 HTML 动画渲染成 MP4，再通过桥接脚本接入本地 <strong>Qwen3-TTS</strong>，实现字幕、画面和个人声音配音的一体化制作。</p>
+<h2 id="一三个工具分别做什么">一、三个工具分别做什么？
+</h2><h3 id="workbuddy">WorkBuddy
+</h3><p>WorkBuddy 是腾讯推出的桌面 <a class="link" href="/tags/ai-agent/" >AI Agent</a>。它不仅能回答问题，还可以协助执行命令、安装依赖、修改文件和分析报错。</p>
+<p>在这套流程中，它主要负责：</p>
+<ul>
+<li>检查电脑环境</li>
+<li>安装 HyperFrames</li>
+<li>执行终端命令</li>
+<li>分析安装报错</li>
+<li>编写 Qwen3-TTS 桥接脚本</li>
+<li>调整视频项目文件</li>
+</ul>
+<p>需要注意的是，WorkBuddy 本身不是 HyperFrames 的必要依赖。熟悉命令行的用户，也可以手动完成全部操作。</p>
+<p><img alt="26728_11_56_43" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/26728_11_56_43-2c227fc4.jpg"></p>
+<h3 id="hyperframes">HyperFrames
+</h3><p>HyperFrames 是 HeyGen 开源的 HTML 转视频框架。</p>
+<p>它允许开发者使用 HTML、CSS、JavaScript 和动画时间轴制作画面，再按照固定帧逐帧渲染为 MP4 视频。</p>
+<p>适合制作：</p>
+<ul>
+<li>产品介绍动画</li>
+<li>数据可视化视频</li>
+<li>知识讲解视频</li>
+<li>字幕配音视频</li>
+<li>网页演示视频</li>
+<li>社交媒体短视频</li>
+</ul>
+<p>与传统录屏不同，HyperFrames 使用确定性的逐帧渲染方式。同一个项目重复渲染时，画面和动画时间通常能够保持一致。</p>
+<h3 id="qwen3-tts">Qwen3-TTS
+</h3><p>Qwen3-TTS 是通义千问团队开源的语音生成模型，支持文本转语音、音色设计和声音克隆。</p>
+<p>将它部署在本地后，可以用参考音频生成接近目标音色的配音，不必每次调用第三方在线语音接口。</p>
+
+    <blockquote>
+        <p>请只克隆自己拥有授权的声音，不要冒用他人身份或未经允许复制他人音色。</p>
+
+    </blockquote>
+<hr>
+<h2 id="二安装前需要准备什么">二、安装前需要准备什么？
+</h2><p>本文以 Windows 环境为例。</p>
+<p>建议提前准备：</p>
+<ol>
+<li>Node.js</li>
+<li>FFmpeg</li>
+<li>WorkBuddy</li>
+<li>已部署的 Qwen3-TTS，可选</li>
+<li>足够的磁盘空间</li>
+</ol>
+<p>如果暂时没有 Qwen3-TTS，也可以先完成 HyperFrames 的安装和视频渲染，后续再接入本地配音。</p>
+<hr>
+<h2 id="三安装-nodejs">三、安装 Node.js
+</h2><p>前往 Node.js 官网下载长期支持版，也就是 LTS 版本。</p>
+<p>安装完成后，打开 PowerShell 或 Windows Terminal，执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">node</span> <span class="n">-v</span>
+</span></span><span class="line"><span class="cl"><span class="n">npm</span> <span class="n">-v</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果能够正常显示版本号，说明 Node.js 和 npm 已安装成功。</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">v22.x.x
+</span></span><span class="line"><span class="cl">10.x.x
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果系统提示找不到 <code>node</code> 命令，可以尝试：</p>
+<ol>
+<li>关闭并重新打开终端。</li>
+<li>重启电脑。</li>
+<li>检查 Node.js 是否已加入系统环境变量。</li>
+</ol>
+<hr>
+<h2 id="四安装-ffmpeg">四、安装 FFmpeg
+</h2><p>以管理员身份打开 PowerShell，然后执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">winget</span> <span class="n">install</span> <span class="p">-</span><span class="n">-id</span> <span class="n">Gyan</span><span class="p">.</span><span class="py">FFmpeg</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装完成后，重新打开终端并检查：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">ffmpeg</span> <span class="n">-version</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>能够看到 FFmpeg 的版本和编译信息，即表示安装成功。</p>
+<p>如果 <code>winget</code> 无法使用，也可以从 FFmpeg 官方网站下载 Windows 构建版本，再手动配置环境变量。</p>
+<hr>
+<h2 id="五安装-workbuddy">五、安装 WorkBuddy
+</h2><p>前往 WorkBuddy 官方网站，下载适合 Windows 或 macOS 的客户端。</p>
+<p>安装并登录后，可以先让 WorkBuddy检查当前环境：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请检查这台电脑是否已经安装 Node.js、npm 和 FFmpeg，并分别输出版本号。缺少的依赖请告诉我具体安装方法。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样做的好处是，可以先发现环境问题，再开始安装 HyperFrames，避免安装到一半才发现依赖缺失。</p>
+<hr>
+<h2 id="六使用-workbuddy-安装-hyperframes">六、使用 WorkBuddy 安装 HyperFrames
+</h2><p>打开 WorkBuddy，新建一个空文件夹作为视频项目目录，然后输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请在当前目录安装 HyperFrames，并创建一个可以预览和渲染的最小示例项目。完成后检查 Node.js、FFmpeg 和浏览器渲染依赖是否正常。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以手动安装 HyperFrames <a class="link" href="/tags/skill/" >Skill</a>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">npx</span> <span class="n">skills</span> <span class="n">add</span> <span class="nb">heygen-com</span><span class="p">/</span><span class="n">hyperframes</span> <span class="p">-</span><span class="n">-yes</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装完成后，可以让 WorkBuddy 创建一个简单测试视频：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请使用 HyperFrames 创建一个 8 秒的 16:9 测试视频。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">要求：
+</span></span><span class="line"><span class="cl">1. 深色背景。
+</span></span><span class="line"><span class="cl">2. 中间显示“Hello HyperFrames”。
+</span></span><span class="line"><span class="cl">3. 文字淡入并轻微向上移动。
+</span></span><span class="line"><span class="cl">4. 最后导出为 MP4。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="七运行环境体检">七、运行环境体检
+</h2><p>在项目目录中执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">npx</span> <span class="n">hyperframes</span> <span class="n">doctor</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>部分安装方式可能也支持：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">hyperframes</span> <span class="n">doctor</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>建议优先使用 <code>npx hyperframes</code>，因为它会调用当前项目使用的版本，能够减少全局版本和项目版本不一致的问题。</p>
+<p>环境体检通常会检查：</p>
+<ul>
+<li>Node.js</li>
+<li>FFmpeg</li>
+<li>浏览器或 Chromium</li>
+<li>HyperFrames 项目配置</li>
+<li>视频渲染相关依赖</li>
+</ul>
+<p>如果出现报错，不要只发送最后一行错误。建议把完整终端输出复制给 WorkBuddy：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">下面是执行 npx hyperframes doctor 后的完整报错。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">请先判断是哪项依赖失败，再给出修复步骤。不要删除现有项目文件，也不要升级无关依赖。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="八预览和渲染视频">八、预览和渲染视频
+</h2><p>创建好 HTML 动画项目后，可以先预览：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">npx</span> <span class="n">hyperframes</span> <span class="n">preview</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>确认画面、动画和字幕没有问题后，再执行渲染：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">npx</span> <span class="n">hyperframes</span> <span class="n">render</span> <span class="n">index</span><span class="p">.</span><span class="py">html</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以指定输出文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">npx</span> <span class="n">hyperframes</span> <span class="n">render</span> <span class="n">index</span><span class="p">.</span><span class="py">html</span> <span class="p">-</span><span class="n">-output</span> <span class="n">output</span><span class="p">.</span><span class="py">mp4</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不同版本的命令参数可能有所变化。如果命令报错，应先运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">npx</span> <span class="n">hyperframes</span> <span class="p">-</span><span class="n">-help</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以当前安装版本显示的命令为准。</p>
+<hr>
+<h2 id="九接入本地-qwen3-tts">九、接入本地 Qwen3-TTS
+</h2><p>HyperFrames 负责画面渲染，Qwen3-TTS 负责生成配音。两者之间通常需要增加一个桥接层。</p>
+<p>整体流程如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">视频文案
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">桥接脚本
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">本地 Qwen3-TTS 接口
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">生成 WAV 或 MP3
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">HyperFrames 读取音频
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">根据音频时长生成字幕和动画
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">导出 MP4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>桥接脚本主要负责：</p>
+<ol>
+<li>接收需要配音的文字。</li>
+<li>调用本地 Qwen3-TTS。</li>
+<li>指定参考音频和参考文本。</li>
+<li>保存生成的音频。</li>
+<li>把音频文件路径返回给 HyperFrames。</li>
+</ol>
+<hr>
+<h2 id="十让-workbuddy-编写桥接脚本">十、让 WorkBuddy 编写桥接脚本
+</h2><p>假设本地 Qwen3-TTS 已经提供 HTTP API，可以向 WorkBuddy 输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">我的本地 Qwen3-TTS 服务已经启动，请为当前 HyperFrames 项目编写一个 TTS 桥接脚本。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">要求：
+</span></span><span class="line"><span class="cl">1. 接收中文文本。
+</span></span><span class="line"><span class="cl">2. 调用本地 Qwen3-TTS HTTP API。
+</span></span><span class="line"><span class="cl">3. 支持配置 API 地址、参考音频和参考文本。
+</span></span><span class="line"><span class="cl">4. 将生成结果保存到 public/audio 目录。
+</span></span><span class="line"><span class="cl">5. 返回音频文件路径和音频时长。
+</span></span><span class="line"><span class="cl">6. 请求失败时输出明确的错误信息。
+</span></span><span class="line"><span class="cl">7. 不要把本地路径和接口地址写死，统一放到 .env 文件中。
+</span></span><span class="line"><span class="cl">8. 同时生成 .env.example 和使用说明。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>建议在 <code>.env</code> 中保存类似配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-env" data-lang="env"><span class="line"><span class="cl"><span class="nv">QWEN_TTS_API_URL</span><span class="o">=</span>http://127.0.0.1:8000
+</span></span><span class="line"><span class="cl"><span class="nv">QWEN_TTS_REF_AUDIO</span><span class="o">=</span>D:/voice/reference.wav
+</span></span><span class="line"><span class="cl"><span class="nv">QWEN_TTS_REF_TEXT</span><span class="o">=</span>这里填写参考音频对应的准确文字
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不要把真实的本地路径、密钥或个人声音样本提交到公开 GitHub 仓库。</p>
+<p>可以在 <code>.gitignore</code> 中加入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.env
+</span></span><span class="line"><span class="cl">public/audio/
+</span></span><span class="line"><span class="cl">private/
+</span></span><span class="line"><span class="cl">*.wav
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="十一一个容易忽略的问题接口格式不一定相同">十一、一个容易忽略的问题：接口格式不一定相同
+</h2><p>“已经部署 Qwen3-TTS”并不代表所有项目都使用相同接口。</p>
+<p>不同的本地部署项目可能使用：</p>
+<ul>
+<li>Python 函数调用</li>
+<li>FastAPI 接口</li>
+<li>Gradio 接口</li>
+<li>OpenAI 兼容接口</li>
+<li>自定义 WebSocket 接口</li>
+</ul>
+<p>因此，桥接脚本不能直接照搬。至少要先确认：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">接口地址：
+</span></span><span class="line"><span class="cl">请求方法：
+</span></span><span class="line"><span class="cl">请求参数：
+</span></span><span class="line"><span class="cl">返回格式：
+</span></span><span class="line"><span class="cl">音频格式：
+</span></span><span class="line"><span class="cl">是否需要参考音频：
+</span></span><span class="line"><span class="cl">是否需要参考文本：
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以让 WorkBuddy读取本地 Qwen3-TTS 项目的 README 或接口代码，然后根据真实接口编写适配脚本。</p>
+<p>推荐提示词：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请读取这个 Qwen3-TTS 项目的 README 和服务端接口代码，确认真实的请求地址、参数和返回格式，再修改 HyperFrames 桥接脚本。不要猜测接口字段。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="十二生成自己的声音配音">十二、生成自己的声音配音
+</h2><p>Qwen3-TTS 的声音克隆通常需要准备：</p>
+<ul>
+<li>一段清晰的参考音频</li>
+<li>参考音频对应的准确文字</li>
+<li>需要生成的新文案</li>
+</ul>
+<p>参考音频建议：</p>
+<ul>
+<li>环境安静</li>
+<li>没有背景音乐</li>
+<li>没有明显混响</li>
+<li>只有一个人说话</li>
+<li>发音清楚</li>
+<li>参考文本与录音内容一致</li>
+</ul>
+<p>完成配置后，可以让 WorkBuddy执行测试：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请使用本地 Qwen3-TTS 生成一段中文测试配音，文案为：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">“这是通过 HyperFrames 和本地语音模型生成的一段测试视频。”
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">生成后检查音频是否可以正常播放，再把它加入 HyperFrames 时间轴，并生成同步字幕。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>确认试听结果正常后，再开始生成正式视频。</p>
+<hr>
+<h2 id="十三常见问题">十三、常见问题
+</h2><h3 id="1-找不到-hyperframes-命令">1. 找不到 <code>hyperframes</code> 命令
+</h3><p>优先尝试：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">npx</span> <span class="n">hyperframes</span> <span class="p">-</span><span class="n">-help</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果可以运行，说明 HyperFrames 安装在当前项目，而不是全局环境。</p>
+<h3 id="2-ffmpeg-已安装但终端仍然找不到">2. FFmpeg 已安装，但终端仍然找不到
+</h3><p>关闭所有终端窗口后重新打开。</p>
+<p>仍然无效时，检查 FFmpeg 的 <code>bin</code> 目录是否已经加入系统 <code>Path</code>。</p>
+<h3 id="3-浏览器下载失败">3. 浏览器下载失败
+</h3><p>可能与网络、代理、防火墙或缓存有关。</p>
+<p>可以把完整错误日志交给 WorkBuddy，重点检查：</p>
+<ul>
+<li>下载地址是否可以访问</li>
+<li>系统代理是否生效</li>
+<li>防火墙是否拦截</li>
+<li>磁盘空间是否充足</li>
+<li>浏览器缓存目录是否损坏</li>
+</ul>
+<h3 id="4-视频有画面但没有声音">4. 视频有画面但没有声音
+</h3><p>检查：</p>
+<ul>
+<li>音频文件是否真实存在</li>
+<li>HTML 中的文件路径是否正确</li>
+<li>音频格式是否受支持</li>
+<li>音频是否加入时间轴</li>
+<li>渲染时 FFmpeg 是否检测到音轨</li>
+</ul>
+<h3 id="5-字幕和配音不同步">5. 字幕和配音不同步
+</h3><p>不要只按照文字长度估算时间。</p>
+<p>更可靠的方式是先生成音频，再读取真实音频时长，根据句子或时间戳安排字幕和动画。</p>
+<h3 id="6-自己的声音不像">6. 自己的声音不像
+</h3><p>重点检查：</p>
+<ul>
+<li>参考音频是否清晰</li>
+<li>参考文本是否准确</li>
+<li>是否选择了支持声音克隆的 Base 模型</li>
+<li>音频中是否包含噪声、音乐或多人说话</li>
+<li>桥接脚本是否正确传递参考音频</li>
+</ul>
+<hr>
+<h2 id="十四这套方案适合谁">十四、这套方案适合谁？
+</h2><p>这套工作流适合：</p>
+<ul>
+<li>不熟悉命令行的内容创作者</li>
+<li>想批量制作知识类视频的人</li>
+<li>需要自动生成字幕和配音的人</li>
+<li>希望减少在线视频工具费用的人</li>
+<li>已经部署本地语音模型的用户</li>
+<li>想用 HTML、CSS 和 JavaScript 制作动画的人</li>
+</ul>
+<p>它的核心价值不是“完全不用配置”，而是让 <a class="link" href="/tags/ai-agent/" >AI Agent</a> 帮助完成重复安装、脚本适配和错误排查，把视频生产流程从多个工具之间的手动切换，变成相对统一的自动化工作流。</p>
+<hr>
+<h2 id="总结">总结
+</h2><p>WorkBuddy、HyperFrames 和 Qwen3-TTS 分别解决了三个问题：</p>
+<ul>
+<li><strong>WorkBuddy</strong>：负责安装、执行和排错。</li>
+<li><strong>HyperFrames</strong>：负责把 HTML 动画渲染成 MP4。</li>
+<li><strong>Qwen3-TTS</strong>：负责本地语音生成和个人音色配音。</li>
+</ul>
+<p>真正关键的环节，是根据本地 Qwen3-TTS 的真实接口编写桥接脚本，而不是简单复制一段固定代码。</p>
+<p>完成桥接后，就可以形成一条相对完整的自动化流程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">输入视频主题
+</span></span><span class="line"><span class="cl">→ AI 生成脚本和 HTML 动画
+</span></span><span class="line"><span class="cl">→ Qwen3-TTS 生成配音
+</span></span><span class="line"><span class="cl">→ 自动生成字幕
+</span></span><span class="line"><span class="cl">→ HyperFrames 渲染 MP4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="项目与官方地址">项目与官方地址
+</h2><ul>
+<li>WorkBuddy 官方介绍：https://docs.cloudbase.net/ai/ai-tools/workbuddy</li>
+<li>HyperFrames GitHub：https://github.com/heygen-com/hyperframes</li>
+<li>HyperFrames 文档：https://hyperframes.heygen.com/</li>
+<li>Qwen3-TTS GitHub：https://github.com/QwenLM/Qwen3-TTS</li>
+</ul>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/workbuddy/">WorkBuddy</a>
+        
+            <a href="/tags/hyperframes/">HyperFrames</a>
+        
+            <a href="/tags/qwen3-tts/">Qwen3-TTS</a>
+        
+            <a href="/tags/html%E8%BD%AC%E8%A7%86%E9%A2%91/">HTML转视频</a>
+        
+            <a href="/tags/ai%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/">AI视频生成</a>
+        
+            <a href="/tags/%E6%9C%AC%E5%9C%B0%E8%AF%AD%E9%9F%B3%E6%A8%A1%E5%9E%8B/">本地语音模型</a>
+        
+            <a href="/tags/%E5%A3%B0%E9%9F%B3%E5%85%8B%E9%9A%86/">声音克隆</a>
+        
+            <a href="/tags/%E8%87%AA%E5%8A%A8%E9%85%8D%E9%9F%B3/">自动配音</a>
+        
+            <a href="/tags/ffmpeg/">FFmpeg</a>
+        
+            <a href="/tags/node.js/">Node.js</a>
+        
+            <a href="/tags/ai-agent/">AI Agent</a>
+        
+            <a href="/tags/%E5%BC%80%E6%BA%90%E8%A7%86%E9%A2%91%E5%B7%A5%E5%85%B7/">开源视频工具</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/5-ge-zi-ding-yi-skill-rang-codex-cong-dai/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手</strong>
+                    </a><a href="/posts/hyperframes-yong-yi-ju-ti-shi-ci-sheng-cheng-wang/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>HyperFrames：用一句提示词生成网页动画，并渲染为 MP4 视频</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    
+    <li><a href="#二安装前需要准备什么">二、安装前需要准备什么？</a></li>
+    <li><a href="#三安装-nodejs">三、安装 Node.js</a></li>
+    <li><a href="#四安装-ffmpeg">四、安装 FFmpeg</a></li>
+    <li><a href="#五安装-workbuddy">五、安装 WorkBuddy</a></li>
+    <li><a href="#六使用-workbuddy-安装-hyperframes">六、使用 WorkBuddy 安装 HyperFrames</a></li>
+    <li><a href="#七运行环境体检">七、运行环境体检</a></li>
+    <li><a href="#八预览和渲染视频">八、预览和渲染视频</a></li>
+    <li><a href="#九接入本地-qwen3-tts">九、接入本地 Qwen3-TTS</a></li>
+    <li><a href="#十让-workbuddy-编写桥接脚本">十、让 WorkBuddy 编写桥接脚本</a></li>
+    <li><a href="#十一一个容易忽略的问题接口格式不一定相同">十一、一个容易忽略的问题：接口格式不一定相同</a></li>
+    <li><a href="#十二生成自己的声音配音">十二、生成自己的声音配音</a></li>
+    
+    <li><a href="#十四这套方案适合谁">十四、这套方案适合谁？</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#项目与官方地址">项目与官方地址</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/ai/"><span>分类</span><b>AI</b></a>
+                    <a><span>字数</span><b>3575</b></a>
+                    <a><span>阅读</span><b>8 MIN</b></a>
+                    <a><span>更新</span><b>07.28</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/hyperframes-yong-yi-ju-ti-shi-ci-sheng-cheng-wang/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/2026728_12_09_15-bcf2b426.jpg" alt="HyperFrames：用一句提示词生成网页动画，并渲染为 MP4 视频" loading="lazy"><code>01 / AI</code>
+                    <h3>HyperFrames：用一句提示词生成网页动画，并渲染为 MP4 视频</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>做产品演示、工具介绍或数据动画时，传统视频软件往往需要手动调整时间轴、关键帧和字幕，制作过程比较繁琐。
+HyperFrames 提供了另一种思路 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/video-use-ba-yuan-shi-su-cai-jiao-gei-ai/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/26728_12_13_20-82056871.jpg" alt="video-use：把原始素材交给 AI，自动完成剪辑、字幕与调色" loading="lazy"><code>02 / AI</code>
+                    <h3>video-use：把原始素材交给 AI，自动完成剪辑、字幕与调色</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>传统视频剪辑最耗时间的，往往不是拍摄，而是后期处理。
+删除停顿、处理口头禅、生成字幕、调整画面颜色、添加转场和动效，这些操作并不复杂，但需要反复 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/windows-ai-gong-ju-fan-fu-bao-cuo-an-zhuang/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/23_08_32301_1-85cb7eaa.jpg" alt="Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费" loading="lazy"><code>03 / AI</code>
+                    <h3>Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>在 Windows 上使用 Codex、Claude Code、Cursor 或其他 AI 编程工具时，你可能遇到过这种情况：
+1 2 3 4 …</p>
+                    <time>2026-08-02</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/yi-ju-hua-ke-long-wang-zhan-ai-agent-xiang/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/729_10_39_48-48407b7e.jpg" alt="一句话克隆网站：AI Agent 像素级复刻工具" loading="lazy"><code>04 / AI</code>
+                    <h3>一句话克隆网站：AI Agent 像素级复刻工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>想快速复刻一个网站的页面设计，又不想从零手写 React 组件和 CSS？
+AI Website Cloner Template 提供了一套基于 …</p>
+                    <time>2026-07-29</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

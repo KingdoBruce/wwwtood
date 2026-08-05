@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本文介绍如何使用 Cloudflare Tunnel 将本地服务安全地连接到公网。临时演示可以通过一条 cloudflared tunnel --url 命令生成 HTTPS 公网地址；需要固定域名和长期运行时，则可创建命名隧道、配置 DNS 和系统服务。文章同时说明 Quick Tunnel 的并发、SSE 和稳定性限制，并提供多服务配置、常见故障排查与安全建议。">
+<title>Cloudflare Tunnel 内网穿透教程：一条命令把本地服务暴露到公网 - 随笔 - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/cloudflare-tunnel-nei-wang-chuan-tou-yi-tiao-ming-ling/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="Cloudflare Tunnel 内网穿透教程：一条命令把本地服务暴露到公网 - 随笔 - 拾光集 TOOD.WIN">
+<meta property='og:description' content="本文介绍如何使用 Cloudflare Tunnel 将本地服务安全地连接到公网。临时演示可以通过一条 cloudflared tunnel --url 命令生成 HTTPS 公网地址；需要固定域名和长期运行时，则可创建命名隧道、配置 DNS 和系统服务。文章同时说明 Quick Tunnel 的并发、SSE 和稳定性限制，并提供多服务配置、常见故障排查与安全建议。">
+<meta property='og:url' content='https://www.tood.win/posts/cloudflare-tunnel-nei-wang-chuan-tou-yi-tiao-ming-ling/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Cloudflare Tunnel' /><meta property='article:tag' content='cloudflared' /><meta property='article:tag' content='内网穿透' /><meta property='article:tag' content='Cloudflare 内网穿透' /><meta property='article:tag' content='Quick Tunnel' /><meta property='article:tag' content='TryCloudflare' /><meta property='article:tag' content='命名隧道' /><meta property='article:tag' content='公网访问 localhost' /><meta property='article:tag' content='本地服务公网访问' /><meta property='article:tag' content='Webhook 调试' /><meta property='article:tag' content='NAS 远程访问' /><meta property='article:tag' content='固定域名内网穿透' /><meta property='article:tag' content='HTTPS 内网穿透' /><meta property='article:tag' content='无公网 IP' /><meta property='article:tag' content='开发工具' /><meta property='article:published_time' content='2026-08-03T14:44:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-03T14:48:44&#43;08:00'/>
+<meta name="twitter:title" content="Cloudflare Tunnel 内网穿透教程：一条命令把本地服务暴露到公网 - 随笔 - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="本文介绍如何使用 Cloudflare Tunnel 将本地服务安全地连接到公网。临时演示可以通过一条 cloudflared tunnel --url 命令生成 HTTPS 公网地址；需要固定域名和长期运行时，则可创建命名隧道、配置 DNS 和系统服务。文章同时说明 Quick Tunnel 的并发、SSE 和稳定性限制，并提供多服务配置、常见故障排查与安全建议。">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="Cloudflare Tunnel, cloudflared, 内网穿透, Cloudflare 内网穿透, Quick Tunnel, TryCloudflare, 命名隧道, 公网访问 localhost, 本地服务公网访问, Webhook 调试, NAS 远程访问, 固定域名内网穿透, HTTPS 内网穿透, 无公网 IP, 开发工具">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"Cloudflare Tunnel 内网穿透教程：一条命令把本地服务暴露到公网\"",
+  "description": "\"本文介绍如何使用 Cloudflare Tunnel 将本地服务安全地连接到公网。临时演示可以通过一条 cloudflared tunnel --url 命令生成 HTTPS 公网地址；需要固定域名和长期运行时，则可创建命名隧道、配置 DNS 和系统服务。文章同时说明 Quick Tunnel 的并发、SSE 和稳定性限制，并提供多服务配置、常见故障排查与安全建议。\"",
+  "datePublished": "\"2026-08-03T14:44:00+08:00\"",
+  "dateModified": "\"2026-08-03T14:48:44+08:00\"",
+  "url": "\"https://www.tood.win/posts/cloudflare-tunnel-nei-wang-chuan-tou-yi-tiao-ming-ling/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span>/</span><a href="/posts/cloudflare-tunnel-nei-wang-chuan-tou-yi-tiao-ming-ling/">Cloudflare Tunnel 内网穿透教程：一条命令把本地服务暴露到公网</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / 随笔</span>
+                <span>LIVE DATA / A.2608.072</span>
+            </div>
+            <h1>Cloudflare Tunnel 内网穿透教程：一条命令把本地服务暴露到公网</h1>
+            <p class="article-deck">本文介绍如何使用 Cloudflare Tunnel 将本地服务安全地连接到公网。临时演示可以通过一条 cloudflared tunnel --url 命令生成 HTTPS 公网地址；需要固定域名和长期运行时，则可创建命名隧道、配置 DNS 和系统服务。文章同时说明 Quick Tunnel 的并发、SSE 和稳定性限制，并提供多服务配置、常见故障排查与安全建议。</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.08.03</span>
+                <span>6 MIN READ</span>
+                <span>2800 WORDS</span>
+                <span>随笔</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A72</strong>
+                <p class="mono">JAN. 03<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">13</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>本地项目已经运行成功，却无法发给同事或客户查看？调试微信、支付宝或 Stripe Webhook 时，需要填写公网 HTTPS 回调地址，但你手里只有 <code>localhost</code>？</p>
+<p><a class="link" href="/tags/cloudflare/" >Cloudflare</a> Tunnel 可以让本地设备主动连接 Cloudflare 网络，再把公网请求转发到本地服务。整个过程不要求家庭宽带拥有公网 IP，也不需要在路由器上开放入站端口。</p>
+<p>对于临时演示，只需要一条命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel --url http://localhost:3000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行后，终端会生成一个类似下面的临时公网地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">https://random-name.trycloudflare.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img alt="Cloudflare Tunnel 内网穿透教程：一条命令把本地服务暴露到公网" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/Ch202683_14_47_13-1611ee7b.jpg"></p>
+<p>把这个地址发给其他人，对方就能访问你电脑上运行的 <code>localhost:3000</code> 服务。</p>
+
+    <blockquote>
+        <p>Quick Tunnel 主要用于开发、测试和临时演示，不适合部署正式网站或长期业务。</p>
+
+    </blockquote>
+<h2 id="cloudflare-tunnel-是什么">Cloudflare Tunnel 是什么？
+</h2><p>传统端口映射通常要求路由器拥有公网 IP，并且需要开放端口。Cloudflare Tunnel 的工作方式不同：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">公网访客
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Cloudflare 网络
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">加密隧道
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">cloudflared
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">本地服务
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>cloudflared</code> 会从本地设备主动建立出站连接，因此通常不需要：</p>
+<ul>
+<li>公网 IPv4 地址</li>
+<li>路由器端口转发</li>
+<li>将服务器端口直接开放到公网</li>
+<li>自建带公网 IP 的 FRP 服务端</li>
+</ul>
+<p>这可以减少直接暴露源站 IP 和入站端口带来的风险，但并不代表本地应用可以取消登录验证、权限控制或安全更新。</p>
+<h2 id="适合哪些使用场景">适合哪些使用场景？
+</h2><p>Cloudflare Tunnel 比较适合以下需求：</p>
+<ul>
+<li>临时分享本地开发环境</li>
+<li>给客户演示尚未部署的项目</li>
+<li>调试 Webhook 和第三方支付回调</li>
+<li>分享本地 API 或测试页面</li>
+<li>远程访问 NAS 管理页面</li>
+<li>为家庭服务器建立固定访问入口</li>
+</ul>
+<p>如果只是临时分享项目，使用 Quick Tunnel 即可；如果需要固定域名和长期运行，应使用命名隧道。</p>
+<h2 id="一安装-cloudflared">一、安装 cloudflared
+</h2><h3 id="macos">macOS
+</h3><p>使用 Homebrew 安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install cloudflared
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="windows">Windows
+</h3><p>可以使用 <a class="link" href="/tags/winget/" >WinGet</a>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">winget</span> <span class="n">install</span> <span class="p">-</span><span class="n">-id</span> <span class="n">Cloudflare</span><span class="p">.</span><span class="py">cloudflared</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装完成后关闭并重新打开 PowerShell，然后检查版本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">cloudflared</span> <span class="p">-</span><span class="n">-version</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以前往官方 GitHub Releases 页面下载 Windows MSI 或可执行文件。</p>
+<h3 id="ubuntu--debian">Ubuntu / Debian
+</h3><p>添加 Cloudflare 官方软件源：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo mkdir -p --mode<span class="o">=</span><span class="m">0755</span> /usr/share/keyrings
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg <span class="se">\
+</span></span></span><span class="line"><span class="cl">  <span class="p">|</span> sudo tee /usr/share/keyrings/cloudflare-main.gpg &gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  <span class="p">|</span> sudo tee /etc/apt/sources.list.d/cloudflared.list
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">sudo apt-get install cloudflared
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装后检查版本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared --version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="二一条命令创建临时公网地址">二、一条命令创建临时公网地址
+</h2><p>假设本地项目运行在：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">http://localhost:3000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel --url http://localhost:3000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>终端会返回一个随机的 <code>trycloudflare.com</code> 地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">https://random-name.trycloudflare.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只要终端中的 <code>cloudflared</code> 进程仍在运行，这个公网地址就可以访问。</p>
+<p>按下 <code>Ctrl + C</code> 停止进程后，隧道会断开。再次运行命令时，通常会生成新的随机地址。</p>
+<h3 id="本地服务使用-https">本地服务使用 HTTPS
+</h3><p>如果本地服务本身运行在 HTTPS：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel --url https://localhost:3000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过，本地自签名证书可能触发 TLS 验证问题。开发环境遇到证书错误时，应优先检查本地证书配置，而不是直接关闭所有安全验证。</p>
+<h3 id="减少日志输出">减少日志输出
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel --url http://localhost:3000 --loglevel error
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="三quick-tunnel-的限制">三、Quick Tunnel 的限制
+</h2><p>Quick Tunnel 虽然方便，但不是正式部署方案。</p>
+<p>目前需要注意：</p>
+<ul>
+<li>每次运行生成的随机域名可能不同</li>
+<li>官方不保证 SLA 或持续可用性</li>
+<li>最多支持 200 个正在处理的并发请求</li>
+<li>超过限制可能返回 HTTP <code>429</code></li>
+<li>不支持 Server-Sent Events，也就是 SSE</li>
+<li>主要用于开发、测试和临时演示</li>
+<li><code>.cloudflared</code> 目录中存在 <code>config.yaml</code> 时，Quick Tunnel 可能无法启动</li>
+</ul>
+<p>如果项目需要固定域名、长期运行、访问控制或更稳定的配置，建议创建正式的 Cloudflare Tunnel。</p>
+<h2 id="四使用固定域名创建命名隧道">四、使用固定域名创建命名隧道
+</h2><p>命名隧道需要：</p>
+<ul>
+<li>Cloudflare 账号</li>
+<li>一个已经接入 Cloudflare DNS 的域名</li>
+<li>在本地或服务器上运行 <code>cloudflared</code></li>
+</ul>
+<p>下面以 <code>demo.example.com</code> 转发到 <code>localhost:3000</code> 为例。</p>
+<h3 id="第一步登录-cloudflare">第一步：登录 Cloudflare
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel login
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>命令会打开浏览器，要求登录 Cloudflare 并选择对应域名。</p>
+<p>授权成功后，本地 <code>.cloudflared</code> 目录中会生成认证文件。</p>
+<h3 id="第二步创建隧道">第二步：创建隧道
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel create my-tunnel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行成功后会显示隧道 UUID，并生成类似下面的凭据文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">~/.cloudflared/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看已经创建的隧道：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第三步绑定域名">第三步：绑定域名
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel route dns my-tunnel demo.example.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这条命令会在 Cloudflare DNS 中创建一条指向隧道的 CNAME 记录。</p>
+<h3 id="第四步创建配置文件">第四步：创建配置文件
+</h3><p>Linux 和 macOS 默认配置路径：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">~/.cloudflared/config.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Windows 默认配置路径：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">%USERPROFILE%\.cloudflared\config.yml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">tunnel</span><span class="p">:</span><span class="w"> </span><span class="l">xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">credentials-file</span><span class="p">:</span><span class="w"> </span><span class="l">/home/your-user/.cloudflared/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.json</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">demo.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">http://localhost:3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">http_status:404</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>请将：</p>
+<ul>
+<li><code>tunnel</code> 修改为实际隧道 UUID</li>
+<li><code>credentials-file</code> 修改为实际 JSON 文件路径</li>
+<li><code>demo.example.com</code> 修改为自己的域名</li>
+<li><code>localhost:3000</code> 修改为本地服务地址</li>
+</ul>
+<p>最后一条 <code>http_status:404</code> 是兜底规则。使用 <code>ingress</code> 配置时，最后必须有一条能够匹配剩余请求的规则。</p>
+<h3 id="第五步启动隧道">第五步：启动隧道
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel run my-tunnel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动成功后，可以通过下面的固定地址访问本地服务：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">https://demo.example.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意，固定域名并不代表本地服务永远在线。电脑关机、网络断开或 <code>cloudflared</code> 停止运行后，公网地址仍然存在，但无法连接到本地服务。</p>
+<h2 id="五一个隧道绑定多个本地服务">五、一个隧道绑定多个本地服务
+</h2><p>同一个命名隧道可以根据不同子域名转发到不同服务：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">tunnel</span><span class="p">:</span><span class="w"> </span><span class="l">xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">credentials-file</span><span class="p">:</span><span class="w"> </span><span class="l">/home/your-user/.cloudflared/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.json</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">app.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">http://localhost:3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">api.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">http://localhost:8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">nas.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">http://192.168.1.10:5000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l">http_status:404</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>对应关系如下：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>公网地址</th>
+          <th>本地服务</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>app.example.com</code></td>
+          <td><code>localhost:3000</code></td>
+      </tr>
+      <tr>
+          <td><code>api.example.com</code></td>
+          <td><code>localhost:8080</code></td>
+      </tr>
+      <tr>
+          <td><code>nas.example.com</code></td>
+          <td><code>192.168.1.10:5000</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>修改配置后，需要重新启动 <code>cloudflared</code> 才能应用新配置。</p>
+<h2 id="六配置为系统服务">六、配置为系统服务
+</h2><p>长期使用时，不建议每次开机后手动运行。可以把 <code>cloudflared</code> 安装为系统服务。</p>
+<p>Linux：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo cloudflared --config /home/your-user/.cloudflared/config.yml service install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后检查服务状态：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl status cloudflared
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>常用管理命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl start cloudflared
+</span></span><span class="line"><span class="cl">sudo systemctl stop cloudflared
+</span></span><span class="line"><span class="cl">sudo systemctl restart cloudflared
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Windows 也支持将 <code>cloudflared</code> 安装为服务，但配置文件路径、运行账户和凭据权限需要正确设置。</p>
+<h2 id="七常见问题">七、常见问题
+</h2><h3 id="1-公网地址打开后显示-502">1. 公网地址打开后显示 502
+</h3><p>通常表示 Cloudflare Tunnel 已连接，但 <code>cloudflared</code> 无法访问本地服务。</p>
+<p>检查本地端口：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl http://localhost:3000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还要确认：</p>
+<ul>
+<li>本地项目是否已经启动</li>
+<li>HTTP 和 HTTPS 是否填写正确</li>
+<li>端口号是否正确</li>
+<li>Docker 服务是否只监听容器内部</li>
+<li>防火墙是否阻止本机访问</li>
+</ul>
+<h3 id="2-quick-tunnel-无法启动">2. Quick Tunnel 无法启动
+</h3><p>检查下面的目录中是否存在 <code>config.yaml</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">~/.cloudflared/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Quick Tunnel 与现有配置文件可能发生冲突。可以暂时重命名配置文件后再测试。</p>
+<h3 id="3-vite-页面提示-host-not-allowed">3. Vite 页面提示 Host not allowed
+</h3><p>部分开发服务器会检查请求的 Host。使用 Quick Tunnel 时，需要把 <code>.trycloudflare.com</code> 加入开发服务器允许的 Host 列表。</p>
+<p>不要为了省事在正式环境中永久允许所有 Host。</p>
+<h3 id="4-电脑重启后无法访问">4. 电脑重启后无法访问
+</h3><p>命名隧道只会保留域名和隧道配置，不会自动启动本地进程。</p>
+<p>需要：</p>
+<ul>
+<li>将 <code>cloudflared</code> 安装为系统服务</li>
+<li>设置本地应用开机启动</li>
+<li>确认配置文件和凭据路径正确</li>
+</ul>
+<h3 id="5-能不能直接暴露数据库端口">5. 能不能直接暴露数据库端口？
+</h3><p>不建议把 MySQL、PostgreSQL、Redis 等数据库直接发布到公网。</p>
+<p>数据库、SSH、RDP 等非 HTTP 服务，更适合结合 Cloudflare Access、WARP 和身份认证使用，而不是创建一个任何人都能访问的公共入口。</p>
+<h2 id="八安全建议">八、安全建议
+</h2><p>Cloudflare Tunnel 减少了开放路由器端口的需求，但它仍然会为本地服务建立公网入口。</p>
+<p>正式使用前至少做好以下设置：</p>
+<ol>
+<li>为管理后台设置强密码和多因素认证。</li>
+<li>不要直接公开数据库、Docker API、路由器后台和无密码 NAS。</li>
+<li>使用 Cloudflare Access 限制允许访问的账号。</li>
+<li>定期更新 <code>cloudflared</code> 和本地应用。</li>
+<li>检查应用日志和 Cloudflare 安全事件。</li>
+<li>不要在配置文件或公开仓库中提交隧道凭据 JSON。</li>
+<li>演示完成后及时关闭不再使用的 Quick Tunnel。</li>
+</ol>
+<h2 id="quick-tunnel-和命名隧道怎么选">Quick Tunnel 和命名隧道怎么选？
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>对比项目</th>
+          <th>Quick Tunnel</th>
+          <th>命名隧道</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>是否需要账号</td>
+          <td>不需要</td>
+          <td>需要</td>
+      </tr>
+      <tr>
+          <td>是否需要自有域名</td>
+          <td>不需要</td>
+          <td>公开固定域名通常需要</td>
+      </tr>
+      <tr>
+          <td>公网地址</td>
+          <td>随机地址</td>
+          <td>固定域名</td>
+      </tr>
+      <tr>
+          <td>适合场景</td>
+          <td>临时演示、Webhook 调试</td>
+          <td>NAS、测试环境、长期服务</td>
+      </tr>
+      <tr>
+          <td>配置难度</td>
+          <td>一条命令</td>
+          <td>需要域名和隧道配置</td>
+      </tr>
+      <tr>
+          <td>是否适合生产环境</td>
+          <td>不适合</td>
+          <td>可用于正式场景，但仍需安全配置</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="总结">总结
+</h2><p>临时把本地服务分享给别人，只需要记住：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel --url http://localhost:&lt;端口&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudflared tunnel --url http://localhost:3000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要固定域名和长期运行时，则使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">命名隧道 + 自有域名 + config.yml + 系统服务
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cloudflare Tunnel 的主要价值不是“完全没有风险”，而是在不开放路由器入站端口、不要求公网 IP 的情况下，为本地服务建立一个更容易管理的公网入口。</p>
+<h2 id="官方项目与参考资料">官方项目与参考资料
+</h2><ul>
+<li>GitHub 项目：<a class="link" href="https://github.com/cloudflare/cloudflared"  target="_blank" rel="noopener"
+    >cloudflare/cloudflared</a></li>
+<li>官方下载文档：<a class="link" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/"  target="_blank" rel="noopener"
+    >Cloudflare Tunnel Downloads</a></li>
+<li>Quick Tunnel 文档：<a class="link" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/trycloudflare/"  target="_blank" rel="noopener"
+    >TryCloudflare Quick Tunnels</a></li>
+<li>命名隧道教程：<a class="link" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/create-local-tunnel/"  target="_blank" rel="noopener"
+    >Create a locally-managed tunnel</a></li>
+<li>配置文件说明：<a class="link" href="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/configuration-file/"  target="_blank" rel="noopener"
+    >Cloudflare Tunnel configuration file</a></li>
+</ul>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/cloudflare-tunnel/">Cloudflare Tunnel</a>
+        
+            <a href="/tags/cloudflared/">Cloudflared</a>
+        
+            <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</a>
+        
+            <a href="/tags/cloudflare-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">Cloudflare 内网穿透</a>
+        
+            <a href="/tags/quick-tunnel/">Quick Tunnel</a>
+        
+            <a href="/tags/trycloudflare/">TryCloudflare</a>
+        
+            <a href="/tags/%E5%91%BD%E5%90%8D%E9%9A%A7%E9%81%93/">命名隧道</a>
+        
+            <a href="/tags/%E5%85%AC%E7%BD%91%E8%AE%BF%E9%97%AE-localhost/">公网访问 Localhost</a>
+        
+            <a href="/tags/%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%85%AC%E7%BD%91%E8%AE%BF%E9%97%AE/">本地服务公网访问</a>
+        
+            <a href="/tags/webhook-%E8%B0%83%E8%AF%95/">Webhook 调试</a>
+        
+            <a href="/tags/nas-%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/">NAS 远程访问</a>
+        
+            <a href="/tags/%E5%9B%BA%E5%AE%9A%E5%9F%9F%E5%90%8D%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">固定域名内网穿透</a>
+        
+            <a href="/tags/https-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">HTTPS 内网穿透</a>
+        
+            <a href="/tags/%E6%97%A0%E5%85%AC%E7%BD%91-ip/">无公网 IP</a>
+        
+            <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/giffgaff-ting-hu-hou-huan-shen-me-ka-saily-0/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>giffgaff 停户后换什么卡？Saily 0.99 美元/月申请美国手机号教程</strong>
+                    </a><a href="/posts/itom-dev-ke-zai-liu-lan-qi-zhong-hang-zou/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>ITom Dev：可在浏览器中行走的开源 3D WebGL 作品集</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#cloudflare-tunnel-是什么">Cloudflare Tunnel 是什么？</a></li>
+    <li><a href="#适合哪些使用场景">适合哪些使用场景？</a></li>
+    
+    
+    <li><a href="#三quick-tunnel-的限制">三、Quick Tunnel 的限制</a></li>
+    
+    <li><a href="#五一个隧道绑定多个本地服务">五、一个隧道绑定多个本地服务</a></li>
+    <li><a href="#六配置为系统服务">六、配置为系统服务</a></li>
+    
+    <li><a href="#八安全建议">八、安全建议</a></li>
+    <li><a href="#quick-tunnel-和命名隧道怎么选">Quick Tunnel 和命名隧道怎么选？</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#官方项目与参考资料">官方项目与参考资料</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/%E9%9A%8F%E7%AC%94/"><span>分类</span><b>随笔</b></a>
+                    <a><span>字数</span><b>2800</b></a>
+                    <a><span>阅读</span><b>6 MIN</b></a>
+                    <a><span>更新</span><b>08.03</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/giffgaff-ting-hu-hou-huan-shen-me-ka-saily-0/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/1_28_30-ca1002ef.jpg" alt="giffgaff 停户后换什么卡？Saily 0.99 美元/月申请美国手机号教程" loading="lazy"><code>01 / 随笔</code>
+                    <h3>giffgaff 停户后换什么卡？Saily 0.99 美元/月申请美国手机号教程</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>近期，部分长期在英国以外使用 giffgaff 的用户收到了停户邮件。
+giffgaff 长期海外用户收到停户邮件：号码抢救与携号转网教程
+这件 …</p>
+                    <time>2026-08-03</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/giffgaff-chang-qi-hai-wai-yong-hu-shou-dao-ting/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/3_11_28_30-6e53c656.jpg" alt="giffgaff 长期海外用户收到停户邮件：号码抢救与携号转网教程" loading="lazy"><code>02 / 随笔</code>
+                    <h3>giffgaff 长期海外用户收到停户邮件：号码抢救与携号转网教程</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>近期，部分长期在英国境外使用 giffgaff 的用户收到了服务停止通知。
+邮件给出的理由是：giffgaff 的移动服务主要面向英国境内用户， …</p>
+                    <time>2026-08-03</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/wang-zhan-yu-ming-ying-gai-dai-www-hai-shi/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/ChatGPT_Image_2026731_14_47_02-7612a27b.jpg" alt="网站域名应该带 www 还是不带 www？Vercel、Sitemap 与 GSC 设置指南" loading="lazy"><code>03 / 随笔</code>
+                    <h3>网站域名应该带 www 还是不带 www？Vercel、Sitemap 与 GSC 设置指南</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>网站上线时，经常需要在下面两种域名格式中选择一种：
+1 2 https://tood.win https://www.tood.win 从 …</p>
+                    <time>2026-07-31</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ai-shi-pin-zhu-jing-tou-ni-xiang-fen-xi/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/12_13_06-65626213.jpg" alt="AI 视频逐镜头逆向分析与提示词生成器" loading="lazy"><code>04 / 随笔</code>
+                    <h3>AI 视频逐镜头逆向分析与提示词生成器</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>AI 视频逐镜头拆解与提示词逆向工程模板想要复刻一条优秀视频，真正需要学习的并不是人物、台词或具体剧情，而是隐藏在画面背后的镜头逻辑、视觉方法 …</p>
+                    <time>2026-07-29</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

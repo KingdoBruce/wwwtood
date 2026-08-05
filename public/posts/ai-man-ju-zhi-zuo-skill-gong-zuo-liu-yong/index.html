@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="制作 AI 漫剧，真正困难的通常不是生成一张图片，而是如何让剧情节奏、人物形象和镜头衔接保持一致。\n目前 GitHub 上已经出现多套面向 Claude Code、Codex 等 AI Agent 的开源 Skills。虽然不同项目的命名并不完全相同，但核心流程基本可以归纳为三类：\n">
+<title>AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率 - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/ai-man-ju-zhi-zuo-skill-gong-zuo-liu-yong/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率 - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="制作 AI 漫剧，真正困难的通常不是生成一张图片，而是如何让剧情节奏、人物形象和镜头衔接保持一致。\n目前 GitHub 上已经出现多套面向 Claude Code、Codex 等 AI Agent 的开源 Skills。虽然不同项目的命名并不完全相同，但核心流程基本可以归纳为三类：\n">
+<meta property='og:url' content='https://www.tood.win/posts/ai-man-ju-zhi-zuo-skill-gong-zuo-liu-yong/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='AI漫剧' /><meta property='article:tag' content='AI短剧制作' /><meta property='article:tag' content='Claude Code Skills' /><meta property='article:tag' content='Codex Skills' /><meta property='article:tag' content='影视分镜' /><meta property='article:tag' content='角色一致性' /><meta property='article:published_time' content='2026-07-29T11:47:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-29T12:13:49&#43;08:00'/>
+<meta name="twitter:title" content="AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率 - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="制作 AI 漫剧，真正困难的通常不是生成一张图片，而是如何让剧情节奏、人物形象和镜头衔接保持一致。\n目前 GitHub 上已经出现多套面向 Claude Code、Codex 等 AI Agent 的开源 Skills。虽然不同项目的命名并不完全相同，但核心流程基本可以归纳为三类：\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="AI漫剧, AI短剧制作, Claude Code Skills, Codex Skills, 影视分镜, 角色一致性">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率\"",
+  "description": "\"制作 AI 漫剧，真正困难的通常不是生成一张图片，而是如何让剧情节奏、人物形象和镜头衔接保持一致。\\n目前 GitHub 上已经出现多套面向 Claude Code、Codex 等 AI Agent 的开源 Skills。虽然不同项目的命名并不完全相同，但核心流程基本可以归纳为三类：\\n\"",
+  "datePublished": "\"2026-07-29T11:47:00+08:00\"",
+  "dateModified": "\"2026-07-29T12:13:49+08:00\"",
+  "url": "\"https://www.tood.win/posts/ai-man-ju-zhi-zuo-skill-gong-zuo-liu-yong/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai/">AI</a><span>/</span><a href="/posts/ai-man-ju-zhi-zuo-skill-gong-zuo-liu-yong/">AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI</span>
+                <span>LIVE DATA / A.2607.056</span>
+            </div>
+            <h1>AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率</h1>
+            <p class="article-deck">制作 AI 漫剧，真正困难的通常不是生成一张图片，而是如何让剧情节奏、人物形象和镜头衔接保持一致。
+目前 GitHub 上已经出现多套面向 Claude Code、Codex 等 AI Agent 的开源 Skills。虽然不同项目的命名并不完全相同，但核心流程基本可以归纳为三类：
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.29</span>
+                <span>4 MIN READ</span>
+                <span>1797 WORDS</span>
+                <span>AI</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A56</strong>
+                <p class="mono">JAN. 29<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">07</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>制作 <a class="link" href="/tags/ai/" >AI</a> 漫剧，真正困难的通常不是生成一张图片，而是如何让<strong>剧情节奏、人物形象和镜头衔接保持一致</strong>。</p>
+<p>目前 GitHub 上已经出现多套面向 <a class="link" href="/tags/claude/" >Claude</a> Code、<a class="link" href="/tags/codex/" >Codex</a> 等 <a class="link" href="/tags/ai-agent/" >AI Agent</a> 的开源 <a class="link" href="/tags/skills/" >Skills</a>。虽然不同项目的命名并不完全相同，但核心流程基本可以归纳为三类：</p>
+<ol>
+<li>剧本创作 <a class="link" href="/tags/skill/" >Skill</a></li>
+<li>图像资产 Skill</li>
+<li>分镜制作 Skill</li>
+</ol>
+<p>这三类 Skill 可以把小说或创意逐步转换为剧本、角色资产、分镜表和图像或视频提示词。</p>
+<p><img alt="AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/026729_11_43_51-e2394a5a.jpg"></p>
+<h2 id="一剧本创作-skill">一、剧本创作 Skill
+</h2><p>剧本 Skill 负责把小说、故事大纲或简单创意，整理成适合短剧和漫剧制作的结构化剧本。</p>
+<p>常见输出包括：</p>
+<ul>
+<li>故事背景与核心冲突</li>
+<li>角色身份、动机和人物关系</li>
+<li>分集大纲</li>
+<li>场景编号与场景说明</li>
+<li>人物动作和对白</li>
+<li>每集开头的吸引点</li>
+<li>结尾悬念或下一集钩子</li>
+</ul>
+<p>它的价值不是单纯“把文字写长”，而是提前解决剧情节奏问题。</p>
+<p>很多 AI 漫剧画面并不差，但播放数据不理想，常见原因是开头进入剧情太慢、冲突不明确，或者每集结尾缺少继续观看的理由。</p>
+<p>因此，剧本生成后仍然需要人工检查：</p>
+<ul>
+<li>前几秒是否出现核心事件</li>
+<li>主角目标是否明确</li>
+<li>冲突是否能够通过画面表现</li>
+<li>对白是否过多</li>
+<li>每个场景是否有存在的必要</li>
+</ul>
+<h2 id="二图像资产-skill">二、图像资产 Skill
+</h2><p>图像资产 Skill 会从剧本中提取需要反复使用的视觉元素，例如：</p>
+<ul>
+<li>主要角色</li>
+<li>次要角色</li>
+<li>服装造型</li>
+<li>场景</li>
+<li>道具</li>
+<li>交通工具</li>
+<li>特殊物品</li>
+<li>关键视觉符号</li>
+</ul>
+<p>随后，它会为每项资产生成结构化说明和图像提示词。</p>
+<p>一份实用的角色资产档案，至少应包含：</p>
+<ul>
+<li>年龄范围</li>
+<li>脸型与五官特征</li>
+<li>发型和发色</li>
+<li>身材与体态</li>
+<li>服装款式、颜色和材质</li>
+<li>常用表情</li>
+<li>正面、侧面和背面参考</li>
+<li>中文与英文提示词</li>
+<li>不允许变化的角色特征</li>
+</ul>
+<p>这一步的重点是解决**<a class="link" href="/tags/%e8%a7%92%e8%89%b2%e4%b8%80%e8%87%b4%e6%80%a7/" >角色一致性</a>**。</p>
+<p>同一个人物在不同镜头中出现时，应尽量复用相同的角色描述和参考图，而不是每次重新生成一套提示词。否则容易出现脸型、发型、服装颜色和年龄不断变化的问题。</p>
+<h2 id="三专业分镜-skill">三、专业分镜 Skill
+</h2><p>分镜 Skill 负责把剧本转换成可以直接执行的镜头清单。</p>
+<p>它通常会为每个镜头标注：</p>
+<ul>
+<li>镜头编号</li>
+<li>场景与时间</li>
+<li>出场人物</li>
+<li>景别</li>
+<li>摄影机角度</li>
+<li>人物位置</li>
+<li>人物动作</li>
+<li>表情变化</li>
+<li>灯光与色调</li>
+<li>镜头运动</li>
+<li>台词或旁白</li>
+<li>建议时长</li>
+<li>首帧或关键帧提示词</li>
+</ul>
+<p>例如，剧本中只有一句：</p>
+
+    <blockquote>
+        <p>主角发现桌上的合同被人替换。</p>
+
+    </blockquote>
+<p>分镜需要进一步明确：</p>
+<ul>
+<li>先用近景展示主角翻开合同</li>
+<li>再切换到合同签名位置的特写</li>
+<li>主角手指停顿，表情从疑惑变为警觉</li>
+<li>镜头缓慢推进</li>
+<li>背景声音逐渐减弱</li>
+<li>最后切到门外模糊的人影</li>
+</ul>
+<p>只有完成这样的镜头拆解，图像模型和视频模型才能获得更明确的执行信息。</p>
+<h2 id="三类-skill-如何组成完整工作流">三类 Skill 如何组成完整工作流
+</h2><p>一套基础的 AI 漫剧生产流程可以按照下面的顺序执行：</p>
+<h3 id="第一步导入故事">第一步：导入故事
+</h3><p>输入小说章节、故事大纲或原创创意，明确：</p>
+<ul>
+<li>视频类型</li>
+<li>目标平台</li>
+<li>单集时长</li>
+<li>画面比例</li>
+<li>目标观众</li>
+<li>视觉风格</li>
+</ul>
+<h3 id="第二步生成分集剧本">第二步：生成分集剧本
+</h3><p>使用剧本 Skill 输出分集大纲和单集剧本，并人工确认剧情逻辑、冲突和结尾钩子。</p>
+<h3 id="第三步建立资产库">第三步：建立资产库
+</h3><p>使用资产 Skill 提取角色、场景和道具，先生成角色参考图或三视图。</p>
+<p>资产确认后再进入批量分镜阶段，避免后期不断返工。</p>
+<h3 id="第四步生成分镜">第四步：生成分镜
+</h3><p>使用分镜 Skill 将剧本拆解为逐镜头表格，并生成每个镜头的关键帧提示词。</p>
+<h3 id="第五步生成图片和视频">第五步：生成图片和视频
+</h3><p>把已经确认的角色参考图、场景资产和分镜提示词交给图像或视频模型。</p>
+<p>生成过程中应优先检查：</p>
+<ul>
+<li>人物是否一致</li>
+<li>服装是否变化</li>
+<li>场景空间是否连续</li>
+<li>人物动作能否衔接</li>
+<li>镜头景别是否过于重复</li>
+</ul>
+<h2 id="使用-skill-不代表可以完全自动化">使用 Skill 不代表可以完全自动化
+</h2><p>Skill 的作用是把经验和制作规则整理成可重复执行的流程，但它不能自动保证作品质量。</p>
+<p>实际制作中仍然需要人工完成：</p>
+<ul>
+<li>判断故事是否值得制作</li>
+<li>修改生硬对白</li>
+<li>选择最终角色形象</li>
+<li>检查人物和场景一致性</li>
+<li>筛选生成结果</li>
+<li>控制节奏、配音和音乐</li>
+<li>处理版权及人物肖像风险</li>
+</ul>
+<p>更准确地说，Skill 能够减少重复整理和提示词编写工作，让创作者把更多时间放在剧情判断和成片质量上。</p>
+<h2 id="相关开源项目">相关开源项目
+</h2><h3 id="1-drama-skills">1. Drama Skills
+</h3><p>一套面向 AI 短剧和漫剧制作的 Skills，覆盖故事开发、剧本、资产、<a class="link" href="/tags/%e5%9b%be%e7%89%87%e6%8f%90%e7%a4%ba%e8%af%8d/" >图片提示词</a>、分镜、视频提示词和独立审查。</p>
+<p>GitHub：</p>
+<p><a class="link" href="https://github.com/worldwonderer/drama-skills"  target="_blank" rel="noopener"
+    >https://github.com/worldwonderer/drama-skills</a></p>
+<p>该项目适配 <a class="link" href="/tags/claude-code/" >Claude Code</a> 和 Codex。目前主要输出结构化文本、资产说明和提示词，不会直接调用图片或视频生成服务。</p>
+<h3 id="2-山音超级编剧大师">2. 山音超级编剧大师
+</h3><p>用于短片、电影和多集剧集创作的编剧 Skill，覆盖人物设计、结构大纲、场景拆解和完整剧本。</p>
+<p>GitHub：</p>
+<p><a class="link" href="https://github.com/Shanyin-ai/shanyin-screenwriting-master"  target="_blank" rel="noopener"
+    >https://github.com/Shanyin-ai/shanyin-screenwriting-master</a></p>
+<h3 id="3-山音导演大师">3. 山音导演大师
+</h3><p>负责导演定调、节奏规划、剧本调整和专业分镜拆解，可输出标准分镜表。</p>
+<p>GitHub：</p>
+<p><a class="link" href="https://github.com/Shanyin-ai/shanyin-director-master"  target="_blank" rel="noopener"
+    >https://github.com/Shanyin-ai/shanyin-director-master</a></p>
+<h2 id="总结">总结
+</h2><p>AI 漫剧制作的关键，不是一次生成多少张图片，而是能否建立稳定的生产流程。</p>
+<p>剧本 Skill 负责解决故事和节奏问题，资产 Skill 负责保持人物与场景一致，分镜 Skill 负责把文字转换为可执行的镜头。</p>
+<p>将这三类 Skill 串联起来，可以明显减少重复工作，但最终作品是否好看，仍然取决于创作者对剧情、画面和节奏的判断。</p>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/ai%E6%BC%AB%E5%89%A7/">AI漫剧</a>
+        
+            <a href="/tags/ai%E7%9F%AD%E5%89%A7%E5%88%B6%E4%BD%9C/">AI短剧制作</a>
+        
+            <a href="/tags/claude-code-skills/">Claude Code Skills</a>
+        
+            <a href="/tags/codex-skills/">Codex Skills</a>
+        
+            <a href="/tags/%E5%BD%B1%E8%A7%86%E5%88%86%E9%95%9C/">影视分镜</a>
+        
+            <a href="/tags/%E8%A7%92%E8%89%B2%E4%B8%80%E8%87%B4%E6%80%A7/">角色一致性</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/yi-ju-hua-ke-long-wang-zhan-ai-agent-xiang/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>一句话克隆网站：AI Agent 像素级复刻工具</strong>
+                    </a><a href="/posts/ai-shi-pin-zhu-jing-tou-ni-xiang-fen-xi/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>AI 视频逐镜头逆向分析与提示词生成器</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#一剧本创作-skill">一、剧本创作 Skill</a></li>
+    <li><a href="#二图像资产-skill">二、图像资产 Skill</a></li>
+    <li><a href="#三专业分镜-skill">三、专业分镜 Skill</a></li>
+    
+    <li><a href="#使用-skill-不代表可以完全自动化">使用 Skill 不代表可以完全自动化</a></li>
+    
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/ai/"><span>分类</span><b>AI</b></a>
+                    <a><span>字数</span><b>1797</b></a>
+                    <a><span>阅读</span><b>4 MIN</b></a>
+                    <a><span>更新</span><b>07.29</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/cheat-on-content-yong-ai-yu-ce-shi-pin-biao/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/28_11_56_43-d6b44f50.png" alt="Cheat on Content：用 AI 预测视频表现，让内容创作从直觉走向数据" loading="lazy"><code>01 / AI</code>
+                    <h3>Cheat on Content：用 AI 预测视频表现，让内容创作从直觉走向数据</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>做短视频时，最难判断的往往不是“能不能写出来”，而是：
+这个选题值得拍吗？ 标题有没有吸引力？ 发布后可能获得多少播放？ 为什么有些视频表现很好 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ai-skill-ru-men-yong-skill-md-rang-ai-ji/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260728-155400_1-b3640702.jpg" alt="AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法" loading="lazy"><code>02 / AI</code>
+                    <h3>AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>每次让 AI 写周报、整理会议纪要或分析数据，都要重新解释格式、语气和步骤？
+这类问题可以通过 AI Skills 解决。
+Skills 可以理 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ai-fu-ke-bao-kuan-shi-pin-ti-shi-ci/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/Image_2026728_16_04_37-d8b2e59e.jpg" alt="AI 复刻爆款视频提示词模板：逐镜头拆解并生成视频提示词" loading="lazy"><code>03 / AI</code>
+                    <h3>AI 复刻爆款视频提示词模板：逐镜头拆解并生成视频提示词</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>看到一条节奏、运镜或视觉效果出色的视频，如何让 AI 帮助我们学习它的制作方法？
+比较实用的方式，不是让 AI 简单描述“视频里有什么”，而是要 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/generative-media-skills-rang-ai-bian-cheng-zhu-shou-sheng/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/28_14_30_10_2-958887ea.jpg" alt="Generative Media Skills：让 AI 编程助手生成图片、视频和音频" loading="lazy"><code>04 / AI</code>
+                    <h3>Generative Media Skills：让 AI 编程助手生成图片、视频和音频</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>做 AI 内容创作时，图片、视频和音频通常需要分别打开不同的平台，不仅操作流程分散，提示词、素材和生成结果也不方便统一管理。 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

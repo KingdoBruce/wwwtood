@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="介绍 obsidian-skills、UI Skill、Humanizer-zh、grill-me 和编码原则 Skill，构建覆盖知识管理、方案审查、UI 设计、内容优化与代码验证的 Codex 工作流。">
+<title>5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手 - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/5-ge-zi-ding-yi-skill-rang-codex-cong-dai/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手 - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="介绍 obsidian-skills、UI Skill、Humanizer-zh、grill-me 和编码原则 Skill，构建覆盖知识管理、方案审查、UI 设计、内容优化与代码验证的 Codex 工作流。">
+<meta property='og:url' content='https://www.tood.win/posts/5-ge-zi-ding-yi-skill-rang-codex-cong-dai/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Codex' /><meta property='article:tag' content='Codex Skills' /><meta property='article:tag' content='Agent Skills' /><meta property='article:tag' content='AI编程工具' /><meta property='article:tag' content='AI开发助手' /><meta property='article:tag' content='Obsidian' /><meta property='article:tag' content='obsidian-skills' /><meta property='article:tag' content='Humanizer-zh' /><meta property='article:tag' content='grill-me' /><meta property='article:tag' content='UI设计' /><meta property='article:tag' content='AI代码生成' /><meta property='article:tag' content='Codex教程' /><meta property='article:published_time' content='2026-07-28T11:34:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-28T16:15:16&#43;08:00'/>
+<meta name="twitter:title" content="5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手 - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="介绍 obsidian-skills、UI Skill、Humanizer-zh、grill-me 和编码原则 Skill，构建覆盖知识管理、方案审查、UI 设计、内容优化与代码验证的 Codex 工作流。">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="Codex, Codex Skills, Agent Skills, AI编程工具, AI开发助手, Obsidian, obsidian-skills, Humanizer-zh, grill-me, UI设计, AI代码生成, Codex教程">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手\"",
+  "description": "\"介绍 obsidian-skills、UI Skill、Humanizer-zh、grill-me 和编码原则 Skill，构建覆盖知识管理、方案审查、UI 设计、内容优化与代码验证的 Codex 工作流。\"",
+  "datePublished": "\"2026-07-28T11:34:00+08:00\"",
+  "dateModified": "\"2026-07-28T16:15:16+08:00\"",
+  "url": "\"https://www.tood.win/posts/5-ge-zi-ding-yi-skill-rang-codex-cong-dai/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai/">AI</a><span>/</span><a href="/posts/5-ge-zi-ding-yi-skill-rang-codex-cong-dai/">5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI</span>
+                <span>LIVE DATA / A.2607.038</span>
+            </div>
+            <h1>5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手</h1>
+            <p class="article-deck">介绍 obsidian-skills、UI Skill、Humanizer-zh、grill-me 和编码原则 Skill，构建覆盖知识管理、方案审查、UI 设计、内容优化与代码验证的 Codex 工作流。</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.28</span>
+                <span>8 MIN READ</span>
+                <span>3863 WORDS</span>
+                <span>AI</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A38</strong>
+                <p class="mono">JAN. 28<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">09</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>很多人使用 <a class="link" href="/tags/codex/" >Codex</a> 时，只让它完成“写代码”这一件事。</p>
+<p>遇到需求就生成代码，出现报错再继续修改。这样的使用方式虽然方便，但 Codex 很难理解项目背景，也容易出现需求理解偏差、界面模板化、修改范围过大等问题。</p>
+<p>更有效的方法，是通过 <strong><a class="link" href="/tags/agent-skills/" >Agent Skills</a></strong> 为 Codex 增加固定的知识、规则和工作流程。</p>
+<p>Skill 本质上是一组可重复使用的说明、脚本和资源。它可以让 Codex 在执行特定任务时，按照预先设定的流程工作，而不是每次都依赖临时提示词。OpenAI 的 <a class="link" href="/tags/skills/" >Skills</a> 项目也将其定义为帮助 Codex 扩展专业能力的模块化目录。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>下面这 5 个 Skill，分别解决知识管理、方案审查、UI 设计、中文写作和代码质量问题。</p>
+<p><img alt="2026728_11_32_01" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/2026728_11_32_01-2bd2a234.jpg"></p>
+<h2 id="一obsidian-skills把-obsidian-变成-codex-的知识库">一、obsidian-skills：把 Obsidian 变成 Codex 的知识库
+</h2><p>在长期项目中，真正影响 <a class="link" href="/tags/ai/" >AI</a> 工作质量的往往不是模型能力，而是它不知道你之前做过什么。</p>
+<p>例如：</p>
+<ul>
+<li>项目已经确定了哪些技术方案</li>
+<li>哪些错误曾经出现过</li>
+<li>用户有哪些固定偏好</li>
+<li>某项设计为什么被放弃</li>
+<li>当前项目有哪些待办事项</li>
+</ul>
+<p><code>obsidian-skills</code> 可以让 Codex 读取和管理 Obsidian 知识库中的 Markdown 笔记、任务、属性、Bases 和 JSON Canvas。</p>
+<p>该项目遵循 Agent Skills 规范，并明确支持 <a class="link" href="/tags/codex-cli/" >Codex CLI</a> 等兼容 Skills 的 AI 编程工具。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<h3 id="它能解决什么问题">它能解决什么问题
+</h3><p>使用这个 Skill 后，可以让 Codex：</p>
+<ul>
+<li>搜索 Obsidian 中的历史笔记</li>
+<li>创建和更新项目文档</li>
+<li>整理零散的开发记录</li>
+<li>查找与当前任务相关的内容</li>
+<li>将解决方案沉淀为长期知识</li>
+<li>根据历史记录继续未完成的工作</li>
+</ul>
+<h3 id="适合的使用场景">适合的使用场景
+</h3><p>例如你可以告诉 Codex：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">搜索 Obsidian 中与当前网站部署有关的笔记，
+</span></span><span class="line"><span class="cl">整理已经尝试过的方法、失败原因和最终解决方案，
+</span></span><span class="line"><span class="cl">然后根据这些信息继续排查问题。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样可以减少重复解释项目背景，也能避免 AI 再次尝试已经失败的方法。</p>
+
+    <blockquote>
+        <p>需要注意：它主要负责帮助 AI 操作和整理 Obsidian 知识库，并不等于自动拥有完整的长期记忆。最终效果仍取决于你的笔记结构和记录质量。</p>
+
+    </blockquote>
+<hr>
+<h2 id="二ui-skill减少-ai-生成网页的模板感">二、UI Skill：减少 AI 生成网页的模板感
+</h2><p>AI 可以快速生成网页，但生成结果经常存在明显的“AI 模板感”。</p>
+<p>常见问题包括：</p>
+<ul>
+<li>不分场景地使用紫蓝渐变</li>
+<li>所有内容都居中排列</li>
+<li>页面由大量相似卡片组成</li>
+<li>默认使用常见字体和圆角</li>
+<li>只考虑桌面端，没有检查移动端</li>
+<li>视觉效果不错，但真实上线后不好使用</li>
+</ul>
+<p>UI Skill 的作用不是提供一个固定模板，而是给 Codex 增加一套设计判断标准。</p>
+<p>目前 GitHub 上已经有多种面向 Codex 的 UI Skills。例如 <code>ui-ux-pro-max-skill</code> 提供了 UI 风格、配色、字体组合、产品类型、UX 规则和图表类型等设计知识，可用于网页和移动端界面的规划、生成、审查与优化。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h3 id="1-建立设计黑名单">1. 建立设计黑名单
+</h3><p>可以在 Skill 中明确禁止一些容易产生模板感的设计：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">除非项目明确要求，否则不要默认使用：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- 紫色到蓝色的渐变背景
+</span></span><span class="line"><span class="cl">- 所有标题和内容居中对齐
+</span></span><span class="line"><span class="cl">- 大量相同尺寸的信息卡片
+</span></span><span class="line"><span class="cl">- 缺乏层级的圆角矩形
+</span></span><span class="line"><span class="cl">- 没有业务含义的装饰性光效
+</span></span><span class="line"><span class="cl">- 默认套用科技 SaaS 网站风格
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>设计黑名单并不是完全禁止这些元素，而是要求 Codex 在使用前说明理由。</p>
+<h3 id="2-根据业务选择设计语言">2. 根据业务选择设计语言
+</h3><p>品牌官网、个人博客和后台管理系统，不应该使用完全相同的设计方式。</p>
+<p>Skill 可以要求 Codex先判断页面类型：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>页面类型</th>
+          <th>设计重点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>品牌落地页</td>
+          <td>品牌识别、视觉节奏、转化路径</td>
+      </tr>
+      <tr>
+          <td>个人博客</td>
+          <td>阅读体验、内容层级、页面速度</td>
+      </tr>
+      <tr>
+          <td>后台系统</td>
+          <td>信息密度、操作效率、状态反馈</td>
+      </tr>
+      <tr>
+          <td>电商页面</td>
+          <td>商品信息、信任感、购买路径</td>
+      </tr>
+      <tr>
+          <td>工具网站</td>
+          <td>功能入口、操作引导、结果展示</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="3-增加上线前质检">3. 增加上线前质检
+</h3><p>页面完成后，要求 Codex 检查：</p>
+<ul>
+<li>手机端图片是否变形</li>
+<li>长英文和链接是否可以换行</li>
+<li>按钮是否有明确反馈</li>
+<li>文字对比度是否足够</li>
+<li>页面加载是否依赖过大的图片</li>
+<li>表单是否提供错误提示</li>
+<li>页面是否存在横向溢出</li>
+<li>键盘操作是否正常</li>
+</ul>
+<p>这样可以让 Codex 从“生成一个好看的页面”，升级为“交付一个可以实际使用的页面”。</p>
+<hr>
+<h2 id="三humanizer-zh减少中文内容的-ai-味">三、Humanizer-zh：减少中文内容的 AI 味
+</h2><p>Codex 不只能写代码，也经常被用于生成：</p>
+<ul>
+<li>产品介绍</li>
+<li>README 文档</li>
+<li>博客文章</li>
+<li>更新日志</li>
+<li>网站文案</li>
+<li>操作说明</li>
+<li>社交媒体内容</li>
+</ul>
+<p>但 AI 生成的中文常常存在表达生硬、结构重复和营销感过强的问题。</p>
+<p><code>Humanizer-zh</code> 是一个中文内容优化 Skill，主要用于识别并减少 AI 写作痕迹，让文字更自然、更接近真实中文表达。其项目说明中明确提到，它可以用于编辑或审阅 AI 生成的文本。<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<h3 id="常见的-ai-写作问题">常见的 AI 写作问题
+</h3><p>它可以重点检查以下内容：</p>
+<ul>
+<li>频繁使用“值得注意的是”</li>
+<li>每段都使用相同句式</li>
+<li>过度使用“赋能”“重塑”“开启新篇章”</li>
+<li>没有事实支撑的夸张表达</li>
+<li>大量使用“首先、其次、最后”</li>
+<li>句子看似完整，但缺少具体信息</li>
+<li>中文中出现明显的英文翻译腔</li>
+</ul>
+<h3 id="使用示例">使用示例
+</h3><p>完成网站文章后，可以让 Codex 执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">使用 Humanizer-zh 检查这篇文章。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">要求：
+</span></span><span class="line"><span class="cl">1. 删除空泛和夸张的营销表达；
+</span></span><span class="line"><span class="cl">2. 保留技术事实、命令和项目名称；
+</span></span><span class="line"><span class="cl">3. 调整重复句式；
+</span></span><span class="line"><span class="cl">4. 使用自然、简洁的中文；
+</span></span><span class="line"><span class="cl">5. 不要为了口语化而降低专业性。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它适合作为内容发布前的最后一道编辑流程，而不是简单地把所有内容改成口语。</p>
+<hr>
+<h2 id="四grill-me在开发之前先把方案问清楚">四、grill-me：在开发之前先把方案问清楚
+</h2><p>AI 编程最常见的问题之一，是需求还没有明确，AI 就已经开始写代码。</p>
+<p>结果通常是：</p>
+<ul>
+<li>技术路线选择错误</li>
+<li>功能边界不断扩大</li>
+<li>忽略重要异常情况</li>
+<li>修改大量无关文件</li>
+<li>做完以后才发现需求理解错了</li>
+</ul>
+<p><code>grill-me</code> 的作用，就是在动手开发前扮演一个严格的方案审查者。</p>
+<p>该 Skill 会围绕计划、设计或技术方案持续追问，直到关键决策、假设和分支得到明确。<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<h3 id="它会重点追问什么">它会重点追问什么
+</h3><p>例如开发一个用户登录功能时，<code>grill-me</code> 不会立刻生成代码，而是先检查：</p>
+<ul>
+<li>使用邮箱、手机号还是第三方账号登录</li>
+<li>是否需要注册、找回密码和邮箱验证</li>
+<li>登录状态保存多久</li>
+<li>是否允许多设备同时登录</li>
+<li>失败次数是否需要限制</li>
+<li>用户数据存储在哪里</li>
+<li>哪些页面需要登录后访问</li>
+<li>是否存在管理员和普通用户权限</li>
+</ul>
+<h3 id="推荐使用阶段">推荐使用阶段
+</h3><p><code>grill-me</code> 最适合在以下阶段使用：</p>
+<ul>
+<li>新功能开发之前</li>
+<li>数据库结构确定之前</li>
+<li>API 接口设计之前</li>
+<li>大规模重构之前</li>
+<li>技术方案评审之前</li>
+<li>项目需求仍然比较模糊时</li>
+</ul>
+<h3 id="使用示例-1">使用示例
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">使用 grill-me 审查下面的开发方案。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">在需求和边界没有明确之前，不要编写代码。
+</span></span><span class="line"><span class="cl">请重点检查：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- 隐含假设
+</span></span><span class="line"><span class="cl">- 异常流程
+</span></span><span class="line"><span class="cl">- 数据安全
+</span></span><span class="line"><span class="cl">- 权限设计
+</span></span><span class="line"><span class="cl">- 技术复杂度
+</span></span><span class="line"><span class="cl">- 后期维护成本
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个 Skill 看起来会让前期讨论变慢，但通常能减少后期返工。</p>
+<hr>
+<h2 id="五编码原则-skill限制-codex-的修改范围">五、编码原则 Skill：限制 Codex 的修改范围
+</h2><p>前面四个 Skill 解决了知识、方案、设计和内容问题，最后还需要一套编码原则来限制 Codex 的执行行为。</p>
+<p>这部分不一定需要安装现成项目，也可以根据自己的开发习惯创建一个自定义 <code>SKILL.md</code>。</p>
+<h3 id="推荐的核心原则">推荐的核心原则
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gh"># 编码原则
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 1. 不猜测需求
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">需求不明确时，先检查现有代码、文档和配置。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果仍然无法确定，应明确说明假设，不要把猜测当成事实。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 2. 只做最小必要修改
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">只修改完成当前任务必需的文件。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">不要顺便重构无关代码，不要更改没有问题的目录结构。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 3. 不擅自增加抽象
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">没有明确复用需求时，不新增：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 通用工具层
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 复杂设计模式
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 多余的配置系统
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 不必要的第三方依赖
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">优先使用项目现有结构和原生能力。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 4. 保持原有代码风格
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">修改前先检查：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 命名规则
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 目录结构
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 格式化配置
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 错误处理方式
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 测试写法
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 已使用的组件和依赖
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">新增代码应与现有项目保持一致。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 5. 修改后必须验证
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">完成修改后至少执行：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 类型检查
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 语法检查
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 相关测试
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 构建检查
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 修改内容复核
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果无法执行某项验证，需要明确说明原因。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 6. 不隐藏问题
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">不要通过删除测试、关闭类型检查、忽略错误或使用空异常处理来让任务表面通过。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">发现现有问题时，应区分：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 本次修改引入的问题
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 项目原本存在的问题
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这套规则的重点不是让 Codex 少写代码，而是让每次修改都更可预测、更容易审查。</p>
+<hr>
+<h2 id="五个-skill-如何组成完整工作流">五个 Skill 如何组成完整工作流
+</h2><p>这五个 Skill 并不是相互独立的工具，可以按照开发流程组合使用。</p>
+<h3 id="第一步读取历史知识">第一步：读取历史知识
+</h3><p>使用 <code>obsidian-skills</code> 搜索项目笔记、历史方案和踩坑记录。</p>
+<h3 id="第二步审查需求">第二步：审查需求
+</h3><p>使用 <code>grill-me</code> 挑战需求和技术方案，找出缺失信息与边界情况。</p>
+<h3 id="第三步设计并实现界面">第三步：设计并实现界面
+</h3><p>使用 UI Skill 确定设计语言、页面结构、响应式规则和质检标准。</p>
+<h3 id="第四步优化文字内容">第四步：优化文字内容
+</h3><p>使用 <code>Humanizer-zh</code> 调整页面文案、README 和博客内容，减少机械化表达。</p>
+<h3 id="第五步完成最小修改并验证">第五步：完成最小修改并验证
+</h3><p>使用编码原则 Skill 限制修改范围，并执行测试、构建和代码检查。</p>
+<p>完整流程可以概括为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">历史知识检索
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">需求追问与方案审查
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">UI 设计与代码实现
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">中文内容优化
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">测试、验证与交付
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="实际使用时不需要每次启用全部-skill">实际使用时，不需要每次启用全部 Skill
+</h2><p>五个 Skill 不一定每次都要同时使用。</p>
+<p>可以根据任务类型进行组合：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>任务</th>
+          <th>推荐 Skill</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>整理项目经验</td>
+          <td>obsidian-skills</td>
+      </tr>
+      <tr>
+          <td>开发复杂新功能</td>
+          <td>obsidian-skills + grill-me + 编码原则</td>
+      </tr>
+      <tr>
+          <td>制作网站页面</td>
+          <td>UI Skill + Humanizer-zh + 编码原则</td>
+      </tr>
+      <tr>
+          <td>编写技术文章</td>
+          <td>obsidian-skills + Humanizer-zh</td>
+      </tr>
+      <tr>
+          <td>重构旧项目</td>
+          <td>grill-me + 编码原则</td>
+      </tr>
+      <tr>
+          <td>制作产品落地页</td>
+          <td>UI Skill + Humanizer-zh</td>
+      </tr>
+      <tr>
+          <td>排查历史问题</td>
+          <td>obsidian-skills + 编码原则</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>Skill 数量并不是越多越好。真正重要的是每个 Skill 都有明确职责，并且不会互相冲突。</p>
+<hr>
+<h2 id="总结">总结
+</h2><p>Codex 的价值不只是生成代码。</p>
+<p>通过 Skills，可以将知识、规范和工作流程固定下来，让 Codex逐渐具备以下能力：</p>
+<ul>
+<li>读取并整理项目知识</li>
+<li>在开发前审查需求</li>
+<li>根据业务选择设计语言</li>
+<li>优化中文内容表达</li>
+<li>控制代码修改范围</li>
+<li>在交付前完成自我验证</li>
+</ul>
+<p>最终目标不是让 Codex 一次生成更多代码，而是减少沟通成本、降低返工概率，让每次修改都更加稳定和可控。</p>
+<hr>
+<h2 id="github-项目地址">GitHub 项目地址
+</h2><ul>
+<li><a class="link" href="https://github.com/openai/skills"  target="_blank" rel="noopener"
+    >OpenAI Skills：Codex Skills 官方目录</a></li>
+<li><a class="link" href="https://github.com/kepano/obsidian-skills"  target="_blank" rel="noopener"
+    >obsidian-skills</a></li>
+<li><a class="link" href="https://github.com/op7418/Humanizer-zh"  target="_blank" rel="noopener"
+    >Humanizer-zh</a></li>
+<li><a class="link" href="https://github.com/mattpocock/skills"  target="_blank" rel="noopener"
+    >grill-me 所在 Skills 项目</a></li>
+<li><a class="link" href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill"  target="_blank" rel="noopener"
+    >UI UX Pro Max Skill</a></li>
+<li><a class="link" href="https://github.com/vipulgupta2048/codex-skills"  target="_blank" rel="noopener"
+    >Codex Frontend Design Skill</a></li>
+</ul>
+
+    <blockquote>
+        <p>“编码原则”部分属于可自行创建的自定义 Skill，并非本文确认的单一 GitHub 项目。</p>
+
+    </blockquote>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>OpenAI Skills 项目将 Agent Skills 描述为由指令、脚本和资源组成的模块化目录，可帮助 Codex 重复执行特定任务。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>obsidian-skills 项目说明其遵循 Agent Skills 规范，并支持 Codex CLI。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>UI UX Pro Max Skill 提供多种设计风格、配色、字体组合、UX 规则与技术栈支持。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Humanizer-zh 用于识别和减少中文文本中的 AI 生成痕迹。&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>grill-me 用于通过持续追问，对计划、需求或设计方案进行压力测试。&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/codex/">Codex</a>
+        
+            <a href="/tags/codex-skills/">Codex Skills</a>
+        
+            <a href="/tags/agent-skills/">Agent Skills</a>
+        
+            <a href="/tags/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/">AI编程工具</a>
+        
+            <a href="/tags/ai%E5%BC%80%E5%8F%91%E5%8A%A9%E6%89%8B/">AI开发助手</a>
+        
+            <a href="/tags/obsidian/">Obsidian</a>
+        
+            <a href="/tags/obsidian-skills/">Obsidian-Skills</a>
+        
+            <a href="/tags/humanizer-zh/">Humanizer-Zh</a>
+        
+            <a href="/tags/grill-me/">Grill-Me</a>
+        
+            <a href="/tags/ui%E8%AE%BE%E8%AE%A1/">UI设计</a>
+        
+            <a href="/tags/ai%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/">AI代码生成</a>
+        
+            <a href="/tags/codex%E6%95%99%E7%A8%8B/">Codex教程</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/yong-ai-zuo-shen-du-yan-jiu-storm-tu-jie/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>用 AI 做深度研究：STORM 方法图解与 4 组实用提示词</strong>
+                    </a><a href="/posts/workbuddy-hyperframes-an-zhuang-jie-ru-ben-di-qwen3-tts/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>WorkBuddy &#43; HyperFrames 安装教程：接入本地 Qwen3-TTS，实现自己的声音自动配音</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    
+    
+    
+    
+    
+    
+    <li><a href="#实际使用时不需要每次启用全部-skill">实际使用时，不需要每次启用全部 Skill</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#github-项目地址">GitHub 项目地址</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/ai/"><span>分类</span><b>AI</b></a>
+                    <a><span>字数</span><b>3863</b></a>
+                    <a><span>阅读</span><b>8 MIN</b></a>
+                    <a><span>更新</span><b>07.28</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/skills-chuang-jian-quan-liu-cheng-cong-xu-qiu-gui/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/Image_2026728_11_11_46-9bbd7f8a.jpg" alt="Skills 创建全流程：从需求规划到测试落地，零基础也能完成" loading="lazy"><code>01 / AI</code>
+                    <h3>Skills 创建全流程：从需求规划到测试落地，零基础也能完成</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>很多人第一次接触 Skills 时，会认为它只是一个写了提示词的 Markdown 文件。
+实际上，一个真正稳定、可复用的 Skill，更像是一 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/codex-obsidian-chang-qi-ji-yi-pei-zhi-rang-ai/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/9d9898f00-af395397.jpg" alt="Codex &#43; Obsidian 长期记忆配置：让 AI 跨项目记住工作进度和关键决策" loading="lazy"><code>02 / AI</code>
+                    <h3>Codex &#43; Obsidian 长期记忆配置：让 AI 跨项目记住工作进度和关键决策</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>Codex 每次开始新任务时，最麻烦的问题之一，就是需要重新解释项目背景、工作习惯和之前做过的决定。
+解决这个问题的一种方法，是把 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ai-skill-ru-men-yong-skill-md-rang-ai-ji/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/QQ20260728-155400_1-b3640702.jpg" alt="AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法" loading="lazy"><code>03 / AI</code>
+                    <h3>AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>每次让 AI 写周报、整理会议纪要或分析数据，都要重新解释格式、语气和步骤？
+这类问题可以通过 AI Skills 解决。
+Skills 可以理 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ui-ux-pro-max-rang-ai-sheng-cheng-de-jie/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/12_2-026d34e7.jpg" alt="UI/UX Pro Max：让 AI 生成的界面摆脱模板感" loading="lazy"><code>04 / AI</code>
+                    <h3>UI/UX Pro Max：让 AI 生成的界面摆脱模板感</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>使用 AI 编程工具生成网页时，很多人都会遇到同一个问题：
+代码可以运行，但界面一眼就能看出是 AI 做的。
+页面通常拥有相似的渐变背景、圆角卡 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

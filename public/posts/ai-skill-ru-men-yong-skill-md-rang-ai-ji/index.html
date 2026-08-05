@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="每次让 AI 写周报、整理会议纪要或分析数据，都要重新解释格式、语气和步骤？\n这类问题可以通过 AI Skills 解决。\nSkills 可以理解为写给 AI 的一份“标准操作手册”：它把任务说明、执行规则、参考案例和所需资源整理在一个文件夹中。当用户提出相关需求时，支持 Agent Skills 的 AI 工具可以读取并执行这些规则。\n">
+<title>AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法 - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/ai-skill-ru-men-yong-skill-md-rang-ai-ji/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法 - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="每次让 AI 写周报、整理会议纪要或分析数据，都要重新解释格式、语气和步骤？\n这类问题可以通过 AI Skills 解决。\nSkills 可以理解为写给 AI 的一份“标准操作手册”：它把任务说明、执行规则、参考案例和所需资源整理在一个文件夹中。当用户提出相关需求时，支持 Agent Skills 的 AI 工具可以读取并执行这些规则。\n">
+<meta property='og:url' content='https://www.tood.win/posts/ai-skill-ru-men-yong-skill-md-rang-ai-ji/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='AI Skill' /><meta property='article:tag' content='Agent Skills' /><meta property='article:tag' content='SKILL.md' /><meta property='article:tag' content='AI入门教程' /><meta property='article:tag' content='Codex Skills' /><meta property='article:tag' content='Claude Code Skills' /><meta property='article:tag' content='AI工作流' /><meta property='article:tag' content='提示词工程' /><meta property='article:tag' content='AI自动化' /><meta property='article:tag' content='周报助手' /><meta property='article:published_time' content='2026-07-28T15:54:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-28T16:01:33&#43;08:00'/>
+<meta name="twitter:title" content="AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法 - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="每次让 AI 写周报、整理会议纪要或分析数据，都要重新解释格式、语气和步骤？\n这类问题可以通过 AI Skills 解决。\nSkills 可以理解为写给 AI 的一份“标准操作手册”：它把任务说明、执行规则、参考案例和所需资源整理在一个文件夹中。当用户提出相关需求时，支持 Agent Skills 的 AI 工具可以读取并执行这些规则。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="AI Skill, Agent Skills, SKILL.md, AI入门教程, Codex Skills, Claude Code Skills, AI工作流, 提示词工程, AI自动化, 周报助手">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法\"",
+  "description": "\"每次让 AI 写周报、整理会议纪要或分析数据，都要重新解释格式、语气和步骤？\\n这类问题可以通过 AI Skills 解决。\\nSkills 可以理解为写给 AI 的一份“标准操作手册”：它把任务说明、执行规则、参考案例和所需资源整理在一个文件夹中。当用户提出相关需求时，支持 Agent Skills 的 AI 工具可以读取并执行这些规则。\\n\"",
+  "datePublished": "\"2026-07-28T15:54:00+08:00\"",
+  "dateModified": "\"2026-07-28T16:01:33+08:00\"",
+  "url": "\"https://www.tood.win/posts/ai-skill-ru-men-yong-skill-md-rang-ai-ji/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai/">AI</a><span>/</span><a href="/posts/ai-skill-ru-men-yong-skill-md-rang-ai-ji/">AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI</span>
+                <span>LIVE DATA / A.2607.047</span>
+            </div>
+            <h1>AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工作方法</h1>
+            <p class="article-deck">每次让 AI 写周报、整理会议纪要或分析数据，都要重新解释格式、语气和步骤？
+这类问题可以通过 AI Skills 解决。
+Skills 可以理解为写给 AI 的一份“标准操作手册”：它把任务说明、执行规则、参考案例和所需资源整理在一个文件夹中。当用户提出相关需求时，支持 Agent Skills 的 AI 工具可以读取并执行这些规则。
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.28</span>
+                <span>6 MIN READ</span>
+                <span>2869 WORDS</span>
+                <span>AI</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A47</strong>
+                <p class="mono">JAN. 28<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">09</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>每次让 <a class="link" href="/tags/ai/" >AI</a> 写周报、整理会议纪要或分析数据，都要重新解释格式、语气和步骤？</p>
+<p>这类问题可以通过 <strong>AI <a class="link" href="/tags/skills/" >Skills</a></strong> 解决。</p>
+<p>Skills 可以理解为写给 AI 的一份“标准操作手册”：它把任务说明、执行规则、参考案例和所需资源整理在一个文件夹中。当用户提出相关需求时，支持 <a class="link" href="/tags/agent-skills/" >Agent Skills</a> 的 AI 工具可以读取并执行这些规则。</p>
+
+    <blockquote>
+        <p>简单来说：普通提示词只服务于当前对话，Skills 更适合保存可重复使用的工作流程。</p>
+
+    </blockquote>
+<p><img alt="b664215f-a0ce-4e20-ab85-487201475799" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/b664215f-a0ce-4e20-ab85-487201475799-5b21eb99.jpg"></p>
+<h2 id="skills-是什么">Skills 是什么？
+</h2><p>一个 Skills 通常对应一项明确任务，例如：</p>
+<ul>
+<li>根据工作记录生成周报</li>
+<li>按固定标准审核文章</li>
+<li>整理会议纪要并提取待办事项</li>
+<li>检查代码中的安全问题</li>
+<li>按品牌规范生成营销文案</li>
+</ul>
+<p>官方 Agent Skills 规范将 Skills 定义为一种轻量级开放格式。最基础的 Skills 是一个文件夹，其中必须包含 <code>Skills.md</code>；复杂 Skills 还可以附带脚本、模板、示例和参考资料。</p>
+<h2 id="skills-能解决什么问题">Skills 能解决什么问题？
+</h2><h3 id="1-减少重复沟通">1. 减少重复沟通
+</h3><p>不需要每次都重新说明：</p>
+<ul>
+<li>输出包含哪些栏目</li>
+<li>使用什么语气</li>
+<li>哪些内容不能出现</li>
+<li>数据应该如何展示</li>
+<li>最终结果采用什么格式</li>
+</ul>
+<h3 id="2-统一输出标准">2. 统一输出标准
+</h3><p>多人或多次使用同一个 Skills 时，可以尽量保持相同的结构、流程和判断标准。</p>
+<h3 id="3-沉淀个人工作方法">3. 沉淀个人工作方法
+</h3><p>当你发现一套提示词效果很好，可以把它整理成 Skills，而不是让它一直留在聊天记录中。</p>
+<p>需要注意的是，Skills 并不是让 AI 获得真正的“永久记忆”。它更像一份保存在本地或项目目录中的规则文件：只有工具能够发现并加载它时，规则才会生效。</p>
+<h2 id="skills-的基本目录结构">Skills 的基本目录结构
+</h2><p>一个标准 Skills 不只是单独散落的文本文件，而是一个独立文件夹：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">weekly-report/
+</span></span><span class="line"><span class="cl">├── Skills.md
+</span></span><span class="line"><span class="cl">├── references/
+</span></span><span class="line"><span class="cl">│   └── report-example.md
+</span></span><span class="line"><span class="cl">└── templates/
+</span></span><span class="line"><span class="cl">    └── weekly-report-template.md
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中：</p>
+<ul>
+<li><code>Skills.md</code>：必需，写明名称、用途和执行规则</li>
+<li><code>references/</code>：可选，存放参考资料或优秀案例</li>
+<li><code>templates/</code>：可选，存放固定模板</li>
+<li><code>scripts/</code>：可选，存放需要执行的辅助脚本</li>
+</ul>
+<p>Anthropic 和 OpenAI 的官方文档都将 Skills 描述为包含指令、资源以及可选脚本的任务能力包，而不只是一个简单提示词。</p>
+<h2 id="三步写出第一个-skills">三步写出第一个 Skills
+</h2><p>下面以“周报助手”为例。</p>
+<h3 id="第一步写清楚名称和触发条件">第一步：写清楚名称和触发条件
+</h3><p>在 <code>Skills.md</code> 顶部加入 YAML 元数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">name: weekly-report
+</span></span><span class="line"><span class="cl">description: 根据用户提供的本周工作记录生成中文周报。当用户要求写周报、整理本周工作，或提交一组工作记录时使用。
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>至少应写清楚：</p>
+<ul>
+<li><code>name</code>：Skills 的名称</li>
+<li><code>description</code>：它能做什么，以及什么时候应该使用</li>
+</ul>
+<p><code>description</code> 不要只写“处理文档”或“提高效率”，否则 AI 很难判断什么时候需要调用它。</p>
+<h3 id="第二步把要求改成可执行规则">第二步：把要求改成可执行规则
+</h3><p>不要只写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">写得专业一点。
+</span></span><span class="line"><span class="cl">内容简洁一些。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这种描述过于主观，不同模型可能有不同理解。</p>
+<p>可以改成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="gh"># 周报生成规则
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">收到用户的工作记录后，按以下顺序处理：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">1.</span> 将内容分为：
+</span></span><span class="line"><span class="cl">   <span class="k">-</span> 本周完成
+</span></span><span class="line"><span class="cl">   <span class="k">-</span> 进行中
+</span></span><span class="line"><span class="cl">   <span class="k">-</span> 下周计划
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">2.</span> 每条内容优先保留：
+</span></span><span class="line"><span class="cl">   <span class="k">-</span> 项目名称
+</span></span><span class="line"><span class="cl">   <span class="k">-</span> 完成数量
+</span></span><span class="line"><span class="cl">   <span class="k">-</span> 当前进度
+</span></span><span class="line"><span class="cl">   <span class="k">-</span> 产生的结果
+</span></span><span class="line"><span class="cl">   <span class="k">-</span> 后续动作
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">3.</span> 不得虚构用户未提供的数据。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">4.</span> 没有具体数字时，保留原始事实，并注明“未提供量化数据”。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">5.</span> 删除“积极推进”“持续赋能”“圆满完成”等空泛表达。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">6.</span> 每条控制在两句话以内。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">7.</span> 最后增加一段不超过80字的本周总结。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这些规则能够直接执行，也更容易检查结果是否合格。</p>
+<h3 id="第三步提供输入与输出示例">第三步：提供输入与输出示例
+</h3><p>示例能帮助 AI 理解你真正想要的效果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="gh"># 示例
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 输入
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 完成用户调研
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 修复了几个登录页面的问题
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 数据看板还在调整
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 下周准备上线新活动
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 输出
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 本周完成
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">1.</span> 完成用户调研，共收集326份有效问卷，并整理出15条核心反馈。
+</span></span><span class="line"><span class="cl"><span class="k">2.</span> 修复登录页面3个影响用户使用的问题，登录功能已通过测试。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 进行中
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">1.</span> 数据看板重构已完成约60%，预计下周完成剩余图表和筛选功能。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 下周计划
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">1.</span> 完成数据看板重构并提交测试。
+</span></span><span class="line"><span class="cl"><span class="k">2.</span> 上线新用户活动，持续跟踪访问量和注册转化率。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 本周总结
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">本周重点完成用户调研和登录功能修复，数据看板重构按计划推进，下周将进入功能上线和数据验证阶段。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>示例越接近真实工作场景，输出通常越稳定。</p>
+<h2 id="可直接复制的完整-skillsmd">可直接复制的完整 Skills.md
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">name: weekly-report
+</span></span><span class="line"><span class="cl">description: 根据用户提供的工作记录生成结构清晰的中文周报。当用户要求写周报、总结本周工作或发送零散工作记录时使用。
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gh"># 周报助手
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 目标
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">将用户提供的零散工作记录整理为可以直接发送的中文周报。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 执行步骤
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">1.</span> 阅读全部工作记录。
+</span></span><span class="line"><span class="cl"><span class="k">2.</span> 合并重复事项。
+</span></span><span class="line"><span class="cl"><span class="k">3.</span> 按“本周完成、进行中、下周计划”分类。
+</span></span><span class="line"><span class="cl"><span class="k">4.</span> 保留项目名称、数量、进度、结果和下一步动作。
+</span></span><span class="line"><span class="cl"><span class="k">5.</span> 生成结构清晰的 Markdown 周报。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 输出结构
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 本周完成
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">列出已经完成并产生结果的事项。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 进行中
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">列出尚未完成的任务，并说明当前进度和下一步动作。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 下周计划
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">列出下周需要执行的具体任务。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 本周总结
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">使用不超过80字总结本周重点、进展和风险。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 写作规则
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 使用平实、清晰的中文。
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 每条内容不超过两句话。
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 优先使用具体数字、进度和结果。
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 不使用“积极推进”“持续赋能”“圆满完成”等空泛表达。
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 不得编造用户没有提供的信息。
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 信息不足时，保留原意并注明缺少的数据。
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 默认使用 Markdown 格式。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 示例
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">输入：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 完成客户调研
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 修复登录页面问题
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 看板还在调整
+</span></span><span class="line"><span class="cl"><span class="k">-</span> 下周上线活动
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">输出：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 本周完成
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">1.</span> 完成客户调研，并整理主要需求和反馈。
+</span></span><span class="line"><span class="cl"><span class="k">2.</span> 完成登录页面问题修复，相关功能已恢复正常。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 进行中
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">1.</span> 数据看板仍在调整，下一步将完善图表和筛选功能。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 下周计划
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">1.</span> 完成数据看板调整并提交测试。
+</span></span><span class="line"><span class="cl"><span class="k">2.</span> 上线新活动并跟踪用户参与数据。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">### 本周总结
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">本周完成客户调研和登录问题修复，数据看板正在推进，下周重点为活动上线和数据验证。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="新手常见的三个错误">新手常见的三个错误
+</h2><h3 id="触发条件太模糊">触发条件太模糊
+</h3><p>错误写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">用于处理工作。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>推荐写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">当用户要求生成周报，或提交本周工作记录时使用。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="规则只有形容词">规则只有形容词
+</h3><p>错误写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">写得专业、简洁、有深度。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>推荐写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">正文不超过500字，每条不超过两句话，每项至少保留一个结果或进度信息。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="一个-skills-承担太多任务">一个 Skills 承担太多任务
+</h3><p>不建议把“写周报、做PPT、分析数据、发送邮件”全部放进同一个 Skills。</p>
+<p>更合理的方式是拆成多个独立 Skills：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">weekly-report/
+</span></span><span class="line"><span class="cl">meeting-notes/
+</span></span><span class="line"><span class="cl">data-analysis/
+</span></span><span class="line"><span class="cl">email-reply/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>一个 Skills 只解决一类明确问题，通常更容易触发，也更方便维护。</p>
+<h2 id="使用第三方-skills-前要注意什么">使用第三方 Skills 前要注意什么？
+</h2><p>不要看到 GitHub 上的 Skills 就直接安装。</p>
+<p>第三方 Skills 可能附带脚本、命令或外部资源。使用前至少检查：</p>
+<ol>
+<li><code>Skills.md</code> 要求 AI 执行哪些操作</li>
+<li>是否包含 <code>scripts/</code> 等可执行文件</li>
+<li>是否会读取环境变量、密钥或私人文件</li>
+<li>是否要求上传数据到外部服务</li>
+<li>GitHub 仓库是否持续维护</li>
+</ol>
+<p>研究已经指出，Agent Skills 生态存在指令注入、恶意脚本和供应链风险，因此第三方 Skills 应当像第三方代码一样审查，而不是只把它当作文档。</p>
+<h2 id="去哪里找现成的-skills">去哪里找现成的 Skills？
+</h2><p>可以从以下官方项目开始：</p>
+<ul>
+<li><a class="link" href="https://developers.openai.com/codex/Skills"  target="_blank" rel="noopener"
+    >OpenAI Codex Agent Skills 文档</a></li>
+<li><a class="link" href="https://github.com/anthropics/Skills"  target="_blank" rel="noopener"
+    >Anthropic 官方 Skills 仓库</a></li>
+<li><a class="link" href="https://github.com/agentSkills/agentSkills"  target="_blank" rel="noopener"
+    >Agent Skills 开放规范</a></li>
+<li><a class="link" href="https://github.com/topics/agent-Skills"  target="_blank" rel="noopener"
+    >GitHub Agent Skills 专题</a></li>
+</ul>
+<p>建议先阅读官方示例，再根据自己的工作流程修改。不要直接复制一个功能复杂的 Skills，然后期待它完全符合自己的需求。</p>
+<h2 id="总结">总结
+</h2><p>写 Skills 的关键，不是堆积大量提示词，而是把一项任务说明清楚：</p>
+<ol>
+<li><strong>什么时候使用</strong></li>
+<li><strong>按什么步骤执行</strong></li>
+<li><strong>必须遵守哪些规则</strong></li>
+<li><strong>最终输出什么格式</strong></li>
+<li><strong>什么样的结果才算合格</strong></li>
+</ol>
+<p>第一次可以从最常用、最重复的一项任务开始，例如周报、会议纪要或文章审核。先完成一个简单可用的版本，再根据实际输出逐步补充规则和示例。</p>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/ai-skill/">AI Skill</a>
+        
+            <a href="/tags/agent-skills/">Agent Skills</a>
+        
+            <a href="/tags/skill.md/">SKILL.md</a>
+        
+            <a href="/tags/ai%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/">AI入门教程</a>
+        
+            <a href="/tags/codex-skills/">Codex Skills</a>
+        
+            <a href="/tags/claude-code-skills/">Claude Code Skills</a>
+        
+            <a href="/tags/ai%E5%B7%A5%E4%BD%9C%E6%B5%81/">AI工作流</a>
+        
+            <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/">提示词工程</a>
+        
+            <a href="/tags/ai%E8%87%AA%E5%8A%A8%E5%8C%96/">AI自动化</a>
+        
+            <a href="/tags/%E5%91%A8%E6%8A%A5%E5%8A%A9%E6%89%8B/">周报助手</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/deeptutor-ke-ben-di-bu-shu-de-kai-yuan-ai/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>DeepTutor：可本地部署的开源 AI 学习与工作伴侣</strong>
+                    </a><a href="/posts/ai-fu-ke-bao-kuan-shi-pin-ti-shi-ci/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>AI 复刻爆款视频提示词模板：逐镜头拆解并生成视频提示词</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#skills-是什么">Skills 是什么？</a></li>
+    
+    <li><a href="#skills-的基本目录结构">Skills 的基本目录结构</a></li>
+    
+    <li><a href="#可直接复制的完整-skillsmd">可直接复制的完整 Skills.md</a></li>
+    
+    <li><a href="#使用第三方-skills-前要注意什么">使用第三方 Skills 前要注意什么？</a></li>
+    <li><a href="#去哪里找现成的-skills">去哪里找现成的 Skills？</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/ai/"><span>分类</span><b>AI</b></a>
+                    <a><span>字数</span><b>2869</b></a>
+                    <a><span>阅读</span><b>6 MIN</b></a>
+                    <a><span>更新</span><b>07.28</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/skills-chuang-jian-quan-liu-cheng-cong-xu-qiu-gui/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/Image_2026728_11_11_46-9bbd7f8a.jpg" alt="Skills 创建全流程：从需求规划到测试落地，零基础也能完成" loading="lazy"><code>01 / AI</code>
+                    <h3>Skills 创建全流程：从需求规划到测试落地，零基础也能完成</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>很多人第一次接触 Skills 时，会认为它只是一个写了提示词的 Markdown 文件。
+实际上，一个真正稳定、可复用的 Skill，更像是一 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ai-man-ju-zhi-zuo-skill-gong-zuo-liu-yong/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/026729_11_43_51-e2394a5a.jpg" alt="AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率" loading="lazy"><code>02 / AI</code>
+                    <h3>AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>制作 AI 漫剧，真正困难的通常不是生成一张图片，而是如何让剧情节奏、人物形象和镜头衔接保持一致。
+目前 GitHub 上已经出现多套面向 …</p>
+                    <time>2026-07-29</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/cheat-on-content-yong-ai-yu-ce-shi-pin-biao/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/28_11_56_43-d6b44f50.png" alt="Cheat on Content：用 AI 预测视频表现，让内容创作从直觉走向数据" loading="lazy"><code>03 / AI</code>
+                    <h3>Cheat on Content：用 AI 预测视频表现，让内容创作从直觉走向数据</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>做短视频时，最难判断的往往不是“能不能写出来”，而是：
+这个选题值得拍吗？ 标题有没有吸引力？ 发布后可能获得多少播放？ 为什么有些视频表现很好 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/5-ge-zi-ding-yi-skill-rang-codex-cong-dai/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/2026728_11_32_01-2bd2a234.jpg" alt="5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手" loading="lazy"><code>04 / AI</code>
+                    <h3>5个自定义 Skills，让 Codex 从代码生成器升级为全能 AI 开发助手</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>很多人使用 Codex 时，只让它完成“写代码”这一件事。
+遇到需求就生成代码，出现报错再继续修改。这样的使用方式虽然方便，但 Codex 很难 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

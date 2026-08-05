@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="AI 视频逐镜头拆解与提示词逆向工程模板\r想要复刻一条优秀视频，真正需要学习的并不是人物、台词或具体剧情，而是隐藏在画面背后的镜头逻辑、视觉方法与节奏设计。\n">
+<title>AI 视频逐镜头逆向分析与提示词生成器 - 随笔 - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/ai-shi-pin-zhu-jing-tou-ni-xiang-fen-xi/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="AI 视频逐镜头逆向分析与提示词生成器 - 随笔 - 拾光集 TOOD.WIN">
+<meta property='og:description' content="AI 视频逐镜头拆解与提示词逆向工程模板\r想要复刻一条优秀视频，真正需要学习的并不是人物、台词或具体剧情，而是隐藏在画面背后的镜头逻辑、视觉方法与节奏设计。\n">
+<meta property='og:url' content='https://www.tood.win/posts/ai-shi-pin-zhu-jing-tou-ni-xiang-fen-xi/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='AI视频提示词' /><meta property='article:tag' content='逐镜头拆解' /><meta property='article:tag' content='电影镜头语言' /><meta property='article:tag' content='视频逆向工程' /><meta property='article:tag' content='AI视频生成' /><meta property='article:tag' content='分镜提示词' /><meta property='article:published_time' content='2026-07-29T12:07:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-29T12:13:49&#43;08:00'/>
+<meta name="twitter:title" content="AI 视频逐镜头逆向分析与提示词生成器 - 随笔 - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="AI 视频逐镜头拆解与提示词逆向工程模板\r想要复刻一条优秀视频，真正需要学习的并不是人物、台词或具体剧情，而是隐藏在画面背后的镜头逻辑、视觉方法与节奏设计。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="AI视频提示词, 逐镜头拆解, 电影镜头语言, 视频逆向工程, AI视频生成, 分镜提示词">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"AI 视频逐镜头逆向分析与提示词生成器\"",
+  "description": "\"AI 视频逐镜头拆解与提示词逆向工程模板\\r想要复刻一条优秀视频，真正需要学习的并不是人物、台词或具体剧情，而是隐藏在画面背后的镜头逻辑、视觉方法与节奏设计。\\n\"",
+  "datePublished": "\"2026-07-29T12:07:00+08:00\"",
+  "dateModified": "\"2026-07-29T12:13:49+08:00\"",
+  "url": "\"https://www.tood.win/posts/ai-shi-pin-zhu-jing-tou-ni-xiang-fen-xi/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span>/</span><a href="/posts/ai-shi-pin-zhu-jing-tou-ni-xiang-fen-xi/">AI 视频逐镜头逆向分析与提示词生成器</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / 随笔</span>
+                <span>LIVE DATA / A.2607.057</span>
+            </div>
+            <h1>AI 视频逐镜头逆向分析与提示词生成器</h1>
+            <p class="article-deck">AI 视频逐镜头拆解与提示词逆向工程模板想要复刻一条优秀视频，真正需要学习的并不是人物、台词或具体剧情，而是隐藏在画面背后的镜头逻辑、视觉方法与节奏设计。
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.29</span>
+                <span>6 MIN READ</span>
+                <span>2937 WORDS</span>
+                <span>随笔</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A57</strong>
+                <p class="mono">JAN. 29<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">08</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><h1 id="ai-视频逐镜头拆解与提示词逆向工程模板"><a class="link" href="/tags/ai/" >AI</a> 视频逐镜头拆解与提示词逆向工程模板
+</h1><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>想要复刻一条优秀视频，真正需要学习的并不是人物、台词或具体剧情，而是隐藏在画面背后的<strong>镜头逻辑、视觉方法与节奏设计</strong>。</p>
+<p>下面这套提示词，可以让 AI 化身为专业的视频提示词架构师，对参考视频进行逐镜头拆解，并进一步整理成可用于 AI 视频生成模型的结构化提示词。</p>
+<p><img alt="AI 视频逐镜头逆向分析与提示词生成器" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/12_13_06-65626213.jpg"></p>
+<h2 id="一角色设定">一、角色设定
+</h2><p>请全面化身为以下三种专业角色：</p>
+<ul>
+<li><strong>顶级 AI 视频提示词架构师</strong></li>
+<li><strong>电影级镜头语言分析师</strong></li>
+<li><strong>多模态视频逆向工程师</strong></li>
+</ul>
+<p>你的任务不是简单概括视频内容，而是从导演、摄影、灯光、美术、剪辑和声音设计等多个维度，对视频进行系统化逆向分析。</p>
+<hr>
+<h2 id="二核心任务">二、核心任务
+</h2><p>请按照视频的实际时间顺序，对内容进行<strong>逐镜头拆解</strong>。</p>
+<p>不要只描述“画面里发生了什么”，而要分析这个镜头是如何被设计、拍摄、运动、衔接和呈现的。</p>
+<p>每个镜头必须重点拆解以下信息：</p>
+<h3 id="1-主体信息">1. 主体信息
+</h3><ul>
+<li>主体身份与角色类型</li>
+<li>年龄、性别及外观特征</li>
+<li>发型、妆容与面部特征</li>
+<li>服装款式、颜色与材质</li>
+<li>配饰、道具及其他视觉锚点</li>
+<li>用于维持角色一致性的固定特征</li>
+</ul>
+<h3 id="2-动作与表演">2. 动作与表演
+</h3><ul>
+<li>主体的初始姿态</li>
+<li>身体动作轨迹</li>
+<li>手部及肢体动作</li>
+<li>头部转动方向</li>
+<li>视线变化</li>
+<li>表情变化</li>
+<li>动作速度与力度</li>
+<li>动作开始、发展和结束状态</li>
+<li>人物与道具、环境之间的物理关系</li>
+</ul>
+<h3 id="3-场景与空间">3. 场景与空间
+</h3><ul>
+<li>场景类型与空间结构</li>
+<li>时间、天气及环境状态</li>
+<li>前景、中景、后景的层次关系</li>
+<li>主体在场景中的具体位置</li>
+<li>环境中的主要建筑、家具、道具或自然元素</li>
+<li>空间纵深、遮挡关系与透视关系</li>
+</ul>
+<h3 id="4-镜头语言">4. 镜头语言
+</h3><ul>
+<li>景别</li>
+<li>机位高度</li>
+<li>拍摄角度</li>
+<li>镜头朝向</li>
+<li>构图方式</li>
+<li>主体在画面中的占比</li>
+<li>景深范围</li>
+<li>焦点位置</li>
+<li>焦段特征</li>
+<li>画面透视效果</li>
+<li>摄影机与主体之间的距离</li>
+</ul>
+<h3 id="5-摄影机运动">5. 摄影机运动
+</h3><ul>
+<li>固定镜头</li>
+<li>推镜</li>
+<li>拉镜</li>
+<li>横移</li>
+<li>升降</li>
+<li>环绕</li>
+<li>跟拍</li>
+<li>摇镜</li>
+<li>俯冲</li>
+<li>手持运动</li>
+<li>稳定器运动</li>
+<li>无人机运动</li>
+<li>复合运镜</li>
+</ul>
+<p>同时标注：</p>
+<ul>
+<li>摄影机运动方向</li>
+<li>运动速度</li>
+<li>运动幅度</li>
+<li>加速或减速过程</li>
+<li>主体运动与摄影机运动之间的配合关系</li>
+</ul>
+<h3 id="6-光线与色彩">6. 光线与色彩
+</h3><ul>
+<li>主光方向</li>
+<li>辅助光方向</li>
+<li>轮廓光位置</li>
+<li>光线软硬程度</li>
+<li>光比强弱</li>
+<li>阴影形态</li>
+<li>环境光来源</li>
+<li>综合色温</li>
+<li>主色调与辅助色</li>
+<li>饱和度和对比度</li>
+<li>高光、暗部及曝光特征</li>
+<li>光线随镜头发生的变化</li>
+</ul>
+<h3 id="7-材质与画面质感">7. 材质与画面质感
+</h3><ul>
+<li>人物皮肤质感</li>
+<li>服装面料质感</li>
+<li>金属、玻璃、木材、石材等材质表现</li>
+<li>空气中的雾气、烟尘或颗粒</li>
+<li>画面锐度</li>
+<li>胶片颗粒</li>
+<li>动态模糊</li>
+<li>镜头光晕</li>
+<li>高光溢出</li>
+<li>反射与折射效果</li>
+<li>整体商业广告感或电影感</li>
+</ul>
+<h3 id="8-节奏与剪辑">8. 节奏与剪辑
+</h3><ul>
+<li>单个镜头持续时间</li>
+<li>动作节奏</li>
+<li>运镜节奏</li>
+<li>剪辑速度</li>
+<li>情绪变化</li>
+<li>音画同步关系</li>
+<li>镜头之间的视觉呼应</li>
+<li>节奏加速或放缓的位置</li>
+<li>情绪高潮和视觉重点</li>
+</ul>
+<h3 id="9-转场与特效">9. 转场与特效
+</h3><ul>
+<li>硬切</li>
+<li>淡入淡出</li>
+<li>叠化</li>
+<li>遮挡转场</li>
+<li>动作匹配转场</li>
+<li>形状匹配转场</li>
+<li>镜头甩动转场</li>
+<li>光线闪白转场</li>
+<li>速度变化转场</li>
+<li>景深模糊转场</li>
+<li>数字故障或粒子特效</li>
+<li>实拍特效与后期特效之间的结合方式</li>
+</ul>
+<h3 id="10-声音设计">10. 声音设计
+</h3><ul>
+<li>环境声音</li>
+<li>人物动作声音</li>
+<li>衣物摩擦声</li>
+<li>脚步声</li>
+<li>道具声音</li>
+<li>风声、水声、交通声等空间声音</li>
+<li>背景音乐类型</li>
+<li>音乐节拍与剪辑点的对应关系</li>
+<li>音效进入和退出的时间</li>
+<li>声音远近及空间混响</li>
+<li>静音或留白的使用方式</li>
+</ul>
+<hr>
+<h2 id="三输出顺序">三、输出顺序
+</h2><p>请严格按照以下顺序输出分析结果。</p>
+<h3 id="第一部分全片视觉与声音概览">第一部分：全片视觉与声音概览
+</h3><p>先总结整条视频的统一视觉方法，包括：</p>
+<ol>
+<li>整体画面材质</li>
+<li>整体节奏变化</li>
+<li>主要转场逻辑</li>
+<li>主要视觉特效</li>
+<li>环境声音设计</li>
+<li>音乐与画面节奏的配合方式</li>
+<li>综合色温与灯光风格</li>
+<li>镜头运动的共同规律</li>
+</ol>
+<hr>
+<h3 id="第二部分完整镜头提示词">第二部分：完整镜头提示词
+</h3><p>根据视频内容，生成一套完整的 AI 视频镜头提示词。</p>
+<p>每个镜头必须独立标注以下内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[镜头编号]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">镜头时长：
+</span></span><span class="line"><span class="cl">起始画面：
+</span></span><span class="line"><span class="cl">主体锚点：
+</span></span><span class="line"><span class="cl">人物外观与服装：
+</span></span><span class="line"><span class="cl">场景空间：
+</span></span><span class="line"><span class="cl">前景：
+</span></span><span class="line"><span class="cl">中景：
+</span></span><span class="line"><span class="cl">后景：
+</span></span><span class="line"><span class="cl">人物动作：
+</span></span><span class="line"><span class="cl">表情与视线变化：
+</span></span><span class="line"><span class="cl">摄影机位置：
+</span></span><span class="line"><span class="cl">景别与构图：
+</span></span><span class="line"><span class="cl">焦段与景深：
+</span></span><span class="line"><span class="cl">摄影机运动：
+</span></span><span class="line"><span class="cl">运动方向与速度：
+</span></span><span class="line"><span class="cl">光线方向：
+</span></span><span class="line"><span class="cl">综合色温：
+</span></span><span class="line"><span class="cl">材质与画面质感：
+</span></span><span class="line"><span class="cl">环境声音：
+</span></span><span class="line"><span class="cl">背景音乐与节奏：
+</span></span><span class="line"><span class="cl">视觉特效：
+</span></span><span class="line"><span class="cl">结束画面：
+</span></span><span class="line"><span class="cl">镜头衔接方式：
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="四单镜头描述要求">四、单镜头描述要求
+</h2><p>每个镜头都必须形成完整的时间连续过程，不能只描述某一个静态画面。</p>
+<p>请重点写清楚以下五个阶段：</p>
+<h3 id="1-起始画面">1. 起始画面
+</h3><p>明确镜头开始时：</p>
+<ul>
+<li>人物位于什么位置</li>
+<li>人物保持什么姿态</li>
+<li>摄影机处于什么位置</li>
+<li>画面焦点落在哪里</li>
+<li>前景、中景和后景分别是什么</li>
+<li>光线和环境处于什么状态</li>
+</ul>
+<h3 id="2-人物动作">2. 人物动作
+</h3><p>明确人物在镜头中的连续动作：</p>
+<ul>
+<li>动作从哪里开始</li>
+<li>身体如何移动</li>
+<li>视线如何变化</li>
+<li>表情如何变化</li>
+<li>手部如何运动</li>
+<li>如何接触道具或环境</li>
+<li>动作最终停止在哪里</li>
+</ul>
+<h3 id="3-摄影机运动">3. 摄影机运动
+</h3><p>明确摄影机在动作过程中的变化：</p>
+<ul>
+<li>从什么位置开始</li>
+<li>朝哪个方向运动</li>
+<li>采用什么运镜方式</li>
+<li>运动速度如何变化</li>
+<li>是否跟随人物</li>
+<li>是否改变焦点、景深或拍摄角度</li>
+<li>最终停留在什么位置</li>
+</ul>
+<h3 id="4-结束画面">4. 结束画面
+</h3><p>明确镜头结束时：</p>
+<ul>
+<li>人物的最终姿势</li>
+<li>人物与道具的最终关系</li>
+<li>摄影机的最终位置</li>
+<li>画面的最终构图</li>
+<li>焦点最终落在哪里</li>
+<li>为下一个镜头保留了什么视觉线索</li>
+</ul>
+<h3 id="5-镜头衔接">5. 镜头衔接
+</h3><p>明确当前镜头如何进入下一个镜头：</p>
+<ul>
+<li>通过人物动作衔接</li>
+<li>通过摄影机运动方向衔接</li>
+<li>通过相同构图衔接</li>
+<li>通过相同颜色或光线衔接</li>
+<li>通过遮挡物衔接</li>
+<li>通过声音提前进入衔接</li>
+<li>通过速度变化或动态模糊衔接</li>
+</ul>
+<hr>
+<h2 id="五角色与场景一致性要求">五、角色与场景一致性要求
+</h2><p>在所有镜头中，必须建立统一的角色锚点和场景锚点。</p>
+<h3 id="角色一致性"><a class="link" href="/tags/%e8%a7%92%e8%89%b2%e4%b8%80%e8%87%b4%e6%80%a7/" >角色一致性</a>
+</h3><p>确保以下信息在不同镜头中保持稳定：</p>
+<ul>
+<li>五官结构</li>
+<li>脸型</li>
+<li>肤色</li>
+<li>发型</li>
+<li>发色</li>
+<li>身材比例</li>
+<li>服装款式</li>
+<li>服装颜色</li>
+<li>服装材质</li>
+<li>鞋子与配饰</li>
+<li>道具外观</li>
+</ul>
+<h3 id="场景一致性">场景一致性
+</h3><p>确保以下信息不会在镜头切换时发生无理由变化：</p>
+<ul>
+<li>建筑结构</li>
+<li>家具位置</li>
+<li>门窗方向</li>
+<li>道具数量</li>
+<li>光源位置</li>
+<li>天气状态</li>
+<li>背景人物</li>
+<li>阴影方向</li>
+<li>场景综合色温</li>
+<li>前后景空间关系</li>
+</ul>
+<hr>
+<h2 id="六负面提示词与禁止项">六、负面提示词与禁止项
+</h2><p>请在最终提示词末尾补充统一的负面提示词，用于降低 AI 视频生成过程中的错误。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">禁止人物面部随机变化，禁止五官漂移，禁止脸型变化，禁止发型和发色改变，禁止人物年龄变化，禁止角色身份切换。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">禁止服装款式变化，禁止服装颜色漂移，禁止面料纹理闪烁，禁止配饰突然出现或消失，禁止鞋子和道具发生无理由变化。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">禁止多余手指，禁止手指融合，禁止手掌畸形，禁止手臂数量错误，禁止腿部变形，禁止关节反向弯曲，禁止身体穿模，禁止人体比例异常。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">禁止人物动作突然跳帧，禁止动作轨迹断裂，禁止姿态瞬间切换，禁止人物无理由位移，禁止物体漂浮，禁止违反重力和惯性的运动。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">禁止人物与道具接触关系错误，禁止手部穿过物体，禁止脚部悬空，禁止物体尺寸随机变化，禁止空间透视关系失真。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">禁止背景闪烁，禁止建筑结构变化，禁止家具位置漂移，禁止背景人物随机出现，禁止光源方向突变，禁止阴影方向不一致。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">禁止摄影机无理由抖动，禁止镜头运动速度突变，禁止焦段随机切换，禁止景深跳变，禁止画面曝光闪烁，禁止综合色温漂移。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">禁止低清晰度，禁止严重噪点，禁止过度锐化，禁止压缩伪影，禁止字幕乱码，禁止水印，禁止品牌标志，禁止无关文字。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="七创作边界">七、创作边界
+</h2><p>本任务只学习参考视频中的：</p>
+<ul>
+<li>镜头设计逻辑</li>
+<li>构图方法</li>
+<li>运镜方式</li>
+<li>光影设计</li>
+<li>色彩关系</li>
+<li>动作节奏</li>
+<li>剪辑节奏</li>
+<li>转场方法</li>
+<li>材质表现</li>
+<li>声音设计</li>
+<li>视觉叙事结构</li>
+</ul>
+<p>不得直接照抄或复刻以下内容：</p>
+<ul>
+<li>原视频中的具体人物身份</li>
+<li>明确可识别的品牌</li>
+<li>商标与产品标志</li>
+<li>原始台词</li>
+<li>专属文案</li>
+<li>具体剧情</li>
+<li>角色姓名</li>
+<li>受版权保护的独特故事设定</li>
+</ul>
+<p>请将原视频中的具体人物、品牌、台词和故事替换为通用、原创且不可识别的新内容，仅保留其镜头语言与视觉设计方法。</p>
+<hr>
+<h2 id="八最终执行指令">八、最终执行指令
+</h2><p>请先完整观看并理解视频，再进行分析。</p>
+<p>不要跳过镜头，不要合并具有明显构图、机位、动作或场景变化的镜头。即使两个画面持续时间很短，只要摄影机角度、景别、主体动作或场景关系发生明显变化，也应拆分为独立镜头。</p>
+<p>最终输出必须具备以下特点：</p>
+<ul>
+<li>按时间顺序排列</li>
+<li>镜头编号清晰</li>
+<li>动作过程连续</li>
+<li>摄影机运动明确</li>
+<li>场景空间关系完整</li>
+<li>光线与材质描述具体</li>
+<li>镜头衔接自然</li>
+<li>可直接用于 AI 视频生成</li>
+<li>可根据不同视频模型进行适配</li>
+<li>不照抄原视频的品牌、人物、台词和具体故事</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/ai%E8%A7%86%E9%A2%91%E6%8F%90%E7%A4%BA%E8%AF%8D/">AI视频提示词</a>
+        
+            <a href="/tags/%E9%80%90%E9%95%9C%E5%A4%B4%E6%8B%86%E8%A7%A3/">逐镜头拆解</a>
+        
+            <a href="/tags/%E7%94%B5%E5%BD%B1%E9%95%9C%E5%A4%B4%E8%AF%AD%E8%A8%80/">电影镜头语言</a>
+        
+            <a href="/tags/%E8%A7%86%E9%A2%91%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/">视频逆向工程</a>
+        
+            <a href="/tags/ai%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/">AI视频生成</a>
+        
+            <a href="/tags/%E5%88%86%E9%95%9C%E6%8F%90%E7%A4%BA%E8%AF%8D/">分镜提示词</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/ai-man-ju-zhi-zuo-skill-gong-zuo-liu-yong/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率</strong>
+                    </a><a href="/posts/di-yi-ci-jian-zhan-xu-yao-na-xie-gong/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>第一次建站需要哪些工具？域名、托管、企业邮箱与网站统计清单</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#一角色设定">一、角色设定</a></li>
+    
+    
+    
+    
+    <li><a href="#六负面提示词与禁止项">六、负面提示词与禁止项</a></li>
+    <li><a href="#七创作边界">七、创作边界</a></li>
+    <li><a href="#八最终执行指令">八、最终执行指令</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/%E9%9A%8F%E7%AC%94/"><span>分类</span><b>随笔</b></a>
+                    <a><span>字数</span><b>2937</b></a>
+                    <a><span>阅读</span><b>6 MIN</b></a>
+                    <a><span>更新</span><b>07.29</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/ai-fu-ke-bao-kuan-shi-pin-ti-shi-ci/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/Image_2026728_16_04_37-d8b2e59e.jpg" alt="AI 复刻爆款视频提示词模板：逐镜头拆解并生成视频提示词" loading="lazy"><code>01 / AI</code>
+                    <h3>AI 复刻爆款视频提示词模板：逐镜头拆解并生成视频提示词</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>看到一条节奏、运镜或视觉效果出色的视频，如何让 AI 帮助我们学习它的制作方法？
+比较实用的方式，不是让 AI 简单描述“视频里有什么”，而是要 …</p>
+                    <time>2026-07-28</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/cloudflare-tunnel-nei-wang-chuan-tou-yi-tiao-ming-ling/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/Ch202683_14_47_13-1611ee7b.jpg" alt="Cloudflare Tunnel 内网穿透教程：一条命令把本地服务暴露到公网" loading="lazy"><code>02 / 随笔</code>
+                    <h3>Cloudflare Tunnel 内网穿透教程：一条命令把本地服务暴露到公网</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>本地项目已经运行成功，却无法发给同事或客户查看？调试微信、支付宝或 Stripe Webhook 时，需要填写公网 HTTPS 回调地址，但你手 …</p>
+                    <time>2026-08-03</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/giffgaff-ting-hu-hou-huan-shen-me-ka-saily-0/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/1_28_30-ca1002ef.jpg" alt="giffgaff 停户后换什么卡？Saily 0.99 美元/月申请美国手机号教程" loading="lazy"><code>03 / 随笔</code>
+                    <h3>giffgaff 停户后换什么卡？Saily 0.99 美元/月申请美国手机号教程</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>近期，部分长期在英国以外使用 giffgaff 的用户收到了停户邮件。
+giffgaff 长期海外用户收到停户邮件：号码抢救与携号转网教程
+这件 …</p>
+                    <time>2026-08-03</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/giffgaff-chang-qi-hai-wai-yong-hu-shou-dao-ting/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/3_11_28_30-6e53c656.jpg" alt="giffgaff 长期海外用户收到停户邮件：号码抢救与携号转网教程" loading="lazy"><code>04 / 随笔</code>
+                    <h3>giffgaff 长期海外用户收到停户邮件：号码抢救与携号转网教程</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>近期，部分长期在英国境外使用 giffgaff 的用户收到了服务停止通知。
+邮件给出的理由是：giffgaff 的移动服务主要面向英国境内用户， …</p>
+                    <time>2026-08-03</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

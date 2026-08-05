@@ -243,4 +243,40 @@
     });
 })();
 </script>
+
+<div class="search-modal" hidden>
+    <div class="search-modal-backdrop" data-close></div>
+    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+        <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
+            <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+            <button type="submit" aria-label="开始搜索">⌕</button>
+        </form>
+        <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+    </div>
+</div>
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
 {{ end }}

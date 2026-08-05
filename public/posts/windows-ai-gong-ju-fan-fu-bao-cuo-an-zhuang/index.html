@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在 Windows 上使用 Codex、Claude Code、Cursor 或其他 AI 编程工具时，你可能遇到过这种情况：\n1 2 3 4 5 执行命令 → PowerShell 报错 → AI 修改命令 → 再次报错 → AI 继续猜测和重试 每次重新读取错误、分析原因和修改命令，都会额外消耗 Token。\n">
+<title>Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费 - AI - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/windows-ai-gong-ju-fan-fu-bao-cuo-an-zhuang/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费 - AI - 拾光集 TOOD.WIN">
+<meta property='og:description' content="在 Windows 上使用 Codex、Claude Code、Cursor 或其他 AI 编程工具时，你可能遇到过这种情况：\n1 2 3 4 5 执行命令 → PowerShell 报错 → AI 修改命令 → 再次报错 → AI 继续猜测和重试 每次重新读取错误、分析原因和修改命令，都会额外消耗 Token。\n">
+<meta property='og:url' content='https://www.tood.win/posts/windows-ai-gong-ju-fan-fu-bao-cuo-an-zhuang/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='PowerShell 7' /><meta property='article:tag' content='Windows PowerShell' /><meta property='article:tag' content='AI Token' /><meta property='article:tag' content='Token 优化' /><meta property='article:tag' content='AI 编程' /><meta property='article:tag' content='AI Agent' /><meta property='article:tag' content='Windows 11' /><meta property='article:tag' content='WinGet' /><meta property='article:tag' content='VS Code' /><meta property='article:tag' content='Cursor' /><meta property='article:tag' content='Codex' /><meta property='article:tag' content='Claude Code' /><meta property='article:tag' content='终端配置' /><meta property='article:tag' content='PowerShell 教程' /><meta property='article:tag' content='pwsh' /><meta property='article:published_time' content='2026-08-02T22:02:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-02T22:06:28&#43;08:00'/>
+<meta name="twitter:title" content="Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费 - AI - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="在 Windows 上使用 Codex、Claude Code、Cursor 或其他 AI 编程工具时，你可能遇到过这种情况：\n1 2 3 4 5 执行命令 → PowerShell 报错 → AI 修改命令 → 再次报错 → AI 继续猜测和重试 每次重新读取错误、分析原因和修改命令，都会额外消耗 Token。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="PowerShell 7, Windows PowerShell, AI Token, Token 优化, AI 编程, AI Agent, Windows 11, WinGet, VS Code, Cursor, Codex, Claude Code, 终端配置, PowerShell 教程, pwsh">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费\"",
+  "description": "\"在 Windows 上使用 Codex、Claude Code、Cursor 或其他 AI 编程工具时，你可能遇到过这种情况：\\n1 2 3 4 5 执行命令 → PowerShell 报错 → AI 修改命令 → 再次报错 → AI 继续猜测和重试 每次重新读取错误、分析原因和修改命令，都会额外消耗 Token。\\n\"",
+  "datePublished": "\"2026-08-02T22:02:00+08:00\"",
+  "dateModified": "\"2026-08-02T22:06:28+08:00\"",
+  "url": "\"https://www.tood.win/posts/windows-ai-gong-ju-fan-fu-bao-cuo-an-zhuang/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai/">AI</a><span>/</span><a href="/posts/windows-ai-gong-ju-fan-fu-bao-cuo-an-zhuang/">Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI</span>
+                <span>LIVE DATA / A.2608.069</span>
+            </div>
+            <h1>Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费</h1>
+            <p class="article-deck">在 Windows 上使用 Codex、Claude Code、Cursor 或其他 AI 编程工具时，你可能遇到过这种情况：
+1 2 3 4 5 执行命令 → PowerShell 报错 → AI 修改命令 → 再次报错 → AI 继续猜测和重试 每次重新读取错误、分析原因和修改命令，都会额外消耗 Token。
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.08.02</span>
+                <span>4 MIN READ</span>
+                <span>1535 WORDS</span>
+                <span>AI</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A69</strong>
+                <p class="mono">JAN. 02<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">10</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>在 Windows 上使用 <a class="link" href="/tags/codex/" >Codex</a>、<a class="link" href="/tags/claude/" >Claude</a> Code、<a class="link" href="/tags/cursor/" >Cursor</a> 或其他 <a class="link" href="/tags/ai/" >AI</a> 编程工具时，你可能遇到过这种情况：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">执行命令
+</span></span><span class="line"><span class="cl">→ PowerShell 报错
+</span></span><span class="line"><span class="cl">→ AI 修改命令
+</span></span><span class="line"><span class="cl">→ 再次报错
+</span></span><span class="line"><span class="cl">→ AI 继续猜测和重试
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>每次重新读取错误、分析原因和修改命令，都会额外消耗 <a class="link" href="/tags/token/" >Token</a>。</p>
+<p>这并不一定是 AI 能力有问题。其中一个常见原因是：<strong><a class="link" href="/tags/ai-agent/" >AI Agent</a> 生成的命令与当前 PowerShell 版本或终端环境不兼容。</strong></p>
+<p>Windows 10 和 Windows 11 通常仍然自带 Windows PowerShell 5.1，而不少现代开发工具和 AI Agent 更适合在 PowerShell 7 中运行。</p>
+
+    <blockquote>
+        <p>注意：安装 PowerShell 7 不能解决所有命令错误，但可以减少一部分由 PowerShell 版本、命令参数和运行环境不一致引起的无效重试。</p>
+
+    </blockquote>
+<p><img alt="Windows AI 工具反复报错？安装 PowerShell 7，减少无效重试和 Token 浪费" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/23_08_32301_1-85cb7eaa.jpg"></p>
+<h2 id="一检查当前-powershell-版本">一、检查当前 PowerShell 版本
+</h2><p>在 PowerShell 中运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$PSVersionTable</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重点查看：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">PSVersion
+</span></span><span class="line"><span class="cl">PSEdition
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果显示类似下面的内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">PSVersion  5.1
+</span></span><span class="line"><span class="cl">PSEdition  Desktop
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>说明当前窗口运行的是系统自带的 Windows PowerShell 5.1。</p>
+<h2 id="二使用-winget-安装-powershell-7">二、使用 WinGet 安装 PowerShell 7
+</h2><p>以管理员身份打开 PowerShell，然后运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">winget</span> <span class="n">install</span> <span class="p">-</span><span class="n">-id</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">PowerShell</span> <span class="p">-</span><span class="n">-source</span> <span class="n">winget</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装过程中，WinGet 会自动下载并安装适合当前系统的 PowerShell 7。</p>
+<p>如果提示已经安装，可以执行升级命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">winget</span> <span class="n">upgrade</span> <span class="p">-</span><span class="n">-id</span> <span class="n">Microsoft</span><span class="p">.</span><span class="py">PowerShell</span> <span class="p">-</span><span class="n">-source</span> <span class="n">winget</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="三为什么安装后仍然显示-powershell-51">三、为什么安装后仍然显示 PowerShell 5.1？
+</h2><p>PowerShell 7 不会覆盖 Windows PowerShell 5.1。</p>
+<p>两者的启动程序不同：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>版本</th>
+          <th>启动程序</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Windows PowerShell 5.1</td>
+          <td><code>powershell.exe</code></td>
+      </tr>
+      <tr>
+          <td>PowerShell 7</td>
+          <td><code>pwsh.exe</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>因此，安装完成后继续在原来的窗口运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$PSVersionTable</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可能仍然显示 5.1，这是正常现象，并不代表安装失败。</p>
+<p>请关闭原来的终端窗口，重新打开终端，然后执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">pwsh</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再次检查版本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$PSVersionTable</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>正常情况下会看到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">PSVersion  7.x
+</span></span><span class="line"><span class="cl">PSEdition  Core
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还可以直接检查：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">pwsh</span> <span class="p">-</span><span class="n">-version</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="四将-windows-terminal-默认终端改为-powershell-7">四、将 Windows Terminal 默认终端改为 PowerShell 7
+</h2><p>只安装 PowerShell 7 还不够。为了避免以后仍然打开 Windows PowerShell 5.1，建议修改默认终端。</p>
+<p>操作步骤：</p>
+<ol>
+<li>打开 Windows Terminal。</li>
+<li>点击顶部的下拉箭头。</li>
+<li>进入“设置”。</li>
+<li>找到“默认配置文件”。</li>
+<li>选择“PowerShell”，不要选择“Windows PowerShell”。</li>
+<li>保存设置并重新打开终端。</li>
+</ol>
+<p>注意区分：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">PowerShell           → 通常是 PowerShell 7
+</span></span><span class="line"><span class="cl">Windows PowerShell   → 系统自带的 PowerShell 5.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="五让-vs-code-默认使用-powershell-7">五、让 VS Code 默认使用 PowerShell 7
+</h2><p>在 VS Code 中按下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Ctrl + Shift + P
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>搜索并选择：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Terminal: Select Default Profile
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后选择：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">PowerShell
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重新创建终端：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Terminal: Create New Terminal
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在新终端中运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$PSVersionTable</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>确认当前版本已经是 PowerShell 7。</p>
+<h2 id="六让-ai-agent-明确调用-powershell-7">六、让 AI Agent 明确调用 PowerShell 7
+</h2><p>有些 AI 工具不会自动使用 Windows Terminal 的默认配置，而是直接调用系统里的 <code>powershell.exe</code>。</p>
+<p>这时可以在 AI 工具的终端或 Shell 设置中，将执行程序改为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">pwsh.exe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>PowerShell 7 的常见安装路径是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">C:\Program Files\PowerShell\7\pwsh.exe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以在终端中查找实际路径：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Command</span> <span class="n">pwsh</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果 AI 工具支持项目规则或长期指令，可以加入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">在 Windows 环境执行终端命令时，优先使用 PowerShell 7（pwsh），不要默认调用 Windows PowerShell 5.1（powershell.exe）。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="七快速验证是否配置成功">七、快速验证是否配置成功
+</h2><p>运行以下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">pwsh</span> <span class="p">-</span><span class="n">-version</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$PSVersionTable</span><span class="p">.</span><span class="py">PSVersion</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再检查程序路径：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Command</span> <span class="n">pwsh</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只要能够正常显示 PowerShell 7 的版本号和安装路径，说明安装基本完成。</p>
+<h2 id="常见问题">常见问题
+</h2><h3 id="安装-powershell-7-后可以删除-powershell-51-吗">安装 PowerShell 7 后，可以删除 PowerShell 5.1 吗？
+</h3><p>不建议。</p>
+<p>PowerShell 7 与 Windows PowerShell 5.1 可以同时存在。部分旧版 Windows 管理模块和脚本仍可能依赖 PowerShell 5.1。</p>
+<h3 id="为什么-ai-工具仍然调用-powershell-51">为什么 AI 工具仍然调用 PowerShell 5.1？
+</h3><p>常见原因包括：</p>
+<ul>
+<li>AI 工具固定调用了 <code>powershell.exe</code>；</li>
+<li>VS Code 默认终端尚未修改；</li>
+<li>安装后没有重新启动终端；</li>
+<li>AI 工具保留了旧的终端会话；</li>
+<li>Shell 配置仍然指向 Windows PowerShell。</li>
+</ul>
+<p>应在对应工具中明确选择 <code>pwsh.exe</code>。</p>
+<h3 id="安装-powershell-7-就一定能减少-token-消耗吗">安装 PowerShell 7 就一定能减少 Token 消耗吗？
+</h3><p>不能保证。</p>
+<p>它主要减少因旧版 PowerShell、命令参数或终端环境不一致造成的报错和重复尝试。权限不足、路径错误、依赖缺失、网络异常和代码本身的问题，仍然需要单独排查。</p>
+<h2 id="总结">总结
+</h2><p>对于经常在 Windows 上使用 AI 编程工具的人，推荐完成下面三项设置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">安装 PowerShell 7
+</span></span><span class="line"><span class="cl">→ 将默认终端改为 PowerShell 7
+</span></span><span class="line"><span class="cl">→ 确认 AI Agent 调用的是 pwsh.exe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>真正关键的不是“电脑里装了 PowerShell 7”，而是<strong>AI 工具实际执行命令时使用了 PowerShell 7</strong>。</p>
+<p>正确配置终端环境，可以减少部分无意义的报错、猜测和重复执行，也能避免 Token 浪费在本可提前解决的兼容性问题上。</p>
+<h2 id="powershell-官方项目">PowerShell 官方项目
+</h2><ul>
+<li>GitHub：<a class="link" href="https://github.com/PowerShell/PowerShell"  target="_blank" rel="noopener"
+    >PowerShell/PowerShell</a></li>
+<li>Windows 安装文档：<a class="link" href="https://learn.microsoft.com/powershell/scripting/install/install-powershell-on-windows"  target="_blank" rel="noopener"
+    >在 Windows 上安装 PowerShell</a></li>
+</ul>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/powershell-7/">PowerShell 7</a>
+        
+            <a href="/tags/windows-powershell/">Windows PowerShell</a>
+        
+            <a href="/tags/ai-token/">AI Token</a>
+        
+            <a href="/tags/token-%E4%BC%98%E5%8C%96/">Token 优化</a>
+        
+            <a href="/tags/ai-%E7%BC%96%E7%A8%8B/">AI 编程</a>
+        
+            <a href="/tags/ai-agent/">AI Agent</a>
+        
+            <a href="/tags/windows-11/">Windows 11</a>
+        
+            <a href="/tags/winget/">WinGet</a>
+        
+            <a href="/tags/vs-code/">VS Code</a>
+        
+            <a href="/tags/cursor/">Cursor</a>
+        
+            <a href="/tags/codex/">Codex</a>
+        
+            <a href="/tags/claude-code/">Claude Code</a>
+        
+            <a href="/tags/%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE/">终端配置</a>
+        
+            <a href="/tags/powershell-%E6%95%99%E7%A8%8B/">PowerShell 教程</a>
+        
+            <a href="/tags/pwsh/">Pwsh</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/wang-zhan-yu-ming-ying-gai-dai-www-hai-shi/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>网站域名应该带 www 还是不带 www？Vercel、Sitemap 与 GSC 设置指南</strong>
+                    </a><a href="/posts/giffgaff-chang-qi-hai-wai-yong-hu-shou-dao-ting/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>giffgaff 长期海外用户收到停户邮件：号码抢救与携号转网教程</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#一检查当前-powershell-版本">一、检查当前 PowerShell 版本</a></li>
+    <li><a href="#二使用-winget-安装-powershell-7">二、使用 WinGet 安装 PowerShell 7</a></li>
+    <li><a href="#三为什么安装后仍然显示-powershell-51">三、为什么安装后仍然显示 PowerShell 5.1？</a></li>
+    <li><a href="#四将-windows-terminal-默认终端改为-powershell-7">四、将 Windows Terminal 默认终端改为 PowerShell 7</a></li>
+    <li><a href="#五让-vs-code-默认使用-powershell-7">五、让 VS Code 默认使用 PowerShell 7</a></li>
+    <li><a href="#六让-ai-agent-明确调用-powershell-7">六、让 AI Agent 明确调用 PowerShell 7</a></li>
+    <li><a href="#七快速验证是否配置成功">七、快速验证是否配置成功</a></li>
+    
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#powershell-官方项目">PowerShell 官方项目</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/ai/"><span>分类</span><b>AI</b></a>
+                    <a><span>字数</span><b>1535</b></a>
+                    <a><span>阅读</span><b>4 MIN</b></a>
+                    <a><span>更新</span><b>08.02</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/headroom-zui-gao-jian-shao-92-token-yong-ai-bian/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/ChatGPT_Image_2026727_20_20_12-d72362d1.jpg" alt="Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上" loading="lazy"><code>01 / AI</code>
+                    <h3>Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>使用 Claude Code、Codex、Cursor 等 AI 编程工具时，真正消耗 Token 的往往不只是你输入的提示词。
+代码搜索结果、 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/codex-xiao-lv-bei-zeng-5-ge-zhi-de-guan/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/codex-5-tools-carousel-4x3-33eb37b3.jpg" alt="Codex 效率倍增：5 个值得关注的开源工具" loading="lazy"><code>02 / AI</code>
+                    <h3>Codex 效率倍增：5 个值得关注的开源工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>同样使用 Codex，为什么有些人写代码更快、更稳，还能让 AI 自动查文档、理解大型项目，甚至操作浏览器和电脑？
+原因并不只是模型更强，而是他 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/find-skills-install-guide/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/19_18_53-9fd8ee26.jpg" alt="Find Skills 使用教程：帮你搜索、筛选和安装合适的 AI Agent Skills" loading="lazy"><code>03 / AI</code>
+                    <h3>Find Skills 使用教程：帮你搜索、筛选和安装合适的 AI Agent Skills</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>Skills 太多不知道装哪个？先用 Find Skills 帮你筛选接触 Claude Code、Codex、Cursor 或其他 AI …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ui-ux-pro-max-rang-ai-sheng-cheng-de-jie/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/12_2-026d34e7.jpg" alt="UI/UX Pro Max：让 AI 生成的界面摆脱模板感" loading="lazy"><code>04 / AI</code>
+                    <h3>UI/UX Pro Max：让 AI 生成的界面摆脱模板感</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>使用 AI 编程工具生成网页时，很多人都会遇到同一个问题：
+代码可以运行，但界面一眼就能看出是 AI 做的。
+页面通常拥有相似的渐变背景、圆角卡 …</p>
+                    <time>2026-07-27</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

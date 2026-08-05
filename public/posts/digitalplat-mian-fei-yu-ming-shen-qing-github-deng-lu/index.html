@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="DigitalPlat FreeDomain 提供 dpdns.org、us.kg、qzz.io、xx.kg、qd.je 等公共命名空间下的免费域名。\n申请成功后，用户可以设置自定义 Nameserver，将 DNS 托管到 Cloudflare 等第三方服务，再配置 A、AAAA、CNAME、MX、TXT 等记录。\n">
+<title>DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南 - 建站 - 拾光集 TOOD.WIN</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/digitalplat-mian-fei-yu-ming-shen-qing-github-deng-lu/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.c04ad67397bafd214d8cb0756ea8054324cc7235a48e1c29c8d78c74007f7a88.css"><meta property='og:title' content="DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南 - 建站 - 拾光集 TOOD.WIN">
+<meta property='og:description' content="DigitalPlat FreeDomain 提供 dpdns.org、us.kg、qzz.io、xx.kg、qd.je 等公共命名空间下的免费域名。\n申请成功后，用户可以设置自定义 Nameserver，将 DNS 托管到 Cloudflare 等第三方服务，再配置 A、AAAA、CNAME、MX、TXT 等记录。\n">
+<meta property='og:url' content='https://www.tood.win/posts/digitalplat-mian-fei-yu-ming-shen-qing-github-deng-lu/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='DigitalPlat FreeDomain' /><meta property='article:tag' content='免费域名申请' /><meta property='article:tag' content='Cloudflare 域名解析' /><meta property='article:tag' content='GitHub 免费域名' /><meta property='article:tag' content='dpdns.org' /><meta property='article:tag' content='us.kg' /><meta property='article:published_time' content='2026-07-31T11:11:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-31T11:16:22&#43;08:00'/>
+<meta name="twitter:title" content="DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南 - 建站 - 拾光集 TOOD.WIN">
+<meta name="twitter:description" content="DigitalPlat FreeDomain 提供 dpdns.org、us.kg、qzz.io、xx.kg、qd.je 等公共命名空间下的免费域名。\n申请成功后，用户可以设置自定义 Nameserver，将 DNS 托管到 Cloudflare 等第三方服务，再配置 A、AAAA、CNAME、MX、TXT 等记录。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<link rel="shortcut icon" href="/uploads/2026/07/ico-123-673558c9.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="DigitalPlat FreeDomain, 免费域名申请, Cloudflare 域名解析, GitHub 免费域名, dpdns.org, us.kg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南\"",
+  "description": "\"DigitalPlat FreeDomain 提供 dpdns.org、us.kg、qzz.io、xx.kg、qd.je 等公共命名空间下的免费域名。\\n申请成功后，用户可以设置自定义 Nameserver，将 DNS 托管到 Cloudflare 等第三方服务，再配置 A、AAAA、CNAME、MX、TXT 等记录。\\n\"",
+  "datePublished": "\"2026-07-31T11:11:00+08:00\"",
+  "dateModified": "\"2026-07-31T11:16:22+08:00\"",
+  "url": "\"https://www.tood.win/posts/digitalplat-mian-fei-yu-ming-shen-qing-github-deng-lu/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/07/tood-logo-60a3a703.png" alt="拾光集 TOOD.WIN">
+            <small>TOOD.WIN / DIGITAL SIGNAL ARCHIVE</small>
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">首页</a>
+        <a href="/archives/#current-archive">最新</a>
+        <a class="" href="/archives/">分类</a>
+        <a class="" href="/tags/">标签</a>
+        <a class="" href="/%e5%85%b3%e4%ba%8e/">关于</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="搜索文章" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><span>/</span><a href="/posts/digitalplat-mian-fei-yu-ming-shen-qing-github-deng-lu/">DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / 建站</span>
+                <span>LIVE DATA / A.2607.064</span>
+            </div>
+            <h1>DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南</h1>
+            <p class="article-deck">DigitalPlat FreeDomain 提供 dpdns.org、us.kg、qzz.io、xx.kg、qd.je 等公共命名空间下的免费域名。
+申请成功后，用户可以设置自定义 Nameserver，将 DNS 托管到 Cloudflare 等第三方服务，再配置 A、AAAA、CNAME、MX、TXT 等记录。
+</p>
+            <div class="author-line mono">
+                <span>BY 拾光集 TOOD.WIN</span>
+                <span>2026.07.31</span>
+                <span>6 MIN READ</span>
+                <span>2644 WORDS</span>
+                <span>建站</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A64</strong>
+                <p class="mono">JAN. 31<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">06</div>
+                <div class="kicker">章节内容</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="广告"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>DigitalPlat FreeDomain 提供 <code>dpdns.org</code>、<code>us.kg</code>、<code>qzz.io</code>、<code>xx.kg</code>、<code>qd.je</code> 等公共命名空间下的免费域名。</p>
+<p>申请成功后，用户可以设置自定义 Nameserver，将 DNS 托管到 <a class="link" href="/tags/cloudflare/" >Cloudflare</a> 等第三方服务，再配置 A、AAAA、CNAME、MX、TXT 等记录。</p>
+<p>它适合个人主页、<a class="link" href="/tags/%e5%bc%80%e6%ba%90%e9%a1%b9%e7%9b%ae/" >开源项目</a>、静态网站和部署练习，但不建议作为重要商业网站唯一的域名入口。</p>
+
+    <blockquote>
+        <p>官方提供的后缀、申请数量、审核方式和免费政策可能随时调整，请以申请面板显示的信息为准。</p>
+
+    </blockquote>
+<p><img alt="DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/07/14_36-dadff2e7.jpg"></p>
+<h2 id="digitalplat-freedomain-是什么">DigitalPlat FreeDomain 是什么？
+</h2><p>DigitalPlat FreeDomain 是一个免费域名项目。它提供的地址通常采用以下形式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">yourname.dpdns.org
+</span></span><span class="line"><span class="cl">yourname.us.kg
+</span></span><span class="line"><span class="cl">yourname.qzz.io
+</span></span><span class="line"><span class="cl">yourname.xx.kg
+</span></span><span class="line"><span class="cl">yourname.qd.je
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>从域名层级来看，它们属于 DigitalPlat 管理的公共命名空间，并不是用户直接向注册局购买的 <code>.com</code>、<code>.net</code> 或国家顶级域名。</p>
+<p>不过，与普通网站平台赠送的固定子域名不同，DigitalPlat 支持用户设置外部权威 Nameserver。因此，你可以将域名添加到 <a class="link" href="/tags/cloudflare/" >Cloudflare</a>，并自行管理 DNS 记录、HTTPS、CDN 和网站部署。</p>
+<p>DigitalPlat 本身主要负责域名申请和 Nameserver 委托，并不提供普通的 DNS 记录编辑器。A、CNAME、TXT 等记录需要在 Cloudflare或其他外部 DNS 服务商中设置。</p>
+<h2 id="当前支持哪些免费域名后缀">当前支持哪些免费域名后缀？
+</h2><p>根据 DigitalPlat 官方 GitHub 项目，目前列出的后缀包括：</p>
+<ul>
+<li><code>.dpdns.org</code></li>
+<li><code>.us.kg</code></li>
+<li><code>.qzz.io</code></li>
+<li><code>.xx.kg</code></li>
+<li><code>.qd.je</code></li>
+</ul>
+<p>部分后缀可能暂时停止申请，也可能因为名额、风控或上游政策变化而调整。</p>
+<p>因此，教程文章中不应保证某个后缀长期开放。实际申请时，应以 DigitalPlat 控制面板中的可选后缀为准。</p>
+<h2 id="适合哪些使用场景">适合哪些使用场景？
+</h2><p>DigitalPlat 免费域名比较适合以下用途：</p>
+<ul>
+<li>个人主页和作品集</li>
+<li>GitHub Pages、Cloudflare Pages 等静态网站</li>
+<li>开源项目演示页面</li>
+<li>API、Webhook 或临时测试环境</li>
+<li>Docker、VPS 和网站部署练习</li>
+<li>DNS、HTTPS、CDN 配置学习</li>
+<li>暂时不想购买正式域名的个人项目</li>
+</ul>
+<p>它最大的价值是降低试错成本，让初学者能够免费体验完整的域名解析和网站部署流程。</p>
+<p>以下项目不建议只使用免费域名：</p>
+<ul>
+<li>企业官网</li>
+<li>电商网站和支付页面</li>
+<li>长期运营的内容品牌</li>
+<li>依赖搜索流量的正式网站</li>
+<li>邮件、登录和用户账户系统</li>
+<li>不能中断访问的重要服务</li>
+</ul>
+<p>重要项目至少应准备一个自己购买并可自由转移的正式域名。</p>
+<h2 id="digitalplat-免费域名申请步骤">DigitalPlat 免费域名申请步骤
+</h2><h3 id="第一步注册或登录账号">第一步：注册或登录账号
+</h3><p>打开 DigitalPlat FreeDomain 控制面板：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">https://dash.domain.digitalplat.org/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据页面提示创建账号或登录。</p>
+<p>DigitalPlat 的登录和验证方式可能调整。部分时期可能使用 GitHub 账号辅助验证，但不应将“必须通过 GitHub 登录”写成永久固定规则。</p>
+<p>建议使用长期可访问的邮箱和账号，并开启可用的安全验证方式。</p>
+<h3 id="第二步搜索可用域名">第二步：搜索可用域名
+</h3><p>进入域名申请页面后，输入准备使用的名称，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">myproject
+</span></span><span class="line"><span class="cl">bruceblog
+</span></span><span class="line"><span class="cl">demoapi
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后从当前开放的后缀中选择：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">myproject.dpdns.org
+</span></span><span class="line"><span class="cl">myproject.us.kg
+</span></span><span class="line"><span class="cl">myproject.qzz.io
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>提交前应注意：</p>
+<ol>
+<li>不要申请知名品牌、银行、政府机构或其他组织的名称。</li>
+<li>不要使用容易被误认为官方网站或登录页面的名称。</li>
+<li>尽量选择与项目名称、用户名或网站内容相关的域名。</li>
+<li>避免一次申请大量无实际用途的域名。</li>
+</ol>
+<p>部分名称可能进入人工审核，也可能因为风控、保留词或商标风险被拒绝。</p>
+<h3 id="第三步在-cloudflare-添加域名">第三步：在 Cloudflare 添加域名
+</h3><p>登录 Cloudflare，选择“添加域”或“Add a domain”，然后输入刚刚申请的完整域名，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">myproject.dpdns.org
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cloudflare 会分配两条 Nameserver，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">alice.ns.cloudflare.com
+</span></span><span class="line"><span class="cl">bob.ns.cloudflare.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实际 Nameserver 每个账号和域名都不同，必须复制 Cloudflare 页面中显示的地址。</p>
+<h3 id="第四步回到-digitalplat-设置-nameserver">第四步：回到 DigitalPlat 设置 Nameserver
+</h3><p>返回 DigitalPlat 控制面板，打开对应域名的管理页面，将 Cloudflare 提供的两条 Nameserver 填入 NS 设置。</p>
+<p>保存后等待委托信息生效。</p>
+<p>DNS 和 Nameserver 变更不会总是立即完成，实际时间会受到缓存、TTL 和上游 DNS 更新速度影响。不要因为几分钟内未生效就重复删除和添加域名。</p>
+<h3 id="第五步在-cloudflare-配置-dns">第五步：在 Cloudflare 配置 DNS
+</h3><p>Cloudflare 确认域名状态正常后，即可添加 DNS 记录。</p>
+<p>将域名指向服务器 IPv4 地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">类型：A
+</span></span><span class="line"><span class="cl">名称：@
+</span></span><span class="line"><span class="cl">内容：服务器 IPv4 地址
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将 <code>www</code> 指向主域名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">类型：CNAME
+</span></span><span class="line"><span class="cl">名称：www
+</span></span><span class="line"><span class="cl">目标：myproject.dpdns.org
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>连接 Cloudflare Pages 时，建议优先在 Pages 项目的“自定义域”设置中添加域名，再按照 Cloudflare 提示完成验证。</p>
+<p>用于第三方服务验证时，通常需要添加 TXT 记录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">类型：TXT
+</span></span><span class="line"><span class="cl">名称：第三方平台指定的名称
+</span></span><span class="line"><span class="cl">内容：第三方平台提供的验证码
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="常见问题与避坑提醒">常见问题与避坑提醒
+</h2><h3 id="1-它不是自己购买的顶级域名">1. 它不是自己购买的顶级域名
+</h3><p><code>myproject.dpdns.org</code> 可以独立配置 Nameserver 和 DNS，但它仍然位于 DigitalPlat 管理的公共命名空间下。</p>
+<p>用户无法像普通 <code>.com</code> 域名一样，将整个后缀的所有权转移到其他注册商。</p>
+<p>因此，更准确的描述是：</p>
+
+    <blockquote>
+        <p>可独立委托 DNS 的免费公共域名，而不是用户自行注册并持有的顶级域名。</p>
+
+    </blockquote>
+<h3 id="2-免费不代表永久不变">2. 免费不代表永久不变
+</h3><p>域名后缀、账号限制、续期规则、审核方式和免费政策都可能调整。</p>
+<p>使用前应确认：</p>
+<ul>
+<li>是否需要续期</li>
+<li>域名当前状态是否正常</li>
+<li>Nameserver 是否仍然有效</li>
+<li>注册邮箱能否正常接收通知</li>
+<li>控制面板是否有待处理的审核或安全提醒</li>
+</ul>
+<p>不要把“<a class="link" href="/tags/%e5%85%8d%e8%b4%b9%e5%9f%9f%e5%90%8d/" >免费域名</a>”写成“永久免费且永不回收”。</p>
+<h3 id="3-cloudflare-接入不等于域名归-cloudflare-所有">3. Cloudflare 接入不等于域名归 Cloudflare 所有
+</h3><p>Cloudflare 只负责权威 DNS、CDN、HTTPS 和安全服务。</p>
+<p>域名的申请状态、命名空间和使用资格仍由 DigitalPlat 管理。即使 Cloudflare 显示域名已激活，DigitalPlat 仍可能依据使用政策暂停违规域名。</p>
+<h3 id="4-不要用于钓鱼仿冒和垃圾邮件">4. 不要用于钓鱼、仿冒和垃圾邮件
+</h3><p>DigitalPlat 明确禁止以下用途：</p>
+<ul>
+<li>仿冒登录页面和凭据收集</li>
+<li>钓鱼、诈骗和恶意跳转</li>
+<li>病毒、木马和恶意软件下载</li>
+<li>垃圾邮件和批量骚扰</li>
+<li>冒充政府、银行、学校或知名品牌</li>
+<li>盗版、商标滥用和其他违法内容</li>
+<li>扫描、攻击或绕过安全限制</li>
+</ul>
+<p>存在安全风险或违规行为时，DigitalPlat 可以暂停域名、关闭 DNS 或终止账号，并且在紧急情况下不一定提前通知。</p>
+<h3 id="5-不适合直接承担关键业务">5. 不适合直接承担关键业务
+</h3><p>DigitalPlat 官方条款要求用户自行准备数据备份、替代域名、故障切换和业务连续性方案。</p>
+<p>重要项目建议采用以下结构：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">正式付费域名：主站和长期品牌入口
+</span></span><span class="line"><span class="cl">DigitalPlat 免费域名：测试、镜像或临时演示
+</span></span><span class="line"><span class="cl">GitHub：保存源代码
+</span></span><span class="line"><span class="cl">Cloudflare：管理 DNS、HTTPS 和 CDN
+</span></span><span class="line"><span class="cl">独立备份：保存数据库与网站文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样即使免费域名政策发生变化，也不会导致网站和用户入口完全丢失。</p>
+<h3 id="6-不建议用作主要企业邮箱域名">6. 不建议用作主要企业邮箱域名
+</h3><p>免费公共域名可能受到整体后缀信誉、邮件服务商策略和反垃圾系统的影响。</p>
+<p>个人测试可以配置 MX、SPF、DKIM 和 DMARC，但正式业务邮件仍建议使用自己购买的品牌域名。</p>
+<h2 id="digitalplat-免费域名值得申请吗">DigitalPlat 免费域名值得申请吗？
+</h2><p>对于学习网站部署、搭建个人主页和测试开源项目，DigitalPlat FreeDomain 是一个实用的低成本入口。</p>
+<p>它的优势包括：</p>
+<ul>
+<li>无需先购买传统域名</li>
+<li>可以设置外部 Nameserver</li>
+<li>可以接入 Cloudflare</li>
+<li>支持常见 DNS 记录</li>
+<li>适合 GitHub Pages、Cloudflare Pages 和 VPS</li>
+<li>官方项目和使用文档公开在 GitHub</li>
+</ul>
+<p>它的限制也很明确：</p>
+<ul>
+<li>域名位于公共命名空间下</li>
+<li>政策和后缀可能调整</li>
+<li>域名可能需要续期或重新审核</li>
+<li>违规或高风险使用可能被立即暂停</li>
+<li>不适合成为关键业务的唯一入口</li>
+</ul>
+<p>免费降低的是建站成本，并不会消除安全、合规、备份和迁移责任。</p>
+<p><a class="link" href="/posts/mian-fei-ling-qu-4-ge-kai-fa-zhe-yu/" >免费领取 4 个开发者域名：Stackryze Domains 使用介绍</a></p>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/digitalplat-freedomain/">DigitalPlat FreeDomain</a>
+        
+            <a href="/tags/%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D%E7%94%B3%E8%AF%B7/">免费域名申请</a>
+        
+            <a href="/tags/cloudflare-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/">Cloudflare 域名解析</a>
+        
+            <a href="/tags/github-%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D/">GitHub 免费域名</a>
+        
+            <a href="/tags/dpdns.org/">Dpdns.org</a>
+        
+            <a href="/tags/us.kg/">Us.kg</a>
+        
+    </section>
+<nav class="prev-next" aria-label="上一篇和下一篇文章"><a href="/posts/ai-bian-cheng-jian-shao-token-xiao-hao-fu-gai/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>AI 编程如何减少 Token 消耗：覆盖 Agent 工作流的 7 个开源工具</strong>
+                    </a><a href="/posts/how-to-nu-sheng-token-dai-ma-shuang-dao-fei/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>How to 怒省 Token，代码爽到飞起！马尾辫 Ponytail 实测</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="文章侧边栏">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#digitalplat-freedomain-是什么">DigitalPlat FreeDomain 是什么？</a></li>
+    <li><a href="#当前支持哪些免费域名后缀">当前支持哪些免费域名后缀？</a></li>
+    <li><a href="#适合哪些使用场景">适合哪些使用场景？</a></li>
+    
+    
+    <li><a href="#digitalplat-免费域名值得申请吗">DigitalPlat 免费域名值得申请吗？</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">LATEST ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">POPULAR ARTICLES</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/video-use-yong-yi-ju-hua-rang-ai-zi-dong/">
+                        <span class="side-article-title">Video-use：用一句话让 AI 自动剪辑视频的开源技能</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/openmontage-kai-yuan-ai-quan-zi-dong-shi-pin-sheng/">
+                        <span class="side-article-title">OpenMontage：开源 AI 全自动视频生产系统，从脚本到剪辑一条指令完成</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/ai-sheng-cheng-de-wang-ye-zong-shi-que-shao/">
+                        <span class="side-article-title">AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impeccable</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-ru-deepseek-v4-flash-bing-mcp-zeng-jia/">
+                        <span class="side-article-title">Codex 接入 DeepSeek V4 Flash，并通过 MCP 增加图片理解能力</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/cowart-wei-codex-jia-shang-wu-xian-hua-bu-yong/">
+                        <span class="side-article-title">Cowart：为 Codex 加上无限画布，用标注直接修改 AI 图片</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a><a class="side-article-row" href="/posts/codex-jie-sheng-token-yong-gpt-5-6-sol-guan/">
+                        <span class="side-article-title">Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否可行？</span>
+                        <span class="side-article-date mono">08.04</span>
+                    </a></div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data">
+                    <a href="/categories/%E5%BB%BA%E7%AB%99/"><span>分类</span><b>建站</b></a>
+                    <a><span>字数</span><b>2644</b></a>
+                    <a><span>阅读</span><b>6 MIN</b></a>
+                    <a><span>更新</span><b>07.31</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/itom-dev-ke-zai-liu-lan-qi-zhong-hang-zou/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/93e00659-200d-4b46-8155-bdbb1a458471-cc83081f.jpg" alt="ITom Dev：可在浏览器中行走的开源 3D WebGL 作品集" loading="lazy"><code>01 / 建站</code>
+                    <h3>ITom Dev：可在浏览器中行走的开源 3D WebGL 作品集</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>ITom Dev 是一个开源的沉浸式 3D 开发者作品集。它没有采用常见的卡片式简历页面，而是把个人介绍、项目案例和联系方式放进了一条可以交互探 …</p>
+                    <time>2026-08-03</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/xianyu-auto-reply-fix-kai-yuan-xian-yu-zi-dong/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/d6ddc941-6453-473b-8d51-501d0c08d4a3-873437be.jpg" alt="xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程" loading="lazy"><code>02 / 建站</code>
+                    <h3>xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>xianyu-auto-reply-fix 是一个开源的闲鱼管理系统，基于 FastAPI、SQLite 和 Playwright 开发，提供多 …</p>
+                    <time>2026-07-29</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/wordpress-jian-zhan-bie-ji-zhe-mai-zhu-ti-he/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/C729_13_52_17-eecc8ff7.jpg" alt="WordPress 建站别急着买主题和装插件：正确流程与避坑清单" loading="lazy"><code>03 / 建站</code>
+                    <h3>WordPress 建站别急着买主题和装插件：正确流程与避坑清单</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>很多人第一次使用 WordPress 建站，通常会先做两件事：
+购买一个看起来功能丰富的 WordPress 主题； 安装页面编辑器、轮播图、表 …</p>
+                    <time>2026-07-29</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/di-yi-ci-jian-zhan-xu-yao-na-xie-gong/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/12_13_06-c03efb6c.jpg" alt="第一次建站需要哪些工具？域名、托管、企业邮箱与网站统计清单" loading="lazy"><code>04 / 建站</code>
+                    <h3>第一次建站需要哪些工具？域名、托管、企业邮箱与网站统计清单</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>第一次建站，真正让人困惑的通常不是“页面怎么做”，而是网站做好之后的一系列问题：
+域名在哪里买？ 网站文件放在哪里？ 免费托管够不够用？ 怎么创 …</p>
+                    <time>2026-07-29</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
+            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
+            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
+            <p>严禁利用本站内容从事任何违法违规活动。</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
+                <button type="submit" aria-label="开始搜索">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">拾光集 TOOD.WIN</a><p>记录每一次实践，收藏每一件好用的工具。</p></div>
+    <div><h4>内容</h4><a href="/categories/ai/">ai</a><a href="/categories/%E5%BB%BA%E7%AB%99/">建站</a><a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a><a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></div>
+    <div><h4>导航</h4><a href="/archives/">分类</a><a href="/tags/">标签</a><a href="/%e5%85%b3%e4%ba%8e/">关于</a><a href="/%e9%93%be%e6%8e%a5/">友情链接</a></div>
+    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="/%e5%85%b3%e4%ba%8e/">联系</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> 拾光集 TOOD.WIN</span><span><time class="archive-runtime" datetime="2026-07-18T00:00:00+08:00" data-runtime-start="2026-07-18T00:00:00+08:00">本站已稳定运行 0天 0小时 0分 0秒</time>
+<script>
+(() => {
+    const runtime = document.currentScript.previousElementSibling;
+    const startedAt = new Date(runtime.dataset.runtimeStart).getTime();
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = currentYear;
+    });
+    const updateRuntime = () => {
+        const elapsed = Math.max(0, Date.now() - startedAt);
+        const totalSeconds = Math.floor(elapsed / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor(totalSeconds % 86400 / 3600);
+        const minutes = Math.floor(totalSeconds % 3600 / 60);
+        const seconds = totalSeconds % 60;
+        runtime.textContent = `本站已稳定运行 ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+    };
+    updateRuntime();
+    window.setInterval(updateRuntime, 1000);
+})();
+</script>
+</span><span>BUILT WITH HUGO</span></div>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>
