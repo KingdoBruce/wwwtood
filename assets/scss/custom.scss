@@ -1562,7 +1562,7 @@ body.signal-article-page .article-download .resource-topbar{padding:0 20px 0 26p
 body.signal-article-page .article-download .float-card{grid-template-columns:280px minmax(0,1fr);background:var(--signal-white)}
 body.signal-article-page .article-download .float-card:hover{background:#f1f4ef;box-shadow:12px 12px 0 #cfd7cc}
 body.signal-article-page .article-download .preview{background:linear-gradient(135deg,rgba(255,255,255,.58),transparent 44%),linear-gradient(135deg,#d9e7ff,#7bcaff 48%,#a7f0d1)}
-body.signal-article-page .article-download .preview img{padding:0;object-fit:contain}
+body.signal-article-page .article-download .preview img{padding:0;object-fit:cover}
 body.signal-article-page .article-download .preview-placeholder{color:rgba(8,16,12,.55)}
 body.signal-article-page .article-download .chips span{background:var(--signal-white)}
 body.signal-article-page .article-download .action-status{background:var(--signal-white)}
