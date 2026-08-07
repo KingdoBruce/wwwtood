@@ -32,13 +32,6 @@
                 <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
                 {{ block "page-index" . }}
                 {{- if not (or (and (eq .Kind "taxonomy") (eq .Data.Plural "tags")) (and (eq .Kind "page") (eq .Section "posts")) (and (eq .Kind "page") (eq (lower .RelPermalink) (lower (`archives/` | relLangURL))))) -}}
-                {{- $brand := site.Data.site.brand -}}
-                <div class="archive-page-index">
-                    <span class="archive-cross" aria-hidden="true"></span>
-                    <span class="archive-coord archive-coord-top">{{ upper .Kind }}.{{ now.Format "0601" }}.{{ printf "%04d" .WordCount }}</span>
-                    <span class="archive-page-name">{{ default "TOOD ARCHIVE" $brand.archive_name }}</span>
-                    <strong>/ {{ upper .Kind }}</strong>
-                </div>
                 {{- end -}}
                 {{ end }}
                 <main class="archive-page-main">{{- block "main" . }}{{- end }}</main>
