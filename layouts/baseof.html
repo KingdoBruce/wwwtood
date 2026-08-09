@@ -18,6 +18,9 @@
 <head>
     {{- partial "head/head.html" . -}}
     {{- block "head" . -}}{{ end }}
+    {{- if or (and (eq .Kind "taxonomy") (eq .Data.Plural "tags")) (and (eq .Kind "term") (eq .Data.Plural "tags")) -}}
+    <meta name="robots" content="noindex">
+    {{- end -}}
 </head>
 <body class="archive-site {{ if not .IsHome }}archive-subpage {{ end }}{{ if hugo.IsServer }}is-local-preview {{ end }}{{ block `body-class` . }}{{ end }}">
     {{- partial "head/colorScheme" . -}}
