@@ -5,6 +5,7 @@ draft = false
 description = "内容说明：本文根据现有项目功能说明整理，目前未提供完整实测环境、版本号及源码地址，因此主要介绍工具的设计思路和现有功能，不对资源占用、稳定性等未验证项目作结论。"
 categories = ["软件"]
 tags = ["DLabel", "云标签", "标签打印"]
+aliases = ["/posts/dlabel-yun-biao-qian-v3-6-5-guan-fang-ban/"]
 
 [download]
 enabled = true
@@ -34,3 +35,5 @@ code = ""
 ![DLabel云标签v3.6.5 官方版本](/uploads/2026/08/QQ20260808-195034-761c0bdf.png)
 
 ![DLabel云标签v3.6.5 官方版本](/uploads/2026/08/QQ20260808-195048-487be910.png)
+
+**可以通过防火墙管理软件将其将其断开网络链接，这样就不用登录也不会提示升级，可以长期持久使用**
