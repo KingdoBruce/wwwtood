@@ -2,17 +2,15 @@
 title = "Caveman Skill 是什么？让 Claude Code、Codex 少说废话并减少输出 Token"
 date = "2026-08-13T22:13:00+08:00"
 draft = false
-description = "**内容说明：**本文根据 Caveman 官方 GitHub 仓库、公开 Benchmark 和项目说明整理，未进行本站独立 Token 对照测试。文中的“平均减少约 65%”来自项目方测试结果，并不代表所有模型和任务都能获得相同效果。"
+description = "内容说明：本文根据 Caveman 官方 GitHub 仓库、公开 Benchmark 和项目说明整理，未进行本站独立 Token 对照测试。文中的“平均减少约 65%”来自项目方测试结果，并不代表所有模型和任务都能获得相同效果。"
 featured = true
 categories = ["AI"]
 tags = ["Caveman Skill", "AI Skills", "Codex", "Claude Code", "AI 减少 Token"]
 +++
 
- **内容说明：**本文根据 Caveman 官方项目资料整理，未进行本站独立 Token 对照测试。文中的“平均减少约 65%”来自项目方 Benchmark，不代表所有模型和任务都能获得相同效果。
+用 [Claude](/tags/claude/) Code、[Codex](/tags/codex/) 这类 AI 编程 Agent 时，经常会遇到一个问题：明明只需要代码、命令或结论，AI 却先解释一大段，执行完还要再总结一次。
 
-用 Claude Code、Codex 这类 AI 编程 Agent 时，经常会遇到一个问题：明明只需要代码、命令或结论，AI 却先解释一大段，执行完还要再总结一次。
-
-Caveman 就是为这种场景准备的 Skill。它不会让模型变聪明，也不会减少模型内部推理，而是尽量压缩最终回复，只保留代码、命令、结果和必要说明。
+Caveman 就是为这种场景准备的 [Skill](/tags/skill/)。它不会让模型变聪明，也不会减少模型内部推理，而是尽量压缩最终回复，只保留代码、命令、结果和必要说明。
 
 ## Caveman 能减少多少 Token？
 
@@ -59,7 +57,7 @@ ollama list
 
 ## Caveman 怎么安装？
 
-### Windows
+### [Windows](/tags/windows/)
 
 在 PowerShell 中运行：
 
@@ -128,7 +126,7 @@ Caveman 更适合目标明确的任务，例如：
 
 ## Caveman 值不值得装？
 
-如果你经常使用 Claude Code、Codex、Cursor 等 AI Agent，而且已经受够每次执行完任务后的“小作文”，Caveman 值得尝试。
+如果你经常使用 Claude Code、Codex、[Cursor](/tags/cursor/) 等 AI Agent，而且已经受够每次执行完任务后的“小作文”，Caveman 值得尝试。
 
 它最大的价值不是让模型能力变强，而是让回复更接近终端工具：
 
