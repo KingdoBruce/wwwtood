@@ -1,7 +1,24 @@
 {{- $posts := where .Site.RegularPages "Section" "posts" -}}
-{{- $related := .Site.RegularPages.Related . -}}
-{{- $recommendations := collections.Union $related $posts.ByDate.Reverse -}}
-{{- $recommendations = where $recommendations "RelPermalink" "ne" .RelPermalink -}}
+{{- $category := "" -}}
+{{- with .Params.categories }}{{ $category = index . 0 }}{{ end -}}
+{{- $categoryPage := "" -}}
+{{- if $category -}}
+    {{- with site.GetPage "/categories" -}}
+        {{- range .Pages -}}
+            {{- if eq .LinkTitle $category -}}{{- $categoryPage = . -}}{{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $recommendations := slice -}}
+{{- with $categoryPage -}}
+    {{- $candidates := where .Pages "Section" "posts" -}}
+    {{- $recommendations = $candidates | complement (slice $) -}}
+{{- end -}}
+{{- if not $recommendations -}}
+    {{- $related := .Site.RegularPages.Related . -}}
+    {{- $recommendations = collections.Union $related $posts.ByDate.Reverse -}}
+    {{- $recommendations = where $recommendations "RelPermalink" "ne" .RelPermalink -}}
+{{- end -}}
 {{- $recommendations = first 4 $recommendations -}}
 {{- with $recommendations -}}
 <aside class="archive-related" aria-labelledby="archive-related-title">

@@ -116,10 +116,25 @@
             </div>
             {{- end -}}
             {{- $posts := where .Site.RegularPages "Section" "posts" -}}
-            {{- $latest := $posts.ByDate.Reverse | first 6 -}}
-            {{- $now := now -}}
-            {{- $thirtyDaysAgo := $now.AddDate 0 0 -30 -}}
-            {{- $popular := where $posts ".Date" ">=" $thirtyDaysAgo | first 6 -}}
+            {{- $latest0 := $posts.ByDate.Reverse -}}
+            {{- $latest := where $latest0 "RelPermalink" "ne" .RelPermalink -}}
+            {{- $latest = first 6 $latest -}}
+            {{- $category := "" -}}
+            {{- with .Params.categories }}{{ $category = index . 0 }}{{ end -}}
+            {{- $categoryPage := "" -}}
+            {{- if $category -}}
+                {{- with site.GetPage "/categories" -}}
+                    {{- range .Pages -}}
+                        {{- if eq .LinkTitle $category -}}{{- $categoryPage = . -}}{{- end -}}
+                    {{- end -}}
+                {{- end -}}
+            {{- end -}}
+            {{- $popular := slice -}}
+            {{- with $categoryPage -}}
+                {{- $catPosts := where .Pages "Section" "posts" -}}
+                {{- $catPosts = where $catPosts "RelPermalink" "ne" $.RelPermalink -}}
+                {{- $popular = first 6 $catPosts.ByDate.Reverse -}}
+            {{- end -}}
             <div class="side-card">
                 <div class="head kicker">最新文章</div>
                 <div class="body side-articles">
