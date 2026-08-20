@@ -31,7 +31,7 @@ from werkzeug.utils import secure_filename
 
 
 APP_NAME = "TOOD Studio"
-APP_VERSION = "1.5.9"
+APP_VERSION = "1.6.0"
 WRITE_METHODS = {"POST", "PUT", "PATCH", "DELETE"}
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico"}
 VIDEO_EXTENSIONS = {".mp4", ".webm", ".mov", ".m4v", ".ogv", ".ogg", ".avi"}
@@ -45,8 +45,8 @@ PUBLISH_MANAGED_PATHS = (
     "layouts/sitemap.xml",
     "static/uploads",
 )
-SEO_SLUG_MAX_LENGTH = 60
-SEO_SLUG_MAX_TOKENS = 10
+SEO_SLUG_MAX_LENGTH = 50
+SEO_SLUG_MAX_TOKENS = 6
 SEO_SLUG_STOP_PHRASES = (
     "完整操作指南",
     "完整使用教程",
@@ -95,6 +95,20 @@ SEO_SLUG_STOP_PHRASES = (
     "这些",
     "那些",
 )
+
+
+ENGLISH_STOP_WORDS = frozenset({
+    "the", "a", "an", "of", "to", "for", "with", "and", "or", "in", "on",
+    "at", "is", "are", "was", "were", "be", "been", "being", "how", "why",
+    "what", "when", "where", "who", "whom", "which", "do", "does", "did",
+    "can", "could", "will", "would", "should", "shall", "may", "might",
+    "must", "your", "you", "our", "my", "his", "her", "its", "their",
+    "this", "that", "these", "those", "from", "by", "via", "into", "onto",
+    "over", "under", "about", "using", "use", "but", "not", "no", "yes",
+    "i", "we", "us", "me", "them", "it", "as", "so", "if", "then", "than",
+    "too", "very", "just", "also", "more", "most", "up", "down", "out",
+    "all", "any", "some", "each", "few", "other", "such", "only", "own",
+})
 
 
 def find_blog_root() -> Path:
@@ -834,12 +848,45 @@ def slugify(value: str) -> str:
 
 def seo_slugify(title: str) -> str:
     value = title.strip()
+    if re.search(r"[\u4e00-\u9fff]", value):
+        return _seo_slugify_chinese(value)
+    return _seo_slugify_english(value)
+
+
+def _seo_slugify_chinese(title: str) -> str:
+    value = title
     for phrase in SEO_SLUG_STOP_PHRASES:
         value = value.replace(phrase, " ")
     tokens: list[str] = []
     for part in re.findall(r"[A-Za-z0-9]+|[\u4e00-\u9fff]+", value):
         if part.isascii():
             tokens.append(part.lower())
+        else:
+            tokens.extend(lazy_pinyin(part, style=Style.NORMAL, errors="ignore"))
+        if len(tokens) >= 10:
+            break
+    normalized_tokens = [
+        re.sub(r"[^a-z0-9]+", "", token.lower())
+        for token in tokens[:10]
+    ]
+    normalized_tokens = [token for token in normalized_tokens if token]
+    value = "-".join(normalized_tokens)
+    if len(value) > 60:
+        value = value[:60].rstrip("-")
+        if "-" in value:
+            value = value.rsplit("-", 1)[0]
+    if not value:
+        value = datetime.now().strftime("post-%Y%m%d-%H%M%S")
+    return value
+
+
+def _seo_slugify_english(title: str) -> str:
+    tokens: list[str] = []
+    for part in re.findall(r"[A-Za-z0-9]+|[\u4e00-\u9fff]+", title):
+        if part.isascii():
+            token = part.lower()
+            if token not in ENGLISH_STOP_WORDS:
+                tokens.append(token)
         else:
             tokens.extend(lazy_pinyin(part, style=Style.NORMAL, errors="ignore"))
         if len(tokens) >= SEO_SLUG_MAX_TOKENS:
@@ -851,8 +898,10 @@ def seo_slugify(title: str) -> str:
     normalized_tokens = [token for token in normalized_tokens if token]
     value = "-".join(normalized_tokens)
     if len(value) > SEO_SLUG_MAX_LENGTH:
-        value = value[:SEO_SLUG_MAX_LENGTH].rstrip("-")
-        if "-" in value:
+        while value and len(value) > SEO_SLUG_MAX_LENGTH:
+            if "-" not in value:
+                value = value[:SEO_SLUG_MAX_LENGTH]
+                break
             value = value.rsplit("-", 1)[0]
     if not value:
         value = datetime.now().strftime("post-%Y%m%d-%H%M%S")
@@ -1103,7 +1152,7 @@ def category_settings_path() -> Path:
     return BLOG_ROOT / "data" / "category_settings.toml"
 
 
-def category_settings() -> dict[str, dict[str, bool]]:
+def category_settings() -> dict[str, dict[str, Any]]:
     data = load_toml(category_settings_path()).get("categories", {})
     if not isinstance(data, dict):
         return {}
@@ -1111,31 +1160,66 @@ def category_settings() -> dict[str, dict[str, bool]]:
         str(name): {
             "show_on_home": boolean_value(values.get("show_on_home"), True),
             "show_in_archives": boolean_value(values.get("show_in_archives"), True),
+            "slug": str(values.get("slug") or "").strip().strip("/"),
         }
         for name, values in data.items()
         if isinstance(values, dict)
     }
 
 
-def save_category_settings(settings: dict[str, dict[str, bool]]) -> None:
+def save_category_settings(settings: dict[str, dict[str, Any]]) -> None:
     save_toml(category_settings_path(), {"categories": settings})
 
 
-def category_display(name: str) -> dict[str, bool]:
+def category_display(name: str) -> dict[str, Any]:
     settings = category_settings()
     matched = next((values for label, values in settings.items() if label.casefold() == name.casefold()), None)
-    return matched or {"show_on_home": True, "show_in_archives": True}
+    return matched or {"show_on_home": True, "show_in_archives": True, "slug": ""}
 
 
 def set_category_display(name: str, values: dict[str, Any]) -> None:
     settings = category_settings()
     existing = next((label for label in settings if label.casefold() == name.casefold()), name)
     current = category_display(name)
+    slug = current["slug"]
+    if "slug" in values:
+        slug = str(values.get("slug") or "").strip().strip("/")
     settings[existing] = {
         "show_on_home": boolean_value(values.get("show_on_home"), current["show_on_home"]),
         "show_in_archives": boolean_value(values.get("show_in_archives"), current["show_in_archives"]),
+        "slug": slug,
     }
     save_category_settings(settings)
+
+
+def category_slug(name: str) -> str:
+    return category_display(name).get("slug", "")
+
+
+def category_term_path(name: str) -> Path:
+    safe = re.sub(r"[\r\n/\\]", "", name).strip()
+    if not safe:
+        raise ValueError("分类名称不能为空")
+    return (BLOG_ROOT / "content" / "categories" / safe / "_index.md").resolve()
+
+
+def sync_category_term(name: str, slug: str = "") -> None:
+    """写入 content/categories/<名称>/_index.md，用 url 覆盖分类页面地址。slug 为空时删除文件。"""
+    if slug:
+        path = category_term_path(name)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        title = str(name).replace('"', '\\"')
+        url = f"/categories/{slug}/"
+        temporary = path.with_suffix(path.suffix + ".tmp")
+        temporary.write_text(f'---\ntitle: "{title}"\nurl: "{url}"\n---\n', encoding="utf-8", newline="\n")
+        temporary.replace(path)
+    else:
+        path = category_term_path(name)
+        if path.is_file():
+            path.unlink()
+        parent = path.parent
+        if parent.is_dir() and not list(parent.iterdir()):
+            parent.rmdir()
 
 
 def taxonomy_catalog() -> dict[str, list[str]]:
@@ -1238,21 +1322,48 @@ def replace_taxonomy_value(kind: str, old_name: str, new_name: str | None) -> in
             if new_name:
                 settings[new_name] = display
             save_category_settings(settings)
+        old_path = category_term_path(old_name)
+        if new_name:
+            new_path = category_term_path(new_name)
+            if old_path.is_file() and old_path != new_path:
+                new_path.parent.mkdir(parents=True, exist_ok=True)
+                if new_path.is_file():
+                    new_path.unlink()
+                old_path.replace(new_path)
+                old_parent = old_path.parent
+                if old_parent.is_dir() and not list(old_parent.iterdir()):
+                    old_parent.rmdir()
+        else:
+            if old_path.is_file():
+                old_path.unlink()
+            parent = old_path.parent
+            if parent.is_dir() and not list(parent.iterdir()):
+                parent.rmdir()
     return changed_posts
 
 
-def about_page_path() -> Path:
-    return BLOG_ROOT / "content" / "page" / "about" / "index.zh.md"
+PROTECTED_PAGE_SLUGS = {"about", "archives", "links", "search"}
 
 
-def parse_about_page() -> dict[str, str]:
-    path = about_page_path()
+def page_path(slug: str) -> Path:
+    return BLOG_ROOT / "content" / "page" / slug / "index.zh.md"
+
+
+def page_slugs() -> list[str]:
+    root = BLOG_ROOT / "content" / "page"
+    if not root.is_dir():
+        return []
+    return sorted(item.name for item in root.iterdir() if (item / "index.zh.md").is_file())
+
+
+def parse_page(slug: str) -> dict[str, str]:
+    path = page_path(slug)
     if not path.is_file():
-        raise FileNotFoundError("未找到中文关于页面")
+        raise FileNotFoundError(f"未找到页面“{slug}”")
     text = path.read_text(encoding="utf-8")
     match = re.match(r"\A---\r?\n(.*?)\r?\n---\r?\n?(.*)\Z", text, re.DOTALL)
     if not match:
-        raise ValueError("关于页面 Front Matter 格式无效")
+        raise ValueError("页面 Front Matter 格式无效")
     header, body = match.groups()
 
     def field(name: str) -> str:
@@ -1270,16 +1381,16 @@ def parse_about_page() -> dict[str, str]:
     return {"title": field("title"), "description": field("description"), "body": body.rstrip()}
 
 
-def write_about_page(values: dict[str, Any]) -> None:
-    path = about_page_path()
+def write_page(slug: str, values: dict[str, Any]) -> None:
+    path = page_path(slug)
     text = path.read_text(encoding="utf-8")
     match = re.match(r"\A---\r?\n(.*?)\r?\n---\r?\n?(.*)\Z", text, re.DOTALL)
     if not match:
-        raise ValueError("关于页面 Front Matter 格式无效")
+        raise ValueError("页面 Front Matter 格式无效")
     header = match.group(1)
     title = str(values.get("title") or "").strip()[:200]
     if not title:
-        raise ValueError("关于页面标题不能为空")
+        raise ValueError("页面标题不能为空")
     description = str(values.get("description") or "").strip()[:500]
     body = str(values.get("body") or "")
 
@@ -1484,13 +1595,16 @@ def api_taxonomies():
 
 @app.post("/api/taxonomies/<kind>")
 def api_add_taxonomy(kind: str):
-    name = validate_taxonomy(kind, (request.get_json(force=True) or {}).get("name"))
-    payload = taxonomy_payload()[kind]
-    if name.casefold() in {item["name"].casefold() for item in payload}:
+    payload = request.get_json(force=True) or {}
+    name = validate_taxonomy(kind, payload.get("name"))
+    tax_payload = taxonomy_payload()[kind]
+    if name.casefold() in {item["name"].casefold() for item in tax_payload}:
         raise ValueError("该名称已经存在")
     ensure_taxonomy_values(kind, [name])
     if kind == "categories":
-        set_category_display(name, {"show_on_home": True, "show_in_archives": True})
+        slug = str(payload.get("slug") or "").strip().strip("/")
+        set_category_display(name, {"show_on_home": True, "show_in_archives": True, "slug": slug})
+        sync_category_term(name, slug)
     label = "分类" if kind == "categories" else "标签"
     return jsonify({"ok": True, "message": f"{label}“{name}”已添加"})
 
@@ -1500,14 +1614,21 @@ def api_category_settings(name: str):
     name = validate_taxonomy("categories", name)
     if name.casefold() not in {item["name"].casefold() for item in taxonomy_payload()["categories"]}:
         raise ValueError("分类不存在")
-    set_category_display(name, request.get_json(force=True) or {})
+    values = request.get_json(force=True) or {}
+    set_category_display(name, values)
+    if "slug" in values:
+        slug = str(values.get("slug") or "").strip().strip("/")
+        if slug and not re.fullmatch(r"[A-Za-z0-9._-]+", slug):
+            raise ValueError("分类别名只能包含字母、数字、点、下划线和连字符")
+        sync_category_term(name, slug)
     return jsonify({"ok": True, "message": f"分类“{name}”的显示设置已保存", "settings": category_display(name)})
 
 
 @app.put("/api/taxonomies/<kind>/<path:old_name>")
 def api_rename_taxonomy(kind: str, old_name: str):
+    payload = request.get_json(force=True) or {}
     old_name = validate_taxonomy(kind, old_name)
-    new_name = validate_taxonomy(kind, (request.get_json(force=True) or {}).get("name"))
+    new_name = validate_taxonomy(kind, payload.get("name"))
     if old_name.casefold() == new_name.casefold() and old_name == new_name:
         return jsonify({"ok": True, "message": "名称没有变化"})
     existing = taxonomy_payload()[kind]
@@ -1515,7 +1636,21 @@ def api_rename_taxonomy(kind: str, old_name: str):
         item["name"].casefold() for item in existing if item["name"].casefold() != old_name.casefold()
     }:
         raise ValueError("新名称已经存在")
+    if kind == "categories":
+        if "slug" in payload:
+            slug = str(payload.get("slug") or "").strip().strip("/")
+            if slug and not re.fullmatch(r"[A-Za-z0-9._-]+", slug):
+                raise ValueError("分类别名只能包含字母、数字、点、下划线和连字符")
+        else:
+            slug = category_slug(old_name)
     changed = replace_taxonomy_value(kind, old_name, new_name)
+    if kind == "categories":
+        sync_category_term(new_name, slug)
+        settings = category_settings()
+        matched = next((label for label in settings if label.casefold() == new_name.casefold()), None)
+        if matched:
+            settings[matched]["slug"] = slug
+            save_category_settings(settings)
     label = "分类" if kind == "categories" else "标签"
     return jsonify({"ok": True, "message": f"{label}已重命名，同步更新 {changed} 篇文章"})
 
@@ -1528,15 +1663,69 @@ def api_delete_taxonomy(kind: str, name: str):
     return jsonify({"ok": True, "message": f"{label}已删除，并从 {changed} 篇文章中移除"})
 
 
-@app.get("/api/about")
-def api_get_about():
-    return jsonify({"ok": True, "about": parse_about_page()})
+@app.get("/api/pages")
+def api_get_pages():
+    pages = []
+    for slug in page_slugs():
+        if slug in {"archives", "links", "search"}:
+            continue
+        try:
+            page = parse_page(slug)
+        except (FileNotFoundError, ValueError):
+            page = {"title": slug, "description": "", "body": ""}
+        page["slug"] = slug
+        pages.append(page)
+    return jsonify({"ok": True, "pages": pages})
 
 
-@app.post("/api/about")
-def api_save_about():
-    write_about_page(request.get_json(force=True) or {})
-    return jsonify({"ok": True, "message": "关于页面已保存"})
+@app.get("/api/pages/<slug>")
+def api_get_page(slug: str):
+    if not page_path(slug).is_file():
+        raise FileNotFoundError("页面不存在")
+    page = parse_page(slug)
+    page["slug"] = slug
+    return jsonify({"ok": True, "page": page})
+
+
+@app.post("/api/pages/<slug>")
+def api_save_page(slug: str):
+    if not page_path(slug).is_file():
+        raise FileNotFoundError("页面不存在")
+    write_page(slug, request.get_json(force=True) or {})
+    title = parse_page(slug)["title"]
+    return jsonify({"ok": True, "message": f"“{title}”页面已保存"})
+
+
+@app.post("/api/pages")
+def api_create_page():
+    values = request.get_json(force=True) or {}
+    slug = str(values.get("slug") or "").strip().strip("/")
+    title = str(values.get("title") or "").strip()[:200]
+    if not slug or not re.fullmatch(r"[A-Za-z0-9._-]+", slug):
+        raise ValueError("页面地址只能包含字母、数字、点、下划线和连字符")
+    if not title:
+        raise ValueError("页面标题不能为空")
+    if page_path(slug).is_file():
+        raise ValueError(f"页面“{slug}”已存在")
+    page_path(slug).parent.mkdir(parents=True, exist_ok=True)
+    today = datetime.now().astimezone().date().isoformat()
+    page_path(slug).write_text(
+        f"---\ntitle: {json.dumps(title, ensure_ascii=False)}\ndate: '{today}'\nlastmod: \"{today}\"\n---\n\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    return jsonify({"ok": True, "message": f"“{title}”页面已创建", "slug": slug})
+
+
+@app.delete("/api/pages/<slug>")
+def api_delete_page(slug: str):
+    if slug in PROTECTED_PAGE_SLUGS:
+        raise ValueError("该页面为系统保留页面，不能删除")
+    directory = page_path(slug).parent
+    if not directory.is_dir():
+        raise FileNotFoundError("页面不存在")
+    shutil.rmtree(directory)
+    return jsonify({"ok": True, "message": f"页面“{slug}”已删除"})
 
 
 @app.get("/api/friends")
@@ -1553,6 +1742,17 @@ def api_save_friends():
 @app.get("/api/posts")
 def api_posts():
     return jsonify({"ok": True, "posts": all_posts()})
+
+
+@app.post("/api/posts/slug-preview")
+def api_post_slug_preview():
+    payload = request.get_json(force=True) or {}
+    title = str(payload.get("title") or "").strip()
+    original_slug = str(payload.get("original_slug") or "").strip()
+    if not title:
+        raise ValueError("文章标题不能为空")
+    slug = available_post_slug(seo_slugify(title), original_slug)
+    return jsonify({"ok": True, "slug": slug})
 
 
 @app.get("/api/posts/<slug>/references")
@@ -1676,8 +1876,27 @@ def api_save_post():
     return jsonify({"ok": True, "message": f"文章已保存为{state}{link_message}", "slug": slug})
 
 
-@app.post("/api/posts/slug-preview")
-def api_post_slug_preview():
+@app.post("/api/posts/batch-categories")
+def api_posts_batch_categories():
+    payload = request.get_json(force=True) or {}
+    slugs = normalize_list(payload.get("slugs", []))
+    if not slugs:
+        raise ValueError("请选择要修改的文章")
+    categories = normalize_list(payload.get("categories", []))
+    ensure_taxonomy_values("categories", categories)
+    updated = 0
+    for slug in slugs:
+        path = post_path(slug)
+        if not path.is_file():
+            continue
+        metadata, body = parse_post(path)
+        if categories:
+            metadata["categories"] = categories
+        else:
+            metadata.pop("categories", None)
+        path.write_text(serialize_post(metadata, body), encoding="utf-8", newline="\n")
+        updated += 1
+    return jsonify({"ok": True, "message": f"已批量更新 {updated} 篇文章的分类"})
     payload = request.get_json(force=True) or {}
     title = str(payload.get("title") or "").strip()
     original_slug = str(payload.get("original_slug") or "").strip()

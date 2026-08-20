@@ -3,7 +3,7 @@ title = "AI 编程如何减少 Token 消耗：覆盖 Agent 工作流的 7 个开
 date = "2026-07-30T23:03:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI编程", "Codex", "开源工具"]
 +++
 

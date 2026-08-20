@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="通过 Google Workspace 的特定地区定价，可以用较低成本注册 .com 域名，再通过 Squarespace 完成域名验证与管理，最后将 Nameserver 切换到 Cloudflare，实现 DNS 托管、CDN 加速和 DNSSEC 安全配置。本文整理了从域名购买、邮箱验证、Cloudflare 接管，到正确取消 Workspace 订阅及常见问题补救的完整流程，适合个人站长、独立开发者和低成本建站用户参考。">
+<title>不到 11 元注册 .com 域名：Google Workspace 购买 &#43; Squarespace 管理 &#43; Cloudflare 托管完整教程 - Web &amp; Hosting - Tood.win | Tech Notes, AI Tools &amp; Web Development</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/bu-dao-11-yuan-zhu-ce-com-yu-ming-google/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.3c8ba4eb96e990e1006031c4cbd8c43e5683ccac3ae62e43d2a608017772f313.css"><meta property='og:title' content="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程 - Web & Hosting - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta property='og:description' content="通过 Google Workspace 的特定地区定价，可以用较低成本注册 .com 域名，再通过 Squarespace 完成域名验证与管理，最后将 Nameserver 切换到 Cloudflare，实现 DNS 托管、CDN 加速和 DNSSEC 安全配置。本文整理了从域名购买、邮箱验证、Cloudflare 接管，到正确取消 Workspace 订阅及常见问题补救的完整流程，适合个人站长、独立开发者和低成本建站用户参考。">
+<meta property='og:url' content='https://www.tood.win/posts/bu-dao-11-yuan-zhu-ce-com-yu-ming-google/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Google Workspace' /><meta property='article:tag' content='Workspace' /><meta property='article:tag' content='域名' /><meta property='article:tag' content='google' /><meta property='article:tag' content='域名注册' /><meta property='article:tag' content='.com域名' /><meta property='article:published_time' content='2026-08-14T19:49:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-14T20:09:05&#43;08:00'/>
+<meta name="twitter:title" content="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程 - Web & Hosting - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta name="twitter:description" content="通过 Google Workspace 的特定地区定价，可以用较低成本注册 .com 域名，再通过 Squarespace 完成域名验证与管理，最后将 Nameserver 切换到 Cloudflare，实现 DNS 托管、CDN 加速和 DNSSEC 安全配置。本文整理了从域名购买、邮箱验证、Cloudflare 接管，到正确取消 Workspace 订阅及常见问题补救的完整流程，适合个人站长、独立开发者和低成本建站用户参考。">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<link rel="shortcut icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="Google Workspace, Workspace, 域名, google, 域名注册, .com域名">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程\"",
+  "description": "\"通过 Google Workspace 的特定地区定价，可以用较低成本注册 .com 域名，再通过 Squarespace 完成域名验证与管理，最后将 Nameserver 切换到 Cloudflare，实现 DNS 托管、CDN 加速和 DNSSEC 安全配置。本文整理了从域名购买、邮箱验证、Cloudflare 接管，到正确取消 Workspace 订阅及常见问题补救的完整流程，适合个人站长、独立开发者和低成本建站用户参考。\"",
+  "datePublished": "\"2026-08-14T19:49:00+08:00\"",
+  "dateModified": "\"2026-08-14T20:09:05+08:00\"",
+  "url": "\"https://www.tood.win/posts/bu-dao-11-yuan-zhu-ce-com-yu-ming-google/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/08/tood-win-logo-a26f7c69.png" alt="Tood.win | Tech Notes">
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">Home</a>
+        <a href="/archives/#current-archive">Latest</a>
+        <a class="" href="/archives/">Categories</a>
+        <a class="" href="/tags/">Tags</a>
+        <a class="" href="/about/">About</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="Search articles" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/web--hosting/">WEB &amp; HOSTING</a><span>/</span><a href="/posts/bu-dao-11-yuan-zhu-ce-com-yu-ming-google/">不到 11 元注册 .com 域名：Google Workspace 购买 &#43; Squarespace 管理 &#43; Cloudflare 托管完整教程</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / WEB &amp; HOSTING</span>
+                <span>LIVE DATA / A.2608.087</span>
+            </div>
+            <h1>不到 11 元注册 .com 域名：Google Workspace 购买 &#43; Squarespace 管理 &#43; Cloudflare 托管完整教程</h1>
+            <p class="article-deck">通过 Google Workspace 的特定地区定价，可以用较低成本注册 .com 域名，再通过 Squarespace 完成域名验证与管理，最后将 Nameserver 切换到 Cloudflare，实现 DNS 托管、CDN 加速和 DNSSEC 安全配置。本文整理了从域名购买、邮箱验证、Cloudflare 接管，到正确取消 Workspace 订阅及常见问题补救的完整流程，适合个人站长、独立开发者和低成本建站用户参考。</p>
+            <div class="author-line mono">
+                <span>BY TOOD.WIN | TECH NOTES</span>
+                <span>2026.08.14</span>
+                <span>9 MIN READ</span>
+                <span>4163 WORDS</span>
+                <span>WEB &amp; HOSTING</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A87</strong>
+                <p class="mono">JAN. 14<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">24</div>
+                <div class="kicker">SECTIONS</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="Advertisement"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>最近折腾域名时发现了一条比较特别的购买路径：通过 <strong><a class="link" href="/tags/google/" >Google</a> Workspace</strong> 注册 <code>.com</code> 域名，在特定地区的定价下，域名年费可能低至几十土耳其里拉，折合人民币大约 <strong>10～15 元/年</strong>。</p>
+<p>相比常见注册商每年七八十元甚至上百元的价格，这个成本确实很有吸引力。</p>
+<p>不过，这套方法比直接在域名平台注册稍微复杂一些，因为整个流程会涉及三个平台：</p>
+<ul>
+<li><strong>Google Workspace</strong>：创建账号、购买域名</li>
+<li><strong>Squarespace</strong>：管理域名、修改 Nameserver、设置 DNSSEC</li>
+<li><strong><a class="link" href="/tags/cloudflare/" >Cloudflare</a></strong>：负责最终 DNS 托管和网站解析</li>
+</ul>
+<p>本文整理一遍完整操作流程，并把实际操作中比较容易踩坑的地方一起写出来。</p>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/26814_19_55_48-b4ac09c4.jpg"></p>
+
+    <blockquote>
+        <p><strong>注意：</strong> Google、Squarespace 的地区价格、付款规则、试用政策以及域名价格都可能调整，请以实际结算页面为准。注册资料和付款信息建议按照平台要求真实填写，避免后续账号或域名验证出现问题。</p>
+
+    </blockquote>
+<hr>
+<h2 id="一这种方式到底能便宜多少">一、这种方式到底能便宜多少？
+</h2><p>先简单看看常见 <code>.com</code> 域名注册价格。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>注册平台</th>
+          <th style="text-align: right">首年参考价格</th>
+          <th style="text-align: right">续费参考价格</th>
+          <th>特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>GoDaddy</td>
+          <td style="text-align: right">活动时可能很低</td>
+          <td style="text-align: right">约 150 元+</td>
+          <td>首年促销多，但续费通常较贵</td>
+      </tr>
+      <tr>
+          <td>Namecheap</td>
+          <td style="text-align: right">价格较低</td>
+          <td style="text-align: right">约 120 元</td>
+          <td>海外常见域名注册商</td>
+      </tr>
+      <tr>
+          <td>Spaceship</td>
+          <td style="text-align: right">约 80 元</td>
+          <td style="text-align: right">约 80 元</td>
+          <td>价格相对透明</td>
+      </tr>
+      <tr>
+          <td>NameSilo</td>
+          <td style="text-align: right">约 100 元</td>
+          <td style="text-align: right">约 100 元</td>
+          <td>通常包含 WHOIS 隐私保护</td>
+      </tr>
+      <tr>
+          <td>Cloudflare Registrar</td>
+          <td style="text-align: right">约 75 元</td>
+          <td style="text-align: right">约 75 元</td>
+          <td>接近成本价，需要使用 Cloudflare DNS</td>
+      </tr>
+      <tr>
+          <td><strong>Google Workspace 特定地区定价</strong></td>
+          <td style="text-align: right"><strong>可能约 10～15 元</strong></td>
+          <td style="text-align: right"><strong>以实际页面为准</strong></td>
+          <td>价格受地区、汇率和政策影响</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>普通 <code>.com</code> 域名一年通常需要几十元到上百元。</p>
+<p>如果 Workspace 当前仍然提供较低的地区定价，那么单个域名一年可能只需要十几元。</p>
+<p>对于手里有多个域名的人来说，累计下来差距还是比较明显的。</p>
+<hr>
+<h1 id="二开始之前需要准备什么">二、开始之前需要准备什么？
+</h1><p>建议提前准备：</p>
+<ul>
+<li>一张支持境外支付的 <strong>Visa / Mastercard 信用卡</strong></li>
+<li>一个可以正常接收邮件的备用邮箱</li>
+<li>一个 Google Workspace 管理账号</li>
+<li>一个 Cloudflare 账号</li>
+<li>对应地区真实、有效且符合平台要求的注册及账单资料</li>
+</ul>
+<p>尽量优先使用正常实体信用卡。</p>
+<p>部分虚拟卡、临时支付卡可能触发 Google 的支付风控，导致付款失败或者需要额外验证。</p>
+<p>整个流程中会频繁在：</p>
+<p><code>Google Workspace → Squarespace → Cloudflare</code></p>
+<p>三个后台之间切换。</p>
+<p>因此第一次操作建议完整看完教程再开始。</p>
+<hr>
+<h1 id="三为什么买-google-域名却要进入-squarespace">三、为什么买 Google 域名却要进入 Squarespace？
+</h1><p>这里先解释一个非常容易让人疑惑的问题。</p>
+<p>Google 已经将原来的 <strong>Google Domains 域名注册业务出售给 Squarespace</strong>。</p>
+<p>因此现在通过 Google Workspace 购买域名后：</p>
+<ul>
+<li><a class="link" href="/tags/%e5%9f%9f%e5%90%8d%e6%b3%a8%e5%86%8c/" >域名注册</a></li>
+<li>域名验证</li>
+<li>Nameserver 修改</li>
+<li>DNSSEC 设置</li>
+<li>域名管理</li>
+</ul>
+<p>很多操作都会转到 <strong>Squarespace Domains</strong> 完成。</p>
+<p>所以如果你看到网上旧教程还在 Google Domains 后台操作，那些截图很可能已经过时。</p>
+<p>现在购买成功后跳转到 Squarespace 属于正常情况。</p>
+<hr>
+<h1 id="四第一步通过-google-workspace-注册域名">四、第一步：通过 Google Workspace 注册域名
+</h1><p>进入：</p>
+<p><code>https://workspace.google.com/</code></p>
+<p>选择：</p>
+<p><strong>开始免费试用</strong></p>
+<p>然后按照页面提示完成注册。</p>
+<hr>
+<h2 id="1-创建-workspace-账号">1. 创建 Workspace 账号
+</h2><p>这里并不要求你提前拥有 Gmail。</p>
+<p>Google 会引导你创建一个新的 Workspace 管理账号。</p>
+<p>例如最终可能得到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">admin@yourdomain.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个账号非常重要。</p>
+<p>后面登录：</p>
+<ul>
+<li>Google Workspace</li>
+<li>Google Admin</li>
+<li>Squarespace 域名后台</li>
+</ul>
+<p>都有可能需要使用。</p>
+<p>因此用户名和密码一定保存好。</p>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/wp-009-2498a553.webp"></p>
+<hr>
+<h2 id="2-填写企业资料">2. 填写企业资料
+</h2><p>根据页面要求填写：</p>
+<ul>
+<li>企业名称</li>
+<li>企业规模</li>
+<li>所在地区</li>
+<li>联系人信息</li>
+<li>联系邮箱</li>
+</ul>
+<p>企业规模如果只是自己使用，可以选择：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">只有您一人
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者类似选项。</p>
+<p>需要注意：</p>
+
+    <blockquote>
+        <p>不同国家和地区显示的域名价格可能不同，最终价格必须以 Google Workspace 实际付款页面为准。</p>
+
+    </blockquote>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/wp-010-35a7aba3.webp"></p>
+<hr>
+<h2 id="3-选择获取新的自定义域名">3. 选择「获取新的自定义域名」
+</h2><p>注册过程中 Google 会询问：</p>
+<p>是否已经拥有域名？</p>
+<p>这里选择类似：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">获取新的自定义域名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后进入域名搜索页面。</p>
+<hr>
+<h2 id="4-搜索想购买的域名">4. 搜索想购买的域名
+</h2><p>输入你准备注册的名字，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">yourname.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>系统会自动检测域名是否已经被注册。</p>
+<p>如果可以注册，就会显示当前地区对应的价格。</p>
+<p>某些地区过去曾出现：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">75 TRY / 年
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样的 <code>.com</code> 定价。</p>
+<p>按照当时汇率计算，大约相当于十几元人民币。</p>
+<p>不过域名价格和汇率都会变化，因此实际金额请以结账页面为准。</p>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/wp-012-a60f6138.webp"></p>
+<hr>
+<h2 id="5-填写域名注册信息">5. 填写域名注册信息
+</h2><p>接下来需要填写域名所有人的联系资料。</p>
+<p>通常包括：</p>
+<ul>
+<li>姓名</li>
+<li>公司</li>
+<li>地址</li>
+<li>国家</li>
+<li>邮编</li>
+<li>电话</li>
+<li>联系邮箱</li>
+</ul>
+<p>部分页面会提供类似：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">将我的联系信息设为不公开
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>的选项。</p>
+<p>开启后，相当于启用 WHOIS 隐私保护。</p>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/wp-013-7bc64ae2.webp"></p>
+<hr>
+<h2 id="6-创建域名管理员账号">6. 创建域名管理员账号
+</h2><p>接下来创建 Workspace 用户。</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">admin@yourdomain.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个账号不仅是 Workspace 邮箱，同时也是后面管理域名的重要身份凭证。</p>
+<p>建议直接使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">admin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者你自己容易记住的用户名。</p>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/wp-014-ba7e663e.webp"></p>
+<hr>
+<h2 id="7-选择-workspace-套餐">7. 选择 Workspace 套餐
+</h2><p>Google 通常会提供 Workspace 商务套餐试用。</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">14 天免费试用
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里需要特别注意：</p>
+<h3 id="workspace-费用和域名费用是两笔独立费用">Workspace 费用和域名费用是两笔独立费用
+</h3><p>也就是说：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Workspace 服务费
+</span></span><span class="line"><span class="cl">+
+</span></span><span class="line"><span class="cl">域名注册费
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不是同一个订阅。</p>
+<p>Workspace 处于免费试用期时，Workspace 本身可能显示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">0 元
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但域名注册费用仍然需要正常支付。</p>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/wp-015-1cfb57a2.webp"></p>
+<hr>
+<h2 id="8-添加付款方式">8. 添加付款方式
+</h2><p>进入付款页面后添加信用卡。</p>
+<p>确认：</p>
+<ul>
+<li>域名</li>
+<li>注册年限</li>
+<li>Workspace 套餐</li>
+<li>域名金额</li>
+<li>付款币种</li>
+</ul>
+<p>全部正确后完成付款。</p>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/wp-016-7b1d620b.webp"></p>
+<hr>
+<h2 id="9-跳过额外用户">9. 跳过额外用户
+</h2><p>Google 可能询问：</p>
+<p>是否继续添加公司员工账号。</p>
+<p>个人使用可以选择：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">暂时跳过
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>无需创建更多 Workspace 用户。</p>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/wp-017-1dab4997.webp"></p>
+<hr>
+<h1 id="五第二步完成-squarespace-域名验证">五、第二步：完成 Squarespace 域名验证
+</h1><p>域名购买完成之后，还有一个步骤非常重要：</p>
+<p><strong>验证域名联系人邮箱。</strong></p>
+<p>由于现在 Google Domains 已经迁移给 Squarespace，因此相关验证邮件通常会由 Squarespace 发出。</p>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/QQ20260814-200141-c65b93db.png"></p>
+<hr>
+<h2 id="找到-squarespace-验证邮件">找到 Squarespace 验证邮件
+</h2><p>检查注册时留下的联系邮箱。</p>
+<p>你应该会收到类似域名验证的邮件。</p>
+<p>点击：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Verify Now
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="使用-google-账号登录-squarespace">使用 Google 账号登录 Squarespace
+</h2><p>页面可能要求：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Continue with Google
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里建议使用前面创建的 Workspace 账号，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">admin@yourdomain.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>完成登录。</p>
+<p><img alt="不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace 管理 + Cloudflare 托管完整教程" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/wp-022-303db5aa.webp"></p>
+<hr>
+<h2 id="完成邮箱验证">完成邮箱验证
+</h2><p>成功后进入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Squarespace
+</span></span><span class="line"><span class="cl">→ Domains
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>应该能够看到刚刚购买的域名。</p>
+<p>然后完成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Email Successfully Verified
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>邮箱验证。</p>
+
+    <blockquote>
+        <p>域名联系人验证不要拖太久。如果注册商要求在规定时间内完成验证，长期未验证可能会影响域名正常状态。</p>
+
+    </blockquote>
+<p>到这里，域名注册环节基本完成。</p>
+<hr>
+<h1 id="六第三步先别急着取消-workspace">六、第三步：先别急着取消 Workspace
+</h1><p>如果你的目的只是买域名，并不准备长期使用 Workspace，第一反应可能是：</p>
+
+    <blockquote>
+        <p>域名已经付款了，那现在是不是可以马上取消 Workspace？</p>
+
+    </blockquote>
+<p>建议暂时不要。</p>
+<p>更加稳妥的顺序是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">购买域名
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">完成 Squarespace 邮箱验证
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">进入 Squarespace 域名后台
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">修改 Nameserver
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">Cloudflare 激活成功
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">确认 DNS 正常
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">再处理 Workspace 订阅
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>原因是修改域名 Nameserver 时，Squarespace 可能再次要求进行 Google 账号身份验证。</p>
+<p>如果提前关闭相关 Workspace 服务，可能增加验证失败的概率。</p>
+<hr>
+<h1 id="七第四步把域名托管到-cloudflare">七、第四步：把域名托管到 Cloudflare
+</h1><p>完成域名购买以后，就可以将 DNS 托管到 Cloudflare。</p>
+<hr>
+<h2 id="cloudflare-后台操作">Cloudflare 后台操作
+</h2><p>进入：</p>
+<p><code>https://dash.cloudflare.com/</code></p>
+<p>然后：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">添加域
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入刚刚购买的域名。</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">yourdomain.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>点击继续。</p>
+<hr>
+<h2 id="选择-free-免费计划">选择 Free 免费计划
+</h2><p>对于普通博客、个人网站和小型网站：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Free
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>基本就够用了。</p>
+<p>Cloudflare 会自动扫描当前域名的 DNS 记录。</p>
+<p>确认以后继续。</p>
+<hr>
+<h2 id="获取两个-cloudflare-nameserver">获取两个 Cloudflare Nameserver
+</h2><p>Cloudflare 会分配两个名称服务器，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">alice.ns.cloudflare.com
+</span></span><span class="line"><span class="cl">bob.ns.cloudflare.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>每个人获得的地址不同。</p>
+<p><strong>不要照抄示例。</strong></p>
+<p>必须使用自己 Cloudflare 页面中实际显示的两个 Nameserver。</p>
+<p>这个页面暂时不要关闭。</p>
+<hr>
+<h1 id="八第五步在-squarespace-修改-nameserver">八、第五步：在 Squarespace 修改 Nameserver
+</h1><p>重新进入 Squarespace。</p>
+<p>找到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Domains
+</span></span><span class="line"><span class="cl">→ 你的域名
+</span></span><span class="line"><span class="cl">→ DNS
+</span></span><span class="line"><span class="cl">→ Domain Nameservers
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>选择：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">USE CUSTOM NAMESERVERS
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也就是使用自定义名称服务器。</p>
+<hr>
+<h2 id="完成-google-身份验证">完成 Google 身份验证
+</h2><p>Squarespace 可能再次要求使用 Google 账号验证。</p>
+<p>使用之前创建的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">admin@yourdomain.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>登录。</p>
+<p>验证通过以后进入 Nameserver 修改页面。</p>
+<hr>
+<h2 id="填写-cloudflare-nameserver">填写 Cloudflare Nameserver
+</h2><p>将 Cloudflare 提供的两个地址分别复制到 Squarespace。</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">alice.ns.cloudflare.com
+</span></span><span class="line"><span class="cl">bob.ns.cloudflare.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后保存。</p>
+<hr>
+<h2 id="如果提示关闭-dnssec-怎么办">如果提示关闭 DNSSEC 怎么办？
+</h2><p>如果之前启用了 DNSSEC，修改 Nameserver 时可能看到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Changing Nameservers will disable DNSSEC
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这种情况下通常需要先关闭旧 DNSSEC，再切换 Nameserver。</p>
+<p>这是正常步骤。</p>
+<p>不要在 Nameserver 还没完全切换到 Cloudflare 时急着重新开启 DNSSEC。</p>
+<hr>
+<h1 id="九第六步确认-cloudflare-托管成功">九、第六步：确认 Cloudflare 托管成功
+</h1><p>返回 Cloudflare。</p>
+<p>点击类似：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">我已更新名称服务器
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后等待 Cloudflare 检测。</p>
+<p>官方可能提示需要几个小时甚至更长时间。</p>
+<p>实际情况下，如果 DNS 更新较快，也可能几分钟就检测成功。</p>
+<p>当 Cloudflare 显示类似：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Your site is now protected by Cloudflare
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">您的域名现在受到 Cloudflare 保护
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>说明域名的 Nameserver 已经成功切换。</p>
+<hr>
+<h1 id="十第七步重新启用-dnssec">十、第七步：重新启用 DNSSEC
+</h1><p>DNSSEC 并不是网站运行的必选项，但开启后可以进一步提升 DNS 安全性。</p>
+<p>如果需要开启，建议在 Cloudflare 完全接管域名以后再设置。</p>
+<p>正确逻辑是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Cloudflare 生成 DS 参数
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">Squarespace 添加 DS Record
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">等待 DNSSEC 生效
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="cloudflare-获取-dnssec-参数">Cloudflare 获取 DNSSEC 参数
+</h2><p>进入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Cloudflare
+</span></span><span class="line"><span class="cl">→ DNS
+</span></span><span class="line"><span class="cl">→ Settings
+</span></span><span class="line"><span class="cl">→ DNSSEC
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>点击：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Enable DNSSEC
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Cloudflare 会生成几项信息。</p>
+<p>通常包括：</p>
+<ul>
+<li>Key Tag</li>
+<li>Algorithm</li>
+<li>Digest Type</li>
+<li>Digest</li>
+</ul>
+<hr>
+<h2 id="squarespace-添加-ds-record">Squarespace 添加 DS Record
+</h2><p>返回：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Squarespace
+</span></span><span class="line"><span class="cl">→ Domains
+</span></span><span class="line"><span class="cl">→ DNS
+</span></span><span class="line"><span class="cl">→ DNSSEC
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>选择：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">ADD RECORD
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后对应填写：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>Cloudflare</th>
+          <th>Squarespace</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Key Tag</td>
+          <td>KEY TAG</td>
+      </tr>
+      <tr>
+          <td>Algorithm</td>
+          <td>ALGORITHM</td>
+      </tr>
+      <tr>
+          <td>Digest Type</td>
+          <td>DIGEST TYPE</td>
+      </tr>
+      <tr>
+          <td>Digest</td>
+          <td>DIGEST</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>全部保持原样复制。</p>
+<p>保存即可。</p>
+<hr>
+<h1 id="十一第八步取消-workspace只保留域名">十一、第八步：取消 Workspace，只保留域名
+</h1><p>当确认：</p>
+<ul>
+<li>域名已经验证</li>
+<li>Squarespace 可以正常管理</li>
+<li>Nameserver 已修改</li>
+<li>Cloudflare 已成功激活</li>
+<li>网站 DNS 正常</li>
+</ul>
+<p>以后，如果确实不需要 Workspace，可以考虑取消 Workspace 服务。</p>
+<p>进入：</p>
+<p><code>https://admin.google.com/</code></p>
+<p>找到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">结算
+</span></span><span class="line"><span class="cl">→ 订阅
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="查看订阅项目">查看订阅项目
+</h2><p>一般可以看到两类内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Google Workspace
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以及：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Domain Registration
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这两个需要区分清楚。</p>
+<p>你的目标是：</p>
+<p><strong>取消 Workspace 服务，而不是取消域名。</strong></p>
+<hr>
+<h2 id="取消-workspace">取消 Workspace
+</h2><p>进入 Workspace 套餐详情。</p>
+<p>找到类似：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">更多
+</span></span><span class="line"><span class="cl">→ 取消订阅
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>按照页面提示操作。</p>
+<p>取消后重新查看订阅列表。</p>
+<p>理想情况下应该只保留：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Domain Registration
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也就是域名注册服务。</p>
+<hr>
+<h1 id="十二提前取消-workspace-导致验证失败怎么办">十二、提前取消 Workspace 导致验证失败怎么办？
+</h1><p>这是整个过程中比较容易遇到的坑。</p>
+<p>如果你：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">刚买完域名
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">立即取消 Workspace
+</span></span><span class="line"><span class="cl">↓
+</span></span><span class="line"><span class="cl">之后才去 Squarespace 修改 Nameserver
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可能会遇到 Google 身份验证失败。</p>
+<p>例如页面无法正常完成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Continue with Google
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>验证。</p>
+<hr>
+<h2 id="解决思路">解决思路
+</h2><p>可以重新登录：</p>
+<p><code>https://admin.google.com/</code></p>
+<p>进入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">结算
+</span></span><span class="line"><span class="cl">→ 订阅
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据 Google 当前提供的选项恢复或重新开通可用的 Workspace 服务。</p>
+<p>待账号恢复正常以后，再回到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Squarespace
+</span></span><span class="line"><span class="cl">→ DNS
+</span></span><span class="line"><span class="cl">→ Domain Nameservers
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重新进行身份验证。</p>
+<p>验证通过后：</p>
+<ol>
+<li>修改 Nameserver</li>
+<li>等待 Cloudflare 激活</li>
+<li>检查 DNS</li>
+<li>再决定是否取消 Workspace</li>
+</ol>
+<p>这样会稳妥很多。</p>
+<hr>
+<h1 id="十三整个流程正确顺序">十三、整个流程正确顺序
+</h1><p>如果第一次操作，建议严格按照下面顺序进行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">注册 Google Workspace
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">搜索并购买 .com 域名
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">创建 Workspace 管理账号
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">完成域名付款
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">接收 Squarespace 验证邮件
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">完成联系人邮箱验证
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">Cloudflare 添加域名
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">获取 Cloudflare Nameserver
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">Squarespace 修改 Nameserver
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">等待 Cloudflare 激活
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">配置网站 DNS
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">可选：重新启用 DNSSEC
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">确认网站和 DNS 正常
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">最后再处理 Workspace 订阅
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中最重要的一点就是：</p>
+
+    <blockquote>
+        <p><strong>不要刚买完域名就急着取消 Workspace。</strong></p>
+
+    </blockquote>
+<p>先把 Squarespace、Cloudflare 和 Nameserver 全部处理完成，再取消会省掉很多麻烦。</p>
+<hr>
+<h1 id="十四这种方式适合什么人">十四、这种方式适合什么人？
+</h1><p>比较适合：</p>
+<ul>
+<li>手里有多个域名的人</li>
+<li>个人站长</li>
+<li>独立开发者</li>
+<li>博客作者</li>
+<li>Cloudflare Pages / Workers 用户</li>
+<li>喜欢折腾低成本网站方案的人</li>
+</ul>
+<p>如果只是注册一个域名，而且不想折腾 Workspace、Squarespace 和 Cloudflare 三个平台，那么直接使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Cloudflare Registrar
+</span></span><span class="line"><span class="cl">Spaceship
+</span></span><span class="line"><span class="cl">Namecheap
+</span></span><span class="line"><span class="cl">NameSilo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>反而会更加省时间。</p>
+<p>但如果当前地区价格确实能做到十几元一年，那么花一点时间走完整个流程，成本优势还是非常明显的。</p>
+<hr>
+<h1 id="十五最后提醒">十五、最后提醒
+</h1><p>这类低价方案最大的变量并不是技术，而是：</p>
+<ul>
+<li>Google 的地区定价</li>
+<li>Squarespace 的域名政策</li>
+<li>Workspace 免费试用政策</li>
+<li>付款风控</li>
+<li>汇率变化</li>
+<li><code>.com</code> 注册和续费价格调整</li>
+</ul>
+<p>所以网上看到的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">75 TRY / 年
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">不到 11 元人民币
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>都应该理解为<strong>特定时间、特定地区以及特定汇率下的实测价格</strong>，而不是永久固定价格。</p>
+<p>真正付款之前，最重要的是确认结账页面显示的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">域名价格
+</span></span><span class="line"><span class="cl">续费价格
+</span></span><span class="line"><span class="cl">币种
+</span></span><span class="line"><span class="cl">Workspace 订阅费用
+</span></span><span class="line"><span class="cl">自动续费状态
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只要这几个地方确认清楚，再按照：</p>
+<p><strong>Google Workspace 购买 → Squarespace 管理 → Cloudflare 托管</strong></p>
+<p>这条路线操作，就基本不会出什么大问题。</p>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/google-workspace/">Google Workspace</a>
+        
+            <a href="/tags/workspace/">Workspace</a>
+        
+            <a href="/tags/%E5%9F%9F%E5%90%8D/">域名</a>
+        
+            <a href="/tags/google/">Google</a>
+        
+            <a href="/tags/%E5%9F%9F%E5%90%8D%E6%B3%A8%E5%86%8C/">域名注册</a>
+        
+            <a href="/tags/.com%E5%9F%9F%E5%90%8D/">.Com域名</a>
+        
+    </section>
+<nav class="prev-next" aria-label="Previous and next article"><a href="/posts/minimax-h3-ben-di-bu-shu-yong-comfyui-da-jian/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>MiniMax H3 怎么本地部署？用 ComfyUI 搭建 AI 视频生成环境</strong>
+                    </a><a href="/posts/ollama-mo-xing-yu-jia-zai-yu-xian-cun-shi/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>Ollama 模型预加载与显存释放工具</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="Article sidebar">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#一这种方式到底能便宜多少">一、这种方式到底能便宜多少？</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#1-创建-workspace-账号">1. 创建 Workspace 账号</a></li>
+    <li><a href="#2-填写企业资料">2. 填写企业资料</a></li>
+    <li><a href="#3-选择获取新的自定义域名">3. 选择「获取新的自定义域名」</a></li>
+    <li><a href="#4-搜索想购买的域名">4. 搜索想购买的域名</a></li>
+    <li><a href="#5-填写域名注册信息">5. 填写域名注册信息</a></li>
+    <li><a href="#6-创建域名管理员账号">6. 创建域名管理员账号</a></li>
+    
+    <li><a href="#8-添加付款方式">8. 添加付款方式</a></li>
+    <li><a href="#9-跳过额外用户">9. 跳过额外用户</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#找到-squarespace-验证邮件">找到 Squarespace 验证邮件</a></li>
+    <li><a href="#使用-google-账号登录-squarespace">使用 Google 账号登录 Squarespace</a></li>
+    <li><a href="#完成邮箱验证">完成邮箱验证</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#cloudflare-后台操作">Cloudflare 后台操作</a></li>
+    <li><a href="#选择-free-免费计划">选择 Free 免费计划</a></li>
+    <li><a href="#获取两个-cloudflare-nameserver">获取两个 Cloudflare Nameserver</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#完成-google-身份验证">完成 Google 身份验证</a></li>
+    <li><a href="#填写-cloudflare-nameserver">填写 Cloudflare Nameserver</a></li>
+    <li><a href="#如果提示关闭-dnssec-怎么办">如果提示关闭 DNSSEC 怎么办？</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#cloudflare-获取-dnssec-参数">Cloudflare 获取 DNSSEC 参数</a></li>
+    <li><a href="#squarespace-添加-ds-record">Squarespace 添加 DS Record</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#查看订阅项目">查看订阅项目</a></li>
+    <li><a href="#取消-workspace">取消 Workspace</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#解决思路">解决思路</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="Advertisement">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">Latest Articles</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/wo-yong-guo-de-ji-jia-yu-ming-fu-wu/">
+                        <span class="side-article-title">我用过的几家域名服务商：Cloudflare、Namecheap、Spaceship 和国内云厂商怎么选？</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/4-fen-cheng-xu-yuan-xue-xi-zi-yuan-geng/">
+                        <span class="side-article-title">4 份程序员学习资源更新：Spring Cloud 微服务、LeetCode、面试与 WMS 项目</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/bai-du-wang-pan-bu-chong-hui-yuan-ye-neng/">
+                        <span class="side-article-title">百度网盘不充会员，也能试试这个提速设置</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/claude-seo-geo-ren-liang-tian-pao-wan-chuan-tong/">
+                        <span class="side-article-title">Claude &#43; SEO &#43; GEO：一个人两天跑完传统团队一个月的活</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                        <span class="side-article-title">视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</span>
+                        <span class="side-article-date mono">08.16</span>
+                    </a><a class="side-article-row" href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                        <span class="side-article-title">Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</span>
+                        <span class="side-article-date mono">08.15</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">Editor's Picks</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/wo-yong-guo-de-ji-jia-yu-ming-fu-wu/">
+                        <span class="side-article-title">我用过的几家域名服务商：Cloudflare、Namecheap、Spaceship 和国内云厂商怎么选？</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/bao-ta-mian-ban-kai-xin-ban-11-0-0/">
+                        <span class="side-article-title">宝塔面板开心版11.0.0 更新：修复与优化并行，体验再升级</span>
+                        <span class="side-article-date mono">08.05</span>
+                    </a><a class="side-article-row" href="/posts/itom-dev-ke-zai-liu-lan-qi-zhong-hang-zou/">
+                        <span class="side-article-title">ITom Dev：可在浏览器中行走的开源 3D WebGL 作品集</span>
+                        <span class="side-article-date mono">08.03</span>
+                    </a><a class="side-article-row" href="/posts/digitalplat-mian-fei-yu-ming-shen-qing-github-deng-lu/">
+                        <span class="side-article-title">DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南</span>
+                        <span class="side-article-date mono">07.31</span>
+                    </a><a class="side-article-row" href="/posts/xianyu-auto-reply-fix-kai-yuan-xian-yu-zi-dong/">
+                        <span class="side-article-title">xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程</span>
+                        <span class="side-article-date mono">07.29</span>
+                    </a><a class="side-article-row" href="/posts/wordpress-jian-zhan-bie-ji-zhe-mai-zhu-ti-he/">
+                        <span class="side-article-title">WordPress 建站别急着买主题和装插件：正确流程与避坑清单</span>
+                        <span class="side-article-date mono">07.29</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data"><a href="/categories/web--hosting/"><span>Category</span><b>Web &amp; Hosting</b></a>
+                    <a><span>Words</span><b>4163</b></a>
+                    <a><span>Reading</span><b>9 MIN</b></a>
+                    <a><span>Updated</span><b>08.14</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/wo-yong-guo-de-ji-jia-yu-ming-fu-wu/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/a252eedc-d710-4cf9-a497-031271f04626-c87e4a70.webp" alt="我用过的几家域名服务商：Cloudflare、Namecheap、Spaceship 和国内云厂商怎么选？" loading="lazy"><code>01 / WEB &amp; HOSTING</code>
+                    <h3>我用过的几家域名服务商：Cloudflare、Namecheap、Spaceship 和国内云厂商怎么选？</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>域名可以说是一个独立站的“门面”。
+前面的内容里，我们已经聊过域名应该怎么选、注册域名时有哪些需要注意的地方。这篇就不再重复这些基础内容了，主要 …</p>
+                    <time>2026-08-19</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/bao-ta-mian-ban-kai-xin-ban-11-0-0/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/fd770f7b-e844-46d3-ae2c-904329e2d909-1da4a2a7.jpg" alt="宝塔面板开心版11.0.0 更新：修复与优化并行，体验再升级" loading="lazy"><code>02 / WEB &amp; HOSTING</code>
+                    <h3>宝塔面板开心版11.0.0 更新：修复与优化并行，体验再升级</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>宝塔面板开心版升级命令安全吗？功能变化与第三方脚本风险说明内容说明：本文根据第三方版本说明、宝塔官方资料及公开页面整理。文中所说的“开心版”并 …</p>
+                    <time>2026-08-05</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/itom-dev-ke-zai-liu-lan-qi-zhong-hang-zou/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/93e00659-200d-4b46-8155-bdbb1a458471-cc83081f.jpg" alt="ITom Dev：可在浏览器中行走的开源 3D WebGL 作品集" loading="lazy"><code>03 / WEB &amp; HOSTING</code>
+                    <h3>ITom Dev：可在浏览器中行走的开源 3D WebGL 作品集</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>ITom Dev 是一个开源的沉浸式 3D 开发者作品集。它没有采用常见的卡片式简历页面，而是把个人介绍、项目案例和联系方式放进了一条可以交互探 …</p>
+                    <time>2026-08-03</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/digitalplat-mian-fei-yu-ming-shen-qing-github-deng-lu/">
+                <div class="archive-related-image"><img src="/uploads/2026/07/14_36-dadff2e7.jpg" alt="DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南" loading="lazy"><code>04 / WEB &amp; HOSTING</code>
+                    <h3>DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>DigitalPlat FreeDomain 提供 dpdns.org、us.kg、qzz.io、xx.kg、qd.je 等公共命名空间下的免费 …</p>
+                    <time>2026-07-31</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>Some resources on this site (<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>) come from public internet sources and are provided for learning and reference only. We charge no fees and sell no resources.</p>
+            <p>Related content does not necessarily represent the views of this site. We do not guarantee its authenticity, accuracy, or validity. Please judge and use it with caution.</p>
+            <p>If there is any infringement, violation, or broken resource link, please contact <a href="mailto:admin@tood.win">admin@tood.win</a>. After verification, we will remove, handle, or update it in a timely manner.</p>
+            <p>Any illegal or unlawful use of this site's content is strictly prohibited.</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">Tood.win | Tech Notes</a><p>Tested in practice. Shared to help you build.</p></div>
+    <div><h4>Content</h4><a href="/categories/ai--automation/">ai &amp; automation</a><a href="/categories/software/">software &amp; tools</a><a href="/categories/notes/">tech notes</a><a href="/categories/web--hosting/">web &amp; hosting</a></div>
+    <div><h4>Navigation</h4><a href="/archives/">Archive</a><a href="/tags/">Tags</a><a href="/about/">About</a><a href="/links/">Friend Links</a></div>
+    <div><h4>Policy</h4><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/please-allow-ads-on-shiguangji-en/">Allow Ads</a><a href="/about/">Contact</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> Tood.win | Tech Notes</span><span class="end-links"><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/links/">Friend Links</a></span><span>BUILT WITH HUGO</span></div>
+<script>
+(() => {
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = new Date().getFullYear();
+    });
+})();
+</script>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

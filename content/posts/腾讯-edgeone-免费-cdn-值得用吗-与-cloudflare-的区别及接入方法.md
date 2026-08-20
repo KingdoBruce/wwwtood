@@ -3,7 +3,7 @@ title = "腾讯 EdgeOne 免费 CDN 值得用吗？与 Cloudflare 的区别及接
 date = "2026-07-24T21:59:00+08:00"
 draft = false
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["免费CDN", "Cloudflare", "CDN加速"]
 +++
 

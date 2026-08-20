@@ -3,7 +3,7 @@ title = "第一次建站需要哪些工具？域名、托管、企业邮箱与�
 date = "2026-07-29T13:20:00+08:00"
 draft = false
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["域名注册", "网站托管", "域名邮箱", "网站统计", "Google Search Console"]
 +++
 

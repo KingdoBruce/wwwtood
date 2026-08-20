@@ -3,7 +3,7 @@ title = "Codex 如何节省 Token：用 GPT-5.6 Sol 管理、Luna 执行是否�
 date = "2026-08-04T19:38:00+08:00"
 draft = false
 description = "通过让 GPT-5.6 Sol 负责需求分析、架构决策和代码审查，再将明确的代码修改、测试和批量任务交给 GPT-5.6 Luna，可以降低 Codex credits 消耗。本文验证了自定义 Subagent 的官方配置方式，并给出可直接使用的 luna-worker.toml、调用提示词及避免多 Agent 反而浪费 Token 的注意事项。"
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Codex节省Token", "GPT-5.6 Sol", "GPT-5.6 Luna", "AI编程成本优化", "Codex多Agent工作流"]
 +++
 

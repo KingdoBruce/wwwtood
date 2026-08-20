@@ -3,7 +3,7 @@ title = "AI 复刻爆款视频提示词模板：逐镜头拆解并生成视频�
 date = "2026-07-28T16:02:00+08:00"
 draft = false
 cover = "/uploads/2026/07/Image_2026728_16_04_37-d8b2e59e.jpg"
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI视频提示词", "爆款视频拆解", "AI视频生成", "电影镜头语言", "Veo提示词", "角色一致性", "多模态视频分析"]
 featured = true
 +++

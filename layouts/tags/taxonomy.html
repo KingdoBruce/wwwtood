@@ -26,18 +26,18 @@
                 <span>DISCOVER / CONNECT / EXPLORE</span>
                 <span>INDEX DATA / T.{{ printf "%03d" $tagCount }}</span>
             </div>
-            <h1>从标签进入<br><span>内容世界</span></h1>
-            <p class="hero-desc">标签不是简单的关键词，而是内容之间的连接点。通过 AI、建站、软件、GitHub、SEO 与效率工具等主题，快速找到你真正感兴趣的文章。</p>
+            <h1>Enter the<br><span>world of tags</span></h1>
+            <p class="hero-desc">Tags are not just keywords, but connection points between content. Quickly find articles you are really interested in across topics like AI, web building, software, GitHub, SEO and productivity tools.</p>
         </div>
         <aside class="hero-panel">
             <div>
-                <div class="kicker">文章统计</div>
+                <div class="kicker">ARTICLE STATS</div>
                 <div class="hero-number">{{ $postCount }}</div>
                 <p class="mono">ARTICLES<br>BY HUGO STATS</p>
             </div>
             <div class="hero-panel-grid">
-                <div><strong>{{ $tagCount }}</strong><span class="kicker">标签</span></div>
-                <div><strong>{{ $categoryCount }}</strong><span class="kicker">分类</span></div>
+                <div><strong>{{ $tagCount }}</strong><span class="kicker">Tags</span></div>
+                <div><strong>{{ $categoryCount }}</strong><span class="kicker">Categories</span></div>
             </div>
         </aside>
     </section>
@@ -45,12 +45,12 @@
     <section class="tag-tools">
         <label class="search-wrap">
             <span class="search-mark">⌕</span>
-            <input id="tagSearch" type="search" placeholder="搜索标签，例如：AI、GitHub、SEO、Windows…" autocomplete="off">
+            <input id="tagSearch" type="search" placeholder="Search tags, e.g. AI, GitHub, SEO, Windows..." autocomplete="off">
         </label>
         <div class="sort-buttons">
-            <button class="active" data-sort="default">默认</button>
-            <button data-sort="name">名称</button>
-            <button data-sort="count">数量</button>
+            <button class="active" data-sort="default">Default</button>
+            <button data-sort="name">Name</button>
+            <button data-sort="count">Count</button>
         </div>
     </section>
 
@@ -60,9 +60,9 @@
             <div>
                 <div class="kicker">FEATURED TAG / 01</div>
                 <h2>{{ .Page.Title }}</h2>
-                <p>该标签下收录的文章与相关主题，点击进入浏览全部内容。</p>
+                <p>Articles and related topics under this tag. Click to browse all content.</p>
             </div>
-            <div class="featured-link">浏览 {{ .Count }} 篇文章 <span>→</span></div>
+            <div class="featured-link">Browse {{ .Count }} articles <span>→</span></div>
         </a>
         {{- end }}
         <div class="featured-side">
@@ -90,7 +90,7 @@
     <div class="section-head">
         <div>
             <div class="kicker">ALL TOPICS</div>
-            <h2>全部标签</h2>
+            <h2>All Tags</h2>
         </div>
         <p class="mono"><span id="visibleCount">{{ len $paginator.Pages }}</span> TAGS VISIBLE</p>
     </div>
@@ -99,25 +99,25 @@
         {{- range $i, $entry := $paginator.Pages }}
         <a class="tag-card" href="{{ $entry.RelPermalink }}" data-name="{{ $entry.Title }}" data-count="{{ len $entry.Pages }}">
             <div class="tag-no"><span class="kicker">TAG / {{ printf "%03d" (add $i 1) }}</span><span class="tag-count">{{ printf "%02d" (len $entry.Pages) }}</span></div>
-            <div><h3># {{ $entry.Title }}</h3><p>该标签下收录的文章与相关主题。</p></div>
+            <div><h3># {{ $entry.Title }}</h3><p>Articles and related topics under this tag.</p></div>
             <span class="tag-arrow">↗</span>
         </a>
         {{- else }}
-        <p class="archive-tags-empty">暂无标签</p>
+        <p class="archive-tags-empty">No tags yet</p>
         {{- end }}
     </div>
 
     <div id="emptyState" class="empty">
         <div class="kicker">NO MATCHED TAGS</div>
-        <h2>没有找到相关标签</h2>
-        <p>换一个更短的关键词试试，例如“AI”“建站”“软件”或“域名”。</p>
+        <h2>No matching tags found</h2>
+        <p>Try a shorter keyword, such as "AI", "web", "software" or "domain".</p>
     </div>
 
     {{- if gt $paginator.TotalPages 1 }}
-    <nav class="tag-page-nav" aria-label="标签分页">
-        {{- with $paginator.Prev }}<a href="{{ .URL }}" rel="prev" class="tag-page-btn">← 上一页</a>{{- else }}<span class="tag-page-btn is-disabled">← 上一页</span>{{- end }}
+    <nav class="tag-page-nav" aria-label="Tags pagination">
+        {{- with $paginator.Prev }}<a href="{{ .URL }}" rel="prev" class="tag-page-btn">← Previous</a>{{- else }}<span class="tag-page-btn is-disabled">← Previous</span>{{- end }}
         <span class="tag-page-info">PAGE {{ printf "%02d" $paginator.PageNumber }} / {{ printf "%02d" $paginator.TotalPages }}</span>
-        {{- with $paginator.Next }}<a href="{{ .URL }}" rel="next" class="tag-page-btn">下一页 →</a>{{- else }}<span class="tag-page-btn is-disabled">下一页 →</span>{{- end }}
+        {{- with $paginator.Next }}<a href="{{ .URL }}" rel="next" class="tag-page-btn">Next →</a>{{- else }}<span class="tag-page-btn is-disabled">Next →</span>{{- end }}
     </nav>
     {{- end }}
 
@@ -125,8 +125,8 @@
         <div class="cloud-title">
             <div class="kicker">TAG CLOUD</div>
             <strong>#</strong>
-            <h2>主题信号云</h2>
-            <p>字号越大，代表该主题下收录的文章越多。</p>
+            <h2>Signal Cloud</h2>
+            <p>The larger the font, the more articles under that topic.</p>
         </div>
         <div class="tag-cloud">
             {{- range $i, $t := $top }}
@@ -140,7 +140,7 @@
     <div class="section-head">
         <div>
             <div class="kicker">RECENTLY UPDATED</div>
-            <h2>热门标签下的新文章</h2>
+            <h2>Latest Articles in Top Tags</h2>
         </div>
         <p class="mono">LATEST SIGNALS / {{ len $latestPosts }}</p>
     </div>
@@ -165,18 +165,18 @@
 
 <div class="search-modal" hidden>
     <div class="search-modal-backdrop" data-close></div>
-    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
-        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
         <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
-            <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
-            <button type="submit" aria-label="开始搜索">⌕</button>
+            <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+            <button type="submit" aria-label="Start search">⌕</button>
         </form>
-        <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
     </div>
 </div>
 <div class="scroll-arrows scroll-arrows--right">
-    <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
-    <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+    <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
 </div>
 
 <script>

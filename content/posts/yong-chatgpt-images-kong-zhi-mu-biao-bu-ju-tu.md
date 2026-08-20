@@ -3,7 +3,7 @@ title = "如何用 ChatGPT Images 控制目标布局、图案和配色"
 date = "2026-07-28T20:06:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["ChatGPT Images", "AI图片生成", "图片提示词", "AI视觉设计", "布局控制", "图案控制", "图生图"]
 +++
 

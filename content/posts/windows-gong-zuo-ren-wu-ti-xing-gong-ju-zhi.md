@@ -2,7 +2,7 @@
 title = "Windows 工作任务提醒工具：支持每月、每日和循环提醒"
 date = "2026-08-06T22:47:00+08:00"
 draft = false
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["Windows", "任务提醒"]
 
 [download]
@@ -13,7 +13,6 @@ size = "361kB"
 source = ""
 code = "5bkt"
 +++
-
 
 公司每月都要按时收集和上报各类报表，但工作一忙，很容易忘记截止时间。为此，我做了一个轻量级工作任务提醒工具，用于提醒资料收集、报表提交和日常休息。
 

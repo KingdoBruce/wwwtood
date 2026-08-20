@@ -1,8 +1,8 @@
 ---
-title: "关于"
-description: "> 记录折腾的过程，分享真正跑通的方法。"
+title: "About"
+description: "Document the process. Share what actually works."
 date: 2026-01-26
-lastmod: "2026-07-21"
+lastmod: "2026-08-19"
 menu:
     main: 
         weight: -90
@@ -10,54 +10,69 @@ menu:
             icon: user
 ---
 
-大家好，我是 **Bruce**，一个喜欢探索新技术、新工具和互联网产品的普通玩家。
 
-从搭建网站、制作小程序，到研究域名、VPS、AI 工具、开源软件以及各种本地工具，我始终享受从零开始、反复尝试，直到真正跑通的过程。
 
----
 
-## 关于这个网站
+Hi, I’m **Bruce**.
 
-这个网站主要记录：
+I’m a curious builder who enjoys exploring new technology, useful tools, and interesting products across the web.
 
-- 我使用过的工具
-- 我完成的项目
-- 实际遇到的问题
-- 曾经踩过的坑
-- 亲自验证过的解决方法
+Over the years, I’ve spent a lot of time building websites, experimenting with small web projects, managing domains and VPS servers, testing AI tools, exploring open-source software, and setting up all kinds of local applications.
 
-这里的内容不一定高深，也不追求复杂的技术表达。
-
-我更希望每一篇内容都能做到：
-
-**真实、实用、清晰、容易理解。**
+What I enjoy most is the process itself: starting with an idea, figuring out how things work, running into problems, trying different approaches, and eventually getting everything working the way it should.
 
 ---
 
-## 为什么做这些记录
+## About This Site
 
-很多问题在解决之后，看起来可能只是一个简单的设置，或者几行代码。
+This website is where I document what I learn along the way.
 
-但在找到正确答案之前，我们往往需要查阅大量资料、尝试不同方法，也可能因为一个不起眼的细节浪费很多时间。
+You’ll mainly find:
 
-因此，我把这些实践过程记录下来，希望能够帮助来到这里的朋友：
+* Tools and software I’ve actually used
+* Projects I’ve built or experimented with
+* Problems I’ve encountered in real-world use
+* Mistakes, limitations, and unexpected issues
+* Solutions and workflows I’ve personally tested
 
-- 节省一点时间
-- 少走一些弯路
-- 更快地解决问题
-- 发现一些有趣且值得尝试的新东西
+The goal isn’t to make things sound more complicated than they are.
 
-如果这里的某篇文章恰好解决了你的问题，那么这些记录便有了意义。
+I prefer content that is:
 
----
+**practical, clear, honest, and easy to follow.**
 
-## 联系方式
-
-如果你有任何问题、建议，或希望进行合作交流，欢迎通过邮箱联系：
-
-**邮箱：[admin@tood.win](mailto:admin@tood.win)**
+Whenever possible, I focus on what actually works rather than just repeating documentation or theory.
 
 ---
 
-> **保持好奇，持续折腾。**  
+## Why I Write
+
+A problem often looks simple once you know the answer.
+
+Sometimes the final solution is just one setting, one command, or a few lines of code.
+
+Getting there, however, can mean reading through documentation, searching forums, testing multiple approaches, dealing with outdated information, and losing hours to one tiny detail.
+
+That’s why I started documenting these experiences.
+
+Hopefully, the things I learn can help someone else:
+
+* Save a little time
+* Avoid unnecessary trial and error
+* Solve a problem faster
+* Discover a useful tool or idea worth exploring
+
+If something I’ve written here helps you solve a problem or gives you a better starting point, then this site has done its job.
+
+---
+
+## Get in Touch
+
+If you have a question, suggestion, correction, or simply want to exchange ideas, feel free to reach out.
+
+**Email: [admin@tood.win](mailto:admin@tood.win)**
+
+---
+
+> **Stay curious. Keep building.**
 > Explore · Build · Share

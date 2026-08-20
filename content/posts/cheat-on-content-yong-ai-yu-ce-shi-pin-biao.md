@@ -2,7 +2,7 @@
 title = "Cheat on Content：用 AI 预测视频表现，让内容创作从直觉走向数据"
 date = "2026-07-28T16:14:00+08:00"
 draft = false
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI视频预测", "AI内容分析", "Claude Code Skills", "开源AI工具"]
 +++
 

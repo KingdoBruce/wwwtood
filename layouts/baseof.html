@@ -10,7 +10,7 @@
         {{- if isset . "show_on_home" -}}{{- $showOnHome = .show_on_home -}}{{- end -}}
     {{- end -}}
     {{- if $showOnHome -}}
-        {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
+        {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" $taxonomy.Page.RelPermalink) -}}
     {{- end -}}
 {{- end -}}
 <!DOCTYPE html>

@@ -3,7 +3,7 @@ title = "AI 阅读 PDF 太费 Token？先用 MarkItDown 转成 Markdown"
 date = "2026-08-05T13:27:00+08:00"
 draft = false
 description = "直接上传长篇 PDF 可能夹带页眉、页脚和复杂排版信息，增加 AI 的解析难度。本文介绍微软开源工具 MarkItDown 的安装与使用方法，演示如何先将 PDF 转成 Markdown，再进行内容清理、章节拆分、AI 总结和知识库导入，同时说明扫描件、复杂表格和多栏论文的转换限制。"
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI读取PDF", "AI节省Token", "Markdown文档转换", "AI知识库"]
 +++
 

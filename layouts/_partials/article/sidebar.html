@@ -5,19 +5,19 @@
 {{- $halfYearStart := now.AddDate 0 -6 0 -}}
 {{- $hotCandidates := where $posts "Date" "ge" $halfYearStart -}}
 {{- $hotCandidates = where $hotCandidates "RelPermalink" "ne" .RelPermalink -}}
-<aside class="archive-article-sidebar" aria-label="文章侧边栏">
+<aside class="archive-article-sidebar" aria-label="Article sidebar">
     <section class="article-side-panel">
         <h2 class="article-side-title">SEARCH <span>01</span></h2>
         <form class="article-side-search" action="{{ `search/` | relLangURL }}" method="get" role="search">
-            <input type="search" name="keyword" placeholder="输入关键词..." aria-label="搜索文章" required>
-            <button type="submit" aria-label="开始搜索">⌕</button>
+            <input type="search" name="keyword" placeholder="Enter a keyword..." aria-label="Search articles" required>
+            <button type="submit" aria-label="Start search">⌕</button>
         </form>
     </section>
 
     {{- if eq .Section "posts" -}}
     <section class="article-side-panel article-side-toc">
         <h2 class="article-side-title">CONTENTS <span>02</span></h2>
-        {{ if ge (len .TableOfContents) 100 }}{{ .TableOfContents }}{{ else }}<p class="article-side-empty">本文暂无分节目录</p>{{ end }}
+        {{ if ge (len .TableOfContents) 100 }}{{ .TableOfContents }}{{ else }}<p class="article-side-empty">No table of contents for this article</p>{{ end }}
         {{ if ge (len .TableOfContents) 100 }}
         <script>
         (() => {
@@ -66,7 +66,7 @@
 
     {{- $advertising := .Site.Data.site.advertising -}}
     {{- if and $advertising.article_sidebar_enabled $advertising.article_sidebar_code (or (eq .Section "posts") (eq .Section "page") (eq .Section "tags")) -}}
-    <section class="article-side-panel site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+    <section class="article-side-panel site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="Advertisement">
         {{ $advertising.article_sidebar_code | safeHTML }}
     </section>
     {{- end -}}
@@ -74,14 +74,14 @@
     <section class="article-side-panel">
         <h2 class="article-side-title">LATEST <span>03</span></h2>
         <ol class="article-side-list">
-            {{ range $latest }}<li><a href="{{ .RelPermalink }}"><span>{{ .Title }}</span><time>{{ .Date.Format "01-02" }}</time></a></li>{{ else }}<li><p class="article-side-empty">暂无其他文章</p></li>{{ end }}
+            {{ range $latest }}<li><a href="{{ .RelPermalink }}"><span>{{ .Title }}</span><time>{{ .Date.Format "01-02" }}</time></a></li>{{ else }}<li><p class="article-side-empty">No other articles</p></li>{{ end }}
         </ol>
     </section>
 
     <section class="article-side-panel">
         <h2 class="article-side-title">HOT <span>04</span></h2>
         <ol class="article-side-list article-hot-list" data-random-count="5">
-            {{ range $index, $post := $hotCandidates }}<li{{ if ge $index 5 }} hidden{{ end }}><a href="{{ $post.RelPermalink }}"><span>{{ $post.Title }}</span><time>{{ $post.Date.Format "01-02" }}</time></a></li>{{ else }}<li><p class="article-side-empty">近半年暂无其他文章</p></li>{{ end }}
+            {{ range $index, $post := $hotCandidates }}<li{{ if ge $index 5 }} hidden{{ end }}><a href="{{ $post.RelPermalink }}"><span>{{ $post.Title }}</span><time>{{ $post.Date.Format "01-02" }}</time></a></li>{{ else }}<li><p class="article-side-empty">No other articles in the last six months</p></li>{{ end }}
         </ol>
         {{ if $hotCandidates }}
         <script>
@@ -103,7 +103,7 @@
     <section class="article-side-panel">
         <h2 class="article-side-title">TAG CLOUD <span>05</span></h2>
         <div class="article-tag-cloud archive-random-tags" data-random-count="18">
-            {{ range $index, $taxonomy := .Site.Taxonomies.tags }}<a{{ if ge $index 18 }} hidden{{ end }} href="{{ printf `tags/%s/` ($index | urlize) | relLangURL }}">{{ $index }}<sup>{{ len $taxonomy.Pages }}</sup></a>{{ else }}<p class="article-side-empty">暂无标签</p>{{ end }}
+            {{ range $index, $taxonomy := .Site.Taxonomies.tags }}<a{{ if ge $index 18 }} hidden{{ end }} href="{{ printf `tags/%s/` ($index | urlize) | relLangURL }}">{{ $index }}<sup>{{ len $taxonomy.Pages }}</sup></a>{{ else }}<p class="article-side-empty">No tags yet</p>{{ end }}
         </div>
         {{ if .Site.Taxonomies.tags }}
         <script>

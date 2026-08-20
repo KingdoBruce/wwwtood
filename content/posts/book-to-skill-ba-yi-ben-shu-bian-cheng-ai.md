@@ -3,7 +3,7 @@ title = "Book to Skill：把一本书变成 AI 可以反复调用的知识工具
 date = "2026-07-27T19:55:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Agent Skills", "AI 读书工具", "电子书转 Skill", "AI Agent", "文档知识提取", "开源 AI 工具"]
 +++
 

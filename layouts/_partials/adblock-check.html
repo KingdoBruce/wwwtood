@@ -2,22 +2,20 @@
 <div class="adblock-notice" role="{{ if $isArticle }}dialog{{ else }}status{{ end }}" aria-modal="{{ if $isArticle }}true{{ else }}false{{ end }}" aria-labelledby="adblock-notice-title" hidden data-blocking="{{ if $isArticle }}true{{ else }}false{{ end }}" data-nosnippet>
     <div class="adblock-notice__panel">
         <span class="adblock-notice__label">AD BLOCKER DETECTED</span>
-        <h2 id="adblock-notice-title">请允许本站展示广告</h2>
-        <p>检测到广告拦截功能。请将拾光集加入允许列表，然后刷新本页面。</p>
+        <h2 id="adblock-notice-title">Please allow ads on this site</h2>
+        <p>An ad blocker was detected. Please add TOOD.WIN to your allowlist, then refresh this page.</p>
         <p class="adblock-notice__en">We detected an ad blocker. Please allow ads on this site, then refresh the page.</p>
         <div class="adblock-notice__links">
-            <a href="https://www.tood.win/posts/please-allow-ads-on-shiguangji-zh/">中文说明</a>
-            <a href="https://www.tood.win/posts/please-allow-ads-on-shiguangji-en/" lang="en">English guide</a>
+            <a href="https://www.tood.win/please-allow-ads-on-shiguangji-en/" lang="en">English guide</a>
         </div>
         {{- if not $isArticle }}
-        <button type="button" class="adblock-notice__close">暂时关闭提示</button>
+        <button type="button" class="adblock-notice__close">Dismiss</button>
         {{- end }}
     </div>
 </div>
 <script>
 (() => {
     const allowlist = [
-        '/please-allow-ads-on-shiguangji-zh/',
         '/please-allow-ads-on-shiguangji-en/'
     ];
     const path = `${window.location.pathname.replace(/\/+$/, '')}/`.toLowerCase();

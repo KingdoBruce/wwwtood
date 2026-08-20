@@ -3,7 +3,7 @@ title = "免费领取 4 个开发者域名：Stackryze Domains 使用介绍"
 date = "2026-07-27T12:16:00+08:00"
 draft = false
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["免费域名", "域名解析", "网站搭建"]
 +++
 

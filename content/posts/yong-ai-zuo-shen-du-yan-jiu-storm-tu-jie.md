@@ -3,7 +3,7 @@ title = "用 AI 做深度研究：STORM 方法图解与 4 组实用提示词"
 date = "2026-07-28T11:22:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI深度研究", "AI研究方法", "斯坦福STORM", "多视角研究", "AI提示词", "深度研究提示词", "人工智能工具", "知识管理", "AI搜索", "提示词工程"]
 +++
 

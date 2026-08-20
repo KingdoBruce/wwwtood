@@ -2,7 +2,7 @@
 title = "Claude + SEO + GEO：一个人两天跑完传统团队一个月的活"
 date = "2026-08-19T10:46:00+08:00"
 draft = false
-categories = ["随笔"]
+categories = ["Tech Notes"]
 tags = ["GEO优化", "ai搜索引擎优化", "GEO", "品牌推广", "品牌出海", "网站推广", "aiseo", "SEO优化", "seo"]
 description = "传统 SEO 中的关键词研究、内容生产、外链建设和数据追踪，如今可以借助 Claude 大幅提升效率，并进一步结合 GEO，让内容不仅获得 Google 排名，也更容易被 ChatGPT、Perplexity、Gemini 等 AI 搜索工具理解、引用和推荐。本文通过四步流程，介绍如何利用 Claude 完成关键词筛选、内容压力测试、AI 引用源建设和品牌引用追踪，打造一套 SEO + GEO 双增长的内容营销闭环。"
 featured = true

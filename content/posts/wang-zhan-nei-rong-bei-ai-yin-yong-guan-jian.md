@@ -3,7 +3,7 @@ title = "网站内容如何被 AI 引用？关键不是写得多，而是写得�
 date = "2026-07-27T17:00:00+08:00"
 draft = false
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["AI搜索", "AI引用", "Google SEO", "AEO", "GEO", "外贸独立站", "B2B SEO"]
 +++
 

@@ -3,7 +3,7 @@ title = "Awesome GPT Image 2 Prompts：GitHub 开源 AI 绘图提示词库"
 date = "2026-07-30T22:16:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["GPT Image 2", "AI绘图提示词", "AI商业设计"]
 +++
 

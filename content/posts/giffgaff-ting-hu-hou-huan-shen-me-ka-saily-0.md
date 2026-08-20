@@ -3,7 +3,7 @@ title = "giffgaff 停户后换什么卡？Saily 0.99 美元/月申请美国手�
 date = "2026-08-03T11:40:00+08:00"
 draft = false
 featured = true
-categories = ["随笔"]
+categories = ["Tech Notes"]
 tags = ["Saily", "美国 eSIM", "eSIM 手机号", "海外保号卡", "giffgaff 替代方案", "海外手机号", "双重验证"]
 +++
 

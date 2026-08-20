@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="内容说明：本文根据现有项目功能说明整理，目前未提供完整实测环境、版本号及源码地址，因此主要介绍工具的设计思路和现有功能，不对资源占用、稳定性等未验证项目作结论。">
+<title>DLabel云标签v3.6.5 官方版本 - Software &amp; Tools - Tood.win | Tech Notes, AI Tools &amp; Web Development</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/dlabel-yun-biao-qian-v3-6-5/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.3c8ba4eb96e990e1006031c4cbd8c43e5683ccac3ae62e43d2a608017772f313.css"><meta property='og:title' content="DLabel云标签v3.6.5 官方版本 - Software & Tools - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta property='og:description' content="内容说明：本文根据现有项目功能说明整理，目前未提供完整实测环境、版本号及源码地址，因此主要介绍工具的设计思路和现有功能，不对资源占用、稳定性等未验证项目作结论。">
+<meta property='og:url' content='https://www.tood.win/posts/dlabel-yun-biao-qian-v3-6-5/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='DLabel' /><meta property='article:tag' content='云标签' /><meta property='article:tag' content='标签打印' /><meta property='article:published_time' content='2026-08-08T19:38:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-09T20:20:25&#43;08:00'/>
+<meta name="twitter:title" content="DLabel云标签v3.6.5 官方版本 - Software & Tools - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta name="twitter:description" content="内容说明：本文根据现有项目功能说明整理，目前未提供完整实测环境、版本号及源码地址，因此主要介绍工具的设计思路和现有功能，不对资源占用、稳定性等未验证项目作结论。">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<link rel="shortcut icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="DLabel, 云标签, 标签打印">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"DLabel云标签v3.6.5 官方版本\"",
+  "description": "\"内容说明：本文根据现有项目功能说明整理，目前未提供完整实测环境、版本号及源码地址，因此主要介绍工具的设计思路和现有功能，不对资源占用、稳定性等未验证项目作结论。\"",
+  "datePublished": "\"2026-08-08T19:38:00+08:00\"",
+  "dateModified": "\"2026-08-09T20:20:25+08:00\"",
+  "url": "\"https://www.tood.win/posts/dlabel-yun-biao-qian-v3-6-5/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/08/tood-win-logo-a26f7c69.png" alt="Tood.win | Tech Notes">
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">Home</a>
+        <a href="/archives/#current-archive">Latest</a>
+        <a class="" href="/archives/">Categories</a>
+        <a class="" href="/tags/">Tags</a>
+        <a class="" href="/about/">About</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="Search articles" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/software/">SOFTWARE &amp; TOOLS</a><span>/</span><a href="/posts/dlabel-yun-biao-qian-v3-6-5/">DLabel云标签v3.6.5 官方版本</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / SOFTWARE &amp; TOOLS</span>
+                <span>LIVE DATA / A.2608.080</span>
+            </div>
+            <h1>DLabel云标签v3.6.5 官方版本</h1>
+            <p class="article-deck">内容说明：本文根据现有项目功能说明整理，目前未提供完整实测环境、版本号及源码地址，因此主要介绍工具的设计思路和现有功能，不对资源占用、稳定性等未验证项目作结论。</p>
+            <div class="author-line mono">
+                <span>BY TOOD.WIN | TECH NOTES</span>
+                <span>2026.08.08</span>
+                <span>1 MIN READ</span>
+                <span>242 WORDS</span>
+                <span>SOFTWARE &amp; TOOLS</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A80</strong>
+                <p class="mono">JAN. 08<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">00</div>
+                <div class="kicker">SECTIONS</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="Advertisement"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>这是目前仍可正常使用的<strong>官方老版本 v3.6.5</strong>，相比新版限制更少，<strong>无需登录即可使用</strong>。</p>
+<p>主要功能：</p>
+<ul>
+<li>支持 <strong>Excel 数据库批量导入、批量打印</strong></li>
+<li>支持 <strong>自定义每条数据的打印数量</strong></li>
+<li>日常标签编辑、批量打印功能均可正常使用</li>
+<li><strong>无需注册账号，也不需要开通 VIP</strong></li>
+</ul>
+<p>我也测试过其他几个版本，部分版本已经强制要求登录，或者限制 Excel 批量打印功能，需要开通 VIP 后才能使用。</p>
+<p><strong>特别注意：安装后不要更新。</strong>
+只要保持在 <strong>v3.6.5</strong> 版本，目前就可以继续免登录使用。</p>
+<p><strong>版本：官方 v3.6.5</strong></p>
+<p><img alt="DLabel云标签v3.6.5 官方版本" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/QQ20260808-195034-761c0bdf.png"></p>
+<p><img alt="DLabel云标签v3.6.5 官方版本" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/QQ20260808-195048-487be910.png"></p>
+<p><strong>可以通过防火墙管理软件将其将其断开网络链接，这样就不用登录也不会提示升级，可以长期持久使用</strong></p>
+
+</section>
+
+
+            
+            <section class="article-download">
+    <div class="resource-body">
+        <article class="float-card" aria-labelledby="article-download-title">
+
+            <div class="float-preview">
+                <div class="preview" aria-label="DLabel云标签v3.6.5 官方版本 resource preview"><img src="/uploads/2026/08/QQ20260808-195034-761c0bdf.png" alt="DLabel云标签v3.6.5 官方版本 resource cover" loading="lazy"></div>
+                <div class="preview-label mono">
+                    <span>PREVIEW / ZIP</span>
+                    <span>SOFTWARE &amp; TOOLS</span>
+                </div>
+            </div>
+
+            <div class="float-content">
+                <div class="kicker">SOFTWARE &amp; TOOLS RESOURCE / CURATED BY US</div>
+                <h2 id="article-download-title">DLabel云标签v3.6.5 官方版本</h2>
+
+                <div class="chips">
+                    <span>Software &amp; Tools</span>
+                    <span>ZIP</span>
+                    <span>28.8 M</span><span>No password</span></div>
+
+                <div class="float-actions">
+                    <div class="action-status">
+                        <div>
+                            <span class="kicker">ACCESS STATUS</span>
+                            <strong>ONLINE / VERIFIED</strong>
+                        </div><span class="mono">NO PASSWORD</span></div>
+                    <a class="download-btn" href="https://iezyw.lanzouv.com/iu74N40vxpyd" target="_blank" rel="noopener noreferrer nofollow">
+                        <span>Download</span>
+                        <b aria-hidden="true">↗</b>
+                    </a>
+                </div>
+            </div>
+
+        </article>
+    </div>
+</section>
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/dlabel/">DLabel</a>
+        
+            <a href="/tags/%E4%BA%91%E6%A0%87%E7%AD%BE/">云标签</a>
+        
+            <a href="/tags/%E6%A0%87%E7%AD%BE%E6%89%93%E5%8D%B0/">标签打印</a>
+        
+    </section>
+<nav class="prev-next" aria-label="Previous and next article"><a href="/posts/deepseek-shi-bie-tu-pian-yong-reasonix-glm-4v-flash/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>DeepSeek 怎么识别图片？用 Reasonix &#43; GLM-4V-Flash 添加免费视觉能力</strong>
+                    </a><a href="/posts/zhuo-pai-tai-qian-pi-liang-da-yin-gong-ju/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="Article sidebar">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body"><p class="toc-empty">No table of contents for this article</p></div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="Advertisement">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">Latest Articles</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/wo-yong-guo-de-ji-jia-yu-ming-fu-wu/">
+                        <span class="side-article-title">我用过的几家域名服务商：Cloudflare、Namecheap、Spaceship 和国内云厂商怎么选？</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/4-fen-cheng-xu-yuan-xue-xi-zi-yuan-geng/">
+                        <span class="side-article-title">4 份程序员学习资源更新：Spring Cloud 微服务、LeetCode、面试与 WMS 项目</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/bai-du-wang-pan-bu-chong-hui-yuan-ye-neng/">
+                        <span class="side-article-title">百度网盘不充会员，也能试试这个提速设置</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/claude-seo-geo-ren-liang-tian-pao-wan-chuan-tong/">
+                        <span class="side-article-title">Claude &#43; SEO &#43; GEO：一个人两天跑完传统团队一个月的活</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                        <span class="side-article-title">视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</span>
+                        <span class="side-article-date mono">08.16</span>
+                    </a><a class="side-article-row" href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                        <span class="side-article-title">Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</span>
+                        <span class="side-article-date mono">08.15</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">Editor's Picks</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                        <span class="side-article-title">视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</span>
+                        <span class="side-article-date mono">08.16</span>
+                    </a><a class="side-article-row" href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                        <span class="side-article-title">Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</span>
+                        <span class="side-article-date mono">08.15</span>
+                    </a><a class="side-article-row" href="/posts/ollama-mo-xing-yu-jia-zai-yu-xian-cun-shi/">
+                        <span class="side-article-title">Ollama 模型预加载与显存释放工具</span>
+                        <span class="side-article-date mono">08.14</span>
+                    </a><a class="side-article-row" href="/posts/fei-shu-ge-shi-kai-yuan-mian-fei-de-pdf/">
+                        <span class="side-article-title">飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具</span>
+                        <span class="side-article-date mono">08.13</span>
+                    </a><a class="side-article-row" href="/posts/zhuo-pai-tai-qian-pi-liang-da-yin-gong-ju/">
+                        <span class="side-article-title">桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景</span>
+                        <span class="side-article-date mono">08.09</span>
+                    </a><a class="side-article-row" href="/posts/windows-gong-zuo-ren-wu-ti-xing-gong-ju-zhi/">
+                        <span class="side-article-title">Windows 工作任务提醒工具：支持每月、每日和循环提醒</span>
+                        <span class="side-article-date mono">08.06</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data"><a href="/categories/software/"><span>Category</span><b>Software &amp; Tools</b></a>
+                    <a><span>Words</span><b>242</b></a>
+                    <a><span>Reading</span><b>1 MIN</b></a>
+                    <a><span>Updated</span><b>08.08</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/b1c7096b-135f-4fcf-ba27-d70256eb1570-de08fb54.webp" alt="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具" loading="lazy"><code>01 / SOFTWARE &amp; TOOLS</code>
+                    <h3>视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>如果平时使用 yt-dlp 下载 B站、YouTube 或其他平台的视频，最大的门槛通常不是下载本身，而是需要记命令、管理下载任务以及查看文件状 …</p>
+                    <time>2026-08-16</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/81bf47a1-61ef-4bab-9d24-57db3210a908-06787703.webp" alt="Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问" loading="lazy"><code>02 / SOFTWARE &amp; TOOLS</code>
+                    <h3>Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>在企业局域网办公环境中，Windows 共享打印机一直都是 IT 运维中非常常见的问题之一。
+尤其是近年来微软频繁推送 Windows 安全更新 …</p>
+                    <time>2026-08-15</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ollama-mo-xing-yu-jia-zai-yu-xian-cun-shi/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/f54df230-9996-4167-b152-1559525df093-255b9c34.webp" alt="Ollama 模型预加载与显存释放工具" loading="lazy"><code>03 / SOFTWARE &amp; TOOLS</code>
+                    <h3>Ollama 模型预加载与显存释放工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>这是一款针对 Ollama 本地大模型 的辅助工具，主要解决两个问题：
+提前加载模型到显存 / 内存，减少首次对话时的等待时间 手动卸载模型，快 …</p>
+                    <time>2026-08-14</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/fei-shu-ge-shi-kai-yuan-mian-fei-de-pdf/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/e8e87015-aa07-40ef-8976-83f4abb86d33-ccf60f28.jpg" alt="飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具" loading="lazy"><code>04 / SOFTWARE &amp; TOOLS</code>
+                    <h3>飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>飞鼠格式（FlyingMouse Format）是一款开源文件转换工具，主要解决 PDF、Office 文档、图片、音视频等格式互转问题。
+它比 …</p>
+                    <time>2026-08-13</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>Some resources on this site (<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>) come from public internet sources and are provided for learning and reference only. We charge no fees and sell no resources.</p>
+            <p>Related content does not necessarily represent the views of this site. We do not guarantee its authenticity, accuracy, or validity. Please judge and use it with caution.</p>
+            <p>If there is any infringement, violation, or broken resource link, please contact <a href="mailto:admin@tood.win">admin@tood.win</a>. After verification, we will remove, handle, or update it in a timely manner.</p>
+            <p>Any illegal or unlawful use of this site's content is strictly prohibited.</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">Tood.win | Tech Notes</a><p>Tested in practice. Shared to help you build.</p></div>
+    <div><h4>Content</h4><a href="/categories/ai--automation/">ai &amp; automation</a><a href="/categories/software/">software &amp; tools</a><a href="/categories/notes/">tech notes</a><a href="/categories/web--hosting/">web &amp; hosting</a></div>
+    <div><h4>Navigation</h4><a href="/archives/">Archive</a><a href="/tags/">Tags</a><a href="/about/">About</a><a href="/links/">Friend Links</a></div>
+    <div><h4>Policy</h4><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/please-allow-ads-on-shiguangji-en/">Allow Ads</a><a href="/about/">Contact</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> Tood.win | Tech Notes</span><span class="end-links"><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/links/">Friend Links</a></span><span>BUILT WITH HUGO</span></div>
+<script>
+(() => {
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = new Date().getFullYear();
+    });
+})();
+</script>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

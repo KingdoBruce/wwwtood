@@ -4,7 +4,7 @@ date = "2026-08-19T15:33:00+08:00"
 draft = false
 description = "结合个人使用体验，简单聊聊 Cloudflare、Namecheap、Spaceship、阿里云和腾讯云几家常见域名服务商，从注册与续费价格、隐私保护、DNS、国内外独立站使用场景等方面分析各自优缺点，帮助你选择更适合自己的域名注册平台。"
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["域名注册", "Cloudflare", "Namecheap", "Spaceship", "域名服务商"]
 +++
 

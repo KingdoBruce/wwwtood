@@ -3,7 +3,7 @@ title = "Headroom 是什么？给 Claude Code、Codex 压缩上下文减少 Toke
 date = "2026-08-13T22:22:00+08:00"
 draft = false
 description = "内容说明： 本文根据 Headroom 官方 GitHub 仓库和公开测试数据整理，目前未进行完整独立对照测试。文中的 Token 节省比例属于项目方测试结果，实际效果会受到任务类型、输入内容和模型等因素影响。"
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Headroom", "AI Token 压缩", "AI Agent", "Codex", "Claude Code"]
 +++
 

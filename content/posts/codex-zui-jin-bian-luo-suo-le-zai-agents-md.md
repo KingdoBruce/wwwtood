@@ -3,7 +3,7 @@ title = "Codex 最近变“啰嗦”了？在 AGENTS.md 加上这句提示词试
 date = "2026-07-27T22:04:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Codex", "AI编程助手", "OpenAI Codex", "AI编程效率", "提示词优化"]
 +++
 

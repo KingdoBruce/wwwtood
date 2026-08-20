@@ -4,7 +4,7 @@ date = "2026-07-28T13:38:00+08:00"
 draft = false
 cover = "/uploads/2026/07/QQ20260728-133954_1-267a7130.jpg"
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["批量视频制作", "数据可视化视频", "排行榜视频", "数据周报", "开源视频工具"]
 +++
 

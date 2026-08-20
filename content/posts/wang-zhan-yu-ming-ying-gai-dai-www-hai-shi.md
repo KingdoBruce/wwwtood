@@ -3,7 +3,7 @@ title = "网站域名应该带 www 还是不带 www？Vercel、Sitemap 与 GSC �
 date = "2026-07-31T14:34:00+08:00"
 draft = false
 featured = true
-categories = ["随笔"]
+categories = ["Tech Notes"]
 tags = ["Vercel域名设置", "Google Search Console", "Sitemap", "Canonical URL", "Google SEO", "域名规范化"]
 +++
 

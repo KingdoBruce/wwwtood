@@ -92,17 +92,30 @@
   function renderPostPage() {
     const searchInput = document.getElementById("postSearch");
     const searchMeta = document.getElementById("postSearchMeta");
-    const query = searchInput.value.trim();
-    const visiblePosts = query
-      ? posts.filter(post => !post.draft && fuzzyTitleMatch(post.title, query))
-      : posts;
+    const query = searchInput.value.trim().toLowerCase();
+    const category = document.getElementById("postCategoryFilter").value;
+    const filterEl = document.getElementById("postCategoryFilter");
+    const currentFilter = filterEl.value;
+    const categories = Array.from(new Set(posts.flatMap(post => post.categories || []))).sort((a, b) => a.localeCompare(b, "zh"));
+    filterEl.innerHTML = `<option value="">全部分类</option>` + categories.map(name => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("");
+    filterEl.value = currentFilter;
+    const batchEl = document.getElementById("postBatchCategory");
+    const currentBatch = batchEl.value;
+    batchEl.innerHTML = `<option value="">清除分类</option>` + categories.map(name => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("");
+    batchEl.value = currentBatch;
+    const visiblePosts = posts.filter(post => {
+      const matchesSearch = !query || [post.title, (post.categories || []).join(" "), (post.tags || []).join(" ")].join(" ").toLowerCase().includes(query);
+      const matchesCategory = !category || (post.categories || []).includes(category);
+      return matchesSearch && matchesCategory;
+    });
     const totalPages = Math.max(1, Math.ceil(visiblePosts.length / POST_PAGE_SIZE));
     postPage = Math.min(Math.max(1, postPage), totalPages);
     const start = (postPage - 1) * POST_PAGE_SIZE;
     const pagePosts = visiblePosts.slice(start, start + POST_PAGE_SIZE);
     document.getElementById("postList").innerHTML = pagePosts.map((post, index) => `
       <article class="post-row" data-slug="${escapeHtml(post.slug)}">
-        <code>A.${String(posts.length - posts.indexOf(post)).padStart(3, "0")}</code>
+        <input type="checkbox" class="post-check" data-slug="${escapeHtml(post.slug)}" title="选择此文章">
+        <code>A.${String(visiblePosts.length - start - index).padStart(3, "0")}</code>
         <div>
           <strong>${escapeHtml(post.title)}</strong>
           <p>${escapeHtml(post.description || post.slug)}</p>
@@ -111,13 +124,13 @@
         <time>${escapeHtml(fmtDate(post.date))}</time>
         <button type="button" class="text-button delete-post-row" data-slug="${escapeHtml(post.slug)}" data-title="${escapeHtml(post.title)}">删除</button>
       </article>
-    `).join("") || (query
-      ? '<div class="empty">没有找到匹配的已发布文章</div>'
+    `).join("") || (query || category
+      ? '<div class="empty">没有找到匹配的文章</div>'
       : '<div class="empty">点击“新建文章”开始写作</div>');
 
     const pagination = document.getElementById("postPagination");
-    pagination.innerHTML = paginationMarkup(postPage, totalPages, visiblePosts.length, query ? "文章搜索结果分页" : "文章管理分页");
-    searchMeta.textContent = query ? `找到 ${visiblePosts.length} 篇` : "输入标题关键词";
+    pagination.innerHTML = paginationMarkup(postPage, totalPages, visiblePosts.length, query || category ? "文章筛选结果分页" : "文章管理分页");
+    searchMeta.textContent = query || category ? `匹配 ${visiblePosts.length}/${posts.length} 篇` : "输入标题、分类或标签关键词";
     bindPagination(pagination, page => {
       postPage = page;
       renderPostPage();
@@ -125,7 +138,12 @@
 
     document.querySelectorAll(".post-row").forEach(row => {
       row.onclick = event => {
-        if (!event.target.closest(".delete-post-row")) editPost(row.dataset.slug);
+        if (event.target.closest(".delete-post-row")) return;
+        if (event.target.closest(".post-check")) {
+          updatePostBatchState();
+          return;
+        }
+        editPost(row.dataset.slug);
       };
     });
     document.querySelectorAll(".delete-post-row").forEach(button => {
@@ -134,9 +152,18 @@
         deletePostBySlug(button.dataset.slug, button.dataset.title);
       };
     });
+    document.querySelectorAll(".post-check").forEach(input => {
+      input.onchange = updatePostBatchState;
+    });
+    updatePostBatchState();
   }
 
   document.getElementById("postSearch").oninput = () => {
+    postPage = 1;
+    renderPostPage();
+  };
+
+  document.getElementById("postCategoryFilter").onchange = () => {
     postPage = 1;
     renderPostPage();
   };

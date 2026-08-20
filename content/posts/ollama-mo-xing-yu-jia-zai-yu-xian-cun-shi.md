@@ -3,7 +3,7 @@ title = "Ollama 模型预加载与显存释放工具"
 date = "2026-08-14T20:40:00+08:00"
 draft = false
 description = "一款专门用于 Ollama 模型预加载与显存释放 的轻量辅助工具，可提前将模型载入显存，减少首次对话等待，也可以随时手动卸载模型快速释放显存。新版增加了 Ollama 服务检测、模型分类、自定义别名、模型介绍和右键快捷操作，适合经常切换本地大模型的用户。"
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["Ollama", "本地模型"]
 
 [download]

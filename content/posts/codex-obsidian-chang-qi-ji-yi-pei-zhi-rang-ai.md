@@ -3,7 +3,7 @@ title = "Codex + Obsidian 长期记忆配置：让 AI 跨项目记住工作进�
 date = "2026-07-28T19:42:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Codex", "Codex长期记忆", "AI智能体", "AI Agent", "Codex CLI", "本地知识库", "AI工作流", "AI记忆系统"]
 +++
 

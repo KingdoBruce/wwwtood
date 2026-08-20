@@ -4,7 +4,7 @@ date = "2026-08-15T18:08:00+08:00"
 draft = false
 description = "DeepSeek Harness 是面向 DeepSeek V4-Pro 与 V4-Flash 的第三方协议适配工具，可通过 Python、CLI、MCP 和 Claude Skill 接入 AI Agent。本文介绍 DeepSeek Harness 的安装与 MCP 配置方法，并推荐 Context7、Playwright、GitHub 等适合 AI 编程的扩展组合。"
 tags = ["DeepSeek Harness", "Python", "AI Agent", "DeepSeek"]
-categories = ["AI"]
+categories = ["AI & Automation"]
 +++
 
 [DeepSeek](/tags/deepseek/) Harness 是一个针对 **DeepSeek V4-Pro / V4-Flash** 的第三方协议适配项目。

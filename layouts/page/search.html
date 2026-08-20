@@ -14,7 +14,7 @@
 {{- $topTags := sort $allTags "Count" "desc" | first 8 -}}
 {{- $categoryGroups := slice -}}
 {{- range $name, $taxonomy := site.Taxonomies.categories -}}
-    {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
+    {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" $taxonomy.Page.RelPermalink) -}}
 {{- end -}}
 <div class="signal-home">
     <div class="wrap">
@@ -26,8 +26,8 @@
             <section class="search-hero">
                 <div class="hero-main">
                     <div class="hero-meta kicker"><span>GLOBAL SEARCH / CONTENT INDEX</span><span>SEARCH.MODE / ACTIVE</span></div>
-                    <h1>搜索<span>拾光集</span></h1>
-                    <p class="hero-desc">搜索文章标题、摘要、分类和标签。输入关键词后可以即时筛选，也可以按内容分类缩小搜索范围。</p>
+                    <h1>Search<span>TOOD.WIN</span></h1>
+                    <p class="hero-desc">Search article titles, summaries, categories and tags. Type a keyword to filter instantly, or narrow the scope by content category.</p>
                 </div>
                 <aside class="hero-card">
                     <div>
@@ -37,7 +37,7 @@
                     </div>
                     <div>
                         <div class="count">{{ len $posts }}</div>
-                        <div class="kicker">可搜索文章</div>
+                        <div class="kicker">SEARCHABLE ARTICLES</div>
                     </div>
                 </aside>
             </section>
@@ -45,8 +45,8 @@
             <section class="search-panel">
                 <form class="search-form" id="searchForm" action="{{ .RelPermalink }}" method="get" role="search"{{ with .OutputFormats.Get "json" }} data-json="{{ .RelPermalink }}"{{ end }}>
                     <span class="search-mark">⌕</span>
-                    <input id="searchInput" type="search" name="keyword" placeholder="搜索文章、工具、分类或标签……" autocomplete="off">
-                    <button type="submit">搜索</button>
+                    <input id="searchInput" type="search" name="keyword" placeholder="Search articles, tools, categories or tags..." autocomplete="off">
+                    <button type="submit">Search</button>
                 </form>
                 <div class="search-total">
                     <div>
@@ -58,38 +58,38 @@
 
             <div class="filter-bar">
                 <div class="filter-group" id="categoryFilters">
-                    <button class="filter-btn active" data-category="全部">全部内容</button>
+                    <button class="filter-btn active" data-category="All">All Content</button>
                     {{- range $name, $taxonomy := .Site.Taxonomies.categories -}}
                     <button class="filter-btn" data-category="{{ $name }}">{{ $name }}</button>
                     {{- end -}}
                 </div>
-                <select class="sort-select" id="sortSelect" aria-label="结果排序">
-                    <option value="newest">按最新发布</option>
-                    <option value="oldest">按最早发布</option>
-                    <option value="title">按标题排序</option>
+                <select class="sort-select" id="sortSelect" aria-label="Sort results">
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                    <option value="title">By title</option>
                 </select>
             </div>
 
             <div class="content-layout">
                 <main class="main-column">
                     <div class="section-head">
-                        <h2 id="resultTitle">热门内容</h2>
+                        <h2 id="resultTitle">Popular Content</h2>
                         <span class="kicker">15 RESULTS PER PAGE</span>
                     </div>
                     <section class="result-list" id="resultList"></section>
                     <section class="empty-state" id="emptyState">
                         <strong>0</strong>
-                        <h2>没有找到匹配内容</h2>
-                        <p>尝试缩短关键词，或搜索 AI、GitHub、SEO、Vercel、Everything。</p>
+                        <h2>No matching content found</h2>
+                        <p>Try a shorter keyword, or search AI, GitHub, SEO, Vercel, Everything.</p>
                     </section>
-                    <nav class="pagination mono" id="pagination" aria-label="搜索结果分页"></nav>
+                    <nav class="pagination mono" id="pagination" aria-label="Search results pagination"></nav>
                 </main>
 
                 <aside class="sidebar">
                     <section class="side-card">
                         <div class="side-head kicker" style="background:var(--signal-pink);color:var(--signal-ink)">POPULAR SEARCHES</div>
                         <nav class="quick-searches">
-                            <a href="#" data-query="AI"><span>AI 与大模型</span><b>AI</b></a>
+                            <a href="#" data-query="AI"><span>AI & LLMs</span><b>AI</b></a>
                             <a href="#" data-query="Everything"><span>Everything</span><b>EV</b></a>
                             <a href="#" data-query="SEO"><span>SEO</span><b>SEO</b></a>
                             <a href="#" data-query="Token"><span>Token</span><b>TK</b></a>
@@ -100,7 +100,7 @@
                     {{- if and $advertising.article_sidebar_enabled $advertising.article_sidebar_code -}}
                     <section class="side-card side-card--ad">
                         <div class="side-head kicker" style="background:var(--signal-black);color:#fff">ADVERTISEMENT</div>
-                        <div class="side-body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                        <div class="side-body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="Advertisement">
                             {{ $advertising.article_sidebar_code | safeHTML }}
                         </div>
                     </section>
@@ -117,10 +117,10 @@
                         <div class="side-head kicker" style="background:var(--signal-orange);color:var(--signal-ink)">SEARCH TIPS</div>
                         <div class="side-body">
                             <ul class="help-list">
-                                <li>输入工具名称可精准搜索。</li>
-                                <li>输入分类名称可查看相关内容。</li>
-                                <li>搜索支持文章标题、摘要和标签。</li>
-                                <li>结果超过 15 条会自动分页。</li>
+                                <li>Enter a tool name for precise results.</li>
+                                <li>Enter a category name to see related content.</li>
+                                <li>Search supports article titles, summaries and tags.</li>
+                                <li>Results over 15 are paginated automatically.</li>
                             </ul>
                         </div>
                     </section>
@@ -133,13 +133,13 @@
 
     <div class="search-modal" hidden>
         <div class="search-modal-backdrop" data-close></div>
-        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
-            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
             <form class="search-modal-form" action="{{ .RelPermalink }}" method="get" role="search">
-                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
-                <button type="submit" aria-label="开始搜索">⌕</button>
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
             </form>
-            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
         </div>
     </div>
 </div>
@@ -187,7 +187,7 @@
     let allData = [];
     let filtered = [];
     let currentPage = 1;
-    let currentCategory = '全部';
+    let currentCategory = 'All';
     let currentQuery = '';
 
     function escapeRegExp(value) {
@@ -207,7 +207,7 @@
             .filter((item) => new Date(item.date) >= threeMonthsAgo)
             .sort((a, b) => (b.wordcount || 0) - (a.wordcount || 0))
             .slice(0, 6);
-        resultTitle.textContent = '热门内容';
+        resultTitle.textContent = 'Popular Content';
         list.innerHTML = hot.map((item, index) => {
             const cat = categoryOf(item);
             const date = (item.date || '').slice(0, 10);
@@ -249,11 +249,11 @@
             showHotPicks();
             return;
         }
-        resultTitle.textContent = '搜索结果';
+        resultTitle.textContent = 'Search Results';
         filtered = allData.filter((item) => {
             const haystack = [item.title, item.content, item.categories ? item.categories.join(' ') : '', item.tags ? item.tags.join(' ') : ''].join(' ').toLowerCase();
             const matchesQuery = !currentQuery || haystack.includes(currentQuery);
-            const matchesCategory = currentCategory === '全部' || (item.categories && item.categories.includes(currentCategory));
+            const matchesCategory = currentCategory === 'All' || (item.categories && item.categories.includes(currentCategory));
             return matchesQuery && matchesCategory;
         });
 
@@ -354,9 +354,9 @@
         element.addEventListener('click', (event) => {
             event.preventDefault();
             input.value = element.dataset.query;
-            currentCategory = '全部';
+            currentCategory = 'All';
             document.querySelectorAll('.filter-btn').forEach((item) => {
-                item.classList.toggle('active', item.dataset.category === '全部');
+                item.classList.toggle('active', item.dataset.category === 'All');
             });
             applyFilters();
             input.scrollIntoView({ behavior: 'smooth', block: 'center' });

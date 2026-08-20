@@ -5,7 +5,7 @@ draft = false
 description = "整理分享 4 份程序员学习资源，涵盖 Alibaba Cloud + Spring Cloud 微服务实战、LeetCode 算法刷题、面试指导以及 WMS 仓储管理项目，适合 Java 开发、求职面试和项目实战学习参考。"
 cover = "/uploads/2026/08/09f50d5d-b1de-4fd6-ac9c-7c69f65a6365-cf3013cb.webp"
 featured = true
-categories = ["随笔"]
+categories = ["Tech Notes"]
 tags = ["Spring Cloud", "Alibaba Cloud", "LeetCode", "算法刷题", "程序员面试", "面试指导", "WMS", "仓储管理系统", "开发学习资料"]
 +++
 

@@ -1175,14 +1175,14 @@ body.template-archives .page-hero{width:1240px;max-width:calc(100% - 28px);margi
 body.template-archives .hero-main{padding-top:8px;min-width:0}
 body.template-archives .hero-meta{display:flex;justify-content:space-between;padding-top:0;padding-bottom:6px;border-bottom:2px solid var(--signal-line)}
 body.template-archives .hero-main h1{max-width:900px;margin:24px 0 18px;font-size:clamp(42px,7vw,80px);line-height:.92;letter-spacing:-.07em;font-weight:900}
-body.template-archives .page-deck{font-size:18px;line-height:1.7;max-width:760px;color:#343a36;white-space:nowrap;overflow:visible}
+body.template-archives .page-deck{font-size:18px;line-height:1.7;max-width:760px;color:#343a36}
 body.template-archives .hero-stats{display:flex;flex-wrap:wrap;gap:18px;margin-top:24px;padding-top:15px;border-top:2px solid var(--signal-line);font-size:13px}
 body.template-archives .signal-box{border:2px solid var(--signal-line);padding:14px 16px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;background:var(--signal-lime)}
 body.template-archives .signal-box strong{font:900 46px/1 "Courier New",monospace}
 body.template-archives .signal-box p.mono{margin:14px 0 0;font:12px/1.6 "Courier New",monospace}
 body.template-archives .signal-box .stat{font-size:32px;font-weight:950}
 body.template-archives .section-head{display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--signal-line);padding:10px 0 15px}
-body.template-archives .category-tags-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0 0 30px}
+body.template-archives .category-tags-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin:0 0 30px}
 body.template-archives .category-tag{min-width:0;min-height:118px;padding:15px 17px;border:2px solid var(--signal-line);background:var(--signal-white);display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;gap:10px;text-decoration:none;position:relative;transition:transform .16s ease,box-shadow .16s ease}
 body.template-archives .category-tag::before{content:"";position:absolute;left:0;bottom:0;width:0;height:4px;background:var(--signal-pink);transition:width .2s ease}
 body.template-archives .category-tag:hover,body.template-archives .category-tag.active{transform:translate(-3px,-3px);box-shadow:4px 4px 0 var(--signal-line)}
@@ -1674,14 +1674,14 @@ body.signal-search-page button,body.signal-search-page input,body.signal-search-
 body.signal-search-page .kicker{font:700 11px/1.25 "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase}
 body.signal-search-page .archive-page-frame{padding:0;min-height:calc(100vh - 140px)}
 body.signal-search-page .archive-page-main{max-width:none}
-body.signal-search-page .breadcrumb{display:flex;gap:10px;align-items:center;padding:15px 0;border-bottom:1px solid var(--signal-line);color:var(--signal-muted);font-size:12px;flex-wrap:wrap}
+body.signal-search-page .breadcrumb{display:flex;gap:10px;align-items:center;padding:23px 0 15px;border-bottom:0;color:var(--signal-muted);font-size:12px;flex-wrap:wrap}
 body.signal-search-page .search-shell{width:100%;max-width:none;margin:auto;padding-bottom:54px}
-body.signal-search-page .search-hero{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:24px;padding:32px 0 28px;align-items:stretch}
+body.signal-search-page .search-hero{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:24px;padding:0 0 28px;align-items:stretch}
 body.signal-search-page .hero-main{padding-top:8px;min-height:0}
 body.signal-search-page .hero-meta{display:flex;justify-content:space-between;gap:16px;padding-top:10px;border-top:2px solid var(--signal-line)}
 body.signal-search-page .search-hero h1{margin:27px 0 16px;font-size:clamp(48px,7vw,86px);line-height:.9;letter-spacing:-.075em}
 body.signal-search-page .search-hero h1 span{display:inline-block;padding:0 .08em .05em;border:2px solid var(--signal-line);background:var(--signal-lime);transform:rotate(-1deg)}
-body.signal-search-page .hero-desc{max-width:760px;margin:0;color:#343a36;font-size:18px;line-height:1.75;white-space:nowrap}
+body.signal-search-page .hero-desc{max-width:760px;margin:0;color:#343a36;font-size:18px;line-height:1.75}
 body.signal-search-page .hero-card{min-height:0;padding:18px;border:2px solid var(--signal-line);background:var(--signal-orange);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
 body.signal-search-page .hero-card:after{content:"⌕";position:absolute;right:-24px;bottom:-65px;font:900 210px/.8 "Courier New",monospace;color:rgba(12,15,13,.13)}
 body.signal-search-page .hero-card strong{display:block;font:900 67px/1 "Courier New",monospace}
@@ -1779,10 +1779,10 @@ body.signal-search-page .help-list{margin:0;padding-left:18px;color:var(--signal
 /* ===== 友链页 ===== */
 body.archive-site.archive-subpage.signal-friends-page{--signal-paper:#eef1ec;--signal-ink:#101312;--signal-muted:#5e6661;--signal-grid:rgba(16,19,18,.07);--signal-lime:#c9ff32;--signal-pink:#ff3d8e;--signal-cyan:#49d8c4;--signal-orange:#ffb52f;--signal-black:#0b0f0d;--signal-line:#1b211e;--signal-white:#f8faf6;--signal-blue:#5da3ff;background-color:var(--signal-paper);background-image:linear-gradient(var(--signal-grid) 1px,transparent 1px),linear-gradient(90deg,var(--signal-grid) 1px,transparent 1px);background-size:28px 28px;color:var(--signal-ink);font-family:Inter,system-ui,-apple-system,"Segoe UI","Noto Sans SC","Microsoft YaHei",sans-serif}
 body.signal-friends-page .kicker{font:700 11px/1.25 "Courier New",monospace;letter-spacing:.12em;text-transform:uppercase}
-body.signal-friends-page .breadcrumb{display:flex;gap:10px;align-items:center;padding:15px 0;border-bottom:1px solid var(--signal-line);color:var(--signal-muted);font-size:12px;flex-wrap:wrap}
+body.signal-friends-page .breadcrumb{display:flex;gap:10px;align-items:center;padding:23px 0 15px;color:var(--signal-muted);font-size:12px;flex-wrap:wrap}
 body.signal-friends-page .breadcrumb a:hover{color:var(--signal-ink)}
 body.signal-friends-page .friends-shell{width:100%;max-width:none;margin:auto;padding-bottom:54px}
-body.signal-friends-page .friends-hero{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:24px;padding:32px 0 28px;align-items:stretch}
+body.signal-friends-page .friends-hero{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:24px;padding:0 0 28px;align-items:stretch}
 body.signal-friends-page .hero-main{padding-top:8px;min-height:0}
 body.signal-friends-page .hero-meta{display:flex;justify-content:space-between;gap:16px;padding-top:10px;border-top:2px solid var(--signal-line)}
 body.signal-friends-page .friends-hero h1{margin:27px 0 16px;font-size:clamp(48px,7vw,86px);line-height:.9;letter-spacing:-.075em}

@@ -3,7 +3,7 @@ title = "Skills 创建全流程：从需求规划到测试落地，零基础也�
 date = "2026-07-28T11:08:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Skill Creator", "Agent Skills", "AI工作流", "AI自动化", "自定义Skill", "提示词工程"]
 +++
 

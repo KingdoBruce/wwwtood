@@ -17,7 +17,7 @@
         <button class="nav-item" data-view="posts">文章 <span>02</span></button>
         <button class="nav-item" data-view="categories">分类 <span>03</span></button>
         <button class="nav-item" data-view="tags">标签 <span>04</span></button>
-        <button class="nav-item" data-view="about">关于 <span>05</span></button>
+        <button class="nav-item" data-view="about">独立页面 <span>05</span></button>
         <button class="nav-item" data-view="friends">友情链接 <span>06</span></button>
         <button class="nav-item" data-view="advertising">广告管理 <span>07</span></button>
         <button class="nav-item" data-view="settings">网站设置 <span>08</span></button>
@@ -72,10 +72,22 @@
           <div><span class="eyebrow">CONTENT.DB</span><h2>文章管理</h2></div>
           <label class="post-search" for="postSearch">
             <span aria-hidden="true">⌕</span>
-            <input id="postSearch" type="search" autocomplete="off" placeholder="搜索已发布文章标题…">
-            <small id="postSearchMeta">输入标题关键词</small>
+            <input id="postSearch" type="search" autocomplete="off" placeholder="搜索文章标题或分类…">
+            <select id="postCategoryFilter" class="post-search-filter" title="按分类筛选">
+              <option value="">全部分类</option>
+            </select>
+            <small id="postSearchMeta">输入标题或分类关键词</small>
           </label>
           <button class="button primary" id="newPost">＋ 新建文章</button>
+        </div>
+        <div class="post-batch-bar" id="postBatchBar" hidden>
+          <label class="post-batch-select"><input type="checkbox" id="postSelectAll"> 全选</label>
+          <span id="postBatchCount">已选 0 篇</span>
+          <select id="postBatchCategory" class="post-batch-category">
+            <option value="">清除分类</option>
+          </select>
+          <button type="button" class="button primary post-batch-apply" id="postBatchApply">应用到所选文章</button>
+          <button type="button" class="text-button" id="postBatchClear">清除选择</button>
         </div>
         <div id="postList" class="post-list"></div>
         <div id="postPagination"></div>
@@ -155,7 +167,7 @@
       <section class="view" id="view-categories">
         <div class="section-actions"><div><span class="eyebrow">TAXONOMY.03</span><h2>分类管理</h2></div></div>
         <div class="taxonomy-manager">
-          <article class="panel taxonomy-create"><h3>添加分类</h3><p>分类用于组织文章。重命名或删除时会同步更新所有关联文章。</p><div class="taxonomy-add-row"><input id="newCategory" maxlength="80" placeholder="输入分类名称"><button class="button primary" id="addCategory">添加分类</button></div></article>
+          <article class="panel taxonomy-create"><h3>添加分类</h3><p>分类用于组织文章。重命名或删除时会同步更新所有关联文章。分类别名用于自定义分类页面的网址目录，可留空。</p><div class="taxonomy-add-row"><input id="newCategory" maxlength="80" placeholder="输入分类名称"><input id="newCategorySlug" maxlength="100" placeholder="分类别名（可选）"><button class="button primary" id="addCategory">添加分类</button></div></article>
           <article class="panel"><div class="panel-heading"><div><span class="eyebrow">CATEGORY.DB</span><h2>全部分类</h2></div><span class="badge" id="categoryTotal">0</span></div><div class="taxonomy-list" id="categoryList"></div></article>
         </div>
       </section>
@@ -169,7 +181,18 @@
       </section>
 
       <section class="view" id="view-about">
-        <div class="section-actions"><div><span class="eyebrow">PAGE.05</span><h2>关于页面</h2></div><button class="button primary" id="saveAbout">保存关于页面</button></div>
+        <div class="section-actions about-section-actions">
+          <div><span class="eyebrow">PAGE.05</span><h2>独立页面</h2></div>
+          <label class="page-switcher">
+            <span>编辑页面</span>
+            <select id="aboutPageSelect"></select>
+          </label>
+          <div class="about-page-actions">
+            <button type="button" class="button" id="addAboutPage">新建页面</button>
+            <button type="button" class="button danger" id="deleteAboutPage">删除页面</button>
+            <button class="button primary" id="saveAbout">保存页面</button>
+          </div>
+        </div>
         <form id="aboutForm" class="about-editor" onsubmit="return false">
           <article class="panel form-panel">
             <h3>页面信息</h3>
@@ -179,7 +202,7 @@
           </article>
           <article class="panel about-content-panel">
             <div class="editor-tabs"><button type="button" class="active" data-about-tab="write">Markdown</button><button type="button" data-about-tab="preview">预览</button></div>
-            <textarea id="aboutPageBody" class="markdown-editor" placeholder="使用 Markdown 编辑关于页面…"></textarea>
+            <textarea id="aboutPageBody" class="markdown-editor" placeholder="使用 Markdown 编辑页面内容…"></textarea>
             <article id="aboutPreview" class="markdown-preview" hidden></article>
           </article>
         </form>

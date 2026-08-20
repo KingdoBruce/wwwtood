@@ -2,7 +2,7 @@
 title = "Chrome DevTools MCP：让 AI 直接操作浏览器调试网站"
 date = "2026-07-24T17:28:00+08:00"
 draft = false
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Chrome DevTools MCP", "MCP", "AI插件"]
 featured = true
 +++

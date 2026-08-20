@@ -16,7 +16,7 @@
         {{- if isset . "show_on_home" -}}{{- $showOnHome = .show_on_home -}}{{- end -}}
     {{- end -}}
     {{- if $showOnHome -}}
-        {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
+        {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" $taxonomy.Page.RelPermalink) -}}
     {{- end -}}
 {{- end -}}
 <div class="signal-home">
@@ -30,33 +30,33 @@
             <div>
                 <div class="error-topline kicker"><span>SYSTEM MESSAGE / LOST SIGNAL</span><span>ERROR.CODE / 404</span></div>
                 <div class="error-code">404</div>
-                <h1>这条内容信号<br>没有被找到</h1>
-                <p>你访问的页面可能已经移动、被删除，或者网址输入有误。可以返回首页，重新搜索内容，或从右侧热门入口继续浏览。</p>
+                <h1>This content signal<br>was not found</h1>
+                <p>The page you visited may have moved, been deleted, or the URL may be incorrect. Return to the homepage, search again, or continue browsing from the popular entries on the right.</p>
             </div>
             <div class="error-actions">
-                <a class="primary-btn" href="{{ .Site.Home.RelPermalink }}"><span>返回首页</span><span>→</span></a>
-                <a class="secondary-btn" href="javascript:history.back()"><span>返回上一页</span><span>↩</span></a>
+                <a class="primary-btn" href="{{ .Site.Home.RelPermalink }}"><span>Back to Home</span><span>→</span></a>
+                <a class="secondary-btn" href="javascript:history.back()"><span>Go Back</span><span>↩</span></a>
             </div>
         </div>
         <aside class="error-side">
             <section class="side-section">
-                <div class="kicker">SEARCH ARCHIVE</div><h2>搜索拾光集</h2>
-                <form class="error-search-form" action="{{ `search/` | relLangURL }}" method="get"><input type="search" name="q" placeholder="输入文章、工具或标签……"><button type="submit">⌕</button></form>
+                <div class="kicker">SEARCH ARCHIVE</div><h2>Search TOOD.WIN</h2>
+                <form class="error-search-form" action="{{ `search/` | relLangURL }}" method="get"><input type="search" name="q" placeholder="Search articles, tools or tags..."><button type="submit">⌕</button></form>
             </section>
             <section class="side-section">
-                <div class="kicker">QUICK ROUTES</div><h2>继续浏览</h2>
+                <div class="kicker">QUICK ROUTES</div><h2>Keep Exploring</h2>
                 <nav class="quick-links">
                     {{- range $i, $c := $categoryGroups -}}
                         {{- if lt $i 4 -}}
                     <a href="{{ $c.URL }}"><span>{{ $c.Name }}</span><b>↗</b></a>
                         {{- end -}}
                     {{- end -}}
-                    <a href="{{ `tags/` | relLangURL }}"><span>全部标签</span><b>↗</b></a>
-                    <a href="{{ `archives/` | relLangURL }}"><span>文章归档</span><b>↗</b></a>
+                    <a href="{{ `tags/` | relLangURL }}"><span>All Tags</span><b>↗</b></a>
+                    <a href="{{ `archives/` | relLangURL }}"><span>Article Archive</span><b>↗</b></a>
                 </nav>
             </section>
             <section class="side-section">
-                <div class="kicker">POPULAR SIGNALS</div><h2>也许你在找</h2>
+                <div class="kicker">POPULAR SIGNALS</div><h2>You Might Be Looking For</h2>
                 <div class="signal-list">
                     {{- range $i, $p := $popular -}}
                     <a class="signal-link" href="{{ $p.RelPermalink }}"><span class="signal-no">{{ printf "%02d" (add $i 1) }}</span><span class="signal-copy"><span>{{ with $p.Params.categories }}{{ index . 0 | upper }}{{ end }} / {{ $p.Date.Format "2006" }}</span><strong>{{ $p.Title }}</strong></span></a>
@@ -78,13 +78,13 @@
 
     <div class="search-modal" hidden>
         <div class="search-modal-backdrop" data-close></div>
-        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
-            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
             <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
-                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
-                <button type="submit" aria-label="开始搜索">⌕</button>
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
             </form>
-            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
         </div>
     </div>
 </div>

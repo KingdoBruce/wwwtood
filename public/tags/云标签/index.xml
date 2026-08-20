@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>云标签 on 拾光集</title>
+        <link>https://www.tood.win/tags/%E4%BA%91%E6%A0%87%E7%AD%BE/</link>
+        <description>Recent content in 云标签 on 拾光集</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh</language>
+        <lastBuildDate>Sun, 09 Aug 2026 20:20:25 +0800</lastBuildDate><atom:link href="https://www.tood.win/tags/%E4%BA%91%E6%A0%87%E7%AD%BE/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>DLabel云标签v3.6.5 官方版本</title>
+            <link>https://www.tood.win/posts/dlabel-yun-biao-qian-v3-6-5/</link>
+            <pubDate>Sat, 08 Aug 2026 19:38:00 +0800</pubDate>
+            <guid>https://www.tood.win/posts/dlabel-yun-biao-qian-v3-6-5/</guid>
+            <description>&lt;p&gt;这是目前仍可正常使用的&lt;strong&gt;官方老版本 v3.6.5&lt;/strong&gt;，相比新版限制更少，&lt;strong&gt;无需登录即可使用&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;主要功能：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;支持 &lt;strong&gt;Excel 数据库批量导入、批量打印&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;支持 &lt;strong&gt;自定义每条数据的打印数量&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;日常标签编辑、批量打印功能均可正常使用&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;无需注册账号，也不需要开通 VIP&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我也测试过其他几个版本，部分版本已经强制要求登录，或者限制 Excel 批量打印功能，需要开通 VIP 后才能使用。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;特别注意：安装后不要更新。&lt;/strong&gt;&#xA;只要保持在 &lt;strong&gt;v3.6.5&lt;/strong&gt; 版本，目前就可以继续免登录使用。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;版本：官方 v3.6.5&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;DLabel云标签v3.6.5 官方版本&#34; loading=&#34;lazy&#34; sizes=&#34;(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px&#34; src=&#34;https://www.tood.win/uploads/2026/08/QQ20260808-195034-761c0bdf.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;DLabel云标签v3.6.5 官方版本&#34; loading=&#34;lazy&#34; sizes=&#34;(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px&#34; src=&#34;https://www.tood.win/uploads/2026/08/QQ20260808-195048-487be910.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;可以通过防火墙管理软件将其将其断开网络链接，这样就不用登录也不会提示升级，可以长期持久使用&lt;/strong&gt;&lt;/p&gt;&#xA;</description>
+        </item></channel>
+</rss>

@@ -38,6 +38,8 @@ try {
         --icon 'TOOD-Studio.ico' `
         --collect-all markdown `
         --collect-all pypinyin `
+        --hidden-import setuptools._vendor.backports `
+        --hidden-import setuptools._vendor.backports.tarfile `
         app.py
     if ($LASTEXITCODE -ne 0) {
         throw "PyInstaller build failed with exit code $LASTEXITCODE"

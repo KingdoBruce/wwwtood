@@ -2,7 +2,7 @@
 title = "Agent-Reach：给 AI Agent 增加 Twitter、B站、小红书等联网能力"
 date = "2026-08-13T22:29:00+08:00"
 draft = false
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Agent-Reach", "AI Agent", "AI Agent 联网", "Claude Code 联网", "AI Skills", "开源工具"]
 description = "内容说明：本文根据 Agent-Reach 官方 GitHub 项目说明整理，属于项目资料整理，并非完整本地实测。支持平台、安装方式和第三方访问能力可能随版本及网站规则变化，请以项目最新说明为准。"
 aliases = ["/posts/agent-reach-rang-ai-agent-yong-you-quan-wang-shi/"]

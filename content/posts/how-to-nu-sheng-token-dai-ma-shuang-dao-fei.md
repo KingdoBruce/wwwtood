@@ -3,7 +3,7 @@ title = "How to 怒省 Token，代码爽到飞起！马尾辫 Ponytail 实测"
 date = "2026-07-31T12:38:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Ponytail", "AI编程", "Codex"]
 +++
 

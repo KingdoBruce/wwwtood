@@ -3,7 +3,7 @@ title = "Windows 深度清理脚本怎么用？Light-Help 两个版本区别与�
 date = "2026-08-05T22:53:00+08:00"
 draft = false
 featured = true
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["Windows 深度清理脚本", "Light-Help", "PowerShell 清理缓存", "Windows 缓存清理", "开源工具"]
 +++
 

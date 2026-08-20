@@ -3,7 +3,7 @@ title = "DeepTutor：可本地部署的开源 AI 学习与工作伴侣"
 date = "2026-07-28T15:16:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["DeepTutor", "本地AI助手", "开源AI项目", "AI学习助手", "RAG知识库", "AI智能体", "本地大模型", "知识管理", "AI工作区", "自托管AI"]
 +++
 

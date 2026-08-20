@@ -38,7 +38,7 @@
         {{- if isset . "show_on_home" -}}{{- $showOnHome = .show_on_home -}}{{- end -}}
     {{- end -}}
     {{- if $showOnHome -}}
-        {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "Posts" $categoryPosts "Count" (len $categoryPosts) "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
+        {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "Posts" $categoryPosts "Count" (len $categoryPosts) "URL" $taxonomy.Page.RelPermalink) -}}
     {{- end -}}
 {{- end -}}
 
@@ -67,22 +67,22 @@
                 <h1><span>{{ default "TOOD" $home.hero_primary }}</span><span><span class="slash">／</span>{{ default "ARCHIVE" $home.hero_secondary }}</span></h1>
                 <div class="hero-sub">
                     <b class="tiny mono">TREND<br>SHIFT</b>
-                    <div>{{ default "记录值得被发现的人、事、思想与微光。" $home.tagline }}</div>
+                    <div>{{ default "Recording people, ideas and moments worth discovering." $home.tagline }}</div>
                 </div>
             </div>
             <aside class="week-card">
                 <div class="week-head">
-                    <span class="tiny mono">本周 / {{ now.Year }}</span>
+                    <span class="tiny mono">WEEK / {{ now.Year }}</span>
                     <span class="week-tag mono">WEEK</span>
                 </div>
                 <div class="week-main">
                     <strong class="week-num mono">{{ $week }}</strong>
-                    <span class="week-unit mono">周</span>
+                    <span class="week-unit mono">WEEK</span>
                 </div>
-                <p class="week-range mono">{{ printf "%d" $monday.Month }}月{{ $monday.Day }}日 — {{ printf "%d" $sunday.Month }}月{{ $sunday.Day }}日</p>
+                <p class="week-range mono">{{ printf "%02d" $monday.Month }}.{{ $monday.Day }} — {{ printf "%02d" $sunday.Month }}.{{ $sunday.Day }}</p>
                 <div class="week-foot">
-                    <div><strong class="big">{{ len $monthlyPosts }}</strong><span class="small">本月新增</span></div>
-                    <div><strong class="big">{{ len $posts }}</strong><span class="small">已收录</span></div>
+                    <div><strong class="big">{{ len $monthlyPosts }}</strong><span class="small">NEW THIS MONTH</span></div>
+                    <div><strong class="big">{{ len $posts }}</strong><span class="small">TOTAL</span></div>
                 </div>
             </aside>
         </header>
@@ -147,7 +147,7 @@
         {{ if and $advertising.home_sidebar_enabled $advertising.home_sidebar_code }}
         <section class="section ad-section">
             <div class="section-label mono"><span>SPONSORED SIGNAL</span><span>ADVERTISEMENT</span></div>
-            <div class="ad-banner site-ad-slot site-ad-slot--home" data-ad-slot="home-sidebar" aria-label="广告">
+            <div class="ad-banner site-ad-slot site-ad-slot--home" data-ad-slot="home-sidebar" aria-label="Advertisement">
                 {{ $advertising.home_sidebar_code | safeHTML }}
             </div>
         </section>
@@ -233,7 +233,7 @@
                     <div class="small mono">TAG.{{ printf "%02d" (add (mul $g 4) $i 1) }}</div>
                     <h3><a href="{{ $tag.URL }}">{{ $tag.Name }}</a></h3>
                     {{ with $tag.Latest }}<p>{{ .Title }}</p>{{ end }}
-                    <a class="tool-link" href="{{ $tag.URL }}">{{ $tag.Count }} 篇 →</a>
+                    <a class="tool-link" href="{{ $tag.URL }}">{{ $tag.Count }} POSTS →</a>
                 </article>
                 {{ end }}
                 </div>
@@ -245,7 +245,7 @@
 
         {{ if $latestPosts }}
         <section id="latest" class="section">
-            <div class="section-label mono"><span>最新文章</span><a href="{{ `archives/` | relLangURL }}">VIEW ALL →</a></div>
+            <div class="section-label mono"><span>Latest Articles</span><a href="{{ `archives/` | relLangURL }}">VIEW ALL →</a></div>
             <div class="latest">
                 {{ range $index, $post := $latestPosts }}
                 <a class="latest-row" href="{{ $post.RelPermalink }}">
@@ -261,8 +261,8 @@
         <section id="about" class="section">
             <div class="section-label mono"><span>WHY TOOD.WIN</span><span>EDITORIAL NOTE</span></div>
             <div class="editorial">
-                <article><div class="small mono">WHY NOW</div><h2>{{ default "记录值得被发现的人、事、思想与微光。" $home.tagline }}</h2><p>{{ default "记录每一次实践，收藏每一件好用的工具。" $home.about_text }}</p></article>
-                <article><div class="small mono">MISSION</div><h2>{{ default "Things Others Ought to Discover." $home.build_label }}</h2><p><a href="{{ `关于/` | relLangURL }}">{{ default "了解更多 →" $home.about_link_label }}</a></p></article>
+                <article><div class="small mono">WHY NOW</div><h2>{{ default "Recording people, ideas and moments worth discovering." $home.tagline }}</h2><p>{{ default "Documenting every practice and collecting every useful tool." $home.about_text }}</p></article>
+                <article><div class="small mono">MISSION</div><h2>{{ default "Things Others Ought to Discover." $home.build_label }}</h2><p><a href="{{ `about/` | relLangURL }}">{{ default "Learn more →" $home.about_link_label }}</a></p></article>
             </div>
         </section>
 
@@ -284,9 +284,9 @@
 
         <section class="section">
             <div class="search-panel">
-                <div><div class="small mono">SITE SEARCH</div><h2>搜索拾光集</h2><p>查找 AI、建站、软件与数字效率中的重点内容。</p></div>
+                <div><div class="small mono">SITE SEARCH</div><h2>Search TOOD.WIN</h2><p>Find key content on AI, web building, software and digital efficiency.</p></div>
                 <form class="form" action="{{ `search/` | relLangURL }}" method="get" role="search">
-                    <input type="search" name="keyword" placeholder="输入关键词..." aria-label="搜索文章" required>
+                    <input type="search" name="keyword" placeholder="Enter a keyword..." aria-label="Search articles" required>
                     <button type="submit">SEARCH</button>
                 </form>
             </div>
@@ -297,18 +297,18 @@
 
     <div class="search-modal" hidden>
         <div class="search-modal-backdrop" data-close></div>
-        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
-            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
             <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
-                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
-                <button type="submit" aria-label="开始搜索">⌕</button>
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
             </form>
-            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
         </div>
     </div>
     <div class="scroll-arrows scroll-arrows--right">
-        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
-        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+        <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
     </div>
 </div>
 <script>

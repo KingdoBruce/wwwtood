@@ -38,7 +38,7 @@
     {{- end -}}
 
     <div class="category-detail-shell">
-        <nav class="category-breadcrumb mono" aria-label="面包屑">
+        <nav class="category-breadcrumb mono" aria-label="Breadcrumb">
             <a href="{{ .Site.Home.RelPermalink }}">HOME</a><span>/</span>
             <a href="{{ `archives/` | relLangURL }}">CATEGORIES</a><span>/</span>
             <strong>{{ upper .Title }}</strong>
@@ -49,7 +49,7 @@
             <div class="category-hero-content">
                 <div class="kicker">TOOD.WIN / CONTENT COLLECTION</div>
                 <h1>{{ .Title }}</h1>
-                <p>{{ with .Description }}{{ . }}{{ else }}收录「{{ .Title }}」主题下的全部文章、实用工具、真实经验与解决方法，按更新时间持续整理。{{ end }}</p>
+                <p>{{ with .Description }}{{ . }}{{ else }}All articles, practical tools, real experiences and solutions on the {{ .Title }} theme, continuously organized by update time.{{ end }}</p>
                 {{- with $heroTags -}}
                 <div class="category-hero-tags">
                     {{- range . -}}<a href="{{ printf `tags/%s/` (. | urlize) | relLangURL }}">{{ . }}</a>{{- end -}}
@@ -64,12 +64,12 @@
 
         <div class="category-content-layout">
         <main class="category-detail-main">
-            <div class="category-section-head"><h2>分类文章</h2><span class="kicker">15 ARTICLES PER PAGE</span></div>
+            <div class="category-section-head"><h2>Category Articles</h2><span class="kicker">15 ARTICLES PER PAGE</span></div>
             <div class="category-list-toolbar">
-                <label class="category-list-search"><input id="categoryArticleSearch" type="search" placeholder="在当前分类中搜索文章……"><button id="categorySearchButton" type="button">搜索</button></label>
+                <label class="category-list-search"><input id="categoryArticleSearch" type="search" placeholder="Search articles in this category..."><button id="categorySearchButton" type="button">Search</button></label>
                 <div class="category-result-count mono"><span id="categoryResultText">{{ len .Pages }} ARTICLES</span></div>
             </div>
-            <section class="category-detail-list" id="categoryArticleList" aria-label="{{ .Title }}分类文章">
+            <section class="category-detail-list" id="categoryArticleList" aria-label="{{ .Title }} category articles">
                 {{- range $index, $article := $paginator.Pages -}}
                     {{- $cover := "" -}}
                     {{- with $article.Params.cover }}{{ $cover = . }}{{ end -}}
@@ -97,15 +97,15 @@
                         </div>
                     </a>
                 {{- else -}}
-                    <p class="category-article-empty">该分类暂时没有文章。</p>
+                    <p class="category-article-empty">No articles in this category yet.</p>
                 {{- end -}}
             </section>
 
             {{- if gt $paginator.TotalPages 1 -}}
-            <nav class="category-page-pagination" aria-label="分类文章分页">
-                {{- with $paginator.Prev }}<a href="{{ .URL }}" rel="prev"><span>←</span><b>上一页</b></a>{{ else }}<span class="is-disabled"><span>←</span><b>上一页</b></span>{{ end -}}
+            <nav class="category-page-pagination" aria-label="Category articles pagination">
+                {{- with $paginator.Prev }}<a href="{{ .URL }}" rel="prev"><span>←</span><b>Previous</b></a>{{ else }}<span class="is-disabled"><span>←</span><b>Previous</b></span>{{ end -}}
                 <strong><small>PAGE</small>{{ $paginator.PageNumber | printf "%02d" }} / {{ $paginator.TotalPages | printf "%02d" }}</strong>
-                {{- with $paginator.Next }}<a href="{{ .URL }}" rel="next"><b>下一页</b><span>→</span></a>{{ else }}<span class="is-disabled"><b>下一页</b><span>→</span></span>{{ end -}}
+                {{- with $paginator.Next }}<a href="{{ .URL }}" rel="next"><b>Next</b><span>→</span></a>{{ else }}<span class="is-disabled"><b>Next</b><span>→</span></span>{{ end -}}
             </nav>
             {{- end -}}
         </main>
@@ -113,7 +113,7 @@
             {{- $advertising := .Site.Data.site.advertising -}}
             <section class="category-side-card">
                 <div class="category-side-head kicker category-side-head--pink">CATEGORY FILTER</div>
-                <nav class="category-side-nav" aria-label="分类筛选">
+                <nav class="category-side-nav" aria-label="Category filter">
                     {{- $categorySettings := .Site.Data.category_settings.categories -}}
                     {{- with .Site.GetPage "/categories" -}}
                     {{- range .Pages.ByTitle -}}
@@ -129,7 +129,7 @@
             {{- if and $advertising.article_sidebar_enabled $advertising.article_sidebar_code -}}
             <section class="category-side-card category-side-card--ad">
                 <div class="category-side-head kicker category-side-head--blue">ADVERTISEMENT</div>
-                <div class="category-side-body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                <div class="category-side-body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="Advertisement">
                     {{ $advertising.article_sidebar_code | safeHTML }}
                 </div>
             </section>
@@ -149,8 +149,8 @@
     </div>
 
 <div class="scroll-arrows scroll-arrows--right">
-    <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
-    <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+    <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
 </div>
 <script>
 (() => {
@@ -246,13 +246,13 @@
 
 <div class="search-modal" hidden>
     <div class="search-modal-backdrop" data-close></div>
-    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
-        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
         <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
-            <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
-            <button type="submit" aria-label="开始搜索">⌕</button>
+            <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+            <button type="submit" aria-label="Start search">⌕</button>
         </form>
-        <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
     </div>
 </div>
 <script>

@@ -3,7 +3,7 @@ title = "AI 生成的网页总是缺少设计感？试试 Taste Skill 和 Impecc
 date = "2026-08-04T21:57:00+08:00"
 draft = false
 description = "Taste Skill 和 Impeccable 是两个面向 Codex、Claude Code、Cursor 等 AI 编程工具的开源前端设计 Skill。Taste Skill 主要改善网页布局、字体、留白和视觉风格，Impeccable 则通过 23 个设计命令检查和精修已有页面。本文介绍两个项目的区别、安装命令、使用方法和可直接复制的网页优化提示词。"
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI设计Skill", "Codex前端设计", "AI生成网页优化", "AI前端设计"]
 +++
 

@@ -3,7 +3,7 @@ title = "HyperFrames：用一句提示词生成网页动画，并渲染为 MP4 �
 date = "2026-07-28T12:07:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI视频生成", "AI编程助手", "Codex", "短视频制作", "开源视频工具"]
 +++
 

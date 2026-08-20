@@ -2,7 +2,7 @@
 title = "为什么别人网站秒开，你的网站却要等半天？先别急着升级服务器."
 date = "2026-07-27T17:51:00+08:00"
 draft = false
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["网站速度优化", "CDN 加速", "图片压缩", "WebP", "网站性能", "服务器优化", "CDN 回源"]
 +++
 

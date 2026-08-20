@@ -1,15 +1,24 @@
-[categories.AI]
+[categories."AI & Automation"]
 show_on_home = true
 show_in_archives = true
+slug = ""
 
-[categories."政策"]
-show_on_home = false
-show_in_archives = false
-
-[categories."软件"]
+[categories."Web & Hosting"]
 show_on_home = true
 show_in_archives = true
+slug = ""
 
-[categories."随笔"]
+[categories."Software & Tools"]
 show_on_home = true
 show_in_archives = true
+slug = "software"
+
+[categories."Tech Notes"]
+show_on_home = true
+show_in_archives = true
+slug = "notes"
+
+[categories."SEO & Growth"]
+show_on_home = true
+show_in_archives = true
+slug = "seo"

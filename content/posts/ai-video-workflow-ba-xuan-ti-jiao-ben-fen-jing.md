@@ -3,7 +3,7 @@ title = "AI Video Workflow：把选题、脚本、分镜到剪辑发布串成一
 date = "2026-07-28T14:35:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI Video Workflow", "AI视频工作流", "AI视频制作", "AI视频生成", "AI分镜", "AI脚本生成", "智能剪辑", "短视频制作", "ViMax"]
 +++
 

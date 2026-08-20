@@ -4,7 +4,7 @@ date = "2026-08-13T22:37:00+08:00"
 draft = false
 description = "内容说明： 本文根据 FlyingMouse Format 官方 GitHub 资料整理，主要介绍功能、适用场景和已知限制，并非完整实测文章。"
 featured = true
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["飞鼠格式", "文件格式转换工具", "PDF转Word", "NCM转MP3", "开源工具"]
 
 [download]

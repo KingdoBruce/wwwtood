@@ -9,7 +9,7 @@
 {{- $links := .Site.Data.friends.links -}}
 {{- $categoryGroups := slice -}}
 {{- range $name, $taxonomy := site.Taxonomies.categories -}}
-    {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
+    {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" $taxonomy.Page.RelPermalink) -}}
 {{- end -}}
 <div class="signal-home">
     <div class="wrap">
@@ -21,8 +21,8 @@
             <section class="friends-hero">
                 <div class="hero-main">
                     <div class="hero-meta kicker"><span>CURATED NETWORK / OPEN WEB</span><span>LINK.DATA / {{ now.Format "2006.01" }}</span></div>
-                    <h1>朋友们的<span>网站</span></h1>
-                    <p class="hero-desc">这里收录长期更新、内容原创、值得反复访问的网站。它们不是简单的链接堆积，而是拾光集之外的一层可信信息网络。</p>
+                    <h1>Friends'<span>Websites</span></h1>
+                    <p class="hero-desc">Here we collect websites that are regularly updated, original, and worth revisiting. They are not a simple pile of links, but a layer of trusted information beyond TOOD.WIN.</p>
                     <div class="hero-stats mono">
                         <span>{{ len $links }} SITES</span>
                         <span>MANUAL REVIEW</span>
@@ -37,7 +37,7 @@
                     </div>
                     <div>
                         <div class="stat">{{ printf "%02d" (len $links) }}</div>
-                        <div class="kicker">收录网站</div>
+                        <div class="kicker">CURATED SITES</div>
                     </div>
                 </aside>
             </section>
@@ -45,37 +45,37 @@
             <section class="friend-intro">
                 <div class="intro-copy">
                     <div class="kicker">ABOUT THE NETWORK</div>
-                    <h2>不是交换排名，<br>而是相互发现</h2>
-                    <p>仅收录持续更新、内容清晰、没有恶意跳转或大量采集的网站。排列顺序不代表推荐等级，也不接受付费置顶。</p>
+                    <h2>Not link ranking,<br>but mutual discovery</h2>
+                    <p>Only websites with ongoing updates, clear content, and no malicious redirects or heavy scraping are included. The order does not imply a recommendation ranking, and paid placements are not accepted.</p>
                 </div>
                 <div class="apply-box">
                     <div>
                         <div class="kicker">LINK EXCHANGE</div>
-                        <h2>申请加入友链</h2>
-                        <p>准备好站名、网址、简介、Logo 和联系方式后，即可提交申请。</p>
+                        <h2>Apply to Join</h2>
+                        <p>Once you have your site name, URL, description, logo and contact info ready, you can submit your application.</p>
                     </div>
-                    <a class="apply-btn" href="#apply"><span>查看申请要求</span><b>↓</b></a>
+                    <a class="apply-btn" href="#apply"><span>VIEW REQUIREMENTS</span><b>↓</b></a>
                 </div>
             </section>
 
             <div class="tools">
                 <label class="search-box">
-                    <input id="friendSearch" type="search" placeholder="搜索站名、简介或网址……">
+                    <input id="friendSearch" type="search" placeholder="Search name, description or URL...">
                     <button type="button">⌕</button>
                 </label>
                 <div class="filters" id="filters">
-                    <button class="filter-btn active" data-filter="全部">全部</button>
+                    <button class="filter-btn active" data-filter="All">All</button>
                 </div>
             </div>
 
             <div class="section-head">
-                <h2>友情链接</h2>
+                <h2>Friend Links</h2>
                 <span class="kicker"><span id="visibleCount">{{ len $links }}</span> SITES VISIBLE</span>
             </div>
 
             <section class="friend-grid" id="friendGrid">
                 {{- range $i, $link := $links -}}
-                <a class="friend-card" href="{{ $link.url }}" target="_blank" rel="noopener noreferrer" data-type="全部" data-search="{{ $link.name }} {{ $link.description }} {{ $link.url }}"{{ if not $link.show_on_home }} data-home="hidden"{{ end }}>
+                <a class="friend-card" href="{{ $link.url }}" target="_blank" rel="noopener noreferrer" data-type="All" data-search="{{ $link.name }} {{ $link.description }} {{ $link.url }}"{{ if not $link.show_on_home }} data-home="hidden"{{ end }}>
                     <div class="friend-main-row">
                         <span class="friend-logo-wrap">
                             {{ if $link.logo }}<img class="friend-logo" src="{{ $link.logo }}" alt="{{ $link.name }}" loading="lazy">{{ else }}<span class="friend-logo">{{ substr $link.name 0 1 }}</span>{{ end }}
@@ -96,8 +96,8 @@
 
             <section class="empty-state" id="emptyState">
                 <strong>0</strong>
-                <h2>没有找到匹配的网站</h2>
-                <p>换一个更短的关键词，或重新选择“全部”。</p>
+                <h2>No matching websites found</h2>
+                <p>Try a shorter keyword, or select "All" again.</p>
             </section>
 
             <section class="rules-section" id="apply">
@@ -106,36 +106,36 @@
                     <div class="rules-grid">
                         <div class="rule">
                             <span class="kicker">01 / CONTENT</span>
-                            <strong>内容持续更新</strong>
-                            <p>网站应有明确主题，并保持正常更新，不接受长期空站。</p>
+                            <strong>Regular updates</strong>
+                            <p>Websites should have a clear topic and regular updates. Long-dormant empty sites are not accepted.</p>
                         </div>
                         <div class="rule">
                             <span class="kicker">02 / ORIGINAL</span>
-                            <strong>以原创为主</strong>
-                            <p>不接受大量采集、机器搬运或纯聚合类型的网站。</p>
+                            <strong>Original content</strong>
+                            <p>Sites with heavy scraping, machine-copied content, or pure aggregation are not accepted.</p>
                         </div>
                         <div class="rule">
                             <span class="kicker">03 / SAFE</span>
-                            <strong>访问安全稳定</strong>
-                            <p>不能包含恶意跳转、强制下载、欺骗按钮或违规内容。</p>
+                            <strong>Safe & stable</strong>
+                            <p>No malicious redirects, forced downloads, deceptive buttons, or illegal content.</p>
                         </div>
                         <div class="rule">
                             <span class="kicker">04 / EXCHANGE</span>
-                            <strong>先添加本站</strong>
-                            <p>申请前请先添加拾光集，并提供友链页面地址。</p>
+                            <strong>Add us first</strong>
+                            <p>Please add TOOD.WIN first and provide your link page URL.</p>
                         </div>
                     </div>
                 </div>
                 <aside class="site-info">
                     <div class="kicker">MY SITE INFO</div>
-                    <h2>拾光集友链信息</h2>
+                    <h2>TOOD.WIN Link Info</h2>
                     <div class="info-list">
-                        <div class="info-row"><span>站名</span><b>{{ default "拾光集 TOOD.WIN" $brand.name }}</b></div>
-                        <div class="info-row"><span>网址</span><b class="mono">{{ .Site.BaseURL }}</b></div>
-                        <div class="info-row"><span>简介</span><b>记录工具、项目、踩坑与解决方法</b></div>
-                        <div class="info-row"><span>联系</span><b class="mono">admin@tood.win</b></div>
+                        <div class="info-row"><span>Site</span><b>{{ default "Tood.win | Tech Notes" $brand.name }}</b></div>
+                        <div class="info-row"><span>URL</span><b class="mono">{{ .Site.BaseURL }}</b></div>
+                        <div class="info-row"><span>Description</span><b>Tools, projects, pitfalls and solutions</b></div>
+                        <div class="info-row"><span>Contact</span><b class="mono">admin@tood.win</b></div>
                     </div>
-                    <button class="copy-btn" id="copyInfo">复制友链信息</button>
+                    <button class="copy-btn" id="copyInfo">Copy link info</button>
                 </aside>
             </section>
         </div>
@@ -145,18 +145,18 @@
 
     <div class="search-modal" hidden>
         <div class="search-modal-backdrop" data-close></div>
-        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
-            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
             <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
-                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
-                <button type="submit" aria-label="开始搜索">⌕</button>
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
             </form>
-            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
         </div>
     </div>
     <div class="scroll-arrows scroll-arrows--right">
-        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
-        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+        <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
     </div>
 </div>
 
@@ -209,13 +209,13 @@
     searchInput.addEventListener('input', updateFriends);
 
     document.getElementById('copyInfo').addEventListener('click', async (event) => {
-        const text = `站名：{{ default "拾光集" $brand.name }}\n网址：{{ .Site.BaseURL }}\n简介：记录工具、项目、踩坑与解决方法\n联系：admin@tood.win`;
+        const text = `Site: {{ default "Tood.win | Tech Notes" $brand.name }}\nURL: {{ .Site.BaseURL }}\nDescription: Tools, projects, pitfalls and solutions\nContact: admin@tood.win`;
         try {
             await navigator.clipboard.writeText(text);
-            event.currentTarget.textContent = '已复制';
-            setTimeout(() => (event.currentTarget.textContent = '复制友链信息'), 1600);
+            event.currentTarget.textContent = 'Copied';
+            setTimeout(() => (event.currentTarget.textContent = 'Copy link info'), 1600);
         } catch (error) {
-            event.currentTarget.textContent = '复制失败';
+            event.currentTarget.textContent = 'Copy failed';
         }
     });
 

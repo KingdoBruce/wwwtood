@@ -2,7 +2,7 @@
 title = "宝塔面板开心版11.0.0 更新：修复与优化并行，体验再升级"
 date = "2026-08-05T23:08:00+08:00"
 draft = false
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["宝塔面板开心版", "宝塔开心版升级命令", "宝塔第三方企业版"]
 featured = true
 +++

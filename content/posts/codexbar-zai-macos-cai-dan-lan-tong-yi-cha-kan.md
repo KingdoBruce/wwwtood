@@ -3,7 +3,7 @@ title = "CodexBar：在 macOS 菜单栏统一查看 AI 编程工具额度"
 date = "2026-07-28T20:22:00+08:00"
 draft = false
 featured = true
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["AI编程工具", "Cursor", "Gemini", "OpenRouter"]
 +++
 

@@ -3,7 +3,7 @@ title = "9 个常用站内 SEO 工具：从收录、关键词到用户行为，�
 date = "2026-07-24T18:05:00+08:00"
 draft = false
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["SEO 工具", "SEO", "建站"]
 +++
 

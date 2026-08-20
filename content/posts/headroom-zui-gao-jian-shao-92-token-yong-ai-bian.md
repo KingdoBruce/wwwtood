@@ -2,7 +2,7 @@
 title = "Headroom：最高减少 92% Token，用 AI 编程时别再把钱浪费在无效上下文上"
 date = "2026-07-27T20:09:00+08:00"
 draft = false
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Headroom", "AI编程工具", "Codex", "Cursor", "AI Agent", "MCP", "跨Agent记忆"]
 +++
 

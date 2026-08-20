@@ -2,7 +2,7 @@
 title = "xianyu-auto-reply-fix：开源闲鱼自动回复与自动发货管理系统部署教程"
 date = "2026-07-29T16:09:00+08:00"
 draft = false
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["AI客服"]
 featured = true
 +++

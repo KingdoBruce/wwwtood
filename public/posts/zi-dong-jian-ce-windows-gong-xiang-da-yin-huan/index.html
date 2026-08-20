@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在企业局域网办公环境中，Windows 共享打印机一直都是 IT 运维中非常常见的问题之一。\n尤其是近年来微软频繁推送 Windows 安全更新和系统补丁后，原本使用正常的共享打印机，有时会突然无法连接，并出现 0x0000011b、0x00000709、“拒绝访问” 等错误。\n">
+<title>Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问 - Software &amp; Tools - Tood.win | Tech Notes, AI Tools &amp; Web Development</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.3c8ba4eb96e990e1006031c4cbd8c43e5683ccac3ae62e43d2a608017772f313.css"><meta property='og:title' content="Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问 - Software & Tools - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta property='og:description' content="在企业局域网办公环境中，Windows 共享打印机一直都是 IT 运维中非常常见的问题之一。\n尤其是近年来微软频繁推送 Windows 安全更新和系统补丁后，原本使用正常的共享打印机，有时会突然无法连接，并出现 0x0000011b、0x00000709、“拒绝访问” 等错误。\n">
+<meta property='og:url' content='https://www.tood.win/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='共享打印机' /><meta property='article:tag' content='0x0000011b' /><meta property='article:tag' content='0x00000709' /><meta property='article:published_time' content='2026-08-15T20:32:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-15T21:32:22&#43;08:00'/>
+<meta name="twitter:title" content="Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问 - Software & Tools - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta name="twitter:description" content="在企业局域网办公环境中，Windows 共享打印机一直都是 IT 运维中非常常见的问题之一。\n尤其是近年来微软频繁推送 Windows 安全更新和系统补丁后，原本使用正常的共享打印机，有时会突然无法连接，并出现 0x0000011b、0x00000709、“拒绝访问” 等错误。\n">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<link rel="shortcut icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="共享打印机, 0x0000011b, 0x00000709">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问\"",
+  "description": "\"在企业局域网办公环境中，Windows 共享打印机一直都是 IT 运维中非常常见的问题之一。\\n尤其是近年来微软频繁推送 Windows 安全更新和系统补丁后，原本使用正常的共享打印机，有时会突然无法连接，并出现 0x0000011b、0x00000709、“拒绝访问” 等错误。\\n\"",
+  "datePublished": "\"2026-08-15T20:32:00+08:00\"",
+  "dateModified": "\"2026-08-15T21:32:22+08:00\"",
+  "url": "\"https://www.tood.win/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/08/tood-win-logo-a26f7c69.png" alt="Tood.win | Tech Notes">
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">Home</a>
+        <a href="/archives/#current-archive">Latest</a>
+        <a class="" href="/archives/">Categories</a>
+        <a class="" href="/tags/">Tags</a>
+        <a class="" href="/about/">About</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="Search articles" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/software/">SOFTWARE &amp; TOOLS</a><span>/</span><a href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / SOFTWARE &amp; TOOLS</span>
+                <span>LIVE DATA / A.2608.090</span>
+            </div>
+            <h1>Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</h1>
+            <p class="article-deck">在企业局域网办公环境中，Windows 共享打印机一直都是 IT 运维中非常常见的问题之一。
+尤其是近年来微软频繁推送 Windows 安全更新和系统补丁后，原本使用正常的共享打印机，有时会突然无法连接，并出现 0x0000011b、0x00000709、“拒绝访问” 等错误。
+</p>
+            <div class="author-line mono">
+                <span>BY TOOD.WIN | TECH NOTES</span>
+                <span>2026.08.15</span>
+                <span>4 MIN READ</span>
+                <span>1643 WORDS</span>
+                <span>SOFTWARE &amp; TOOLS</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A90</strong>
+                <p class="mono">JAN. 15<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">00</div>
+                <div class="kicker">SECTIONS</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="Advertisement"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>在企业局域网办公环境中，<strong><a class="link" href="/tags/windows/" >Windows</a> 共享打印机</strong>一直都是 IT 运维中非常常见的问题之一。</p>
+<p>尤其是近年来微软频繁推送 Windows 安全更新和系统补丁后，原本使用正常的共享打印机，有时会突然无法连接，并出现 <strong><code>0x0000011b</code></strong>、<strong><code>0x00000709</code></strong>、<strong>“拒绝访问”</strong> 等错误。</p>
+<p>对于普通用户来说，这类问题往往很难判断到底是打印机故障、网络问题，还是 Windows 系统策略导致的。</p>
+<p>今天分享一款非常实用的 <strong>Windows 添加共享打印机小工具</strong>。</p>
+<p>它没有复杂华丽的 UI，界面甚至可以说有些朴素，但功能非常直接：<strong>自动检测 Windows 共享打印环境，并针对常见的系统策略、权限和服务问题进行修复，让添加网络共享打印机变得更加简单。</strong></p>
+<p><img alt="Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/81bf47a1-61ef-4bab-9d24-57db3210a908-06787703.webp"></p>
+<hr>
+<h4 id="为什么-windows-共享打印机经常连接失败">为什么 Windows 共享打印机经常连接失败？
+</h4><p>很多用户遇到共享打印机无法连接时，第一反应通常是重启电脑、重新添加打印机，甚至重新安装驱动。</p>
+<p>但实际上，很多问题并不出在打印机本身，而是 Windows 系统底层的共享策略、权限或服务发生了变化。</p>
+<p>这款工具提供了一个比较完整的 <strong>“本机共享环境检测报告”</strong>，可以帮助用户快速定位常见问题。</p>
+<p>比较典型的原因主要有以下几种：</p>
+<ol>
+<li>
+<p><strong>RPC 鉴权限制</strong></p>
+<p>Windows 安全更新可能会调整 RPC 相关安全策略，这也是共享打印机出现 <strong><code>0x0000011b</code></strong> 错误的常见原因之一。</p>
+</li>
+<li>
+<p><strong>打印机驱动权限受限</strong></p>
+<p>系统无法正常下载、安装或映射共享打印机驱动时，可能会出现 <strong><code>0x00000709</code></strong> 等错误。</p>
+</li>
+<li>
+<p><strong>Print Spooler 服务异常</strong></p>
+<p>Windows 的 Print Spooler，也就是“打印后台处理程序”服务如果被停止或运行异常，可能直接导致打印机无法发现、无法添加，甚至打印机列表为空。</p>
+</li>
+<li>
+<p><strong>Guest 来宾访问被禁止</strong></p>
+<p>某些局域网共享环境依赖 Guest 或网络凭据进行身份验证，如果 Windows 安全策略禁止相关访问，就可能直接出现无权限、拒绝访问等情况。</p>
+</li>
+</ol>
+<hr>
+<h4 id="三步完成共享打印环境修复">三步完成共享打印环境修复
+</h4><p>相比网上大量需要手动修改注册表、服务和系统策略的教程，这款工具最大的优势就是把复杂操作进行了整合。</p>
+<p>整个流程基本可以分成三步。</p>
+<h4 id="第一步检测共享环境并自动修复">第一步：检测共享环境并自动修复
+</h4><p>软件启动后会自动检测当前 Windows 的共享打印环境，包括：</p>
+<ul>
+<li>RPC 相关策略</li>
+<li>打印机驱动权限</li>
+<li>Print Spooler 服务状态</li>
+<li>防火墙 ICMP 状态</li>
+<li>当前网络类型</li>
+<li>专用网络 / 工作网络设置</li>
+<li>Guest 来宾访问相关策略</li>
+</ul>
+<p>如果检测到异常，软件会直接提示：</p>
+<p><strong>“发现异常，点击修复”</strong></p>
+<p>用户只需要执行修复，程序就会自动调整相关注册表项、系统策略以及服务状态，不需要再手动进入注册表编辑器逐项修改。</p>
+<p>对于不熟悉 Windows 系统设置的用户来说，这一点非常方便。</p>
+<hr>
+<h4 id="第二步添加-windows-凭据">第二步：添加 Windows 凭据
+</h4><p>局域网跨电脑连接共享打印机时，另一个常见问题就是：</p>
+<p><strong>账号和密码验证失败。</strong></p>
+<p>有时候明明能够访问对方电脑，但连接共享打印机时仍然会不断要求输入用户名和密码，或者直接提示没有访问权限。</p>
+<p>这款工具可以协助向 Windows 的 <strong>“凭据管理器”</strong> 添加对应的网络访问凭据。</p>
+<p>完成后，系统在访问目标共享电脑时即可直接使用已经保存的身份信息进行验证，减少因为账户认证问题导致的共享打印失败。</p>
+<hr>
+<h4 id="第三步添加网络共享打印机">第三步：添加网络共享打印机
+</h4><p>当共享环境、系统权限以及 Windows 凭据全部处理完成之后，就可以直接添加局域网中的共享打印机。</p>
+<p>前面的系统策略和权限问题已经被处理，最后的打印机挂载过程自然会简单很多。</p>
+<p>对于经常遇到：</p>
+<ul>
+<li><code>0x0000011b</code></li>
+<li><code>0x00000709</code></li>
+<li>拒绝访问</li>
+<li>无法连接到打印机</li>
+<li>找不到网络打印机</li>
+<li>打印机驱动无法安装</li>
+</ul>
+<p>这类问题的电脑来说，可以省去大量手动排查时间。</p>
+<hr>
+<h4 id="运行说明">运行说明
+</h4><p>这款工具采用原生接口开发，整体非常轻量。</p>
+<p>如果下载后双击程序没有任何反应，或者提示缺少 DLL、运行环境等错误，一般不是程序损坏，而是 Windows 系统缺少必要的 <strong>C++ 运行环境</strong>。</p>
+<p>这种情况下，只需要安装：</p>
+<p><strong>Microsoft Visual C++ Redistributable（微软常用运行库）</strong></p>
+<p>安装完成后重新打开程序即可。</p>
+<hr>
+<h4 id="总结">总结
+</h4><p>很多 Windows 共享打印机故障，看起来像打印机或者网络出现了问题，实际上真正的原因往往隐藏在 Windows 的系统策略、RPC 权限、打印服务、驱动权限和网络凭据之中。</p>
+<p>而这款工具最大的价值，就是把这些复杂的<strong>底层逻辑</strong>封装起来：</p>
+<p><strong>检测异常 → 自动修复 → 添加凭据 → 添加共享打印机。</strong></p>
+<p>不需要普通用户研究注册表，也不需要反复尝试各种网上教程。</p>
+<p>如果你的公司、办公室或者家中经常需要连接 Windows 局域网共享打印机，或者长期被 <strong><code>0x0000011b</code>、<code>0x00000709</code>、拒绝访问</strong> 等问题折腾，这类工具非常适合放进自己的 IT 运维工具箱或 U 盘里备用。</p>
+
+</section>
+
+
+            
+            <section class="article-download">
+    <div class="resource-body">
+        <article class="float-card" aria-labelledby="article-download-title">
+
+            <div class="float-preview">
+                <div class="preview" aria-label="Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问 resource preview"><img src="/uploads/2026/08/81bf47a1-61ef-4bab-9d24-57db3210a908-06787703.webp" alt="Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问 resource cover" loading="lazy"></div>
+                <div class="preview-label mono">
+                    <span>PREVIEW / RAR</span>
+                    <span>SOFTWARE &amp; TOOLS</span>
+                </div>
+            </div>
+
+            <div class="float-content">
+                <div class="kicker">SOFTWARE &amp; TOOLS RESOURCE / CURATED BY US</div>
+                <h2 id="article-download-title">Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</h2>
+
+                <div class="chips">
+                    <span>Software &amp; Tools</span>
+                    <span>rar</span>
+                    <span>54.6 K</span><span>No password</span></div>
+
+                <div class="float-actions">
+                    <div class="action-status">
+                        <div>
+                            <span class="kicker">ACCESS STATUS</span>
+                            <strong>ONLINE / VERIFIED</strong>
+                        </div><span class="mono">NO PASSWORD</span></div>
+                    <a class="download-btn" href="https://iezyw.lanzouv.com/itBSg3km9n7a" target="_blank" rel="noopener noreferrer nofollow">
+                        <span>Download</span>
+                        <b aria-hidden="true">↗</b>
+                    </a>
+                </div>
+            </div>
+
+        </article>
+    </div>
+</section>
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%85%B1%E4%BA%AB%E6%89%93%E5%8D%B0%E6%9C%BA/">共享打印机</a>
+        
+            <a href="/tags/0x0000011b/">0x0000011b</a>
+        
+            <a href="/tags/0x00000709/">0x00000709</a>
+        
+    </section>
+<nav class="prev-next" aria-label="Previous and next article"><a href="/posts/deepseek-harness-an-zhuang-rang-deepseek-v4-geng-wen-ding/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>DeepSeek Harness 安装教程：让 DeepSeek V4 更稳定地接入 MCP、Claude Code 与 AI 编程工具</strong>
+                    </a><a href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="Article sidebar">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#为什么-windows-共享打印机经常连接失败">为什么 Windows 共享打印机经常连接失败？</a></li>
+            <li><a href="#三步完成共享打印环境修复">三步完成共享打印环境修复</a></li>
+            <li><a href="#第一步检测共享环境并自动修复">第一步：检测共享环境并自动修复</a></li>
+            <li><a href="#第二步添加-windows-凭据">第二步：添加 Windows 凭据</a></li>
+            <li><a href="#第三步添加网络共享打印机">第三步：添加网络共享打印机</a></li>
+            <li><a href="#运行说明">运行说明</a></li>
+            <li><a href="#总结">总结</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="Advertisement">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">Latest Articles</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/wo-yong-guo-de-ji-jia-yu-ming-fu-wu/">
+                        <span class="side-article-title">我用过的几家域名服务商：Cloudflare、Namecheap、Spaceship 和国内云厂商怎么选？</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/4-fen-cheng-xu-yuan-xue-xi-zi-yuan-geng/">
+                        <span class="side-article-title">4 份程序员学习资源更新：Spring Cloud 微服务、LeetCode、面试与 WMS 项目</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/bai-du-wang-pan-bu-chong-hui-yuan-ye-neng/">
+                        <span class="side-article-title">百度网盘不充会员，也能试试这个提速设置</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/claude-seo-geo-ren-liang-tian-pao-wan-chuan-tong/">
+                        <span class="side-article-title">Claude &#43; SEO &#43; GEO：一个人两天跑完传统团队一个月的活</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                        <span class="side-article-title">视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</span>
+                        <span class="side-article-date mono">08.16</span>
+                    </a><a class="side-article-row" href="/posts/deepseek-harness-an-zhuang-rang-deepseek-v4-geng-wen-ding/">
+                        <span class="side-article-title">DeepSeek Harness 安装教程：让 DeepSeek V4 更稳定地接入 MCP、Claude Code 与 AI 编程工具</span>
+                        <span class="side-article-date mono">08.15</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">Editor's Picks</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                        <span class="side-article-title">视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</span>
+                        <span class="side-article-date mono">08.16</span>
+                    </a><a class="side-article-row" href="/posts/ollama-mo-xing-yu-jia-zai-yu-xian-cun-shi/">
+                        <span class="side-article-title">Ollama 模型预加载与显存释放工具</span>
+                        <span class="side-article-date mono">08.14</span>
+                    </a><a class="side-article-row" href="/posts/fei-shu-ge-shi-kai-yuan-mian-fei-de-pdf/">
+                        <span class="side-article-title">飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具</span>
+                        <span class="side-article-date mono">08.13</span>
+                    </a><a class="side-article-row" href="/posts/zhuo-pai-tai-qian-pi-liang-da-yin-gong-ju/">
+                        <span class="side-article-title">桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景</span>
+                        <span class="side-article-date mono">08.09</span>
+                    </a><a class="side-article-row" href="/posts/dlabel-yun-biao-qian-v3-6-5/">
+                        <span class="side-article-title">DLabel云标签v3.6.5 官方版本</span>
+                        <span class="side-article-date mono">08.08</span>
+                    </a><a class="side-article-row" href="/posts/windows-gong-zuo-ren-wu-ti-xing-gong-ju-zhi/">
+                        <span class="side-article-title">Windows 工作任务提醒工具：支持每月、每日和循环提醒</span>
+                        <span class="side-article-date mono">08.06</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data"><a href="/categories/software/"><span>Category</span><b>Software &amp; Tools</b></a>
+                    <a><span>Words</span><b>1643</b></a>
+                    <a><span>Reading</span><b>4 MIN</b></a>
+                    <a><span>Updated</span><b>08.15</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/b1c7096b-135f-4fcf-ba27-d70256eb1570-de08fb54.webp" alt="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具" loading="lazy"><code>01 / SOFTWARE &amp; TOOLS</code>
+                    <h3>视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>如果平时使用 yt-dlp 下载 B站、YouTube 或其他平台的视频，最大的门槛通常不是下载本身，而是需要记命令、管理下载任务以及查看文件状 …</p>
+                    <time>2026-08-16</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ollama-mo-xing-yu-jia-zai-yu-xian-cun-shi/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/f54df230-9996-4167-b152-1559525df093-255b9c34.webp" alt="Ollama 模型预加载与显存释放工具" loading="lazy"><code>02 / SOFTWARE &amp; TOOLS</code>
+                    <h3>Ollama 模型预加载与显存释放工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>这是一款针对 Ollama 本地大模型 的辅助工具，主要解决两个问题：
+提前加载模型到显存 / 内存，减少首次对话时的等待时间 手动卸载模型，快 …</p>
+                    <time>2026-08-14</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/fei-shu-ge-shi-kai-yuan-mian-fei-de-pdf/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/e8e87015-aa07-40ef-8976-83f4abb86d33-ccf60f28.jpg" alt="飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具" loading="lazy"><code>03 / SOFTWARE &amp; TOOLS</code>
+                    <h3>飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>飞鼠格式（FlyingMouse Format）是一款开源文件转换工具，主要解决 PDF、Office 文档、图片、音视频等格式互转问题。
+它比 …</p>
+                    <time>2026-08-13</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/zhuo-pai-tai-qian-pi-liang-da-yin-gong-ju/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/a2e0713c-fded-4f9c-b422-44f7eb223cf4-f266856c.jpg" alt="桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景" loading="lazy"><code>04 / SOFTWARE &amp; TOOLS</code>
+                    <h3>桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>这是一款用于 桌牌、台签、席卡、座位牌 制作与打印的实用小工具，适合会议、培训、活动、展会、婚宴、学校及单位办公等需要批量制作人员桌牌的场景。 …</p>
+                    <time>2026-08-09</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>Some resources on this site (<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>) come from public internet sources and are provided for learning and reference only. We charge no fees and sell no resources.</p>
+            <p>Related content does not necessarily represent the views of this site. We do not guarantee its authenticity, accuracy, or validity. Please judge and use it with caution.</p>
+            <p>If there is any infringement, violation, or broken resource link, please contact <a href="mailto:admin@tood.win">admin@tood.win</a>. After verification, we will remove, handle, or update it in a timely manner.</p>
+            <p>Any illegal or unlawful use of this site's content is strictly prohibited.</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">Tood.win | Tech Notes</a><p>Tested in practice. Shared to help you build.</p></div>
+    <div><h4>Content</h4><a href="/categories/ai--automation/">ai &amp; automation</a><a href="/categories/software/">software &amp; tools</a><a href="/categories/notes/">tech notes</a><a href="/categories/web--hosting/">web &amp; hosting</a></div>
+    <div><h4>Navigation</h4><a href="/archives/">Archive</a><a href="/tags/">Tags</a><a href="/about/">About</a><a href="/links/">Friend Links</a></div>
+    <div><h4>Policy</h4><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/please-allow-ads-on-shiguangji-en/">Allow Ads</a><a href="/about/">Contact</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> Tood.win | Tech Notes</span><span class="end-links"><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/links/">Friend Links</a></span><span>BUILT WITH HUGO</span></div>
+<script>
+(() => {
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = new Date().getFullYear();
+    });
+})();
+</script>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

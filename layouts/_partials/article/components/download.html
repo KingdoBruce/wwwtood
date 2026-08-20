@@ -1,23 +1,23 @@
 {{- with .Params.download -}}
 {{- if and .enabled .url -}}
-{{- $category := "资源" -}}
+{{- $category := "Resource" -}}
 {{- with $.Params.categories }}{{ $category = index . 0 }}{{ end -}}
-{{- $format := .format | default "资源文件" -}}
-{{- $size := .size | default "以下载页为准" -}}
-{{- $source := .source | default "本站整理" -}}
+{{- $format := .format | default "Resource File" -}}
+{{- $size := .size | default "See download page" -}}
+{{- $source := .source | default "Curated by us" -}}
 <section class="article-download">
     <div class="resource-body">
         <article class="float-card" aria-labelledby="article-download-title">
 
             <div class="float-preview">
-                <div class="preview" aria-label="{{ $.Title }}资源预览图">
+                <div class="preview" aria-label="{{ $.Title }} resource preview">
                     {{- $cover := "" -}}
                     {{- with $.Params.cover -}}{{- $cover = . -}}{{- else -}}
                     {{- $img := findRE "<img[^>]*src=[\"'][^\"']*[\"']" $.Content 1 -}}
                     {{- with $img }}{{ $cover = (index $img 0) | replaceRE ".*src=[\"']([^\"']*)[\"'].*" "$1" }}{{ end -}}
                     {{- end -}}
                     {{- if $cover -}}
-                    <img src="{{ $cover | safeURL }}" alt="{{ $.Title }}资源封面" loading="lazy">
+                    <img src="{{ $cover | safeURL }}" alt="{{ $.Title }} resource cover" loading="lazy">
                     {{- else -}}
                     <span class="preview-placeholder">TOOD</span>
                     {{- end -}}
@@ -37,9 +37,9 @@
                     <span>{{ $format }}</span>
                     <span>{{ $size }}</span>
                     {{- with .code -}}
-                    <span>需提取码</span>
+                    <span>Password required</span>
                     {{- else -}}
-                    <span>无需提取码</span>
+                    <span>No password</span>
                     {{- end -}}
                 </div>
 
@@ -51,15 +51,15 @@
                         </div>
                         {{- with .code -}}
                         <details class="resource-code">
-                            <summary class="mono">查看提取码</summary>
-                            <code onclick="navigator.clipboard.writeText(this.textContent);this.textContent='已复制';setTimeout(()=>this.textContent='{{ . }}',1200)">{{ . }}</code>
+                            <summary class="mono">View password</summary>
+                            <code onclick="navigator.clipboard.writeText(this.textContent);this.textContent='Copied';setTimeout(()=>this.textContent='{{ . }}',1200)">{{ . }}</code>
                         </details>
                         {{- else -}}
                         <span class="mono">NO PASSWORD</span>
                         {{- end -}}
                     </div>
                     <a class="download-btn" href="{{ .url }}" target="_blank" rel="noopener noreferrer nofollow">
-                        <span>下载资源</span>
+                        <span>Download</span>
                         <b aria-hidden="true">↗</b>
                     </a>
                 </div>

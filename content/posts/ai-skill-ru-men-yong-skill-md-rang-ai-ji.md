@@ -3,7 +3,7 @@ title = "AI Skills 入门教程：用一个 SKILLs.md，让 AI 记住你的工�
 date = "2026-07-28T15:54:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Agent Skills", "AI入门教程", "Claude Code Skills", "AI工作流", "提示词工程", "AI自动化"]
 cover = "/uploads/2026/07/QQ20260728-155400_1-b3640702.jpg"
 +++

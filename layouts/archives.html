@@ -17,17 +17,17 @@
         {{- with index $categorySettings $term.LinkTitle -}}
             {{- if isset . "show_in_archives" -}}{{- $showInArchives = .show_in_archives -}}{{- end -}}
         {{- end -}}
-        {{- if and $showInArchives (gt (len $term.Pages) 0) -}}{{- $visibleTerms = $visibleTerms | append $term -}}{{- end -}}
+        {{- if $showInArchives -}}{{- $visibleTerms = $visibleTerms | append $term -}}{{- end -}}
     {{- end -}}
     {{- $posts := where .Site.RegularPages "Section" "posts" -}}
     {{- $totalArticles := len $posts -}}
     {{- $monthlyPosts := where $posts "Date" ">=" (time (printf "%s-01T00:00:00+08:00" (now.Format "2006-01"))) -}}
     {{- $monthGroups := $posts.GroupByDate "2006-01" -}}
-    {{- $currentMonthName := now.Format "1 月" -}}
+    {{- $currentMonthName := now.Format "January" -}}
     {{- $monthsJSON := slice -}}
     {{- range $group := $monthGroups -}}
         {{- $monthLabel := "" -}}
-        {{- with index $group.Pages 0 }}{{ $monthLabel = .Date.Format "2006 年 1 月" }}{{ end }}
+        {{- with index $group.Pages 0 }}{{ $monthLabel = .Date.Format "January 2006" }}{{ end }}
         {{- $articles := slice -}}
         {{- range $article := $group.Pages -}}
             {{- $cat := "" -}}
@@ -44,19 +44,19 @@
 <header class="page-hero">
     <div class="hero-main">
         <div class="hero-meta kicker"><span>CONTENT DIRECTORY / CATEGORIES</span><span>UPDATED / {{ now.Format "2006.01" }}</span></div>
-        <h1>内容分类</h1>
-        <p class="page-deck">按主题进入拾光集的不同内容区。这里不是传统的栏目列表，而是一张持续更新的数字实践地图。</p>
+        <h1>Content Categories</h1>
+        <p class="page-deck">Browse the different content areas of TOOD.WIN by topic. This is not a traditional column list, but a continuously updated map of digital practice.</p>
         <div class="hero-stats mono"><span>{{ len $visibleTerms | printf "%02d" }} CATEGORIES</span><span>{{ $totalArticles | printf "%02d" }} ARTICLES</span><span>AI / WEB / SOFTWARE / NOTES</span></div>
     </div>
     <aside class="signal-box">
         <div>
-            <div class="kicker">本月新增</div>
+            <div class="kicker">NEW THIS MONTH</div>
             <strong>{{ len $monthlyPosts }}</strong>
             <p class="mono">{{ $currentMonthName }} / {{ now.Year }}</p>
         </div>
         <div>
             <div class="stat">{{ $totalArticles }}</div>
-            <div class="kicker">已收录文章</div>
+            <div class="kicker">ARCHIVED ARTICLES</div>
         </div>
     </aside>
 </header>
@@ -65,12 +65,12 @@
     <main class="archive-top">
         {{- with $visibleTerms -}}
         <div class="section-head kicker"><span>ALL SIGNAL GROUPS</span><span>{{ len . | printf "%02d" }} ITEMS</span></div>
-        <nav class="category-tags-row" aria-label="内容分类">
+        <nav class="category-tags-row" aria-label="Content categories">
             {{- range $index, $term := . -}}
             <a class="category-tag" href="{{ $term.RelPermalink }}">
                 <span class="category-tag-no mono">GROUP / {{ printf "%02d" (add $index 1) }}</span>
                 <strong class="category-tag-name">{{ $term.LinkTitle }}</strong>
-                <span class="category-tag-foot"><b>{{ len $term.Pages | printf "%02d" }}</b><span class="category-tag-go">进入分类 ↗</span></span>
+                <span class="category-tag-foot"><b>{{ len $term.Pages | printf "%02d" }}</b><span class="category-tag-go">OPEN ↗</span></span>
             </a>
             {{- end -}}
         </nav>
@@ -87,36 +87,36 @@
                     <div class="month-heading">
                         <div>
                             <div class="kicker">CURRENT ARCHIVE</div>
-                            <strong id="monthTitle">{{ range first 1 . }}{{ with index .Pages 0 }}{{ .Date.Format "2006 年 1 月" }}{{ end }}{{ end }}</strong>
+                            <strong id="monthTitle">{{ range first 1 . }}{{ with index .Pages 0 }}{{ .Date.Format "January 2006" }}{{ end }}{{ end }}</strong>
                         </div>
                         <span class="mono" id="monthCount"></span>
                     </div>
                     <div class="month-arrows">
-                        <button type="button" id="prevMonth" aria-label="上一个月">←</button>
-                        <button type="button" id="nextMonth" aria-label="下一个月">→</button>
+                        <button type="button" id="prevMonth" aria-label="Previous month">←</button>
+                        <button type="button" id="nextMonth" aria-label="Next month">→</button>
                     </div>
                 </div>
 
                 <div id="monthPages">
                     {{- range $groupIndex, $group := . -}}
-                    <section class="month-page{{ if eq $groupIndex 0 }} active{{ end }}" data-label="{{ with index $group.Pages 0 }}{{ .Date.Format "2006 年 1 月" }}{{ end }}">
+                    <section class="month-page{{ if eq $groupIndex 0 }} active{{ end }}" data-label="{{ with index $group.Pages 0 }}{{ .Date.Format "January 2006" }}{{ end }}">
                         <div class="article-month-list" data-month="{{ $groupIndex }}"></div>
                     </section>
                     {{- end -}}
                 </div>
 
-                <nav class="month-pagination mono" aria-label="按月分页">
-                    <button type="button" class="month-page-nav month-page-prev" aria-label="上一页月份"></button>
+                <nav class="month-pagination mono" aria-label="Monthly pagination">
+                    <button type="button" class="month-page-nav month-page-prev" aria-label="Previous page"></button>
                     <div class="month-pagination-track">
                         {{- range $groupIndex, $group := . -}}
                         <button class="month-btn{{ if eq $groupIndex 0 }} active{{ end }}" type="button" data-index="{{ $groupIndex }}"><strong>{{ replace $group.Key "-" "." }}</strong><small>{{ len $group.Pages }} ARTICLES</small></button>
                         {{- end -}}
                     </div>
-                    <button type="button" class="month-page-nav month-page-next" aria-label="下一页月份"></button>
+                    <button type="button" class="month-page-nav month-page-next" aria-label="Next page"></button>
                     <span class="month-pagination-status"></span>
                 </nav>
                 {{- else -}}
-                <div class="archive-month-empty">暂无可归档文章</div>
+                <div class="archive-month-empty">No articles to archive yet</div>
                 {{- end -}}
             </section>
         </main>
@@ -127,8 +127,8 @@
 <script type="application/json" id="archives-data">{{ $monthsJSON | jsonify | safeJS }}</script>
 
 <div class="scroll-arrows scroll-arrows--right">
-    <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
-    <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+    <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+    <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
 </div>
 
 <script>
@@ -273,13 +273,13 @@
 
 <div class="search-modal" hidden>
     <div class="search-modal-backdrop" data-close></div>
-    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
-        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
         <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
-            <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
-            <button type="submit" aria-label="开始搜索">⌕</button>
+            <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+            <button type="submit" aria-label="Start search">⌕</button>
         </form>
-        <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
     </div>
 </div>
 <script>

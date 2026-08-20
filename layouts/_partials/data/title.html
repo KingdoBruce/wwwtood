@@ -22,9 +22,9 @@
     {{- $pageTitle := default $siteTitle .Title -}}
     {{- if eq .Kind "taxonomy" -}}
         {{- if eq .Data.Plural "categories" -}}
-            {{- $pageTitle = "分类" -}}
+            {{- $pageTitle = "Categories" -}}
         {{- else if eq .Data.Plural "tags" -}}
-            {{- $pageTitle = "标签" -}}
+            {{- $pageTitle = "Tags" -}}
         {{- end -}}
     {{- end -}}
     {{- $title = $title | append $pageTitle -}}
@@ -37,13 +37,13 @@
         {{- if $categoryNames -}}
             {{- $title = $title | append (delimit $categoryNames " / ") -}}
         {{- else -}}
-            {{- $title = $title | append "未分类" -}}
+            {{- $title = $title | append "Uncategorized" -}}
         {{- end -}}
     {{- else if eq .Kind "term" -}}
         {{- if eq .Data.Plural "categories" -}}
-            {{- $title = $title | append "分类" -}}
+            {{- $title = $title | append "Categories" -}}
         {{- else if eq .Data.Plural "tags" -}}
-            {{- $title = $title | append "标签" -}}
+            {{- $title = $title | append "Tags" -}}
         {{- end -}}
     {{- end -}}
 

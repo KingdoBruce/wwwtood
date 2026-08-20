@@ -2,7 +2,7 @@
 title = "AI 搜索正在分走点击，2026 年还有必要继续做 SEO 吗？"
 date = "2026-07-23T20:22:00+08:00"
 draft = false
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["SEO", "建站", "AI搜索"]
 +++
 

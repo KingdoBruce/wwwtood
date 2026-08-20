@@ -3,7 +3,7 @@ title = "DLabel云标签v3.6.5 官方版本"
 date = "2026-08-08T19:38:00+08:00"
 draft = false
 description = "内容说明：本文根据现有项目功能说明整理，目前未提供完整实测环境、版本号及源码地址，因此主要介绍工具的设计思路和现有功能，不对资源占用、稳定性等未验证项目作结论。"
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["DLabel", "云标签", "标签打印"]
 aliases = ["/posts/dlabel-yun-biao-qian-v3-6-5-guan-fang-ban/"]
 

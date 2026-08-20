@@ -4,7 +4,7 @@ date = "2026-07-24T13:45:00+08:00"
 draft = false
 cover = "/uploads/2026/07/94a061f4-539f-4fef-9e98-11d51d5dc4a1-b4597ea7.png"
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Graphify", "AI", "知识图谱"]
 +++
 

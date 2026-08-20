@@ -38,7 +38,7 @@
     {{- end -}}
 
     <div class="tag-detail-shell">
-        <nav class="tag-breadcrumb mono" aria-label="面包屑">
+        <nav class="tag-breadcrumb mono" aria-label="Breadcrumb">
             <a href="{{ .Site.Home.RelPermalink }}">HOME</a><span>/</span>
             <a href="{{ `tags/` | relLangURL }}">TAGS</a><span>/</span>
             <strong>{{ upper .Title }}</strong>
@@ -48,8 +48,8 @@
             <div class="tag-hero-code"><span class="kicker">TAG INDEX</span><strong style="font-size:{{ $codeFont }}px">#{{ upper .Title }}</strong></div>
             <div class="tag-hero-content">
                 <div class="kicker">KEYWORD ARCHIVE / TOOD.WIN</div>
-                <h1>标签：{{ .Title }}</h1>
-                <p>{{ with .Description }}{{ . }}{{ else }}汇总所有包含「{{ .Title }}」标签的文章，内容横跨大模型、AI 编程、Agent、提示词、本地模型、图像生成与自动化工作流。{{ end }}</p>
+                <h1>Tag: {{ .Title }}</h1>
+                <p>{{ with .Description }}{{ . }}{{ else }}All articles tagged with {{ .Title }}, spanning LLMs, AI programming, agents, prompts, local models, image generation and automated workflows.{{ end }}</p>
                 {{- with $heroTags -}}
                 <div class="tag-hero-tags">
                     {{- range . -}}<a href="{{ printf `tags/%s/` (. | urlize) | relLangURL }}">{{ . }}</a>{{- end -}}
@@ -64,11 +64,11 @@
 
         <div class="tag-content-layout">
             <main class="tag-detail-main">
-                <section class="tag-about" aria-label="关于该标签">
+                <section class="tag-about" aria-label="About this tag">
                     <div class="tag-about-copy">
                         <div class="kicker">ABOUT THIS TAG</div>
-                        <h2>{{ .Title }} 内容索引</h2>
-                        <p>该标签会聚合多个分类中的 {{ .Title }} 相关文章，因此比单一分类更适合浏览交叉主题内容。</p>
+                        <h2>{{ .Title }} content index</h2>
+                        <p>This tag aggregates {{ .Title }} articles across multiple categories, making it better suited for browsing cross-topic content than a single category.</p>
                     </div>
                     <div class="tag-about-mark">
                         <span class="kicker">CURRENT TAG</span>
@@ -77,13 +77,13 @@
                     </div>
                 </section>
 
-                <div class="tag-section-head"><h2>{{ .Title }} 标签文章</h2><span class="kicker">15 ARTICLES PER PAGE</span></div>
+                <div class="tag-section-head"><h2>{{ .Title }} articles</h2><span class="kicker">15 ARTICLES PER PAGE</span></div>
                 <div class="tag-list-toolbar">
-                    <label class="tag-list-search"><input id="tagArticleSearch" type="search" placeholder="在「{{ .Title }}」标签中搜索文章……"><button id="tagSearchButton" type="button">搜索</button></label>
+                    <label class="tag-list-search"><input id="tagArticleSearch" type="search" placeholder='Search articles in tag "{{ .Title }}"...'><button id="tagSearchButton" type="button">Search</button></label>
                     <div class="tag-result-count mono"><span id="tagResultText">{{ $totalArticles }} ARTICLES</span></div>
                 </div>
 
-                <section class="tag-article-list" id="tagArticleList" aria-label="{{ .Title }}标签文章">
+                <section class="tag-article-list" id="tagArticleList" aria-label="{{ .Title }} tagged articles">
                     {{- range $index, $article := $paginator.Pages -}}
                         {{- $cover := "" -}}
                         {{- with $article.Params.cover }}{{ $cover = . }}{{ end -}}
@@ -123,12 +123,12 @@
                             </div>
                         </a>
                     {{- else -}}
-                        <p class="tag-article-empty">该标签暂时没有文章。</p>
+                        <p class="tag-article-empty">No articles with this tag yet.</p>
                     {{- end -}}
                 </section>
 
                 {{- if gt $paginator.TotalPages 1 -}}
-                <nav class="tag-pagination mono" aria-label="标签文章分页">
+                <nav class="tag-pagination mono" aria-label="Tag articles pagination">
                     {{- with $paginator.Prev }}<a class="tag-page-btn" href="{{ .URL }}" rel="prev">←</a>{{ else }}<span class="tag-page-btn is-disabled">←</span>{{ end -}}
                     {{- range $paginator.Pagers -}}
                         {{- if eq .PageNumber $paginator.PageNumber -}}<span class="tag-page-btn active">{{ .PageNumber | printf "%02d" }}</span>{{- else -}}<a class="tag-page-btn" href="{{ .URL }}">{{ .PageNumber | printf "%02d" }}</a>{{- end -}}
@@ -141,7 +141,7 @@
             <aside class="tag-detail-sidebar">
                 <section class="tag-side-card">
                     <div class="tag-side-head kicker tag-side-head--pink">POPULAR TAGS</div>
-                    <nav class="tag-side-nav" aria-label="热门标签">
+                    <nav class="tag-side-nav" aria-label="Popular tags">
                         {{- range site.Taxonomies.tags.ByCount | first 6 -}}
                             <a class="{{ if eq .Page.RelPermalink $currentURL }}active{{ end }}" href="{{ .Page.RelPermalink }}"><span>{{ .Page.Title }}</span><b>{{ .Count }}</b></a>
                         {{- end -}}
@@ -163,13 +163,13 @@
 
 <div class="search-modal" hidden>
     <div class="search-modal-backdrop" data-close></div>
-    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
-        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+    <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+        <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
         <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
-            <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
-            <button type="submit" aria-label="开始搜索">⌕</button>
+            <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+            <button type="submit" aria-label="Start search">⌕</button>
         </form>
-        <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+        <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
     </div>
 </div>
 

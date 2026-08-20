@@ -3,7 +3,7 @@ title = "2026 年建站技术怎么选：WordPress 与 Next.js，真正决定答
 date = "2026-07-23T18:34:00+08:00"
 draft = false
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["WordPress", "网站搭建"]
 +++
 

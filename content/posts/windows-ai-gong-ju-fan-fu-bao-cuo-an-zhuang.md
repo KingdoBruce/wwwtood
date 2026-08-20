@@ -3,7 +3,7 @@ title = "Windows AI 工具反复报错？安装 PowerShell 7，减少无效重�
 date = "2026-08-02T22:02:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["PowerShell 7", "Windows PowerShell", "AI Token", "AI Agent", "Windows 11", "WinGet", "VS Code", "Cursor", "Codex"]
 +++
 

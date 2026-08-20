@@ -4,7 +4,7 @@ date = "2026-08-04T22:11:00+08:00"
 draft = false
 description = "Video-use 是一个可接入 Claude Code、Codex 等 AI Agent 的开源视频剪辑 Skill。它能够根据自然语言指令分析原始素材，完成语音转录、口误与停顿删除、片段拼接、统一调色、字幕渲染、动画叠加和成片质量检查，并通过 `project.md` 保存项目进度，适合快速制作口播、教程、访谈和知识分享视频。"
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Video-use", "AI 视频剪辑", "开源视频剪辑工具", "AI 自动剪视频"]
 +++
 

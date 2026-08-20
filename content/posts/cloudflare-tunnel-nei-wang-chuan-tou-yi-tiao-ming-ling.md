@@ -3,7 +3,7 @@ title = "Cloudflare Tunnel 内网穿透教程：一条命令把本地服务暴�
 date = "2026-08-03T14:44:00+08:00"
 draft = false
 description = "本文介绍如何使用 Cloudflare Tunnel 将本地服务安全地连接到公网。临时演示可以通过一条 cloudflared tunnel --url 命令生成 HTTPS 公网地址；需要固定域名和长期运行时，则可创建命名隧道、配置 DNS 和系统服务。文章同时说明 Quick Tunnel 的并发、SSE 和稳定性限制，并提供多服务配置、常见故障排查与安全建议。"
-categories = ["随笔"]
+categories = ["Tech Notes"]
 tags = ["本地服务公网访问", "Webhook 调试", "无公网 IP", "开发工具"]
 +++
 

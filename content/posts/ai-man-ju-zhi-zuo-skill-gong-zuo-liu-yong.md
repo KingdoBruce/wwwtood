@@ -2,7 +2,7 @@
 title = "AI 漫剧制作 Skill 工作流：用剧本、资产和分镜提高创作效率"
 date = "2026-07-29T11:47:00+08:00"
 draft = false
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI漫剧", "AI短剧制作", "Claude Code Skills", "影视分镜", "角色一致性"]
 +++
 

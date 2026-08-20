@@ -3,7 +3,7 @@ title = "AnySearch Skill：为 AI Agent 减少无效搜索与 Token 浪费"
 date = "2026-07-27T16:47:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Token", "AI", "Skill", "AnySearch"]
 +++
 

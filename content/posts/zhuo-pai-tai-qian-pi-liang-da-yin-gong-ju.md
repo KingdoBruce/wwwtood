@@ -2,7 +2,7 @@
 title = "桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景"
 date = "2026-08-09T20:10:00+08:00"
 draft = false
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["牌打印工具", "台签打印软件", "席卡打印软件", "座位牌打印", "双面打印工具"]
 
 [download]

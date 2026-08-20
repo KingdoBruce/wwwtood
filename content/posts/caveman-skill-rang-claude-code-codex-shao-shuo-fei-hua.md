@@ -4,7 +4,7 @@ date = "2026-08-13T22:13:00+08:00"
 draft = false
 description = "内容说明：本文根据 Caveman 官方 GitHub 仓库、公开 Benchmark 和项目说明整理，未进行本站独立 Token 对照测试。文中的“平均减少约 65%”来自项目方测试结果，并不代表所有模型和任务都能获得相同效果。"
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Caveman Skill", "AI Skills", "Codex", "Claude Code", "AI 减少 Token"]
 +++
 

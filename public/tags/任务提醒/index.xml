@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>任务提醒 on 拾光集</title>
+        <link>https://www.tood.win/tags/%E4%BB%BB%E5%8A%A1%E6%8F%90%E9%86%92/</link>
+        <description>Recent content in 任务提醒 on 拾光集</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh</language>
+        <lastBuildDate>Thu, 06 Aug 2026 22:58:15 +0800</lastBuildDate><atom:link href="https://www.tood.win/tags/%E4%BB%BB%E5%8A%A1%E6%8F%90%E9%86%92/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>Windows 工作任务提醒工具：支持每月、每日和循环提醒</title>
+            <link>https://www.tood.win/posts/windows-gong-zuo-ren-wu-ti-xing-gong-ju-zhi/</link>
+            <pubDate>Thu, 06 Aug 2026 22:47:00 +0800</pubDate>
+            <guid>https://www.tood.win/posts/windows-gong-zuo-ren-wu-ti-xing-gong-ju-zhi/</guid>
+            <description>&lt;p&gt;公司每月都要按时收集和上报各类报表，但工作一忙，很容易忘记截止时间。为此，我做了一个轻量级工作任务提醒工具，用于提醒资料收集、报表提交和日常休息。&lt;/p&gt;&#xA;&lt;p&gt;软件支持三种提醒模式：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;每月任务&lt;/strong&gt;：每月在指定日期和时间提醒&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;每日任务&lt;/strong&gt;：每天在固定时间提醒&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;循环提醒&lt;/strong&gt;：在指定时间段内间隔提醒&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;可以自定义提醒内容、闹钟音效、响铃时长和弹窗显示时间。软件无需安装，支持开机自启动，也可以通过系统通知栏图标快速开启或关闭。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;适用系统：&lt;/strong&gt; Windows 7 及以上&#xA;&lt;strong&gt;软件大小：&lt;/strong&gt; 361 KB&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Windows 工作任务提醒工具：支持每月、每日和循环提醒&#34; loading=&#34;lazy&#34; sizes=&#34;(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px&#34; src=&#34;https://www.tood.win/uploads/2026/08/QQ20260806-224909-5f1aec67.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Windows 工作任务提醒工具：支持每月、每日和循环提醒&#34; loading=&#34;lazy&#34; sizes=&#34;(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px&#34; src=&#34;https://www.tood.win/uploads/2026/08/QQ20260806-224920-2f759379.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Windows 工作任务提醒工具：支持每月、每日和循环提醒&#34; loading=&#34;lazy&#34; sizes=&#34;(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px&#34; src=&#34;https://www.tood.win/uploads/2026/08/QQ20260806-224935-e8d2a224.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Windows 工作任务提醒工具：支持每月、每日和循环提醒&#34; loading=&#34;lazy&#34; sizes=&#34;(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px&#34; src=&#34;https://www.tood.win/uploads/2026/08/QQ20260806-224948-119fcb4f.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img alt=&#34;Windows 工作任务提醒工具：支持每月、每日和循环提醒&#34; loading=&#34;lazy&#34; sizes=&#34;(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px&#34; src=&#34;https://www.tood.win/uploads/2026/08/QQ20260806-225000-23002c67.png&#34;&gt;&lt;/p&gt;&#xA;</description>
+        </item></channel>
+</rss>

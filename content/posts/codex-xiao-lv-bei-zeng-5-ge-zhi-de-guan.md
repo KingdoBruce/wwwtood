@@ -3,7 +3,7 @@ title = "Codex 效率倍增：5 个值得关注的开源工具"
 date = "2026-07-27T19:40:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Codex", "AI编程", "开源工具", "AI开发工具", "Agent Skills", "Firecrawl", "Ponytail", "Graphify", "MCP", "AI Agent", "代码知识图谱", "Cursor"]
 +++
 

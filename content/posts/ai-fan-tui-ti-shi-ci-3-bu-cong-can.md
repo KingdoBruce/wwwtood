@@ -3,7 +3,7 @@ title = "AI 反推提示词教程：3 步从参考图片生成可复用的生图
 date = "2026-07-28T17:21:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI反推提示词", "图片反推提示词", "AI生图提示词", "提示词工程", "AI绘画教程"]
 +++
 

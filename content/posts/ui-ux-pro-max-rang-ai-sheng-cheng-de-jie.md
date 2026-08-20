@@ -4,7 +4,7 @@ date = "2026-07-27T21:55:00+08:00"
 draft = false
 cover = "/uploads/2026/07/12_2-026d34e7.jpg"
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI生成UI", "AI前端开发", "AI编程工具", "UI设计知识库", "Codex", "Cursor", "开源项目"]
 +++
 

@@ -3,7 +3,7 @@ title = "独立站别急着上线：从建站第一天开始做对的 Google SEO
 date = "2026-07-23T19:29:00+08:00"
 draft = false
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["SEO", "建站", "GOOGLE收录", "搜索引擎优化"]
 +++
 

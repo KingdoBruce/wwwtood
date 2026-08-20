@@ -2,7 +2,7 @@
 title = "DigitalPlat 免费域名申请教程：GitHub 登录、Cloudflare 解析与避坑指南"
 date = "2026-07-31T11:11:00+08:00"
 draft = false
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["DigitalPlat FreeDomain", "us.kg"]
 featured = true
 +++

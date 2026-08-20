@@ -3,7 +3,7 @@ title = "AI 换图常用提示词：将产品自然融入新场景"
 date = "2026-07-30T22:54:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI换图提示词", "AI产品合成", "电商图片生成", "AI修图教程", "多图融合提示词"]
 +++
 

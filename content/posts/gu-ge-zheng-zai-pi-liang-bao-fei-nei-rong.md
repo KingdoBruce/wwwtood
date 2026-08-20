@@ -3,7 +3,7 @@ title = "谷歌正在“批量报废”内容站？真正被淘汰的不是 AI"
 date = "2026-07-29T09:47:00+08:00"
 draft = false
 featured = true
-categories = ["随笔"]
+categories = ["Tech Notes"]
 tags = ["Google SEO", "网站流量"]
 +++
 

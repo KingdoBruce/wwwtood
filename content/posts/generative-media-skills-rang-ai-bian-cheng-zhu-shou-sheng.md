@@ -4,7 +4,7 @@ date = "2026-07-28T14:27:00+08:00"
 draft = false
 cover = "/uploads/2026/07/28_14_30_10_2-958887ea.jpg"
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI图片生成", "AI视频生成", "AI音频生成", "多模态AI", "Claude Code Skills", "Cursor Skills", "AI内容创作"]
 +++
 

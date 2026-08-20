@@ -5,35 +5,35 @@
         <description>Recent content in Categories on 拾光集</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh</language>
-        <lastBuildDate>Tue, 04 Aug 2026 22:14:14 +0800</lastBuildDate><atom:link href="https://www.tood.win/categories/index.xml" rel="self" type="application/rss+xml" /><item>
-            <title>AI</title>
-            <link>https://www.tood.win/categories/ai/</link>
-            <pubDate>Tue, 04 Aug 2026 22:11:00 +0800</pubDate>
-            <guid>https://www.tood.win/categories/ai/</guid>
+        <lastBuildDate>Wed, 19 Aug 2026 15:46:09 +0800</lastBuildDate><atom:link href="https://www.tood.win/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>Web &amp; Hosting</title>
+            <link>https://www.tood.win/categories/web--hosting/</link>
+            <pubDate>Wed, 19 Aug 2026 15:33:00 +0800</pubDate>
+            <guid>https://www.tood.win/categories/web--hosting/</guid>
             <description></description>
         </item><item>
-            <title>建站</title>
-            <link>https://www.tood.win/categories/%E5%BB%BA%E7%AB%99/</link>
-            <pubDate>Mon, 03 Aug 2026 19:57:00 +0800</pubDate>
-            <guid>https://www.tood.win/categories/%E5%BB%BA%E7%AB%99/</guid>
+            <title>Tech Notes</title>
+            <link>https://www.tood.win/categories/notes/</link>
+            <pubDate>Wed, 19 Aug 2026 15:08:00 +0800</pubDate>
+            <guid>https://www.tood.win/categories/notes/</guid>
             <description></description>
         </item><item>
-            <title>随笔</title>
-            <link>https://www.tood.win/categories/%E9%9A%8F%E7%AC%94/</link>
-            <pubDate>Mon, 03 Aug 2026 14:44:00 +0800</pubDate>
-            <guid>https://www.tood.win/categories/%E9%9A%8F%E7%AC%94/</guid>
+            <title>Software &amp; Tools</title>
+            <link>https://www.tood.win/categories/software/</link>
+            <pubDate>Sun, 16 Aug 2026 21:50:00 +0800</pubDate>
+            <guid>https://www.tood.win/categories/software/</guid>
             <description></description>
         </item><item>
-            <title>软件</title>
-            <link>https://www.tood.win/categories/%E8%BD%AF%E4%BB%B6/</link>
-            <pubDate>Fri, 31 Jul 2026 13:51:00 +0800</pubDate>
-            <guid>https://www.tood.win/categories/%E8%BD%AF%E4%BB%B6/</guid>
+            <title>AI &amp; Automation</title>
+            <link>https://www.tood.win/categories/ai--automation/</link>
+            <pubDate>Sat, 15 Aug 2026 18:08:00 +0800</pubDate>
+            <guid>https://www.tood.win/categories/ai--automation/</guid>
             <description></description>
         </item><item>
-            <title>政策</title>
-            <link>https://www.tood.win/categories/%E6%94%BF%E7%AD%96/</link>
-            <pubDate>Tue, 21 Jul 2026 16:39:00 +0800</pubDate>
-            <guid>https://www.tood.win/categories/%E6%94%BF%E7%AD%96/</guid>
+            <title>SEO &amp; Growth</title>
+            <link>https://www.tood.win/categories/seo/</link>
+            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+            <guid>https://www.tood.win/categories/seo/</guid>
             <description></description>
         </item></channel>
 </rss>

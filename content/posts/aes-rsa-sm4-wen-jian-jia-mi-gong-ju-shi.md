@@ -2,7 +2,7 @@
 title = "AES+RSA+SM4 文件加密工具使用说明"
 date = "2026-08-06T20:49:00+08:00"
 draft = false
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["文件加密", "Windows", "AES加密"]
 description = "介绍一款支持 AES、RSA 和 SM4 的 Windows 文件加密工具，说明 .dec 密钥的作用、大文件处理限制以及使用时需要注意的风险。"
 

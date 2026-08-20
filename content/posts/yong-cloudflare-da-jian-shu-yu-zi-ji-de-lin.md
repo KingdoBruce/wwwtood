@@ -2,7 +2,7 @@
 title = "用 Cloudflare 搭建一个属于自己的临时邮箱：Cloud Mail 项目介绍"
 date = "2026-07-27T12:27:00+08:00"
 draft = false
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["Email", "免费邮箱", "开源项目", "Cloud Mail"]
 featured = true
 +++

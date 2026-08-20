@@ -23,7 +23,13 @@
 {{- if not $cover -}}{{- with .Params.cover }}{{ $cover = . }}{{ end -}}{{- end -}}
 {{- $words := .WordCount -}}
 <div class="signal-article">
-    <div class="breadcrumb mono"><a href="{{ .Site.Home.RelPermalink }}">HOME</a><span>/</span>{{ with .Params.categories }}<a href="{{ `categories/` | relLangURL }}{{ index . 0 | urlize }}/">{{ upper (index . 0) }}</a><span>/</span>{{ end }}<a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+    <div class="breadcrumb mono"><a href="{{ .Site.Home.RelPermalink }}">HOME</a><span>/</span>{{- with .Params.categories -}}
+    {{- $categoryName := index . 0 -}}
+    {{- $categoryURL := printf "categories/%s/" ($categoryName | urlize) | relLangURL -}}
+    {{- $termPage := site.GetPage (printf "/categories/%s" $categoryName) -}}
+    {{- with $termPage }}{{ $categoryURL = .RelPermalink }}{{ end -}}
+    <a href="{{ $categoryURL }}">{{ upper $categoryName }}</a><span>/</span>
+{{- end -}}<a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
 
     <header class="article-hero">
         <div class="hero-main">
@@ -49,7 +55,7 @@
             </div>
             <div>
                 <div class="stat">{{ printf "%02d" $sectionCount }}</div>
-                <div class="kicker">章节内容</div>
+                <div class="kicker">SECTIONS</div>
             </div>
         </aside>
     </header>
@@ -73,7 +79,7 @@
                 {{- $previous := .PrevInSection -}}
                 {{- $next := .NextInSection -}}
                 {{- if or $previous $next -}}
-                <nav class="prev-next" aria-label="上一篇和下一篇文章">
+                <nav class="prev-next" aria-label="Previous and next article">
                     {{- with $previous -}}
                     <a href="{{ .RelPermalink }}" rel="prev">
                         <span class="kicker">PREVIOUS ARTICLE</span>
@@ -82,7 +88,7 @@
                     {{- else -}}
                     <span class="prev-disabled">
                         <span class="kicker">PREVIOUS ARTICLE</span>
-                        <strong>已经是第一篇</strong>
+                        <strong>This is the first article</strong>
                     </span>
                     {{- end -}}
                     {{- with $next -}}
@@ -93,7 +99,7 @@
                     {{- else -}}
                     <span class="prev-disabled">
                         <span class="kicker">NEXT ARTICLE</span>
-                        <strong>已经是最后一篇</strong>
+                        <strong>This is the last article</strong>
                     </span>
                     {{- end -}}
                 </nav>
@@ -102,15 +108,15 @@
             </div>
         </main>
 
-        <aside class="side-meta" aria-label="文章侧边栏">
+        <aside class="side-meta" aria-label="Article sidebar">
             <div class="side-card toc-card">
                 <div class="head kicker">CONTENT DIRECTORY</div>
-                <div class="body toc-body">{{ if ge (len .TableOfContents) 100 }}{{ partial "article/components/toc" . | safeHTML }}{{ else }}<p class="toc-empty">本文暂无分节目录</p>{{ end }}</div>
+                <div class="body toc-body">{{ if ge (len .TableOfContents) 100 }}{{ partial "article/components/toc" . | safeHTML }}{{ else }}<p class="toc-empty">No table of contents for this article</p>{{ end }}</div>
             </div>
             {{- if and $advertising.article_sidebar_enabled $advertising.article_sidebar_code -}}
             <div class="side-card side-card--ad">
                 <div class="head kicker">ADVERTISEMENT</div>
-                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="广告">
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="Advertisement">
                     {{ $advertising.article_sidebar_code | safeHTML }}
                 </div>
             </div>
@@ -136,7 +142,7 @@
                 {{- $popular = first 6 $catPosts.ByDate.Reverse -}}
             {{- end -}}
             <div class="side-card">
-                <div class="head kicker">最新文章</div>
+                <div class="head kicker">Latest Articles</div>
                 <div class="body side-articles">
                     {{- range $latest -}}
                     <a class="side-article-row" href="{{ .RelPermalink }}">
@@ -146,8 +152,9 @@
                     {{- end -}}
                 </div>
             </div>
+            {{- if eq .Section "posts" -}}
             <div class="side-card">
-                <div class="head kicker" style="background:var(--signal-pink)">编辑推荐</div>
+                <div class="head kicker" style="background:var(--signal-pink)">Editor's Picks</div>
                 <div class="body side-articles">
                     {{- range $popular -}}
                     <a class="side-article-row" href="{{ .RelPermalink }}">
@@ -157,6 +164,7 @@
                     {{- end -}}
                 </div>
             </div>
+            {{- end -}}
             <div class="side-card">
                 <div class="head kicker">READING STATUS</div>
                 <div class="body">
@@ -167,10 +175,17 @@
             <div class="side-card">
                 <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
                 <div class="body article-data">
-                    <a{{ with .Params.categories }} href="{{ `categories/` | relLangURL }}{{ index . 0 | urlize }}/"{{ end }}><span>分类</span><b>{{ with .Params.categories }}{{ index . 0 }}{{ else }}-{{ end }}</b></a>
-                    <a><span>字数</span><b>{{ $words }}</b></a>
-                    <a><span>阅读</span><b>{{ .ReadingTime }} MIN</b></a>
-                    <a><span>更新</span><b>{{ .Date.Format "01.02" }}</b></a>
+                    {{- $articleCategoryURL := "" -}}
+                    {{- with .Params.categories -}}
+                        {{- $articleCategoryName := index . 0 -}}
+                        {{- $articleCategoryURL = printf "categories/%s/" ($articleCategoryName | urlize) | relLangURL -}}
+                        {{- $articleCategoryPage := site.GetPage (printf "/categories/%s" $articleCategoryName) -}}
+                        {{- with $articleCategoryPage }}{{ $articleCategoryURL = .RelPermalink }}{{ end -}}
+                    {{- end -}}
+                    <a{{ with $articleCategoryURL }} href="{{ . }}"{{ end }}><span>Category</span><b>{{ with .Params.categories }}{{ index . 0 }}{{ else }}-{{ end }}</b></a>
+                    <a><span>Words</span><b>{{ $words }}</b></a>
+                    <a><span>Reading</span><b>{{ .ReadingTime }} MIN</b></a>
+                    <a><span>Updated</span><b>{{ .Date.Format "01.02" }}</b></a>
                 </div>
             </div>
         </aside>
@@ -182,28 +197,28 @@
     <aside class="article-disclaimer">
         <code>DISCLAIMER</code>
         <div class="article-disclaimer-body">
-            <p>本站（<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>）部分资源来源于互联网公开渠道，仅供学习与参考，不收取费用，也不出售任何资源。</p>
-            <p>相关内容不代表本站立场，本站不保证其真实性、准确性及有效性，请用户自行判断并谨慎使用。</p>
-            <p>如有侵权、违规内容或资源链接失效，请联系 <a href="mailto:admin@tood.win">admin@tood.win</a>。经核实后，我们将及时删除、处理或更新。</p>
-            <p>严禁利用本站内容从事任何违法违规活动。</p>
+            <p>Some resources on this site (<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>) come from public internet sources and are provided for learning and reference only. We charge no fees and sell no resources.</p>
+            <p>Related content does not necessarily represent the views of this site. We do not guarantee its authenticity, accuracy, or validity. Please judge and use it with caution.</p>
+            <p>If there is any infringement, violation, or broken resource link, please contact <a href="mailto:admin@tood.win">admin@tood.win</a>. After verification, we will remove, handle, or update it in a timely manner.</p>
+            <p>Any illegal or unlawful use of this site's content is strictly prohibited.</p>
         </div>
     </aside>
     {{- end -}}
 
     <div class="search-modal" hidden>
         <div class="search-modal-backdrop" data-close></div>
-        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="搜索文章">
-            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="关闭搜索">✕</button></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / {{ now.Format "0601" }}</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
             <form class="search-modal-form" action="{{ `search/` | relLangURL }}" method="get" role="search">
-                <input type="search" name="keyword" placeholder="输入关键词搜索拾光集..." aria-label="搜索文章" required>
-                <button type="submit" aria-label="开始搜索">⌕</button>
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
             </form>
-            <p class="search-modal-hint mono">AI / 建站 / 软件 / 效率工具</p>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
         </div>
     </div>
     <div class="scroll-arrows scroll-arrows--right">
-        <a href="#" class="scroll-arrow scroll-up" aria-label="回到顶部">↑</a>
-        <a href="#" class="scroll-arrow scroll-down" aria-label="前往底部">↓</a>
+        <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
     </div>
 </div>
 

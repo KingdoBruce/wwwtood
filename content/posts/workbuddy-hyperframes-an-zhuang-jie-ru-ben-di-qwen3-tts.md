@@ -3,7 +3,7 @@ title = "WorkBuddy + HyperFrames 安装教程：接入本地 Qwen3-TTS，实现�
 date = "2026-07-28T11:55:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["WorkBuddy", "Qwen3-TTS", "AI视频生成", "本地语音模型", "声音克隆", "FFmpeg", "AI Agent", "开源视频工具"]
 +++
 

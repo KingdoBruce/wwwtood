@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="内容说明： 本文根据 FlyingMouse Format 官方 GitHub 资料整理，主要介绍功能、适用场景和已知限制，并非完整实测文章。">
+<title>飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具 - Software &amp; Tools - Tood.win | Tech Notes, AI Tools &amp; Web Development</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/fei-shu-ge-shi-kai-yuan-mian-fei-de-pdf/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.3c8ba4eb96e990e1006031c4cbd8c43e5683ccac3ae62e43d2a608017772f313.css"><meta property='og:title' content="飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具 - Software & Tools - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta property='og:description' content="内容说明： 本文根据 FlyingMouse Format 官方 GitHub 资料整理，主要介绍功能、适用场景和已知限制，并非完整实测文章。">
+<meta property='og:url' content='https://www.tood.win/posts/fei-shu-ge-shi-kai-yuan-mian-fei-de-pdf/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='飞鼠格式' /><meta property='article:tag' content='文件格式转换工具' /><meta property='article:tag' content='PDF转Word' /><meta property='article:tag' content='NCM转MP3' /><meta property='article:tag' content='开源工具' /><meta property='article:published_time' content='2026-08-13T22:37:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-13T22:52:32&#43;08:00'/>
+<meta name="twitter:title" content="飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具 - Software & Tools - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta name="twitter:description" content="内容说明： 本文根据 FlyingMouse Format 官方 GitHub 资料整理，主要介绍功能、适用场景和已知限制，并非完整实测文章。">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<link rel="shortcut icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="飞鼠格式, 文件格式转换工具, PDF转Word, NCM转MP3, 开源工具">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具\"",
+  "description": "\"内容说明： 本文根据 FlyingMouse Format 官方 GitHub 资料整理，主要介绍功能、适用场景和已知限制，并非完整实测文章。\"",
+  "datePublished": "\"2026-08-13T22:37:00+08:00\"",
+  "dateModified": "\"2026-08-13T22:52:32+08:00\"",
+  "url": "\"https://www.tood.win/posts/fei-shu-ge-shi-kai-yuan-mian-fei-de-pdf/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/08/tood-win-logo-a26f7c69.png" alt="Tood.win | Tech Notes">
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">Home</a>
+        <a href="/archives/#current-archive">Latest</a>
+        <a class="" href="/archives/">Categories</a>
+        <a class="" href="/tags/">Tags</a>
+        <a class="" href="/about/">About</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="Search articles" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/software/">SOFTWARE &amp; TOOLS</a><span>/</span><a href="/posts/fei-shu-ge-shi-kai-yuan-mian-fei-de-pdf/">飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / SOFTWARE &amp; TOOLS</span>
+                <span>LIVE DATA / A.2608.085</span>
+            </div>
+            <h1>飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具</h1>
+            <p class="article-deck">内容说明： 本文根据 FlyingMouse Format 官方 GitHub 资料整理，主要介绍功能、适用场景和已知限制，并非完整实测文章。</p>
+            <div class="author-line mono">
+                <span>BY TOOD.WIN | TECH NOTES</span>
+                <span>2026.08.13</span>
+                <span>3 MIN READ</span>
+                <span>1270 WORDS</span>
+                <span>SOFTWARE &amp; TOOLS</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A85</strong>
+                <p class="mono">JAN. 13<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">08</div>
+                <div class="kicker">SECTIONS</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="Advertisement"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>飞鼠格式（FlyingMouse Format）是一款开源文件转换工具，主要解决 PDF、Office 文档、图片、音视频等格式互转问题。</p>
+<p>它比较特别的地方，是除了常见格式外，还支持 NCM、mflac、mgg、KGMA 等部分音乐客户端文件转换。大部分普通文件处理在本地完成，适合不想频繁使用在线转换网站的用户。</p>
+<h2 id="飞鼠格式支持哪些文件">飞鼠格式支持哪些文件？
+</h2><p>目前项目说明列出的主要能力包括：</p>
+<ul>
+<li>JPG、PNG、<a class="link" href="/tags/webp/" >WebP</a>、HEIC、RAW 等图片转换；</li>
+<li>Word、Excel、PPT、WPS、TXT、Markdown；</li>
+<li>PDF 转 Word、Excel、图片、TXT；</li>
+<li>图片 OCR 文字识别；</li>
+<li>音频、视频格式互转；</li>
+<li>NCM、mflac、mgg、KGMA 等音乐格式；</li>
+<li>EPUB、MOBI 等部分电子书格式；</li>
+<li>批量文件转换。</li>
+</ul>
+<p>项目整合了 <a class="link" href="/tags/ffmpeg/" >FFmpeg</a>、LibreOffice、Poppler、Tesseract、pdf2docx 等组件，本质上是把多个转换工具集中到一个图形界面中。</p>
+<p><img alt="飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/e8e87015-aa07-40ef-8976-83f4abb86d33-ccf60f28.jpg"></p>
+<h2 id="pdf-转-word-能保留排版吗">PDF 转 Word 能保留排版吗？
+</h2><p>飞鼠格式使用 pdf2docx 处理 PDF 转 Word，项目说明中提到会尽量保留段落、表格、图片、字体和布局，扫描版 PDF 还可以通过 OCR 识别文字。</p>
+<p>但这里不要理解成“复杂 PDF 一定可以完整还原”。</p>
+<p>遇到多栏排版、复杂表格、特殊字体或大量公式时，转换结果仍然需要实际测试。</p>
+<h2 id="支持部分加密音乐格式转换">支持部分加密音乐格式转换
+</h2><p>飞鼠格式支持处理：</p>
+<ul>
+<li>网易云音乐 NCM；</li>
+<li>QQ 音乐 mflac、mgg；</li>
+<li>酷狗 KGMA；</li>
+<li>部分 mmp4、musicex 文件。</li>
+</ul>
+<p>可以转换为 MP3、FLAC、WAV、M4A 等常见格式。</p>
+<p><img alt="飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/home-7fe14b6c.png"></p>
+<p>不过并非所有音乐格式都完全离线处理。例如部分新版 QQ 音乐 musicex 文件，可能需要联网获取解密所需信息。</p>
+<p>另外，只建议转换自己合法获得并有权处理的文件。</p>
+<h2 id="是否完全离线">是否完全离线？
+</h2><p>普通文档、图片、PDF、音视频转换主要在本地完成，不需要把文件上传到在线转换服务器。</p>
+<p>这一点比较适合处理合同、报价单、内部 Excel 等不方便上传第三方网站的文件。</p>
+<p>但部分音乐解密功能可能需要联网，所以不能简单理解成“所有功能完全离线”。</p>
+<h2 id="支持哪些系统">支持哪些系统？
+</h2><p>目前官方提供：</p>
+<ul>
+<li><a class="link" href="/tags/windows/" >Windows</a> 10 / 11 x64；</li>
+<li>Windows 7 SP1 兼容版；</li>
+<li>macOS Apple Silicon；</li>
+<li>macOS Intel。</li>
+</ul>
+<p>Windows 7 使用较旧的 Electron 环境，安全维护已经停止，更建议在 Windows 10 / 11 上使用。</p>
+<p>另外，目前 Windows 安装包没有数字签名，安装时可能出现 SmartScreen 提示。</p>
+<h2 id="适合哪些用户">适合哪些用户？
+</h2><p>如果你经常处理 PDF、Office 文档、图片、视频、OCR，或者偶尔需要转换 NCM 等音乐文件，飞鼠格式的优势比较明显。</p>
+<p>它最大的价值不是某一种转换能力特别突出，而是把多个常见文件处理功能放到一个工具里，减少来回安装不同软件的麻烦。</p>
+<p>如果只是偶尔转换一张图片，则没有太大必要专门安装。</p>
+<h2 id="使用前需要注意">使用前需要注意
+</h2><p>目前主要限制包括：</p>
+<ol>
+<li>复杂 PDF 转 Word 不保证完整还原；</li>
+<li>部分电子书转换仍属于实验功能；</li>
+<li>某些 QQ 音乐格式需要联网；</li>
+<li>音乐客户端格式可能随版本变化；</li>
+<li>Windows 安装包目前没有代码签名。</li>
+</ol>
+<h2 id="总结">总结
+</h2><p>飞鼠格式适合经常处理多种文件格式、又希望尽量在本地完成转换的用户。</p>
+<p>它覆盖 PDF、Office、图片、OCR、音视频和部分音乐客户端格式，功能范围比较广。</p>
+<p>如果你主要看重 <strong>PDF 转 Word、本地文件转换和 NCM 等音乐格式处理</strong>，可以从官方 GitHub 下载后根据自己的文件实际测试。</p>
+
+</section>
+
+
+            
+            <section class="article-download">
+    <div class="resource-body">
+        <article class="float-card" aria-labelledby="article-download-title">
+
+            <div class="float-preview">
+                <div class="preview" aria-label="飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具 resource preview"><img src="/uploads/2026/08/e8e87015-aa07-40ef-8976-83f4abb86d33-ccf60f28.jpg" alt="飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具 resource cover" loading="lazy"></div>
+                <div class="preview-label mono">
+                    <span>PREVIEW / EXE</span>
+                    <span>SOFTWARE &amp; TOOLS</span>
+                </div>
+            </div>
+
+            <div class="float-content">
+                <div class="kicker">SOFTWARE &amp; TOOLS RESOURCE / CURATED BY US</div>
+                <h2 id="article-download-title">飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具</h2>
+
+                <div class="chips">
+                    <span>Software &amp; Tools</span>
+                    <span>EXE</span>
+                    <span>617 MB</span><span>No password</span></div>
+
+                <div class="float-actions">
+                    <div class="action-status">
+                        <div>
+                            <span class="kicker">ACCESS STATUS</span>
+                            <strong>ONLINE / VERIFIED</strong>
+                        </div><span class="mono">NO PASSWORD</span></div>
+                    <a class="download-btn" href="https://github.com/LaoFeng-mouse/flyingmouse-format" target="_blank" rel="noopener noreferrer nofollow">
+                        <span>Download</span>
+                        <b aria-hidden="true">↗</b>
+                    </a>
+                </div>
+            </div>
+
+        </article>
+    </div>
+</section>
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/%E9%A3%9E%E9%BC%A0%E6%A0%BC%E5%BC%8F/">飞鼠格式</a>
+        
+            <a href="/tags/%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/">文件格式转换工具</a>
+        
+            <a href="/tags/pdf%E8%BD%ACword/">PDF转Word</a>
+        
+            <a href="/tags/ncm%E8%BD%ACmp3/">NCM转MP3</a>
+        
+            <a href="/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/">开源工具</a>
+        
+    </section>
+<nav class="prev-next" aria-label="Previous and next article"><a href="/posts/agent-reach-gei-ai-agent-zeng-jia-twitter-b-zhan/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>Agent-Reach：给 AI Agent 增加 Twitter、B站、小红书等联网能力</strong>
+                    </a><a href="/posts/minimax-h3-ben-di-bu-shu-yong-comfyui-da-jian/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>MiniMax H3 怎么本地部署？用 ComfyUI 搭建 AI 视频生成环境</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="Article sidebar">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#飞鼠格式支持哪些文件">飞鼠格式支持哪些文件？</a></li>
+    <li><a href="#pdf-转-word-能保留排版吗">PDF 转 Word 能保留排版吗？</a></li>
+    <li><a href="#支持部分加密音乐格式转换">支持部分加密音乐格式转换</a></li>
+    <li><a href="#是否完全离线">是否完全离线？</a></li>
+    <li><a href="#支持哪些系统">支持哪些系统？</a></li>
+    <li><a href="#适合哪些用户">适合哪些用户？</a></li>
+    <li><a href="#使用前需要注意">使用前需要注意</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="Advertisement">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">Latest Articles</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/wo-yong-guo-de-ji-jia-yu-ming-fu-wu/">
+                        <span class="side-article-title">我用过的几家域名服务商：Cloudflare、Namecheap、Spaceship 和国内云厂商怎么选？</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/4-fen-cheng-xu-yuan-xue-xi-zi-yuan-geng/">
+                        <span class="side-article-title">4 份程序员学习资源更新：Spring Cloud 微服务、LeetCode、面试与 WMS 项目</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/bai-du-wang-pan-bu-chong-hui-yuan-ye-neng/">
+                        <span class="side-article-title">百度网盘不充会员，也能试试这个提速设置</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/claude-seo-geo-ren-liang-tian-pao-wan-chuan-tong/">
+                        <span class="side-article-title">Claude &#43; SEO &#43; GEO：一个人两天跑完传统团队一个月的活</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                        <span class="side-article-title">视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</span>
+                        <span class="side-article-date mono">08.16</span>
+                    </a><a class="side-article-row" href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                        <span class="side-article-title">Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</span>
+                        <span class="side-article-date mono">08.15</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">Editor's Picks</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                        <span class="side-article-title">视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</span>
+                        <span class="side-article-date mono">08.16</span>
+                    </a><a class="side-article-row" href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                        <span class="side-article-title">Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</span>
+                        <span class="side-article-date mono">08.15</span>
+                    </a><a class="side-article-row" href="/posts/ollama-mo-xing-yu-jia-zai-yu-xian-cun-shi/">
+                        <span class="side-article-title">Ollama 模型预加载与显存释放工具</span>
+                        <span class="side-article-date mono">08.14</span>
+                    </a><a class="side-article-row" href="/posts/zhuo-pai-tai-qian-pi-liang-da-yin-gong-ju/">
+                        <span class="side-article-title">桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景</span>
+                        <span class="side-article-date mono">08.09</span>
+                    </a><a class="side-article-row" href="/posts/dlabel-yun-biao-qian-v3-6-5/">
+                        <span class="side-article-title">DLabel云标签v3.6.5 官方版本</span>
+                        <span class="side-article-date mono">08.08</span>
+                    </a><a class="side-article-row" href="/posts/windows-gong-zuo-ren-wu-ti-xing-gong-ju-zhi/">
+                        <span class="side-article-title">Windows 工作任务提醒工具：支持每月、每日和循环提醒</span>
+                        <span class="side-article-date mono">08.06</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data"><a href="/categories/software/"><span>Category</span><b>Software &amp; Tools</b></a>
+                    <a><span>Words</span><b>1270</b></a>
+                    <a><span>Reading</span><b>3 MIN</b></a>
+                    <a><span>Updated</span><b>08.13</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/b1c7096b-135f-4fcf-ba27-d70256eb1570-de08fb54.webp" alt="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具" loading="lazy"><code>01 / SOFTWARE &amp; TOOLS</code>
+                    <h3>视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>如果平时使用 yt-dlp 下载 B站、YouTube 或其他平台的视频，最大的门槛通常不是下载本身，而是需要记命令、管理下载任务以及查看文件状 …</p>
+                    <time>2026-08-16</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/81bf47a1-61ef-4bab-9d24-57db3210a908-06787703.webp" alt="Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问" loading="lazy"><code>02 / SOFTWARE &amp; TOOLS</code>
+                    <h3>Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>在企业局域网办公环境中，Windows 共享打印机一直都是 IT 运维中非常常见的问题之一。
+尤其是近年来微软频繁推送 Windows 安全更新 …</p>
+                    <time>2026-08-15</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ollama-mo-xing-yu-jia-zai-yu-xian-cun-shi/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/f54df230-9996-4167-b152-1559525df093-255b9c34.webp" alt="Ollama 模型预加载与显存释放工具" loading="lazy"><code>03 / SOFTWARE &amp; TOOLS</code>
+                    <h3>Ollama 模型预加载与显存释放工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>这是一款针对 Ollama 本地大模型 的辅助工具，主要解决两个问题：
+提前加载模型到显存 / 内存，减少首次对话时的等待时间 手动卸载模型，快 …</p>
+                    <time>2026-08-14</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/zhuo-pai-tai-qian-pi-liang-da-yin-gong-ju/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/a2e0713c-fded-4f9c-b422-44f7eb223cf4-f266856c.jpg" alt="桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景" loading="lazy"><code>04 / SOFTWARE &amp; TOOLS</code>
+                    <h3>桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>这是一款用于 桌牌、台签、席卡、座位牌 制作与打印的实用小工具，适合会议、培训、活动、展会、婚宴、学校及单位办公等需要批量制作人员桌牌的场景。 …</p>
+                    <time>2026-08-09</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>Some resources on this site (<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>) come from public internet sources and are provided for learning and reference only. We charge no fees and sell no resources.</p>
+            <p>Related content does not necessarily represent the views of this site. We do not guarantee its authenticity, accuracy, or validity. Please judge and use it with caution.</p>
+            <p>If there is any infringement, violation, or broken resource link, please contact <a href="mailto:admin@tood.win">admin@tood.win</a>. After verification, we will remove, handle, or update it in a timely manner.</p>
+            <p>Any illegal or unlawful use of this site's content is strictly prohibited.</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">Tood.win | Tech Notes</a><p>Tested in practice. Shared to help you build.</p></div>
+    <div><h4>Content</h4><a href="/categories/ai--automation/">ai &amp; automation</a><a href="/categories/software/">software &amp; tools</a><a href="/categories/notes/">tech notes</a><a href="/categories/web--hosting/">web &amp; hosting</a></div>
+    <div><h4>Navigation</h4><a href="/archives/">Archive</a><a href="/tags/">Tags</a><a href="/about/">About</a><a href="/links/">Friend Links</a></div>
+    <div><h4>Policy</h4><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/please-allow-ads-on-shiguangji-en/">Allow Ads</a><a href="/about/">Contact</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> Tood.win | Tech Notes</span><span class="end-links"><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/links/">Friend Links</a></span><span>BUILT WITH HUGO</span></div>
+<script>
+(() => {
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = new Date().getFullYear();
+    });
+})();
+</script>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Vidom 将 yt-dlp 封装成一个可通过浏览器操作的视频下载管理器，支持多平台解析、任务队列、断点续传、实时进度和下载历史。本文整理其部署方法、工作方式及目前需要注意的使用限制。">
+<title>视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具 - Software &amp; Tools - Tood.win | Tech Notes, AI Tools &amp; Web Development</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.3c8ba4eb96e990e1006031c4cbd8c43e5683ccac3ae62e43d2a608017772f313.css"><meta property='og:title' content="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具 - Software & Tools - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta property='og:description' content="Vidom 将 yt-dlp 封装成一个可通过浏览器操作的视频下载管理器，支持多平台解析、任务队列、断点续传、实时进度和下载历史。本文整理其部署方法、工作方式及目前需要注意的使用限制。">
+<meta property='og:url' content='https://www.tood.win/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Vidom视频下载管理器' /><meta property='article:tag' content='yt-dlp Web界面' /><meta property='article:tag' content='在线视频下载' /><meta property='article:tag' content='开源工具' /><meta property='article:tag' content='Docker' /><meta property='article:published_time' content='2026-08-16T21:50:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-16T22:10:06&#43;08:00'/>
+<meta name="twitter:title" content="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具 - Software & Tools - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta name="twitter:description" content="Vidom 将 yt-dlp 封装成一个可通过浏览器操作的视频下载管理器，支持多平台解析、任务队列、断点续传、实时进度和下载历史。本文整理其部署方法、工作方式及目前需要注意的使用限制。">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<link rel="shortcut icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="Vidom视频下载管理器, yt-dlp Web界面, 在线视频下载, 开源工具, Docker">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具\"",
+  "description": "\"Vidom 将 yt-dlp 封装成一个可通过浏览器操作的视频下载管理器，支持多平台解析、任务队列、断点续传、实时进度和下载历史。本文整理其部署方法、工作方式及目前需要注意的使用限制。\"",
+  "datePublished": "\"2026-08-16T21:50:00+08:00\"",
+  "dateModified": "\"2026-08-16T22:10:06+08:00\"",
+  "url": "\"https://www.tood.win/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/08/tood-win-logo-a26f7c69.png" alt="Tood.win | Tech Notes">
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">Home</a>
+        <a href="/archives/#current-archive">Latest</a>
+        <a class="" href="/archives/">Categories</a>
+        <a class="" href="/tags/">Tags</a>
+        <a class="" href="/about/">About</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="Search articles" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/software/">SOFTWARE &amp; TOOLS</a><span>/</span><a href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / SOFTWARE &amp; TOOLS</span>
+                <span>LIVE DATA / A.2608.091</span>
+            </div>
+            <h1>视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</h1>
+            <p class="article-deck">Vidom 将 yt-dlp 封装成一个可通过浏览器操作的视频下载管理器，支持多平台解析、任务队列、断点续传、实时进度和下载历史。本文整理其部署方法、工作方式及目前需要注意的使用限制。</p>
+            <div class="author-line mono">
+                <span>BY TOOD.WIN | TECH NOTES</span>
+                <span>2026.08.16</span>
+                <span>3 MIN READ</span>
+                <span>1343 WORDS</span>
+                <span>SOFTWARE &amp; TOOLS</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A91</strong>
+                <p class="mono">JAN. 16<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">05</div>
+                <div class="kicker">SECTIONS</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="Advertisement"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p>如果平时使用 <code>yt-dlp</code> 下载 B站、<a class="link" href="/tags/youtube/" >YouTube</a> 或其他平台的视频，最大的门槛通常不是下载本身，而是需要记命令、管理下载任务以及查看文件状态。</p>
+<p><strong>Vidom</strong> 做的事情，就是在 yt-dlp 外面增加一个 Web 管理界面。</p>
+<p>部署完成以后，可以直接通过浏览器添加视频地址，并统一查看下载进度、暂停或继续任务、管理历史记录，不需要每次都进入终端输入 yt-dlp 命令。</p>
+<p>目前项目支持 YouTube、哔哩哔哩、Vimeo、X、TikTok、小红书、Instagram，以及普通 HTTP 媒体直链。</p>
+<p><img alt="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/b1c7096b-135f-4fcf-ba27-d70256eb1570-de08fb54.webp"></p>
+<h2 id="vidom-主要解决什么问题">Vidom 主要解决什么问题？
+</h2><p>Vidom 本身并不是一个新的在线视频解析引擎。</p>
+<p>它的核心下载能力仍然来自：</p>
+<ul>
+<li>yt-dlp；</li>
+<li><a class="link" href="/tags/ffmpeg/" >ffmpeg</a>；</li>
+<li>普通 HTTP 下载。</li>
+</ul>
+<p>因此，可以把它理解成：</p>
+<p><strong>yt-dlp + 下载队列 + SQLite + Web 管理面板。</strong></p>
+<p>相比直接使用 yt-dlp 命令行，Vidom 更适合需要长期下载或者同时管理多个任务的场景。</p>
+<p>例如一次加入多个视频以后，可以设置最大并发数，并在网页中查看：</p>
+<ul>
+<li>当前下载任务；</li>
+</ul>
+<p><img alt="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/QQ20260816-214902-90adbcfd.png"></p>
+<ul>
+<li>下载百分比；* 实时速度；* 剩余时间；</li>
+</ul>
+<p><img alt="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/QQ20260816-214709-e5744c72.png"></p>
+<ul>
+<li>下载历史；* 成功与失败状态。</li>
+</ul>
+<p><img alt="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/QQ20260816-214728-2dd5eae8.png"></p>
+<p>对于偶尔只下载一个视频的人来说，直接使用 yt-dlp 反而可能更加简单。</p>
+<h2 id="vidom-支持哪些视频来源">Vidom 支持哪些视频来源？
+</h2><p>根据现有项目说明，目前内置支持：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>来源</th>
+          <th>支持情况</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>YouTube</td>
+          <td>支持</td>
+      </tr>
+      <tr>
+          <td>哔哩哔哩</td>
+          <td>支持</td>
+      </tr>
+      <tr>
+          <td>Vimeo</td>
+          <td>支持</td>
+      </tr>
+      <tr>
+          <td>X / Twitter</td>
+          <td>支持</td>
+      </tr>
+      <tr>
+          <td>TikTok</td>
+          <td>支持</td>
+      </tr>
+      <tr>
+          <td>Instagram</td>
+          <td>支持</td>
+      </tr>
+      <tr>
+          <td>HTTP 媒体直链</td>
+          <td>支持</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><img alt="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/QQ20260816-214719-29bfd764.png"></p>
+<p>平台类视频主要交给 yt-dlp 处理。</p>
+<p>普通文件直链则可以直接通过 HTTP 下载，并支持 Range 断点续传。</p>
+<p>需要说明的是，<strong>支持某个平台，并不意味着该平台上的所有内容都可以下载。</strong></p>
+<p>会员视频、需要登录的资源、地区限制内容、DRM 内容以及平台主动限制访问的视频，都可能解析失败。</p>
+<h2 id="比直接使用-yt-dlp-多了什么">比直接使用 yt-dlp 多了什么？
+</h2><p>Vidom 比较有价值的部分并不是“支持多少网站”，因为这些能力本身主要来自 yt-dlp，而是它增加了一层下载管理功能。</p>
+<h3 id="任务队列">任务队列
+</h3><p>可以限制同时运行的任务数量，目前提供：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">1 / 2 / 3 / 5 / 10
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>默认同时下载 3 个任务。</p>
+<p>对于网络带宽有限或者同时需要下载大量视频的设备，这比直接批量启动多个 yt-dlp 进程更加容易管理。</p>
+<h3 id="暂停继续和重试">暂停、继续和重试
+</h3><p>任务支持：</p>
+<ul>
+<li>暂停；</li>
+<li>恢复；</li>
+<li>取消；</li>
+<li>重试；</li>
+<li>删除。</li>
+</ul>
+<p>恢复下载时会利用 yt-dlp 的断点续传能力，尽量从已经下载的位置继续，而不是重新下载整个文件。</p>
+<h3 id="实时进度">实时进度
+</h3><p>前端通过 SSE 接收任务状态，同时保留轮询作为兜底。</p>
+<p>页面可以显示：</p>
+<ul>
+<li>下载百分比；</li>
+<li>下载速度；</li>
+<li>已下载大小；</li>
+<li>剩余时间。</li>
+</ul>
+<h3 id="服务重启后恢复任务">服务重启后恢复任务
+</h3><p>如果服务器意外重启，原来处于：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">parsing
+</span></span><span class="line"><span class="cl">downloading
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>状态的任务，会重新进入等待队列。</p>
+<p>已经完成的任务不会重新下载。</p>
+<p>这对于把 Vidom 长期部署在 NAS、小服务器或者 VPS 上比较有意义。</p>
+<h3 id="下载历史和统计">下载历史和统计
+</h3><p>Vidom 还提供 Dashboard 和下载历史。</p>
+<p>可以查看：</p>
+<ul>
+<li>今日任务数量；</li>
+<li>累计下载量；</li>
+<li>成功率；</li>
+<li>不同平台占比；</li>
+<li>每日下载趋势。</li>
+</ul>
+<p>历史记录支持关键词搜索、平台筛选以及按照时间或文件大小排序。</p>
+<p>如果只是偶尔下载视频，这些功能意义有限；如果把它当作长期运行的下载中心，管理价值会明显一些。</p>
+<h2 id="vidom-的技术结构">Vidom 的技术结构
+</h2><p>项目采用前后端分离结构，但生产环境可以由单个 Node.js 服务提供。</p>
+<p>主要技术包括：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>部分</th>
+          <th>技术</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>后端</td>
+          <td>Node.js 22+、Express、TypeScript</td>
+      </tr>
+      <tr>
+          <td>前端</td>
+          <td>React、TypeScript、<a class="link" href="/tags/vite/" >Vite</a></td>
+      </tr>
+      <tr>
+          <td>UI</td>
+          <td>Tailwind CSS v4</td>
+      </tr>
+      <tr>
+          <td>数据库</td>
+          <td>SQLite</td>
+      </tr>
+      <tr>
+          <td>视频解析</td>
+          <td>yt-dlp</td>
+      </tr>
+      <tr>
+          <td>音视频处理</td>
+          <td>ffmpeg</td>
+      </tr>
+      <tr>
+          <td>自动化测试</td>
+          <td>Playwright</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>数据库直接使用 Node.js 自带的 <code>node:sqlite</code>。</p>
+<p><img alt="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/QQ20260816214806-8b1ac138.png"></p>
+<p>因此如果按照原始项目设计运行，需要 <strong>Node.js 22 或更高版本</strong>。</p>
+<h2 id="windows本地部署">[Windows]本地部署
+</h2><p>程序已经打包生成exe可执行文件，双击文件后就能直接使用，无需手动安装各种环境和依赖，做到开箱即用！</p>
+
+</section>
+
+
+            
+            <section class="article-download">
+    <div class="resource-body">
+        <article class="float-card" aria-labelledby="article-download-title">
+
+            <div class="float-preview">
+                <div class="preview" aria-label="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具 resource preview"><img src="/uploads/2026/08/b1c7096b-135f-4fcf-ba27-d70256eb1570-de08fb54.webp" alt="视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具 resource cover" loading="lazy"></div>
+                <div class="preview-label mono">
+                    <span>PREVIEW / RAR/EXE</span>
+                    <span>SOFTWARE &amp; TOOLS</span>
+                </div>
+            </div>
+
+            <div class="float-content">
+                <div class="kicker">SOFTWARE &amp; TOOLS RESOURCE / CURATED BY US</div>
+                <h2 id="article-download-title">视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</h2>
+
+                <div class="chips">
+                    <span>Software &amp; Tools</span>
+                    <span>RAR/EXE</span>
+                    <span>96.8M</span><span>No password</span></div>
+
+                <div class="float-actions">
+                    <div class="action-status">
+                        <div>
+                            <span class="kicker">ACCESS STATUS</span>
+                            <strong>ONLINE / VERIFIED</strong>
+                        </div><span class="mono">NO PASSWORD</span></div>
+                    <a class="download-btn" href="https://iezyw.lanzouv.com/ihoi642ry1fe" target="_blank" rel="noopener noreferrer nofollow">
+                        <span>Download</span>
+                        <b aria-hidden="true">↗</b>
+                    </a>
+                </div>
+            </div>
+
+        </article>
+    </div>
+</section>
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/vidom%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD%E7%AE%A1%E7%90%86%E5%99%A8/">Vidom视频下载管理器</a>
+        
+            <a href="/tags/yt-dlp-web%E7%95%8C%E9%9D%A2/">Yt-Dlp Web界面</a>
+        
+            <a href="/tags/%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD/">在线视频下载</a>
+        
+            <a href="/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/">开源工具</a>
+        
+            <a href="/tags/docker/">Docker</a>
+        
+    </section>
+<nav class="prev-next" aria-label="Previous and next article"><a href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</strong>
+                    </a><a href="/posts/claude-seo-geo-ren-liang-tian-pao-wan-chuan-tong/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>Claude &#43; SEO &#43; GEO：一个人两天跑完传统团队一个月的活</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="Article sidebar">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#vidom-主要解决什么问题">Vidom 主要解决什么问题？</a></li>
+    <li><a href="#vidom-支持哪些视频来源">Vidom 支持哪些视频来源？</a></li>
+    
+    <li><a href="#vidom-的技术结构">Vidom 的技术结构</a></li>
+    <li><a href="#windows本地部署">[Windows]本地部署</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="Advertisement">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">Latest Articles</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/wo-yong-guo-de-ji-jia-yu-ming-fu-wu/">
+                        <span class="side-article-title">我用过的几家域名服务商：Cloudflare、Namecheap、Spaceship 和国内云厂商怎么选？</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/4-fen-cheng-xu-yuan-xue-xi-zi-yuan-geng/">
+                        <span class="side-article-title">4 份程序员学习资源更新：Spring Cloud 微服务、LeetCode、面试与 WMS 项目</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/bai-du-wang-pan-bu-chong-hui-yuan-ye-neng/">
+                        <span class="side-article-title">百度网盘不充会员，也能试试这个提速设置</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/claude-seo-geo-ren-liang-tian-pao-wan-chuan-tong/">
+                        <span class="side-article-title">Claude &#43; SEO &#43; GEO：一个人两天跑完传统团队一个月的活</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                        <span class="side-article-title">Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</span>
+                        <span class="side-article-date mono">08.15</span>
+                    </a><a class="side-article-row" href="/posts/deepseek-harness-an-zhuang-rang-deepseek-v4-geng-wen-ding/">
+                        <span class="side-article-title">DeepSeek Harness 安装教程：让 DeepSeek V4 更稳定地接入 MCP、Claude Code 与 AI 编程工具</span>
+                        <span class="side-article-date mono">08.15</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">Editor's Picks</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                        <span class="side-article-title">Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</span>
+                        <span class="side-article-date mono">08.15</span>
+                    </a><a class="side-article-row" href="/posts/ollama-mo-xing-yu-jia-zai-yu-xian-cun-shi/">
+                        <span class="side-article-title">Ollama 模型预加载与显存释放工具</span>
+                        <span class="side-article-date mono">08.14</span>
+                    </a><a class="side-article-row" href="/posts/fei-shu-ge-shi-kai-yuan-mian-fei-de-pdf/">
+                        <span class="side-article-title">飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具</span>
+                        <span class="side-article-date mono">08.13</span>
+                    </a><a class="side-article-row" href="/posts/zhuo-pai-tai-qian-pi-liang-da-yin-gong-ju/">
+                        <span class="side-article-title">桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景</span>
+                        <span class="side-article-date mono">08.09</span>
+                    </a><a class="side-article-row" href="/posts/dlabel-yun-biao-qian-v3-6-5/">
+                        <span class="side-article-title">DLabel云标签v3.6.5 官方版本</span>
+                        <span class="side-article-date mono">08.08</span>
+                    </a><a class="side-article-row" href="/posts/windows-gong-zuo-ren-wu-ti-xing-gong-ju-zhi/">
+                        <span class="side-article-title">Windows 工作任务提醒工具：支持每月、每日和循环提醒</span>
+                        <span class="side-article-date mono">08.06</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data"><a href="/categories/software/"><span>Category</span><b>Software &amp; Tools</b></a>
+                    <a><span>Words</span><b>1343</b></a>
+                    <a><span>Reading</span><b>3 MIN</b></a>
+                    <a><span>Updated</span><b>08.16</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/81bf47a1-61ef-4bab-9d24-57db3210a908-06787703.webp" alt="Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问" loading="lazy"><code>01 / SOFTWARE &amp; TOOLS</code>
+                    <h3>Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>在企业局域网办公环境中，Windows 共享打印机一直都是 IT 运维中非常常见的问题之一。
+尤其是近年来微软频繁推送 Windows 安全更新 …</p>
+                    <time>2026-08-15</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/ollama-mo-xing-yu-jia-zai-yu-xian-cun-shi/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/f54df230-9996-4167-b152-1559525df093-255b9c34.webp" alt="Ollama 模型预加载与显存释放工具" loading="lazy"><code>02 / SOFTWARE &amp; TOOLS</code>
+                    <h3>Ollama 模型预加载与显存释放工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>这是一款针对 Ollama 本地大模型 的辅助工具，主要解决两个问题：
+提前加载模型到显存 / 内存，减少首次对话时的等待时间 手动卸载模型，快 …</p>
+                    <time>2026-08-14</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/fei-shu-ge-shi-kai-yuan-mian-fei-de-pdf/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/e8e87015-aa07-40ef-8976-83f4abb86d33-ccf60f28.jpg" alt="飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具" loading="lazy"><code>03 / SOFTWARE &amp; TOOLS</code>
+                    <h3>飞鼠格式是什么？开源免费的 PDF、文档与音视频格式转换工具</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>飞鼠格式（FlyingMouse Format）是一款开源文件转换工具，主要解决 PDF、Office 文档、图片、音视频等格式互转问题。
+它比 …</p>
+                    <time>2026-08-13</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/zhuo-pai-tai-qian-pi-liang-da-yin-gong-ju/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/a2e0713c-fded-4f9c-b422-44f7eb223cf4-f266856c.jpg" alt="桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景" loading="lazy"><code>04 / SOFTWARE &amp; TOOLS</code>
+                    <h3>桌牌台签批量打印工具：支持双面打印、Excel 导入与自定义背景</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>这是一款用于 桌牌、台签、席卡、座位牌 制作与打印的实用小工具，适合会议、培训、活动、展会、婚宴、学校及单位办公等需要批量制作人员桌牌的场景。 …</p>
+                    <time>2026-08-09</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>Some resources on this site (<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>) come from public internet sources and are provided for learning and reference only. We charge no fees and sell no resources.</p>
+            <p>Related content does not necessarily represent the views of this site. We do not guarantee its authenticity, accuracy, or validity. Please judge and use it with caution.</p>
+            <p>If there is any infringement, violation, or broken resource link, please contact <a href="mailto:admin@tood.win">admin@tood.win</a>. After verification, we will remove, handle, or update it in a timely manner.</p>
+            <p>Any illegal or unlawful use of this site's content is strictly prohibited.</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">Tood.win | Tech Notes</a><p>Tested in practice. Shared to help you build.</p></div>
+    <div><h4>Content</h4><a href="/categories/ai--automation/">ai &amp; automation</a><a href="/categories/software/">software &amp; tools</a><a href="/categories/notes/">tech notes</a><a href="/categories/web--hosting/">web &amp; hosting</a></div>
+    <div><h4>Navigation</h4><a href="/archives/">Archive</a><a href="/tags/">Tags</a><a href="/about/">About</a><a href="/links/">Friend Links</a></div>
+    <div><h4>Policy</h4><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/please-allow-ads-on-shiguangji-en/">Allow Ads</a><a href="/about/">Contact</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> Tood.win | Tech Notes</span><span class="end-links"><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/links/">Friend Links</a></span><span>BUILT WITH HUGO</span></div>
+<script>
+(() => {
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = new Date().getFullYear();
+    });
+})();
+</script>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

@@ -11,16 +11,16 @@
         {{- if isset . "show_on_home" -}}{{- $showOnHome = .show_on_home -}}{{- end -}}
     {{- end -}}
     {{- if $showOnHome -}}
-        {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" (printf "categories/%s/" ($name | urlize) | relLangURL)) -}}
+        {{- $categoryGroups = $categoryGroups | append (dict "Name" $name "URL" $taxonomy.Page.RelPermalink) -}}
     {{- end -}}
 {{- end -}}
 <footer class="footer">
-    <div><a class="brand" href="{{ .Site.Home.RelPermalink }}">{{ default "TOOD.WIN" $brand.name }}</a><p>{{ default "记录工具、项目、踩坑与解决方法。" $home.about_text }}</p></div>
-    <div><h4>内容</h4>{{ range first 4 $categoryGroups }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}</div>
-    <div><h4>导航</h4><a href="{{ `archives/` | relLangURL }}">{{ default "归档" $navigation.archives }}</a><a href="{{ `tags/` | relLangURL }}">{{ default "标签" $navigation.tags }}</a><a href="{{ `关于/` | relLangURL }}">{{ default "关于" $navigation.about }}</a><a href="{{ `链接/` | relLangURL }}">友情链接</a></div>
-    <div><h4>政策</h4><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="/posts/please-allow-ads-on-shiguangji-zh/">允许广告</a><a href="{{ `关于/` | relLangURL }}">联系</a></div>
+    <div><a class="brand" href="{{ .Site.Home.RelPermalink }}">{{ default "TOOD.WIN" $brand.name }}</a><p>{{ default "Tools, projects, pitfalls and solutions." $home.about_text }}</p></div>
+    <div><h4>Content</h4>{{ range first 4 $categoryGroups }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}</div>
+    <div><h4>Navigation</h4><a href="{{ `archives/` | relLangURL }}">{{ default "Archive" $navigation.archives }}</a><a href="{{ `tags/` | relLangURL }}">{{ default "Tags" $navigation.tags }}</a><a href="{{ `about/` | relLangURL }}">{{ default "About" $navigation.about }}</a><a href="{{ `links/` | relLangURL }}">Friend Links</a></div>
+    <div><h4>Policy</h4><a href="{{ `privacypolicy/` | relLangURL }}">Privacy Policy</a><a href="{{ `disclaimer/` | relLangURL }}">Disclaimer</a><a href="{{ `please-allow-ads-on-shiguangji-en/` | relLangURL }}">Allow Ads</a><a href="{{ `about/` | relLangURL }}">Contact</a></div>
 </footer>
-<div class="end mono"><span>© <span data-current-year>{{ now.Year }}</span> {{ default "TOOD.WIN" $brand.name }}</span><span class="end-links"><a href="/posts/privacypolicy/">隐私政策</a><a href="/posts/disclaimer-zh/">免责声明</a><a href="{{ `链接/` | relLangURL }}">友情链接</a></span><span>{{ default "BUILT WITH HUGO" $footer.build_label }}</span></div>
+<div class="end mono"><span>© <span data-current-year>{{ now.Year }}</span> {{ default "TOOD.WIN" $brand.name }}</span><span class="end-links"><a href="{{ `privacypolicy/` | relLangURL }}">Privacy Policy</a><a href="{{ `disclaimer/` | relLangURL }}">Disclaimer</a><a href="{{ `links/` | relLangURL }}">Friend Links</a></span><span>{{ default "BUILT WITH HUGO" $footer.build_label }}</span></div>
 <script>
 (() => {
     document.querySelectorAll("[data-current-year]").forEach((element) => {

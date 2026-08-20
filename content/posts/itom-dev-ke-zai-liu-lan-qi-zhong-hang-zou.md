@@ -5,7 +5,7 @@ draft = false
 description = "ITom Dev 是 Tomasz Szmajda 开源的沉浸式 3D WebGL 开发者作品集。项目使用 React、Vite、Three.js、React Three Fiber 和 GSAP，将个人介绍、项目案例与联系方式放进可交互探索的手绘 3D 走廊。本文介绍项目特点、本地部署方法、浏览器设置、二次开发建议，以及 MIT 代码许可证与个人素材版权之间的区别。"
 cover = "/uploads/2026/08/93e00659-200d-4b46-8155-bdbb1a458471-cc83081f.jpg"
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["Vite", "WebGL", "GLSL", "开源作品集"]
 +++
 

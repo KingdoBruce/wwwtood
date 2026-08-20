@@ -3,7 +3,7 @@ title = "16 种常见的 UI 设计风格提示词"
 date = "2026-07-26T22:54:00+08:00"
 draft = false
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["UI设计", "AI", "建站"]
 +++
 

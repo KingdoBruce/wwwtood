@@ -3,7 +3,7 @@ title = "PPT Master：免费开源的 AI PPT 工具，生成真正可编辑的 P
 date = "2026-07-27T09:27:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI", "MCP", "AI PPT 工具"]
 +++
 

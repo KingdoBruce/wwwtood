@@ -3,7 +3,7 @@ title = "一句话克隆网站：AI Agent 像素级复刻工具"
 date = "2026-07-29T10:37:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["AI Agent", "网站克隆", "像素级复刻", "前端开发"]
 +++
 

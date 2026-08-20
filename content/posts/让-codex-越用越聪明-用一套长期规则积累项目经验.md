@@ -3,7 +3,7 @@ title = "让 Codex 越用越聪明：用一套长期规则积累项目经验"
 date = "2026-07-25T22:38:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["Codex", "AI"]
 +++
 

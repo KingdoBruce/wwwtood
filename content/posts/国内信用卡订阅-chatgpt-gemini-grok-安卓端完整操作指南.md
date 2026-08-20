@@ -3,7 +3,7 @@ title = "国内信用卡订阅 ChatGPT、Gemini、Grok：安卓端完整操作�
 date = "2026-07-24T22:30:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["ChatGPT", "AI", "Google"]
 +++
 

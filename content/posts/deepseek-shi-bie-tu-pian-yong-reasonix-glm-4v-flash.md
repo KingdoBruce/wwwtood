@@ -3,7 +3,7 @@ title = "DeepSeek 怎么识别图片？用 Reasonix + GLM-4V-Flash 添加免费�
 date = "2026-08-07T20:23:00+08:00"
 draft = false
 description = "本文根据实际操作记录以及 Reasonix、智谱官方公开资料整理。已经尝试使用图片进行基础场景识别，但没有进行系统性的准确率测试，因此本文主要记录实现方法，不代表所有图片场景下都能获得稳定结果。"
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["DeepSeek", "DeepSeek识图", "Reasonix", "MCP", "GLM-4V-Flash"]
 featured = true
 +++

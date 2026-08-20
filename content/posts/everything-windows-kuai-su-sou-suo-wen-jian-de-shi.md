@@ -3,7 +3,7 @@ title = "Everything 使用教程：Windows 快速搜索文件的实用技巧"
 date = "2026-07-31T13:51:00+08:00"
 draft = false
 cover = "/uploads/2026/07/31_13_53_56-5c219d61.jpg"
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["Everything", "文件搜索工具", "Windows效率工具", "文件管理"]
 featured = true
 

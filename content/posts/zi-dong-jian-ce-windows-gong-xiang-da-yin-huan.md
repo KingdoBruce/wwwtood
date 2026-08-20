@@ -2,7 +2,7 @@
 title = "Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问"
 date = "2026-08-15T20:32:00+08:00"
 draft = false
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["共享打印机", "0x0000011b", "0x00000709"]
 
 [download]

@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="DeepSeek Harness 是面向 DeepSeek V4-Pro 与 V4-Flash 的第三方协议适配工具，可通过 Python、CLI、MCP 和 Claude Skill 接入 AI Agent。本文介绍 DeepSeek Harness 的安装与 MCP 配置方法，并推荐 Context7、Playwright、GitHub 等适合 AI 编程的扩展组合。">
+<title>DeepSeek Harness 安装教程：让 DeepSeek V4 更稳定地接入 MCP、Claude Code 与 AI 编程工具 - AI &amp; Automation - Tood.win | Tech Notes, AI Tools &amp; Web Development</title>
+
+
+<link rel="canonical" href="https://www.tood.win/posts/deepseek-harness-an-zhuang-rang-deepseek-v4-geng-wen-ding/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+
+<link rel="stylesheet" href="/scss/style.min.3c8ba4eb96e990e1006031c4cbd8c43e5683ccac3ae62e43d2a608017772f313.css"><meta property='og:title' content="DeepSeek Harness 安装教程：让 DeepSeek V4 更稳定地接入 MCP、Claude Code 与 AI 编程工具 - AI & Automation - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta property='og:description' content="DeepSeek Harness 是面向 DeepSeek V4-Pro 与 V4-Flash 的第三方协议适配工具，可通过 Python、CLI、MCP 和 Claude Skill 接入 AI Agent。本文介绍 DeepSeek Harness 的安装与 MCP 配置方法，并推荐 Context7、Playwright、GitHub 等适合 AI 编程的扩展组合。">
+<meta property='og:url' content='https://www.tood.win/posts/deepseek-harness-an-zhuang-rang-deepseek-v4-geng-wen-ding/'>
+<meta property='og:site_name' content='拾光集'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='DeepSeek Harness' /><meta property='article:tag' content='Python' /><meta property='article:tag' content='AI Agent' /><meta property='article:tag' content='DeepSeek' /><meta property='article:published_time' content='2026-08-15T18:08:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-15T18:14:45&#43;08:00'/>
+<meta name="twitter:title" content="DeepSeek Harness 安装教程：让 DeepSeek V4 更稳定地接入 MCP、Claude Code 与 AI 编程工具 - AI & Automation - Tood.win | Tech Notes, AI Tools & Web Development">
+<meta name="twitter:description" content="DeepSeek Harness 是面向 DeepSeek V4-Pro 与 V4-Flash 的第三方协议适配工具，可通过 Python、CLI、MCP 和 Claude Skill 接入 AI Agent。本文介绍 DeepSeek Harness 的安装与 MCP 配置方法，并推荐 Context7、Playwright、GitHub 等适合 AI 编程的扩展组合。">
+    <link rel="shortcut icon" href="img/avatar.png" />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.tood.win/sitemap.xml">
+<link rel="icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<link rel="shortcut icon" href="/uploads/2026/08/ico-b2a8590a.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTY0M5CM76"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TTY0M5CM76');
+</script>
+    <script async src="https://fundingchoicesmessages.google.com/i/pub-8251016534296673?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+    <meta name="keywords" content="DeepSeek Harness, Python, AI Agent, DeepSeek">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "\"DeepSeek Harness 安装教程：让 DeepSeek V4 更稳定地接入 MCP、Claude Code 与 AI 编程工具\"",
+  "description": "\"DeepSeek Harness 是面向 DeepSeek V4-Pro 与 V4-Flash 的第三方协议适配工具，可通过 Python、CLI、MCP 和 Claude Skill 接入 AI Agent。本文介绍 DeepSeek Harness 的安装与 MCP 配置方法，并推荐 Context7、Playwright、GitHub 等适合 AI 编程的扩展组合。\"",
+  "datePublished": "\"2026-08-15T18:08:00+08:00\"",
+  "dateModified": "\"2026-08-15T18:14:45+08:00\"",
+  "url": "\"https://www.tood.win/posts/deepseek-harness-an-zhuang-rang-deepseek-v4-geng-wen-ding/\"",
+  "author": {
+    "@type": "Person",
+    "name": "Tood.win"
+  }
+}
+</script>
+
+</head>
+<body class="archive-site archive-subpage article-page signal-article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+
+        <div class="archive-shell archive-page-shell">
+            
+<nav class="nav">
+    <a class="brand" href="/">
+        <span class="brand-logo-wrap">
+            <img class="signal-brand-logo" src="/uploads/2026/08/tood-win-logo-a26f7c69.png" alt="Tood.win | Tech Notes">
+        </span>
+    </a>
+    <div class="menu">
+        <a class="" href="/">Home</a>
+        <a href="/archives/#current-archive">Latest</a>
+        <a class="" href="/archives/">Categories</a>
+        <a class="" href="/tags/">Tags</a>
+        <a class="" href="/about/">About</a>
+    </div>
+    <div class="actions"><button type="button" class="icon search-open" aria-label="Search articles" aria-haspopup="dialog">⌕</button></div>
+</nav>
+<script>
+(() => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => document.body.classList.toggle('nav-scrolled', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+            <div class="archive-page-frame">
+                <span class="archive-coord archive-coord-left">N 31° 13′ 46.98″</span>
+                
+                <main class="archive-page-main"><div class="signal-article">
+    <div class="breadcrumb mono"><a href="/">HOME</a><span>/</span><a href="/categories/ai--automation/">AI &amp; AUTOMATION</a><span>/</span><a href="/posts/deepseek-harness-an-zhuang-rang-deepseek-v4-geng-wen-ding/">DeepSeek Harness 安装教程：让 DeepSeek V4 更稳定地接入 MCP、Claude Code 与 AI 编程工具</a></div>
+
+    <header class="article-hero">
+        <div class="hero-main">
+            <div class="hero-meta kicker">
+                <span>ARTICLE / AI &amp; AUTOMATION</span>
+                <span>LIVE DATA / A.2608.089</span>
+            </div>
+            <h1>DeepSeek Harness 安装教程：让 DeepSeek V4 更稳定地接入 MCP、Claude Code 与 AI 编程工具</h1>
+            <p class="article-deck">DeepSeek Harness 是面向 DeepSeek V4-Pro 与 V4-Flash 的第三方协议适配工具，可通过 Python、CLI、MCP 和 Claude Skill 接入 AI Agent。本文介绍 DeepSeek Harness 的安装与 MCP 配置方法，并推荐 Context7、Playwright、GitHub 等适合 AI 编程的扩展组合。</p>
+            <div class="author-line mono">
+                <span>BY TOOD.WIN | TECH NOTES</span>
+                <span>2026.08.15</span>
+                <span>4 MIN READ</span>
+                <span>1874 WORDS</span>
+                <span>AI &amp; AUTOMATION</span>
+            </div>
+        </div>
+        <aside class="article-index">
+            <div>
+                <div class="kicker">ARTICLE INDEX</div>
+                <strong>A89</strong>
+                <p class="mono">JAN. 15<br>— 2026</p>
+            </div>
+            <div>
+                <div class="stat">09</div>
+                <div class="kicker">SECTIONS</div>
+            </div>
+        </aside>
+    </header>
+
+    <div class="article-layout">
+        <main class="article-body">
+            <section class="article-content"><div class="site-ad-slot site-ad-slot--content" data-ad-slot="article-content" aria-label="Advertisement"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div><p><a class="link" href="/tags/deepseek/" >DeepSeek</a> Harness 是一个针对 <strong>DeepSeek V4-Pro / V4-Flash</strong> 的第三方协议适配项目。</p>
+<p>它不是 DeepSeek 官方客户端，也不是新的大模型，而是夹在 DeepSeek API 与 <a class="link" href="/tags/claude-code/" >Claude Code</a>、Cline、Roo Code、Cherry Studio 等 <a class="link" href="/tags/ai/" >AI</a> 工具之间的一层“适配器”，主要解决多轮推理、Tool Calling、流式输出、上下文和缓存等兼容问题。</p>
+<p>目前项目提供 4 种主要使用方式：</p>
+<ul>
+<li>Python Library</li>
+<li><code>dsh</code> 命令行工具</li>
+<li><a class="link" href="/tags/mcp/" >MCP</a> Server</li>
+<li><a class="link" href="/tags/claude/" >Claude</a> Code / Agent Skill</li>
+</ul>
+<p>如果主要用于 AI 编程，我更推荐 <strong>MCP + DeepSeek V4-Flash</strong> 这套组合。</p>
+<hr>
+<p><img alt="DeepSeek Harness 安装教程：让 DeepSeek V4 更稳定地接入 MCP、Claude Code 与 AI 编程工具" loading="lazy" sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src="/uploads/2026/08/ced07606-e459-4743-85a6-b71a099c4b66-cf03e8af.webp"></p>
+<h2 id="一安装前准备">一、安装前准备
+</h2><p>至少需要：</p>
+<ul>
+<li>Python 3</li>
+<li>Node.js / npm</li>
+<li>DeepSeek API Key</li>
+<li>一个支持 MCP 的 AI 客户端</li>
+</ul>
+<p>项目已经明确支持或适配 Claude Desktop、Cline、Roo Code、ChatWise、Cherry Studio 等 MCP 客户端。</p>
+<p>DeepSeek API Key 可以从 DeepSeek Platform 获取。DeepSeek 官方目前的 Agent 集成文档也已经围绕 V4-Pro 和 V4-Flash 展开。</p>
+<hr>
+<h2 id="二最推荐通过-mcp-安装-deepseek-harness">二、最推荐：通过 MCP 安装 DeepSeek Harness
+</h2><p>实际上不需要把整个项目下载下来。</p>
+<p>只需要：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npx -y @deepseek-harness/mcp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>项目当前提供的 MCP 包为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">@deepseek-harness/mcp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它通过标准 <code>stdio</code> MCP 协议运行。</p>
+<p>然后在支持 MCP 的客户端配置中加入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;mcpServers&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;deepseek-harness&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;command&#34;</span><span class="p">:</span> <span class="s2">&#34;npx&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;-y&#34;</span><span class="p">,</span> <span class="s2">&#34;@deepseek-harness/mcp&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;env&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;DEEPSEEK_API_KEY&#34;</span><span class="p">:</span> <span class="s2">&#34;你的 DeepSeek API Key&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>保存并重新启动客户端即可。</p>
+<p>官方仓库给出的 MCP 配置也是这种方式。</p>
+<p>DeepSeek Harness MCP 会提供几个主要工具：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">deepseek_chat
+</span></span><span class="line"><span class="cl">deepseek_chat_stream
+</span></span><span class="line"><span class="cl">validate_message_history
+</span></span><span class="line"><span class="cl">estimate_cache_hit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中后两个主要负责消息历史和缓存检查，本身不需要消耗 DeepSeek API 配额。</p>
+<hr>
+<h2 id="三安装命令行版本">三、安装命令行版本
+</h2><p>如果想先测试 DeepSeek Harness 是否能正常工作，可以安装 CLI：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install deepseek-harness-cli
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a class="link" href="/tags/windows/" >Windows</a> PowerShell 设置 API Key：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$env:DEEPSEEK_API_KEY</span><span class="p">=</span><span class="s2">&#34;你的API Key&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Linux / macOS：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">DEEPSEEK_API_KEY</span><span class="o">=</span><span class="s2">&#34;你的API Key&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dsh doctor
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果环境正常，就可以进入交互模式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dsh chat
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>开启 Thinking：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dsh chat -r
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还可以检查已有消息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dsh validate messages.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者估算缓存命中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dsh estimate messages.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这些命令都来自项目当前 CLI 实现。</p>
+<hr>
+<h2 id="四python-项目安装">四、Python 项目安装
+</h2><p>如果你正在开发自己的 Agent，可以直接安装 Python Library：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install deepseek-harness
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>简单测试：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">deepseek_harness</span> <span class="kn">import</span> <span class="n">DeepSeekHarness</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">client</span> <span class="o">=</span> <span class="n">DeepSeekHarness</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">disable_thinking_by_default</span><span class="o">=</span><span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">model</span><span class="o">=</span><span class="s2">&#34;deepseek-v4-pro&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;role&#34;</span><span class="p">:</span> <span class="s2">&#34;user&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;content&#34;</span><span class="p">:</span> <span class="s2">&#34;Hello&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">4096</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s2">&#34;message&#34;</span><span class="p">][</span><span class="s2">&#34;content&#34;</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Python 方式更适合：</p>
+<ul>
+<li>自己开发 <a class="link" href="/tags/ai-agent/" >AI Agent</a></li>
+<li>FastAPI 后端</li>
+<li>LangChain</li>
+<li>LlamaIndex</li>
+<li>自动化程序</li>
+<li>企业内部 AI 系统</li>
+</ul>
+<p>项目也将 Python Library 作为自定义 Agent 的推荐接入方式。</p>
+<hr>
+<h2 id="五claude-code-安装-skill">五、Claude Code 安装 Skill
+</h2><p>DeepSeek Harness 本身还提供了一个 Claude Skill。</p>
+<p>安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/HenryZ838978/deepseek-harness
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后复制：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp -r deepseek-harness/packages/skill ~/.claude/skills/deepseek-harness
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重新启动 Claude Code 后即可加载。</p>
+<p>这个 Skill 主要让 Agent 理解 DeepSeek V4 的协议特性，包括：</p>
+<ul>
+<li>Thinking / reasoning_content</li>
+<li>Tool Calling</li>
+<li>消息历史</li>
+<li>DeepSeek Prefix Cache</li>
+<li>API 调用规则</li>
+</ul>
+<p>项目提供的 Skill 中还包含 <code>safe_init.py</code> 和协议参考文件。</p>
+<p>Windows 用户也可以把：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">packages/skill
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>复制到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">C:\Users\你的用户名\.claude\skills\deepseek-harness
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="六推荐搭配哪些插件">六、推荐搭配哪些插件？
+</h2><p>DeepSeek Harness 本身更像一个“模型协议层”，真正提升 Agent 能力的还是 MCP 和 <a class="link" href="/tags/skills/" >Skills</a>。</p>
+<p>我比较推荐下面这套组合：</p>
+<h3 id="1-context7">1. Context7
+</h3><p>用途：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">查询最新开发文档
+</span></span><span class="line"><span class="cl">框架 API
+</span></span><span class="line"><span class="cl">第三方库文档
+</span></span><span class="line"><span class="cl">代码示例
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如开发 Next.js、React、Python 时，可以减少模型使用旧 API 的情况。</p>
+<hr>
+<h3 id="2-filesystem-mcp">2. Filesystem MCP
+</h3><p>让 Agent：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">读取文件
+</span></span><span class="line"><span class="cl">创建文件
+</span></span><span class="line"><span class="cl">修改代码
+</span></span><span class="line"><span class="cl">浏览项目目录
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这是 AI 编程最基础的一类 MCP。</p>
+<p>如果使用 Cline、Roo Code、Claude Code 等，本身已经拥有完整文件操作能力，就没必要重复安装。</p>
+<hr>
+<h3 id="3-playwright-mcp">3. Playwright MCP
+</h3><p>适合 Web 项目。</p>
+<p>可以让 Agent：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">打开网页
+</span></span><span class="line"><span class="cl">点击按钮
+</span></span><span class="line"><span class="cl">填写表单
+</span></span><span class="line"><span class="cl">截图
+</span></span><span class="line"><span class="cl">检查页面
+</span></span><span class="line"><span class="cl">测试前端
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于 <a class="link" href="/tags/codex/" >Codex</a> / Claude Code / DeepSeek 做网站开发非常实用。</p>
+<hr>
+<h3 id="4-git--github">4. Git / GitHub
+</h3><p>适合：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">查看 Git diff
+</span></span><span class="line"><span class="cl">分析提交记录
+</span></span><span class="line"><span class="cl">管理 Issue
+</span></span><span class="line"><span class="cl">查看 PR
+</span></span><span class="line"><span class="cl">代码审查
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果 AI 经常帮你修改大型项目，Git 能让修改过程安全很多。</p>
+<hr>
+<h3 id="5-sequential-thinking-类工具">5. Sequential Thinking 类工具
+</h3><p>适合复杂：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Bug 排查
+</span></span><span class="line"><span class="cl">系统架构
+</span></span><span class="line"><span class="cl">大型重构
+</span></span><span class="line"><span class="cl">复杂逻辑分析
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过 DeepSeek V4 本身已经具备 Thinking 能力，因此普通任务没有必要一直开启，否则可能增加 <a class="link" href="/tags/token/" >Token</a> 消耗。</p>
+<hr>
+<h2 id="七我更推荐的组合">七、我更推荐的组合
+</h2><p>如果主要目的是 <strong>使用 DeepSeek 做 AI 编程</strong>，可以这样搭：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">DeepSeek V4-Flash
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">DeepSeek Harness
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">Cline / Roo Code / Claude Code
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">MCP
+</span></span><span class="line"><span class="cl">├─ Context7
+</span></span><span class="line"><span class="cl">├─ Playwright
+</span></span><span class="line"><span class="cl">├─ GitHub
+</span></span><span class="line"><span class="cl">└─ 项目自身工具
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>日常写代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">DeepSeek V4-Flash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>复杂架构、疑难 Bug：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">DeepSeek V4-Pro
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样通常比所有任务都直接跑 Pro 更合理。</p>
+<hr>
+<h2 id="deepseek-harness-值不值得安装">DeepSeek Harness 值不值得安装？
+</h2><p>如果只是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">简单聊天
+</span></span><span class="line"><span class="cl">普通 API 调用
+</span></span><span class="line"><span class="cl">单轮问答
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其实没必要。</p>
+<p>但如果你的场景是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">DeepSeek + Agent
+</span></span><span class="line"><span class="cl">DeepSeek + MCP
+</span></span><span class="line"><span class="cl">DeepSeek + Tool Calling
+</span></span><span class="line"><span class="cl">DeepSeek + AI 编程
+</span></span><span class="line"><span class="cl">长时间连续开发
+</span></span><span class="line"><span class="cl">多轮工具调用
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>DeepSeek Harness 就比较有价值。</p>
+<p>因为它重点解决的不是“让 DeepSeek 变聪明”，而是让 DeepSeek V4 在 Agent 环境中的协议行为更加稳定。</p>
+<p>需要特别注意的是：<strong>DeepSeek Harness 是社区项目，并非 DeepSeek 官方项目。</strong></p>
+<p>DeepSeek 官方目前另外维护了 <code>awesome-deepseek-agent</code>，里面已经收录 Claude Code、Codex、Cline、DeepSeek-TUI、<a class="link" href="/tags/reasonix/" >Reasonix</a>、<a class="link" href="/tags/opencode/" >OpenCode</a>、Qwen Code 等大量 DeepSeek Agent 集成教程，可以作为后续扩展参考。</p>
+<hr>
+<h2 id="github-项目">GitHub 项目
+</h2><p>DeepSeek Harness：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">https://github.com/HenryZ838978/deepseek-harness
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>DeepSeek 官方 Agent 集成项目：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">https://github.com/deepseek-ai/awesome-deepseek-agent
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>项目当前采用 MIT License。</p>
+
+</section>
+
+
+            
+            
+            
+
+            <div class="article-end">
+                
+    <section class="article-tags">
+        
+            <a href="/tags/deepseek-harness/">DeepSeek Harness</a>
+        
+            <a href="/tags/python/">Python</a>
+        
+            <a href="/tags/ai-agent/">AI Agent</a>
+        
+            <a href="/tags/deepseek/">DeepSeek</a>
+        
+    </section>
+<nav class="prev-next" aria-label="Previous and next article"><a href="/posts/ollama-mo-xing-yu-jia-zai-yu-xian-cun-shi/" rel="prev">
+                        <span class="kicker">PREVIOUS ARTICLE</span>
+                        <strong>Ollama 模型预加载与显存释放工具</strong>
+                    </a><a href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/" rel="next">
+                        <span class="kicker">NEXT ARTICLE</span>
+                        <strong>Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</strong>
+                    </a></nav></div>
+        </main>
+
+        <aside class="side-meta" aria-label="Article sidebar">
+            <div class="side-card toc-card">
+                <div class="head kicker">CONTENT DIRECTORY</div>
+                <div class="body toc-body">
+  <ol>
+    <li><a href="#一安装前准备">一、安装前准备</a></li>
+    <li><a href="#二最推荐通过-mcp-安装-deepseek-harness">二、最推荐：通过 MCP 安装 DeepSeek Harness</a></li>
+    <li><a href="#三安装命令行版本">三、安装命令行版本</a></li>
+    <li><a href="#四python-项目安装">四、Python 项目安装</a></li>
+    <li><a href="#五claude-code-安装-skill">五、Claude Code 安装 Skill</a></li>
+    
+    <li><a href="#七我更推荐的组合">七、我更推荐的组合</a></li>
+    <li><a href="#deepseek-harness-值不值得安装">DeepSeek Harness 值不值得安装？</a></li>
+    <li><a href="#github-项目">GitHub 项目</a></li>
+  </ol>
+</div>
+            </div><div class="side-card side-card--ad">
+                <div class="head kicker">ADVERTISEMENT</div>
+                <div class="body site-ad-slot site-ad-slot--sidebar" data-ad-slot="article-sidebar" aria-label="Advertisement">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251016534296673"
+     crossorigin="anonymous"></script>
+<!-- iezyw自适应 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8251016534296673"
+     data-ad-slot="8508409086"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                </div>
+            </div><div class="side-card">
+                <div class="head kicker">Latest Articles</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/wo-yong-guo-de-ji-jia-yu-ming-fu-wu/">
+                        <span class="side-article-title">我用过的几家域名服务商：Cloudflare、Namecheap、Spaceship 和国内云厂商怎么选？</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/4-fen-cheng-xu-yuan-xue-xi-zi-yuan-geng/">
+                        <span class="side-article-title">4 份程序员学习资源更新：Spring Cloud 微服务、LeetCode、面试与 WMS 项目</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/bai-du-wang-pan-bu-chong-hui-yuan-ye-neng/">
+                        <span class="side-article-title">百度网盘不充会员，也能试试这个提速设置</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/claude-seo-geo-ren-liang-tian-pao-wan-chuan-tong/">
+                        <span class="side-article-title">Claude &#43; SEO &#43; GEO：一个人两天跑完传统团队一个月的活</span>
+                        <span class="side-article-date mono">08.19</span>
+                    </a><a class="side-article-row" href="/posts/shi-pin-xia-zai-guan-li-qi-zhi-chi-b/">
+                        <span class="side-article-title">视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等 的自部署工具</span>
+                        <span class="side-article-date mono">08.16</span>
+                    </a><a class="side-article-row" href="/posts/zi-dong-jian-ce-windows-gong-xiang-da-yin-huan/">
+                        <span class="side-article-title">Windows 共享打印机修复工具：一键解决 0x0000011b、0x00000709 和拒绝访问</span>
+                        <span class="side-article-date mono">08.15</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker" style="background:var(--signal-pink)">Editor's Picks</div>
+                <div class="body side-articles"><a class="side-article-row" href="/posts/minimax-h3-ben-di-bu-shu-yong-comfyui-da-jian/">
+                        <span class="side-article-title">MiniMax H3 怎么本地部署？用 ComfyUI 搭建 AI 视频生成环境</span>
+                        <span class="side-article-date mono">08.13</span>
+                    </a><a class="side-article-row" href="/posts/agent-reach-gei-ai-agent-zeng-jia-twitter-b-zhan/">
+                        <span class="side-article-title">Agent-Reach：给 AI Agent 增加 Twitter、B站、小红书等联网能力</span>
+                        <span class="side-article-date mono">08.13</span>
+                    </a><a class="side-article-row" href="/posts/headroom-gei-claude-code-codex-ya-suo-shang-xia-wen/">
+                        <span class="side-article-title">Headroom 是什么？给 Claude Code、Codex 压缩上下文减少 Token</span>
+                        <span class="side-article-date mono">08.13</span>
+                    </a><a class="side-article-row" href="/posts/caveman-skill-rang-claude-code-codex-shao-shuo-fei-hua/">
+                        <span class="side-article-title">Caveman Skill 是什么？让 Claude Code、Codex 少说废话并减少输出 Token</span>
+                        <span class="side-article-date mono">08.13</span>
+                    </a><a class="side-article-row" href="/posts/deepseek-shi-bie-tu-pian-yong-reasonix-glm-4v-flash/">
+                        <span class="side-article-title">DeepSeek 怎么识别图片？用 Reasonix &#43; GLM-4V-Flash 添加免费视觉能力</span>
+                        <span class="side-article-date mono">08.07</span>
+                    </a><a class="side-article-row" href="/posts/ai-yue-du-pdf-tai-fei-token-xian-yong-markitdown/">
+                        <span class="side-article-title">AI 阅读 PDF 太费 Token？先用 MarkItDown 转成 Markdown</span>
+                        <span class="side-article-date mono">08.05</span>
+                    </a></div>
+            </div><div class="side-card">
+                <div class="head kicker">READING STATUS</div>
+                <div class="body">
+                    <div class="kicker reading-progress-copy">PROGRESS / 0%</div>
+                    <div class="progress"><span></span></div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="head kicker" style="background:var(--signal-lime)">ARTICLE DATA</div>
+                <div class="body article-data"><a href="/categories/ai--automation/"><span>Category</span><b>AI &amp; Automation</b></a>
+                    <a><span>Words</span><b>1874</b></a>
+                    <a><span>Reading</span><b>4 MIN</b></a>
+                    <a><span>Updated</span><b>08.15</b></a>
+                </div>
+            </div>
+        </aside>
+    </div><aside class="archive-related" aria-labelledby="archive-related-title">
+    <div class="archive-related-header">
+        <h2 id="archive-related-title">RELATED SIGNALS</h2>
+        <span>04 ARTICLES</span>
+    </div>
+    <div class="archive-related-grid"><article class="archive-related-card">
+            <a href="/posts/minimax-h3-ben-di-bu-shu-yong-comfyui-da-jian/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/62965b98-d51b-4284-94f8-c09fd2c60f33-2ccdff68.jpg" alt="MiniMax H3 怎么本地部署？用 ComfyUI 搭建 AI 视频生成环境" loading="lazy"><code>01 / AI &amp; AUTOMATION</code>
+                    <h3>MiniMax H3 怎么本地部署？用 ComfyUI 搭建 AI 视频生成环境</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>MiniMax H3 已开放模型权重，也开始出现对应的 ComfyUI 工作流。
+如果不熟悉 Python、CUDA 和模型目录，可以直接让 …</p>
+                    <time>2026-08-13</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/agent-reach-gei-ai-agent-zeng-jia-twitter-b-zhan/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/813_22_33_27-567dd209.jpg" alt="Agent-Reach：给 AI Agent 增加 Twitter、B站、小红书等联网能力" loading="lazy"><code>02 / AI &amp; AUTOMATION</code>
+                    <h3>Agent-Reach：给 AI Agent 增加 Twitter、B站、小红书等联网能力</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>很多 AI Agent 本身可以调用工具，但真正需要它去搜索 Twitter/X、Reddit、B站、小红书等平台时，往往会遇到 API 收费、 …</p>
+                    <time>2026-08-13</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/headroom-gei-claude-code-codex-ya-suo-shang-xia-wen/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/09814-a4dac0a5.jpg" alt="Headroom 是什么？给 Claude Code、Codex 压缩上下文减少 Token" loading="lazy"><code>03 / AI &amp; AUTOMATION</code>
+                    <h3>Headroom 是什么？给 Claude Code、Codex 压缩上下文减少 Token</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>如果你经常使用 Claude Code、Codex、Cursor 这类 AI Agent，会发现 Token 不只是消耗在自己输入的问题上。 …</p>
+                    <time>2026-08-13</time>
+                </div>
+            </a>
+        </article><article class="archive-related-card">
+            <a href="/posts/caveman-skill-rang-claude-code-codex-shao-shuo-fei-hua/">
+                <div class="archive-related-image"><img src="/uploads/2026/08/6813_22_16_44-85fdfd84.jpg" alt="Caveman Skill 是什么？让 Claude Code、Codex 少说废话并减少输出 Token" loading="lazy"><code>04 / AI &amp; AUTOMATION</code>
+                    <h3>Caveman Skill 是什么？让 Claude Code、Codex 少说废话并减少输出 Token</h3>
+                </div>
+                <div class="archive-related-copy">
+                    <p>用 Claude Code、Codex 这类 AI 编程 Agent 时，经常会遇到一个问题：明明只需要代码、命令或结论，AI 却先解释一大段， …</p>
+                    <time>2026-08-13</time>
+                </div>
+            </a>
+        </article></div>
+</aside>
+
+    <aside class="article-disclaimer">
+        <code>DISCLAIMER</code>
+        <div class="article-disclaimer-body">
+            <p>Some resources on this site (<a href="https://www.tood.win" target="_blank" rel="noreferrer">tood.win</a>) come from public internet sources and are provided for learning and reference only. We charge no fees and sell no resources.</p>
+            <p>Related content does not necessarily represent the views of this site. We do not guarantee its authenticity, accuracy, or validity. Please judge and use it with caution.</p>
+            <p>If there is any infringement, violation, or broken resource link, please contact <a href="mailto:admin@tood.win">admin@tood.win</a>. After verification, we will remove, handle, or update it in a timely manner.</p>
+            <p>Any illegal or unlawful use of this site's content is strictly prohibited.</p>
+        </div>
+    </aside><div class="search-modal" hidden>
+        <div class="search-modal-backdrop" data-close></div>
+        <div class="search-modal-panel" role="dialog" aria-modal="true" aria-label="Search articles">
+            <div class="search-modal-head mono"><span>SEARCH / 2608</span><button type="button" class="search-modal-close" data-close aria-label="Close search">✕</button></div>
+            <form class="search-modal-form" action="/search/" method="get" role="search">
+                <input type="search" name="keyword" placeholder="Search TOOD.WIN..." aria-label="Search articles" required>
+                <button type="submit" aria-label="Start search">⌕</button>
+            </form>
+            <p class="search-modal-hint mono">AI / WEB / SOFTWARE / TOOLS</p>
+        </div>
+    </div>
+    <div class="scroll-arrows scroll-arrows--right">
+        <a href="#" class="scroll-arrow scroll-up" aria-label="Back to top">↑</a>
+        <a href="#" class="scroll-arrow scroll-down" aria-label="Go to bottom">↓</a>
+    </div>
+</div>
+
+<script>
+(() => {
+    const modal = document.querySelector('.search-modal');
+    const opener = document.querySelector('.search-open');
+    if (!modal || !opener) return;
+    const input = modal.querySelector('input[name="keyword"]');
+    const open = () => {
+        modal.hidden = false;
+        document.body.classList.add('search-modal-open');
+        window.setTimeout(() => input && input.focus(), 30);
+    };
+    const close = () => {
+        modal.hidden = true;
+        document.body.classList.remove('search-modal-open');
+    };
+    opener.addEventListener('click', open);
+    modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.hidden) close();
+    });
+})();
+</script>
+<script>
+(() => {
+    const progress = document.querySelector('.side-meta .reading-progress-copy');
+    const bar = document.querySelector('.side-meta .progress span');
+    const page = document.querySelector('.signal-article');
+    if (!page || !bar || !progress) return;
+    const update = () => {
+        const total = Math.max(1, page.scrollHeight - window.innerHeight);
+        const ratio = Math.min(100, Math.round((window.scrollY / total) * 100));
+        bar.style.width = ratio + '%';
+        progress.textContent = 'PROGRESS / ' + ratio + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
+</script>
+<script>
+(() => {
+    document.querySelectorAll('.side-meta .share a[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const old = btn.textContent;
+                    btn.textContent = 'OK';
+                    window.setTimeout(() => { btn.textContent = old; }, 1200);
+                });
+            }
+        });
+    });
+})();
+</script>
+<script>
+(() => {
+    const arrows = document.querySelector('.scroll-arrows');
+    const article = document.querySelector('.article-body');
+    const sidebar = document.querySelector('.side-meta');
+    const placeArrows = () => {
+        if (!arrows || !article || !sidebar || window.innerWidth <= 760) return;
+        const x = (article.getBoundingClientRect().right + sidebar.getBoundingClientRect().left) / 2;
+        arrows.style.setProperty('--scroll-arrows-x', `${x}px`);
+    };
+    document.querySelectorAll('.scroll-arrow.scroll-up').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    });
+    document.querySelectorAll('.scroll-arrow.scroll-down').forEach(btn => {
+        btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); });
+    });
+    window.addEventListener('resize', placeArrows, { passive: true });
+    placeArrows();
+})();
+</script>
+
+
+
+
+
+<script type="module">
+    import gallery from '\/ts\/gallery.js';
+
+    const articleContent = document.querySelector('.article-content');
+    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
+    
+    if (shouldLoad) {
+        gallery(articleContent);
+
+        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
+        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
+
+        const styleTag = document.createElement('link');
+        styleTag.rel = 'stylesheet';
+        styleTag.href = styleHref;
+        document.head.appendChild(styleTag);
+
+        const lightbox = new PhotoSwipeLightbox({
+            gallerySelector: '.article-content',
+            childSelector: 'figure a.image-link',
+            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
+        });
+        lightbox.init();
+    }
+</script>
+
+
+</main>
+            </div>
+            <footer class="footer">
+    <div><a class="brand" href="/">Tood.win | Tech Notes</a><p>Tested in practice. Shared to help you build.</p></div>
+    <div><h4>Content</h4><a href="/categories/ai--automation/">ai &amp; automation</a><a href="/categories/software/">software &amp; tools</a><a href="/categories/notes/">tech notes</a><a href="/categories/web--hosting/">web &amp; hosting</a></div>
+    <div><h4>Navigation</h4><a href="/archives/">Archive</a><a href="/tags/">Tags</a><a href="/about/">About</a><a href="/links/">Friend Links</a></div>
+    <div><h4>Policy</h4><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/please-allow-ads-on-shiguangji-en/">Allow Ads</a><a href="/about/">Contact</a></div>
+</footer>
+<div class="end mono"><span>© <span data-current-year>2026</span> Tood.win | Tech Notes</span><span class="end-links"><a href="/privacypolicy/">Privacy Policy</a><a href="/disclaimer/">Disclaimer</a><a href="/links/">Friend Links</a></span><span>BUILT WITH HUGO</span></div>
+<script>
+(() => {
+    document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = new Date().getFullYear();
+    });
+})();
+</script>
+        </div>
+    <script>
+(() => {
+    document.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', (event) => {
+        const key = event.key.toLowerCase();
+        const modifier = event.ctrlKey || event.metaKey;
+        const developerShortcut = modifier && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const viewSourceShortcut = modifier && !event.shiftKey && key === 'u';
+        const keyboardContextMenu = event.shiftKey && key === 'f10';
+
+        if (key === 'f12' || developerShortcut || viewSourceShortcut || keyboardContextMenu) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    }, { capture: true });
+})();
+</script>
+
+    
+<script type="text/javascript" src="/ts/main.f856840516f7c2ad1769a8f5937e3d08d6cb386e2cd2dd025ae696e0ff207958.js" defer></script>
+
+
+</body>
+</html>

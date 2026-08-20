@@ -3,7 +3,7 @@ title = "视频下载管理器：支持 B站、YouTube 与 TikTok、小红书等
 date = "2026-08-16T21:50:00+08:00"
 draft = false
 description = "Vidom 将 yt-dlp 封装成一个可通过浏览器操作的视频下载管理器，支持多平台解析、任务队列、断点续传、实时进度和下载历史。本文整理其部署方法、工作方式及目前需要注意的使用限制。"
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["Vidom视频下载管理器", "yt-dlp Web界面", "在线视频下载", "开源工具", "Docker"]
 
 [download]

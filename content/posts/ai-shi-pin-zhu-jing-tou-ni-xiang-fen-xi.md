@@ -3,7 +3,7 @@ title = "AI 视频逐镜头逆向分析与提示词生成器"
 date = "2026-07-29T12:07:00+08:00"
 draft = false
 featured = true
-categories = ["随笔"]
+categories = ["Tech Notes"]
 tags = ["AI视频提示词", "电影镜头语言", "AI视频生成"]
 +++
 

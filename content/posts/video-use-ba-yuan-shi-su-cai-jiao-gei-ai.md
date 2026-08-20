@@ -3,7 +3,7 @@ title = "video-use：把原始素材交给 AI，自动完成剪辑、字幕与�
 date = "2026-07-28T12:14:00+08:00"
 draft = false
 featured = true
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["video-use", "AI视频剪辑", "开源视频工具", "FFmpeg", "AI剪辑工具", "短视频制作"]
 +++
 

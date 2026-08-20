@@ -3,7 +3,7 @@ title = "MiniMax H3 怎么本地部署？用 ComfyUI 搭建 AI 视频生成环�
 date = "2026-08-13T22:44:00+08:00"
 draft = false
 description = "内容说明：本文根据 MiniMax 官方项目、官方 Hugging Face 模型以及目前公开的 ComfyUI 工作流整理，主要提供部署思路和 AI 提示词。不同显卡的实际显存占用、生成速度以及四步加速效果仍需要在对应硬件上验证。"
-categories = ["AI"]
+categories = ["AI & Automation"]
 tags = ["MiniMax H3", "ComfyUI", "MiniMax H3 本地部署", "AI 视频", "文生视频", "开源工具"]
 featured = true
 +++

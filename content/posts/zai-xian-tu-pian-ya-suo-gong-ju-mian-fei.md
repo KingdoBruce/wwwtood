@@ -3,7 +3,7 @@ title = "在线图片压缩工具：免费批量压缩 JPG、PNG 和 WebP"
 date = "2026-07-31T13:24:00+08:00"
 draft = false
 featured = true
-categories = ["软件"]
+categories = ["Software & Tools"]
 tags = ["图片压缩", "在线图片压缩", "JPG压缩", "PNG压缩", "批量图片压缩"]
 +++
 

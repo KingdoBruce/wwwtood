@@ -3,7 +3,7 @@ title = "不到 11 元注册 .com 域名：Google Workspace 购买 + Squarespace
 date = "2026-08-14T19:49:00+08:00"
 draft = false
 featured = true
-categories = ["建站"]
+categories = ["Web & Hosting"]
 tags = ["Google Workspace", "Workspace", "域名", "google", "域名注册", ".com域名"]
 description = "通过 Google Workspace 的特定地区定价，可以用较低成本注册 .com 域名，再通过 Squarespace 完成域名验证与管理，最后将 Nameserver 切换到 Cloudflare，实现 DNS 托管、CDN 加速和 DNSSEC 安全配置。本文整理了从域名购买、邮箱验证、Cloudflare 接管，到正确取消 Workspace 订阅及常见问题补救的完整流程，适合个人站长、独立开发者和低成本建站用户参考。"
 +++
